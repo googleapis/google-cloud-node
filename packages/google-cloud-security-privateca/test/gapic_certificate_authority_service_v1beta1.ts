@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2547,9 +2547,8 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       );
       client.innerApiCalls.scheduleDeleteCertificateAuthority =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.scheduleDeleteCertificateAuthority(
-        request
-      );
+      const [operation] =
+        await client.scheduleDeleteCertificateAuthority(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
@@ -2675,9 +2674,8 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.scheduleDeleteCertificateAuthority =
         stubLongRunningCall(undefined, undefined, expectedError);
-      const [operation] = await client.scheduleDeleteCertificateAuthority(
-        request
-      );
+      const [operation] =
+        await client.scheduleDeleteCertificateAuthority(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
         client.innerApiCalls.scheduleDeleteCertificateAuthority as SinonStub

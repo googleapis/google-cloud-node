@@ -22,6 +22,7 @@ import "google/cloud/aiplatform/v1/deployed_model_ref.proto";
 import "google/cloud/aiplatform/v1/encryption_spec.proto";
 import "google/cloud/aiplatform/v1/env_var.proto";
 import "google/cloud/aiplatform/v1/explanation.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -90,6 +91,35 @@ message Model {
         [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
+  // Stats of data used for train or evaluate the Model.
+  message DataStats {
+    // Number of DataItems that were used for training this Model.
+    int64 training_data_items_count = 1;
+
+    // Number of DataItems that were used for validating this Model during
+    // training.
+    int64 validation_data_items_count = 2;
+
+    // Number of DataItems that were used for evaluating this Model. If the
+    // Model is evaluated multiple times, this will be the number of test
+    // DataItems used by the first evaluation. If the Model is not evaluated,
+    // the number is 0.
+    int64 test_data_items_count = 3;
+
+    // Number of Annotations that are used for training this Model.
+    int64 training_annotations_count = 4;
+
+    // Number of Annotations that are used for validating this Model during
+    // training.
+    int64 validation_annotations_count = 5;
+
+    // Number of Annotations that are used for evaluating this Model. If the
+    // Model is evaluated multiple times, this will be the number of test
+    // Annotations used by the first evaluation. If the Model is not evaluated,
+    // the number is 0.
+    int64 test_annotations_count = 6;
+  }
+
   // Contains information about the original Model if this Model is a copy.
   message OriginalModelInfo {
     // Output only. The resource name of the Model this Model is a copy of,
@@ -119,7 +149,9 @@ message Model {
 
     // Resources that can be shared by multiple
     // [DeployedModels][google.cloud.aiplatform.v1.DeployedModel]. A
-    // pre-configured [DeploymentResourcePool][] is required.
+    // pre-configured
+    // [DeploymentResourcePool][google.cloud.aiplatform.v1.DeploymentResourcePool]
+    // is required.
     SHARED_RESOURCES = 3;
   }
 
@@ -393,6 +425,12 @@ message Model {
   //
   // See https://goo.gl/xmQnxf for more information and examples of labels.
   map<string, string> labels = 17;
+
+  // Stats of data used for training or evaluating the Model.
+  //
+  // Only populated when the Model is trained by a TrainingPipeline with
+  // [data_input_config][TrainingPipeline.data_input_config].
+  DataStats data_stats = 21;
 
   // Customer-managed encryption key spec for a Model. If set, this
   // Model and all sub-resources of this Model will be secured by this key.
@@ -690,6 +728,32 @@ message ModelContainerSpec {
   //   [`AIP_DEPLOYED_MODEL_ID` environment
   //   variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)
   string health_route = 7 [(google.api.field_behavior) = IMMUTABLE];
+
+  // Immutable. List of ports to expose from the container. Vertex AI sends gRPC
+  // prediction requests that it receives to the first port on this list. Vertex
+  // AI also sends liveness and health checks to this port.
+  //
+  // If you do not specify this field, gRPC requests to the container will be
+  // disabled.
+  //
+  // Vertex AI does not use ports other than the first one listed. This field
+  // corresponds to the `ports` field of the Kubernetes Containers v1 core API.
+  repeated Port grpc_ports = 9 [(google.api.field_behavior) = IMMUTABLE];
+
+  // Immutable. Deployment timeout.
+  // Limit for deployment timeout is 2 hours.
+  google.protobuf.Duration deployment_timeout = 10
+      [(google.api.field_behavior) = IMMUTABLE];
+
+  // Immutable. The amount of the VM memory to reserve as the shared memory for
+  // the model in megabytes.
+  int64 shared_memory_size_mb = 11 [(google.api.field_behavior) = IMMUTABLE];
+
+  // Immutable. Specification for Kubernetes startup probe.
+  Probe startup_probe = 12 [(google.api.field_behavior) = IMMUTABLE];
+
+  // Immutable. Specification for Kubernetes readiness probe.
+  Probe health_probe = 13 [(google.api.field_behavior) = IMMUTABLE];
 }
 
 // Represents a network port in a container.
@@ -720,6 +784,9 @@ message ModelSourceInfo {
 
     // The Model is saved or tuned from Genie.
     GENIE = 5;
+
+    // The Model is uploaded by text embedding finetuning pipeline.
+    CUSTOM_TEXT_EMBEDDING = 6;
   }
 
   // Type of the model source.
@@ -729,4 +796,36 @@ message ModelSourceInfo {
   // [source_type][google.cloud.aiplatform.v1.ModelSourceInfo.source_type]
   // pertains to the original.
   bool copy = 2;
+}
+
+// Probe describes a health check to be performed against a container to
+// determine whether it is alive or ready to receive traffic.
+message Probe {
+  // ExecAction specifies a command to execute.
+  message ExecAction {
+    // Command is the command line to execute inside the container, the working
+    // directory for the command is root ('/') in the container's filesystem.
+    // The command is simply exec'd, it is not run inside a shell, so
+    // traditional shell instructions ('|', etc) won't work. To use a shell, you
+    // need to explicitly call out to that shell. Exit status of 0 is treated as
+    // live/healthy and non-zero is unhealthy.
+    repeated string command = 1;
+  }
+
+  oneof probe_type {
+    // Exec specifies the action to take.
+    ExecAction exec = 1;
+  }
+
+  // How often (in seconds) to perform the probe. Default to 10 seconds.
+  // Minimum value is 1. Must be less than timeout_seconds.
+  //
+  // Maps to Kubernetes probe argument 'periodSeconds'.
+  int32 period_seconds = 2;
+
+  // Number of seconds after which the probe times out. Defaults to 1 second.
+  // Minimum value is 1. Must be greater or equal to period_seconds.
+  //
+  // Maps to Kubernetes probe argument 'timeoutSeconds'.
+  int32 timeout_seconds = 3;
 }

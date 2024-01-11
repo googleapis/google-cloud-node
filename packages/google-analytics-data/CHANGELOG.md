@@ -1,5 +1,26 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.2.0...data-v4.3.0) (2023-12-11)
+
+
+### Features
+
+* [analytics-data] add `CreateAudienceExport`, `QueryAudienceExport`, `GetAudienceExport`, `ListAudienceExports` methods to the Data API v1 beta ([#4878](https://github.com/googleapis/google-cloud-node/issues/4878)) ([1f9dc5a](https://github.com/googleapis/google-cloud-node/commit/1f9dc5ae6faf68324ab358b3f4f40328f62e7b64))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.1.0...data-v4.2.0) (2023-11-30)
+
+
+### Features
+
+* [analytics-data] add `CreateRecurringAudienceList`, `GetRecurringAudienceList`, `ListRecurringAudienceLists` methods to the Data API v1 alpha ([#4851](https://github.com/googleapis/google-cloud-node/issues/4851)) ([400c893](https://github.com/googleapis/google-cloud-node/commit/400c893def58322eb686fc16841622b8aeb83b14))
+
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.0.1...data-v4.1.0) (2023-11-16)
+
+
+### Features
+
+* [analytics-data] add the `SheetExportAudienceList` method to the Data API v1 alpha ([#4804](https://github.com/googleapis/google-cloud-node/issues/4804)) ([279e77c](https://github.com/googleapis/google-cloud-node/commit/279e77c39982c98fb2f9f6b9305ee9097ae10352))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/data-v4.0.0...data-v4.0.1) (2023-09-06)
 
 

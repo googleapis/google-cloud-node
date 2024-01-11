@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,8 +33,8 @@ function main(workspace, path) {
    */
   // const workspace = 'abc123'
   /**
-   *  Required. The directory's full path including directory name, relative to the
-   *  workspace root.
+   *  Required. The directory's full path including directory name, relative to
+   *  the workspace root.
    */
   // const path = 'abc123'
 

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,10 +18,12 @@
 
 import * as v2 from './v2';
 
+const ExportServiceClient = v2.ExportServiceClient;
+type ExportServiceClient = v2.ExportServiceClient;
 const ProfilerServiceClient = v2.ProfilerServiceClient;
 type ProfilerServiceClient = v2.ProfilerServiceClient;
 
-export {v2, ProfilerServiceClient};
-export default {v2, ProfilerServiceClient};
+export {v2, ExportServiceClient, ProfilerServiceClient};
+export default {v2, ExportServiceClient, ProfilerServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

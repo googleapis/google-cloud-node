@@ -20,6 +20,7 @@ import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/cloud/sql/v1/cloud_sql_resources.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -67,6 +68,15 @@ service SqlInstancesService {
   rpc DemoteMaster(SqlInstancesDemoteMasterRequest) returns (Operation) {
     option (google.api.http) = {
       post: "/v1/projects/{project}/instances/{instance}/demoteMaster"
+      body: "body"
+    };
+  }
+
+  // Demotes an existing standalone instance to be a Cloud SQL read replica
+  // for an external database server.
+  rpc Demote(SqlInstancesDemoteRequest) returns (Operation) {
+    option (google.api.http) = {
+      post: "/v1/projects/{project}/instances/{instance}/demote"
       body: "body"
     };
   }
@@ -160,6 +170,13 @@ service SqlInstancesService {
   rpc PromoteReplica(SqlInstancesPromoteReplicaRequest) returns (Operation) {
     option (google.api.http) = {
       post: "/v1/projects/{project}/instances/{instance}/promoteReplica"
+    };
+  }
+
+  // Switches over from the primary instance to the replica instance.
+  rpc Switchover(SqlInstancesSwitchoverRequest) returns (Operation) {
+    option (google.api.http) = {
+      post: "/v1/projects/{project}/instances/{instance}/switchover"
     };
   }
 
@@ -344,6 +361,18 @@ message SqlInstancesDemoteMasterRequest {
   InstancesDemoteMasterRequest body = 100;
 }
 
+// Instance demote request.
+message SqlInstancesDemoteRequest {
+  // Required. Cloud SQL instance name.
+  string instance = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. ID of the project that contains the instance.
+  string project = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The request body.
+  InstancesDemoteRequest body = 100 [(google.api.field_behavior) = REQUIRED];
+}
+
 // Instance export request.
 message SqlInstancesExportRequest {
   // Cloud SQL instance ID. This does not include the project ID.
@@ -449,6 +478,26 @@ message SqlInstancesPromoteReplicaRequest {
 
   // ID of the project that contains the read replica.
   string project = 2;
+
+  // Set to true if the promote operation should attempt to re-add the original
+  // primary as a replica when it comes back online. Otherwise, if this value is
+  // false or not set, the original primary will be a standalone instance.
+  bool failover = 3;
+}
+
+// Instance switchover request.
+message SqlInstancesSwitchoverRequest {
+  // Cloud SQL read replica instance name.
+  string instance = 1;
+
+  // ID of the project that contains the replica.
+  string project = 2;
+
+  // Optional. (MySQL only) Cloud SQL instance operations timeout, which is a
+  // sum of all database operations. Default value is 10 minutes and can be
+  // modified to a maximum value of 24 hours.
+  google.protobuf.Duration db_timeout = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance reset SSL config request.
@@ -593,6 +642,21 @@ message BackupReencryptionConfig {
   optional BackupType backup_type = 2;
 }
 
+// External Sync parallel level.
+enum ExternalSyncParallelLevel {
+  // Unknown sync parallel level. Will be defaulted to OPTIMAL.
+  EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0;
+
+  // Minimal parallel level.
+  MIN = 1;
+
+  // Optimal parallel level.
+  OPTIMAL = 2;
+
+  // Maximum parallel level.
+  MAX = 3;
+}
+
 // Instance get disk shrink config request.
 message SqlInstancesGetDiskShrinkConfigRequest {
   // Cloud SQL instance ID. This does not include the project ID.
@@ -641,21 +705,6 @@ message SqlInstancesVerifyExternalSyncSettingsRequest {
 
 // Instance start external sync request.
 message SqlInstancesStartExternalSyncRequest {
-  // External Sync parallel level.
-  enum ExternalSyncParallelLevel {
-    // Unknown sync parallel level. Will be defaulted to OPTIMAL.
-    EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0;
-
-    // Minimal parallel level.
-    MIN = 1;
-
-    // Optimal parallel level.
-    OPTIMAL = 2;
-
-    // Maximum parallel level.
-    MAX = 3;
-  }
-
   // Cloud SQL instance ID. This does not include the project ID.
   string instance = 1;
 
@@ -709,6 +758,13 @@ message InstancesCloneRequest {
 message InstancesDemoteMasterRequest {
   // Contains details about the demoteMaster operation.
   DemoteMasterContext demote_master_context = 1;
+}
+
+// This request is used to demote an existing standalone instance to be a
+// Cloud SQL read replica for an external database server.
+message InstancesDemoteRequest {
+  // Required. Contains details about the demote operation.
+  DemoteContext demote_context = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Database instance export request.
@@ -963,6 +1019,17 @@ message DatabaseInstance {
     optional int32 sql_min_recommended_increase_size_gb = 2;
   }
 
+  // The current SQL network architecture for the instance.
+  enum SqlNetworkArchitecture {
+    SQL_NETWORK_ARCHITECTURE_UNSPECIFIED = 0;
+
+    // Instance is a Tenancy Unit (TU) instance.
+    NEW_NETWORK_ARCHITECTURE = 1;
+
+    // Instance is an Umbrella instance.
+    OLD_NETWORK_ARCHITECTURE = 2;
+  }
+
   // This is always `sql#instance`.
   string kind = 1;
 
@@ -1113,12 +1180,22 @@ message DatabaseInstance {
   // The current software version on the instance.
   string maintenance_version = 42;
 
+  optional SqlNetworkArchitecture sql_network_architecture = 47;
+
   // Output only. The link to service attachment of PSC instance.
   optional string psc_service_attachment_link = 48
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The dns name of the instance.
   optional string dns_name = 49 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. DEPRECATED: please use write_endpoint instead.
+  optional string primary_dns_name = 51
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The dns name of the primary instance in a replication group.
+  optional string write_endpoint = 52
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Reschedule options for maintenance windows.
@@ -1177,6 +1254,18 @@ message DemoteMasterContext {
 
   // Flag to skip replication setup on the instance.
   bool skip_replication_setup = 5;
+}
+
+// This context is used to demote an existing standalone instance to be
+// a Cloud SQL read replica for an external database server.
+message DemoteContext {
+  // This is always `sql#demoteContext`.
+  string kind = 1;
+
+  // Required. The name of the instance which acts as the on-premises primary
+  // instance in the replication setup.
+  string source_representative_instance_name = 2
+      [(google.api.field_behavior) = REQUIRED];
 }
 
 // Database instance failover context.
@@ -1334,6 +1423,13 @@ message SqlExternalSyncSettingError {
     // The replication user is missing parallel import specific privileges.
     // (e.g. LOCK TABLES) for MySQL.
     MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34;
+
+    // The global variable local_infile is off on external server replica.
+    LOCAL_INFILE_OFF = 35;
+
+    // This code instructs customers to turn on point-in-time recovery manually
+    // for the instance after promoting the Cloud SQL for PostgreSQL instance.
+    TURN_ON_PITR_AFTER_PROMOTE = 36;
   }
 
   // Can be `sql#externalSyncSettingError` or
@@ -1397,6 +1493,12 @@ message ReplicaConfiguration {
   // primary instance. Only one replica can be specified as failover target, and
   // the replica has to be in different zone with the primary instance.
   google.protobuf.BoolValue failover_target = 3;
+
+  // Optional. Specifies if a SQL Server replica is a cascadable replica. A
+  // cascadable replica is a SQL Server cross region replica that supports
+  // replica(s) under it.
+  google.protobuf.BoolValue cascadable_replica = 5
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 enum SqlInstanceType {

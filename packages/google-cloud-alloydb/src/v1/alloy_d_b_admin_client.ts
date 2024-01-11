@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -943,6 +943,10 @@ export class AlloyDBAdminClient {
    *   default duration.
    * @param {string} [request.publicKey]
    *   Optional. The public key from the client.
+   * @param {boolean} [request.useMetadataExchange]
+   *   Optional. An optional hint to the endpoint to generate a client
+   *   ceritificate that can be used by AlloyDB connectors to exchange additional
+   *   metadata with the server after TLS handshake.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

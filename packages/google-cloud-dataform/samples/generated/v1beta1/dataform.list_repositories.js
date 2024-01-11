@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,9 +34,9 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Maximum number of repositories to return. The server may return fewer
-   *  items than requested. If unspecified, the server will pick an appropriate
-   *  default.
+   *  Optional. Maximum number of repositories to return. The server may return
+   *  fewer items than requested. If unspecified, the server will pick an
+   *  appropriate default.
    */
   // const pageSize = 1234
   /**
@@ -47,9 +47,9 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. This field only supports ordering by `name`. If unspecified, the server
-   *  will choose the ordering. If specified, the default order is ascending for
-   *  the `name` field.
+   *  Optional. This field only supports ordering by `name`. If unspecified, the
+   *  server will choose the ordering. If specified, the default order is
+   *  ascending for the `name` field.
    */
   // const orderBy = 'abc123'
   /**

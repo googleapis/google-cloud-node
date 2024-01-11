@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -182,6 +182,20 @@
                         values[valuesById[1] = "RSASSA_PSS_SHA256"] = 1;
                         values[valuesById[2] = "RSASSA_PKCS1V15_SHA256"] = 2;
                         values[valuesById[3] = "ECDSA_P256_SHA256"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * TokenType enum.
+                     * @name google.cloud.confidentialcomputing.v1.TokenType
+                     * @enum {number}
+                     * @property {number} TOKEN_TYPE_UNSPECIFIED=0 TOKEN_TYPE_UNSPECIFIED value
+                     * @property {number} TOKEN_TYPE_OIDC=1 TOKEN_TYPE_OIDC value
+                     */
+                    v1.TokenType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "TOKEN_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "TOKEN_TYPE_OIDC"] = 1;
                         return values;
                     })();
     
@@ -1514,6 +1528,7 @@
                          * @interface ITokenOptions
                          * @property {string|null} [audience] TokenOptions audience
                          * @property {Array.<string>|null} [nonce] TokenOptions nonce
+                         * @property {google.cloud.confidentialcomputing.v1.TokenType|null} [tokenType] TokenOptions tokenType
                          */
     
                         /**
@@ -1549,6 +1564,14 @@
                         TokenOptions.prototype.nonce = $util.emptyArray;
     
                         /**
+                         * TokenOptions tokenType.
+                         * @member {google.cloud.confidentialcomputing.v1.TokenType} tokenType
+                         * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
+                         * @instance
+                         */
+                        TokenOptions.prototype.tokenType = 0;
+    
+                        /**
                          * Creates a new TokenOptions instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.confidentialcomputing.v1.TokenOptions
@@ -1577,6 +1600,8 @@
                             if (message.nonce != null && message.nonce.length)
                                 for (var i = 0; i < message.nonce.length; ++i)
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.nonce[i]);
+                            if (message.tokenType != null && Object.hasOwnProperty.call(message, "tokenType"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.tokenType);
                             return writer;
                         };
     
@@ -1619,6 +1644,10 @@
                                         if (!(message.nonce && message.nonce.length))
                                             message.nonce = [];
                                         message.nonce.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.tokenType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -1666,6 +1695,14 @@
                                     if (!$util.isString(message.nonce[i]))
                                         return "nonce: string[] expected";
                             }
+                            if (message.tokenType != null && message.hasOwnProperty("tokenType"))
+                                switch (message.tokenType) {
+                                default:
+                                    return "tokenType: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -1690,6 +1727,22 @@
                                 for (var i = 0; i < object.nonce.length; ++i)
                                     message.nonce[i] = String(object.nonce[i]);
                             }
+                            switch (object.tokenType) {
+                            default:
+                                if (typeof object.tokenType === "number") {
+                                    message.tokenType = object.tokenType;
+                                    break;
+                                }
+                                break;
+                            case "TOKEN_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.tokenType = 0;
+                                break;
+                            case "TOKEN_TYPE_OIDC":
+                            case 1:
+                                message.tokenType = 1;
+                                break;
+                            }
                             return message;
                         };
     
@@ -1708,8 +1761,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.nonce = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.audience = "";
+                                object.tokenType = options.enums === String ? "TOKEN_TYPE_UNSPECIFIED" : 0;
+                            }
                             if (message.audience != null && message.hasOwnProperty("audience"))
                                 object.audience = message.audience;
                             if (message.nonce && message.nonce.length) {
@@ -1717,6 +1772,8 @@
                                 for (var j = 0; j < message.nonce.length; ++j)
                                     object.nonce[j] = message.nonce[j];
                             }
+                            if (message.tokenType != null && message.hasOwnProperty("tokenType"))
+                                object.tokenType = options.enums === String ? $root.google.cloud.confidentialcomputing.v1.TokenType[message.tokenType] === undefined ? message.tokenType : $root.google.cloud.confidentialcomputing.v1.TokenType[message.tokenType] : message.tokenType;
                             return object;
                         };
     

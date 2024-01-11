@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -155,6 +155,12 @@ function main(nodeVersion, imageType) {
    *  node pool to the specified disk size.
    */
   // const diskSizeGb = 1234
+  /**
+   *  Desired resource manager tag keys and values to be attached to the nodes
+   *  for managing Compute Engine firewalls using Network Firewall Policies.
+   *  Existing tags will be replaced with new values.
+   */
+  // const resourceManagerTags = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

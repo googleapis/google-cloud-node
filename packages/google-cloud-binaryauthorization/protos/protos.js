@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -6113,6 +6113,8 @@
                                  * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
                                  * @interface IImageDetails
                                  * @property {string|null} [image] ImageDetails image
+                                 * @property {string|null} [containerName] ImageDetails containerName
+                                 * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType|null} [containerType] ImageDetails containerType
                                  * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult|null} [result] ImageDetails result
                                  * @property {string|null} [description] ImageDetails description
                                  * @property {Array.<google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult>|null} [checkResults] ImageDetails checkResults
@@ -6141,6 +6143,22 @@
                                  * @instance
                                  */
                                 ImageDetails.prototype.image = "";
+    
+                                /**
+                                 * ImageDetails containerName.
+                                 * @member {string} containerName
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @instance
+                                 */
+                                ImageDetails.prototype.containerName = "";
+    
+                                /**
+                                 * ImageDetails containerType.
+                                 * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType} containerType
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @instance
+                                 */
+                                ImageDetails.prototype.containerType = 0;
     
                                 /**
                                  * ImageDetails result.
@@ -6199,6 +6217,10 @@
                                     if (message.checkResults != null && message.checkResults.length)
                                         for (var i = 0; i < message.checkResults.length; ++i)
                                             $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.encode(message.checkResults[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    if (message.containerName != null && Object.hasOwnProperty.call(message, "containerName"))
+                                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.containerName);
+                                    if (message.containerType != null && Object.hasOwnProperty.call(message, "containerType"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.containerType);
                                     return writer;
                                 };
     
@@ -6235,6 +6257,14 @@
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.image = reader.string();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.containerName = reader.string();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.containerType = reader.int32();
                                                 break;
                                             }
                                         case 2: {
@@ -6289,6 +6319,19 @@
                                     if (message.image != null && message.hasOwnProperty("image"))
                                         if (!$util.isString(message.image))
                                             return "image: string expected";
+                                    if (message.containerName != null && message.hasOwnProperty("containerName"))
+                                        if (!$util.isString(message.containerName))
+                                            return "containerName: string expected";
+                                    if (message.containerType != null && message.hasOwnProperty("containerType"))
+                                        switch (message.containerType) {
+                                        default:
+                                            return "containerType: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                            break;
+                                        }
                                     if (message.result != null && message.hasOwnProperty("result"))
                                         switch (message.result) {
                                         default:
@@ -6327,6 +6370,32 @@
                                     var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails();
                                     if (object.image != null)
                                         message.image = String(object.image);
+                                    if (object.containerName != null)
+                                        message.containerName = String(object.containerName);
+                                    switch (object.containerType) {
+                                    default:
+                                        if (typeof object.containerType === "number") {
+                                            message.containerType = object.containerType;
+                                            break;
+                                        }
+                                        break;
+                                    case "CONTAINER_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.containerType = 0;
+                                        break;
+                                    case "CONTAINER":
+                                    case 1:
+                                        message.containerType = 1;
+                                        break;
+                                    case "INIT_CONTAINER":
+                                    case 2:
+                                        message.containerType = 2;
+                                        break;
+                                    case "EPHEMERAL_CONTAINER":
+                                    case 3:
+                                        message.containerType = 3;
+                                        break;
+                                    }
                                     switch (object.result) {
                                     default:
                                         if (typeof object.result === "number") {
@@ -6381,6 +6450,8 @@
                                         object.image = "";
                                         object.result = options.enums === String ? "AUDIT_RESULT_UNSPECIFIED" : 0;
                                         object.description = "";
+                                        object.containerName = "";
+                                        object.containerType = options.enums === String ? "CONTAINER_TYPE_UNSPECIFIED" : 0;
                                     }
                                     if (message.image != null && message.hasOwnProperty("image"))
                                         object.image = message.image;
@@ -6393,6 +6464,10 @@
                                         for (var j = 0; j < message.checkResults.length; ++j)
                                             object.checkResults[j] = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.toObject(message.checkResults[j], options);
                                     }
+                                    if (message.containerName != null && message.hasOwnProperty("containerName"))
+                                        object.containerName = message.containerName;
+                                    if (message.containerType != null && message.hasOwnProperty("containerType"))
+                                        object.containerType = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType[message.containerType] === undefined ? message.containerType : $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType[message.containerType] : message.containerType;
                                     return object;
                                 };
     
@@ -6421,6 +6496,24 @@
                                     }
                                     return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails";
                                 };
+    
+                                /**
+                                 * ContainerType enum.
+                                 * @name google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType
+                                 * @enum {number}
+                                 * @property {number} CONTAINER_TYPE_UNSPECIFIED=0 CONTAINER_TYPE_UNSPECIFIED value
+                                 * @property {number} CONTAINER=1 CONTAINER value
+                                 * @property {number} INIT_CONTAINER=2 INIT_CONTAINER value
+                                 * @property {number} EPHEMERAL_CONTAINER=3 EPHEMERAL_CONTAINER value
+                                 */
+                                ImageDetails.ContainerType = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "CONTAINER_TYPE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "CONTAINER"] = 1;
+                                    values[valuesById[2] = "INIT_CONTAINER"] = 2;
+                                    values[valuesById[3] = "EPHEMERAL_CONTAINER"] = 3;
+                                    return values;
+                                })();
     
                                 /**
                                  * AuditResult enum.

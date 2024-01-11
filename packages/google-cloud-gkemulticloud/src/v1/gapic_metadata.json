@@ -25,6 +25,11 @@
                 "generateAttachedClusterInstallManifest"
               ]
             },
+            "GenerateAttachedClusterAgentToken": {
+              "methods": [
+                "generateAttachedClusterAgentToken"
+              ]
+            },
             "CreateAttachedCluster": {
               "methods": [
                 "createAttachedCluster"
@@ -72,6 +77,11 @@
                 "generateAttachedClusterInstallManifest"
               ]
             },
+            "GenerateAttachedClusterAgentToken": {
+              "methods": [
+                "generateAttachedClusterAgentToken"
+              ]
+            },
             "CreateAttachedCluster": {
               "methods": [
                 "createAttachedCluster"
@@ -113,6 +123,11 @@
                 "getAwsCluster"
               ]
             },
+            "GenerateAwsClusterAgentToken": {
+              "methods": [
+                "generateAwsClusterAgentToken"
+              ]
+            },
             "GenerateAwsAccessToken": {
               "methods": [
                 "generateAwsAccessToken"
@@ -121,6 +136,16 @@
             "GetAwsNodePool": {
               "methods": [
                 "getAwsNodePool"
+              ]
+            },
+            "GetAwsOpenIdConfig": {
+              "methods": [
+                "getAwsOpenIdConfig"
+              ]
+            },
+            "GetAwsJsonWebKeys": {
+              "methods": [
+                "getAwsJsonWebKeys"
               ]
             },
             "GetAwsServerConfig": {
@@ -151,6 +176,11 @@
             "UpdateAwsNodePool": {
               "methods": [
                 "updateAwsNodePool"
+              ]
+            },
+            "RollbackAwsNodePoolUpdate": {
+              "methods": [
+                "rollbackAwsNodePoolUpdate"
               ]
             },
             "DeleteAwsNodePool": {
@@ -182,6 +212,11 @@
                 "getAwsCluster"
               ]
             },
+            "GenerateAwsClusterAgentToken": {
+              "methods": [
+                "generateAwsClusterAgentToken"
+              ]
+            },
             "GenerateAwsAccessToken": {
               "methods": [
                 "generateAwsAccessToken"
@@ -190,6 +225,16 @@
             "GetAwsNodePool": {
               "methods": [
                 "getAwsNodePool"
+              ]
+            },
+            "GetAwsOpenIdConfig": {
+              "methods": [
+                "getAwsOpenIdConfig"
+              ]
+            },
+            "GetAwsJsonWebKeys": {
+              "methods": [
+                "getAwsJsonWebKeys"
               ]
             },
             "GetAwsServerConfig": {
@@ -220,6 +265,11 @@
             "UpdateAwsNodePool": {
               "methods": [
                 "updateAwsNodePool"
+              ]
+            },
+            "RollbackAwsNodePoolUpdate": {
+              "methods": [
+                "rollbackAwsNodePoolUpdate"
               ]
             },
             "DeleteAwsNodePool": {
@@ -260,6 +310,11 @@
                 "getAzureCluster"
               ]
             },
+            "GenerateAzureClusterAgentToken": {
+              "methods": [
+                "generateAzureClusterAgentToken"
+              ]
+            },
             "GenerateAzureAccessToken": {
               "methods": [
                 "generateAzureAccessToken"
@@ -268,6 +323,16 @@
             "GetAzureNodePool": {
               "methods": [
                 "getAzureNodePool"
+              ]
+            },
+            "GetAzureOpenIdConfig": {
+              "methods": [
+                "getAzureOpenIdConfig"
+              ]
+            },
+            "GetAzureJsonWebKeys": {
+              "methods": [
+                "getAzureJsonWebKeys"
               ]
             },
             "GetAzureServerConfig": {
@@ -351,6 +416,11 @@
                 "getAzureCluster"
               ]
             },
+            "GenerateAzureClusterAgentToken": {
+              "methods": [
+                "generateAzureClusterAgentToken"
+              ]
+            },
             "GenerateAzureAccessToken": {
               "methods": [
                 "generateAzureAccessToken"
@@ -359,6 +429,16 @@
             "GetAzureNodePool": {
               "methods": [
                 "getAzureNodePool"
+              ]
+            },
+            "GetAzureOpenIdConfig": {
+              "methods": [
+                "getAzureOpenIdConfig"
+              ]
+            },
+            "GetAzureJsonWebKeys": {
+              "methods": [
+                "getAzureJsonWebKeys"
               ]
             },
             "GetAzureServerConfig": {

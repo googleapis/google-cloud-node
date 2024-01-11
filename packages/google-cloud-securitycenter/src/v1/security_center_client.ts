@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2591,12 +2591,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The relative resource name of the organization, project, or
-   *   folder. See:
-   *   https://cloud.google.com/apis/design/resource_names#relative_resource_name
-   *   An example is:
-   *   "organizations/{organization_id}".
+   *   folder. For more information about relative resource names, see [Relative
+   *   Resource
+   *   Name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+   *   Example: `organizations/{organization_id}`
    * @param {google.cloud.securitycenter.v1.CustomConfig} request.customConfig
-   *   Required. The user specified custom configuration to test.
+   *   Required. The custom configuration that you need to test.
    * @param {google.cloud.securitycenter.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource} request.resource
    *   Required. Resource data to simulate custom module against.
    * @param {object} [options]

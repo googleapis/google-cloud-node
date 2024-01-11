@@ -7949,8 +7949,14 @@ export namespace google {
                     /** DataQualityResult passed */
                     passed?: (boolean|null);
 
+                    /** DataQualityResult score */
+                    score?: (number|null);
+
                     /** DataQualityResult dimensions */
                     dimensions?: (google.cloud.dataplex.v1.IDataQualityDimensionResult[]|null);
+
+                    /** DataQualityResult columns */
+                    columns?: (google.cloud.dataplex.v1.IDataQualityColumnResult[]|null);
 
                     /** DataQualityResult rules */
                     rules?: (google.cloud.dataplex.v1.IDataQualityRuleResult[]|null);
@@ -7977,8 +7983,14 @@ export namespace google {
                     /** DataQualityResult passed. */
                     public passed: boolean;
 
+                    /** DataQualityResult score. */
+                    public score?: (number|null);
+
                     /** DataQualityResult dimensions. */
                     public dimensions: google.cloud.dataplex.v1.IDataQualityDimensionResult[];
+
+                    /** DataQualityResult columns. */
+                    public columns: google.cloud.dataplex.v1.IDataQualityColumnResult[];
 
                     /** DataQualityResult rules. */
                     public rules: google.cloud.dataplex.v1.IDataQualityRuleResult[];
@@ -7991,6 +8003,9 @@ export namespace google {
 
                     /** DataQualityResult postScanActionsResult. */
                     public postScanActionsResult?: (google.cloud.dataplex.v1.DataQualityResult.IPostScanActionsResult|null);
+
+                    /** DataQualityResult _score. */
+                    public _score?: "score";
 
                     /**
                      * Creates a new DataQualityResult instance using the specified properties.
@@ -8428,6 +8443,9 @@ export namespace google {
 
                     /** DataQualityDimensionResult passed */
                     passed?: (boolean|null);
+
+                    /** DataQualityDimensionResult score */
+                    score?: (number|null);
                 }
 
                 /** Represents a DataQualityDimensionResult. */
@@ -8444,6 +8462,12 @@ export namespace google {
 
                     /** DataQualityDimensionResult passed. */
                     public passed: boolean;
+
+                    /** DataQualityDimensionResult score. */
+                    public score?: (number|null);
+
+                    /** DataQualityDimensionResult _score. */
+                    public _score?: "score";
 
                     /**
                      * Creates a new DataQualityDimensionResult instance using the specified properties.
@@ -9616,6 +9640,112 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a DataQualityColumnResult. */
+                interface IDataQualityColumnResult {
+
+                    /** DataQualityColumnResult column */
+                    column?: (string|null);
+
+                    /** DataQualityColumnResult score */
+                    score?: (number|null);
+                }
+
+                /** Represents a DataQualityColumnResult. */
+                class DataQualityColumnResult implements IDataQualityColumnResult {
+
+                    /**
+                     * Constructs a new DataQualityColumnResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDataQualityColumnResult);
+
+                    /** DataQualityColumnResult column. */
+                    public column: string;
+
+                    /** DataQualityColumnResult score. */
+                    public score?: (number|null);
+
+                    /** DataQualityColumnResult _score. */
+                    public _score?: "score";
+
+                    /**
+                     * Creates a new DataQualityColumnResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataQualityColumnResult instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDataQualityColumnResult): google.cloud.dataplex.v1.DataQualityColumnResult;
+
+                    /**
+                     * Encodes the specified DataQualityColumnResult message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityColumnResult.verify|verify} messages.
+                     * @param message DataQualityColumnResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDataQualityColumnResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataQualityColumnResult message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityColumnResult.verify|verify} messages.
+                     * @param message DataQualityColumnResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDataQualityColumnResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataQualityColumnResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataQualityColumnResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityColumnResult;
+
+                    /**
+                     * Decodes a DataQualityColumnResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataQualityColumnResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityColumnResult;
+
+                    /**
+                     * Verifies a DataQualityColumnResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataQualityColumnResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataQualityColumnResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityColumnResult;
+
+                    /**
+                     * Creates a plain object from a DataQualityColumnResult message. Also converts values to other types if specified.
+                     * @param message DataQualityColumnResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DataQualityColumnResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataQualityColumnResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataQualityColumnResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a DataTaxonomyService */
@@ -22500,6 +22630,255 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a GovernanceEvent. */
+                interface IGovernanceEvent {
+
+                    /** GovernanceEvent message */
+                    message?: (string|null);
+
+                    /** GovernanceEvent eventType */
+                    eventType?: (google.cloud.dataplex.v1.GovernanceEvent.EventType|keyof typeof google.cloud.dataplex.v1.GovernanceEvent.EventType|null);
+
+                    /** GovernanceEvent entity */
+                    entity?: (google.cloud.dataplex.v1.GovernanceEvent.IEntity|null);
+                }
+
+                /** Represents a GovernanceEvent. */
+                class GovernanceEvent implements IGovernanceEvent {
+
+                    /**
+                     * Constructs a new GovernanceEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IGovernanceEvent);
+
+                    /** GovernanceEvent message. */
+                    public message: string;
+
+                    /** GovernanceEvent eventType. */
+                    public eventType: (google.cloud.dataplex.v1.GovernanceEvent.EventType|keyof typeof google.cloud.dataplex.v1.GovernanceEvent.EventType);
+
+                    /** GovernanceEvent entity. */
+                    public entity?: (google.cloud.dataplex.v1.GovernanceEvent.IEntity|null);
+
+                    /** GovernanceEvent _entity. */
+                    public _entity?: "entity";
+
+                    /**
+                     * Creates a new GovernanceEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GovernanceEvent instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IGovernanceEvent): google.cloud.dataplex.v1.GovernanceEvent;
+
+                    /**
+                     * Encodes the specified GovernanceEvent message. Does not implicitly {@link google.cloud.dataplex.v1.GovernanceEvent.verify|verify} messages.
+                     * @param message GovernanceEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IGovernanceEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GovernanceEvent message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.GovernanceEvent.verify|verify} messages.
+                     * @param message GovernanceEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IGovernanceEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GovernanceEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GovernanceEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.GovernanceEvent;
+
+                    /**
+                     * Decodes a GovernanceEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GovernanceEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.GovernanceEvent;
+
+                    /**
+                     * Verifies a GovernanceEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GovernanceEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GovernanceEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.GovernanceEvent;
+
+                    /**
+                     * Creates a plain object from a GovernanceEvent message. Also converts values to other types if specified.
+                     * @param message GovernanceEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.GovernanceEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GovernanceEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GovernanceEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GovernanceEvent {
+
+                    /** Properties of an Entity. */
+                    interface IEntity {
+
+                        /** Entity entity */
+                        entity?: (string|null);
+
+                        /** Entity entityType */
+                        entityType?: (google.cloud.dataplex.v1.GovernanceEvent.Entity.EntityType|keyof typeof google.cloud.dataplex.v1.GovernanceEvent.Entity.EntityType|null);
+                    }
+
+                    /** Represents an Entity. */
+                    class Entity implements IEntity {
+
+                        /**
+                         * Constructs a new Entity.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.GovernanceEvent.IEntity);
+
+                        /** Entity entity. */
+                        public entity: string;
+
+                        /** Entity entityType. */
+                        public entityType: (google.cloud.dataplex.v1.GovernanceEvent.Entity.EntityType|keyof typeof google.cloud.dataplex.v1.GovernanceEvent.Entity.EntityType);
+
+                        /**
+                         * Creates a new Entity instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Entity instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.GovernanceEvent.IEntity): google.cloud.dataplex.v1.GovernanceEvent.Entity;
+
+                        /**
+                         * Encodes the specified Entity message. Does not implicitly {@link google.cloud.dataplex.v1.GovernanceEvent.Entity.verify|verify} messages.
+                         * @param message Entity message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.GovernanceEvent.IEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Entity message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.GovernanceEvent.Entity.verify|verify} messages.
+                         * @param message Entity message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.GovernanceEvent.IEntity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Entity message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Entity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.GovernanceEvent.Entity;
+
+                        /**
+                         * Decodes an Entity message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Entity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.GovernanceEvent.Entity;
+
+                        /**
+                         * Verifies an Entity message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Entity message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Entity
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.GovernanceEvent.Entity;
+
+                        /**
+                         * Creates a plain object from an Entity message. Also converts values to other types if specified.
+                         * @param message Entity
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.GovernanceEvent.Entity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Entity to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Entity
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Entity {
+
+                        /** EntityType enum. */
+                        enum EntityType {
+                            ENTITY_TYPE_UNSPECIFIED = 0,
+                            TABLE = 1,
+                            FILESET = 2
+                        }
+                    }
+
+                    /** EventType enum. */
+                    enum EventType {
+                        EVENT_TYPE_UNSPECIFIED = 0,
+                        RESOURCE_IAM_POLICY_UPDATE = 1,
+                        BIGQUERY_TABLE_CREATE = 2,
+                        BIGQUERY_TABLE_UPDATE = 3,
+                        BIGQUERY_TABLE_DELETE = 4,
+                        BIGQUERY_CONNECTION_CREATE = 5,
+                        BIGQUERY_CONNECTION_UPDATE = 6,
+                        BIGQUERY_CONNECTION_DELETE = 7,
+                        BIGQUERY_TAXONOMY_CREATE = 10,
+                        BIGQUERY_POLICY_TAG_CREATE = 11,
+                        BIGQUERY_POLICY_TAG_DELETE = 12,
+                        BIGQUERY_POLICY_TAG_SET_IAM_POLICY = 13,
+                        ACCESS_POLICY_UPDATE = 14,
+                        GOVERNANCE_RULE_MATCHED_RESOURCES = 15,
+                        GOVERNANCE_RULE_SEARCH_LIMIT_EXCEEDS = 16,
+                        GOVERNANCE_RULE_ERRORS = 17,
+                        GOVERNANCE_RULE_PROCESSING = 18
+                    }
+                }
+
                 /** Properties of a DataScanEvent. */
                 interface IDataScanEvent {
 
@@ -22834,6 +23213,15 @@ export namespace google {
 
                         /** DataQualityResult dimensionPassed */
                         dimensionPassed?: ({ [k: string]: boolean }|null);
+
+                        /** DataQualityResult score */
+                        score?: (number|null);
+
+                        /** DataQualityResult dimensionScore */
+                        dimensionScore?: ({ [k: string]: number }|null);
+
+                        /** DataQualityResult columnScore */
+                        columnScore?: ({ [k: string]: number }|null);
                     }
 
                     /** Represents a DataQualityResult. */
@@ -22853,6 +23241,15 @@ export namespace google {
 
                         /** DataQualityResult dimensionPassed. */
                         public dimensionPassed: { [k: string]: boolean };
+
+                        /** DataQualityResult score. */
+                        public score: number;
+
+                        /** DataQualityResult dimensionScore. */
+                        public dimensionScore: { [k: string]: number };
+
+                        /** DataQualityResult columnScore. */
+                        public columnScore: { [k: string]: number };
 
                         /**
                          * Creates a new DataQualityResult instance using the specified properties.

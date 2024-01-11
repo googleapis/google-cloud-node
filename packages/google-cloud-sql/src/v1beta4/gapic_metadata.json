@@ -228,6 +228,11 @@
                 "demoteMaster"
               ]
             },
+            "Demote": {
+              "methods": [
+                "demote"
+              ]
+            },
             "Export": {
               "methods": [
                 "export"
@@ -276,6 +281,11 @@
             "PromoteReplica": {
               "methods": [
                 "promoteReplica"
+              ]
+            },
+            "Switchover": {
+              "methods": [
+                "switchover"
               ]
             },
             "ResetSslConfig": {
@@ -383,6 +393,11 @@
                 "demoteMaster"
               ]
             },
+            "Demote": {
+              "methods": [
+                "demote"
+              ]
+            },
             "Export": {
               "methods": [
                 "export"
@@ -431,6 +446,11 @@
             "PromoteReplica": {
               "methods": [
                 "promoteReplica"
+              ]
+            },
+            "Switchover": {
+              "methods": [
+                "switchover"
               ]
             },
             "ResetSslConfig": {

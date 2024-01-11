@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -111,6 +111,51 @@ export namespace google {
                      * @param [response] Profile
                      */
                     type UpdateProfileCallback = (error: (Error|null), response?: google.devtools.cloudprofiler.v2.Profile) => void;
+                }
+
+                /** Represents an ExportService */
+                class ExportService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ExportService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ExportService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ExportService;
+
+                    /**
+                     * Calls ListProfiles.
+                     * @param request ListProfilesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListProfilesResponse
+                     */
+                    public listProfiles(request: google.devtools.cloudprofiler.v2.IListProfilesRequest, callback: google.devtools.cloudprofiler.v2.ExportService.ListProfilesCallback): void;
+
+                    /**
+                     * Calls ListProfiles.
+                     * @param request ListProfilesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listProfiles(request: google.devtools.cloudprofiler.v2.IListProfilesRequest): Promise<google.devtools.cloudprofiler.v2.ListProfilesResponse>;
+                }
+
+                namespace ExportService {
+
+                    /**
+                     * Callback as used by {@link google.devtools.cloudprofiler.v2.ExportService|listProfiles}.
+                     * @param error Error, if any
+                     * @param [response] ListProfilesResponse
+                     */
+                    type ListProfilesCallback = (error: (Error|null), response?: google.devtools.cloudprofiler.v2.ListProfilesResponse) => void;
                 }
 
                 /** Properties of a CreateProfileRequest. */
@@ -674,6 +719,224 @@ export namespace google {
                     CONTENTION = 5,
                     PEAK_HEAP = 6,
                     HEAP_ALLOC = 7
+                }
+
+                /** Properties of a ListProfilesRequest. */
+                interface IListProfilesRequest {
+
+                    /** ListProfilesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListProfilesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListProfilesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListProfilesRequest. */
+                class ListProfilesRequest implements IListProfilesRequest {
+
+                    /**
+                     * Constructs a new ListProfilesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudprofiler.v2.IListProfilesRequest);
+
+                    /** ListProfilesRequest parent. */
+                    public parent: string;
+
+                    /** ListProfilesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListProfilesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListProfilesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProfilesRequest instance
+                     */
+                    public static create(properties?: google.devtools.cloudprofiler.v2.IListProfilesRequest): google.devtools.cloudprofiler.v2.ListProfilesRequest;
+
+                    /**
+                     * Encodes the specified ListProfilesRequest message. Does not implicitly {@link google.devtools.cloudprofiler.v2.ListProfilesRequest.verify|verify} messages.
+                     * @param message ListProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudprofiler.v2.IListProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProfilesRequest message, length delimited. Does not implicitly {@link google.devtools.cloudprofiler.v2.ListProfilesRequest.verify|verify} messages.
+                     * @param message ListProfilesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudprofiler.v2.IListProfilesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProfilesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudprofiler.v2.ListProfilesRequest;
+
+                    /**
+                     * Decodes a ListProfilesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProfilesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudprofiler.v2.ListProfilesRequest;
+
+                    /**
+                     * Verifies a ListProfilesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProfilesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProfilesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudprofiler.v2.ListProfilesRequest;
+
+                    /**
+                     * Creates a plain object from a ListProfilesRequest message. Also converts values to other types if specified.
+                     * @param message ListProfilesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudprofiler.v2.ListProfilesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProfilesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListProfilesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListProfilesResponse. */
+                interface IListProfilesResponse {
+
+                    /** ListProfilesResponse profiles */
+                    profiles?: (google.devtools.cloudprofiler.v2.IProfile[]|null);
+
+                    /** ListProfilesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListProfilesResponse skippedProfiles */
+                    skippedProfiles?: (number|null);
+                }
+
+                /** Represents a ListProfilesResponse. */
+                class ListProfilesResponse implements IListProfilesResponse {
+
+                    /**
+                     * Constructs a new ListProfilesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudprofiler.v2.IListProfilesResponse);
+
+                    /** ListProfilesResponse profiles. */
+                    public profiles: google.devtools.cloudprofiler.v2.IProfile[];
+
+                    /** ListProfilesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListProfilesResponse skippedProfiles. */
+                    public skippedProfiles: number;
+
+                    /**
+                     * Creates a new ListProfilesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProfilesResponse instance
+                     */
+                    public static create(properties?: google.devtools.cloudprofiler.v2.IListProfilesResponse): google.devtools.cloudprofiler.v2.ListProfilesResponse;
+
+                    /**
+                     * Encodes the specified ListProfilesResponse message. Does not implicitly {@link google.devtools.cloudprofiler.v2.ListProfilesResponse.verify|verify} messages.
+                     * @param message ListProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudprofiler.v2.IListProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProfilesResponse message, length delimited. Does not implicitly {@link google.devtools.cloudprofiler.v2.ListProfilesResponse.verify|verify} messages.
+                     * @param message ListProfilesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudprofiler.v2.IListProfilesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProfilesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudprofiler.v2.ListProfilesResponse;
+
+                    /**
+                     * Decodes a ListProfilesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProfilesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudprofiler.v2.ListProfilesResponse;
+
+                    /**
+                     * Verifies a ListProfilesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProfilesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProfilesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudprofiler.v2.ListProfilesResponse;
+
+                    /**
+                     * Creates a plain object from a ListProfilesResponse message. Also converts values to other types if specified.
+                     * @param message ListProfilesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudprofiler.v2.ListProfilesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProfilesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListProfilesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }

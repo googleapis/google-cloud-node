@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-recommender",
-        "version": "6.1.0",
+        "version": "6.1.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 93,
+                    "end": 97,
                     "type": "FULL"
                 }
             ],
@@ -162,7 +162,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 93,
+                    "end": 97,
                     "type": "FULL"
                 }
             ],

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -684,6 +684,9 @@ export namespace google {
                     /** AnnotateAssessmentRequest reasons */
                     reasons?: (google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason[]|null);
 
+                    /** AnnotateAssessmentRequest accountId */
+                    accountId?: (string|null);
+
                     /** AnnotateAssessmentRequest hashedAccountId */
                     hashedAccountId?: (Uint8Array|string|null);
 
@@ -708,6 +711,9 @@ export namespace google {
 
                     /** AnnotateAssessmentRequest reasons. */
                     public reasons: google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason[];
+
+                    /** AnnotateAssessmentRequest accountId. */
+                    public accountId: string;
 
                     /** AnnotateAssessmentRequest hashedAccountId. */
                     public hashedAccountId: (Uint8Array|string);
@@ -1472,6 +1478,9 @@ export namespace google {
 
                     /** Event transactionData */
                     transactionData?: (google.cloud.recaptchaenterprise.v1.ITransactionData|null);
+
+                    /** Event userInfo */
+                    userInfo?: (google.cloud.recaptchaenterprise.v1.IUserInfo|null);
                 }
 
                 /** Represents an Event. */
@@ -1521,6 +1530,9 @@ export namespace google {
 
                     /** Event transactionData. */
                     public transactionData?: (google.cloud.recaptchaenterprise.v1.ITransactionData|null);
+
+                    /** Event userInfo. */
+                    public userInfo?: (google.cloud.recaptchaenterprise.v1.IUserInfo|null);
 
                     /**
                      * Creates a new Event instance using the specified properties.
@@ -2257,6 +2269,227 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a UserInfo. */
+                interface IUserInfo {
+
+                    /** UserInfo createAccountTime */
+                    createAccountTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UserInfo accountId */
+                    accountId?: (string|null);
+
+                    /** UserInfo userIds */
+                    userIds?: (google.cloud.recaptchaenterprise.v1.IUserId[]|null);
+                }
+
+                /** Represents a UserInfo. */
+                class UserInfo implements IUserInfo {
+
+                    /**
+                     * Constructs a new UserInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IUserInfo);
+
+                    /** UserInfo createAccountTime. */
+                    public createAccountTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UserInfo accountId. */
+                    public accountId: string;
+
+                    /** UserInfo userIds. */
+                    public userIds: google.cloud.recaptchaenterprise.v1.IUserId[];
+
+                    /**
+                     * Creates a new UserInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UserInfo instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IUserInfo): google.cloud.recaptchaenterprise.v1.UserInfo;
+
+                    /**
+                     * Encodes the specified UserInfo message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UserInfo.verify|verify} messages.
+                     * @param message UserInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UserInfo message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UserInfo.verify|verify} messages.
+                     * @param message UserInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UserInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.UserInfo;
+
+                    /**
+                     * Decodes a UserInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UserInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.UserInfo;
+
+                    /**
+                     * Verifies a UserInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UserInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UserInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.UserInfo;
+
+                    /**
+                     * Creates a plain object from a UserInfo message. Also converts values to other types if specified.
+                     * @param message UserInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.UserInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UserInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UserInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a UserId. */
+                interface IUserId {
+
+                    /** UserId email */
+                    email?: (string|null);
+
+                    /** UserId phoneNumber */
+                    phoneNumber?: (string|null);
+
+                    /** UserId username */
+                    username?: (string|null);
+                }
+
+                /** Represents a UserId. */
+                class UserId implements IUserId {
+
+                    /**
+                     * Constructs a new UserId.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IUserId);
+
+                    /** UserId email. */
+                    public email?: (string|null);
+
+                    /** UserId phoneNumber. */
+                    public phoneNumber?: (string|null);
+
+                    /** UserId username. */
+                    public username?: (string|null);
+
+                    /** UserId idOneof. */
+                    public idOneof?: ("email"|"phoneNumber"|"username");
+
+                    /**
+                     * Creates a new UserId instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UserId instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IUserId): google.cloud.recaptchaenterprise.v1.UserId;
+
+                    /**
+                     * Encodes the specified UserId message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UserId.verify|verify} messages.
+                     * @param message UserId message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IUserId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UserId message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UserId.verify|verify} messages.
+                     * @param message UserId message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IUserId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UserId message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UserId
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.UserId;
+
+                    /**
+                     * Decodes a UserId message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UserId
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.UserId;
+
+                    /**
+                     * Verifies a UserId message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UserId message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UserId
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.UserId;
+
+                    /**
+                     * Creates a plain object from a UserId message. Also converts values to other types if specified.
+                     * @param message UserId
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.UserId, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UserId to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UserId
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RiskAnalysis. */
@@ -7395,6 +7628,9 @@ export namespace google {
                     /** SearchRelatedAccountGroupMembershipsRequest project */
                     project?: (string|null);
 
+                    /** SearchRelatedAccountGroupMembershipsRequest accountId */
+                    accountId?: (string|null);
+
                     /** SearchRelatedAccountGroupMembershipsRequest hashedAccountId */
                     hashedAccountId?: (Uint8Array|string|null);
 
@@ -7416,6 +7652,9 @@ export namespace google {
 
                     /** SearchRelatedAccountGroupMembershipsRequest project. */
                     public project: string;
+
+                    /** SearchRelatedAccountGroupMembershipsRequest accountId. */
+                    public accountId: string;
 
                     /** SearchRelatedAccountGroupMembershipsRequest hashedAccountId. */
                     public hashedAccountId: (Uint8Array|string);
@@ -7613,6 +7852,9 @@ export namespace google {
                     /** RelatedAccountGroupMembership name */
                     name?: (string|null);
 
+                    /** RelatedAccountGroupMembership accountId */
+                    accountId?: (string|null);
+
                     /** RelatedAccountGroupMembership hashedAccountId */
                     hashedAccountId?: (Uint8Array|string|null);
                 }
@@ -7628,6 +7870,9 @@ export namespace google {
 
                     /** RelatedAccountGroupMembership name. */
                     public name: string;
+
+                    /** RelatedAccountGroupMembership accountId. */
+                    public accountId: string;
 
                     /** RelatedAccountGroupMembership hashedAccountId. */
                     public hashedAccountId: (Uint8Array|string);

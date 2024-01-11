@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2355,6 +2355,6064 @@
                         return ActiveDirectory;
                     })();
     
+                    v1.Backup = (function() {
+    
+                        /**
+                         * Properties of a Backup.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IBackup
+                         * @property {string|null} [name] Backup name
+                         * @property {google.cloud.netapp.v1.Backup.State|null} [state] Backup state
+                         * @property {string|null} [description] Backup description
+                         * @property {number|Long|null} [volumeUsageBytes] Backup volumeUsageBytes
+                         * @property {google.cloud.netapp.v1.Backup.Type|null} [backupType] Backup backupType
+                         * @property {string|null} [sourceVolume] Backup sourceVolume
+                         * @property {string|null} [sourceSnapshot] Backup sourceSnapshot
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Backup createTime
+                         * @property {Object.<string,string>|null} [labels] Backup labels
+                         * @property {number|Long|null} [chainStorageBytes] Backup chainStorageBytes
+                         */
+    
+                        /**
+                         * Constructs a new Backup.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a Backup.
+                         * @implements IBackup
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IBackup=} [properties] Properties to set
+                         */
+                        function Backup(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Backup name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.name = "";
+    
+                        /**
+                         * Backup state.
+                         * @member {google.cloud.netapp.v1.Backup.State} state
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.state = 0;
+    
+                        /**
+                         * Backup description.
+                         * @member {string} description
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.description = "";
+    
+                        /**
+                         * Backup volumeUsageBytes.
+                         * @member {number|Long} volumeUsageBytes
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.volumeUsageBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Backup backupType.
+                         * @member {google.cloud.netapp.v1.Backup.Type} backupType
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.backupType = 0;
+    
+                        /**
+                         * Backup sourceVolume.
+                         * @member {string} sourceVolume
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.sourceVolume = "";
+    
+                        /**
+                         * Backup sourceSnapshot.
+                         * @member {string|null|undefined} sourceSnapshot
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.sourceSnapshot = null;
+    
+                        /**
+                         * Backup createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.createTime = null;
+    
+                        /**
+                         * Backup labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Backup chainStorageBytes.
+                         * @member {number|Long} chainStorageBytes
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Backup.prototype.chainStorageBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Backup _sourceSnapshot.
+                         * @member {"sourceSnapshot"|undefined} _sourceSnapshot
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         */
+                        Object.defineProperty(Backup.prototype, "_sourceSnapshot", {
+                            get: $util.oneOfGetter($oneOfFields = ["sourceSnapshot"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Backup instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackup=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.Backup} Backup instance
+                         */
+                        Backup.create = function create(properties) {
+                            return new Backup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Backup message. Does not implicitly {@link google.cloud.netapp.v1.Backup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackup} message Backup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Backup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.volumeUsageBytes != null && Object.hasOwnProperty.call(message, "volumeUsageBytes"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.volumeUsageBytes);
+                            if (message.backupType != null && Object.hasOwnProperty.call(message, "backupType"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.backupType);
+                            if (message.sourceVolume != null && Object.hasOwnProperty.call(message, "sourceVolume"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.sourceVolume);
+                            if (message.sourceSnapshot != null && Object.hasOwnProperty.call(message, "sourceSnapshot"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.sourceSnapshot);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.chainStorageBytes != null && Object.hasOwnProperty.call(message, "chainStorageBytes"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int64(message.chainStorageBytes);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Backup message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.Backup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackup} message Backup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Backup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Backup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.Backup} Backup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Backup.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.Backup(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.volumeUsageBytes = reader.int64();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.backupType = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.sourceVolume = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.sourceSnapshot = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 10: {
+                                        message.chainStorageBytes = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Backup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.Backup} Backup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Backup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Backup message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Backup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.volumeUsageBytes != null && message.hasOwnProperty("volumeUsageBytes"))
+                                if (!$util.isInteger(message.volumeUsageBytes) && !(message.volumeUsageBytes && $util.isInteger(message.volumeUsageBytes.low) && $util.isInteger(message.volumeUsageBytes.high)))
+                                    return "volumeUsageBytes: integer|Long expected";
+                            if (message.backupType != null && message.hasOwnProperty("backupType"))
+                                switch (message.backupType) {
+                                default:
+                                    return "backupType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.sourceVolume != null && message.hasOwnProperty("sourceVolume"))
+                                if (!$util.isString(message.sourceVolume))
+                                    return "sourceVolume: string expected";
+                            if (message.sourceSnapshot != null && message.hasOwnProperty("sourceSnapshot")) {
+                                properties._sourceSnapshot = 1;
+                                if (!$util.isString(message.sourceSnapshot))
+                                    return "sourceSnapshot: string expected";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.chainStorageBytes != null && message.hasOwnProperty("chainStorageBytes"))
+                                if (!$util.isInteger(message.chainStorageBytes) && !(message.chainStorageBytes && $util.isInteger(message.chainStorageBytes.low) && $util.isInteger(message.chainStorageBytes.high)))
+                                    return "chainStorageBytes: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Backup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.Backup} Backup
+                         */
+                        Backup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.Backup)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.Backup();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "UPLOADING":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "READY":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "DELETING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "ERROR":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "UPDATING":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.volumeUsageBytes != null)
+                                if ($util.Long)
+                                    (message.volumeUsageBytes = $util.Long.fromValue(object.volumeUsageBytes)).unsigned = false;
+                                else if (typeof object.volumeUsageBytes === "string")
+                                    message.volumeUsageBytes = parseInt(object.volumeUsageBytes, 10);
+                                else if (typeof object.volumeUsageBytes === "number")
+                                    message.volumeUsageBytes = object.volumeUsageBytes;
+                                else if (typeof object.volumeUsageBytes === "object")
+                                    message.volumeUsageBytes = new $util.LongBits(object.volumeUsageBytes.low >>> 0, object.volumeUsageBytes.high >>> 0).toNumber();
+                            switch (object.backupType) {
+                            default:
+                                if (typeof object.backupType === "number") {
+                                    message.backupType = object.backupType;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.backupType = 0;
+                                break;
+                            case "MANUAL":
+                            case 1:
+                                message.backupType = 1;
+                                break;
+                            case "SCHEDULED":
+                            case 2:
+                                message.backupType = 2;
+                                break;
+                            }
+                            if (object.sourceVolume != null)
+                                message.sourceVolume = String(object.sourceVolume);
+                            if (object.sourceSnapshot != null)
+                                message.sourceSnapshot = String(object.sourceSnapshot);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.Backup.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.Backup.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.chainStorageBytes != null)
+                                if ($util.Long)
+                                    (message.chainStorageBytes = $util.Long.fromValue(object.chainStorageBytes)).unsigned = false;
+                                else if (typeof object.chainStorageBytes === "string")
+                                    message.chainStorageBytes = parseInt(object.chainStorageBytes, 10);
+                                else if (typeof object.chainStorageBytes === "number")
+                                    message.chainStorageBytes = object.chainStorageBytes;
+                                else if (typeof object.chainStorageBytes === "object")
+                                    message.chainStorageBytes = new $util.LongBits(object.chainStorageBytes.low >>> 0, object.chainStorageBytes.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Backup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @static
+                         * @param {google.cloud.netapp.v1.Backup} message Backup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Backup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.description = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.volumeUsageBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.volumeUsageBytes = options.longs === String ? "0" : 0;
+                                object.backupType = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.sourceVolume = "";
+                                object.createTime = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.chainStorageBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.chainStorageBytes = options.longs === String ? "0" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.netapp.v1.Backup.State[message.state] === undefined ? message.state : $root.google.cloud.netapp.v1.Backup.State[message.state] : message.state;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.volumeUsageBytes != null && message.hasOwnProperty("volumeUsageBytes"))
+                                if (typeof message.volumeUsageBytes === "number")
+                                    object.volumeUsageBytes = options.longs === String ? String(message.volumeUsageBytes) : message.volumeUsageBytes;
+                                else
+                                    object.volumeUsageBytes = options.longs === String ? $util.Long.prototype.toString.call(message.volumeUsageBytes) : options.longs === Number ? new $util.LongBits(message.volumeUsageBytes.low >>> 0, message.volumeUsageBytes.high >>> 0).toNumber() : message.volumeUsageBytes;
+                            if (message.backupType != null && message.hasOwnProperty("backupType"))
+                                object.backupType = options.enums === String ? $root.google.cloud.netapp.v1.Backup.Type[message.backupType] === undefined ? message.backupType : $root.google.cloud.netapp.v1.Backup.Type[message.backupType] : message.backupType;
+                            if (message.sourceVolume != null && message.hasOwnProperty("sourceVolume"))
+                                object.sourceVolume = message.sourceVolume;
+                            if (message.sourceSnapshot != null && message.hasOwnProperty("sourceSnapshot")) {
+                                object.sourceSnapshot = message.sourceSnapshot;
+                                if (options.oneofs)
+                                    object._sourceSnapshot = "sourceSnapshot";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.chainStorageBytes != null && message.hasOwnProperty("chainStorageBytes"))
+                                if (typeof message.chainStorageBytes === "number")
+                                    object.chainStorageBytes = options.longs === String ? String(message.chainStorageBytes) : message.chainStorageBytes;
+                                else
+                                    object.chainStorageBytes = options.longs === String ? $util.Long.prototype.toString.call(message.chainStorageBytes) : options.longs === Number ? new $util.LongBits(message.chainStorageBytes.low >>> 0, message.chainStorageBytes.high >>> 0).toNumber() : message.chainStorageBytes;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Backup to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Backup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Backup
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.Backup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Backup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.Backup";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.netapp.v1.Backup.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} UPLOADING=2 UPLOADING value
+                         * @property {number} READY=3 READY value
+                         * @property {number} DELETING=4 DELETING value
+                         * @property {number} ERROR=5 ERROR value
+                         * @property {number} UPDATING=6 UPDATING value
+                         */
+                        Backup.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "UPLOADING"] = 2;
+                            values[valuesById[3] = "READY"] = 3;
+                            values[valuesById[4] = "DELETING"] = 4;
+                            values[valuesById[5] = "ERROR"] = 5;
+                            values[valuesById[6] = "UPDATING"] = 6;
+                            return values;
+                        })();
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.netapp.v1.Backup.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} MANUAL=1 MANUAL value
+                         * @property {number} SCHEDULED=2 SCHEDULED value
+                         */
+                        Backup.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MANUAL"] = 1;
+                            values[valuesById[2] = "SCHEDULED"] = 2;
+                            return values;
+                        })();
+    
+                        return Backup;
+                    })();
+    
+                    v1.ListBackupsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListBackupsRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IListBackupsRequest
+                         * @property {string|null} [parent] ListBackupsRequest parent
+                         * @property {number|null} [pageSize] ListBackupsRequest pageSize
+                         * @property {string|null} [pageToken] ListBackupsRequest pageToken
+                         * @property {string|null} [orderBy] ListBackupsRequest orderBy
+                         * @property {string|null} [filter] ListBackupsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupsRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a ListBackupsRequest.
+                         * @implements IListBackupsRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IListBackupsRequest=} [properties] Properties to set
+                         */
+                        function ListBackupsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListBackupsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListBackupsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListBackupsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListBackupsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @instance
+                         */
+                        ListBackupsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListBackupsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ListBackupsRequest} ListBackupsRequest instance
+                         */
+                        ListBackupsRequest.create = function create(properties) {
+                            return new ListBackupsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsRequest message. Does not implicitly {@link google.cloud.netapp.v1.ListBackupsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupsRequest} message ListBackupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListBackupsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupsRequest} message ListBackupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ListBackupsRequest} ListBackupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ListBackupsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ListBackupsRequest} ListBackupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ListBackupsRequest} ListBackupsRequest
+                         */
+                        ListBackupsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ListBackupsRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ListBackupsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ListBackupsRequest} message ListBackupsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ListBackupsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ListBackupsRequest";
+                        };
+    
+                        return ListBackupsRequest;
+                    })();
+    
+                    v1.ListBackupsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListBackupsResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IListBackupsResponse
+                         * @property {Array.<google.cloud.netapp.v1.IBackup>|null} [backups] ListBackupsResponse backups
+                         * @property {string|null} [nextPageToken] ListBackupsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListBackupsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupsResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a ListBackupsResponse.
+                         * @implements IListBackupsResponse
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IListBackupsResponse=} [properties] Properties to set
+                         */
+                        function ListBackupsResponse(properties) {
+                            this.backups = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupsResponse backups.
+                         * @member {Array.<google.cloud.netapp.v1.IBackup>} backups
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @instance
+                         */
+                        ListBackupsResponse.prototype.backups = $util.emptyArray;
+    
+                        /**
+                         * ListBackupsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @instance
+                         */
+                        ListBackupsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListBackupsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @instance
+                         */
+                        ListBackupsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListBackupsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ListBackupsResponse} ListBackupsResponse instance
+                         */
+                        ListBackupsResponse.create = function create(properties) {
+                            return new ListBackupsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsResponse message. Does not implicitly {@link google.cloud.netapp.v1.ListBackupsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupsResponse} message ListBackupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backups != null && message.backups.length)
+                                for (var i = 0; i < message.backups.length; ++i)
+                                    $root.google.cloud.netapp.v1.Backup.encode(message.backups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupsResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListBackupsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupsResponse} message ListBackupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ListBackupsResponse} ListBackupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ListBackupsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.backups && message.backups.length))
+                                            message.backups = [];
+                                        message.backups.push($root.google.cloud.netapp.v1.Backup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ListBackupsResponse} ListBackupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backups != null && message.hasOwnProperty("backups")) {
+                                if (!Array.isArray(message.backups))
+                                    return "backups: array expected";
+                                for (var i = 0; i < message.backups.length; ++i) {
+                                    var error = $root.google.cloud.netapp.v1.Backup.verify(message.backups[i]);
+                                    if (error)
+                                        return "backups." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ListBackupsResponse} ListBackupsResponse
+                         */
+                        ListBackupsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ListBackupsResponse)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ListBackupsResponse();
+                            if (object.backups) {
+                                if (!Array.isArray(object.backups))
+                                    throw TypeError(".google.cloud.netapp.v1.ListBackupsResponse.backups: array expected");
+                                message.backups = [];
+                                for (var i = 0; i < object.backups.length; ++i) {
+                                    if (typeof object.backups[i] !== "object")
+                                        throw TypeError(".google.cloud.netapp.v1.ListBackupsResponse.backups: object expected");
+                                    message.backups[i] = $root.google.cloud.netapp.v1.Backup.fromObject(object.backups[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.netapp.v1.ListBackupsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.ListBackupsResponse} message ListBackupsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.backups = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.backups && message.backups.length) {
+                                object.backups = [];
+                                for (var j = 0; j < message.backups.length; ++j)
+                                    object.backups[j] = $root.google.cloud.netapp.v1.Backup.toObject(message.backups[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ListBackupsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ListBackupsResponse";
+                        };
+    
+                        return ListBackupsResponse;
+                    })();
+    
+                    v1.GetBackupRequest = (function() {
+    
+                        /**
+                         * Properties of a GetBackupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IGetBackupRequest
+                         * @property {string|null} [name] GetBackupRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetBackupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a GetBackupRequest.
+                         * @implements IGetBackupRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IGetBackupRequest=} [properties] Properties to set
+                         */
+                        function GetBackupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetBackupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.GetBackupRequest
+                         * @instance
+                         */
+                        GetBackupRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetBackupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetBackupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.GetBackupRequest} GetBackupRequest instance
+                         */
+                        GetBackupRequest.create = function create(properties) {
+                            return new GetBackupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupRequest message. Does not implicitly {@link google.cloud.netapp.v1.GetBackupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetBackupRequest} message GetBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.GetBackupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetBackupRequest} message GetBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetBackupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.GetBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.GetBackupRequest} GetBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.GetBackupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetBackupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.GetBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.GetBackupRequest} GetBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetBackupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.GetBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetBackupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.GetBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.GetBackupRequest} GetBackupRequest
+                         */
+                        GetBackupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.GetBackupRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.GetBackupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetBackupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.GetBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.GetBackupRequest} message GetBackupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetBackupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetBackupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.GetBackupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetBackupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.GetBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.GetBackupRequest";
+                        };
+    
+                        return GetBackupRequest;
+                    })();
+    
+                    v1.CreateBackupRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateBackupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ICreateBackupRequest
+                         * @property {string|null} [parent] CreateBackupRequest parent
+                         * @property {string|null} [backupId] CreateBackupRequest backupId
+                         * @property {google.cloud.netapp.v1.IBackup|null} [backup] CreateBackupRequest backup
+                         */
+    
+                        /**
+                         * Constructs a new CreateBackupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a CreateBackupRequest.
+                         * @implements ICreateBackupRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ICreateBackupRequest=} [properties] Properties to set
+                         */
+                        function CreateBackupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateBackupRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @instance
+                         */
+                        CreateBackupRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateBackupRequest backupId.
+                         * @member {string} backupId
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @instance
+                         */
+                        CreateBackupRequest.prototype.backupId = "";
+    
+                        /**
+                         * CreateBackupRequest backup.
+                         * @member {google.cloud.netapp.v1.IBackup|null|undefined} backup
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @instance
+                         */
+                        CreateBackupRequest.prototype.backup = null;
+    
+                        /**
+                         * Creates a new CreateBackupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateBackupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.CreateBackupRequest} CreateBackupRequest instance
+                         */
+                        CreateBackupRequest.create = function create(properties) {
+                            return new CreateBackupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBackupRequest message. Does not implicitly {@link google.cloud.netapp.v1.CreateBackupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateBackupRequest} message CreateBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBackupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.backupId != null && Object.hasOwnProperty.call(message, "backupId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.backupId);
+                            if (message.backup != null && Object.hasOwnProperty.call(message, "backup"))
+                                $root.google.cloud.netapp.v1.Backup.encode(message.backup, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBackupRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.CreateBackupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateBackupRequest} message CreateBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBackupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateBackupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.CreateBackupRequest} CreateBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBackupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.CreateBackupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backupId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.backup = $root.google.cloud.netapp.v1.Backup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateBackupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.CreateBackupRequest} CreateBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBackupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateBackupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateBackupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.backupId != null && message.hasOwnProperty("backupId"))
+                                if (!$util.isString(message.backupId))
+                                    return "backupId: string expected";
+                            if (message.backup != null && message.hasOwnProperty("backup")) {
+                                var error = $root.google.cloud.netapp.v1.Backup.verify(message.backup);
+                                if (error)
+                                    return "backup." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.CreateBackupRequest} CreateBackupRequest
+                         */
+                        CreateBackupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.CreateBackupRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.CreateBackupRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.backupId != null)
+                                message.backupId = String(object.backupId);
+                            if (object.backup != null) {
+                                if (typeof object.backup !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.CreateBackupRequest.backup: object expected");
+                                message.backup = $root.google.cloud.netapp.v1.Backup.fromObject(object.backup);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateBackupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.CreateBackupRequest} message CreateBackupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateBackupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.backupId = "";
+                                object.backup = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.backupId != null && message.hasOwnProperty("backupId"))
+                                object.backupId = message.backupId;
+                            if (message.backup != null && message.hasOwnProperty("backup"))
+                                object.backup = $root.google.cloud.netapp.v1.Backup.toObject(message.backup, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateBackupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateBackupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.CreateBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.CreateBackupRequest";
+                        };
+    
+                        return CreateBackupRequest;
+                    })();
+    
+                    v1.DeleteBackupRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteBackupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IDeleteBackupRequest
+                         * @property {string|null} [name] DeleteBackupRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteBackupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a DeleteBackupRequest.
+                         * @implements IDeleteBackupRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IDeleteBackupRequest=} [properties] Properties to set
+                         */
+                        function DeleteBackupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteBackupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.DeleteBackupRequest
+                         * @instance
+                         */
+                        DeleteBackupRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteBackupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteBackupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.DeleteBackupRequest} DeleteBackupRequest instance
+                         */
+                        DeleteBackupRequest.create = function create(properties) {
+                            return new DeleteBackupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBackupRequest message. Does not implicitly {@link google.cloud.netapp.v1.DeleteBackupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteBackupRequest} message DeleteBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBackupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBackupRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.DeleteBackupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteBackupRequest} message DeleteBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBackupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteBackupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.DeleteBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.DeleteBackupRequest} DeleteBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBackupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.DeleteBackupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteBackupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.DeleteBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.DeleteBackupRequest} DeleteBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBackupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteBackupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.DeleteBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteBackupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.DeleteBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.DeleteBackupRequest} DeleteBackupRequest
+                         */
+                        DeleteBackupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.DeleteBackupRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.DeleteBackupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteBackupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.DeleteBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.DeleteBackupRequest} message DeleteBackupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteBackupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteBackupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.DeleteBackupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteBackupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.DeleteBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.DeleteBackupRequest";
+                        };
+    
+                        return DeleteBackupRequest;
+                    })();
+    
+                    v1.UpdateBackupRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateBackupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IUpdateBackupRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateBackupRequest updateMask
+                         * @property {google.cloud.netapp.v1.IBackup|null} [backup] UpdateBackupRequest backup
+                         */
+    
+                        /**
+                         * Constructs a new UpdateBackupRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an UpdateBackupRequest.
+                         * @implements IUpdateBackupRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IUpdateBackupRequest=} [properties] Properties to set
+                         */
+                        function UpdateBackupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateBackupRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @instance
+                         */
+                        UpdateBackupRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateBackupRequest backup.
+                         * @member {google.cloud.netapp.v1.IBackup|null|undefined} backup
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @instance
+                         */
+                        UpdateBackupRequest.prototype.backup = null;
+    
+                        /**
+                         * Creates a new UpdateBackupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateBackupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.UpdateBackupRequest} UpdateBackupRequest instance
+                         */
+                        UpdateBackupRequest.create = function create(properties) {
+                            return new UpdateBackupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBackupRequest message. Does not implicitly {@link google.cloud.netapp.v1.UpdateBackupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateBackupRequest} message UpdateBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBackupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.backup != null && Object.hasOwnProperty.call(message, "backup"))
+                                $root.google.cloud.netapp.v1.Backup.encode(message.backup, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBackupRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.UpdateBackupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateBackupRequest} message UpdateBackupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBackupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateBackupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.UpdateBackupRequest} UpdateBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBackupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.UpdateBackupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backup = $root.google.cloud.netapp.v1.Backup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateBackupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.UpdateBackupRequest} UpdateBackupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBackupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateBackupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateBackupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.backup != null && message.hasOwnProperty("backup")) {
+                                var error = $root.google.cloud.netapp.v1.Backup.verify(message.backup);
+                                if (error)
+                                    return "backup." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateBackupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.UpdateBackupRequest} UpdateBackupRequest
+                         */
+                        UpdateBackupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.UpdateBackupRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.UpdateBackupRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.UpdateBackupRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.backup != null) {
+                                if (typeof object.backup !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.UpdateBackupRequest.backup: object expected");
+                                message.backup = $root.google.cloud.netapp.v1.Backup.fromObject(object.backup);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateBackupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.UpdateBackupRequest} message UpdateBackupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateBackupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.backup = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.backup != null && message.hasOwnProperty("backup"))
+                                object.backup = $root.google.cloud.netapp.v1.Backup.toObject(message.backup, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateBackupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateBackupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateBackupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.UpdateBackupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateBackupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.UpdateBackupRequest";
+                        };
+    
+                        return UpdateBackupRequest;
+                    })();
+    
+                    v1.BackupPolicy = (function() {
+    
+                        /**
+                         * Properties of a BackupPolicy.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IBackupPolicy
+                         * @property {string|null} [name] BackupPolicy name
+                         * @property {number|null} [dailyBackupLimit] BackupPolicy dailyBackupLimit
+                         * @property {number|null} [weeklyBackupLimit] BackupPolicy weeklyBackupLimit
+                         * @property {number|null} [monthlyBackupLimit] BackupPolicy monthlyBackupLimit
+                         * @property {string|null} [description] BackupPolicy description
+                         * @property {boolean|null} [enabled] BackupPolicy enabled
+                         * @property {number|null} [assignedVolumeCount] BackupPolicy assignedVolumeCount
+                         * @property {google.protobuf.ITimestamp|null} [createTime] BackupPolicy createTime
+                         * @property {Object.<string,string>|null} [labels] BackupPolicy labels
+                         * @property {google.cloud.netapp.v1.BackupPolicy.State|null} [state] BackupPolicy state
+                         */
+    
+                        /**
+                         * Constructs a new BackupPolicy.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a BackupPolicy.
+                         * @implements IBackupPolicy
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IBackupPolicy=} [properties] Properties to set
+                         */
+                        function BackupPolicy(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupPolicy name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        BackupPolicy.prototype.name = "";
+    
+                        /**
+                         * BackupPolicy dailyBackupLimit.
+                         * @member {number|null|undefined} dailyBackupLimit
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        BackupPolicy.prototype.dailyBackupLimit = null;
+    
+                        /**
+                         * BackupPolicy weeklyBackupLimit.
+                         * @member {number|null|undefined} weeklyBackupLimit
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        BackupPolicy.prototype.weeklyBackupLimit = null;
+    
+                        /**
+                         * BackupPolicy monthlyBackupLimit.
+                         * @member {number|null|undefined} monthlyBackupLimit
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        BackupPolicy.prototype.monthlyBackupLimit = null;
+    
+                        /**
+                         * BackupPolicy description.
+                         * @member {string|null|undefined} description
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        BackupPolicy.prototype.description = null;
+    
+                        /**
+                         * BackupPolicy enabled.
+                         * @member {boolean|null|undefined} enabled
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        BackupPolicy.prototype.enabled = null;
+    
+                        /**
+                         * BackupPolicy assignedVolumeCount.
+                         * @member {number|null|undefined} assignedVolumeCount
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        BackupPolicy.prototype.assignedVolumeCount = null;
+    
+                        /**
+                         * BackupPolicy createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        BackupPolicy.prototype.createTime = null;
+    
+                        /**
+                         * BackupPolicy labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        BackupPolicy.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * BackupPolicy state.
+                         * @member {google.cloud.netapp.v1.BackupPolicy.State} state
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        BackupPolicy.prototype.state = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BackupPolicy _dailyBackupLimit.
+                         * @member {"dailyBackupLimit"|undefined} _dailyBackupLimit
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        Object.defineProperty(BackupPolicy.prototype, "_dailyBackupLimit", {
+                            get: $util.oneOfGetter($oneOfFields = ["dailyBackupLimit"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * BackupPolicy _weeklyBackupLimit.
+                         * @member {"weeklyBackupLimit"|undefined} _weeklyBackupLimit
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        Object.defineProperty(BackupPolicy.prototype, "_weeklyBackupLimit", {
+                            get: $util.oneOfGetter($oneOfFields = ["weeklyBackupLimit"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * BackupPolicy _monthlyBackupLimit.
+                         * @member {"monthlyBackupLimit"|undefined} _monthlyBackupLimit
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        Object.defineProperty(BackupPolicy.prototype, "_monthlyBackupLimit", {
+                            get: $util.oneOfGetter($oneOfFields = ["monthlyBackupLimit"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * BackupPolicy _description.
+                         * @member {"description"|undefined} _description
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        Object.defineProperty(BackupPolicy.prototype, "_description", {
+                            get: $util.oneOfGetter($oneOfFields = ["description"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * BackupPolicy _enabled.
+                         * @member {"enabled"|undefined} _enabled
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        Object.defineProperty(BackupPolicy.prototype, "_enabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["enabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * BackupPolicy _assignedVolumeCount.
+                         * @member {"assignedVolumeCount"|undefined} _assignedVolumeCount
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         */
+                        Object.defineProperty(BackupPolicy.prototype, "_assignedVolumeCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["assignedVolumeCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BackupPolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackupPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.BackupPolicy} BackupPolicy instance
+                         */
+                        BackupPolicy.create = function create(properties) {
+                            return new BackupPolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupPolicy message. Does not implicitly {@link google.cloud.netapp.v1.BackupPolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackupPolicy} message BackupPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupPolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.dailyBackupLimit != null && Object.hasOwnProperty.call(message, "dailyBackupLimit"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.dailyBackupLimit);
+                            if (message.weeklyBackupLimit != null && Object.hasOwnProperty.call(message, "weeklyBackupLimit"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.weeklyBackupLimit);
+                            if (message.monthlyBackupLimit != null && Object.hasOwnProperty.call(message, "monthlyBackupLimit"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.monthlyBackupLimit);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.enabled);
+                            if (message.assignedVolumeCount != null && Object.hasOwnProperty.call(message, "assignedVolumeCount"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.assignedVolumeCount);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupPolicy message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.BackupPolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackupPolicy} message BackupPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupPolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.BackupPolicy} BackupPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupPolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.BackupPolicy(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dailyBackupLimit = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.weeklyBackupLimit = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.monthlyBackupLimit = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.assignedVolumeCount = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 10: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupPolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.BackupPolicy} BackupPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupPolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupPolicy message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupPolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.dailyBackupLimit != null && message.hasOwnProperty("dailyBackupLimit")) {
+                                properties._dailyBackupLimit = 1;
+                                if (!$util.isInteger(message.dailyBackupLimit))
+                                    return "dailyBackupLimit: integer expected";
+                            }
+                            if (message.weeklyBackupLimit != null && message.hasOwnProperty("weeklyBackupLimit")) {
+                                properties._weeklyBackupLimit = 1;
+                                if (!$util.isInteger(message.weeklyBackupLimit))
+                                    return "weeklyBackupLimit: integer expected";
+                            }
+                            if (message.monthlyBackupLimit != null && message.hasOwnProperty("monthlyBackupLimit")) {
+                                properties._monthlyBackupLimit = 1;
+                                if (!$util.isInteger(message.monthlyBackupLimit))
+                                    return "monthlyBackupLimit: integer expected";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description")) {
+                                properties._description = 1;
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            }
+                            if (message.enabled != null && message.hasOwnProperty("enabled")) {
+                                properties._enabled = 1;
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            }
+                            if (message.assignedVolumeCount != null && message.hasOwnProperty("assignedVolumeCount")) {
+                                properties._assignedVolumeCount = 1;
+                                if (!$util.isInteger(message.assignedVolumeCount))
+                                    return "assignedVolumeCount: integer expected";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.BackupPolicy} BackupPolicy
+                         */
+                        BackupPolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.BackupPolicy)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.BackupPolicy();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.dailyBackupLimit != null)
+                                message.dailyBackupLimit = object.dailyBackupLimit | 0;
+                            if (object.weeklyBackupLimit != null)
+                                message.weeklyBackupLimit = object.weeklyBackupLimit | 0;
+                            if (object.monthlyBackupLimit != null)
+                                message.monthlyBackupLimit = object.monthlyBackupLimit | 0;
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            if (object.assignedVolumeCount != null)
+                                message.assignedVolumeCount = object.assignedVolumeCount | 0;
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.BackupPolicy.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.BackupPolicy.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "READY":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "ERROR":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "UPDATING":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupPolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @static
+                         * @param {google.cloud.netapp.v1.BackupPolicy} message BackupPolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupPolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.dailyBackupLimit != null && message.hasOwnProperty("dailyBackupLimit")) {
+                                object.dailyBackupLimit = message.dailyBackupLimit;
+                                if (options.oneofs)
+                                    object._dailyBackupLimit = "dailyBackupLimit";
+                            }
+                            if (message.weeklyBackupLimit != null && message.hasOwnProperty("weeklyBackupLimit")) {
+                                object.weeklyBackupLimit = message.weeklyBackupLimit;
+                                if (options.oneofs)
+                                    object._weeklyBackupLimit = "weeklyBackupLimit";
+                            }
+                            if (message.monthlyBackupLimit != null && message.hasOwnProperty("monthlyBackupLimit")) {
+                                object.monthlyBackupLimit = message.monthlyBackupLimit;
+                                if (options.oneofs)
+                                    object._monthlyBackupLimit = "monthlyBackupLimit";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description")) {
+                                object.description = message.description;
+                                if (options.oneofs)
+                                    object._description = "description";
+                            }
+                            if (message.enabled != null && message.hasOwnProperty("enabled")) {
+                                object.enabled = message.enabled;
+                                if (options.oneofs)
+                                    object._enabled = "enabled";
+                            }
+                            if (message.assignedVolumeCount != null && message.hasOwnProperty("assignedVolumeCount")) {
+                                object.assignedVolumeCount = message.assignedVolumeCount;
+                                if (options.oneofs)
+                                    object._assignedVolumeCount = "assignedVolumeCount";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.netapp.v1.BackupPolicy.State[message.state] === undefined ? message.state : $root.google.cloud.netapp.v1.BackupPolicy.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupPolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupPolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupPolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.BackupPolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.BackupPolicy";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.netapp.v1.BackupPolicy.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} READY=2 READY value
+                         * @property {number} DELETING=3 DELETING value
+                         * @property {number} ERROR=4 ERROR value
+                         * @property {number} UPDATING=5 UPDATING value
+                         */
+                        BackupPolicy.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "READY"] = 2;
+                            values[valuesById[3] = "DELETING"] = 3;
+                            values[valuesById[4] = "ERROR"] = 4;
+                            values[valuesById[5] = "UPDATING"] = 5;
+                            return values;
+                        })();
+    
+                        return BackupPolicy;
+                    })();
+    
+                    v1.CreateBackupPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateBackupPolicyRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ICreateBackupPolicyRequest
+                         * @property {string|null} [parent] CreateBackupPolicyRequest parent
+                         * @property {google.cloud.netapp.v1.IBackupPolicy|null} [backupPolicy] CreateBackupPolicyRequest backupPolicy
+                         * @property {string|null} [backupPolicyId] CreateBackupPolicyRequest backupPolicyId
+                         */
+    
+                        /**
+                         * Constructs a new CreateBackupPolicyRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a CreateBackupPolicyRequest.
+                         * @implements ICreateBackupPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ICreateBackupPolicyRequest=} [properties] Properties to set
+                         */
+                        function CreateBackupPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateBackupPolicyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @instance
+                         */
+                        CreateBackupPolicyRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateBackupPolicyRequest backupPolicy.
+                         * @member {google.cloud.netapp.v1.IBackupPolicy|null|undefined} backupPolicy
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @instance
+                         */
+                        CreateBackupPolicyRequest.prototype.backupPolicy = null;
+    
+                        /**
+                         * CreateBackupPolicyRequest backupPolicyId.
+                         * @member {string} backupPolicyId
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @instance
+                         */
+                        CreateBackupPolicyRequest.prototype.backupPolicyId = "";
+    
+                        /**
+                         * Creates a new CreateBackupPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateBackupPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.CreateBackupPolicyRequest} CreateBackupPolicyRequest instance
+                         */
+                        CreateBackupPolicyRequest.create = function create(properties) {
+                            return new CreateBackupPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBackupPolicyRequest message. Does not implicitly {@link google.cloud.netapp.v1.CreateBackupPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateBackupPolicyRequest} message CreateBackupPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBackupPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.backupPolicy != null && Object.hasOwnProperty.call(message, "backupPolicy"))
+                                $root.google.cloud.netapp.v1.BackupPolicy.encode(message.backupPolicy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.backupPolicyId != null && Object.hasOwnProperty.call(message, "backupPolicyId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.backupPolicyId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBackupPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.CreateBackupPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateBackupPolicyRequest} message CreateBackupPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBackupPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateBackupPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.CreateBackupPolicyRequest} CreateBackupPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBackupPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.CreateBackupPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backupPolicy = $root.google.cloud.netapp.v1.BackupPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.backupPolicyId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateBackupPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.CreateBackupPolicyRequest} CreateBackupPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBackupPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateBackupPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateBackupPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.backupPolicy != null && message.hasOwnProperty("backupPolicy")) {
+                                var error = $root.google.cloud.netapp.v1.BackupPolicy.verify(message.backupPolicy);
+                                if (error)
+                                    return "backupPolicy." + error;
+                            }
+                            if (message.backupPolicyId != null && message.hasOwnProperty("backupPolicyId"))
+                                if (!$util.isString(message.backupPolicyId))
+                                    return "backupPolicyId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateBackupPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.CreateBackupPolicyRequest} CreateBackupPolicyRequest
+                         */
+                        CreateBackupPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.CreateBackupPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.CreateBackupPolicyRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.backupPolicy != null) {
+                                if (typeof object.backupPolicy !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.CreateBackupPolicyRequest.backupPolicy: object expected");
+                                message.backupPolicy = $root.google.cloud.netapp.v1.BackupPolicy.fromObject(object.backupPolicy);
+                            }
+                            if (object.backupPolicyId != null)
+                                message.backupPolicyId = String(object.backupPolicyId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateBackupPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.CreateBackupPolicyRequest} message CreateBackupPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateBackupPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.backupPolicy = null;
+                                object.backupPolicyId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.backupPolicy != null && message.hasOwnProperty("backupPolicy"))
+                                object.backupPolicy = $root.google.cloud.netapp.v1.BackupPolicy.toObject(message.backupPolicy, options);
+                            if (message.backupPolicyId != null && message.hasOwnProperty("backupPolicyId"))
+                                object.backupPolicyId = message.backupPolicyId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateBackupPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateBackupPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateBackupPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.CreateBackupPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateBackupPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.CreateBackupPolicyRequest";
+                        };
+    
+                        return CreateBackupPolicyRequest;
+                    })();
+    
+                    v1.GetBackupPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a GetBackupPolicyRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IGetBackupPolicyRequest
+                         * @property {string|null} [name] GetBackupPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetBackupPolicyRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a GetBackupPolicyRequest.
+                         * @implements IGetBackupPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IGetBackupPolicyRequest=} [properties] Properties to set
+                         */
+                        function GetBackupPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetBackupPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.GetBackupPolicyRequest
+                         * @instance
+                         */
+                        GetBackupPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetBackupPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.GetBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetBackupPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.GetBackupPolicyRequest} GetBackupPolicyRequest instance
+                         */
+                        GetBackupPolicyRequest.create = function create(properties) {
+                            return new GetBackupPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupPolicyRequest message. Does not implicitly {@link google.cloud.netapp.v1.GetBackupPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.GetBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetBackupPolicyRequest} message GetBackupPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.GetBackupPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.GetBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetBackupPolicyRequest} message GetBackupPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetBackupPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.GetBackupPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.GetBackupPolicyRequest} GetBackupPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.GetBackupPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetBackupPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.GetBackupPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.GetBackupPolicyRequest} GetBackupPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetBackupPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.GetBackupPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetBackupPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetBackupPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.GetBackupPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.GetBackupPolicyRequest} GetBackupPolicyRequest
+                         */
+                        GetBackupPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.GetBackupPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.GetBackupPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetBackupPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.GetBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.GetBackupPolicyRequest} message GetBackupPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetBackupPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetBackupPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.GetBackupPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetBackupPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBackupPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.GetBackupPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBackupPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.GetBackupPolicyRequest";
+                        };
+    
+                        return GetBackupPolicyRequest;
+                    })();
+    
+                    v1.ListBackupPoliciesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListBackupPoliciesRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IListBackupPoliciesRequest
+                         * @property {string|null} [parent] ListBackupPoliciesRequest parent
+                         * @property {number|null} [pageSize] ListBackupPoliciesRequest pageSize
+                         * @property {string|null} [pageToken] ListBackupPoliciesRequest pageToken
+                         * @property {string|null} [filter] ListBackupPoliciesRequest filter
+                         * @property {string|null} [orderBy] ListBackupPoliciesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupPoliciesRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a ListBackupPoliciesRequest.
+                         * @implements IListBackupPoliciesRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IListBackupPoliciesRequest=} [properties] Properties to set
+                         */
+                        function ListBackupPoliciesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupPoliciesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @instance
+                         */
+                        ListBackupPoliciesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListBackupPoliciesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @instance
+                         */
+                        ListBackupPoliciesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListBackupPoliciesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @instance
+                         */
+                        ListBackupPoliciesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListBackupPoliciesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @instance
+                         */
+                        ListBackupPoliciesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListBackupPoliciesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @instance
+                         */
+                        ListBackupPoliciesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListBackupPoliciesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupPoliciesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ListBackupPoliciesRequest} ListBackupPoliciesRequest instance
+                         */
+                        ListBackupPoliciesRequest.create = function create(properties) {
+                            return new ListBackupPoliciesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupPoliciesRequest message. Does not implicitly {@link google.cloud.netapp.v1.ListBackupPoliciesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupPoliciesRequest} message ListBackupPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupPoliciesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListBackupPoliciesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupPoliciesRequest} message ListBackupPoliciesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupPoliciesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupPoliciesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ListBackupPoliciesRequest} ListBackupPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupPoliciesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ListBackupPoliciesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ListBackupPoliciesRequest} ListBackupPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupPoliciesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupPoliciesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupPoliciesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ListBackupPoliciesRequest} ListBackupPoliciesRequest
+                         */
+                        ListBackupPoliciesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ListBackupPoliciesRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ListBackupPoliciesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupPoliciesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ListBackupPoliciesRequest} message ListBackupPoliciesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupPoliciesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupPoliciesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupPoliciesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupPoliciesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupPoliciesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ListBackupPoliciesRequest";
+                        };
+    
+                        return ListBackupPoliciesRequest;
+                    })();
+    
+                    v1.ListBackupPoliciesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListBackupPoliciesResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IListBackupPoliciesResponse
+                         * @property {Array.<google.cloud.netapp.v1.IBackupPolicy>|null} [backupPolicies] ListBackupPoliciesResponse backupPolicies
+                         * @property {string|null} [nextPageToken] ListBackupPoliciesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListBackupPoliciesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupPoliciesResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a ListBackupPoliciesResponse.
+                         * @implements IListBackupPoliciesResponse
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IListBackupPoliciesResponse=} [properties] Properties to set
+                         */
+                        function ListBackupPoliciesResponse(properties) {
+                            this.backupPolicies = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupPoliciesResponse backupPolicies.
+                         * @member {Array.<google.cloud.netapp.v1.IBackupPolicy>} backupPolicies
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @instance
+                         */
+                        ListBackupPoliciesResponse.prototype.backupPolicies = $util.emptyArray;
+    
+                        /**
+                         * ListBackupPoliciesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @instance
+                         */
+                        ListBackupPoliciesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListBackupPoliciesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @instance
+                         */
+                        ListBackupPoliciesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListBackupPoliciesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupPoliciesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ListBackupPoliciesResponse} ListBackupPoliciesResponse instance
+                         */
+                        ListBackupPoliciesResponse.create = function create(properties) {
+                            return new ListBackupPoliciesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupPoliciesResponse message. Does not implicitly {@link google.cloud.netapp.v1.ListBackupPoliciesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupPoliciesResponse} message ListBackupPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupPoliciesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backupPolicies != null && message.backupPolicies.length)
+                                for (var i = 0; i < message.backupPolicies.length; ++i)
+                                    $root.google.cloud.netapp.v1.BackupPolicy.encode(message.backupPolicies[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListBackupPoliciesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupPoliciesResponse} message ListBackupPoliciesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupPoliciesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupPoliciesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ListBackupPoliciesResponse} ListBackupPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupPoliciesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ListBackupPoliciesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.backupPolicies && message.backupPolicies.length))
+                                            message.backupPolicies = [];
+                                        message.backupPolicies.push($root.google.cloud.netapp.v1.BackupPolicy.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ListBackupPoliciesResponse} ListBackupPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupPoliciesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupPoliciesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupPoliciesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backupPolicies != null && message.hasOwnProperty("backupPolicies")) {
+                                if (!Array.isArray(message.backupPolicies))
+                                    return "backupPolicies: array expected";
+                                for (var i = 0; i < message.backupPolicies.length; ++i) {
+                                    var error = $root.google.cloud.netapp.v1.BackupPolicy.verify(message.backupPolicies[i]);
+                                    if (error)
+                                        return "backupPolicies." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ListBackupPoliciesResponse} ListBackupPoliciesResponse
+                         */
+                        ListBackupPoliciesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ListBackupPoliciesResponse)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ListBackupPoliciesResponse();
+                            if (object.backupPolicies) {
+                                if (!Array.isArray(object.backupPolicies))
+                                    throw TypeError(".google.cloud.netapp.v1.ListBackupPoliciesResponse.backupPolicies: array expected");
+                                message.backupPolicies = [];
+                                for (var i = 0; i < object.backupPolicies.length; ++i) {
+                                    if (typeof object.backupPolicies[i] !== "object")
+                                        throw TypeError(".google.cloud.netapp.v1.ListBackupPoliciesResponse.backupPolicies: object expected");
+                                    message.backupPolicies[i] = $root.google.cloud.netapp.v1.BackupPolicy.fromObject(object.backupPolicies[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.netapp.v1.ListBackupPoliciesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupPoliciesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.ListBackupPoliciesResponse} message ListBackupPoliciesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupPoliciesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.backupPolicies = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.backupPolicies && message.backupPolicies.length) {
+                                object.backupPolicies = [];
+                                for (var j = 0; j < message.backupPolicies.length; ++j)
+                                    object.backupPolicies[j] = $root.google.cloud.netapp.v1.BackupPolicy.toObject(message.backupPolicies[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupPoliciesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupPoliciesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupPoliciesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ListBackupPoliciesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupPoliciesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ListBackupPoliciesResponse";
+                        };
+    
+                        return ListBackupPoliciesResponse;
+                    })();
+    
+                    v1.UpdateBackupPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateBackupPolicyRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IUpdateBackupPolicyRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateBackupPolicyRequest updateMask
+                         * @property {google.cloud.netapp.v1.IBackupPolicy|null} [backupPolicy] UpdateBackupPolicyRequest backupPolicy
+                         */
+    
+                        /**
+                         * Constructs a new UpdateBackupPolicyRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an UpdateBackupPolicyRequest.
+                         * @implements IUpdateBackupPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IUpdateBackupPolicyRequest=} [properties] Properties to set
+                         */
+                        function UpdateBackupPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateBackupPolicyRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @instance
+                         */
+                        UpdateBackupPolicyRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateBackupPolicyRequest backupPolicy.
+                         * @member {google.cloud.netapp.v1.IBackupPolicy|null|undefined} backupPolicy
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @instance
+                         */
+                        UpdateBackupPolicyRequest.prototype.backupPolicy = null;
+    
+                        /**
+                         * Creates a new UpdateBackupPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateBackupPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.UpdateBackupPolicyRequest} UpdateBackupPolicyRequest instance
+                         */
+                        UpdateBackupPolicyRequest.create = function create(properties) {
+                            return new UpdateBackupPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBackupPolicyRequest message. Does not implicitly {@link google.cloud.netapp.v1.UpdateBackupPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateBackupPolicyRequest} message UpdateBackupPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBackupPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.backupPolicy != null && Object.hasOwnProperty.call(message, "backupPolicy"))
+                                $root.google.cloud.netapp.v1.BackupPolicy.encode(message.backupPolicy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBackupPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.UpdateBackupPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateBackupPolicyRequest} message UpdateBackupPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBackupPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateBackupPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.UpdateBackupPolicyRequest} UpdateBackupPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBackupPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.UpdateBackupPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backupPolicy = $root.google.cloud.netapp.v1.BackupPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateBackupPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.UpdateBackupPolicyRequest} UpdateBackupPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBackupPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateBackupPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateBackupPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.backupPolicy != null && message.hasOwnProperty("backupPolicy")) {
+                                var error = $root.google.cloud.netapp.v1.BackupPolicy.verify(message.backupPolicy);
+                                if (error)
+                                    return "backupPolicy." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateBackupPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.UpdateBackupPolicyRequest} UpdateBackupPolicyRequest
+                         */
+                        UpdateBackupPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.UpdateBackupPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.UpdateBackupPolicyRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.UpdateBackupPolicyRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.backupPolicy != null) {
+                                if (typeof object.backupPolicy !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.UpdateBackupPolicyRequest.backupPolicy: object expected");
+                                message.backupPolicy = $root.google.cloud.netapp.v1.BackupPolicy.fromObject(object.backupPolicy);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateBackupPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.UpdateBackupPolicyRequest} message UpdateBackupPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateBackupPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.backupPolicy = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.backupPolicy != null && message.hasOwnProperty("backupPolicy"))
+                                object.backupPolicy = $root.google.cloud.netapp.v1.BackupPolicy.toObject(message.backupPolicy, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateBackupPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateBackupPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateBackupPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.UpdateBackupPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateBackupPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.UpdateBackupPolicyRequest";
+                        };
+    
+                        return UpdateBackupPolicyRequest;
+                    })();
+    
+                    v1.DeleteBackupPolicyRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteBackupPolicyRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IDeleteBackupPolicyRequest
+                         * @property {string|null} [name] DeleteBackupPolicyRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteBackupPolicyRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a DeleteBackupPolicyRequest.
+                         * @implements IDeleteBackupPolicyRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IDeleteBackupPolicyRequest=} [properties] Properties to set
+                         */
+                        function DeleteBackupPolicyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteBackupPolicyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.DeleteBackupPolicyRequest
+                         * @instance
+                         */
+                        DeleteBackupPolicyRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteBackupPolicyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.DeleteBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteBackupPolicyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.DeleteBackupPolicyRequest} DeleteBackupPolicyRequest instance
+                         */
+                        DeleteBackupPolicyRequest.create = function create(properties) {
+                            return new DeleteBackupPolicyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBackupPolicyRequest message. Does not implicitly {@link google.cloud.netapp.v1.DeleteBackupPolicyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.DeleteBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteBackupPolicyRequest} message DeleteBackupPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBackupPolicyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBackupPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.DeleteBackupPolicyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.DeleteBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteBackupPolicyRequest} message DeleteBackupPolicyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBackupPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteBackupPolicyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.DeleteBackupPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.DeleteBackupPolicyRequest} DeleteBackupPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBackupPolicyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.DeleteBackupPolicyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteBackupPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.DeleteBackupPolicyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.DeleteBackupPolicyRequest} DeleteBackupPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBackupPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteBackupPolicyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.DeleteBackupPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteBackupPolicyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteBackupPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.DeleteBackupPolicyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.DeleteBackupPolicyRequest} DeleteBackupPolicyRequest
+                         */
+                        DeleteBackupPolicyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.DeleteBackupPolicyRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.DeleteBackupPolicyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteBackupPolicyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.DeleteBackupPolicyRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.DeleteBackupPolicyRequest} message DeleteBackupPolicyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteBackupPolicyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteBackupPolicyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.DeleteBackupPolicyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteBackupPolicyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteBackupPolicyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.DeleteBackupPolicyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteBackupPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.DeleteBackupPolicyRequest";
+                        };
+    
+                        return DeleteBackupPolicyRequest;
+                    })();
+    
+                    v1.BackupVault = (function() {
+    
+                        /**
+                         * Properties of a BackupVault.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IBackupVault
+                         * @property {string|null} [name] BackupVault name
+                         * @property {google.cloud.netapp.v1.BackupVault.State|null} [state] BackupVault state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] BackupVault createTime
+                         * @property {string|null} [description] BackupVault description
+                         * @property {Object.<string,string>|null} [labels] BackupVault labels
+                         */
+    
+                        /**
+                         * Constructs a new BackupVault.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a BackupVault.
+                         * @implements IBackupVault
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IBackupVault=} [properties] Properties to set
+                         */
+                        function BackupVault(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupVault name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @instance
+                         */
+                        BackupVault.prototype.name = "";
+    
+                        /**
+                         * BackupVault state.
+                         * @member {google.cloud.netapp.v1.BackupVault.State} state
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @instance
+                         */
+                        BackupVault.prototype.state = 0;
+    
+                        /**
+                         * BackupVault createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @instance
+                         */
+                        BackupVault.prototype.createTime = null;
+    
+                        /**
+                         * BackupVault description.
+                         * @member {string} description
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @instance
+                         */
+                        BackupVault.prototype.description = "";
+    
+                        /**
+                         * BackupVault labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @instance
+                         */
+                        BackupVault.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Creates a new BackupVault instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackupVault=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.BackupVault} BackupVault instance
+                         */
+                        BackupVault.create = function create(properties) {
+                            return new BackupVault(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupVault message. Does not implicitly {@link google.cloud.netapp.v1.BackupVault.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackupVault} message BackupVault message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupVault.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupVault message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.BackupVault.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackupVault} message BackupVault message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupVault.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupVault message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.BackupVault} BackupVault
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupVault.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.BackupVault(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupVault message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.BackupVault} BackupVault
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupVault.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupVault message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupVault.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupVault message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.BackupVault} BackupVault
+                         */
+                        BackupVault.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.BackupVault)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.BackupVault();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "READY":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "ERROR":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "UPDATING":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.BackupVault.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.BackupVault.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupVault message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @static
+                         * @param {google.cloud.netapp.v1.BackupVault} message BackupVault
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupVault.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.description = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.netapp.v1.BackupVault.State[message.state] === undefined ? message.state : $root.google.cloud.netapp.v1.BackupVault.State[message.state] : message.state;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupVault to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupVault.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupVault
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.BackupVault
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupVault.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.BackupVault";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.netapp.v1.BackupVault.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} READY=2 READY value
+                         * @property {number} DELETING=3 DELETING value
+                         * @property {number} ERROR=4 ERROR value
+                         * @property {number} UPDATING=5 UPDATING value
+                         */
+                        BackupVault.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "READY"] = 2;
+                            values[valuesById[3] = "DELETING"] = 3;
+                            values[valuesById[4] = "ERROR"] = 4;
+                            values[valuesById[5] = "UPDATING"] = 5;
+                            return values;
+                        })();
+    
+                        return BackupVault;
+                    })();
+    
+                    v1.GetBackupVaultRequest = (function() {
+    
+                        /**
+                         * Properties of a GetBackupVaultRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IGetBackupVaultRequest
+                         * @property {string|null} [name] GetBackupVaultRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetBackupVaultRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a GetBackupVaultRequest.
+                         * @implements IGetBackupVaultRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IGetBackupVaultRequest=} [properties] Properties to set
+                         */
+                        function GetBackupVaultRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetBackupVaultRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.GetBackupVaultRequest
+                         * @instance
+                         */
+                        GetBackupVaultRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetBackupVaultRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.GetBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetBackupVaultRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.GetBackupVaultRequest} GetBackupVaultRequest instance
+                         */
+                        GetBackupVaultRequest.create = function create(properties) {
+                            return new GetBackupVaultRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupVaultRequest message. Does not implicitly {@link google.cloud.netapp.v1.GetBackupVaultRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.GetBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetBackupVaultRequest} message GetBackupVaultRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupVaultRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetBackupVaultRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.GetBackupVaultRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.GetBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IGetBackupVaultRequest} message GetBackupVaultRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetBackupVaultRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetBackupVaultRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.GetBackupVaultRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.GetBackupVaultRequest} GetBackupVaultRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupVaultRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.GetBackupVaultRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetBackupVaultRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.GetBackupVaultRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.GetBackupVaultRequest} GetBackupVaultRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetBackupVaultRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetBackupVaultRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.GetBackupVaultRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetBackupVaultRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetBackupVaultRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.GetBackupVaultRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.GetBackupVaultRequest} GetBackupVaultRequest
+                         */
+                        GetBackupVaultRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.GetBackupVaultRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.GetBackupVaultRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetBackupVaultRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.GetBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.GetBackupVaultRequest} message GetBackupVaultRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetBackupVaultRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetBackupVaultRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.GetBackupVaultRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetBackupVaultRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetBackupVaultRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.GetBackupVaultRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetBackupVaultRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.GetBackupVaultRequest";
+                        };
+    
+                        return GetBackupVaultRequest;
+                    })();
+    
+                    v1.ListBackupVaultsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListBackupVaultsRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IListBackupVaultsRequest
+                         * @property {string|null} [parent] ListBackupVaultsRequest parent
+                         * @property {number|null} [pageSize] ListBackupVaultsRequest pageSize
+                         * @property {string|null} [pageToken] ListBackupVaultsRequest pageToken
+                         * @property {string|null} [orderBy] ListBackupVaultsRequest orderBy
+                         * @property {string|null} [filter] ListBackupVaultsRequest filter
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupVaultsRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a ListBackupVaultsRequest.
+                         * @implements IListBackupVaultsRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IListBackupVaultsRequest=} [properties] Properties to set
+                         */
+                        function ListBackupVaultsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupVaultsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @instance
+                         */
+                        ListBackupVaultsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListBackupVaultsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @instance
+                         */
+                        ListBackupVaultsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListBackupVaultsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @instance
+                         */
+                        ListBackupVaultsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListBackupVaultsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @instance
+                         */
+                        ListBackupVaultsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListBackupVaultsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @instance
+                         */
+                        ListBackupVaultsRequest.prototype.filter = "";
+    
+                        /**
+                         * Creates a new ListBackupVaultsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupVaultsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ListBackupVaultsRequest} ListBackupVaultsRequest instance
+                         */
+                        ListBackupVaultsRequest.create = function create(properties) {
+                            return new ListBackupVaultsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupVaultsRequest message. Does not implicitly {@link google.cloud.netapp.v1.ListBackupVaultsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupVaultsRequest} message ListBackupVaultsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupVaultsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupVaultsRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListBackupVaultsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupVaultsRequest} message ListBackupVaultsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupVaultsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupVaultsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ListBackupVaultsRequest} ListBackupVaultsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupVaultsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ListBackupVaultsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupVaultsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ListBackupVaultsRequest} ListBackupVaultsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupVaultsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupVaultsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupVaultsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupVaultsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ListBackupVaultsRequest} ListBackupVaultsRequest
+                         */
+                        ListBackupVaultsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ListBackupVaultsRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ListBackupVaultsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupVaultsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ListBackupVaultsRequest} message ListBackupVaultsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupVaultsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.orderBy = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupVaultsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupVaultsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupVaultsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupVaultsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ListBackupVaultsRequest";
+                        };
+    
+                        return ListBackupVaultsRequest;
+                    })();
+    
+                    v1.ListBackupVaultsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListBackupVaultsResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IListBackupVaultsResponse
+                         * @property {Array.<google.cloud.netapp.v1.IBackupVault>|null} [backupVaults] ListBackupVaultsResponse backupVaults
+                         * @property {string|null} [nextPageToken] ListBackupVaultsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListBackupVaultsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListBackupVaultsResponse.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a ListBackupVaultsResponse.
+                         * @implements IListBackupVaultsResponse
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IListBackupVaultsResponse=} [properties] Properties to set
+                         */
+                        function ListBackupVaultsResponse(properties) {
+                            this.backupVaults = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListBackupVaultsResponse backupVaults.
+                         * @member {Array.<google.cloud.netapp.v1.IBackupVault>} backupVaults
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @instance
+                         */
+                        ListBackupVaultsResponse.prototype.backupVaults = $util.emptyArray;
+    
+                        /**
+                         * ListBackupVaultsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @instance
+                         */
+                        ListBackupVaultsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListBackupVaultsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @instance
+                         */
+                        ListBackupVaultsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListBackupVaultsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupVaultsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.ListBackupVaultsResponse} ListBackupVaultsResponse instance
+                         */
+                        ListBackupVaultsResponse.create = function create(properties) {
+                            return new ListBackupVaultsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupVaultsResponse message. Does not implicitly {@link google.cloud.netapp.v1.ListBackupVaultsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupVaultsResponse} message ListBackupVaultsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupVaultsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backupVaults != null && message.backupVaults.length)
+                                for (var i = 0; i < message.backupVaults.length; ++i)
+                                    $root.google.cloud.netapp.v1.BackupVault.encode(message.backupVaults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListBackupVaultsResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListBackupVaultsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.IListBackupVaultsResponse} message ListBackupVaultsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListBackupVaultsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListBackupVaultsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.ListBackupVaultsResponse} ListBackupVaultsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupVaultsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.ListBackupVaultsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.backupVaults && message.backupVaults.length))
+                                            message.backupVaults = [];
+                                        message.backupVaults.push($root.google.cloud.netapp.v1.BackupVault.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListBackupVaultsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.ListBackupVaultsResponse} ListBackupVaultsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListBackupVaultsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListBackupVaultsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListBackupVaultsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.backupVaults != null && message.hasOwnProperty("backupVaults")) {
+                                if (!Array.isArray(message.backupVaults))
+                                    return "backupVaults: array expected";
+                                for (var i = 0; i < message.backupVaults.length; ++i) {
+                                    var error = $root.google.cloud.netapp.v1.BackupVault.verify(message.backupVaults[i]);
+                                    if (error)
+                                        return "backupVaults." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListBackupVaultsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.ListBackupVaultsResponse} ListBackupVaultsResponse
+                         */
+                        ListBackupVaultsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.ListBackupVaultsResponse)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.ListBackupVaultsResponse();
+                            if (object.backupVaults) {
+                                if (!Array.isArray(object.backupVaults))
+                                    throw TypeError(".google.cloud.netapp.v1.ListBackupVaultsResponse.backupVaults: array expected");
+                                message.backupVaults = [];
+                                for (var i = 0; i < object.backupVaults.length; ++i) {
+                                    if (typeof object.backupVaults[i] !== "object")
+                                        throw TypeError(".google.cloud.netapp.v1.ListBackupVaultsResponse.backupVaults: object expected");
+                                    message.backupVaults[i] = $root.google.cloud.netapp.v1.BackupVault.fromObject(object.backupVaults[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.netapp.v1.ListBackupVaultsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListBackupVaultsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @static
+                         * @param {google.cloud.netapp.v1.ListBackupVaultsResponse} message ListBackupVaultsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListBackupVaultsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.backupVaults = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.backupVaults && message.backupVaults.length) {
+                                object.backupVaults = [];
+                                for (var j = 0; j < message.backupVaults.length; ++j)
+                                    object.backupVaults[j] = $root.google.cloud.netapp.v1.BackupVault.toObject(message.backupVaults[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListBackupVaultsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListBackupVaultsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListBackupVaultsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.ListBackupVaultsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListBackupVaultsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.ListBackupVaultsResponse";
+                        };
+    
+                        return ListBackupVaultsResponse;
+                    })();
+    
+                    v1.CreateBackupVaultRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateBackupVaultRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ICreateBackupVaultRequest
+                         * @property {string|null} [parent] CreateBackupVaultRequest parent
+                         * @property {string|null} [backupVaultId] CreateBackupVaultRequest backupVaultId
+                         * @property {google.cloud.netapp.v1.IBackupVault|null} [backupVault] CreateBackupVaultRequest backupVault
+                         */
+    
+                        /**
+                         * Constructs a new CreateBackupVaultRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a CreateBackupVaultRequest.
+                         * @implements ICreateBackupVaultRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ICreateBackupVaultRequest=} [properties] Properties to set
+                         */
+                        function CreateBackupVaultRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateBackupVaultRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @instance
+                         */
+                        CreateBackupVaultRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateBackupVaultRequest backupVaultId.
+                         * @member {string} backupVaultId
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @instance
+                         */
+                        CreateBackupVaultRequest.prototype.backupVaultId = "";
+    
+                        /**
+                         * CreateBackupVaultRequest backupVault.
+                         * @member {google.cloud.netapp.v1.IBackupVault|null|undefined} backupVault
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @instance
+                         */
+                        CreateBackupVaultRequest.prototype.backupVault = null;
+    
+                        /**
+                         * Creates a new CreateBackupVaultRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateBackupVaultRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.CreateBackupVaultRequest} CreateBackupVaultRequest instance
+                         */
+                        CreateBackupVaultRequest.create = function create(properties) {
+                            return new CreateBackupVaultRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBackupVaultRequest message. Does not implicitly {@link google.cloud.netapp.v1.CreateBackupVaultRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateBackupVaultRequest} message CreateBackupVaultRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBackupVaultRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.backupVaultId != null && Object.hasOwnProperty.call(message, "backupVaultId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.backupVaultId);
+                            if (message.backupVault != null && Object.hasOwnProperty.call(message, "backupVault"))
+                                $root.google.cloud.netapp.v1.BackupVault.encode(message.backupVault, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateBackupVaultRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.CreateBackupVaultRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ICreateBackupVaultRequest} message CreateBackupVaultRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateBackupVaultRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateBackupVaultRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.CreateBackupVaultRequest} CreateBackupVaultRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBackupVaultRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.CreateBackupVaultRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backupVaultId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.backupVault = $root.google.cloud.netapp.v1.BackupVault.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateBackupVaultRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.CreateBackupVaultRequest} CreateBackupVaultRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateBackupVaultRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateBackupVaultRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateBackupVaultRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.backupVaultId != null && message.hasOwnProperty("backupVaultId"))
+                                if (!$util.isString(message.backupVaultId))
+                                    return "backupVaultId: string expected";
+                            if (message.backupVault != null && message.hasOwnProperty("backupVault")) {
+                                var error = $root.google.cloud.netapp.v1.BackupVault.verify(message.backupVault);
+                                if (error)
+                                    return "backupVault." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateBackupVaultRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.CreateBackupVaultRequest} CreateBackupVaultRequest
+                         */
+                        CreateBackupVaultRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.CreateBackupVaultRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.CreateBackupVaultRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.backupVaultId != null)
+                                message.backupVaultId = String(object.backupVaultId);
+                            if (object.backupVault != null) {
+                                if (typeof object.backupVault !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.CreateBackupVaultRequest.backupVault: object expected");
+                                message.backupVault = $root.google.cloud.netapp.v1.BackupVault.fromObject(object.backupVault);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateBackupVaultRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.CreateBackupVaultRequest} message CreateBackupVaultRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateBackupVaultRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.backupVaultId = "";
+                                object.backupVault = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.backupVaultId != null && message.hasOwnProperty("backupVaultId"))
+                                object.backupVaultId = message.backupVaultId;
+                            if (message.backupVault != null && message.hasOwnProperty("backupVault"))
+                                object.backupVault = $root.google.cloud.netapp.v1.BackupVault.toObject(message.backupVault, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateBackupVaultRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateBackupVaultRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateBackupVaultRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.CreateBackupVaultRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateBackupVaultRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.CreateBackupVaultRequest";
+                        };
+    
+                        return CreateBackupVaultRequest;
+                    })();
+    
+                    v1.DeleteBackupVaultRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteBackupVaultRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IDeleteBackupVaultRequest
+                         * @property {string|null} [name] DeleteBackupVaultRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteBackupVaultRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a DeleteBackupVaultRequest.
+                         * @implements IDeleteBackupVaultRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IDeleteBackupVaultRequest=} [properties] Properties to set
+                         */
+                        function DeleteBackupVaultRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteBackupVaultRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.DeleteBackupVaultRequest
+                         * @instance
+                         */
+                        DeleteBackupVaultRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteBackupVaultRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.DeleteBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteBackupVaultRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.DeleteBackupVaultRequest} DeleteBackupVaultRequest instance
+                         */
+                        DeleteBackupVaultRequest.create = function create(properties) {
+                            return new DeleteBackupVaultRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBackupVaultRequest message. Does not implicitly {@link google.cloud.netapp.v1.DeleteBackupVaultRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.DeleteBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteBackupVaultRequest} message DeleteBackupVaultRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBackupVaultRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteBackupVaultRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.DeleteBackupVaultRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.DeleteBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IDeleteBackupVaultRequest} message DeleteBackupVaultRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteBackupVaultRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteBackupVaultRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.DeleteBackupVaultRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.DeleteBackupVaultRequest} DeleteBackupVaultRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBackupVaultRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.DeleteBackupVaultRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteBackupVaultRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.DeleteBackupVaultRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.DeleteBackupVaultRequest} DeleteBackupVaultRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteBackupVaultRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteBackupVaultRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.DeleteBackupVaultRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteBackupVaultRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteBackupVaultRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.DeleteBackupVaultRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.DeleteBackupVaultRequest} DeleteBackupVaultRequest
+                         */
+                        DeleteBackupVaultRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.DeleteBackupVaultRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.DeleteBackupVaultRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteBackupVaultRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.DeleteBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.DeleteBackupVaultRequest} message DeleteBackupVaultRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteBackupVaultRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteBackupVaultRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.DeleteBackupVaultRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteBackupVaultRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteBackupVaultRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.DeleteBackupVaultRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteBackupVaultRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.DeleteBackupVaultRequest";
+                        };
+    
+                        return DeleteBackupVaultRequest;
+                    })();
+    
+                    v1.UpdateBackupVaultRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateBackupVaultRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IUpdateBackupVaultRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateBackupVaultRequest updateMask
+                         * @property {google.cloud.netapp.v1.IBackupVault|null} [backupVault] UpdateBackupVaultRequest backupVault
+                         */
+    
+                        /**
+                         * Constructs a new UpdateBackupVaultRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents an UpdateBackupVaultRequest.
+                         * @implements IUpdateBackupVaultRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IUpdateBackupVaultRequest=} [properties] Properties to set
+                         */
+                        function UpdateBackupVaultRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateBackupVaultRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @instance
+                         */
+                        UpdateBackupVaultRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateBackupVaultRequest backupVault.
+                         * @member {google.cloud.netapp.v1.IBackupVault|null|undefined} backupVault
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @instance
+                         */
+                        UpdateBackupVaultRequest.prototype.backupVault = null;
+    
+                        /**
+                         * Creates a new UpdateBackupVaultRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateBackupVaultRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.UpdateBackupVaultRequest} UpdateBackupVaultRequest instance
+                         */
+                        UpdateBackupVaultRequest.create = function create(properties) {
+                            return new UpdateBackupVaultRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBackupVaultRequest message. Does not implicitly {@link google.cloud.netapp.v1.UpdateBackupVaultRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateBackupVaultRequest} message UpdateBackupVaultRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBackupVaultRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.backupVault != null && Object.hasOwnProperty.call(message, "backupVault"))
+                                $root.google.cloud.netapp.v1.BackupVault.encode(message.backupVault, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateBackupVaultRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.UpdateBackupVaultRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.IUpdateBackupVaultRequest} message UpdateBackupVaultRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateBackupVaultRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateBackupVaultRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.UpdateBackupVaultRequest} UpdateBackupVaultRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBackupVaultRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.UpdateBackupVaultRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backupVault = $root.google.cloud.netapp.v1.BackupVault.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateBackupVaultRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.UpdateBackupVaultRequest} UpdateBackupVaultRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateBackupVaultRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateBackupVaultRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateBackupVaultRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.backupVault != null && message.hasOwnProperty("backupVault")) {
+                                var error = $root.google.cloud.netapp.v1.BackupVault.verify(message.backupVault);
+                                if (error)
+                                    return "backupVault." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateBackupVaultRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.UpdateBackupVaultRequest} UpdateBackupVaultRequest
+                         */
+                        UpdateBackupVaultRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.UpdateBackupVaultRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.UpdateBackupVaultRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.UpdateBackupVaultRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.backupVault != null) {
+                                if (typeof object.backupVault !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.UpdateBackupVaultRequest.backupVault: object expected");
+                                message.backupVault = $root.google.cloud.netapp.v1.BackupVault.fromObject(object.backupVault);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateBackupVaultRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.UpdateBackupVaultRequest} message UpdateBackupVaultRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateBackupVaultRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.backupVault = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.backupVault != null && message.hasOwnProperty("backupVault"))
+                                object.backupVault = $root.google.cloud.netapp.v1.BackupVault.toObject(message.backupVault, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateBackupVaultRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateBackupVaultRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateBackupVaultRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.UpdateBackupVaultRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateBackupVaultRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.UpdateBackupVaultRequest";
+                        };
+    
+                        return UpdateBackupVaultRequest;
+                    })();
+    
                     v1.NetApp = (function() {
     
                         /**
@@ -3571,6 +9629,501 @@
                          * @memberof google.cloud.netapp.v1.NetApp
                          * @instance
                          * @param {google.cloud.netapp.v1.IReverseReplicationDirectionRequest} request ReverseReplicationDirectionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|createBackupVault}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef CreateBackupVaultCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateBackupVault.
+                         * @function createBackupVault
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ICreateBackupVaultRequest} request CreateBackupVaultRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.CreateBackupVaultCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.createBackupVault = function createBackupVault(request, callback) {
+                            return this.rpcCall(createBackupVault, $root.google.cloud.netapp.v1.CreateBackupVaultRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateBackupVault" });
+    
+                        /**
+                         * Calls CreateBackupVault.
+                         * @function createBackupVault
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ICreateBackupVaultRequest} request CreateBackupVaultRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|getBackupVault}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef GetBackupVaultCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.BackupVault} [response] BackupVault
+                         */
+    
+                        /**
+                         * Calls GetBackupVault.
+                         * @function getBackupVault
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IGetBackupVaultRequest} request GetBackupVaultRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.GetBackupVaultCallback} callback Node-style callback called with the error, if any, and BackupVault
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.getBackupVault = function getBackupVault(request, callback) {
+                            return this.rpcCall(getBackupVault, $root.google.cloud.netapp.v1.GetBackupVaultRequest, $root.google.cloud.netapp.v1.BackupVault, request, callback);
+                        }, "name", { value: "GetBackupVault" });
+    
+                        /**
+                         * Calls GetBackupVault.
+                         * @function getBackupVault
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IGetBackupVaultRequest} request GetBackupVaultRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.BackupVault>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|listBackupVaults}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef ListBackupVaultsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.ListBackupVaultsResponse} [response] ListBackupVaultsResponse
+                         */
+    
+                        /**
+                         * Calls ListBackupVaults.
+                         * @function listBackupVaults
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IListBackupVaultsRequest} request ListBackupVaultsRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.ListBackupVaultsCallback} callback Node-style callback called with the error, if any, and ListBackupVaultsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.listBackupVaults = function listBackupVaults(request, callback) {
+                            return this.rpcCall(listBackupVaults, $root.google.cloud.netapp.v1.ListBackupVaultsRequest, $root.google.cloud.netapp.v1.ListBackupVaultsResponse, request, callback);
+                        }, "name", { value: "ListBackupVaults" });
+    
+                        /**
+                         * Calls ListBackupVaults.
+                         * @function listBackupVaults
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IListBackupVaultsRequest} request ListBackupVaultsRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.ListBackupVaultsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|updateBackupVault}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef UpdateBackupVaultCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateBackupVault.
+                         * @function updateBackupVault
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IUpdateBackupVaultRequest} request UpdateBackupVaultRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.UpdateBackupVaultCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.updateBackupVault = function updateBackupVault(request, callback) {
+                            return this.rpcCall(updateBackupVault, $root.google.cloud.netapp.v1.UpdateBackupVaultRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateBackupVault" });
+    
+                        /**
+                         * Calls UpdateBackupVault.
+                         * @function updateBackupVault
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IUpdateBackupVaultRequest} request UpdateBackupVaultRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|deleteBackupVault}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef DeleteBackupVaultCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteBackupVault.
+                         * @function deleteBackupVault
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IDeleteBackupVaultRequest} request DeleteBackupVaultRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.DeleteBackupVaultCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.deleteBackupVault = function deleteBackupVault(request, callback) {
+                            return this.rpcCall(deleteBackupVault, $root.google.cloud.netapp.v1.DeleteBackupVaultRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteBackupVault" });
+    
+                        /**
+                         * Calls DeleteBackupVault.
+                         * @function deleteBackupVault
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IDeleteBackupVaultRequest} request DeleteBackupVaultRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|createBackup}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef CreateBackupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateBackup.
+                         * @function createBackup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ICreateBackupRequest} request CreateBackupRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.CreateBackupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.createBackup = function createBackup(request, callback) {
+                            return this.rpcCall(createBackup, $root.google.cloud.netapp.v1.CreateBackupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateBackup" });
+    
+                        /**
+                         * Calls CreateBackup.
+                         * @function createBackup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ICreateBackupRequest} request CreateBackupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|getBackup}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef GetBackupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.Backup} [response] Backup
+                         */
+    
+                        /**
+                         * Calls GetBackup.
+                         * @function getBackup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IGetBackupRequest} request GetBackupRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.GetBackupCallback} callback Node-style callback called with the error, if any, and Backup
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.getBackup = function getBackup(request, callback) {
+                            return this.rpcCall(getBackup, $root.google.cloud.netapp.v1.GetBackupRequest, $root.google.cloud.netapp.v1.Backup, request, callback);
+                        }, "name", { value: "GetBackup" });
+    
+                        /**
+                         * Calls GetBackup.
+                         * @function getBackup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IGetBackupRequest} request GetBackupRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.Backup>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|listBackups}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef ListBackupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.ListBackupsResponse} [response] ListBackupsResponse
+                         */
+    
+                        /**
+                         * Calls ListBackups.
+                         * @function listBackups
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IListBackupsRequest} request ListBackupsRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.ListBackupsCallback} callback Node-style callback called with the error, if any, and ListBackupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.listBackups = function listBackups(request, callback) {
+                            return this.rpcCall(listBackups, $root.google.cloud.netapp.v1.ListBackupsRequest, $root.google.cloud.netapp.v1.ListBackupsResponse, request, callback);
+                        }, "name", { value: "ListBackups" });
+    
+                        /**
+                         * Calls ListBackups.
+                         * @function listBackups
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IListBackupsRequest} request ListBackupsRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.ListBackupsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|deleteBackup}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef DeleteBackupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteBackup.
+                         * @function deleteBackup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IDeleteBackupRequest} request DeleteBackupRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.DeleteBackupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.deleteBackup = function deleteBackup(request, callback) {
+                            return this.rpcCall(deleteBackup, $root.google.cloud.netapp.v1.DeleteBackupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteBackup" });
+    
+                        /**
+                         * Calls DeleteBackup.
+                         * @function deleteBackup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IDeleteBackupRequest} request DeleteBackupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|updateBackup}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef UpdateBackupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateBackup.
+                         * @function updateBackup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IUpdateBackupRequest} request UpdateBackupRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.UpdateBackupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.updateBackup = function updateBackup(request, callback) {
+                            return this.rpcCall(updateBackup, $root.google.cloud.netapp.v1.UpdateBackupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateBackup" });
+    
+                        /**
+                         * Calls UpdateBackup.
+                         * @function updateBackup
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IUpdateBackupRequest} request UpdateBackupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|createBackupPolicy}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef CreateBackupPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateBackupPolicy.
+                         * @function createBackupPolicy
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ICreateBackupPolicyRequest} request CreateBackupPolicyRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.CreateBackupPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.createBackupPolicy = function createBackupPolicy(request, callback) {
+                            return this.rpcCall(createBackupPolicy, $root.google.cloud.netapp.v1.CreateBackupPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateBackupPolicy" });
+    
+                        /**
+                         * Calls CreateBackupPolicy.
+                         * @function createBackupPolicy
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ICreateBackupPolicyRequest} request CreateBackupPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|getBackupPolicy}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef GetBackupPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.BackupPolicy} [response] BackupPolicy
+                         */
+    
+                        /**
+                         * Calls GetBackupPolicy.
+                         * @function getBackupPolicy
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IGetBackupPolicyRequest} request GetBackupPolicyRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.GetBackupPolicyCallback} callback Node-style callback called with the error, if any, and BackupPolicy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.getBackupPolicy = function getBackupPolicy(request, callback) {
+                            return this.rpcCall(getBackupPolicy, $root.google.cloud.netapp.v1.GetBackupPolicyRequest, $root.google.cloud.netapp.v1.BackupPolicy, request, callback);
+                        }, "name", { value: "GetBackupPolicy" });
+    
+                        /**
+                         * Calls GetBackupPolicy.
+                         * @function getBackupPolicy
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IGetBackupPolicyRequest} request GetBackupPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.BackupPolicy>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|listBackupPolicies}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef ListBackupPoliciesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.netapp.v1.ListBackupPoliciesResponse} [response] ListBackupPoliciesResponse
+                         */
+    
+                        /**
+                         * Calls ListBackupPolicies.
+                         * @function listBackupPolicies
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IListBackupPoliciesRequest} request ListBackupPoliciesRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.ListBackupPoliciesCallback} callback Node-style callback called with the error, if any, and ListBackupPoliciesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.listBackupPolicies = function listBackupPolicies(request, callback) {
+                            return this.rpcCall(listBackupPolicies, $root.google.cloud.netapp.v1.ListBackupPoliciesRequest, $root.google.cloud.netapp.v1.ListBackupPoliciesResponse, request, callback);
+                        }, "name", { value: "ListBackupPolicies" });
+    
+                        /**
+                         * Calls ListBackupPolicies.
+                         * @function listBackupPolicies
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IListBackupPoliciesRequest} request ListBackupPoliciesRequest message or plain object
+                         * @returns {Promise<google.cloud.netapp.v1.ListBackupPoliciesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|updateBackupPolicy}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef UpdateBackupPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateBackupPolicy.
+                         * @function updateBackupPolicy
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IUpdateBackupPolicyRequest} request UpdateBackupPolicyRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.UpdateBackupPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.updateBackupPolicy = function updateBackupPolicy(request, callback) {
+                            return this.rpcCall(updateBackupPolicy, $root.google.cloud.netapp.v1.UpdateBackupPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateBackupPolicy" });
+    
+                        /**
+                         * Calls UpdateBackupPolicy.
+                         * @function updateBackupPolicy
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IUpdateBackupPolicyRequest} request UpdateBackupPolicyRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|deleteBackupPolicy}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef DeleteBackupPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteBackupPolicy.
+                         * @function deleteBackupPolicy
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IDeleteBackupPolicyRequest} request DeleteBackupPolicyRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.DeleteBackupPolicyCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.deleteBackupPolicy = function deleteBackupPolicy(request, callback) {
+                            return this.rpcCall(deleteBackupPolicy, $root.google.cloud.netapp.v1.DeleteBackupPolicyRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteBackupPolicy" });
+    
+                        /**
+                         * Calls DeleteBackupPolicy.
+                         * @function deleteBackupPolicy
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.IDeleteBackupPolicyRequest} request DeleteBackupPolicyRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -16435,6 +22988,7 @@
                          * @property {string|null} [kmsConfig] Volume kmsConfig
                          * @property {google.cloud.netapp.v1.EncryptionType|null} [encryptionType] Volume encryptionType
                          * @property {boolean|null} [hasReplication] Volume hasReplication
+                         * @property {google.cloud.netapp.v1.IBackupConfig|null} [backupConfig] Volume backupConfig
                          * @property {Array.<google.cloud.netapp.v1.RestrictedAction>|null} [restrictedActions] Volume restrictedActions
                          */
     
@@ -16691,12 +23245,34 @@
                         Volume.prototype.hasReplication = false;
     
                         /**
+                         * Volume backupConfig.
+                         * @member {google.cloud.netapp.v1.IBackupConfig|null|undefined} backupConfig
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Volume.prototype.backupConfig = null;
+    
+                        /**
                          * Volume restrictedActions.
                          * @member {Array.<google.cloud.netapp.v1.RestrictedAction>} restrictedActions
                          * @memberof google.cloud.netapp.v1.Volume
                          * @instance
                          */
                         Volume.prototype.restrictedActions = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Volume _backupConfig.
+                         * @member {"backupConfig"|undefined} _backupConfig
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Object.defineProperty(Volume.prototype, "_backupConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["backupConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Volume instance using the specified properties.
@@ -16790,6 +23366,8 @@
                                 writer.uint32(/* id 28, wireType 0 =*/224).int32(message.encryptionType);
                             if (message.hasReplication != null && Object.hasOwnProperty.call(message, "hasReplication"))
                                 writer.uint32(/* id 29, wireType 0 =*/232).bool(message.hasReplication);
+                            if (message.backupConfig != null && Object.hasOwnProperty.call(message, "backupConfig"))
+                                $root.google.cloud.netapp.v1.BackupConfig.encode(message.backupConfig, writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
                             if (message.restrictedActions != null && message.restrictedActions.length) {
                                 writer.uint32(/* id 31, wireType 2 =*/250).fork();
                                 for (var i = 0; i < message.restrictedActions.length; ++i)
@@ -16981,6 +23559,10 @@
                                         message.hasReplication = reader.bool();
                                         break;
                                     }
+                                case 30: {
+                                        message.backupConfig = $root.google.cloud.netapp.v1.BackupConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 31: {
                                         if (!(message.restrictedActions && message.restrictedActions.length))
                                             message.restrictedActions = [];
@@ -17027,6 +23609,7 @@
                         Volume.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -17191,6 +23774,14 @@
                             if (message.hasReplication != null && message.hasOwnProperty("hasReplication"))
                                 if (typeof message.hasReplication !== "boolean")
                                     return "hasReplication: boolean expected";
+                            if (message.backupConfig != null && message.hasOwnProperty("backupConfig")) {
+                                properties._backupConfig = 1;
+                                {
+                                    var error = $root.google.cloud.netapp.v1.BackupConfig.verify(message.backupConfig);
+                                    if (error)
+                                        return "backupConfig." + error;
+                                }
+                            }
                             if (message.restrictedActions != null && message.hasOwnProperty("restrictedActions")) {
                                 if (!Array.isArray(message.restrictedActions))
                                     return "restrictedActions: array expected";
@@ -17489,6 +24080,11 @@
                             }
                             if (object.hasReplication != null)
                                 message.hasReplication = Boolean(object.hasReplication);
+                            if (object.backupConfig != null) {
+                                if (typeof object.backupConfig !== "object")
+                                    throw TypeError(".google.cloud.netapp.v1.Volume.backupConfig: object expected");
+                                message.backupConfig = $root.google.cloud.netapp.v1.BackupConfig.fromObject(object.backupConfig);
+                            }
                             if (object.restrictedActions) {
                                 if (!Array.isArray(object.restrictedActions))
                                     throw TypeError(".google.cloud.netapp.v1.Volume.restrictedActions: array expected");
@@ -17646,6 +24242,11 @@
                                 object.encryptionType = options.enums === String ? $root.google.cloud.netapp.v1.EncryptionType[message.encryptionType] === undefined ? message.encryptionType : $root.google.cloud.netapp.v1.EncryptionType[message.encryptionType] : message.encryptionType;
                             if (message.hasReplication != null && message.hasOwnProperty("hasReplication"))
                                 object.hasReplication = message.hasReplication;
+                            if (message.backupConfig != null && message.hasOwnProperty("backupConfig")) {
+                                object.backupConfig = $root.google.cloud.netapp.v1.BackupConfig.toObject(message.backupConfig, options);
+                                if (options.oneofs)
+                                    object._backupConfig = "backupConfig";
+                            }
                             if (message.restrictedActions && message.restrictedActions.length) {
                                 object.restrictedActions = [];
                                 for (var j = 0; j < message.restrictedActions.length; ++j)
@@ -20495,6 +27096,7 @@
                          * @memberof google.cloud.netapp.v1
                          * @interface IRestoreParameters
                          * @property {string|null} [sourceSnapshot] RestoreParameters sourceSnapshot
+                         * @property {string|null} [sourceBackup] RestoreParameters sourceBackup
                          */
     
                         /**
@@ -20520,17 +27122,25 @@
                          */
                         RestoreParameters.prototype.sourceSnapshot = null;
     
+                        /**
+                         * RestoreParameters sourceBackup.
+                         * @member {string|null|undefined} sourceBackup
+                         * @memberof google.cloud.netapp.v1.RestoreParameters
+                         * @instance
+                         */
+                        RestoreParameters.prototype.sourceBackup = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * RestoreParameters source.
-                         * @member {"sourceSnapshot"|undefined} source
+                         * @member {"sourceSnapshot"|"sourceBackup"|undefined} source
                          * @memberof google.cloud.netapp.v1.RestoreParameters
                          * @instance
                          */
                         Object.defineProperty(RestoreParameters.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["sourceSnapshot"]),
+                            get: $util.oneOfGetter($oneOfFields = ["sourceSnapshot", "sourceBackup"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -20560,6 +27170,8 @@
                                 writer = $Writer.create();
                             if (message.sourceSnapshot != null && Object.hasOwnProperty.call(message, "sourceSnapshot"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceSnapshot);
+                            if (message.sourceBackup != null && Object.hasOwnProperty.call(message, "sourceBackup"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceBackup);
                             return writer;
                         };
     
@@ -20596,6 +27208,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.sourceSnapshot = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sourceBackup = reader.string();
                                         break;
                                     }
                                 default:
@@ -20639,6 +27255,13 @@
                                 if (!$util.isString(message.sourceSnapshot))
                                     return "sourceSnapshot: string expected";
                             }
+                            if (message.sourceBackup != null && message.hasOwnProperty("sourceBackup")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                if (!$util.isString(message.sourceBackup))
+                                    return "sourceBackup: string expected";
+                            }
                             return null;
                         };
     
@@ -20656,6 +27279,8 @@
                             var message = new $root.google.cloud.netapp.v1.RestoreParameters();
                             if (object.sourceSnapshot != null)
                                 message.sourceSnapshot = String(object.sourceSnapshot);
+                            if (object.sourceBackup != null)
+                                message.sourceBackup = String(object.sourceBackup);
                             return message;
                         };
     
@@ -20676,6 +27301,11 @@
                                 object.sourceSnapshot = message.sourceSnapshot;
                                 if (options.oneofs)
                                     object.source = "sourceSnapshot";
+                            }
+                            if (message.sourceBackup != null && message.hasOwnProperty("sourceBackup")) {
+                                object.sourceBackup = message.sourceBackup;
+                                if (options.oneofs)
+                                    object.source = "sourceBackup";
                             }
                             return object;
                         };
@@ -20707,6 +27337,291 @@
                         };
     
                         return RestoreParameters;
+                    })();
+    
+                    v1.BackupConfig = (function() {
+    
+                        /**
+                         * Properties of a BackupConfig.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface IBackupConfig
+                         * @property {Array.<string>|null} [backupPolicies] BackupConfig backupPolicies
+                         * @property {string|null} [backupVault] BackupConfig backupVault
+                         * @property {boolean|null} [scheduledBackupEnabled] BackupConfig scheduledBackupEnabled
+                         */
+    
+                        /**
+                         * Constructs a new BackupConfig.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a BackupConfig.
+                         * @implements IBackupConfig
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.IBackupConfig=} [properties] Properties to set
+                         */
+                        function BackupConfig(properties) {
+                            this.backupPolicies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BackupConfig backupPolicies.
+                         * @member {Array.<string>} backupPolicies
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @instance
+                         */
+                        BackupConfig.prototype.backupPolicies = $util.emptyArray;
+    
+                        /**
+                         * BackupConfig backupVault.
+                         * @member {string} backupVault
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @instance
+                         */
+                        BackupConfig.prototype.backupVault = "";
+    
+                        /**
+                         * BackupConfig scheduledBackupEnabled.
+                         * @member {boolean|null|undefined} scheduledBackupEnabled
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @instance
+                         */
+                        BackupConfig.prototype.scheduledBackupEnabled = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BackupConfig _scheduledBackupEnabled.
+                         * @member {"scheduledBackupEnabled"|undefined} _scheduledBackupEnabled
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @instance
+                         */
+                        Object.defineProperty(BackupConfig.prototype, "_scheduledBackupEnabled", {
+                            get: $util.oneOfGetter($oneOfFields = ["scheduledBackupEnabled"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BackupConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackupConfig=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.BackupConfig} BackupConfig instance
+                         */
+                        BackupConfig.create = function create(properties) {
+                            return new BackupConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BackupConfig message. Does not implicitly {@link google.cloud.netapp.v1.BackupConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackupConfig} message BackupConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.backupPolicies != null && message.backupPolicies.length)
+                                for (var i = 0; i < message.backupPolicies.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.backupPolicies[i]);
+                            if (message.backupVault != null && Object.hasOwnProperty.call(message, "backupVault"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.backupVault);
+                            if (message.scheduledBackupEnabled != null && Object.hasOwnProperty.call(message, "scheduledBackupEnabled"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.scheduledBackupEnabled);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BackupConfig message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.BackupConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.IBackupConfig} message BackupConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BackupConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BackupConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.BackupConfig} BackupConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.BackupConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.backupPolicies && message.backupPolicies.length))
+                                            message.backupPolicies = [];
+                                        message.backupPolicies.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.backupVault = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.scheduledBackupEnabled = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BackupConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.BackupConfig} BackupConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BackupConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BackupConfig message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BackupConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.backupPolicies != null && message.hasOwnProperty("backupPolicies")) {
+                                if (!Array.isArray(message.backupPolicies))
+                                    return "backupPolicies: array expected";
+                                for (var i = 0; i < message.backupPolicies.length; ++i)
+                                    if (!$util.isString(message.backupPolicies[i]))
+                                        return "backupPolicies: string[] expected";
+                            }
+                            if (message.backupVault != null && message.hasOwnProperty("backupVault"))
+                                if (!$util.isString(message.backupVault))
+                                    return "backupVault: string expected";
+                            if (message.scheduledBackupEnabled != null && message.hasOwnProperty("scheduledBackupEnabled")) {
+                                properties._scheduledBackupEnabled = 1;
+                                if (typeof message.scheduledBackupEnabled !== "boolean")
+                                    return "scheduledBackupEnabled: boolean expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BackupConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.BackupConfig} BackupConfig
+                         */
+                        BackupConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.BackupConfig)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.BackupConfig();
+                            if (object.backupPolicies) {
+                                if (!Array.isArray(object.backupPolicies))
+                                    throw TypeError(".google.cloud.netapp.v1.BackupConfig.backupPolicies: array expected");
+                                message.backupPolicies = [];
+                                for (var i = 0; i < object.backupPolicies.length; ++i)
+                                    message.backupPolicies[i] = String(object.backupPolicies[i]);
+                            }
+                            if (object.backupVault != null)
+                                message.backupVault = String(object.backupVault);
+                            if (object.scheduledBackupEnabled != null)
+                                message.scheduledBackupEnabled = Boolean(object.scheduledBackupEnabled);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BackupConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @static
+                         * @param {google.cloud.netapp.v1.BackupConfig} message BackupConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BackupConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.backupPolicies = [];
+                            if (options.defaults)
+                                object.backupVault = "";
+                            if (message.backupPolicies && message.backupPolicies.length) {
+                                object.backupPolicies = [];
+                                for (var j = 0; j < message.backupPolicies.length; ++j)
+                                    object.backupPolicies[j] = message.backupPolicies[j];
+                            }
+                            if (message.backupVault != null && message.hasOwnProperty("backupVault"))
+                                object.backupVault = message.backupVault;
+                            if (message.scheduledBackupEnabled != null && message.hasOwnProperty("scheduledBackupEnabled")) {
+                                object.scheduledBackupEnabled = message.scheduledBackupEnabled;
+                                if (options.oneofs)
+                                    object._scheduledBackupEnabled = "scheduledBackupEnabled";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BackupConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BackupConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BackupConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.BackupConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BackupConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.BackupConfig";
+                        };
+    
+                        return BackupConfig;
                     })();
     
                     return v1;

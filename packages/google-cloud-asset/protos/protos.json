@@ -1507,14 +1507,16 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "destinationParent": {
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "*"
                           }
                         },
                         "view": {
@@ -3277,7 +3279,7 @@
                 },
                 "v1p2beta1": {
                   "options": {
-                    "csharp_namespace": "Google.Cloud.Asset.v1p2beta1",
+                    "csharp_namespace": "Google.Cloud.Asset.V1P2Beta1",
                     "go_package": "cloud.google.com/go/asset/apiv1p2beta1/assetpb;assetpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "AssetProto",
@@ -3385,6 +3387,27 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        }
+                      }
+                    },
+                    "ExportAssetsResponse": {
+                      "fields": {
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "outputConfig": {
+                          "type": "OutputConfig",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BatchGetAssetsHistoryResponse": {
+                      "fields": {
+                        "assets": {
+                          "rule": "repeated",
+                          "type": "TemporalAsset",
+                          "id": 1
                         }
                       }
                     },
@@ -3505,6 +3528,13 @@
                         }
                       }
                     },
+                    "ContentType": {
+                      "values": {
+                        "CONTENT_TYPE_UNSPECIFIED": 0,
+                        "RESOURCE": 1,
+                        "IAM_POLICY": 2
+                      }
+                    },
                     "PubsubDestination": {
                       "fields": {
                         "topic": {
@@ -3565,13 +3595,6 @@
                         }
                       }
                     },
-                    "ContentType": {
-                      "values": {
-                        "CONTENT_TYPE_UNSPECIFIED": 0,
-                        "RESOURCE": 1,
-                        "IAM_POLICY": 2
-                      }
-                    },
                     "TemporalAsset": {
                       "fields": {
                         "window": {
@@ -3601,6 +3624,19 @@
                       }
                     },
                     "Asset": {
+                      "options": {
+                        "(google.api.resource).type": "cloudasset.googleapis.com/Asset",
+                        "(google.api.resource).pattern": "*"
+                      },
+                      "oneofs": {
+                        "accessContextPolicy": {
+                          "oneof": [
+                            "accessPolicy",
+                            "accessLevel",
+                            "servicePerimeter"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -3622,6 +3658,23 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 6
+                        },
+                        "accessPolicy": {
+                          "type": "google.identity.accesscontextmanager.v1.AccessPolicy",
+                          "id": 7
+                        },
+                        "accessLevel": {
+                          "type": "google.identity.accesscontextmanager.v1.AccessLevel",
+                          "id": 8
+                        },
+                        "servicePerimeter": {
+                          "type": "google.identity.accesscontextmanager.v1.ServicePerimeter",
+                          "id": 9
+                        },
+                        "orgPolicy": {
+                          "rule": "repeated",
+                          "type": "google.cloud.orgpolicy.v1.Policy",
+                          "id": 10
                         }
                       }
                     },
@@ -4700,7 +4753,7 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.OrgPolicy.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/orgpolicy/v1;orgpolicy",
+                    "go_package": "cloud.google.com/go/orgpolicy/apiv1/orgpolicypb;orgpolicypb",
                     "java_multiple_files": true,
                     "java_outer_classname": "OrgPolicyProto",
                     "java_package": "com.google.cloud.orgpolicy.v1",
@@ -6645,9 +6698,6 @@
                 }
               }
             },
-            "Empty": {
-              "fields": {}
-            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -6735,6 +6785,9 @@
                 }
               }
             },
+            "Empty": {
+              "fields": {}
+            },
             "FieldMask": {
               "fields": {
                 "paths": {
@@ -6800,7 +6853,7 @@
               "options": {
                 "cc_enable_arenas": true,
                 "csharp_namespace": "Google.Cloud.Iam.V1",
-                "go_package": "google.golang.org/genproto/googleapis/iam/v1;iam",
+                "go_package": "cloud.google.com/go/iam/apiv1/iampb;iampb",
                 "java_multiple_files": true,
                 "java_outer_classname": "PolicyProto",
                 "java_package": "com.google.iam.v1",
@@ -6965,16 +7018,20 @@
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Identity.AccessContextManager.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/identity/accesscontextmanager/v1;accesscontextmanager",
+                    "go_package": "cloud.google.com/go/accesscontextmanager/apiv1/accesscontextmanagerpb;accesscontextmanagerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServicePerimeterProto",
                     "java_package": "com.google.identity.accesscontextmanager.v1",
+                    "objc_class_prefix": "GACM",
                     "php_namespace": "Google\\Identity\\AccessContextManager\\V1",
-                    "ruby_package": "Google::Identity::AccessContextManager::V1",
-                    "objc_class_prefix": "GACM"
+                    "ruby_package": "Google::Identity::AccessContextManager::V1"
                   },
                   "nested": {
                     "AccessLevel": {
+                      "options": {
+                        "(google.api.resource).type": "accesscontextmanager.googleapis.com/AccessLevel",
+                        "(google.api.resource).pattern": "accessPolicies/{access_policy}/accessLevels/{access_level}"
+                      },
                       "oneofs": {
                         "level": {
                           "oneof": [
@@ -7123,6 +7180,10 @@
                       }
                     },
                     "AccessPolicy": {
+                      "options": {
+                        "(google.api.resource).type": "accesscontextmanager.googleapis.com/AccessPolicy",
+                        "(google.api.resource).pattern": "accessPolicies/{access_policy}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -7135,6 +7196,11 @@
                         "title": {
                           "type": "string",
                           "id": 3
+                        },
+                        "scopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -7151,6 +7217,10 @@
                       }
                     },
                     "ServicePerimeter": {
+                      "options": {
+                        "(google.api.resource).type": "accesscontextmanager.googleapis.com/ServicePerimeter",
+                        "(google.api.resource).pattern": "accessPolicies/{access_policy}/servicePerimeters/{service_perimeter}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -7218,6 +7288,16 @@
                         "vpcAccessibleServices": {
                           "type": "VpcAccessibleServices",
                           "id": 10
+                        },
+                        "ingressPolicies": {
+                          "rule": "repeated",
+                          "type": "IngressPolicy",
+                          "id": 8
+                        },
+                        "egressPolicies": {
+                          "rule": "repeated",
+                          "type": "EgressPolicy",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -7233,6 +7313,155 @@
                               "id": 2
                             }
                           }
+                        },
+                        "IdentityType": {
+                          "values": {
+                            "IDENTITY_TYPE_UNSPECIFIED": 0,
+                            "ANY_IDENTITY": 1,
+                            "ANY_USER_ACCOUNT": 2,
+                            "ANY_SERVICE_ACCOUNT": 3
+                          }
+                        },
+                        "MethodSelector": {
+                          "oneofs": {
+                            "kind": {
+                              "oneof": [
+                                "method",
+                                "permission"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "method": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "permission": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ApiOperation": {
+                          "fields": {
+                            "serviceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "methodSelectors": {
+                              "rule": "repeated",
+                              "type": "MethodSelector",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IngressSource": {
+                          "oneofs": {
+                            "source": {
+                              "oneof": [
+                                "accessLevel",
+                                "resource"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "accessLevel": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "resource": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IngressFrom": {
+                          "fields": {
+                            "sources": {
+                              "rule": "repeated",
+                              "type": "IngressSource",
+                              "id": 1
+                            },
+                            "identities": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "identityType": {
+                              "type": "IdentityType",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "IngressTo": {
+                          "fields": {
+                            "operations": {
+                              "rule": "repeated",
+                              "type": "ApiOperation",
+                              "id": 1
+                            },
+                            "resources": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IngressPolicy": {
+                          "fields": {
+                            "ingressFrom": {
+                              "type": "IngressFrom",
+                              "id": 1
+                            },
+                            "ingressTo": {
+                              "type": "IngressTo",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "EgressFrom": {
+                          "fields": {
+                            "identities": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "identityType": {
+                              "type": "IdentityType",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "EgressTo": {
+                          "fields": {
+                            "resources": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "operations": {
+                              "rule": "repeated",
+                              "type": "ApiOperation",
+                              "id": 2
+                            },
+                            "externalResources": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "EgressPolicy": {
+                          "fields": {
+                            "egressFrom": {
+                              "type": "EgressFrom",
+                              "id": 1
+                            },
+                            "egressTo": {
+                              "type": "EgressTo",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     }
@@ -7241,7 +7470,7 @@
                 "type": {
                   "options": {
                     "csharp_namespace": "Google.Identity.AccessContextManager.Type",
-                    "go_package": "google.golang.org/genproto/googleapis/identity/accesscontextmanager/type;type",
+                    "go_package": "google.golang.org/genproto/googleapis/identity/accesscontextmanager/type",
                     "java_package": "com.google.identity.accesscontextmanager.type",
                     "java_multiple_files": true,
                     "java_outer_classname": "TypeProto",

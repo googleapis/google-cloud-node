@@ -535,6 +535,147 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
   });
 
+  describe('sheetExportAudienceList', () => {
+    it('invokes sheetExportAudienceList without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.SheetExportAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.SheetExportAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.SheetExportAudienceListResponse()
+      );
+      client.innerApiCalls.sheetExportAudienceList =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.sheetExportAudienceList(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.sheetExportAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.sheetExportAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes sheetExportAudienceList without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.SheetExportAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.SheetExportAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.SheetExportAudienceListResponse()
+      );
+      client.innerApiCalls.sheetExportAudienceList =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.sheetExportAudienceList(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.ISheetExportAudienceListResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.sheetExportAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.sheetExportAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes sheetExportAudienceList with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.SheetExportAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.SheetExportAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.sheetExportAudienceList = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.sheetExportAudienceList(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.sheetExportAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.sheetExportAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes sheetExportAudienceList with closed client', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.SheetExportAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.SheetExportAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.sheetExportAudienceList(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getAudienceList', () => {
     it('invokes getAudienceList without error', async () => {
       const client =
@@ -666,6 +807,288 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAudienceList(request), expectedError);
+    });
+  });
+
+  describe('createRecurringAudienceList', () => {
+    it('invokes createRecurringAudienceList without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+      );
+      client.innerApiCalls.createRecurringAudienceList =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createRecurringAudienceList(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createRecurringAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRecurringAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRecurringAudienceList without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+      );
+      client.innerApiCalls.createRecurringAudienceList =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createRecurringAudienceList(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IRecurringAudienceList | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createRecurringAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRecurringAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRecurringAudienceList with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createRecurringAudienceList = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createRecurringAudienceList(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createRecurringAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRecurringAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createRecurringAudienceList with closed client', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createRecurringAudienceList(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getRecurringAudienceList', () => {
+    it('invokes getRecurringAudienceList without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetRecurringAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetRecurringAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+      );
+      client.innerApiCalls.getRecurringAudienceList =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getRecurringAudienceList(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRecurringAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRecurringAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRecurringAudienceList without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetRecurringAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetRecurringAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+      );
+      client.innerApiCalls.getRecurringAudienceList =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getRecurringAudienceList(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1alpha.IRecurringAudienceList | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getRecurringAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRecurringAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRecurringAudienceList with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetRecurringAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetRecurringAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getRecurringAudienceList = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getRecurringAudienceList(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getRecurringAudienceList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRecurringAudienceList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getRecurringAudienceList with closed client', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.GetRecurringAudienceListRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.GetRecurringAudienceListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getRecurringAudienceList(request),
+        expectedError
+      );
     });
   });
 
@@ -1205,12 +1628,378 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     });
   });
 
+  describe('listRecurringAudienceLists', () => {
+    it('invokes listRecurringAudienceLists without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+      ];
+      client.innerApiCalls.listRecurringAudienceLists =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listRecurringAudienceLists(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRecurringAudienceLists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRecurringAudienceLists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRecurringAudienceLists without error using callback', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+      ];
+      client.innerApiCalls.listRecurringAudienceLists =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listRecurringAudienceLists(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.data.v1alpha.IRecurringAudienceList[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listRecurringAudienceLists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRecurringAudienceLists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRecurringAudienceLists with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listRecurringAudienceLists = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listRecurringAudienceLists(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listRecurringAudienceLists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRecurringAudienceLists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listRecurringAudienceListsStream without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+      ];
+      client.descriptors.page.listRecurringAudienceLists.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listRecurringAudienceListsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.data.v1alpha.RecurringAudienceList[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.data.v1alpha.RecurringAudienceList
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listRecurringAudienceLists
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRecurringAudienceLists, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listRecurringAudienceLists
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listRecurringAudienceListsStream with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRecurringAudienceLists.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listRecurringAudienceListsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.data.v1alpha.RecurringAudienceList[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.data.v1alpha.RecurringAudienceList
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listRecurringAudienceLists
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRecurringAudienceLists, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listRecurringAudienceLists
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listRecurringAudienceLists without error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.data.v1alpha.RecurringAudienceList()
+        ),
+      ];
+      client.descriptors.page.listRecurringAudienceLists.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.data.v1alpha.IRecurringAudienceList[] =
+        [];
+      const iterable = client.listRecurringAudienceListsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRecurringAudienceLists
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listRecurringAudienceLists
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listRecurringAudienceLists with error', async () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRecurringAudienceLists.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listRecurringAudienceListsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.data.v1alpha.IRecurringAudienceList[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRecurringAudienceLists
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listRecurringAudienceLists
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('audienceList', () => {
       const fakePath = '/rendered/path/audienceList';
       const expectedParameters = {
-        propertyId: 'propertyIdValue',
-        audienceListId: 'audienceListIdValue',
+        property: 'propertyValue',
+        audience_list: 'audienceListValue',
       };
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
@@ -1227,8 +2016,8 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
 
       it('audienceListPath', () => {
         const result = client.audienceListPath(
-          'propertyIdValue',
-          'audienceListIdValue'
+          'propertyValue',
+          'audienceListValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
@@ -1238,9 +2027,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         );
       });
 
-      it('matchPropertyIdFromAudienceListName', () => {
-        const result = client.matchPropertyIdFromAudienceListName(fakePath);
-        assert.strictEqual(result, 'propertyIdValue');
+      it('matchPropertyFromAudienceListName', () => {
+        const result = client.matchPropertyFromAudienceListName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
         assert(
           (client.pathTemplates.audienceListPathTemplate.match as SinonStub)
             .getCall(-1)
@@ -1248,9 +2037,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         );
       });
 
-      it('matchAudienceListIdFromAudienceListName', () => {
-        const result = client.matchAudienceListIdFromAudienceListName(fakePath);
-        assert.strictEqual(result, 'audienceListIdValue');
+      it('matchAudienceListFromAudienceListName', () => {
+        const result = client.matchAudienceListFromAudienceListName(fakePath);
+        assert.strictEqual(result, 'audienceListValue');
         assert(
           (client.pathTemplates.audienceListPathTemplate.match as SinonStub)
             .getCall(-1)
@@ -1262,7 +2051,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
     describe('property', () => {
       const fakePath = '/rendered/path/property';
       const expectedParameters = {
-        propertyId: 'propertyIdValue',
+        property: 'propertyValue',
       };
       const client =
         new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
@@ -1278,7 +2067,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         .returns(expectedParameters);
 
       it('propertyPath', () => {
-        const result = client.propertyPath('propertyIdValue');
+        const result = client.propertyPath('propertyValue');
         assert.strictEqual(result, fakePath);
         assert(
           (client.pathTemplates.propertyPathTemplate.render as SinonStub)
@@ -1287,11 +2076,77 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         );
       });
 
-      it('matchPropertyIdFromPropertyName', () => {
-        const result = client.matchPropertyIdFromPropertyName(fakePath);
-        assert.strictEqual(result, 'propertyIdValue');
+      it('matchPropertyFromPropertyName', () => {
+        const result = client.matchPropertyFromPropertyName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
         assert(
           (client.pathTemplates.propertyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('recurringAudienceList', () => {
+      const fakePath = '/rendered/path/recurringAudienceList';
+      const expectedParameters = {
+        property: 'propertyValue',
+        recurring_audience_list: 'recurringAudienceListValue',
+      };
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.recurringAudienceListPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.recurringAudienceListPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('recurringAudienceListPath', () => {
+        const result = client.recurringAudienceListPath(
+          'propertyValue',
+          'recurringAudienceListValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.recurringAudienceListPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromRecurringAudienceListName', () => {
+        const result =
+          client.matchPropertyFromRecurringAudienceListName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (
+            client.pathTemplates.recurringAudienceListPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRecurringAudienceListFromRecurringAudienceListName', () => {
+        const result =
+          client.matchRecurringAudienceListFromRecurringAudienceListName(
+            fakePath
+          );
+        assert.strictEqual(result, 'recurringAudienceListValue');
+        assert(
+          (
+            client.pathTemplates.recurringAudienceListPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

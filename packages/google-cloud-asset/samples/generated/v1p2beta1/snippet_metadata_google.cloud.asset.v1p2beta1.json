@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-asset",
-        "version": "5.1.0",
+        "version": "5.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],

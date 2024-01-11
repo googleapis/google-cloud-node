@@ -10747,6 +10747,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|sheetExportAudienceList}.
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @typedef SheetExportAudienceListCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1alpha.SheetExportAudienceListResponse} [response] SheetExportAudienceListResponse
+                         */
+    
+                        /**
+                         * Calls SheetExportAudienceList.
+                         * @function sheetExportAudienceList
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.ISheetExportAudienceListRequest} request SheetExportAudienceListRequest message or plain object
+                         * @param {google.analytics.data.v1alpha.AlphaAnalyticsData.SheetExportAudienceListCallback} callback Node-style callback called with the error, if any, and SheetExportAudienceListResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AlphaAnalyticsData.prototype.sheetExportAudienceList = function sheetExportAudienceList(request, callback) {
+                            return this.rpcCall(sheetExportAudienceList, $root.google.analytics.data.v1alpha.SheetExportAudienceListRequest, $root.google.analytics.data.v1alpha.SheetExportAudienceListResponse, request, callback);
+                        }, "name", { value: "SheetExportAudienceList" });
+    
+                        /**
+                         * Calls SheetExportAudienceList.
+                         * @function sheetExportAudienceList
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.ISheetExportAudienceListRequest} request SheetExportAudienceListRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1alpha.SheetExportAudienceListResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|getAudienceList}.
                          * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
                          * @typedef GetAudienceListCallback
@@ -10812,7 +10845,1434 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|createRecurringAudienceList}.
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @typedef CreateRecurringAudienceListCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1alpha.RecurringAudienceList} [response] RecurringAudienceList
+                         */
+    
+                        /**
+                         * Calls CreateRecurringAudienceList.
+                         * @function createRecurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest} request CreateRecurringAudienceListRequest message or plain object
+                         * @param {google.analytics.data.v1alpha.AlphaAnalyticsData.CreateRecurringAudienceListCallback} callback Node-style callback called with the error, if any, and RecurringAudienceList
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AlphaAnalyticsData.prototype.createRecurringAudienceList = function createRecurringAudienceList(request, callback) {
+                            return this.rpcCall(createRecurringAudienceList, $root.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest, $root.google.analytics.data.v1alpha.RecurringAudienceList, request, callback);
+                        }, "name", { value: "CreateRecurringAudienceList" });
+    
+                        /**
+                         * Calls CreateRecurringAudienceList.
+                         * @function createRecurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest} request CreateRecurringAudienceListRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1alpha.RecurringAudienceList>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|getRecurringAudienceList}.
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @typedef GetRecurringAudienceListCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1alpha.RecurringAudienceList} [response] RecurringAudienceList
+                         */
+    
+                        /**
+                         * Calls GetRecurringAudienceList.
+                         * @function getRecurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest} request GetRecurringAudienceListRequest message or plain object
+                         * @param {google.analytics.data.v1alpha.AlphaAnalyticsData.GetRecurringAudienceListCallback} callback Node-style callback called with the error, if any, and RecurringAudienceList
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AlphaAnalyticsData.prototype.getRecurringAudienceList = function getRecurringAudienceList(request, callback) {
+                            return this.rpcCall(getRecurringAudienceList, $root.google.analytics.data.v1alpha.GetRecurringAudienceListRequest, $root.google.analytics.data.v1alpha.RecurringAudienceList, request, callback);
+                        }, "name", { value: "GetRecurringAudienceList" });
+    
+                        /**
+                         * Calls GetRecurringAudienceList.
+                         * @function getRecurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest} request GetRecurringAudienceListRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1alpha.RecurringAudienceList>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|listRecurringAudienceLists}.
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @typedef ListRecurringAudienceListsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} [response] ListRecurringAudienceListsResponse
+                         */
+    
+                        /**
+                         * Calls ListRecurringAudienceLists.
+                         * @function listRecurringAudienceLists
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest} request ListRecurringAudienceListsRequest message or plain object
+                         * @param {google.analytics.data.v1alpha.AlphaAnalyticsData.ListRecurringAudienceListsCallback} callback Node-style callback called with the error, if any, and ListRecurringAudienceListsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AlphaAnalyticsData.prototype.listRecurringAudienceLists = function listRecurringAudienceLists(request, callback) {
+                            return this.rpcCall(listRecurringAudienceLists, $root.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest, $root.google.analytics.data.v1alpha.ListRecurringAudienceListsResponse, request, callback);
+                        }, "name", { value: "ListRecurringAudienceLists" });
+    
+                        /**
+                         * Calls ListRecurringAudienceLists.
+                         * @function listRecurringAudienceLists
+                         * @memberof google.analytics.data.v1alpha.AlphaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest} request ListRecurringAudienceListsRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1alpha.ListRecurringAudienceListsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return AlphaAnalyticsData;
+                    })();
+    
+                    v1alpha.CreateRecurringAudienceListRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateRecurringAudienceListRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface ICreateRecurringAudienceListRequest
+                         * @property {string|null} [parent] CreateRecurringAudienceListRequest parent
+                         * @property {google.analytics.data.v1alpha.IRecurringAudienceList|null} [recurringAudienceList] CreateRecurringAudienceListRequest recurringAudienceList
+                         */
+    
+                        /**
+                         * Constructs a new CreateRecurringAudienceListRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a CreateRecurringAudienceListRequest.
+                         * @implements ICreateRecurringAudienceListRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest=} [properties] Properties to set
+                         */
+                        function CreateRecurringAudienceListRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateRecurringAudienceListRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @instance
+                         */
+                        CreateRecurringAudienceListRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateRecurringAudienceListRequest recurringAudienceList.
+                         * @member {google.analytics.data.v1alpha.IRecurringAudienceList|null|undefined} recurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @instance
+                         */
+                        CreateRecurringAudienceListRequest.prototype.recurringAudienceList = null;
+    
+                        /**
+                         * Creates a new CreateRecurringAudienceListRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.CreateRecurringAudienceListRequest} CreateRecurringAudienceListRequest instance
+                         */
+                        CreateRecurringAudienceListRequest.create = function create(properties) {
+                            return new CreateRecurringAudienceListRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateRecurringAudienceListRequest message. Does not implicitly {@link google.analytics.data.v1alpha.CreateRecurringAudienceListRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest} message CreateRecurringAudienceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateRecurringAudienceListRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.recurringAudienceList != null && Object.hasOwnProperty.call(message, "recurringAudienceList"))
+                                $root.google.analytics.data.v1alpha.RecurringAudienceList.encode(message.recurringAudienceList, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateRecurringAudienceListRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.CreateRecurringAudienceListRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ICreateRecurringAudienceListRequest} message CreateRecurringAudienceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateRecurringAudienceListRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateRecurringAudienceListRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.CreateRecurringAudienceListRequest} CreateRecurringAudienceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateRecurringAudienceListRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.recurringAudienceList = $root.google.analytics.data.v1alpha.RecurringAudienceList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateRecurringAudienceListRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.CreateRecurringAudienceListRequest} CreateRecurringAudienceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateRecurringAudienceListRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateRecurringAudienceListRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateRecurringAudienceListRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.recurringAudienceList != null && message.hasOwnProperty("recurringAudienceList")) {
+                                var error = $root.google.analytics.data.v1alpha.RecurringAudienceList.verify(message.recurringAudienceList);
+                                if (error)
+                                    return "recurringAudienceList." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateRecurringAudienceListRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.CreateRecurringAudienceListRequest} CreateRecurringAudienceListRequest
+                         */
+                        CreateRecurringAudienceListRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.recurringAudienceList != null) {
+                                if (typeof object.recurringAudienceList !== "object")
+                                    throw TypeError(".google.analytics.data.v1alpha.CreateRecurringAudienceListRequest.recurringAudienceList: object expected");
+                                message.recurringAudienceList = $root.google.analytics.data.v1alpha.RecurringAudienceList.fromObject(object.recurringAudienceList);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateRecurringAudienceListRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.CreateRecurringAudienceListRequest} message CreateRecurringAudienceListRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateRecurringAudienceListRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.recurringAudienceList = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.recurringAudienceList != null && message.hasOwnProperty("recurringAudienceList"))
+                                object.recurringAudienceList = $root.google.analytics.data.v1alpha.RecurringAudienceList.toObject(message.recurringAudienceList, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateRecurringAudienceListRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateRecurringAudienceListRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateRecurringAudienceListRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.CreateRecurringAudienceListRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateRecurringAudienceListRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.CreateRecurringAudienceListRequest";
+                        };
+    
+                        return CreateRecurringAudienceListRequest;
+                    })();
+    
+                    v1alpha.RecurringAudienceList = (function() {
+    
+                        /**
+                         * Properties of a RecurringAudienceList.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IRecurringAudienceList
+                         * @property {string|null} [name] RecurringAudienceList name
+                         * @property {string|null} [audience] RecurringAudienceList audience
+                         * @property {string|null} [audienceDisplayName] RecurringAudienceList audienceDisplayName
+                         * @property {Array.<google.analytics.data.v1alpha.IAudienceDimension>|null} [dimensions] RecurringAudienceList dimensions
+                         * @property {number|null} [activeDaysRemaining] RecurringAudienceList activeDaysRemaining
+                         * @property {Array.<string>|null} [audienceLists] RecurringAudienceList audienceLists
+                         */
+    
+                        /**
+                         * Constructs a new RecurringAudienceList.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a RecurringAudienceList.
+                         * @implements IRecurringAudienceList
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IRecurringAudienceList=} [properties] Properties to set
+                         */
+                        function RecurringAudienceList(properties) {
+                            this.dimensions = [];
+                            this.audienceLists = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RecurringAudienceList name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.name = "";
+    
+                        /**
+                         * RecurringAudienceList audience.
+                         * @member {string} audience
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.audience = "";
+    
+                        /**
+                         * RecurringAudienceList audienceDisplayName.
+                         * @member {string} audienceDisplayName
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.audienceDisplayName = "";
+    
+                        /**
+                         * RecurringAudienceList dimensions.
+                         * @member {Array.<google.analytics.data.v1alpha.IAudienceDimension>} dimensions
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.dimensions = $util.emptyArray;
+    
+                        /**
+                         * RecurringAudienceList activeDaysRemaining.
+                         * @member {number|null|undefined} activeDaysRemaining
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.activeDaysRemaining = null;
+    
+                        /**
+                         * RecurringAudienceList audienceLists.
+                         * @member {Array.<string>} audienceLists
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.audienceLists = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * RecurringAudienceList _activeDaysRemaining.
+                         * @member {"activeDaysRemaining"|undefined} _activeDaysRemaining
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        Object.defineProperty(RecurringAudienceList.prototype, "_activeDaysRemaining", {
+                            get: $util.oneOfGetter($oneOfFields = ["activeDaysRemaining"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new RecurringAudienceList instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRecurringAudienceList=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.RecurringAudienceList} RecurringAudienceList instance
+                         */
+                        RecurringAudienceList.create = function create(properties) {
+                            return new RecurringAudienceList(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RecurringAudienceList message. Does not implicitly {@link google.analytics.data.v1alpha.RecurringAudienceList.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRecurringAudienceList} message RecurringAudienceList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecurringAudienceList.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.audience != null && Object.hasOwnProperty.call(message, "audience"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.audience);
+                            if (message.audienceDisplayName != null && Object.hasOwnProperty.call(message, "audienceDisplayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.audienceDisplayName);
+                            if (message.dimensions != null && message.dimensions.length)
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    $root.google.analytics.data.v1alpha.AudienceDimension.encode(message.dimensions[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.activeDaysRemaining != null && Object.hasOwnProperty.call(message, "activeDaysRemaining"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.activeDaysRemaining);
+                            if (message.audienceLists != null && message.audienceLists.length)
+                                for (var i = 0; i < message.audienceLists.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.audienceLists[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RecurringAudienceList message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.RecurringAudienceList.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IRecurringAudienceList} message RecurringAudienceList message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecurringAudienceList.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RecurringAudienceList message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.RecurringAudienceList} RecurringAudienceList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecurringAudienceList.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.RecurringAudienceList();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.audience = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.audienceDisplayName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.dimensions && message.dimensions.length))
+                                            message.dimensions = [];
+                                        message.dimensions.push($root.google.analytics.data.v1alpha.AudienceDimension.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.activeDaysRemaining = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.audienceLists && message.audienceLists.length))
+                                            message.audienceLists = [];
+                                        message.audienceLists.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RecurringAudienceList message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.RecurringAudienceList} RecurringAudienceList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecurringAudienceList.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RecurringAudienceList message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RecurringAudienceList.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                if (!$util.isString(message.audience))
+                                    return "audience: string expected";
+                            if (message.audienceDisplayName != null && message.hasOwnProperty("audienceDisplayName"))
+                                if (!$util.isString(message.audienceDisplayName))
+                                    return "audienceDisplayName: string expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!Array.isArray(message.dimensions))
+                                    return "dimensions: array expected";
+                                for (var i = 0; i < message.dimensions.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.AudienceDimension.verify(message.dimensions[i]);
+                                    if (error)
+                                        return "dimensions." + error;
+                                }
+                            }
+                            if (message.activeDaysRemaining != null && message.hasOwnProperty("activeDaysRemaining")) {
+                                properties._activeDaysRemaining = 1;
+                                if (!$util.isInteger(message.activeDaysRemaining))
+                                    return "activeDaysRemaining: integer expected";
+                            }
+                            if (message.audienceLists != null && message.hasOwnProperty("audienceLists")) {
+                                if (!Array.isArray(message.audienceLists))
+                                    return "audienceLists: array expected";
+                                for (var i = 0; i < message.audienceLists.length; ++i)
+                                    if (!$util.isString(message.audienceLists[i]))
+                                        return "audienceLists: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RecurringAudienceList message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.RecurringAudienceList} RecurringAudienceList
+                         */
+                        RecurringAudienceList.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.RecurringAudienceList)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.RecurringAudienceList();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.audience != null)
+                                message.audience = String(object.audience);
+                            if (object.audienceDisplayName != null)
+                                message.audienceDisplayName = String(object.audienceDisplayName);
+                            if (object.dimensions) {
+                                if (!Array.isArray(object.dimensions))
+                                    throw TypeError(".google.analytics.data.v1alpha.RecurringAudienceList.dimensions: array expected");
+                                message.dimensions = [];
+                                for (var i = 0; i < object.dimensions.length; ++i) {
+                                    if (typeof object.dimensions[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.RecurringAudienceList.dimensions: object expected");
+                                    message.dimensions[i] = $root.google.analytics.data.v1alpha.AudienceDimension.fromObject(object.dimensions[i]);
+                                }
+                            }
+                            if (object.activeDaysRemaining != null)
+                                message.activeDaysRemaining = object.activeDaysRemaining | 0;
+                            if (object.audienceLists) {
+                                if (!Array.isArray(object.audienceLists))
+                                    throw TypeError(".google.analytics.data.v1alpha.RecurringAudienceList.audienceLists: array expected");
+                                message.audienceLists = [];
+                                for (var i = 0; i < object.audienceLists.length; ++i)
+                                    message.audienceLists[i] = String(object.audienceLists[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RecurringAudienceList message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {google.analytics.data.v1alpha.RecurringAudienceList} message RecurringAudienceList
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RecurringAudienceList.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensions = [];
+                                object.audienceLists = [];
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.audience = "";
+                                object.audienceDisplayName = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                object.audience = message.audience;
+                            if (message.audienceDisplayName != null && message.hasOwnProperty("audienceDisplayName"))
+                                object.audienceDisplayName = message.audienceDisplayName;
+                            if (message.dimensions && message.dimensions.length) {
+                                object.dimensions = [];
+                                for (var j = 0; j < message.dimensions.length; ++j)
+                                    object.dimensions[j] = $root.google.analytics.data.v1alpha.AudienceDimension.toObject(message.dimensions[j], options);
+                            }
+                            if (message.activeDaysRemaining != null && message.hasOwnProperty("activeDaysRemaining")) {
+                                object.activeDaysRemaining = message.activeDaysRemaining;
+                                if (options.oneofs)
+                                    object._activeDaysRemaining = "activeDaysRemaining";
+                            }
+                            if (message.audienceLists && message.audienceLists.length) {
+                                object.audienceLists = [];
+                                for (var j = 0; j < message.audienceLists.length; ++j)
+                                    object.audienceLists[j] = message.audienceLists[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RecurringAudienceList to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RecurringAudienceList.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RecurringAudienceList
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RecurringAudienceList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.RecurringAudienceList";
+                        };
+    
+                        return RecurringAudienceList;
+                    })();
+    
+                    v1alpha.GetRecurringAudienceListRequest = (function() {
+    
+                        /**
+                         * Properties of a GetRecurringAudienceListRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IGetRecurringAudienceListRequest
+                         * @property {string|null} [name] GetRecurringAudienceListRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetRecurringAudienceListRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a GetRecurringAudienceListRequest.
+                         * @implements IGetRecurringAudienceListRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest=} [properties] Properties to set
+                         */
+                        function GetRecurringAudienceListRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetRecurringAudienceListRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @instance
+                         */
+                        GetRecurringAudienceListRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetRecurringAudienceListRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.GetRecurringAudienceListRequest} GetRecurringAudienceListRequest instance
+                         */
+                        GetRecurringAudienceListRequest.create = function create(properties) {
+                            return new GetRecurringAudienceListRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetRecurringAudienceListRequest message. Does not implicitly {@link google.analytics.data.v1alpha.GetRecurringAudienceListRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest} message GetRecurringAudienceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRecurringAudienceListRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetRecurringAudienceListRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.GetRecurringAudienceListRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IGetRecurringAudienceListRequest} message GetRecurringAudienceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRecurringAudienceListRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetRecurringAudienceListRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.GetRecurringAudienceListRequest} GetRecurringAudienceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRecurringAudienceListRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.GetRecurringAudienceListRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetRecurringAudienceListRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.GetRecurringAudienceListRequest} GetRecurringAudienceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRecurringAudienceListRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetRecurringAudienceListRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetRecurringAudienceListRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetRecurringAudienceListRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.GetRecurringAudienceListRequest} GetRecurringAudienceListRequest
+                         */
+                        GetRecurringAudienceListRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.GetRecurringAudienceListRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.GetRecurringAudienceListRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetRecurringAudienceListRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.GetRecurringAudienceListRequest} message GetRecurringAudienceListRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetRecurringAudienceListRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetRecurringAudienceListRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetRecurringAudienceListRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetRecurringAudienceListRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.GetRecurringAudienceListRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetRecurringAudienceListRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.GetRecurringAudienceListRequest";
+                        };
+    
+                        return GetRecurringAudienceListRequest;
+                    })();
+    
+                    v1alpha.ListRecurringAudienceListsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRecurringAudienceListsRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IListRecurringAudienceListsRequest
+                         * @property {string|null} [parent] ListRecurringAudienceListsRequest parent
+                         * @property {number|null} [pageSize] ListRecurringAudienceListsRequest pageSize
+                         * @property {string|null} [pageToken] ListRecurringAudienceListsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRecurringAudienceListsRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a ListRecurringAudienceListsRequest.
+                         * @implements IListRecurringAudienceListsRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest=} [properties] Properties to set
+                         */
+                        function ListRecurringAudienceListsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRecurringAudienceListsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @instance
+                         */
+                        ListRecurringAudienceListsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListRecurringAudienceListsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @instance
+                         */
+                        ListRecurringAudienceListsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRecurringAudienceListsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @instance
+                         */
+                        ListRecurringAudienceListsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListRecurringAudienceListsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsRequest} ListRecurringAudienceListsRequest instance
+                         */
+                        ListRecurringAudienceListsRequest.create = function create(properties) {
+                            return new ListRecurringAudienceListsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecurringAudienceListsRequest message. Does not implicitly {@link google.analytics.data.v1alpha.ListRecurringAudienceListsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest} message ListRecurringAudienceListsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecurringAudienceListsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecurringAudienceListsRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ListRecurringAudienceListsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsRequest} message ListRecurringAudienceListsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecurringAudienceListsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRecurringAudienceListsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsRequest} ListRecurringAudienceListsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecurringAudienceListsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRecurringAudienceListsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsRequest} ListRecurringAudienceListsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecurringAudienceListsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRecurringAudienceListsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRecurringAudienceListsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRecurringAudienceListsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsRequest} ListRecurringAudienceListsRequest
+                         */
+                        ListRecurringAudienceListsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRecurringAudienceListsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ListRecurringAudienceListsRequest} message ListRecurringAudienceListsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRecurringAudienceListsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRecurringAudienceListsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRecurringAudienceListsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRecurringAudienceListsRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRecurringAudienceListsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.ListRecurringAudienceListsRequest";
+                        };
+    
+                        return ListRecurringAudienceListsRequest;
+                    })();
+    
+                    v1alpha.ListRecurringAudienceListsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRecurringAudienceListsResponse.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IListRecurringAudienceListsResponse
+                         * @property {Array.<google.analytics.data.v1alpha.IRecurringAudienceList>|null} [recurringAudienceLists] ListRecurringAudienceListsResponse recurringAudienceLists
+                         * @property {string|null} [nextPageToken] ListRecurringAudienceListsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRecurringAudienceListsResponse.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a ListRecurringAudienceListsResponse.
+                         * @implements IListRecurringAudienceListsResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsResponse=} [properties] Properties to set
+                         */
+                        function ListRecurringAudienceListsResponse(properties) {
+                            this.recurringAudienceLists = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRecurringAudienceListsResponse recurringAudienceLists.
+                         * @member {Array.<google.analytics.data.v1alpha.IRecurringAudienceList>} recurringAudienceLists
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @instance
+                         */
+                        ListRecurringAudienceListsResponse.prototype.recurringAudienceLists = $util.emptyArray;
+    
+                        /**
+                         * ListRecurringAudienceListsResponse nextPageToken.
+                         * @member {string|null|undefined} nextPageToken
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @instance
+                         */
+                        ListRecurringAudienceListsResponse.prototype.nextPageToken = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ListRecurringAudienceListsResponse _nextPageToken.
+                         * @member {"nextPageToken"|undefined} _nextPageToken
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @instance
+                         */
+                        Object.defineProperty(ListRecurringAudienceListsResponse.prototype, "_nextPageToken", {
+                            get: $util.oneOfGetter($oneOfFields = ["nextPageToken"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ListRecurringAudienceListsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} ListRecurringAudienceListsResponse instance
+                         */
+                        ListRecurringAudienceListsResponse.create = function create(properties) {
+                            return new ListRecurringAudienceListsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecurringAudienceListsResponse message. Does not implicitly {@link google.analytics.data.v1alpha.ListRecurringAudienceListsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsResponse} message ListRecurringAudienceListsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecurringAudienceListsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.recurringAudienceLists != null && message.recurringAudienceLists.length)
+                                for (var i = 0; i < message.recurringAudienceLists.length; ++i)
+                                    $root.google.analytics.data.v1alpha.RecurringAudienceList.encode(message.recurringAudienceLists[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecurringAudienceListsResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.ListRecurringAudienceListsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IListRecurringAudienceListsResponse} message ListRecurringAudienceListsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecurringAudienceListsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRecurringAudienceListsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} ListRecurringAudienceListsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecurringAudienceListsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.ListRecurringAudienceListsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.recurringAudienceLists && message.recurringAudienceLists.length))
+                                            message.recurringAudienceLists = [];
+                                        message.recurringAudienceLists.push($root.google.analytics.data.v1alpha.RecurringAudienceList.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRecurringAudienceListsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} ListRecurringAudienceListsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecurringAudienceListsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRecurringAudienceListsResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRecurringAudienceListsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.recurringAudienceLists != null && message.hasOwnProperty("recurringAudienceLists")) {
+                                if (!Array.isArray(message.recurringAudienceLists))
+                                    return "recurringAudienceLists: array expected";
+                                for (var i = 0; i < message.recurringAudienceLists.length; ++i) {
+                                    var error = $root.google.analytics.data.v1alpha.RecurringAudienceList.verify(message.recurringAudienceLists[i]);
+                                    if (error)
+                                        return "recurringAudienceLists." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken")) {
+                                properties._nextPageToken = 1;
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRecurringAudienceListsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} ListRecurringAudienceListsResponse
+                         */
+                        ListRecurringAudienceListsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.ListRecurringAudienceListsResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.ListRecurringAudienceListsResponse();
+                            if (object.recurringAudienceLists) {
+                                if (!Array.isArray(object.recurringAudienceLists))
+                                    throw TypeError(".google.analytics.data.v1alpha.ListRecurringAudienceListsResponse.recurringAudienceLists: array expected");
+                                message.recurringAudienceLists = [];
+                                for (var i = 0; i < object.recurringAudienceLists.length; ++i) {
+                                    if (typeof object.recurringAudienceLists[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1alpha.ListRecurringAudienceListsResponse.recurringAudienceLists: object expected");
+                                    message.recurringAudienceLists[i] = $root.google.analytics.data.v1alpha.RecurringAudienceList.fromObject(object.recurringAudienceLists[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRecurringAudienceListsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ListRecurringAudienceListsResponse} message ListRecurringAudienceListsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRecurringAudienceListsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.recurringAudienceLists = [];
+                            if (message.recurringAudienceLists && message.recurringAudienceLists.length) {
+                                object.recurringAudienceLists = [];
+                                for (var j = 0; j < message.recurringAudienceLists.length; ++j)
+                                    object.recurringAudienceLists[j] = $root.google.analytics.data.v1alpha.RecurringAudienceList.toObject(message.recurringAudienceLists[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken")) {
+                                object.nextPageToken = message.nextPageToken;
+                                if (options.oneofs)
+                                    object._nextPageToken = "nextPageToken";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRecurringAudienceListsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRecurringAudienceListsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRecurringAudienceListsResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.ListRecurringAudienceListsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRecurringAudienceListsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.ListRecurringAudienceListsResponse";
+                        };
+    
+                        return ListRecurringAudienceListsResponse;
                     })();
     
                     v1alpha.GetAudienceListRequest = (function() {
@@ -11778,6 +13238,11 @@
                          * @property {Array.<google.analytics.data.v1alpha.IAudienceDimension>|null} [dimensions] AudienceList dimensions
                          * @property {google.analytics.data.v1alpha.AudienceList.State|null} [state] AudienceList state
                          * @property {google.protobuf.ITimestamp|null} [beginCreatingTime] AudienceList beginCreatingTime
+                         * @property {number|null} [creationQuotaTokensCharged] AudienceList creationQuotaTokensCharged
+                         * @property {number|null} [rowCount] AudienceList rowCount
+                         * @property {string|null} [errorMessage] AudienceList errorMessage
+                         * @property {number|null} [percentageCompleted] AudienceList percentageCompleted
+                         * @property {string|null} [recurringAudienceList] AudienceList recurringAudienceList
                          */
     
                         /**
@@ -11844,6 +13309,46 @@
                          */
                         AudienceList.prototype.beginCreatingTime = null;
     
+                        /**
+                         * AudienceList creationQuotaTokensCharged.
+                         * @member {number} creationQuotaTokensCharged
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        AudienceList.prototype.creationQuotaTokensCharged = 0;
+    
+                        /**
+                         * AudienceList rowCount.
+                         * @member {number|null|undefined} rowCount
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        AudienceList.prototype.rowCount = null;
+    
+                        /**
+                         * AudienceList errorMessage.
+                         * @member {string|null|undefined} errorMessage
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        AudienceList.prototype.errorMessage = null;
+    
+                        /**
+                         * AudienceList percentageCompleted.
+                         * @member {number|null|undefined} percentageCompleted
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        AudienceList.prototype.percentageCompleted = null;
+    
+                        /**
+                         * AudienceList recurringAudienceList.
+                         * @member {string|null|undefined} recurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        AudienceList.prototype.recurringAudienceList = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -11866,6 +13371,50 @@
                          */
                         Object.defineProperty(AudienceList.prototype, "_beginCreatingTime", {
                             get: $util.oneOfGetter($oneOfFields = ["beginCreatingTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * AudienceList _rowCount.
+                         * @member {"rowCount"|undefined} _rowCount
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceList.prototype, "_rowCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["rowCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * AudienceList _errorMessage.
+                         * @member {"errorMessage"|undefined} _errorMessage
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceList.prototype, "_errorMessage", {
+                            get: $util.oneOfGetter($oneOfFields = ["errorMessage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * AudienceList _percentageCompleted.
+                         * @member {"percentageCompleted"|undefined} _percentageCompleted
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceList.prototype, "_percentageCompleted", {
+                            get: $util.oneOfGetter($oneOfFields = ["percentageCompleted"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * AudienceList _recurringAudienceList.
+                         * @member {"recurringAudienceList"|undefined} _recurringAudienceList
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceList.prototype, "_recurringAudienceList", {
+                            get: $util.oneOfGetter($oneOfFields = ["recurringAudienceList"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -11906,6 +13455,16 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
                             if (message.beginCreatingTime != null && Object.hasOwnProperty.call(message, "beginCreatingTime"))
                                 $root.google.protobuf.Timestamp.encode(message.beginCreatingTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.creationQuotaTokensCharged != null && Object.hasOwnProperty.call(message, "creationQuotaTokensCharged"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.creationQuotaTokensCharged);
+                            if (message.rowCount != null && Object.hasOwnProperty.call(message, "rowCount"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.rowCount);
+                            if (message.errorMessage != null && Object.hasOwnProperty.call(message, "errorMessage"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.errorMessage);
+                            if (message.percentageCompleted != null && Object.hasOwnProperty.call(message, "percentageCompleted"))
+                                writer.uint32(/* id 11, wireType 1 =*/89).double(message.percentageCompleted);
+                            if (message.recurringAudienceList != null && Object.hasOwnProperty.call(message, "recurringAudienceList"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.recurringAudienceList);
                             return writer;
                         };
     
@@ -11964,6 +13523,26 @@
                                     }
                                 case 6: {
                                         message.beginCreatingTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.creationQuotaTokensCharged = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.rowCount = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.errorMessage = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.percentageCompleted = reader.double();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.recurringAudienceList = reader.string();
                                         break;
                                     }
                                 default:
@@ -12040,6 +13619,29 @@
                                         return "beginCreatingTime." + error;
                                 }
                             }
+                            if (message.creationQuotaTokensCharged != null && message.hasOwnProperty("creationQuotaTokensCharged"))
+                                if (!$util.isInteger(message.creationQuotaTokensCharged))
+                                    return "creationQuotaTokensCharged: integer expected";
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount")) {
+                                properties._rowCount = 1;
+                                if (!$util.isInteger(message.rowCount))
+                                    return "rowCount: integer expected";
+                            }
+                            if (message.errorMessage != null && message.hasOwnProperty("errorMessage")) {
+                                properties._errorMessage = 1;
+                                if (!$util.isString(message.errorMessage))
+                                    return "errorMessage: string expected";
+                            }
+                            if (message.percentageCompleted != null && message.hasOwnProperty("percentageCompleted")) {
+                                properties._percentageCompleted = 1;
+                                if (typeof message.percentageCompleted !== "number")
+                                    return "percentageCompleted: number expected";
+                            }
+                            if (message.recurringAudienceList != null && message.hasOwnProperty("recurringAudienceList")) {
+                                properties._recurringAudienceList = 1;
+                                if (!$util.isString(message.recurringAudienceList))
+                                    return "recurringAudienceList: string expected";
+                            }
                             return null;
                         };
     
@@ -12100,6 +13702,16 @@
                                     throw TypeError(".google.analytics.data.v1alpha.AudienceList.beginCreatingTime: object expected");
                                 message.beginCreatingTime = $root.google.protobuf.Timestamp.fromObject(object.beginCreatingTime);
                             }
+                            if (object.creationQuotaTokensCharged != null)
+                                message.creationQuotaTokensCharged = object.creationQuotaTokensCharged | 0;
+                            if (object.rowCount != null)
+                                message.rowCount = object.rowCount | 0;
+                            if (object.errorMessage != null)
+                                message.errorMessage = String(object.errorMessage);
+                            if (object.percentageCompleted != null)
+                                message.percentageCompleted = Number(object.percentageCompleted);
+                            if (object.recurringAudienceList != null)
+                                message.recurringAudienceList = String(object.recurringAudienceList);
                             return message;
                         };
     
@@ -12122,6 +13734,7 @@
                                 object.name = "";
                                 object.audience = "";
                                 object.audienceDisplayName = "";
+                                object.creationQuotaTokensCharged = 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -12143,6 +13756,28 @@
                                 object.beginCreatingTime = $root.google.protobuf.Timestamp.toObject(message.beginCreatingTime, options);
                                 if (options.oneofs)
                                     object._beginCreatingTime = "beginCreatingTime";
+                            }
+                            if (message.creationQuotaTokensCharged != null && message.hasOwnProperty("creationQuotaTokensCharged"))
+                                object.creationQuotaTokensCharged = message.creationQuotaTokensCharged;
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount")) {
+                                object.rowCount = message.rowCount;
+                                if (options.oneofs)
+                                    object._rowCount = "rowCount";
+                            }
+                            if (message.errorMessage != null && message.hasOwnProperty("errorMessage")) {
+                                object.errorMessage = message.errorMessage;
+                                if (options.oneofs)
+                                    object._errorMessage = "errorMessage";
+                            }
+                            if (message.percentageCompleted != null && message.hasOwnProperty("percentageCompleted")) {
+                                object.percentageCompleted = options.json && !isFinite(message.percentageCompleted) ? String(message.percentageCompleted) : message.percentageCompleted;
+                                if (options.oneofs)
+                                    object._percentageCompleted = "percentageCompleted";
+                            }
+                            if (message.recurringAudienceList != null && message.hasOwnProperty("recurringAudienceList")) {
+                                object.recurringAudienceList = message.recurringAudienceList;
+                                if (options.oneofs)
+                                    object._recurringAudienceList = "recurringAudienceList";
                             }
                             return object;
                         };
@@ -12955,6 +14590,625 @@
                         };
     
                         return QueryAudienceListResponse;
+                    })();
+    
+                    v1alpha.SheetExportAudienceListRequest = (function() {
+    
+                        /**
+                         * Properties of a SheetExportAudienceListRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface ISheetExportAudienceListRequest
+                         * @property {string|null} [name] SheetExportAudienceListRequest name
+                         * @property {number|Long|null} [offset] SheetExportAudienceListRequest offset
+                         * @property {number|Long|null} [limit] SheetExportAudienceListRequest limit
+                         */
+    
+                        /**
+                         * Constructs a new SheetExportAudienceListRequest.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a SheetExportAudienceListRequest.
+                         * @implements ISheetExportAudienceListRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.ISheetExportAudienceListRequest=} [properties] Properties to set
+                         */
+                        function SheetExportAudienceListRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SheetExportAudienceListRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @instance
+                         */
+                        SheetExportAudienceListRequest.prototype.name = "";
+    
+                        /**
+                         * SheetExportAudienceListRequest offset.
+                         * @member {number|Long} offset
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @instance
+                         */
+                        SheetExportAudienceListRequest.prototype.offset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * SheetExportAudienceListRequest limit.
+                         * @member {number|Long} limit
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @instance
+                         */
+                        SheetExportAudienceListRequest.prototype.limit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new SheetExportAudienceListRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ISheetExportAudienceListRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.SheetExportAudienceListRequest} SheetExportAudienceListRequest instance
+                         */
+                        SheetExportAudienceListRequest.create = function create(properties) {
+                            return new SheetExportAudienceListRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SheetExportAudienceListRequest message. Does not implicitly {@link google.analytics.data.v1alpha.SheetExportAudienceListRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ISheetExportAudienceListRequest} message SheetExportAudienceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SheetExportAudienceListRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.offset);
+                            if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.limit);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SheetExportAudienceListRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.SheetExportAudienceListRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ISheetExportAudienceListRequest} message SheetExportAudienceListRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SheetExportAudienceListRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SheetExportAudienceListRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.SheetExportAudienceListRequest} SheetExportAudienceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SheetExportAudienceListRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.SheetExportAudienceListRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.offset = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.limit = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SheetExportAudienceListRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.SheetExportAudienceListRequest} SheetExportAudienceListRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SheetExportAudienceListRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SheetExportAudienceListRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SheetExportAudienceListRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.offset != null && message.hasOwnProperty("offset"))
+                                if (!$util.isInteger(message.offset) && !(message.offset && $util.isInteger(message.offset.low) && $util.isInteger(message.offset.high)))
+                                    return "offset: integer|Long expected";
+                            if (message.limit != null && message.hasOwnProperty("limit"))
+                                if (!$util.isInteger(message.limit) && !(message.limit && $util.isInteger(message.limit.low) && $util.isInteger(message.limit.high)))
+                                    return "limit: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SheetExportAudienceListRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.SheetExportAudienceListRequest} SheetExportAudienceListRequest
+                         */
+                        SheetExportAudienceListRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.SheetExportAudienceListRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.SheetExportAudienceListRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.offset != null)
+                                if ($util.Long)
+                                    (message.offset = $util.Long.fromValue(object.offset)).unsigned = false;
+                                else if (typeof object.offset === "string")
+                                    message.offset = parseInt(object.offset, 10);
+                                else if (typeof object.offset === "number")
+                                    message.offset = object.offset;
+                                else if (typeof object.offset === "object")
+                                    message.offset = new $util.LongBits(object.offset.low >>> 0, object.offset.high >>> 0).toNumber();
+                            if (object.limit != null)
+                                if ($util.Long)
+                                    (message.limit = $util.Long.fromValue(object.limit)).unsigned = false;
+                                else if (typeof object.limit === "string")
+                                    message.limit = parseInt(object.limit, 10);
+                                else if (typeof object.limit === "number")
+                                    message.limit = object.limit;
+                                else if (typeof object.limit === "object")
+                                    message.limit = new $util.LongBits(object.limit.low >>> 0, object.limit.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SheetExportAudienceListRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @static
+                         * @param {google.analytics.data.v1alpha.SheetExportAudienceListRequest} message SheetExportAudienceListRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SheetExportAudienceListRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.offset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.offset = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.limit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.limit = options.longs === String ? "0" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.offset != null && message.hasOwnProperty("offset"))
+                                if (typeof message.offset === "number")
+                                    object.offset = options.longs === String ? String(message.offset) : message.offset;
+                                else
+                                    object.offset = options.longs === String ? $util.Long.prototype.toString.call(message.offset) : options.longs === Number ? new $util.LongBits(message.offset.low >>> 0, message.offset.high >>> 0).toNumber() : message.offset;
+                            if (message.limit != null && message.hasOwnProperty("limit"))
+                                if (typeof message.limit === "number")
+                                    object.limit = options.longs === String ? String(message.limit) : message.limit;
+                                else
+                                    object.limit = options.longs === String ? $util.Long.prototype.toString.call(message.limit) : options.longs === Number ? new $util.LongBits(message.limit.low >>> 0, message.limit.high >>> 0).toNumber() : message.limit;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SheetExportAudienceListRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SheetExportAudienceListRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SheetExportAudienceListRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SheetExportAudienceListRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SheetExportAudienceListRequest";
+                        };
+    
+                        return SheetExportAudienceListRequest;
+                    })();
+    
+                    v1alpha.SheetExportAudienceListResponse = (function() {
+    
+                        /**
+                         * Properties of a SheetExportAudienceListResponse.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface ISheetExportAudienceListResponse
+                         * @property {string|null} [spreadsheetUri] SheetExportAudienceListResponse spreadsheetUri
+                         * @property {string|null} [spreadsheetId] SheetExportAudienceListResponse spreadsheetId
+                         * @property {number|null} [rowCount] SheetExportAudienceListResponse rowCount
+                         * @property {google.analytics.data.v1alpha.IAudienceList|null} [audienceList] SheetExportAudienceListResponse audienceList
+                         */
+    
+                        /**
+                         * Constructs a new SheetExportAudienceListResponse.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a SheetExportAudienceListResponse.
+                         * @implements ISheetExportAudienceListResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.ISheetExportAudienceListResponse=} [properties] Properties to set
+                         */
+                        function SheetExportAudienceListResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SheetExportAudienceListResponse spreadsheetUri.
+                         * @member {string|null|undefined} spreadsheetUri
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @instance
+                         */
+                        SheetExportAudienceListResponse.prototype.spreadsheetUri = null;
+    
+                        /**
+                         * SheetExportAudienceListResponse spreadsheetId.
+                         * @member {string|null|undefined} spreadsheetId
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @instance
+                         */
+                        SheetExportAudienceListResponse.prototype.spreadsheetId = null;
+    
+                        /**
+                         * SheetExportAudienceListResponse rowCount.
+                         * @member {number|null|undefined} rowCount
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @instance
+                         */
+                        SheetExportAudienceListResponse.prototype.rowCount = null;
+    
+                        /**
+                         * SheetExportAudienceListResponse audienceList.
+                         * @member {google.analytics.data.v1alpha.IAudienceList|null|undefined} audienceList
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @instance
+                         */
+                        SheetExportAudienceListResponse.prototype.audienceList = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SheetExportAudienceListResponse _spreadsheetUri.
+                         * @member {"spreadsheetUri"|undefined} _spreadsheetUri
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @instance
+                         */
+                        Object.defineProperty(SheetExportAudienceListResponse.prototype, "_spreadsheetUri", {
+                            get: $util.oneOfGetter($oneOfFields = ["spreadsheetUri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * SheetExportAudienceListResponse _spreadsheetId.
+                         * @member {"spreadsheetId"|undefined} _spreadsheetId
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @instance
+                         */
+                        Object.defineProperty(SheetExportAudienceListResponse.prototype, "_spreadsheetId", {
+                            get: $util.oneOfGetter($oneOfFields = ["spreadsheetId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * SheetExportAudienceListResponse _rowCount.
+                         * @member {"rowCount"|undefined} _rowCount
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @instance
+                         */
+                        Object.defineProperty(SheetExportAudienceListResponse.prototype, "_rowCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["rowCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * SheetExportAudienceListResponse _audienceList.
+                         * @member {"audienceList"|undefined} _audienceList
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @instance
+                         */
+                        Object.defineProperty(SheetExportAudienceListResponse.prototype, "_audienceList", {
+                            get: $util.oneOfGetter($oneOfFields = ["audienceList"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new SheetExportAudienceListResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ISheetExportAudienceListResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.SheetExportAudienceListResponse} SheetExportAudienceListResponse instance
+                         */
+                        SheetExportAudienceListResponse.create = function create(properties) {
+                            return new SheetExportAudienceListResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SheetExportAudienceListResponse message. Does not implicitly {@link google.analytics.data.v1alpha.SheetExportAudienceListResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ISheetExportAudienceListResponse} message SheetExportAudienceListResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SheetExportAudienceListResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.spreadsheetUri != null && Object.hasOwnProperty.call(message, "spreadsheetUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.spreadsheetUri);
+                            if (message.spreadsheetId != null && Object.hasOwnProperty.call(message, "spreadsheetId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.spreadsheetId);
+                            if (message.rowCount != null && Object.hasOwnProperty.call(message, "rowCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.rowCount);
+                            if (message.audienceList != null && Object.hasOwnProperty.call(message, "audienceList"))
+                                $root.google.analytics.data.v1alpha.AudienceList.encode(message.audienceList, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SheetExportAudienceListResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.SheetExportAudienceListResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.ISheetExportAudienceListResponse} message SheetExportAudienceListResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SheetExportAudienceListResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SheetExportAudienceListResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.SheetExportAudienceListResponse} SheetExportAudienceListResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SheetExportAudienceListResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.SheetExportAudienceListResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.spreadsheetUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.spreadsheetId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.rowCount = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.audienceList = $root.google.analytics.data.v1alpha.AudienceList.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SheetExportAudienceListResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.SheetExportAudienceListResponse} SheetExportAudienceListResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SheetExportAudienceListResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SheetExportAudienceListResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SheetExportAudienceListResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.spreadsheetUri != null && message.hasOwnProperty("spreadsheetUri")) {
+                                properties._spreadsheetUri = 1;
+                                if (!$util.isString(message.spreadsheetUri))
+                                    return "spreadsheetUri: string expected";
+                            }
+                            if (message.spreadsheetId != null && message.hasOwnProperty("spreadsheetId")) {
+                                properties._spreadsheetId = 1;
+                                if (!$util.isString(message.spreadsheetId))
+                                    return "spreadsheetId: string expected";
+                            }
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount")) {
+                                properties._rowCount = 1;
+                                if (!$util.isInteger(message.rowCount))
+                                    return "rowCount: integer expected";
+                            }
+                            if (message.audienceList != null && message.hasOwnProperty("audienceList")) {
+                                properties._audienceList = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1alpha.AudienceList.verify(message.audienceList);
+                                    if (error)
+                                        return "audienceList." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SheetExportAudienceListResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.SheetExportAudienceListResponse} SheetExportAudienceListResponse
+                         */
+                        SheetExportAudienceListResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.SheetExportAudienceListResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.SheetExportAudienceListResponse();
+                            if (object.spreadsheetUri != null)
+                                message.spreadsheetUri = String(object.spreadsheetUri);
+                            if (object.spreadsheetId != null)
+                                message.spreadsheetId = String(object.spreadsheetId);
+                            if (object.rowCount != null)
+                                message.rowCount = object.rowCount | 0;
+                            if (object.audienceList != null) {
+                                if (typeof object.audienceList !== "object")
+                                    throw TypeError(".google.analytics.data.v1alpha.SheetExportAudienceListResponse.audienceList: object expected");
+                                message.audienceList = $root.google.analytics.data.v1alpha.AudienceList.fromObject(object.audienceList);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SheetExportAudienceListResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @static
+                         * @param {google.analytics.data.v1alpha.SheetExportAudienceListResponse} message SheetExportAudienceListResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SheetExportAudienceListResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.spreadsheetUri != null && message.hasOwnProperty("spreadsheetUri")) {
+                                object.spreadsheetUri = message.spreadsheetUri;
+                                if (options.oneofs)
+                                    object._spreadsheetUri = "spreadsheetUri";
+                            }
+                            if (message.spreadsheetId != null && message.hasOwnProperty("spreadsheetId")) {
+                                object.spreadsheetId = message.spreadsheetId;
+                                if (options.oneofs)
+                                    object._spreadsheetId = "spreadsheetId";
+                            }
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount")) {
+                                object.rowCount = message.rowCount;
+                                if (options.oneofs)
+                                    object._rowCount = "rowCount";
+                            }
+                            if (message.audienceList != null && message.hasOwnProperty("audienceList")) {
+                                object.audienceList = $root.google.analytics.data.v1alpha.AudienceList.toObject(message.audienceList, options);
+                                if (options.oneofs)
+                                    object._audienceList = "audienceList";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SheetExportAudienceListResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SheetExportAudienceListResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SheetExportAudienceListResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.SheetExportAudienceListResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SheetExportAudienceListResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.SheetExportAudienceListResponse";
+                        };
+    
+                        return SheetExportAudienceListResponse;
                     })();
     
                     v1alpha.AudienceRow = (function() {
@@ -30712,6 +32966,138 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|createAudienceExport}.
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @typedef CreateAudienceExportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateAudienceExport.
+                         * @function createAudienceExport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.ICreateAudienceExportRequest} request CreateAudienceExportRequest message or plain object
+                         * @param {google.analytics.data.v1beta.BetaAnalyticsData.CreateAudienceExportCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BetaAnalyticsData.prototype.createAudienceExport = function createAudienceExport(request, callback) {
+                            return this.rpcCall(createAudienceExport, $root.google.analytics.data.v1beta.CreateAudienceExportRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateAudienceExport" });
+    
+                        /**
+                         * Calls CreateAudienceExport.
+                         * @function createAudienceExport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.ICreateAudienceExportRequest} request CreateAudienceExportRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|queryAudienceExport}.
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @typedef QueryAudienceExportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1beta.QueryAudienceExportResponse} [response] QueryAudienceExportResponse
+                         */
+    
+                        /**
+                         * Calls QueryAudienceExport.
+                         * @function queryAudienceExport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IQueryAudienceExportRequest} request QueryAudienceExportRequest message or plain object
+                         * @param {google.analytics.data.v1beta.BetaAnalyticsData.QueryAudienceExportCallback} callback Node-style callback called with the error, if any, and QueryAudienceExportResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BetaAnalyticsData.prototype.queryAudienceExport = function queryAudienceExport(request, callback) {
+                            return this.rpcCall(queryAudienceExport, $root.google.analytics.data.v1beta.QueryAudienceExportRequest, $root.google.analytics.data.v1beta.QueryAudienceExportResponse, request, callback);
+                        }, "name", { value: "QueryAudienceExport" });
+    
+                        /**
+                         * Calls QueryAudienceExport.
+                         * @function queryAudienceExport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IQueryAudienceExportRequest} request QueryAudienceExportRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1beta.QueryAudienceExportResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|getAudienceExport}.
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @typedef GetAudienceExportCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1beta.AudienceExport} [response] AudienceExport
+                         */
+    
+                        /**
+                         * Calls GetAudienceExport.
+                         * @function getAudienceExport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IGetAudienceExportRequest} request GetAudienceExportRequest message or plain object
+                         * @param {google.analytics.data.v1beta.BetaAnalyticsData.GetAudienceExportCallback} callback Node-style callback called with the error, if any, and AudienceExport
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BetaAnalyticsData.prototype.getAudienceExport = function getAudienceExport(request, callback) {
+                            return this.rpcCall(getAudienceExport, $root.google.analytics.data.v1beta.GetAudienceExportRequest, $root.google.analytics.data.v1beta.AudienceExport, request, callback);
+                        }, "name", { value: "GetAudienceExport" });
+    
+                        /**
+                         * Calls GetAudienceExport.
+                         * @function getAudienceExport
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IGetAudienceExportRequest} request GetAudienceExportRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1beta.AudienceExport>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData|listAudienceExports}.
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @typedef ListAudienceExportsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1beta.ListAudienceExportsResponse} [response] ListAudienceExportsResponse
+                         */
+    
+                        /**
+                         * Calls ListAudienceExports.
+                         * @function listAudienceExports
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IListAudienceExportsRequest} request ListAudienceExportsRequest message or plain object
+                         * @param {google.analytics.data.v1beta.BetaAnalyticsData.ListAudienceExportsCallback} callback Node-style callback called with the error, if any, and ListAudienceExportsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BetaAnalyticsData.prototype.listAudienceExports = function listAudienceExports(request, callback) {
+                            return this.rpcCall(listAudienceExports, $root.google.analytics.data.v1beta.ListAudienceExportsRequest, $root.google.analytics.data.v1beta.ListAudienceExportsResponse, request, callback);
+                        }, "name", { value: "ListAudienceExports" });
+    
+                        /**
+                         * Calls ListAudienceExports.
+                         * @function listAudienceExports
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.IListAudienceExportsRequest} request ListAudienceExportsRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1beta.ListAudienceExportsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return BetaAnalyticsData;
                     })();
     
@@ -36223,6 +38609,2933 @@
                         };
     
                         return RunRealtimeReportResponse;
+                    })();
+    
+                    v1beta.GetAudienceExportRequest = (function() {
+    
+                        /**
+                         * Properties of a GetAudienceExportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IGetAudienceExportRequest
+                         * @property {string|null} [name] GetAudienceExportRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetAudienceExportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a GetAudienceExportRequest.
+                         * @implements IGetAudienceExportRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IGetAudienceExportRequest=} [properties] Properties to set
+                         */
+                        function GetAudienceExportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetAudienceExportRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.GetAudienceExportRequest
+                         * @instance
+                         */
+                        GetAudienceExportRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetAudienceExportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.GetAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IGetAudienceExportRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.GetAudienceExportRequest} GetAudienceExportRequest instance
+                         */
+                        GetAudienceExportRequest.create = function create(properties) {
+                            return new GetAudienceExportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetAudienceExportRequest message. Does not implicitly {@link google.analytics.data.v1beta.GetAudienceExportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.GetAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IGetAudienceExportRequest} message GetAudienceExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAudienceExportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetAudienceExportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.GetAudienceExportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.GetAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IGetAudienceExportRequest} message GetAudienceExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetAudienceExportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetAudienceExportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.GetAudienceExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.GetAudienceExportRequest} GetAudienceExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAudienceExportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.GetAudienceExportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetAudienceExportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.GetAudienceExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.GetAudienceExportRequest} GetAudienceExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetAudienceExportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetAudienceExportRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.GetAudienceExportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetAudienceExportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetAudienceExportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.GetAudienceExportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.GetAudienceExportRequest} GetAudienceExportRequest
+                         */
+                        GetAudienceExportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.GetAudienceExportRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.GetAudienceExportRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetAudienceExportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.GetAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.GetAudienceExportRequest} message GetAudienceExportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetAudienceExportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetAudienceExportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.GetAudienceExportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetAudienceExportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetAudienceExportRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.GetAudienceExportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetAudienceExportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.GetAudienceExportRequest";
+                        };
+    
+                        return GetAudienceExportRequest;
+                    })();
+    
+                    v1beta.ListAudienceExportsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAudienceExportsRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IListAudienceExportsRequest
+                         * @property {string|null} [parent] ListAudienceExportsRequest parent
+                         * @property {number|null} [pageSize] ListAudienceExportsRequest pageSize
+                         * @property {string|null} [pageToken] ListAudienceExportsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAudienceExportsRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a ListAudienceExportsRequest.
+                         * @implements IListAudienceExportsRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IListAudienceExportsRequest=} [properties] Properties to set
+                         */
+                        function ListAudienceExportsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAudienceExportsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @instance
+                         */
+                        ListAudienceExportsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAudienceExportsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @instance
+                         */
+                        ListAudienceExportsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAudienceExportsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @instance
+                         */
+                        ListAudienceExportsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListAudienceExportsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IListAudienceExportsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.ListAudienceExportsRequest} ListAudienceExportsRequest instance
+                         */
+                        ListAudienceExportsRequest.create = function create(properties) {
+                            return new ListAudienceExportsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAudienceExportsRequest message. Does not implicitly {@link google.analytics.data.v1beta.ListAudienceExportsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IListAudienceExportsRequest} message ListAudienceExportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAudienceExportsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAudienceExportsRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ListAudienceExportsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IListAudienceExportsRequest} message ListAudienceExportsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAudienceExportsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAudienceExportsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.ListAudienceExportsRequest} ListAudienceExportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAudienceExportsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.ListAudienceExportsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAudienceExportsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.ListAudienceExportsRequest} ListAudienceExportsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAudienceExportsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAudienceExportsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAudienceExportsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAudienceExportsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.ListAudienceExportsRequest} ListAudienceExportsRequest
+                         */
+                        ListAudienceExportsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.ListAudienceExportsRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.ListAudienceExportsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAudienceExportsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.ListAudienceExportsRequest} message ListAudienceExportsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAudienceExportsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAudienceExportsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAudienceExportsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAudienceExportsRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAudienceExportsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.ListAudienceExportsRequest";
+                        };
+    
+                        return ListAudienceExportsRequest;
+                    })();
+    
+                    v1beta.ListAudienceExportsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAudienceExportsResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IListAudienceExportsResponse
+                         * @property {Array.<google.analytics.data.v1beta.IAudienceExport>|null} [audienceExports] ListAudienceExportsResponse audienceExports
+                         * @property {string|null} [nextPageToken] ListAudienceExportsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListAudienceExportsResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a ListAudienceExportsResponse.
+                         * @implements IListAudienceExportsResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IListAudienceExportsResponse=} [properties] Properties to set
+                         */
+                        function ListAudienceExportsResponse(properties) {
+                            this.audienceExports = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAudienceExportsResponse audienceExports.
+                         * @member {Array.<google.analytics.data.v1beta.IAudienceExport>} audienceExports
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @instance
+                         */
+                        ListAudienceExportsResponse.prototype.audienceExports = $util.emptyArray;
+    
+                        /**
+                         * ListAudienceExportsResponse nextPageToken.
+                         * @member {string|null|undefined} nextPageToken
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @instance
+                         */
+                        ListAudienceExportsResponse.prototype.nextPageToken = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ListAudienceExportsResponse _nextPageToken.
+                         * @member {"nextPageToken"|undefined} _nextPageToken
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @instance
+                         */
+                        Object.defineProperty(ListAudienceExportsResponse.prototype, "_nextPageToken", {
+                            get: $util.oneOfGetter($oneOfFields = ["nextPageToken"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ListAudienceExportsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IListAudienceExportsResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.ListAudienceExportsResponse} ListAudienceExportsResponse instance
+                         */
+                        ListAudienceExportsResponse.create = function create(properties) {
+                            return new ListAudienceExportsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAudienceExportsResponse message. Does not implicitly {@link google.analytics.data.v1beta.ListAudienceExportsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IListAudienceExportsResponse} message ListAudienceExportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAudienceExportsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.audienceExports != null && message.audienceExports.length)
+                                for (var i = 0; i < message.audienceExports.length; ++i)
+                                    $root.google.analytics.data.v1beta.AudienceExport.encode(message.audienceExports[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAudienceExportsResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ListAudienceExportsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IListAudienceExportsResponse} message ListAudienceExportsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAudienceExportsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAudienceExportsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.ListAudienceExportsResponse} ListAudienceExportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAudienceExportsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.ListAudienceExportsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.audienceExports && message.audienceExports.length))
+                                            message.audienceExports = [];
+                                        message.audienceExports.push($root.google.analytics.data.v1beta.AudienceExport.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAudienceExportsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.ListAudienceExportsResponse} ListAudienceExportsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAudienceExportsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAudienceExportsResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAudienceExportsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.audienceExports != null && message.hasOwnProperty("audienceExports")) {
+                                if (!Array.isArray(message.audienceExports))
+                                    return "audienceExports: array expected";
+                                for (var i = 0; i < message.audienceExports.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.AudienceExport.verify(message.audienceExports[i]);
+                                    if (error)
+                                        return "audienceExports." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken")) {
+                                properties._nextPageToken = 1;
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAudienceExportsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.ListAudienceExportsResponse} ListAudienceExportsResponse
+                         */
+                        ListAudienceExportsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.ListAudienceExportsResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.ListAudienceExportsResponse();
+                            if (object.audienceExports) {
+                                if (!Array.isArray(object.audienceExports))
+                                    throw TypeError(".google.analytics.data.v1beta.ListAudienceExportsResponse.audienceExports: array expected");
+                                message.audienceExports = [];
+                                for (var i = 0; i < object.audienceExports.length; ++i) {
+                                    if (typeof object.audienceExports[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.ListAudienceExportsResponse.audienceExports: object expected");
+                                    message.audienceExports[i] = $root.google.analytics.data.v1beta.AudienceExport.fromObject(object.audienceExports[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAudienceExportsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.ListAudienceExportsResponse} message ListAudienceExportsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAudienceExportsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.audienceExports = [];
+                            if (message.audienceExports && message.audienceExports.length) {
+                                object.audienceExports = [];
+                                for (var j = 0; j < message.audienceExports.length; ++j)
+                                    object.audienceExports[j] = $root.google.analytics.data.v1beta.AudienceExport.toObject(message.audienceExports[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken")) {
+                                object.nextPageToken = message.nextPageToken;
+                                if (options.oneofs)
+                                    object._nextPageToken = "nextPageToken";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAudienceExportsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAudienceExportsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAudienceExportsResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.ListAudienceExportsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAudienceExportsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.ListAudienceExportsResponse";
+                        };
+    
+                        return ListAudienceExportsResponse;
+                    })();
+    
+                    v1beta.CreateAudienceExportRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateAudienceExportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface ICreateAudienceExportRequest
+                         * @property {string|null} [parent] CreateAudienceExportRequest parent
+                         * @property {google.analytics.data.v1beta.IAudienceExport|null} [audienceExport] CreateAudienceExportRequest audienceExport
+                         */
+    
+                        /**
+                         * Constructs a new CreateAudienceExportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a CreateAudienceExportRequest.
+                         * @implements ICreateAudienceExportRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.ICreateAudienceExportRequest=} [properties] Properties to set
+                         */
+                        function CreateAudienceExportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateAudienceExportRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @instance
+                         */
+                        CreateAudienceExportRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateAudienceExportRequest audienceExport.
+                         * @member {google.analytics.data.v1beta.IAudienceExport|null|undefined} audienceExport
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @instance
+                         */
+                        CreateAudienceExportRequest.prototype.audienceExport = null;
+    
+                        /**
+                         * Creates a new CreateAudienceExportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICreateAudienceExportRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.CreateAudienceExportRequest} CreateAudienceExportRequest instance
+                         */
+                        CreateAudienceExportRequest.create = function create(properties) {
+                            return new CreateAudienceExportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAudienceExportRequest message. Does not implicitly {@link google.analytics.data.v1beta.CreateAudienceExportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICreateAudienceExportRequest} message CreateAudienceExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAudienceExportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.audienceExport != null && Object.hasOwnProperty.call(message, "audienceExport"))
+                                $root.google.analytics.data.v1beta.AudienceExport.encode(message.audienceExport, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateAudienceExportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CreateAudienceExportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICreateAudienceExportRequest} message CreateAudienceExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateAudienceExportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateAudienceExportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.CreateAudienceExportRequest} CreateAudienceExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAudienceExportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.CreateAudienceExportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.audienceExport = $root.google.analytics.data.v1beta.AudienceExport.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateAudienceExportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.CreateAudienceExportRequest} CreateAudienceExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateAudienceExportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateAudienceExportRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateAudienceExportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.audienceExport != null && message.hasOwnProperty("audienceExport")) {
+                                var error = $root.google.analytics.data.v1beta.AudienceExport.verify(message.audienceExport);
+                                if (error)
+                                    return "audienceExport." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateAudienceExportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.CreateAudienceExportRequest} CreateAudienceExportRequest
+                         */
+                        CreateAudienceExportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.CreateAudienceExportRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.CreateAudienceExportRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.audienceExport != null) {
+                                if (typeof object.audienceExport !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.CreateAudienceExportRequest.audienceExport: object expected");
+                                message.audienceExport = $root.google.analytics.data.v1beta.AudienceExport.fromObject(object.audienceExport);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateAudienceExportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.CreateAudienceExportRequest} message CreateAudienceExportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateAudienceExportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.audienceExport = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.audienceExport != null && message.hasOwnProperty("audienceExport"))
+                                object.audienceExport = $root.google.analytics.data.v1beta.AudienceExport.toObject(message.audienceExport, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateAudienceExportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateAudienceExportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateAudienceExportRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.CreateAudienceExportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateAudienceExportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.CreateAudienceExportRequest";
+                        };
+    
+                        return CreateAudienceExportRequest;
+                    })();
+    
+                    v1beta.AudienceExport = (function() {
+    
+                        /**
+                         * Properties of an AudienceExport.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IAudienceExport
+                         * @property {string|null} [name] AudienceExport name
+                         * @property {string|null} [audience] AudienceExport audience
+                         * @property {string|null} [audienceDisplayName] AudienceExport audienceDisplayName
+                         * @property {Array.<google.analytics.data.v1beta.IAudienceDimension>|null} [dimensions] AudienceExport dimensions
+                         * @property {google.analytics.data.v1beta.AudienceExport.State|null} [state] AudienceExport state
+                         * @property {google.protobuf.ITimestamp|null} [beginCreatingTime] AudienceExport beginCreatingTime
+                         * @property {number|null} [creationQuotaTokensCharged] AudienceExport creationQuotaTokensCharged
+                         * @property {number|null} [rowCount] AudienceExport rowCount
+                         * @property {string|null} [errorMessage] AudienceExport errorMessage
+                         * @property {number|null} [percentageCompleted] AudienceExport percentageCompleted
+                         */
+    
+                        /**
+                         * Constructs a new AudienceExport.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents an AudienceExport.
+                         * @implements IAudienceExport
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IAudienceExport=} [properties] Properties to set
+                         */
+                        function AudienceExport(properties) {
+                            this.dimensions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AudienceExport name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        AudienceExport.prototype.name = "";
+    
+                        /**
+                         * AudienceExport audience.
+                         * @member {string} audience
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        AudienceExport.prototype.audience = "";
+    
+                        /**
+                         * AudienceExport audienceDisplayName.
+                         * @member {string} audienceDisplayName
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        AudienceExport.prototype.audienceDisplayName = "";
+    
+                        /**
+                         * AudienceExport dimensions.
+                         * @member {Array.<google.analytics.data.v1beta.IAudienceDimension>} dimensions
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        AudienceExport.prototype.dimensions = $util.emptyArray;
+    
+                        /**
+                         * AudienceExport state.
+                         * @member {google.analytics.data.v1beta.AudienceExport.State|null|undefined} state
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        AudienceExport.prototype.state = null;
+    
+                        /**
+                         * AudienceExport beginCreatingTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} beginCreatingTime
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        AudienceExport.prototype.beginCreatingTime = null;
+    
+                        /**
+                         * AudienceExport creationQuotaTokensCharged.
+                         * @member {number} creationQuotaTokensCharged
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        AudienceExport.prototype.creationQuotaTokensCharged = 0;
+    
+                        /**
+                         * AudienceExport rowCount.
+                         * @member {number|null|undefined} rowCount
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        AudienceExport.prototype.rowCount = null;
+    
+                        /**
+                         * AudienceExport errorMessage.
+                         * @member {string|null|undefined} errorMessage
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        AudienceExport.prototype.errorMessage = null;
+    
+                        /**
+                         * AudienceExport percentageCompleted.
+                         * @member {number|null|undefined} percentageCompleted
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        AudienceExport.prototype.percentageCompleted = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AudienceExport _state.
+                         * @member {"state"|undefined} _state
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceExport.prototype, "_state", {
+                            get: $util.oneOfGetter($oneOfFields = ["state"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * AudienceExport _beginCreatingTime.
+                         * @member {"beginCreatingTime"|undefined} _beginCreatingTime
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceExport.prototype, "_beginCreatingTime", {
+                            get: $util.oneOfGetter($oneOfFields = ["beginCreatingTime"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * AudienceExport _rowCount.
+                         * @member {"rowCount"|undefined} _rowCount
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceExport.prototype, "_rowCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["rowCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * AudienceExport _errorMessage.
+                         * @member {"errorMessage"|undefined} _errorMessage
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceExport.prototype, "_errorMessage", {
+                            get: $util.oneOfGetter($oneOfFields = ["errorMessage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * AudienceExport _percentageCompleted.
+                         * @member {"percentageCompleted"|undefined} _percentageCompleted
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceExport.prototype, "_percentageCompleted", {
+                            get: $util.oneOfGetter($oneOfFields = ["percentageCompleted"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AudienceExport instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceExport=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.AudienceExport} AudienceExport instance
+                         */
+                        AudienceExport.create = function create(properties) {
+                            return new AudienceExport(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AudienceExport message. Does not implicitly {@link google.analytics.data.v1beta.AudienceExport.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceExport} message AudienceExport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudienceExport.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.audience != null && Object.hasOwnProperty.call(message, "audience"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.audience);
+                            if (message.audienceDisplayName != null && Object.hasOwnProperty.call(message, "audienceDisplayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.audienceDisplayName);
+                            if (message.dimensions != null && message.dimensions.length)
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    $root.google.analytics.data.v1beta.AudienceDimension.encode(message.dimensions[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
+                            if (message.beginCreatingTime != null && Object.hasOwnProperty.call(message, "beginCreatingTime"))
+                                $root.google.protobuf.Timestamp.encode(message.beginCreatingTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.creationQuotaTokensCharged != null && Object.hasOwnProperty.call(message, "creationQuotaTokensCharged"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.creationQuotaTokensCharged);
+                            if (message.rowCount != null && Object.hasOwnProperty.call(message, "rowCount"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.rowCount);
+                            if (message.errorMessage != null && Object.hasOwnProperty.call(message, "errorMessage"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.errorMessage);
+                            if (message.percentageCompleted != null && Object.hasOwnProperty.call(message, "percentageCompleted"))
+                                writer.uint32(/* id 10, wireType 1 =*/81).double(message.percentageCompleted);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AudienceExport message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.AudienceExport.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceExport} message AudienceExport message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudienceExport.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AudienceExport message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.AudienceExport} AudienceExport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudienceExport.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.AudienceExport();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.audience = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.audienceDisplayName = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.dimensions && message.dimensions.length))
+                                            message.dimensions = [];
+                                        message.dimensions.push($root.google.analytics.data.v1beta.AudienceDimension.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.beginCreatingTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.creationQuotaTokensCharged = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.rowCount = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.errorMessage = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.percentageCompleted = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AudienceExport message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.AudienceExport} AudienceExport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudienceExport.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AudienceExport message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AudienceExport.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                if (!$util.isString(message.audience))
+                                    return "audience: string expected";
+                            if (message.audienceDisplayName != null && message.hasOwnProperty("audienceDisplayName"))
+                                if (!$util.isString(message.audienceDisplayName))
+                                    return "audienceDisplayName: string expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!Array.isArray(message.dimensions))
+                                    return "dimensions: array expected";
+                                for (var i = 0; i < message.dimensions.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.AudienceDimension.verify(message.dimensions[i]);
+                                    if (error)
+                                        return "dimensions." + error;
+                                }
+                            }
+                            if (message.state != null && message.hasOwnProperty("state")) {
+                                properties._state = 1;
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
+                            if (message.beginCreatingTime != null && message.hasOwnProperty("beginCreatingTime")) {
+                                properties._beginCreatingTime = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.beginCreatingTime);
+                                    if (error)
+                                        return "beginCreatingTime." + error;
+                                }
+                            }
+                            if (message.creationQuotaTokensCharged != null && message.hasOwnProperty("creationQuotaTokensCharged"))
+                                if (!$util.isInteger(message.creationQuotaTokensCharged))
+                                    return "creationQuotaTokensCharged: integer expected";
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount")) {
+                                properties._rowCount = 1;
+                                if (!$util.isInteger(message.rowCount))
+                                    return "rowCount: integer expected";
+                            }
+                            if (message.errorMessage != null && message.hasOwnProperty("errorMessage")) {
+                                properties._errorMessage = 1;
+                                if (!$util.isString(message.errorMessage))
+                                    return "errorMessage: string expected";
+                            }
+                            if (message.percentageCompleted != null && message.hasOwnProperty("percentageCompleted")) {
+                                properties._percentageCompleted = 1;
+                                if (typeof message.percentageCompleted !== "number")
+                                    return "percentageCompleted: number expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AudienceExport message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.AudienceExport} AudienceExport
+                         */
+                        AudienceExport.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.AudienceExport)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.AudienceExport();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.audience != null)
+                                message.audience = String(object.audience);
+                            if (object.audienceDisplayName != null)
+                                message.audienceDisplayName = String(object.audienceDisplayName);
+                            if (object.dimensions) {
+                                if (!Array.isArray(object.dimensions))
+                                    throw TypeError(".google.analytics.data.v1beta.AudienceExport.dimensions: array expected");
+                                message.dimensions = [];
+                                for (var i = 0; i < object.dimensions.length; ++i) {
+                                    if (typeof object.dimensions[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.AudienceExport.dimensions: object expected");
+                                    message.dimensions[i] = $root.google.analytics.data.v1beta.AudienceDimension.fromObject(object.dimensions[i]);
+                                }
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            if (object.beginCreatingTime != null) {
+                                if (typeof object.beginCreatingTime !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.AudienceExport.beginCreatingTime: object expected");
+                                message.beginCreatingTime = $root.google.protobuf.Timestamp.fromObject(object.beginCreatingTime);
+                            }
+                            if (object.creationQuotaTokensCharged != null)
+                                message.creationQuotaTokensCharged = object.creationQuotaTokensCharged | 0;
+                            if (object.rowCount != null)
+                                message.rowCount = object.rowCount | 0;
+                            if (object.errorMessage != null)
+                                message.errorMessage = String(object.errorMessage);
+                            if (object.percentageCompleted != null)
+                                message.percentageCompleted = Number(object.percentageCompleted);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AudienceExport message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @static
+                         * @param {google.analytics.data.v1beta.AudienceExport} message AudienceExport
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AudienceExport.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dimensions = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.audience = "";
+                                object.audienceDisplayName = "";
+                                object.creationQuotaTokensCharged = 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                object.audience = message.audience;
+                            if (message.audienceDisplayName != null && message.hasOwnProperty("audienceDisplayName"))
+                                object.audienceDisplayName = message.audienceDisplayName;
+                            if (message.dimensions && message.dimensions.length) {
+                                object.dimensions = [];
+                                for (var j = 0; j < message.dimensions.length; ++j)
+                                    object.dimensions[j] = $root.google.analytics.data.v1beta.AudienceDimension.toObject(message.dimensions[j], options);
+                            }
+                            if (message.state != null && message.hasOwnProperty("state")) {
+                                object.state = options.enums === String ? $root.google.analytics.data.v1beta.AudienceExport.State[message.state] === undefined ? message.state : $root.google.analytics.data.v1beta.AudienceExport.State[message.state] : message.state;
+                                if (options.oneofs)
+                                    object._state = "state";
+                            }
+                            if (message.beginCreatingTime != null && message.hasOwnProperty("beginCreatingTime")) {
+                                object.beginCreatingTime = $root.google.protobuf.Timestamp.toObject(message.beginCreatingTime, options);
+                                if (options.oneofs)
+                                    object._beginCreatingTime = "beginCreatingTime";
+                            }
+                            if (message.creationQuotaTokensCharged != null && message.hasOwnProperty("creationQuotaTokensCharged"))
+                                object.creationQuotaTokensCharged = message.creationQuotaTokensCharged;
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount")) {
+                                object.rowCount = message.rowCount;
+                                if (options.oneofs)
+                                    object._rowCount = "rowCount";
+                            }
+                            if (message.errorMessage != null && message.hasOwnProperty("errorMessage")) {
+                                object.errorMessage = message.errorMessage;
+                                if (options.oneofs)
+                                    object._errorMessage = "errorMessage";
+                            }
+                            if (message.percentageCompleted != null && message.hasOwnProperty("percentageCompleted")) {
+                                object.percentageCompleted = options.json && !isFinite(message.percentageCompleted) ? String(message.percentageCompleted) : message.percentageCompleted;
+                                if (options.oneofs)
+                                    object._percentageCompleted = "percentageCompleted";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AudienceExport to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AudienceExport.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AudienceExport
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.AudienceExport
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AudienceExport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.AudienceExport";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.analytics.data.v1beta.AudienceExport.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} ACTIVE=2 ACTIVE value
+                         * @property {number} FAILED=3 FAILED value
+                         */
+                        AudienceExport.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "ACTIVE"] = 2;
+                            values[valuesById[3] = "FAILED"] = 3;
+                            return values;
+                        })();
+    
+                        return AudienceExport;
+                    })();
+    
+                    v1beta.AudienceExportMetadata = (function() {
+    
+                        /**
+                         * Properties of an AudienceExportMetadata.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IAudienceExportMetadata
+                         */
+    
+                        /**
+                         * Constructs a new AudienceExportMetadata.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents an AudienceExportMetadata.
+                         * @implements IAudienceExportMetadata
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IAudienceExportMetadata=} [properties] Properties to set
+                         */
+                        function AudienceExportMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new AudienceExportMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.AudienceExportMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceExportMetadata=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.AudienceExportMetadata} AudienceExportMetadata instance
+                         */
+                        AudienceExportMetadata.create = function create(properties) {
+                            return new AudienceExportMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AudienceExportMetadata message. Does not implicitly {@link google.analytics.data.v1beta.AudienceExportMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.AudienceExportMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceExportMetadata} message AudienceExportMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudienceExportMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AudienceExportMetadata message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.AudienceExportMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.AudienceExportMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceExportMetadata} message AudienceExportMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudienceExportMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AudienceExportMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.AudienceExportMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.AudienceExportMetadata} AudienceExportMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudienceExportMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.AudienceExportMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AudienceExportMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.AudienceExportMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.AudienceExportMetadata} AudienceExportMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudienceExportMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AudienceExportMetadata message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.AudienceExportMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AudienceExportMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AudienceExportMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.AudienceExportMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.AudienceExportMetadata} AudienceExportMetadata
+                         */
+                        AudienceExportMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.AudienceExportMetadata)
+                                return object;
+                            return new $root.google.analytics.data.v1beta.AudienceExportMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from an AudienceExportMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.AudienceExportMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.AudienceExportMetadata} message AudienceExportMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AudienceExportMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this AudienceExportMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.AudienceExportMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AudienceExportMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AudienceExportMetadata
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.AudienceExportMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AudienceExportMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.AudienceExportMetadata";
+                        };
+    
+                        return AudienceExportMetadata;
+                    })();
+    
+                    v1beta.QueryAudienceExportRequest = (function() {
+    
+                        /**
+                         * Properties of a QueryAudienceExportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IQueryAudienceExportRequest
+                         * @property {string|null} [name] QueryAudienceExportRequest name
+                         * @property {number|Long|null} [offset] QueryAudienceExportRequest offset
+                         * @property {number|Long|null} [limit] QueryAudienceExportRequest limit
+                         */
+    
+                        /**
+                         * Constructs a new QueryAudienceExportRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a QueryAudienceExportRequest.
+                         * @implements IQueryAudienceExportRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IQueryAudienceExportRequest=} [properties] Properties to set
+                         */
+                        function QueryAudienceExportRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryAudienceExportRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @instance
+                         */
+                        QueryAudienceExportRequest.prototype.name = "";
+    
+                        /**
+                         * QueryAudienceExportRequest offset.
+                         * @member {number|Long} offset
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @instance
+                         */
+                        QueryAudienceExportRequest.prototype.offset = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * QueryAudienceExportRequest limit.
+                         * @member {number|Long} limit
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @instance
+                         */
+                        QueryAudienceExportRequest.prototype.limit = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new QueryAudienceExportRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IQueryAudienceExportRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.QueryAudienceExportRequest} QueryAudienceExportRequest instance
+                         */
+                        QueryAudienceExportRequest.create = function create(properties) {
+                            return new QueryAudienceExportRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryAudienceExportRequest message. Does not implicitly {@link google.analytics.data.v1beta.QueryAudienceExportRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IQueryAudienceExportRequest} message QueryAudienceExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryAudienceExportRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.offset);
+                            if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.limit);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryAudienceExportRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.QueryAudienceExportRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.IQueryAudienceExportRequest} message QueryAudienceExportRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryAudienceExportRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryAudienceExportRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.QueryAudienceExportRequest} QueryAudienceExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryAudienceExportRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.QueryAudienceExportRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.offset = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.limit = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryAudienceExportRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.QueryAudienceExportRequest} QueryAudienceExportRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryAudienceExportRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryAudienceExportRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryAudienceExportRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.offset != null && message.hasOwnProperty("offset"))
+                                if (!$util.isInteger(message.offset) && !(message.offset && $util.isInteger(message.offset.low) && $util.isInteger(message.offset.high)))
+                                    return "offset: integer|Long expected";
+                            if (message.limit != null && message.hasOwnProperty("limit"))
+                                if (!$util.isInteger(message.limit) && !(message.limit && $util.isInteger(message.limit.low) && $util.isInteger(message.limit.high)))
+                                    return "limit: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryAudienceExportRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.QueryAudienceExportRequest} QueryAudienceExportRequest
+                         */
+                        QueryAudienceExportRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.QueryAudienceExportRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.QueryAudienceExportRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.offset != null)
+                                if ($util.Long)
+                                    (message.offset = $util.Long.fromValue(object.offset)).unsigned = false;
+                                else if (typeof object.offset === "string")
+                                    message.offset = parseInt(object.offset, 10);
+                                else if (typeof object.offset === "number")
+                                    message.offset = object.offset;
+                                else if (typeof object.offset === "object")
+                                    message.offset = new $util.LongBits(object.offset.low >>> 0, object.offset.high >>> 0).toNumber();
+                            if (object.limit != null)
+                                if ($util.Long)
+                                    (message.limit = $util.Long.fromValue(object.limit)).unsigned = false;
+                                else if (typeof object.limit === "string")
+                                    message.limit = parseInt(object.limit, 10);
+                                else if (typeof object.limit === "number")
+                                    message.limit = object.limit;
+                                else if (typeof object.limit === "object")
+                                    message.limit = new $util.LongBits(object.limit.low >>> 0, object.limit.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryAudienceExportRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.QueryAudienceExportRequest} message QueryAudienceExportRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryAudienceExportRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.offset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.offset = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.limit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.limit = options.longs === String ? "0" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.offset != null && message.hasOwnProperty("offset"))
+                                if (typeof message.offset === "number")
+                                    object.offset = options.longs === String ? String(message.offset) : message.offset;
+                                else
+                                    object.offset = options.longs === String ? $util.Long.prototype.toString.call(message.offset) : options.longs === Number ? new $util.LongBits(message.offset.low >>> 0, message.offset.high >>> 0).toNumber() : message.offset;
+                            if (message.limit != null && message.hasOwnProperty("limit"))
+                                if (typeof message.limit === "number")
+                                    object.limit = options.longs === String ? String(message.limit) : message.limit;
+                                else
+                                    object.limit = options.longs === String ? $util.Long.prototype.toString.call(message.limit) : options.longs === Number ? new $util.LongBits(message.limit.low >>> 0, message.limit.high >>> 0).toNumber() : message.limit;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryAudienceExportRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryAudienceExportRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryAudienceExportRequest
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryAudienceExportRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.QueryAudienceExportRequest";
+                        };
+    
+                        return QueryAudienceExportRequest;
+                    })();
+    
+                    v1beta.QueryAudienceExportResponse = (function() {
+    
+                        /**
+                         * Properties of a QueryAudienceExportResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IQueryAudienceExportResponse
+                         * @property {google.analytics.data.v1beta.IAudienceExport|null} [audienceExport] QueryAudienceExportResponse audienceExport
+                         * @property {Array.<google.analytics.data.v1beta.IAudienceRow>|null} [audienceRows] QueryAudienceExportResponse audienceRows
+                         * @property {number|null} [rowCount] QueryAudienceExportResponse rowCount
+                         */
+    
+                        /**
+                         * Constructs a new QueryAudienceExportResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a QueryAudienceExportResponse.
+                         * @implements IQueryAudienceExportResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IQueryAudienceExportResponse=} [properties] Properties to set
+                         */
+                        function QueryAudienceExportResponse(properties) {
+                            this.audienceRows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryAudienceExportResponse audienceExport.
+                         * @member {google.analytics.data.v1beta.IAudienceExport|null|undefined} audienceExport
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @instance
+                         */
+                        QueryAudienceExportResponse.prototype.audienceExport = null;
+    
+                        /**
+                         * QueryAudienceExportResponse audienceRows.
+                         * @member {Array.<google.analytics.data.v1beta.IAudienceRow>} audienceRows
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @instance
+                         */
+                        QueryAudienceExportResponse.prototype.audienceRows = $util.emptyArray;
+    
+                        /**
+                         * QueryAudienceExportResponse rowCount.
+                         * @member {number|null|undefined} rowCount
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @instance
+                         */
+                        QueryAudienceExportResponse.prototype.rowCount = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * QueryAudienceExportResponse _audienceExport.
+                         * @member {"audienceExport"|undefined} _audienceExport
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @instance
+                         */
+                        Object.defineProperty(QueryAudienceExportResponse.prototype, "_audienceExport", {
+                            get: $util.oneOfGetter($oneOfFields = ["audienceExport"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * QueryAudienceExportResponse _rowCount.
+                         * @member {"rowCount"|undefined} _rowCount
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @instance
+                         */
+                        Object.defineProperty(QueryAudienceExportResponse.prototype, "_rowCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["rowCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new QueryAudienceExportResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IQueryAudienceExportResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.QueryAudienceExportResponse} QueryAudienceExportResponse instance
+                         */
+                        QueryAudienceExportResponse.create = function create(properties) {
+                            return new QueryAudienceExportResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryAudienceExportResponse message. Does not implicitly {@link google.analytics.data.v1beta.QueryAudienceExportResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IQueryAudienceExportResponse} message QueryAudienceExportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryAudienceExportResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.audienceExport != null && Object.hasOwnProperty.call(message, "audienceExport"))
+                                $root.google.analytics.data.v1beta.AudienceExport.encode(message.audienceExport, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.audienceRows != null && message.audienceRows.length)
+                                for (var i = 0; i < message.audienceRows.length; ++i)
+                                    $root.google.analytics.data.v1beta.AudienceRow.encode(message.audienceRows[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.rowCount != null && Object.hasOwnProperty.call(message, "rowCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.rowCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryAudienceExportResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.QueryAudienceExportResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.IQueryAudienceExportResponse} message QueryAudienceExportResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryAudienceExportResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryAudienceExportResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.QueryAudienceExportResponse} QueryAudienceExportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryAudienceExportResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.QueryAudienceExportResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.audienceExport = $root.google.analytics.data.v1beta.AudienceExport.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.audienceRows && message.audienceRows.length))
+                                            message.audienceRows = [];
+                                        message.audienceRows.push($root.google.analytics.data.v1beta.AudienceRow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.rowCount = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryAudienceExportResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.QueryAudienceExportResponse} QueryAudienceExportResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryAudienceExportResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryAudienceExportResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryAudienceExportResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.audienceExport != null && message.hasOwnProperty("audienceExport")) {
+                                properties._audienceExport = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.AudienceExport.verify(message.audienceExport);
+                                    if (error)
+                                        return "audienceExport." + error;
+                                }
+                            }
+                            if (message.audienceRows != null && message.hasOwnProperty("audienceRows")) {
+                                if (!Array.isArray(message.audienceRows))
+                                    return "audienceRows: array expected";
+                                for (var i = 0; i < message.audienceRows.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.AudienceRow.verify(message.audienceRows[i]);
+                                    if (error)
+                                        return "audienceRows." + error;
+                                }
+                            }
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount")) {
+                                properties._rowCount = 1;
+                                if (!$util.isInteger(message.rowCount))
+                                    return "rowCount: integer expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryAudienceExportResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.QueryAudienceExportResponse} QueryAudienceExportResponse
+                         */
+                        QueryAudienceExportResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.QueryAudienceExportResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.QueryAudienceExportResponse();
+                            if (object.audienceExport != null) {
+                                if (typeof object.audienceExport !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.QueryAudienceExportResponse.audienceExport: object expected");
+                                message.audienceExport = $root.google.analytics.data.v1beta.AudienceExport.fromObject(object.audienceExport);
+                            }
+                            if (object.audienceRows) {
+                                if (!Array.isArray(object.audienceRows))
+                                    throw TypeError(".google.analytics.data.v1beta.QueryAudienceExportResponse.audienceRows: array expected");
+                                message.audienceRows = [];
+                                for (var i = 0; i < object.audienceRows.length; ++i) {
+                                    if (typeof object.audienceRows[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.QueryAudienceExportResponse.audienceRows: object expected");
+                                    message.audienceRows[i] = $root.google.analytics.data.v1beta.AudienceRow.fromObject(object.audienceRows[i]);
+                                }
+                            }
+                            if (object.rowCount != null)
+                                message.rowCount = object.rowCount | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryAudienceExportResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.QueryAudienceExportResponse} message QueryAudienceExportResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryAudienceExportResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.audienceRows = [];
+                            if (message.audienceExport != null && message.hasOwnProperty("audienceExport")) {
+                                object.audienceExport = $root.google.analytics.data.v1beta.AudienceExport.toObject(message.audienceExport, options);
+                                if (options.oneofs)
+                                    object._audienceExport = "audienceExport";
+                            }
+                            if (message.audienceRows && message.audienceRows.length) {
+                                object.audienceRows = [];
+                                for (var j = 0; j < message.audienceRows.length; ++j)
+                                    object.audienceRows[j] = $root.google.analytics.data.v1beta.AudienceRow.toObject(message.audienceRows[j], options);
+                            }
+                            if (message.rowCount != null && message.hasOwnProperty("rowCount")) {
+                                object.rowCount = message.rowCount;
+                                if (options.oneofs)
+                                    object._rowCount = "rowCount";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryAudienceExportResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryAudienceExportResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryAudienceExportResponse
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.QueryAudienceExportResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryAudienceExportResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.QueryAudienceExportResponse";
+                        };
+    
+                        return QueryAudienceExportResponse;
+                    })();
+    
+                    v1beta.AudienceRow = (function() {
+    
+                        /**
+                         * Properties of an AudienceRow.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IAudienceRow
+                         * @property {Array.<google.analytics.data.v1beta.IAudienceDimensionValue>|null} [dimensionValues] AudienceRow dimensionValues
+                         */
+    
+                        /**
+                         * Constructs a new AudienceRow.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents an AudienceRow.
+                         * @implements IAudienceRow
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IAudienceRow=} [properties] Properties to set
+                         */
+                        function AudienceRow(properties) {
+                            this.dimensionValues = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AudienceRow dimensionValues.
+                         * @member {Array.<google.analytics.data.v1beta.IAudienceDimensionValue>} dimensionValues
+                         * @memberof google.analytics.data.v1beta.AudienceRow
+                         * @instance
+                         */
+                        AudienceRow.prototype.dimensionValues = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AudienceRow instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.AudienceRow
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceRow=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.AudienceRow} AudienceRow instance
+                         */
+                        AudienceRow.create = function create(properties) {
+                            return new AudienceRow(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AudienceRow message. Does not implicitly {@link google.analytics.data.v1beta.AudienceRow.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.AudienceRow
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceRow} message AudienceRow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudienceRow.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensionValues != null && message.dimensionValues.length)
+                                for (var i = 0; i < message.dimensionValues.length; ++i)
+                                    $root.google.analytics.data.v1beta.AudienceDimensionValue.encode(message.dimensionValues[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AudienceRow message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.AudienceRow.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.AudienceRow
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceRow} message AudienceRow message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudienceRow.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AudienceRow message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.AudienceRow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.AudienceRow} AudienceRow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudienceRow.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.AudienceRow();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.dimensionValues && message.dimensionValues.length))
+                                            message.dimensionValues = [];
+                                        message.dimensionValues.push($root.google.analytics.data.v1beta.AudienceDimensionValue.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AudienceRow message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.AudienceRow
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.AudienceRow} AudienceRow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudienceRow.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AudienceRow message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.AudienceRow
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AudienceRow.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dimensionValues != null && message.hasOwnProperty("dimensionValues")) {
+                                if (!Array.isArray(message.dimensionValues))
+                                    return "dimensionValues: array expected";
+                                for (var i = 0; i < message.dimensionValues.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.AudienceDimensionValue.verify(message.dimensionValues[i]);
+                                    if (error)
+                                        return "dimensionValues." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AudienceRow message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.AudienceRow
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.AudienceRow} AudienceRow
+                         */
+                        AudienceRow.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.AudienceRow)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.AudienceRow();
+                            if (object.dimensionValues) {
+                                if (!Array.isArray(object.dimensionValues))
+                                    throw TypeError(".google.analytics.data.v1beta.AudienceRow.dimensionValues: array expected");
+                                message.dimensionValues = [];
+                                for (var i = 0; i < object.dimensionValues.length; ++i) {
+                                    if (typeof object.dimensionValues[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.AudienceRow.dimensionValues: object expected");
+                                    message.dimensionValues[i] = $root.google.analytics.data.v1beta.AudienceDimensionValue.fromObject(object.dimensionValues[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AudienceRow message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.AudienceRow
+                         * @static
+                         * @param {google.analytics.data.v1beta.AudienceRow} message AudienceRow
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AudienceRow.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dimensionValues = [];
+                            if (message.dimensionValues && message.dimensionValues.length) {
+                                object.dimensionValues = [];
+                                for (var j = 0; j < message.dimensionValues.length; ++j)
+                                    object.dimensionValues[j] = $root.google.analytics.data.v1beta.AudienceDimensionValue.toObject(message.dimensionValues[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AudienceRow to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.AudienceRow
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AudienceRow.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AudienceRow
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.AudienceRow
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AudienceRow.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.AudienceRow";
+                        };
+    
+                        return AudienceRow;
+                    })();
+    
+                    v1beta.AudienceDimension = (function() {
+    
+                        /**
+                         * Properties of an AudienceDimension.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IAudienceDimension
+                         * @property {string|null} [dimensionName] AudienceDimension dimensionName
+                         */
+    
+                        /**
+                         * Constructs a new AudienceDimension.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents an AudienceDimension.
+                         * @implements IAudienceDimension
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IAudienceDimension=} [properties] Properties to set
+                         */
+                        function AudienceDimension(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AudienceDimension dimensionName.
+                         * @member {string} dimensionName
+                         * @memberof google.analytics.data.v1beta.AudienceDimension
+                         * @instance
+                         */
+                        AudienceDimension.prototype.dimensionName = "";
+    
+                        /**
+                         * Creates a new AudienceDimension instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.AudienceDimension
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceDimension=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.AudienceDimension} AudienceDimension instance
+                         */
+                        AudienceDimension.create = function create(properties) {
+                            return new AudienceDimension(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AudienceDimension message. Does not implicitly {@link google.analytics.data.v1beta.AudienceDimension.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.AudienceDimension
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceDimension} message AudienceDimension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudienceDimension.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensionName != null && Object.hasOwnProperty.call(message, "dimensionName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dimensionName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AudienceDimension message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.AudienceDimension.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.AudienceDimension
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceDimension} message AudienceDimension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudienceDimension.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AudienceDimension message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.AudienceDimension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.AudienceDimension} AudienceDimension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudienceDimension.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.AudienceDimension();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dimensionName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AudienceDimension message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.AudienceDimension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.AudienceDimension} AudienceDimension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudienceDimension.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AudienceDimension message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.AudienceDimension
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AudienceDimension.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dimensionName != null && message.hasOwnProperty("dimensionName"))
+                                if (!$util.isString(message.dimensionName))
+                                    return "dimensionName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AudienceDimension message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.AudienceDimension
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.AudienceDimension} AudienceDimension
+                         */
+                        AudienceDimension.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.AudienceDimension)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.AudienceDimension();
+                            if (object.dimensionName != null)
+                                message.dimensionName = String(object.dimensionName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AudienceDimension message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.AudienceDimension
+                         * @static
+                         * @param {google.analytics.data.v1beta.AudienceDimension} message AudienceDimension
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AudienceDimension.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.dimensionName = "";
+                            if (message.dimensionName != null && message.hasOwnProperty("dimensionName"))
+                                object.dimensionName = message.dimensionName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AudienceDimension to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.AudienceDimension
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AudienceDimension.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AudienceDimension
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.AudienceDimension
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AudienceDimension.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.AudienceDimension";
+                        };
+    
+                        return AudienceDimension;
+                    })();
+    
+                    v1beta.AudienceDimensionValue = (function() {
+    
+                        /**
+                         * Properties of an AudienceDimensionValue.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IAudienceDimensionValue
+                         * @property {string|null} [value] AudienceDimensionValue value
+                         */
+    
+                        /**
+                         * Constructs a new AudienceDimensionValue.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents an AudienceDimensionValue.
+                         * @implements IAudienceDimensionValue
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IAudienceDimensionValue=} [properties] Properties to set
+                         */
+                        function AudienceDimensionValue(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AudienceDimensionValue value.
+                         * @member {string|null|undefined} value
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @instance
+                         */
+                        AudienceDimensionValue.prototype.value = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AudienceDimensionValue oneValue.
+                         * @member {"value"|undefined} oneValue
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceDimensionValue.prototype, "oneValue", {
+                            get: $util.oneOfGetter($oneOfFields = ["value"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AudienceDimensionValue instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceDimensionValue=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.AudienceDimensionValue} AudienceDimensionValue instance
+                         */
+                        AudienceDimensionValue.create = function create(properties) {
+                            return new AudienceDimensionValue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AudienceDimensionValue message. Does not implicitly {@link google.analytics.data.v1beta.AudienceDimensionValue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceDimensionValue} message AudienceDimensionValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudienceDimensionValue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AudienceDimensionValue message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.AudienceDimensionValue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.IAudienceDimensionValue} message AudienceDimensionValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AudienceDimensionValue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AudienceDimensionValue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.AudienceDimensionValue} AudienceDimensionValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudienceDimensionValue.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.AudienceDimensionValue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AudienceDimensionValue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.AudienceDimensionValue} AudienceDimensionValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AudienceDimensionValue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AudienceDimensionValue message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AudienceDimensionValue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.value != null && message.hasOwnProperty("value")) {
+                                properties.oneValue = 1;
+                                if (!$util.isString(message.value))
+                                    return "value: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AudienceDimensionValue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.AudienceDimensionValue} AudienceDimensionValue
+                         */
+                        AudienceDimensionValue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.AudienceDimensionValue)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.AudienceDimensionValue();
+                            if (object.value != null)
+                                message.value = String(object.value);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AudienceDimensionValue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @static
+                         * @param {google.analytics.data.v1beta.AudienceDimensionValue} message AudienceDimensionValue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AudienceDimensionValue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.value != null && message.hasOwnProperty("value")) {
+                                object.value = message.value;
+                                if (options.oneofs)
+                                    object.oneValue = "value";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AudienceDimensionValue to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AudienceDimensionValue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AudienceDimensionValue
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.AudienceDimensionValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AudienceDimensionValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.AudienceDimensionValue";
+                        };
+    
+                        return AudienceDimensionValue;
                     })();
     
                     v1beta.DateRange = (function() {
@@ -42729,6 +48042,7 @@
                          * @property {string|null} [timeZone] ResponseMetaData timeZone
                          * @property {string|null} [emptyReason] ResponseMetaData emptyReason
                          * @property {boolean|null} [subjectToThresholding] ResponseMetaData subjectToThresholding
+                         * @property {Array.<google.analytics.data.v1beta.ISamplingMetadata>|null} [samplingMetadatas] ResponseMetaData samplingMetadatas
                          */
     
                         /**
@@ -42740,6 +48054,7 @@
                          * @param {google.analytics.data.v1beta.IResponseMetaData=} [properties] Properties to set
                          */
                         function ResponseMetaData(properties) {
+                            this.samplingMetadatas = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -42793,6 +48108,14 @@
                          * @instance
                          */
                         ResponseMetaData.prototype.subjectToThresholding = null;
+    
+                        /**
+                         * ResponseMetaData samplingMetadatas.
+                         * @member {Array.<google.analytics.data.v1beta.ISamplingMetadata>} samplingMetadatas
+                         * @memberof google.analytics.data.v1beta.ResponseMetaData
+                         * @instance
+                         */
+                        ResponseMetaData.prototype.samplingMetadatas = $util.emptyArray;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -42888,6 +48211,9 @@
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.emptyReason);
                             if (message.subjectToThresholding != null && Object.hasOwnProperty.call(message, "subjectToThresholding"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.subjectToThresholding);
+                            if (message.samplingMetadatas != null && message.samplingMetadatas.length)
+                                for (var i = 0; i < message.samplingMetadatas.length; ++i)
+                                    $root.google.analytics.data.v1beta.SamplingMetadata.encode(message.samplingMetadatas[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -42944,6 +48270,12 @@
                                     }
                                 case 8: {
                                         message.subjectToThresholding = reader.bool();
+                                        break;
+                                    }
+                                case 9: {
+                                        if (!(message.samplingMetadatas && message.samplingMetadatas.length))
+                                            message.samplingMetadatas = [];
+                                        message.samplingMetadatas.push($root.google.analytics.data.v1beta.SamplingMetadata.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -43013,6 +48345,15 @@
                                 if (typeof message.subjectToThresholding !== "boolean")
                                     return "subjectToThresholding: boolean expected";
                             }
+                            if (message.samplingMetadatas != null && message.hasOwnProperty("samplingMetadatas")) {
+                                if (!Array.isArray(message.samplingMetadatas))
+                                    return "samplingMetadatas: array expected";
+                                for (var i = 0; i < message.samplingMetadatas.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.SamplingMetadata.verify(message.samplingMetadatas[i]);
+                                    if (error)
+                                        return "samplingMetadatas." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -43043,6 +48384,16 @@
                                 message.emptyReason = String(object.emptyReason);
                             if (object.subjectToThresholding != null)
                                 message.subjectToThresholding = Boolean(object.subjectToThresholding);
+                            if (object.samplingMetadatas) {
+                                if (!Array.isArray(object.samplingMetadatas))
+                                    throw TypeError(".google.analytics.data.v1beta.ResponseMetaData.samplingMetadatas: array expected");
+                                message.samplingMetadatas = [];
+                                for (var i = 0; i < object.samplingMetadatas.length; ++i) {
+                                    if (typeof object.samplingMetadatas[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.ResponseMetaData.samplingMetadatas: object expected");
+                                    message.samplingMetadatas[i] = $root.google.analytics.data.v1beta.SamplingMetadata.fromObject(object.samplingMetadatas[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -43059,6 +48410,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.samplingMetadatas = [];
                             if (options.defaults)
                                 object.dataLossFromOtherRow = false;
                             if (message.dataLossFromOtherRow != null && message.hasOwnProperty("dataLossFromOtherRow"))
@@ -43087,6 +48440,11 @@
                                 object.subjectToThresholding = message.subjectToThresholding;
                                 if (options.oneofs)
                                     object._subjectToThresholding = "subjectToThresholding";
+                            }
+                            if (message.samplingMetadatas && message.samplingMetadatas.length) {
+                                object.samplingMetadatas = [];
+                                for (var j = 0; j < message.samplingMetadatas.length; ++j)
+                                    object.samplingMetadatas[j] = $root.google.analytics.data.v1beta.SamplingMetadata.toObject(message.samplingMetadatas[j], options);
                             }
                             return object;
                         };
@@ -43635,6 +48993,261 @@
                         })();
     
                         return ResponseMetaData;
+                    })();
+    
+                    v1beta.SamplingMetadata = (function() {
+    
+                        /**
+                         * Properties of a SamplingMetadata.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface ISamplingMetadata
+                         * @property {number|Long|null} [samplesReadCount] SamplingMetadata samplesReadCount
+                         * @property {number|Long|null} [samplingSpaceSize] SamplingMetadata samplingSpaceSize
+                         */
+    
+                        /**
+                         * Constructs a new SamplingMetadata.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a SamplingMetadata.
+                         * @implements ISamplingMetadata
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.ISamplingMetadata=} [properties] Properties to set
+                         */
+                        function SamplingMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SamplingMetadata samplesReadCount.
+                         * @member {number|Long} samplesReadCount
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @instance
+                         */
+                        SamplingMetadata.prototype.samplesReadCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * SamplingMetadata samplingSpaceSize.
+                         * @member {number|Long} samplingSpaceSize
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @instance
+                         */
+                        SamplingMetadata.prototype.samplingSpaceSize = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new SamplingMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.ISamplingMetadata=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.SamplingMetadata} SamplingMetadata instance
+                         */
+                        SamplingMetadata.create = function create(properties) {
+                            return new SamplingMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SamplingMetadata message. Does not implicitly {@link google.analytics.data.v1beta.SamplingMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.ISamplingMetadata} message SamplingMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SamplingMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.samplesReadCount != null && Object.hasOwnProperty.call(message, "samplesReadCount"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.samplesReadCount);
+                            if (message.samplingSpaceSize != null && Object.hasOwnProperty.call(message, "samplingSpaceSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.samplingSpaceSize);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SamplingMetadata message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.SamplingMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.ISamplingMetadata} message SamplingMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SamplingMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SamplingMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.SamplingMetadata} SamplingMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SamplingMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.SamplingMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.samplesReadCount = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.samplingSpaceSize = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SamplingMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.SamplingMetadata} SamplingMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SamplingMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SamplingMetadata message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SamplingMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.samplesReadCount != null && message.hasOwnProperty("samplesReadCount"))
+                                if (!$util.isInteger(message.samplesReadCount) && !(message.samplesReadCount && $util.isInteger(message.samplesReadCount.low) && $util.isInteger(message.samplesReadCount.high)))
+                                    return "samplesReadCount: integer|Long expected";
+                            if (message.samplingSpaceSize != null && message.hasOwnProperty("samplingSpaceSize"))
+                                if (!$util.isInteger(message.samplingSpaceSize) && !(message.samplingSpaceSize && $util.isInteger(message.samplingSpaceSize.low) && $util.isInteger(message.samplingSpaceSize.high)))
+                                    return "samplingSpaceSize: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SamplingMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.SamplingMetadata} SamplingMetadata
+                         */
+                        SamplingMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.SamplingMetadata)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.SamplingMetadata();
+                            if (object.samplesReadCount != null)
+                                if ($util.Long)
+                                    (message.samplesReadCount = $util.Long.fromValue(object.samplesReadCount)).unsigned = false;
+                                else if (typeof object.samplesReadCount === "string")
+                                    message.samplesReadCount = parseInt(object.samplesReadCount, 10);
+                                else if (typeof object.samplesReadCount === "number")
+                                    message.samplesReadCount = object.samplesReadCount;
+                                else if (typeof object.samplesReadCount === "object")
+                                    message.samplesReadCount = new $util.LongBits(object.samplesReadCount.low >>> 0, object.samplesReadCount.high >>> 0).toNumber();
+                            if (object.samplingSpaceSize != null)
+                                if ($util.Long)
+                                    (message.samplingSpaceSize = $util.Long.fromValue(object.samplingSpaceSize)).unsigned = false;
+                                else if (typeof object.samplingSpaceSize === "string")
+                                    message.samplingSpaceSize = parseInt(object.samplingSpaceSize, 10);
+                                else if (typeof object.samplingSpaceSize === "number")
+                                    message.samplingSpaceSize = object.samplingSpaceSize;
+                                else if (typeof object.samplingSpaceSize === "object")
+                                    message.samplingSpaceSize = new $util.LongBits(object.samplingSpaceSize.low >>> 0, object.samplingSpaceSize.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SamplingMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @static
+                         * @param {google.analytics.data.v1beta.SamplingMetadata} message SamplingMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SamplingMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.samplesReadCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.samplesReadCount = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.samplingSpaceSize = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.samplingSpaceSize = options.longs === String ? "0" : 0;
+                            }
+                            if (message.samplesReadCount != null && message.hasOwnProperty("samplesReadCount"))
+                                if (typeof message.samplesReadCount === "number")
+                                    object.samplesReadCount = options.longs === String ? String(message.samplesReadCount) : message.samplesReadCount;
+                                else
+                                    object.samplesReadCount = options.longs === String ? $util.Long.prototype.toString.call(message.samplesReadCount) : options.longs === Number ? new $util.LongBits(message.samplesReadCount.low >>> 0, message.samplesReadCount.high >>> 0).toNumber() : message.samplesReadCount;
+                            if (message.samplingSpaceSize != null && message.hasOwnProperty("samplingSpaceSize"))
+                                if (typeof message.samplingSpaceSize === "number")
+                                    object.samplingSpaceSize = options.longs === String ? String(message.samplingSpaceSize) : message.samplingSpaceSize;
+                                else
+                                    object.samplingSpaceSize = options.longs === String ? $util.Long.prototype.toString.call(message.samplingSpaceSize) : options.longs === Number ? new $util.LongBits(message.samplingSpaceSize.low >>> 0, message.samplingSpaceSize.high >>> 0).toNumber() : message.samplingSpaceSize;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SamplingMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SamplingMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SamplingMetadata
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1beta.SamplingMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SamplingMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1beta.SamplingMetadata";
+                        };
+    
+                        return SamplingMetadata;
                     })();
     
                     v1beta.DimensionHeader = (function() {
@@ -45960,19 +51573,44 @@
     
                         /**
                          * QuotaStatus consumed.
-                         * @member {number} consumed
+                         * @member {number|null|undefined} consumed
                          * @memberof google.analytics.data.v1beta.QuotaStatus
                          * @instance
                          */
-                        QuotaStatus.prototype.consumed = 0;
+                        QuotaStatus.prototype.consumed = null;
     
                         /**
                          * QuotaStatus remaining.
-                         * @member {number} remaining
+                         * @member {number|null|undefined} remaining
                          * @memberof google.analytics.data.v1beta.QuotaStatus
                          * @instance
                          */
-                        QuotaStatus.prototype.remaining = 0;
+                        QuotaStatus.prototype.remaining = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * QuotaStatus _consumed.
+                         * @member {"consumed"|undefined} _consumed
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @instance
+                         */
+                        Object.defineProperty(QuotaStatus.prototype, "_consumed", {
+                            get: $util.oneOfGetter($oneOfFields = ["consumed"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * QuotaStatus _remaining.
+                         * @member {"remaining"|undefined} _remaining
+                         * @memberof google.analytics.data.v1beta.QuotaStatus
+                         * @instance
+                         */
+                        Object.defineProperty(QuotaStatus.prototype, "_remaining", {
+                            get: $util.oneOfGetter($oneOfFields = ["remaining"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new QuotaStatus instance using the specified properties.
@@ -46079,12 +51717,17 @@
                         QuotaStatus.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.consumed != null && message.hasOwnProperty("consumed"))
+                            var properties = {};
+                            if (message.consumed != null && message.hasOwnProperty("consumed")) {
+                                properties._consumed = 1;
                                 if (!$util.isInteger(message.consumed))
                                     return "consumed: integer expected";
-                            if (message.remaining != null && message.hasOwnProperty("remaining"))
+                            }
+                            if (message.remaining != null && message.hasOwnProperty("remaining")) {
+                                properties._remaining = 1;
                                 if (!$util.isInteger(message.remaining))
                                     return "remaining: integer expected";
+                            }
                             return null;
                         };
     
@@ -46120,14 +51763,16 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
-                                object.consumed = 0;
-                                object.remaining = 0;
-                            }
-                            if (message.consumed != null && message.hasOwnProperty("consumed"))
+                            if (message.consumed != null && message.hasOwnProperty("consumed")) {
                                 object.consumed = message.consumed;
-                            if (message.remaining != null && message.hasOwnProperty("remaining"))
+                                if (options.oneofs)
+                                    object._consumed = "consumed";
+                            }
+                            if (message.remaining != null && message.hasOwnProperty("remaining")) {
                                 object.remaining = message.remaining;
+                                if (options.oneofs)
+                                    object._remaining = "remaining";
+                            }
                             return object;
                         };
     

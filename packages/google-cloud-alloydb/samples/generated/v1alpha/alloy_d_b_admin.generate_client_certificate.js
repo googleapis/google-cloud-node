@@ -48,7 +48,8 @@ function main(parent) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. A pem-encoded X.509 certificate signing request (CSR).
+   *  Optional. A pem-encoded X.509 certificate signing request (CSR). It is
+   *  recommended to use public_key instead.
    */
   // const pemCsr = 'abc123'
   /**

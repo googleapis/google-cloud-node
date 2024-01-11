@@ -9,7 +9,7 @@
                 "v2": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.Profiler.V2",
-                    "go_package": "google.golang.org/genproto/googleapis/devtools/cloudprofiler/v2;cloudprofiler",
+                    "go_package": "cloud.google.com/go/cloudprofiler/apiv2/cloudprofilerpb;cloudprofilerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ProfilerProto",
                     "java_package": "com.google.devtools.cloudprofiler.v2",
@@ -76,6 +76,28 @@
                             },
                             {
                               "(google.api.method_signature)": "profile,update_mask"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ExportService": {
+                      "options": {
+                        "(google.api.default_host)": "cloudprofiler.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.write"
+                      },
+                      "methods": {
+                        "ListProfiles": {
+                          "requestType": "ListProfilesRequest",
+                          "responseType": "ListProfilesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*}/profiles"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*}/profiles"
+                              }
                             }
                           ]
                         }
@@ -197,6 +219,43 @@
                         "CONTENTION": 5,
                         "PEAK_HEAP": 6,
                         "HEAP_ALLOC": 7
+                      }
+                    },
+                    "ListProfilesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListProfilesResponse": {
+                      "fields": {
+                        "profiles": {
+                          "rule": "repeated",
+                          "type": "Profile",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "skippedProfiles": {
+                          "type": "int32",
+                          "id": 3
+                        }
                       }
                     }
                   }

@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.4.0...dataplex-v3.5.0) (2023-12-05)
+
+
+### Features
+
+* [dataplex] add data quality score to DataQualityResult ([#4856](https://github.com/googleapis/google-cloud-node/issues/4856)) ([fc9471b](https://github.com/googleapis/google-cloud-node/commit/fc9471b804d94a96d382237fbd369f85991f89d1))
+
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.3.0...dataplex-v3.4.0) (2023-11-30)
+
+
+### Features
+
+* [dataplex] added DataQualityResult.score, dimension_score, column_score ([#4835](https://github.com/googleapis/google-cloud-node/issues/4835)) ([da536e9](https://github.com/googleapis/google-cloud-node/commit/da536e93659f38469fac2a7903c11c96c92c9074))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.2.0...dataplex-v3.3.0) (2023-11-03)
+
+
+### Features
+
+* [dataplex] DataQualityDimension is now part of the DataQualityDimensionResult message ([#4776](https://github.com/googleapis/google-cloud-node/issues/4776)) ([ca49756](https://github.com/googleapis/google-cloud-node/commit/ca497563124fbb8977f0e93b6af2cbf3a45f1088))
+* Add relativeResourceName and linkedResourceName to search result ([ca49756](https://github.com/googleapis/google-cloud-node/commit/ca497563124fbb8977f0e93b6af2cbf3a45f1088))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.1.0...dataplex-v3.2.0) (2023-10-18)
 
 

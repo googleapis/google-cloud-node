@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -4039,20 +4039,6 @@ export namespace google {
                     public createSubproperty(request: google.analytics.admin.v1alpha.ICreateSubpropertyRequest): Promise<google.analytics.admin.v1alpha.CreateSubpropertyResponse>;
 
                     /**
-                     * Calls DeleteSubpropertyEventFilter.
-                     * @param request DeleteSubpropertyEventFilterRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deleteSubpropertyEventFilter(request: google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteSubpropertyEventFilterCallback): void;
-
-                    /**
-                     * Calls DeleteSubpropertyEventFilter.
-                     * @param request DeleteSubpropertyEventFilterRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteSubpropertyEventFilter(request: google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest): Promise<google.protobuf.Empty>;
-
-                    /**
                      * Calls CreateSubpropertyEventFilter.
                      * @param request CreateSubpropertyEventFilterRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and SubpropertyEventFilter
@@ -4065,6 +4051,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public createSubpropertyEventFilter(request: google.analytics.admin.v1alpha.ICreateSubpropertyEventFilterRequest): Promise<google.analytics.admin.v1alpha.SubpropertyEventFilter>;
+
+                    /**
+                     * Calls GetSubpropertyEventFilter.
+                     * @param request GetSubpropertyEventFilterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SubpropertyEventFilter
+                     */
+                    public getSubpropertyEventFilter(request: google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetSubpropertyEventFilterCallback): void;
+
+                    /**
+                     * Calls GetSubpropertyEventFilter.
+                     * @param request GetSubpropertyEventFilterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSubpropertyEventFilter(request: google.analytics.admin.v1alpha.IGetSubpropertyEventFilterRequest): Promise<google.analytics.admin.v1alpha.SubpropertyEventFilter>;
+
+                    /**
+                     * Calls ListSubpropertyEventFilters.
+                     * @param request ListSubpropertyEventFiltersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSubpropertyEventFiltersResponse
+                     */
+                    public listSubpropertyEventFilters(request: google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListSubpropertyEventFiltersCallback): void;
+
+                    /**
+                     * Calls ListSubpropertyEventFilters.
+                     * @param request ListSubpropertyEventFiltersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSubpropertyEventFilters(request: google.analytics.admin.v1alpha.IListSubpropertyEventFiltersRequest): Promise<google.analytics.admin.v1alpha.ListSubpropertyEventFiltersResponse>;
+
+                    /**
+                     * Calls UpdateSubpropertyEventFilter.
+                     * @param request UpdateSubpropertyEventFilterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SubpropertyEventFilter
+                     */
+                    public updateSubpropertyEventFilter(request: google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateSubpropertyEventFilterCallback): void;
+
+                    /**
+                     * Calls UpdateSubpropertyEventFilter.
+                     * @param request UpdateSubpropertyEventFilterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSubpropertyEventFilter(request: google.analytics.admin.v1alpha.IUpdateSubpropertyEventFilterRequest): Promise<google.analytics.admin.v1alpha.SubpropertyEventFilter>;
+
+                    /**
+                     * Calls DeleteSubpropertyEventFilter.
+                     * @param request DeleteSubpropertyEventFilterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteSubpropertyEventFilter(request: google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteSubpropertyEventFilterCallback): void;
+
+                    /**
+                     * Calls DeleteSubpropertyEventFilter.
+                     * @param request DeleteSubpropertyEventFilterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSubpropertyEventFilter(request: google.analytics.admin.v1alpha.IDeleteSubpropertyEventFilterRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace AnalyticsAdminService {
@@ -4952,18 +4994,39 @@ export namespace google {
                     type CreateSubpropertyCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.CreateSubpropertyResponse) => void;
 
                     /**
-                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|deleteSubpropertyEventFilter}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeleteSubpropertyEventFilterCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-                    /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|createSubpropertyEventFilter}.
                      * @param error Error, if any
                      * @param [response] SubpropertyEventFilter
                      */
                     type CreateSubpropertyEventFilterCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SubpropertyEventFilter) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getSubpropertyEventFilter}.
+                     * @param error Error, if any
+                     * @param [response] SubpropertyEventFilter
+                     */
+                    type GetSubpropertyEventFilterCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SubpropertyEventFilter) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|listSubpropertyEventFilters}.
+                     * @param error Error, if any
+                     * @param [response] ListSubpropertyEventFiltersResponse
+                     */
+                    type ListSubpropertyEventFiltersCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListSubpropertyEventFiltersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|updateSubpropertyEventFilter}.
+                     * @param error Error, if any
+                     * @param [response] SubpropertyEventFilter
+                     */
+                    type UpdateSubpropertyEventFilterCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SubpropertyEventFilter) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|deleteSubpropertyEventFilter}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteSubpropertyEventFilterCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a RunAccessReportRequest. */
@@ -28967,6 +29030,9 @@ export namespace google {
 
                     /** ConversionEvent countingMethod */
                     countingMethod?: (google.analytics.admin.v1alpha.ConversionEvent.ConversionCountingMethod|keyof typeof google.analytics.admin.v1alpha.ConversionEvent.ConversionCountingMethod|null);
+
+                    /** ConversionEvent defaultConversionValue */
+                    defaultConversionValue?: (google.analytics.admin.v1alpha.ConversionEvent.IDefaultConversionValue|null);
                 }
 
                 /** Represents a ConversionEvent. */
@@ -28995,6 +29061,12 @@ export namespace google {
 
                     /** ConversionEvent countingMethod. */
                     public countingMethod: (google.analytics.admin.v1alpha.ConversionEvent.ConversionCountingMethod|keyof typeof google.analytics.admin.v1alpha.ConversionEvent.ConversionCountingMethod);
+
+                    /** ConversionEvent defaultConversionValue. */
+                    public defaultConversionValue?: (google.analytics.admin.v1alpha.ConversionEvent.IDefaultConversionValue|null);
+
+                    /** ConversionEvent _defaultConversionValue. */
+                    public _defaultConversionValue?: "defaultConversionValue";
 
                     /**
                      * Creates a new ConversionEvent instance using the specified properties.
@@ -29075,6 +29147,115 @@ export namespace google {
                 }
 
                 namespace ConversionEvent {
+
+                    /** Properties of a DefaultConversionValue. */
+                    interface IDefaultConversionValue {
+
+                        /** DefaultConversionValue value */
+                        value?: (number|null);
+
+                        /** DefaultConversionValue currencyCode */
+                        currencyCode?: (string|null);
+                    }
+
+                    /** Represents a DefaultConversionValue. */
+                    class DefaultConversionValue implements IDefaultConversionValue {
+
+                        /**
+                         * Constructs a new DefaultConversionValue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1alpha.ConversionEvent.IDefaultConversionValue);
+
+                        /** DefaultConversionValue value. */
+                        public value?: (number|null);
+
+                        /** DefaultConversionValue currencyCode. */
+                        public currencyCode?: (string|null);
+
+                        /** DefaultConversionValue _value. */
+                        public _value?: "value";
+
+                        /** DefaultConversionValue _currencyCode. */
+                        public _currencyCode?: "currencyCode";
+
+                        /**
+                         * Creates a new DefaultConversionValue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DefaultConversionValue instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1alpha.ConversionEvent.IDefaultConversionValue): google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue;
+
+                        /**
+                         * Encodes the specified DefaultConversionValue message. Does not implicitly {@link google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue.verify|verify} messages.
+                         * @param message DefaultConversionValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1alpha.ConversionEvent.IDefaultConversionValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DefaultConversionValue message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue.verify|verify} messages.
+                         * @param message DefaultConversionValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1alpha.ConversionEvent.IDefaultConversionValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DefaultConversionValue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DefaultConversionValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue;
+
+                        /**
+                         * Decodes a DefaultConversionValue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DefaultConversionValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue;
+
+                        /**
+                         * Verifies a DefaultConversionValue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DefaultConversionValue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DefaultConversionValue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue;
+
+                        /**
+                         * Creates a plain object from a DefaultConversionValue message. Also converts values to other types if specified.
+                         * @param message DefaultConversionValue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DefaultConversionValue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DefaultConversionValue
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** ConversionCountingMethod enum. */
                     enum ConversionCountingMethod {
@@ -29760,10 +29941,6 @@ export namespace google {
                         REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED = 0,
                         PAID_AND_ORGANIC_CHANNELS_DATA_DRIVEN = 1,
                         PAID_AND_ORGANIC_CHANNELS_LAST_CLICK = 2,
-                        PAID_AND_ORGANIC_CHANNELS_FIRST_CLICK = 3,
-                        PAID_AND_ORGANIC_CHANNELS_LINEAR = 4,
-                        PAID_AND_ORGANIC_CHANNELS_POSITION_BASED = 5,
-                        PAID_AND_ORGANIC_CHANNELS_TIME_DECAY = 6,
                         GOOGLE_PAID_CHANNELS_LAST_CLICK = 7
                     }
 

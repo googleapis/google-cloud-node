@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 138,
+                    "end": 152,
                     "type": "FULL"
                 }
             ],
@@ -94,7 +94,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 126,
+                    "end": 125,
                     "type": "FULL"
                 }
             ],
@@ -178,7 +178,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 88,
+                    "end": 91,
                     "type": "FULL"
                 }
             ],
@@ -223,14 +223,14 @@
             "regionTag": "places_v1_generated_Places_GetPlace_async",
             "title": "Places getPlace Sample",
             "origin": "API_DEFINITION",
-            "description": " Get a Place with a place id (in a name) string.",
+            "description": " Get place details with a place id (in a name) string.",
             "canonical": true,
             "file": "places.get_place.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],

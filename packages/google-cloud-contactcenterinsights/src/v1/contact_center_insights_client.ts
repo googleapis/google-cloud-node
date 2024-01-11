@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -279,6 +279,12 @@ export class ContactCenterInsightsClient {
     const bulkAnalyzeConversationsMetadata = protoFilesRoot.lookup(
       '.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata'
     ) as gax.protobuf.Type;
+    const bulkDeleteConversationsResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse'
+    ) as gax.protobuf.Type;
+    const bulkDeleteConversationsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata'
+    ) as gax.protobuf.Type;
     const ingestConversationsResponse = protoFilesRoot.lookup(
       '.google.cloud.contactcenterinsights.v1.IngestConversationsResponse'
     ) as gax.protobuf.Type;
@@ -334,6 +340,15 @@ export class ContactCenterInsightsClient {
         ),
         bulkAnalyzeConversationsMetadata.decode.bind(
           bulkAnalyzeConversationsMetadata
+        )
+      ),
+      bulkDeleteConversations: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        bulkDeleteConversationsResponse.decode.bind(
+          bulkDeleteConversationsResponse
+        ),
+        bulkDeleteConversationsMetadata.decode.bind(
+          bulkDeleteConversationsMetadata
         )
       ),
       ingestConversations: new this._gaxModule.LongrunningDescriptor(
@@ -430,6 +445,7 @@ export class ContactCenterInsightsClient {
       'listAnalyses',
       'deleteAnalysis',
       'bulkAnalyzeConversations',
+      'bulkDeleteConversations',
       'ingestConversations',
       'exportInsightsData',
       'createIssueModel',
@@ -2995,11 +3011,11 @@ export class ContactCenterInsightsClient {
    *   This value should be 4-64 characters and must match the regular
    *   expression `^{@link protos.0-9|a-z0-9-]{4,64}$`. Valid characters are `[a-z}-`
    * @param {google.cloud.contactcenterinsights.v1.RedactionConfig} [request.redactionConfig]
-   *   Optional. DLP settings for transcript redaction. Optional, will default to
-   *   the config specified in Settings.
+   *   Optional. DLP settings for transcript redaction. Will default to the config
+   *   specified in Settings.
    * @param {google.cloud.contactcenterinsights.v1.SpeechConfig} [request.speechConfig]
-   *   Optional. Default Speech-to-Text configuration. Optional, will default to
-   *   the config specified in Settings.
+   *   Optional. Speech-to-Text configuration. Will default to the config
+   *   specified in Settings.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3417,6 +3433,156 @@ export class ContactCenterInsightsClient {
     >;
   }
   /**
+   * Deletes multiple conversations in a single request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource to delete conversations from.
+   *   Format:
+   *   projects/{project}/locations/{location}
+   * @param {string} request.filter
+   *   Filter used to select the subset of conversations to delete.
+   * @param {number} request.maxDeleteCount
+   *   Maximum number of conversations to delete.
+   * @param {boolean} request.force
+   *   If set to true, all of this conversation's analyses will also be deleted.
+   *   Otherwise, the request will only succeed if the conversation has no
+   *   analyses.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.bulk_delete_conversations.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_BulkDeleteConversations_async
+   */
+  bulkDeleteConversations(
+    request?: protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  bulkDeleteConversations(
+    request: protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bulkDeleteConversations(
+    request: protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bulkDeleteConversations(
+    request?: protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse,
+            protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsResponse,
+        protos.google.cloud.contactcenterinsights.v1.IBulkDeleteConversationsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.bulkDeleteConversations(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `bulkDeleteConversations()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.bulk_delete_conversations.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_BulkDeleteConversations_async
+   */
+  async checkBulkDeleteConversationsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse,
+      protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.bulkDeleteConversations,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsResponse,
+      protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata
+    >;
+  }
+  /**
    * Imports conversations and processes them according to the user's
    * configuration.
    *
@@ -3431,6 +3597,12 @@ export class ContactCenterInsightsClient {
    *   Required. The parent resource for new conversations.
    * @param {google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig} request.conversationConfig
    *   Configuration that applies to all conversations.
+   * @param {google.cloud.contactcenterinsights.v1.RedactionConfig} [request.redactionConfig]
+   *   Optional. DLP settings for transcript redaction. Optional, will default to
+   *   the config specified in Settings.
+   * @param {google.cloud.contactcenterinsights.v1.SpeechConfig} [request.speechConfig]
+   *   Optional. Default Speech-to-Text configuration. Optional, will default to
+   *   the config specified in Settings.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

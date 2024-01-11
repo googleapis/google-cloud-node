@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,8 @@ const ExperimentsClient = v3.ExperimentsClient;
 type ExperimentsClient = v3.ExperimentsClient;
 const FlowsClient = v3.FlowsClient;
 type FlowsClient = v3.FlowsClient;
+const GeneratorsClient = v3.GeneratorsClient;
+type GeneratorsClient = v3.GeneratorsClient;
 const IntentsClient = v3.IntentsClient;
 type IntentsClient = v3.IntentsClient;
 const PagesClient = v3.PagesClient;
@@ -62,6 +64,7 @@ export {
   EnvironmentsClient,
   ExperimentsClient,
   FlowsClient,
+  GeneratorsClient,
   IntentsClient,
   PagesClient,
   SecuritySettingsServiceClient,
@@ -82,6 +85,7 @@ export default {
   EnvironmentsClient,
   ExperimentsClient,
   FlowsClient,
+  GeneratorsClient,
   IntentsClient,
   PagesClient,
   SecuritySettingsServiceClient,

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,14 +30,14 @@ function main(name, targetSnapshotId) {
    */
   /**
    *  Required.
-   *  projects/{project_id}/locations/{location_id}/instances/{instance_id}. The
-   *  resource name of the instance, in the format
+   *  `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
+   *  The resource name of the instance, in the format
    */
   // const name = 'abc123'
   /**
    *  Required. The snapshot resource ID, in the format 'my-snapshot', where the
    *  specified ID is the {snapshot_id} of the fully qualified name like
-   *  projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}
+   *  `projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}`
    */
   // const targetSnapshotId = 'abc123'
 

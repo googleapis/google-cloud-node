@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -172,6 +172,8 @@ const ServiceAttachmentsClient = v1.ServiceAttachmentsClient;
 type ServiceAttachmentsClient = v1.ServiceAttachmentsClient;
 const SnapshotsClient = v1.SnapshotsClient;
 type SnapshotsClient = v1.SnapshotsClient;
+const SnapshotSettingsServiceClient = v1.SnapshotSettingsServiceClient;
+type SnapshotSettingsServiceClient = v1.SnapshotSettingsServiceClient;
 const SslCertificatesClient = v1.SslCertificatesClient;
 type SslCertificatesClient = v1.SslCertificatesClient;
 const SslPoliciesClient = v1.SslPoliciesClient;
@@ -282,6 +284,7 @@ export {
   SecurityPoliciesClient,
   ServiceAttachmentsClient,
   SnapshotsClient,
+  SnapshotSettingsServiceClient,
   SslCertificatesClient,
   SslPoliciesClient,
   SubnetworksClient,
@@ -376,6 +379,7 @@ export default {
   SecurityPoliciesClient,
   ServiceAttachmentsClient,
   SnapshotsClient,
+  SnapshotSettingsServiceClient,
   SslCertificatesClient,
   SslPoliciesClient,
   SubnetworksClient,

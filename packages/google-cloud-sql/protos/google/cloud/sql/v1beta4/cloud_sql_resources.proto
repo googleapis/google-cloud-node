@@ -56,6 +56,14 @@ message ApiWarning {
     // Warning when user provided maxResults parameter exceeds the limit.  The
     // returned result set may be incomplete.
     MAX_RESULTS_EXCEEDS_LIMIT = 2;
+
+    // Warning when user tries to create/update a user with credentials that
+    // have previously been compromised by a public data breach.
+    COMPROMISED_CREDENTIALS = 3;
+
+    // Warning when the operation succeeds but some non-critical workflow state
+    // failed.
+    INTERNAL_STATE_FAILURE = 4;
   }
 
   // Code to uniquely identify the warning type.
@@ -432,6 +440,17 @@ message DatabaseInstance {
     optional int32 sql_min_recommended_increase_size_gb = 2;
   }
 
+  // The current SQL network architecture for the instance.
+  enum SqlNetworkArchitecture {
+    SQL_NETWORK_ARCHITECTURE_UNSPECIFIED = 0;
+
+    // Instance is a Tenancy Unit (TU) instance.
+    NEW_NETWORK_ARCHITECTURE = 1;
+
+    // Instance is an Umbrella instance.
+    OLD_NETWORK_ARCHITECTURE = 2;
+  }
+
   // This is always `sql#instance`.
   string kind = 1;
 
@@ -582,12 +601,23 @@ message DatabaseInstance {
   // The current software version on the instance.
   string maintenance_version = 42;
 
+  // The SQL network architecture for the instance.
+  optional SqlNetworkArchitecture sql_network_architecture = 47;
+
   // Output only. The link to service attachment of PSC instance.
   optional string psc_service_attachment_link = 48
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The dns name of the instance.
   optional string dns_name = 49 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. DEPRECATED: please use write_endpoint instead.
+  optional string primary_dns_name = 51
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The dns name of the primary instance in a replication group.
+  optional string write_endpoint = 52
+      [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Database list response.
@@ -661,6 +691,18 @@ message DemoteMasterMySqlReplicaConfiguration {
 
   // PEM representation of the trusted CA's x509 certificate.
   string ca_certificate = 6;
+}
+
+// This context is used to demote an existing standalone instance to be
+// a Cloud SQL read replica for an external database server.
+message DemoteContext {
+  // This is always `sql#demoteContext`.
+  string kind = 1;
+
+  // Required. The name of the instance which acts as an on-premises primary
+  // instance in the replication setup.
+  string source_representative_instance_name = 2
+      [(google.api.field_behavior) = REQUIRED];
 }
 
 enum SqlFileType {
@@ -911,13 +953,16 @@ message ImportContext {
     // Type of the bak content, FULL or DIFF.
     BakType bak_type = 6;
 
-    // Optional. StopAt keyword for transaction log import, Applies to Cloud SQL
-    // for SQL Server only
+    // Optional. The timestamp when the import should stop. This timestamp is in
+    // the [RFC 3339](https://tools.ietf.org/html/rfc3339) format (for example,
+    // `2023-10-01T16:19:00.094`). This field is equivalent to the STOPAT
+    // keyword and applies to Cloud SQL for SQL Server only.
     google.protobuf.Timestamp stop_at = 7
         [(google.api.field_behavior) = OPTIONAL];
 
-    // Optional. StopAtMark keyword for transaction log import, Applies to Cloud
-    // SQL for SQL Server only
+    // Optional. The marked transaction where the import should stop. This field
+    // is equivalent to the STOPATMARK keyword and applies to Cloud SQL for SQL
+    // Server only.
     string stop_at_mark = 8 [(google.api.field_behavior) = OPTIONAL];
   }
 
@@ -976,6 +1021,14 @@ message InstancesCloneRequest {
 message InstancesDemoteMasterRequest {
   // Contains details about the demoteMaster operation.
   DemoteMasterContext demote_master_context = 1;
+}
+
+// This request is used to demote an existing standalone instance to be a
+// Cloud SQL read replica for an external database server.
+message InstancesDemoteRequest {
+  // Required. This context is used to demote an existing standalone instance to
+  // be a Cloud SQL read replica for an external database server.
+  DemoteContext demote_context = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 // Database instance export request.
@@ -1186,6 +1239,20 @@ message SqlExternalSyncSettingError {
     // The replication user is missing parallel import specific privileges.
     // (e.g. LOCK TABLES) for MySQL.
     MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34;
+
+    // The global variable local_infile is off on external server replica.
+    LOCAL_INFILE_OFF = 35;
+
+    // This code instructs customers to turn on point-in-time recovery manually
+    // for the instance after promoting the Cloud SQL for PostgreSQL instance.
+    TURN_ON_PITR_AFTER_PROMOTE = 36;
+
+    // The minor version of replica database is incompatible with the source.
+    INCOMPATIBLE_DATABASE_MINOR_VERSION = 37;
+
+    // This warning message indicates that Cloud SQL uses the maximum number of
+    // subscriptions to migrate data from the source to the destination.
+    SOURCE_MAX_SUBSCRIPTIONS = 38;
   }
 
   // Can be `sql#externalSyncSettingError` or
@@ -1201,6 +1268,29 @@ message SqlExternalSyncSettingError {
 
 // IP Management configuration.
 message IpConfiguration {
+  // The SSL options for database connections.
+  enum SslMode {
+    // The SSL mode is unknown.
+    SSL_MODE_UNSPECIFIED = 0;
+
+    // Allow non-SSL/non-TLS and SSL/TLS connections. For SSL/TLS connections,
+    // the client certificate won't be verified.
+    // When this value is used, the legacy `require_ssl` flag must be false or
+    // cleared to avoid the conflict between values of two flags.
+    ALLOW_UNENCRYPTED_AND_ENCRYPTED = 1;
+
+    // Only allow connections encrypted with SSL/TLS.
+    // When this value is used, the legacy `require_ssl` flag must be false or
+    // cleared to avoid the conflict between values of two flags.
+    ENCRYPTED_ONLY = 2;
+
+    // Only allow connections encrypted with SSL/TLS and with valid
+    // client certificates.
+    // When this value is used, the legacy `require_ssl` flag must be true or
+    // cleared to avoid the conflict between values of two flags.
+    TRUSTED_CLIENT_CERTIFICATE_REQUIRED = 3;
+  }
+
   // Whether the instance is assigned a public IP address or not.
   google.protobuf.BoolValue ipv4_enabled = 1;
 
@@ -1210,7 +1300,15 @@ message IpConfiguration {
   // be updated, but it cannot be removed after it is set.
   string private_network = 2;
 
-  // Whether SSL connections over IP are enforced or not.
+  // Use `ssl_mode` instead for MySQL and PostgreSQL. SQL Server uses this flag.
+  //
+  // Whether SSL/TLS connections over IP are enforced.
+  // If set to false, then allow both non-SSL/non-TLS and SSL/TLS connections.
+  // For SSL/TLS connections, the client certificate won't be verified. If
+  // set to true, then only allow connections encrypted with SSL/TLS and with
+  // valid client certificates. If you want to enforce SSL/TLS without enforcing
+  // the requirement for valid client certificates, then use the `ssl_mode` flag
+  // instead of the legacy `require_ssl` flag.
   google.protobuf.BoolValue require_ssl = 3;
 
   // The list of external networks that are allowed to connect to the instance
@@ -1230,6 +1328,10 @@ message IpConfiguration {
   // such as BigQuery.
   google.protobuf.BoolValue enable_private_path_for_google_cloud_services = 7;
 
+  // SQL Server uses the `require_ssl` flag. You can set the value for this flag
+  // to 'true' or 'false'.
+  SslMode ssl_mode = 8;
+
   // PSC settings for this instance.
   optional PscConfig psc_config = 9;
 }
@@ -1239,16 +1341,17 @@ message PscConfig {
   // Whether PSC connectivity is enabled for this instance.
   optional bool psc_enabled = 1;
 
-  // List of consumer projects that are allow-listed for PSC connections to this
-  // instance. This instance can be connected to with PSC from any network in
-  // these projects.
+  // Optional. The list of consumer projects that are allow-listed for PSC
+  // connections to this instance. This instance can be connected to with PSC
+  // from any network in these projects.
   //
   // Each consumer project in this list may be represented by a project number
   // (numeric) or by a project id (alphanumeric).
-  repeated string allowed_consumer_projects = 2;
+  repeated string allowed_consumer_projects = 2
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Database instance IP Mapping.
+// Database instance IP mapping
 message IpMapping {
   // The type of this IP address. A `PRIMARY` address is a public address that
   // can accept incoming connections. A `PRIVATE` address is a private address
@@ -1281,6 +1384,7 @@ message LocationPreference {
 
   // The preferred Compute Engine zone for the secondary/failover
   // (for example: us-central1-a, us-central1-b, etc.).
+  // To disable this field, set it to 'no_secondary_zone'.
   string secondary_zone = 4;
 
   // This is always `sql#locationPreference`.
@@ -1612,6 +1716,9 @@ message Operation {
   // populated.
   OperationErrors error = 8;
 
+  // An Admin API warning message.
+  ApiWarning api_warning = 19;
+
   // The type of the operation. Valid values are:
   // *  `CREATE`
   // *  `DELETE`
@@ -1702,6 +1809,10 @@ message PasswordValidationPolicy {
 
   // Whether the password policy is enabled or not.
   google.protobuf.BoolValue enable_password_policy = 6;
+
+  // Disallow credentials that have been previously compromised by a public data
+  // breach.
+  google.protobuf.BoolValue disallow_compromised_credentials = 7;
 }
 
 // Operations list response.
@@ -1736,6 +1847,12 @@ message ReplicaConfiguration {
   // primary instance. Only one replica can be specified as failover target, and
   // the replica has to be in different zone with the primary instance.
   google.protobuf.BoolValue failover_target = 3;
+
+  // Optional. Specifies if a SQL Server replica is a cascadable replica. A
+  // cascadable replica is a SQL Server cross region replica that supports
+  // replica(s) under it.
+  google.protobuf.BoolValue cascadable_replica = 5
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Database instance restore from backup context.
@@ -2428,6 +2545,12 @@ enum SqlUpdateTrack {
   // your instance prefer to let Cloud SQL choose the timing of restart (within
   // its Maintenance window, if applicable).
   stable = 2;
+
+  // For instance update that requires a restart, this update track indicates
+  // your instance prefer to let Cloud SQL choose the timing of restart (within
+  // its Maintenance window, if applicable) to be at least 5 weeks after the
+  // notification.
+  week5 = 3;
 }
 
 enum SqlFlagType {

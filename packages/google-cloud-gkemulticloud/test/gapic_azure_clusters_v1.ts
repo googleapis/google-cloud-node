@@ -519,6 +519,143 @@ describe('v1.AzureClustersClient', () => {
     });
   });
 
+  describe('generateAzureClusterAgentToken', () => {
+    it('invokes generateAzureClusterAgentToken without error', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenResponse()
+      );
+      client.innerApiCalls.generateAzureClusterAgentToken =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.generateAzureClusterAgentToken(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateAzureClusterAgentToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateAzureClusterAgentToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateAzureClusterAgentToken without error using callback', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenResponse()
+      );
+      client.innerApiCalls.generateAzureClusterAgentToken =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.generateAzureClusterAgentToken(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.gkemulticloud.v1.IGenerateAzureClusterAgentTokenResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateAzureClusterAgentToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateAzureClusterAgentToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateAzureClusterAgentToken with error', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.generateAzureClusterAgentToken = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.generateAzureClusterAgentToken(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.generateAzureClusterAgentToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateAzureClusterAgentToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateAzureClusterAgentToken with closed client', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.generateAzureClusterAgentToken(request),
+        expectedError
+      );
+    });
+  });
+
   describe('generateAzureAccessToken', () => {
     it('invokes generateAzureAccessToken without error', async () => {
       const client = new azureclustersModule.v1.AzureClustersClient({
@@ -783,6 +920,268 @@ describe('v1.AzureClustersClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAzureNodePool(request), expectedError);
+    });
+  });
+
+  describe('getAzureOpenIdConfig', () => {
+    it('invokes getAzureOpenIdConfig without error', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GetAzureOpenIdConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureOpenIdConfigRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.AzureOpenIdConfig()
+      );
+      client.innerApiCalls.getAzureOpenIdConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getAzureOpenIdConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAzureOpenIdConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureOpenIdConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAzureOpenIdConfig without error using callback', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GetAzureOpenIdConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureOpenIdConfigRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.AzureOpenIdConfig()
+      );
+      client.innerApiCalls.getAzureOpenIdConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAzureOpenIdConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.gkemulticloud.v1.IAzureOpenIdConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAzureOpenIdConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureOpenIdConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAzureOpenIdConfig with error', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GetAzureOpenIdConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureOpenIdConfigRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAzureOpenIdConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAzureOpenIdConfig(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAzureOpenIdConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureOpenIdConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAzureOpenIdConfig with closed client', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GetAzureOpenIdConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureOpenIdConfigRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAzureOpenIdConfig(request), expectedError);
+    });
+  });
+
+  describe('getAzureJsonWebKeys', () => {
+    it('invokes getAzureJsonWebKeys without error', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GetAzureJsonWebKeysRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureJsonWebKeysRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.AzureJsonWebKeys()
+      );
+      client.innerApiCalls.getAzureJsonWebKeys =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getAzureJsonWebKeys(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAzureJsonWebKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureJsonWebKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAzureJsonWebKeys without error using callback', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GetAzureJsonWebKeysRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureJsonWebKeysRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.AzureJsonWebKeys()
+      );
+      client.innerApiCalls.getAzureJsonWebKeys =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAzureJsonWebKeys(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.gkemulticloud.v1.IAzureJsonWebKeys | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAzureJsonWebKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureJsonWebKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAzureJsonWebKeys with error', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GetAzureJsonWebKeysRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureJsonWebKeysRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedHeaderRequestParams = `azure_cluster=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAzureJsonWebKeys = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getAzureJsonWebKeys(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAzureJsonWebKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAzureJsonWebKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAzureJsonWebKeys with closed client', async () => {
+      const client = new azureclustersModule.v1.AzureClustersClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.gkemulticloud.v1.GetAzureJsonWebKeysRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkemulticloud.v1.GetAzureJsonWebKeysRequest',
+        ['azureCluster']
+      );
+      request.azureCluster = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getAzureJsonWebKeys(request), expectedError);
     });
   });
 

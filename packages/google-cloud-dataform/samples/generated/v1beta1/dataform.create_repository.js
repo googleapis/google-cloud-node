@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ function main(parent, repository, repositoryId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location in which to create the repository. Must be in the format
-   *  `projects/* /locations/*`.
+   *  Required. The location in which to create the repository. Must be in the
+   *  format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
@@ -38,8 +38,8 @@ function main(parent, repository, repositoryId) {
    */
   // const repository = {}
   /**
-   *  Required. The ID to use for the repository, which will become the final component of
-   *  the repository's resource name.
+   *  Required. The ID to use for the repository, which will become the final
+   *  component of the repository's resource name.
    */
   // const repositoryId = 'abc123'
 

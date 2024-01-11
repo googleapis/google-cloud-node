@@ -20,9 +20,24 @@
                 "queryAudienceList"
               ]
             },
+            "SheetExportAudienceList": {
+              "methods": [
+                "sheetExportAudienceList"
+              ]
+            },
             "GetAudienceList": {
               "methods": [
                 "getAudienceList"
+              ]
+            },
+            "CreateRecurringAudienceList": {
+              "methods": [
+                "createRecurringAudienceList"
+              ]
+            },
+            "GetRecurringAudienceList": {
+              "methods": [
+                "getRecurringAudienceList"
               ]
             },
             "CreateAudienceList": {
@@ -35,6 +50,13 @@
                 "listAudienceLists",
                 "listAudienceListsStream",
                 "listAudienceListsAsync"
+              ]
+            },
+            "ListRecurringAudienceLists": {
+              "methods": [
+                "listRecurringAudienceLists",
+                "listRecurringAudienceListsStream",
+                "listRecurringAudienceListsAsync"
               ]
             }
           }
@@ -52,9 +74,24 @@
                 "queryAudienceList"
               ]
             },
+            "SheetExportAudienceList": {
+              "methods": [
+                "sheetExportAudienceList"
+              ]
+            },
             "GetAudienceList": {
               "methods": [
                 "getAudienceList"
+              ]
+            },
+            "CreateRecurringAudienceList": {
+              "methods": [
+                "createRecurringAudienceList"
+              ]
+            },
+            "GetRecurringAudienceList": {
+              "methods": [
+                "getRecurringAudienceList"
               ]
             },
             "CreateAudienceList": {
@@ -67,6 +104,13 @@
                 "listAudienceLists",
                 "listAudienceListsStream",
                 "listAudienceListsAsync"
+              ]
+            },
+            "ListRecurringAudienceLists": {
+              "methods": [
+                "listRecurringAudienceLists",
+                "listRecurringAudienceListsStream",
+                "listRecurringAudienceListsAsync"
               ]
             }
           }

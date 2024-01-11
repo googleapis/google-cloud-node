@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,6 +40,10 @@ function main(run) {
    *  updated.
    */
   // const updateMask = {}
+  /**
+   *  If set to true and the run is not found, the request creates it.
+   */
+  // const allowMissing = true
 
   // Imports the Lineage library
   const {LineageClient} = require('@google-cloud/lineage').v1;

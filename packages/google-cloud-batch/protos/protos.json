@@ -442,9 +442,19 @@
                         "logsPath": {
                           "type": "string",
                           "id": 2
+                        },
+                        "cloudLoggingOption": {
+                          "type": "CloudLoggingOption",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
+                        "CloudLoggingOption": {
+                          "fields": {}
+                        },
                         "Destination": {
                           "values": {
                             "DESTINATION_UNSPECIFIED": 0,
@@ -1702,9 +1712,27 @@
                         "logsPath": {
                           "type": "string",
                           "id": 2
+                        },
+                        "cloudLoggingOption": {
+                          "type": "CloudLoggingOption",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
+                        "CloudLoggingOption": {
+                          "fields": {
+                            "useGenericTaskMonitoredResource": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "Destination": {
                           "values": {
                             "DESTINATION_UNSPECIFIED": 0,
@@ -2180,6 +2208,13 @@
                         "permissiveSsh": {
                           "type": "bool",
                           "id": 12
+                        },
+                        "enableOslogin": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {

@@ -114,6 +114,15 @@ message Job {
 // LogsPolicy describes how outputs from a Job's Tasks (stdout/stderr) will be
 // preserved.
 message LogsPolicy {
+  // CloudLoggingOption contains additional settings for cloud logging generated
+  // by Batch job.
+  message CloudLoggingOption {
+    // Optional. Set this flag to true to use generic_task as monitored resource
+    // for Batch job generated cloud logging.
+    bool use_generic_task_monitored_resource = 1
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
   // The destination (if any) for logs.
   enum Destination {
     // Logs are not preserved.
@@ -133,6 +142,11 @@ message LogsPolicy {
   // local file path on the VM, or under the mount point of a Persistent Disk or
   // Filestore, or a Cloud Storage path.
   string logs_path = 2;
+
+  // Optional. Additional settings for Cloud Logging. It will only take effect
+  // when the destination of LogsPolicy is set to CLOUD_LOGGING.
+  CloudLoggingOption cloud_logging_option = 3
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // JobDependency describes the state of other Jobs that the start of this Job
@@ -586,6 +600,10 @@ message AllocationPolicy {
   map<string, string> labels = 6;
 
   // The network policy.
+  //
+  // If you define an instance template in the InstancePolicyOrTemplate field,
+  // Batch will use the network settings in the instance template instead of
+  // this field.
   NetworkPolicy network = 7;
 
   // The placement policy.
@@ -628,7 +646,8 @@ message TaskGroup {
   int64 task_count = 4;
 
   // Max number of tasks that can run in parallel.
-  // Default to min(task_count, 1000).
+  // Default to min(task_count, parallel tasks per job limit).
+  // See: [Job Limits](https://cloud.google.com/batch/quotas#job_limits).
   // Field parallelism must be 1 if the scheduling_policy is IN_ORDER.
   int64 parallelism = 5;
 
@@ -672,6 +691,17 @@ message TaskGroup {
   // When true, Batch will configure SSH to allow passwordless login between
   // VMs running the Batch tasks in the same TaskGroup.
   bool permissive_ssh = 12;
+
+  // Optional. When true, Batch will use the OS Login generated POSIX account to
+  // exeucute the runnables instead of the default root user.
+  //
+  // To control root or non-root privilege for runnable execution, the project \
+  // Admin user needs to configure IAM roles according to
+  // https://cloud.google.com/compute/docs/oslogin/set-up-oslogin#configure_users.
+  // Specifically, if a root execution is needed, the roles/compute.osAdminLogin
+  // should be granted to the Batch job submitter. Otherwise,
+  // roles/compute.osLogin should be granted to the Batch job submitter.
+  bool enable_oslogin = 13 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Carries information about a Google Cloud service account.

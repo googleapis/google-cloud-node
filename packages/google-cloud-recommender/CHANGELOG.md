@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.1.1](https://github.com/googleapis/google-cloud-node/compare/recommender-v6.1.0...recommender-v6.1.1) (2024-01-05)
+
+
+### Bug Fixes
+
+* [recommender] correct long audio synthesis HTTP binding ([#4883](https://github.com/googleapis/google-cloud-node/issues/4883)) ([aa8dcf8](https://github.com/googleapis/google-cloud-node/commit/aa8dcf8c3f98e878eac8517cfd01ec2bfa7f54be))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/recommender-v6.0.0...recommender-v6.1.0) (2023-09-06)
 
 

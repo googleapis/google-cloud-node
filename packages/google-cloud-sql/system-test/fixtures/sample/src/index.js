@@ -23,9 +23,12 @@ function main() {
   const sqlBackupRunsServiceClient = new sql.SqlBackupRunsServiceClient();
   const sqlConnectServiceClient = new sql.SqlConnectServiceClient();
   const sqlDatabasesServiceClient = new sql.SqlDatabasesServiceClient();
+
   const sqlFlagsServiceClient = new sql.SqlFlagsServiceClient();
+
   const sqlInstancesServiceClient = new sql.SqlInstancesServiceClient();
   const sqlOperationsServiceClient = new sql.SqlOperationsServiceClient();
+
   const sqlSslCertsServiceClient = new sql.SqlSslCertsServiceClient();
   const sqlTiersServiceClient = new sql.SqlTiersServiceClient();
   const sqlUsersServiceClient = new sql.SqlUsersServiceClient();

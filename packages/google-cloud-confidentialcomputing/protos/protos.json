@@ -69,6 +69,12 @@
                         "ECDSA_P256_SHA256": 3
                       }
                     },
+                    "TokenType": {
+                      "values": {
+                        "TOKEN_TYPE_UNSPECIFIED": 0,
+                        "TOKEN_TYPE_OIDC": 1
+                      }
+                    },
                     "Challenge": {
                       "options": {
                         "(google.api.resource).type": "confidentialcomputing.googleapis.com/Challenge",
@@ -212,6 +218,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tokenType": {
+                          "type": "TokenType",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

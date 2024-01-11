@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,23 +29,33 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource of the WorkflowInvocation type. Must be in the
-   *  format `projects/* /locations/* /repositories/*`.
+   *  Required. The parent resource of the WorkflowInvocation type. Must be in
+   *  the format `projects/* /locations/* /repositories/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. Maximum number of workflow invocations to return. The server may return
-   *  fewer items than requested. If unspecified, the server will pick an
+   *  Optional. Maximum number of workflow invocations to return. The server may
+   *  return fewer items than requested. If unspecified, the server will pick an
    *  appropriate default.
    */
   // const pageSize = 1234
   /**
-   *  Optional. Page token received from a previous `ListWorkflowInvocations` call.
-   *  Provide this to retrieve the subsequent page.
+   *  Optional. Page token received from a previous `ListWorkflowInvocations`
+   *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to `ListWorkflowInvocations`
    *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. This field only supports ordering by `name`. If unspecified, the
+   *  server will choose the ordering. If specified, the default order is
+   *  ascending for the `name` field.
+   */
+  // const orderBy = 'abc123'
+  /**
+   *  Optional. Filter for the returned list.
+   */
+  // const filter = 'abc123'
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;

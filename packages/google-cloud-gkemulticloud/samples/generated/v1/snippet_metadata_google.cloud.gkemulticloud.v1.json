@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-gkemulticloud",
-        "version": "1.0.1",
+        "version": "1.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -74,7 +74,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],
@@ -122,7 +122,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -150,6 +150,10 @@
                     {
                         "name": "distribution",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "proxy_config",
+                        "type": ".google.cloud.gkemulticloud.v1.AttachedProxyConfig"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -362,7 +366,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 85,
                     "type": "FULL"
                 }
             ],
@@ -382,6 +386,10 @@
                     {
                         "name": "platform_version",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "proxy_config",
+                        "type": ".google.cloud.gkemulticloud.v1.AttachedProxyConfig"
                     }
                 ],
                 "resultType": ".google.cloud.gkemulticloud.v1.GenerateAttachedClusterInstallManifestResponse",
@@ -392,6 +400,78 @@
                 "method": {
                     "shortName": "GenerateAttachedClusterInstallManifest",
                     "fullName": "google.cloud.gkemulticloud.v1.AttachedClusters.GenerateAttachedClusterInstallManifest",
+                    "service": {
+                        "shortName": "AttachedClusters",
+                        "fullName": "google.cloud.gkemulticloud.v1.AttachedClusters"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkemulticloud_v1_generated_AttachedClusters_GenerateAttachedClusterAgentToken_async",
+            "title": "AttachedClusters generateAttachedClusterAgentToken Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates an access token for a cluster agent.",
+            "canonical": true,
+            "file": "attached_clusters.generate_attached_cluster_agent_token.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 88,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GenerateAttachedClusterAgentToken",
+                "fullName": "google.cloud.gkemulticloud.v1.AttachedClusters.GenerateAttachedClusterAgentToken",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "attached_cluster",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "subject_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "subject_token_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "version",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "grant_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "audience",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "scope",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "requested_token_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "options",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkemulticloud.v1.GenerateAttachedClusterAgentTokenResponse",
+                "client": {
+                    "shortName": "AttachedClustersClient",
+                    "fullName": "google.cloud.gkemulticloud.v1.AttachedClustersClient"
+                },
+                "method": {
+                    "shortName": "GenerateAttachedClusterAgentToken",
+                    "fullName": "google.cloud.gkemulticloud.v1.AttachedClusters.GenerateAttachedClusterAgentToken",
                     "service": {
                         "shortName": "AttachedClusters",
                         "fullName": "google.cloud.gkemulticloud.v1.AttachedClusters"
@@ -462,7 +542,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 89,
+                    "end": 93,
                     "type": "FULL"
                 }
             ],
@@ -598,7 +678,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -620,6 +700,10 @@
                         "type": "TYPE_BOOL"
                     },
                     {
+                        "name": "ignore_errors",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
                         "name": "etag",
                         "type": "TYPE_STRING"
                     }
@@ -632,6 +716,82 @@
                 "method": {
                     "shortName": "DeleteAwsCluster",
                     "fullName": "google.cloud.gkemulticloud.v1.AwsClusters.DeleteAwsCluster",
+                    "service": {
+                        "shortName": "AwsClusters",
+                        "fullName": "google.cloud.gkemulticloud.v1.AwsClusters"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkemulticloud_v1_generated_AwsClusters_GenerateAwsClusterAgentToken_async",
+            "title": "AttachedClusters generateAwsClusterAgentToken Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates an access token for a cluster agent.",
+            "canonical": true,
+            "file": "aws_clusters.generate_aws_cluster_agent_token.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 92,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GenerateAwsClusterAgentToken",
+                "fullName": "google.cloud.gkemulticloud.v1.AwsClusters.GenerateAwsClusterAgentToken",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "aws_cluster",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "subject_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "subject_token_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "version",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "node_pool_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "grant_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "audience",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "scope",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "requested_token_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "options",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkemulticloud.v1.GenerateAwsClusterAgentTokenResponse",
+                "client": {
+                    "shortName": "AwsClustersClient",
+                    "fullName": "google.cloud.gkemulticloud.v1.AwsClustersClient"
+                },
+                "method": {
+                    "shortName": "GenerateAwsClusterAgentToken",
+                    "fullName": "google.cloud.gkemulticloud.v1.AwsClusters.GenerateAwsClusterAgentToken",
                     "service": {
                         "shortName": "AwsClusters",
                         "fullName": "google.cloud.gkemulticloud.v1.AwsClusters"
@@ -742,7 +902,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 88,
+                    "end": 96,
                     "type": "FULL"
                 }
             ],
@@ -772,6 +932,50 @@
                 "method": {
                     "shortName": "UpdateAwsNodePool",
                     "fullName": "google.cloud.gkemulticloud.v1.AwsClusters.UpdateAwsNodePool",
+                    "service": {
+                        "shortName": "AwsClusters",
+                        "fullName": "google.cloud.gkemulticloud.v1.AwsClusters"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkemulticloud_v1_generated_AwsClusters_RollbackAwsNodePoolUpdate_async",
+            "title": "AttachedClusters rollbackAwsNodePoolUpdate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Rolls back a previously aborted or failed [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool] update request. Makes no changes if the last update request successfully finished. If an update request is in progress, you cannot rollback the update. You must first cancel or let it finish unsuccessfully before you can rollback.",
+            "canonical": true,
+            "file": "aws_clusters.rollback_aws_node_pool_update.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RollbackAwsNodePoolUpdate",
+                "fullName": "google.cloud.gkemulticloud.v1.AwsClusters.RollbackAwsNodePoolUpdate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "respect_pdb",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AwsClustersClient",
+                    "fullName": "google.cloud.gkemulticloud.v1.AwsClustersClient"
+                },
+                "method": {
+                    "shortName": "RollbackAwsNodePoolUpdate",
+                    "fullName": "google.cloud.gkemulticloud.v1.AwsClusters.RollbackAwsNodePoolUpdate",
                     "service": {
                         "shortName": "AwsClusters",
                         "fullName": "google.cloud.gkemulticloud.v1.AwsClusters"
@@ -878,7 +1082,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
@@ -900,6 +1104,10 @@
                         "type": "TYPE_BOOL"
                     },
                     {
+                        "name": "ignore_errors",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
                         "name": "etag",
                         "type": "TYPE_STRING"
                     }
@@ -912,6 +1120,86 @@
                 "method": {
                     "shortName": "DeleteAwsNodePool",
                     "fullName": "google.cloud.gkemulticloud.v1.AwsClusters.DeleteAwsNodePool",
+                    "service": {
+                        "shortName": "AwsClusters",
+                        "fullName": "google.cloud.gkemulticloud.v1.AwsClusters"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkemulticloud_v1_generated_AwsClusters_GetAwsOpenIdConfig_async",
+            "title": "AttachedClusters getAwsOpenIdConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the OIDC discovery document for the cluster. See the [OpenID Connect Discovery 1.0 specification](https://openid.net/specs/openid-connect-discovery-1_0.html) for details.",
+            "canonical": true,
+            "file": "aws_clusters.get_aws_open_id_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAwsOpenIdConfig",
+                "fullName": "google.cloud.gkemulticloud.v1.AwsClusters.GetAwsOpenIdConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "aws_cluster",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkemulticloud.v1.AwsOpenIdConfig",
+                "client": {
+                    "shortName": "AwsClustersClient",
+                    "fullName": "google.cloud.gkemulticloud.v1.AwsClustersClient"
+                },
+                "method": {
+                    "shortName": "GetAwsOpenIdConfig",
+                    "fullName": "google.cloud.gkemulticloud.v1.AwsClusters.GetAwsOpenIdConfig",
+                    "service": {
+                        "shortName": "AwsClusters",
+                        "fullName": "google.cloud.gkemulticloud.v1.AwsClusters"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkemulticloud_v1_generated_AwsClusters_GetAwsJsonWebKeys_async",
+            "title": "AttachedClusters getAwsJsonWebKeys Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the public component of the cluster signing keys in JSON Web Key format.",
+            "canonical": true,
+            "file": "aws_clusters.get_aws_json_web_keys.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAwsJsonWebKeys",
+                "fullName": "google.cloud.gkemulticloud.v1.AwsClusters.GetAwsJsonWebKeys",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "aws_cluster",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkemulticloud.v1.AwsJsonWebKeys",
+                "client": {
+                    "shortName": "AwsClustersClient",
+                    "fullName": "google.cloud.gkemulticloud.v1.AwsClustersClient"
+                },
+                "method": {
+                    "shortName": "GetAwsJsonWebKeys",
+                    "fullName": "google.cloud.gkemulticloud.v1.AwsClusters.GetAwsJsonWebKeys",
                     "service": {
                         "shortName": "AwsClusters",
                         "fullName": "google.cloud.gkemulticloud.v1.AwsClusters"
@@ -1210,7 +1498,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -1388,6 +1676,82 @@
             }
         },
         {
+            "regionTag": "gkemulticloud_v1_generated_AzureClusters_GenerateAzureClusterAgentToken_async",
+            "title": "AttachedClusters generateAzureClusterAgentToken Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates an access token for a cluster agent.",
+            "canonical": true,
+            "file": "azure_clusters.generate_azure_cluster_agent_token.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 92,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GenerateAzureClusterAgentToken",
+                "fullName": "google.cloud.gkemulticloud.v1.AzureClusters.GenerateAzureClusterAgentToken",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "azure_cluster",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "subject_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "subject_token_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "version",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "node_pool_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "grant_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "audience",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "scope",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "requested_token_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "options",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkemulticloud.v1.GenerateAzureClusterAgentTokenResponse",
+                "client": {
+                    "shortName": "AzureClustersClient",
+                    "fullName": "google.cloud.gkemulticloud.v1.AzureClustersClient"
+                },
+                "method": {
+                    "shortName": "GenerateAzureClusterAgentToken",
+                    "fullName": "google.cloud.gkemulticloud.v1.AzureClusters.GenerateAzureClusterAgentToken",
+                    "service": {
+                        "shortName": "AzureClusters",
+                        "fullName": "google.cloud.gkemulticloud.v1.AzureClusters"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "gkemulticloud_v1_generated_AzureClusters_GenerateAzureAccessToken_async",
             "title": "AttachedClusters generateAzureAccessToken Sample",
             "origin": "API_DEFINITION",
@@ -1438,7 +1802,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 81,
                     "type": "FULL"
                 }
             ],
@@ -1490,7 +1854,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -1660,6 +2024,86 @@
                 "method": {
                     "shortName": "DeleteAzureNodePool",
                     "fullName": "google.cloud.gkemulticloud.v1.AzureClusters.DeleteAzureNodePool",
+                    "service": {
+                        "shortName": "AzureClusters",
+                        "fullName": "google.cloud.gkemulticloud.v1.AzureClusters"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkemulticloud_v1_generated_AzureClusters_GetAzureOpenIdConfig_async",
+            "title": "AttachedClusters getAzureOpenIdConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the OIDC discovery document for the cluster. See the [OpenID Connect Discovery 1.0 specification](https://openid.net/specs/openid-connect-discovery-1_0.html) for details.",
+            "canonical": true,
+            "file": "azure_clusters.get_azure_open_id_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAzureOpenIdConfig",
+                "fullName": "google.cloud.gkemulticloud.v1.AzureClusters.GetAzureOpenIdConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "azure_cluster",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkemulticloud.v1.AzureOpenIdConfig",
+                "client": {
+                    "shortName": "AzureClustersClient",
+                    "fullName": "google.cloud.gkemulticloud.v1.AzureClustersClient"
+                },
+                "method": {
+                    "shortName": "GetAzureOpenIdConfig",
+                    "fullName": "google.cloud.gkemulticloud.v1.AzureClusters.GetAzureOpenIdConfig",
+                    "service": {
+                        "shortName": "AzureClusters",
+                        "fullName": "google.cloud.gkemulticloud.v1.AzureClusters"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gkemulticloud_v1_generated_AzureClusters_GetAzureJsonWebKeys_async",
+            "title": "AttachedClusters getAzureJsonWebKeys Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the public component of the cluster signing keys in JSON Web Key format.",
+            "canonical": true,
+            "file": "azure_clusters.get_azure_json_web_keys.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAzureJsonWebKeys",
+                "fullName": "google.cloud.gkemulticloud.v1.AzureClusters.GetAzureJsonWebKeys",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "azure_cluster",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkemulticloud.v1.AzureJsonWebKeys",
+                "client": {
+                    "shortName": "AzureClustersClient",
+                    "fullName": "google.cloud.gkemulticloud.v1.AzureClustersClient"
+                },
+                "method": {
+                    "shortName": "GetAzureJsonWebKeys",
+                    "fullName": "google.cloud.gkemulticloud.v1.AzureClusters.GetAzureJsonWebKeys",
                     "service": {
                         "shortName": "AzureClusters",
                         "fullName": "google.cloud.gkemulticloud.v1.AzureClusters"

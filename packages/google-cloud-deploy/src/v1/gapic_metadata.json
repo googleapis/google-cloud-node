@@ -15,9 +15,19 @@
                 "getDeliveryPipeline"
               ]
             },
+            "RollbackTarget": {
+              "methods": [
+                "rollbackTarget"
+              ]
+            },
             "GetTarget": {
               "methods": [
                 "getTarget"
+              ]
+            },
+            "GetCustomTargetType": {
+              "methods": [
+                "getCustomTargetType"
               ]
             },
             "GetRelease": {
@@ -75,6 +85,21 @@
                 "getConfig"
               ]
             },
+            "GetAutomation": {
+              "methods": [
+                "getAutomation"
+              ]
+            },
+            "GetAutomationRun": {
+              "methods": [
+                "getAutomationRun"
+              ]
+            },
+            "CancelAutomationRun": {
+              "methods": [
+                "cancelAutomationRun"
+              ]
+            },
             "CreateDeliveryPipeline": {
               "methods": [
                 "createDeliveryPipeline"
@@ -105,6 +130,21 @@
                 "deleteTarget"
               ]
             },
+            "CreateCustomTargetType": {
+              "methods": [
+                "createCustomTargetType"
+              ]
+            },
+            "UpdateCustomTargetType": {
+              "methods": [
+                "updateCustomTargetType"
+              ]
+            },
+            "DeleteCustomTargetType": {
+              "methods": [
+                "deleteCustomTargetType"
+              ]
+            },
             "CreateRelease": {
               "methods": [
                 "createRelease"
@@ -113,6 +153,21 @@
             "CreateRollout": {
               "methods": [
                 "createRollout"
+              ]
+            },
+            "CreateAutomation": {
+              "methods": [
+                "createAutomation"
+              ]
+            },
+            "UpdateAutomation": {
+              "methods": [
+                "updateAutomation"
+              ]
+            },
+            "DeleteAutomation": {
+              "methods": [
+                "deleteAutomation"
               ]
             },
             "ListDeliveryPipelines": {
@@ -127,6 +182,13 @@
                 "listTargets",
                 "listTargetsStream",
                 "listTargetsAsync"
+              ]
+            },
+            "ListCustomTargetTypes": {
+              "methods": [
+                "listCustomTargetTypes",
+                "listCustomTargetTypesStream",
+                "listCustomTargetTypesAsync"
               ]
             },
             "ListReleases": {
@@ -148,6 +210,20 @@
                 "listJobRuns",
                 "listJobRunsStream",
                 "listJobRunsAsync"
+              ]
+            },
+            "ListAutomations": {
+              "methods": [
+                "listAutomations",
+                "listAutomationsStream",
+                "listAutomationsAsync"
+              ]
+            },
+            "ListAutomationRuns": {
+              "methods": [
+                "listAutomationRuns",
+                "listAutomationRunsStream",
+                "listAutomationRunsAsync"
               ]
             }
           }
@@ -160,9 +236,19 @@
                 "getDeliveryPipeline"
               ]
             },
+            "RollbackTarget": {
+              "methods": [
+                "rollbackTarget"
+              ]
+            },
             "GetTarget": {
               "methods": [
                 "getTarget"
+              ]
+            },
+            "GetCustomTargetType": {
+              "methods": [
+                "getCustomTargetType"
               ]
             },
             "GetRelease": {
@@ -220,6 +306,21 @@
                 "getConfig"
               ]
             },
+            "GetAutomation": {
+              "methods": [
+                "getAutomation"
+              ]
+            },
+            "GetAutomationRun": {
+              "methods": [
+                "getAutomationRun"
+              ]
+            },
+            "CancelAutomationRun": {
+              "methods": [
+                "cancelAutomationRun"
+              ]
+            },
             "CreateDeliveryPipeline": {
               "methods": [
                 "createDeliveryPipeline"
@@ -250,6 +351,21 @@
                 "deleteTarget"
               ]
             },
+            "CreateCustomTargetType": {
+              "methods": [
+                "createCustomTargetType"
+              ]
+            },
+            "UpdateCustomTargetType": {
+              "methods": [
+                "updateCustomTargetType"
+              ]
+            },
+            "DeleteCustomTargetType": {
+              "methods": [
+                "deleteCustomTargetType"
+              ]
+            },
             "CreateRelease": {
               "methods": [
                 "createRelease"
@@ -258,6 +374,21 @@
             "CreateRollout": {
               "methods": [
                 "createRollout"
+              ]
+            },
+            "CreateAutomation": {
+              "methods": [
+                "createAutomation"
+              ]
+            },
+            "UpdateAutomation": {
+              "methods": [
+                "updateAutomation"
+              ]
+            },
+            "DeleteAutomation": {
+              "methods": [
+                "deleteAutomation"
               ]
             },
             "ListDeliveryPipelines": {
@@ -272,6 +403,13 @@
                 "listTargets",
                 "listTargetsStream",
                 "listTargetsAsync"
+              ]
+            },
+            "ListCustomTargetTypes": {
+              "methods": [
+                "listCustomTargetTypes",
+                "listCustomTargetTypesStream",
+                "listCustomTargetTypesAsync"
               ]
             },
             "ListReleases": {
@@ -293,6 +431,20 @@
                 "listJobRuns",
                 "listJobRunsStream",
                 "listJobRunsAsync"
+              ]
+            },
+            "ListAutomations": {
+              "methods": [
+                "listAutomations",
+                "listAutomationsStream",
+                "listAutomationsAsync"
+              ]
+            },
+            "ListAutomationRuns": {
+              "methods": [
+                "listAutomationRuns",
+                "listAutomationRunsStream",
+                "listAutomationRunsAsync"
               ]
             }
           }

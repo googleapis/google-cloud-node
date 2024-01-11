@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-sql",
-        "version": "0.1.0",
+        "version": "0.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -832,6 +832,54 @@
             }
         },
         {
+            "regionTag": "sqladmin_v1_generated_SqlInstancesService_Demote_async",
+            "title": "SqlAvailableDatabaseVersionsService demote Sample",
+            "origin": "API_DEFINITION",
+            "description": " Demotes an existing standalone instance to be a Cloud SQL read replica for an external database server.",
+            "canonical": true,
+            "file": "sql_instances_service.demote.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Demote",
+                "fullName": "google.cloud.sql.v1.SqlInstancesService.Demote",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "body",
+                        "type": ".google.cloud.sql.v1.InstancesDemoteRequest"
+                    }
+                ],
+                "resultType": ".google.cloud.sql.v1.Operation",
+                "client": {
+                    "shortName": "SqlInstancesServiceClient",
+                    "fullName": "google.cloud.sql.v1.SqlInstancesServiceClient"
+                },
+                "method": {
+                    "shortName": "Demote",
+                    "fullName": "google.cloud.sql.v1.SqlInstancesService.Demote",
+                    "service": {
+                        "shortName": "SqlInstancesService",
+                        "fullName": "google.cloud.sql.v1.SqlInstancesService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "sqladmin_v1_generated_SqlInstancesService_Export_async",
             "title": "SqlAvailableDatabaseVersionsService export Sample",
             "origin": "API_DEFINITION",
@@ -1266,7 +1314,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -1282,6 +1330,10 @@
                     {
                         "name": "project",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "failover",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.sql.v1.Operation",
@@ -1292,6 +1344,54 @@
                 "method": {
                     "shortName": "PromoteReplica",
                     "fullName": "google.cloud.sql.v1.SqlInstancesService.PromoteReplica",
+                    "service": {
+                        "shortName": "SqlInstancesService",
+                        "fullName": "google.cloud.sql.v1.SqlInstancesService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "sqladmin_v1_generated_SqlInstancesService_Switchover_async",
+            "title": "SqlAvailableDatabaseVersionsService switchover Sample",
+            "origin": "API_DEFINITION",
+            "description": " Switches over from the primary instance to the replica instance.",
+            "canonical": true,
+            "file": "sql_instances_service.switchover.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Switchover",
+                "fullName": "google.cloud.sql.v1.SqlInstancesService.Switchover",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "db_timeout",
+                        "type": ".google.protobuf.Duration"
+                    }
+                ],
+                "resultType": ".google.cloud.sql.v1.Operation",
+                "client": {
+                    "shortName": "SqlInstancesServiceClient",
+                    "fullName": "google.cloud.sql.v1.SqlInstancesServiceClient"
+                },
+                "method": {
+                    "shortName": "Switchover",
+                    "fullName": "google.cloud.sql.v1.SqlInstancesService.Switchover",
                     "service": {
                         "shortName": "SqlInstancesService",
                         "fullName": "google.cloud.sql.v1.SqlInstancesService"
@@ -1865,7 +1965,7 @@
                     },
                     {
                         "name": "sync_parallel_level",
-                        "type": ".google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel"
+                        "type": ".google.cloud.sql.v1.ExternalSyncParallelLevel"
                     }
                 ],
                 "resultType": ".google.cloud.sql.v1.Operation",

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,13 +45,13 @@ function main(parent, conversation) {
    */
   // const conversationId = 'abc123'
   /**
-   *  Optional. DLP settings for transcript redaction. Optional, will default to
-   *  the config specified in Settings.
+   *  Optional. DLP settings for transcript redaction. Will default to the config
+   *  specified in Settings.
    */
   // const redactionConfig = {}
   /**
-   *  Optional. Default Speech-to-Text configuration. Optional, will default to
-   *  the config specified in Settings.
+   *  Optional. Speech-to-Text configuration. Will default to the config
+   *  specified in Settings.
    */
   // const speechConfig = {}
 

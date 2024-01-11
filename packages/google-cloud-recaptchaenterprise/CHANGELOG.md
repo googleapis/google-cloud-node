@@ -4,6 +4,31 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.1.0...recaptcha-enterprise-v5.1.1) (2024-01-05)
+
+
+### Bug Fixes
+
+* [recaptchaenterprise] correct long audio synthesis HTTP binding ([#4873](https://github.com/googleapis/google-cloud-node/issues/4873)) ([285e5aa](https://github.com/googleapis/google-cloud-node/commit/285e5aa4a45d9596d38cc7c76e8762e41dd7635f))
+
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.0.0...recaptcha-enterprise-v5.1.0) (2023-11-30)
+
+
+### Features
+
+* [recaptchaenterprise] added AnnotateAssessmentRequest.account_id ([#4843](https://github.com/googleapis/google-cloud-node/issues/4843)) ([4b7d541](https://github.com/googleapis/google-cloud-node/commit/4b7d541718867ab49dc048be8f73d4d9ee7fb542))
+
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v4.1.0...recaptcha-enterprise-v5.0.0) (2023-11-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* [recaptchaenterprise] added required annotations ([#4801](https://github.com/googleapis/google-cloud-node/issues/4801))
+
+### Bug Fixes
+
+* [recaptchaenterprise] added required annotations ([#4801](https://github.com/googleapis/google-cloud-node/issues/4801)) ([489c507](https://github.com/googleapis/google-cloud-node/commit/489c5075229a2060ae569e23ad0daa49f41344c2))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v4.0.1...recaptcha-enterprise-v4.1.0) (2023-10-24)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -428,6 +428,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.billing.v1.CloudBilling|moveBillingAccount}.
+                         * @memberof google.cloud.billing.v1.CloudBilling
+                         * @typedef MoveBillingAccountCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.billing.v1.BillingAccount} [response] BillingAccount
+                         */
+    
+                        /**
+                         * Calls MoveBillingAccount.
+                         * @function moveBillingAccount
+                         * @memberof google.cloud.billing.v1.CloudBilling
+                         * @instance
+                         * @param {google.cloud.billing.v1.IMoveBillingAccountRequest} request MoveBillingAccountRequest message or plain object
+                         * @param {google.cloud.billing.v1.CloudBilling.MoveBillingAccountCallback} callback Node-style callback called with the error, if any, and BillingAccount
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudBilling.prototype.moveBillingAccount = function moveBillingAccount(request, callback) {
+                            return this.rpcCall(moveBillingAccount, $root.google.cloud.billing.v1.MoveBillingAccountRequest, $root.google.cloud.billing.v1.BillingAccount, request, callback);
+                        }, "name", { value: "MoveBillingAccount" });
+    
+                        /**
+                         * Calls MoveBillingAccount.
+                         * @function moveBillingAccount
+                         * @memberof google.cloud.billing.v1.CloudBilling
+                         * @instance
+                         * @param {google.cloud.billing.v1.IMoveBillingAccountRequest} request MoveBillingAccountRequest message or plain object
+                         * @returns {Promise<google.cloud.billing.v1.BillingAccount>} Promise
+                         * @variation 2
+                         */
+    
                         return CloudBilling;
                     })();
     
@@ -441,6 +474,7 @@
                          * @property {boolean|null} [open] BillingAccount open
                          * @property {string|null} [displayName] BillingAccount displayName
                          * @property {string|null} [masterBillingAccount] BillingAccount masterBillingAccount
+                         * @property {string|null} [parent] BillingAccount parent
                          */
     
                         /**
@@ -491,6 +525,14 @@
                         BillingAccount.prototype.masterBillingAccount = "";
     
                         /**
+                         * BillingAccount parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.billing.v1.BillingAccount
+                         * @instance
+                         */
+                        BillingAccount.prototype.parent = "";
+    
+                        /**
                          * Creates a new BillingAccount instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.billing.v1.BillingAccount
@@ -522,6 +564,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
                             if (message.masterBillingAccount != null && Object.hasOwnProperty.call(message, "masterBillingAccount"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.masterBillingAccount);
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.parent);
                             return writer;
                         };
     
@@ -572,6 +616,10 @@
                                         message.masterBillingAccount = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -619,6 +667,9 @@
                             if (message.masterBillingAccount != null && message.hasOwnProperty("masterBillingAccount"))
                                 if (!$util.isString(message.masterBillingAccount))
                                     return "masterBillingAccount: string expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
                             return null;
                         };
     
@@ -642,6 +693,8 @@
                                 message.displayName = String(object.displayName);
                             if (object.masterBillingAccount != null)
                                 message.masterBillingAccount = String(object.masterBillingAccount);
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
                             return message;
                         };
     
@@ -663,6 +716,7 @@
                                 object.open = false;
                                 object.displayName = "";
                                 object.masterBillingAccount = "";
+                                object.parent = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -672,6 +726,8 @@
                                 object.displayName = message.displayName;
                             if (message.masterBillingAccount != null && message.hasOwnProperty("masterBillingAccount"))
                                 object.masterBillingAccount = message.masterBillingAccount;
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
                             return object;
                         };
     
@@ -1189,6 +1245,7 @@
                          * @property {number|null} [pageSize] ListBillingAccountsRequest pageSize
                          * @property {string|null} [pageToken] ListBillingAccountsRequest pageToken
                          * @property {string|null} [filter] ListBillingAccountsRequest filter
+                         * @property {string|null} [parent] ListBillingAccountsRequest parent
                          */
     
                         /**
@@ -1231,6 +1288,14 @@
                         ListBillingAccountsRequest.prototype.filter = "";
     
                         /**
+                         * ListBillingAccountsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.billing.v1.ListBillingAccountsRequest
+                         * @instance
+                         */
+                        ListBillingAccountsRequest.prototype.parent = "";
+    
+                        /**
                          * Creates a new ListBillingAccountsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.billing.v1.ListBillingAccountsRequest
@@ -1260,6 +1325,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.pageToken);
                             if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.filter);
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.parent);
                             return writer;
                         };
     
@@ -1306,6 +1373,10 @@
                                         message.filter = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1350,6 +1421,9 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
                             return null;
                         };
     
@@ -1371,6 +1445,8 @@
                                 message.pageToken = String(object.pageToken);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
                             return message;
                         };
     
@@ -1391,6 +1467,7 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                                 object.filter = "";
+                                object.parent = "";
                             }
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                                 object.pageSize = message.pageSize;
@@ -1398,6 +1475,8 @@
                                 object.pageToken = message.pageToken;
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
                             return object;
                         };
     
@@ -1685,6 +1764,7 @@
                          * @memberof google.cloud.billing.v1
                          * @interface ICreateBillingAccountRequest
                          * @property {google.cloud.billing.v1.IBillingAccount|null} [billingAccount] CreateBillingAccountRequest billingAccount
+                         * @property {string|null} [parent] CreateBillingAccountRequest parent
                          */
     
                         /**
@@ -1709,6 +1789,14 @@
                          * @instance
                          */
                         CreateBillingAccountRequest.prototype.billingAccount = null;
+    
+                        /**
+                         * CreateBillingAccountRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.billing.v1.CreateBillingAccountRequest
+                         * @instance
+                         */
+                        CreateBillingAccountRequest.prototype.parent = "";
     
                         /**
                          * Creates a new CreateBillingAccountRequest instance using the specified properties.
@@ -1736,6 +1824,8 @@
                                 writer = $Writer.create();
                             if (message.billingAccount != null && Object.hasOwnProperty.call(message, "billingAccount"))
                                 $root.google.cloud.billing.v1.BillingAccount.encode(message.billingAccount, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.parent);
                             return writer;
                         };
     
@@ -1772,6 +1862,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.billingAccount = $root.google.cloud.billing.v1.BillingAccount.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.parent = reader.string();
                                         break;
                                     }
                                 default:
@@ -1814,6 +1908,9 @@
                                 if (error)
                                     return "billingAccount." + error;
                             }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
                             return null;
                         };
     
@@ -1834,6 +1931,8 @@
                                     throw TypeError(".google.cloud.billing.v1.CreateBillingAccountRequest.billingAccount: object expected");
                                 message.billingAccount = $root.google.cloud.billing.v1.BillingAccount.fromObject(object.billingAccount);
                             }
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
                             return message;
                         };
     
@@ -1850,10 +1949,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.billingAccount = null;
+                                object.parent = "";
+                            }
                             if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
                                 object.billingAccount = $root.google.cloud.billing.v1.BillingAccount.toObject(message.billingAccount, options);
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
                             return object;
                         };
     
@@ -3077,6 +3180,233 @@
                         };
     
                         return UpdateProjectBillingInfoRequest;
+                    })();
+    
+                    v1.MoveBillingAccountRequest = (function() {
+    
+                        /**
+                         * Properties of a MoveBillingAccountRequest.
+                         * @memberof google.cloud.billing.v1
+                         * @interface IMoveBillingAccountRequest
+                         * @property {string|null} [name] MoveBillingAccountRequest name
+                         * @property {string|null} [destinationParent] MoveBillingAccountRequest destinationParent
+                         */
+    
+                        /**
+                         * Constructs a new MoveBillingAccountRequest.
+                         * @memberof google.cloud.billing.v1
+                         * @classdesc Represents a MoveBillingAccountRequest.
+                         * @implements IMoveBillingAccountRequest
+                         * @constructor
+                         * @param {google.cloud.billing.v1.IMoveBillingAccountRequest=} [properties] Properties to set
+                         */
+                        function MoveBillingAccountRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MoveBillingAccountRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @instance
+                         */
+                        MoveBillingAccountRequest.prototype.name = "";
+    
+                        /**
+                         * MoveBillingAccountRequest destinationParent.
+                         * @member {string} destinationParent
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @instance
+                         */
+                        MoveBillingAccountRequest.prototype.destinationParent = "";
+    
+                        /**
+                         * Creates a new MoveBillingAccountRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @static
+                         * @param {google.cloud.billing.v1.IMoveBillingAccountRequest=} [properties] Properties to set
+                         * @returns {google.cloud.billing.v1.MoveBillingAccountRequest} MoveBillingAccountRequest instance
+                         */
+                        MoveBillingAccountRequest.create = function create(properties) {
+                            return new MoveBillingAccountRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MoveBillingAccountRequest message. Does not implicitly {@link google.cloud.billing.v1.MoveBillingAccountRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @static
+                         * @param {google.cloud.billing.v1.IMoveBillingAccountRequest} message MoveBillingAccountRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveBillingAccountRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.destinationParent != null && Object.hasOwnProperty.call(message, "destinationParent"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.destinationParent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MoveBillingAccountRequest message, length delimited. Does not implicitly {@link google.cloud.billing.v1.MoveBillingAccountRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @static
+                         * @param {google.cloud.billing.v1.IMoveBillingAccountRequest} message MoveBillingAccountRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveBillingAccountRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MoveBillingAccountRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.billing.v1.MoveBillingAccountRequest} MoveBillingAccountRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveBillingAccountRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.billing.v1.MoveBillingAccountRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.destinationParent = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MoveBillingAccountRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.billing.v1.MoveBillingAccountRequest} MoveBillingAccountRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveBillingAccountRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MoveBillingAccountRequest message.
+                         * @function verify
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MoveBillingAccountRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.destinationParent != null && message.hasOwnProperty("destinationParent"))
+                                if (!$util.isString(message.destinationParent))
+                                    return "destinationParent: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MoveBillingAccountRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.billing.v1.MoveBillingAccountRequest} MoveBillingAccountRequest
+                         */
+                        MoveBillingAccountRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.billing.v1.MoveBillingAccountRequest)
+                                return object;
+                            var message = new $root.google.cloud.billing.v1.MoveBillingAccountRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.destinationParent != null)
+                                message.destinationParent = String(object.destinationParent);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MoveBillingAccountRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @static
+                         * @param {google.cloud.billing.v1.MoveBillingAccountRequest} message MoveBillingAccountRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MoveBillingAccountRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.destinationParent = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.destinationParent != null && message.hasOwnProperty("destinationParent"))
+                                object.destinationParent = message.destinationParent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MoveBillingAccountRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MoveBillingAccountRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MoveBillingAccountRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.billing.v1.MoveBillingAccountRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MoveBillingAccountRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.billing.v1.MoveBillingAccountRequest";
+                        };
+    
+                        return MoveBillingAccountRequest;
                     })();
     
                     v1.CloudCatalog = (function() {

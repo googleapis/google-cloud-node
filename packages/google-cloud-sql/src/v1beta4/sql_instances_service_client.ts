@@ -230,6 +230,7 @@ export class SqlInstancesServiceClient {
       'clone',
       'delete',
       'demoteMaster',
+      'demote',
       'export',
       'failover',
       'reencrypt',
@@ -240,6 +241,7 @@ export class SqlInstancesServiceClient {
       'listServerCas',
       'patch',
       'promoteReplica',
+      'switchover',
       'resetSslConfig',
       'restart',
       'restoreBackup',
@@ -736,13 +738,109 @@ export class SqlInstancesServiceClient {
     return this.innerApiCalls.demoteMaster(request, options, callback);
   }
   /**
+   * Demotes an existing standalone instance to be a Cloud SQL read replica
+   * for an external database server.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Required. The name of the Cloud SQL instance.
+   * @param {string} request.project
+   *   Required. The project ID of the project that contains the instance.
+   * @param {google.cloud.sql.v1beta4.InstancesDemoteRequest} request.body
+   *   The request body.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.demote.js</caption>
+   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Demote_async
+   */
+  demote(
+    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1beta4.IOperation,
+      protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  demote(
+    request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1beta4.IOperation,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  demote(
+    request: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1beta4.IOperation,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  demote(
+    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1beta4.IOperation,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1beta4.IOperation,
+      protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        instance: request.instance ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.demote(request, options, callback);
+  }
+  /**
    * Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL
    * dump or CSV file.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
+   *   The Cloud SQL instance ID. This doesn't include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance to be exported.
    * @param {google.cloud.sql.v1beta4.InstancesExportRequest} request.body
@@ -1622,6 +1720,10 @@ export class SqlInstancesServiceClient {
    *   Cloud SQL read replica instance name.
    * @param {string} request.project
    *   ID of the project that contains the read replica.
+   * @param {boolean} request.failover
+   *   Set to true if the promote operation should attempt to re-add the original
+   *   primary as a replica when it comes back online. Otherwise, if this value is
+   *   false or not set, the original primary will be a standalone instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1711,6 +1813,109 @@ export class SqlInstancesServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.promoteReplica(request, options, callback);
+  }
+  /**
+   * Switches over from the primary instance to a replica instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Cloud SQL read replica instance name.
+   * @param {string} request.project
+   *   ID of the project that contains the replica.
+   * @param {google.protobuf.Duration} [request.dbTimeout]
+   *   Optional. (MySQL only) Cloud SQL instance operations timeout, which is a
+   *   sum of all database operations. Default value is 10 minutes and can be
+   *   modified to a maximum value of 24 hours.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1beta4.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta4/sql_instances_service.switchover.js</caption>
+   * region_tag:sqladmin_v1beta4_generated_SqlInstancesService_Switchover_async
+   */
+  switchover(
+    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1beta4.IOperation,
+      (
+        | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  switchover(
+    request: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1beta4.IOperation,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  switchover(
+    request: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1beta4.IOperation,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  switchover(
+    request?: protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1beta4.IOperation,
+      | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1beta4.IOperation,
+      (
+        | protos.google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        instance: request.instance ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.switchover(request, options, callback);
   }
   /**
    * Deletes all client certificates and generates a new server SSL certificate
@@ -2830,7 +3035,7 @@ export class SqlInstancesServiceClient {
    *   Whether to skip the verification step (VESS).
    * @param {google.cloud.sql.v1beta4.MySqlSyncConfig} request.mysqlSyncConfig
    *   MySQL-specific settings for start external sync.
-   * @param {google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel} [request.syncParallelLevel]
+   * @param {google.cloud.sql.v1beta4.ExternalSyncParallelLevel} [request.syncParallelLevel]
    *   Optional. Parallel level for initial data sync. Currently only applicable
    *   for MySQL.
    * @param {object} [options]

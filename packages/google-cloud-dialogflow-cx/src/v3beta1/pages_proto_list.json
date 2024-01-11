@@ -12,6 +12,7 @@
   "../../protos/google/cloud/dialogflow/cx/v3beta1/fulfillment.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/gcs.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/generative_settings.proto",
+  "../../protos/google/cloud/dialogflow/cx/v3beta1/generator.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/import_strategy.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/inline.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/intent.proto",

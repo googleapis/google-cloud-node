@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -254,6 +254,20 @@ export namespace google {
                     public restoreInstance(request: google.cloud.filestore.v1.IRestoreInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls RevertInstance.
+                     * @param request RevertInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public revertInstance(request: google.cloud.filestore.v1.IRevertInstanceRequest, callback: google.cloud.filestore.v1.CloudFilestoreManager.RevertInstanceCallback): void;
+
+                    /**
+                     * Calls RevertInstance.
+                     * @param request RevertInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public revertInstance(request: google.cloud.filestore.v1.IRevertInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteInstance.
                      * @param request DeleteInstanceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -444,6 +458,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RestoreInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1.CloudFilestoreManager|revertInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RevertInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.filestore.v1.CloudFilestoreManager|deleteInstance}.
@@ -952,6 +973,9 @@ export namespace google {
                     /** Instance satisfiesPzs */
                     satisfiesPzs?: (google.protobuf.IBoolValue|null);
 
+                    /** Instance satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
+
                     /** Instance kmsKeyName */
                     kmsKeyName?: (string|null);
 
@@ -1000,6 +1024,9 @@ export namespace google {
 
                     /** Instance satisfiesPzs. */
                     public satisfiesPzs?: (google.protobuf.IBoolValue|null);
+
+                    /** Instance satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /** Instance kmsKeyName. */
                     public kmsKeyName: string;
@@ -1098,7 +1125,8 @@ export namespace google {
                         RESTORING = 7,
                         SUSPENDED = 8,
                         SUSPENDING = 9,
-                        RESUMING = 10
+                        RESUMING = 10,
+                        REVERTING = 12
                     }
 
                     /** Tier enum. */
@@ -1109,7 +1137,9 @@ export namespace google {
                         BASIC_HDD = 3,
                         BASIC_SSD = 4,
                         HIGH_SCALE_SSD = 5,
-                        ENTERPRISE = 6
+                        ENTERPRISE = 6,
+                        ZONAL = 7,
+                        REGIONAL = 8
                     }
 
                     /** SuspensionReason enum. */
@@ -1534,6 +1564,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RestoreInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RevertInstanceRequest. */
+                interface IRevertInstanceRequest {
+
+                    /** RevertInstanceRequest name */
+                    name?: (string|null);
+
+                    /** RevertInstanceRequest targetSnapshotId */
+                    targetSnapshotId?: (string|null);
+                }
+
+                /** Represents a RevertInstanceRequest. */
+                class RevertInstanceRequest implements IRevertInstanceRequest {
+
+                    /**
+                     * Constructs a new RevertInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1.IRevertInstanceRequest);
+
+                    /** RevertInstanceRequest name. */
+                    public name: string;
+
+                    /** RevertInstanceRequest targetSnapshotId. */
+                    public targetSnapshotId: string;
+
+                    /**
+                     * Creates a new RevertInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RevertInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1.IRevertInstanceRequest): google.cloud.filestore.v1.RevertInstanceRequest;
+
+                    /**
+                     * Encodes the specified RevertInstanceRequest message. Does not implicitly {@link google.cloud.filestore.v1.RevertInstanceRequest.verify|verify} messages.
+                     * @param message RevertInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1.IRevertInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RevertInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.RevertInstanceRequest.verify|verify} messages.
+                     * @param message RevertInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1.IRevertInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RevertInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RevertInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1.RevertInstanceRequest;
+
+                    /**
+                     * Decodes a RevertInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RevertInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1.RevertInstanceRequest;
+
+                    /**
+                     * Verifies a RevertInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RevertInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RevertInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1.RevertInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a RevertInstanceRequest message. Also converts values to other types if specified.
+                     * @param message RevertInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1.RevertInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RevertInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RevertInstanceRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2680,6 +2813,9 @@ export namespace google {
                     /** Backup satisfiesPzs */
                     satisfiesPzs?: (google.protobuf.IBoolValue|null);
 
+                    /** Backup satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
+
                     /** Backup kmsKey */
                     kmsKey?: (string|null);
                 }
@@ -2728,6 +2864,9 @@ export namespace google {
 
                     /** Backup satisfiesPzs. */
                     public satisfiesPzs?: (google.protobuf.IBoolValue|null);
+
+                    /** Backup satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /** Backup kmsKey. */
                     public kmsKey: string;
@@ -2818,7 +2957,8 @@ export namespace google {
                         CREATING = 1,
                         FINALIZING = 2,
                         READY = 3,
-                        DELETING = 4
+                        DELETING = 4,
+                        INVALID = 5
                     }
                 }
 
@@ -4595,6 +4735,9 @@ export namespace google {
                     /** Instance satisfiesPzs */
                     satisfiesPzs?: (google.protobuf.IBoolValue|null);
 
+                    /** Instance satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
+
                     /** Instance kmsKeyName */
                     kmsKeyName?: (string|null);
 
@@ -4664,6 +4807,9 @@ export namespace google {
 
                     /** Instance satisfiesPzs. */
                     public satisfiesPzs?: (google.protobuf.IBoolValue|null);
+
+                    /** Instance satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /** Instance kmsKeyName. */
                     public kmsKeyName: string;
@@ -4796,7 +4942,8 @@ export namespace google {
                         BASIC_SSD = 4,
                         HIGH_SCALE_SSD = 6,
                         ENTERPRISE = 7,
-                        ZONAL = 8
+                        ZONAL = 8,
+                        REGIONAL = 9
                     }
 
                     /** SuspensionReason enum. */
@@ -6483,6 +6630,9 @@ export namespace google {
                     /** Backup satisfiesPzs */
                     satisfiesPzs?: (google.protobuf.IBoolValue|null);
 
+                    /** Backup satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
+
                     /** Backup kmsKeyName */
                     kmsKeyName?: (string|null);
                 }
@@ -6531,6 +6681,9 @@ export namespace google {
 
                     /** Backup satisfiesPzs. */
                     public satisfiesPzs?: (google.protobuf.IBoolValue|null);
+
+                    /** Backup satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /** Backup kmsKeyName. */
                     public kmsKeyName: string;

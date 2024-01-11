@@ -223,6 +223,78 @@
         }
       }
     },
+    "DeploymentResourcePoolService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DeploymentResourcePoolServiceClient",
+          "rpcs": {
+            "GetDeploymentResourcePool": {
+              "methods": [
+                "getDeploymentResourcePool"
+              ]
+            },
+            "CreateDeploymentResourcePool": {
+              "methods": [
+                "createDeploymentResourcePool"
+              ]
+            },
+            "DeleteDeploymentResourcePool": {
+              "methods": [
+                "deleteDeploymentResourcePool"
+              ]
+            },
+            "ListDeploymentResourcePools": {
+              "methods": [
+                "listDeploymentResourcePools",
+                "listDeploymentResourcePoolsStream",
+                "listDeploymentResourcePoolsAsync"
+              ]
+            },
+            "QueryDeployedModels": {
+              "methods": [
+                "queryDeployedModels",
+                "queryDeployedModelsStream",
+                "queryDeployedModelsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DeploymentResourcePoolServiceClient",
+          "rpcs": {
+            "GetDeploymentResourcePool": {
+              "methods": [
+                "getDeploymentResourcePool"
+              ]
+            },
+            "CreateDeploymentResourcePool": {
+              "methods": [
+                "createDeploymentResourcePool"
+              ]
+            },
+            "DeleteDeploymentResourcePool": {
+              "methods": [
+                "deleteDeploymentResourcePool"
+              ]
+            },
+            "ListDeploymentResourcePools": {
+              "methods": [
+                "listDeploymentResourcePools",
+                "listDeploymentResourcePoolsStream",
+                "listDeploymentResourcePoolsAsync"
+              ]
+            },
+            "QueryDeployedModels": {
+              "methods": [
+                "queryDeployedModels",
+                "queryDeployedModelsStream",
+                "queryDeployedModelsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EndpointService": {
       "clients": {
         "grpc": {
@@ -315,6 +387,308 @@
                 "listEndpoints",
                 "listEndpointsStream",
                 "listEndpointsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeatureOnlineStoreAdminService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FeatureOnlineStoreAdminServiceClient",
+          "rpcs": {
+            "GetFeatureOnlineStore": {
+              "methods": [
+                "getFeatureOnlineStore"
+              ]
+            },
+            "GetFeatureView": {
+              "methods": [
+                "getFeatureView"
+              ]
+            },
+            "SyncFeatureView": {
+              "methods": [
+                "syncFeatureView"
+              ]
+            },
+            "GetFeatureViewSync": {
+              "methods": [
+                "getFeatureViewSync"
+              ]
+            },
+            "CreateFeatureOnlineStore": {
+              "methods": [
+                "createFeatureOnlineStore"
+              ]
+            },
+            "UpdateFeatureOnlineStore": {
+              "methods": [
+                "updateFeatureOnlineStore"
+              ]
+            },
+            "DeleteFeatureOnlineStore": {
+              "methods": [
+                "deleteFeatureOnlineStore"
+              ]
+            },
+            "CreateFeatureView": {
+              "methods": [
+                "createFeatureView"
+              ]
+            },
+            "UpdateFeatureView": {
+              "methods": [
+                "updateFeatureView"
+              ]
+            },
+            "DeleteFeatureView": {
+              "methods": [
+                "deleteFeatureView"
+              ]
+            },
+            "ListFeatureOnlineStores": {
+              "methods": [
+                "listFeatureOnlineStores",
+                "listFeatureOnlineStoresStream",
+                "listFeatureOnlineStoresAsync"
+              ]
+            },
+            "ListFeatureViews": {
+              "methods": [
+                "listFeatureViews",
+                "listFeatureViewsStream",
+                "listFeatureViewsAsync"
+              ]
+            },
+            "ListFeatureViewSyncs": {
+              "methods": [
+                "listFeatureViewSyncs",
+                "listFeatureViewSyncsStream",
+                "listFeatureViewSyncsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FeatureOnlineStoreAdminServiceClient",
+          "rpcs": {
+            "GetFeatureOnlineStore": {
+              "methods": [
+                "getFeatureOnlineStore"
+              ]
+            },
+            "GetFeatureView": {
+              "methods": [
+                "getFeatureView"
+              ]
+            },
+            "SyncFeatureView": {
+              "methods": [
+                "syncFeatureView"
+              ]
+            },
+            "GetFeatureViewSync": {
+              "methods": [
+                "getFeatureViewSync"
+              ]
+            },
+            "CreateFeatureOnlineStore": {
+              "methods": [
+                "createFeatureOnlineStore"
+              ]
+            },
+            "UpdateFeatureOnlineStore": {
+              "methods": [
+                "updateFeatureOnlineStore"
+              ]
+            },
+            "DeleteFeatureOnlineStore": {
+              "methods": [
+                "deleteFeatureOnlineStore"
+              ]
+            },
+            "CreateFeatureView": {
+              "methods": [
+                "createFeatureView"
+              ]
+            },
+            "UpdateFeatureView": {
+              "methods": [
+                "updateFeatureView"
+              ]
+            },
+            "DeleteFeatureView": {
+              "methods": [
+                "deleteFeatureView"
+              ]
+            },
+            "ListFeatureOnlineStores": {
+              "methods": [
+                "listFeatureOnlineStores",
+                "listFeatureOnlineStoresStream",
+                "listFeatureOnlineStoresAsync"
+              ]
+            },
+            "ListFeatureViews": {
+              "methods": [
+                "listFeatureViews",
+                "listFeatureViewsStream",
+                "listFeatureViewsAsync"
+              ]
+            },
+            "ListFeatureViewSyncs": {
+              "methods": [
+                "listFeatureViewSyncs",
+                "listFeatureViewSyncsStream",
+                "listFeatureViewSyncsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeatureOnlineStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FeatureOnlineStoreServiceClient",
+          "rpcs": {
+            "FetchFeatureValues": {
+              "methods": [
+                "fetchFeatureValues"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FeatureOnlineStoreServiceClient",
+          "rpcs": {
+            "FetchFeatureValues": {
+              "methods": [
+                "fetchFeatureValues"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FeatureRegistryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FeatureRegistryServiceClient",
+          "rpcs": {
+            "GetFeatureGroup": {
+              "methods": [
+                "getFeatureGroup"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "getFeature"
+              ]
+            },
+            "CreateFeatureGroup": {
+              "methods": [
+                "createFeatureGroup"
+              ]
+            },
+            "UpdateFeatureGroup": {
+              "methods": [
+                "updateFeatureGroup"
+              ]
+            },
+            "DeleteFeatureGroup": {
+              "methods": [
+                "deleteFeatureGroup"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "createFeature"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "updateFeature"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "deleteFeature"
+              ]
+            },
+            "ListFeatureGroups": {
+              "methods": [
+                "listFeatureGroups",
+                "listFeatureGroupsStream",
+                "listFeatureGroupsAsync"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "listFeatures",
+                "listFeaturesStream",
+                "listFeaturesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FeatureRegistryServiceClient",
+          "rpcs": {
+            "GetFeatureGroup": {
+              "methods": [
+                "getFeatureGroup"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "getFeature"
+              ]
+            },
+            "CreateFeatureGroup": {
+              "methods": [
+                "createFeatureGroup"
+              ]
+            },
+            "UpdateFeatureGroup": {
+              "methods": [
+                "updateFeatureGroup"
+              ]
+            },
+            "DeleteFeatureGroup": {
+              "methods": [
+                "deleteFeatureGroup"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "createFeature"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "updateFeature"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "deleteFeature"
+              ]
+            },
+            "ListFeatureGroups": {
+              "methods": [
+                "listFeatureGroups",
+                "listFeatureGroupsStream",
+                "listFeatureGroupsAsync"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "listFeatures",
+                "listFeaturesStream",
+                "listFeaturesAsync"
               ]
             }
           }
@@ -1182,6 +1556,40 @@
         }
       }
     },
+    "LlmUtilityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LlmUtilityServiceClient",
+          "rpcs": {
+            "CountTokens": {
+              "methods": [
+                "countTokens"
+              ]
+            },
+            "ComputeTokens": {
+              "methods": [
+                "computeTokens"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LlmUtilityServiceClient",
+          "rpcs": {
+            "CountTokens": {
+              "methods": [
+                "countTokens"
+              ]
+            },
+            "ComputeTokens": {
+              "methods": [
+                "computeTokens"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MatchService": {
       "clients": {
         "grpc": {
@@ -1979,14 +2387,39 @@
                 "rawPredict"
               ]
             },
+            "DirectPredict": {
+              "methods": [
+                "directPredict"
+              ]
+            },
+            "DirectRawPredict": {
+              "methods": [
+                "directRawPredict"
+              ]
+            },
             "Explain": {
               "methods": [
                 "explain"
               ]
             },
+            "StreamingPredict": {
+              "methods": [
+                "streamingPredict"
+              ]
+            },
             "ServerStreamingPredict": {
               "methods": [
                 "serverStreamingPredict"
+              ]
+            },
+            "StreamingRawPredict": {
+              "methods": [
+                "streamingRawPredict"
+              ]
+            },
+            "StreamGenerateContent": {
+              "methods": [
+                "streamGenerateContent"
               ]
             }
           }
@@ -2002,6 +2435,16 @@
             "RawPredict": {
               "methods": [
                 "rawPredict"
+              ]
+            },
+            "DirectPredict": {
+              "methods": [
+                "directPredict"
+              ]
+            },
+            "DirectRawPredict": {
+              "methods": [
+                "directRawPredict"
               ]
             },
             "Explain": {

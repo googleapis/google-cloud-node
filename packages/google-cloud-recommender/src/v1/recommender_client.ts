@@ -724,7 +724,7 @@ export class RecommenderClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Name of the recommendation.
+   *   Required. Name of the recommendation.
    * @param {string} request.etag
    *   Fingerprint of the Recommendation. Provides optimistic locking.
    * @param {object} [options]
@@ -1640,6 +1640,8 @@ export class RecommenderClient {
    *
    *   * `severity`
    *
+   *   * `targetResources`
+   *
    *   Examples:
    *
    *   * `stateInfo.state = ACTIVE OR stateInfo.state = DISMISSED`
@@ -1648,7 +1650,12 @@ export class RecommenderClient {
    *
    *   * `severity = CRITICAL OR severity = HIGH`
    *
+   *   * `targetResources :
+   *   //compute.googleapis.com/projects/1234/zones/us-central1-a/instances/instance-1`
+   *
    *   * `stateInfo.state = ACTIVE AND (severity = CRITICAL OR severity = HIGH)`
+   *
+   *   The max allowed filter length is 500 characters.
    *
    *   (These expressions are based on the filter language described at
    *   https://google.aip.dev/160)
@@ -1780,6 +1787,8 @@ export class RecommenderClient {
    *
    *   * `severity`
    *
+   *   * `targetResources`
+   *
    *   Examples:
    *
    *   * `stateInfo.state = ACTIVE OR stateInfo.state = DISMISSED`
@@ -1788,7 +1797,12 @@ export class RecommenderClient {
    *
    *   * `severity = CRITICAL OR severity = HIGH`
    *
+   *   * `targetResources :
+   *   //compute.googleapis.com/projects/1234/zones/us-central1-a/instances/instance-1`
+   *
    *   * `stateInfo.state = ACTIVE AND (severity = CRITICAL OR severity = HIGH)`
+   *
+   *   The max allowed filter length is 500 characters.
    *
    *   (These expressions are based on the filter language described at
    *   https://google.aip.dev/160)
@@ -1868,6 +1882,8 @@ export class RecommenderClient {
    *
    *   * `severity`
    *
+   *   * `targetResources`
+   *
    *   Examples:
    *
    *   * `stateInfo.state = ACTIVE OR stateInfo.state = DISMISSED`
@@ -1876,7 +1892,12 @@ export class RecommenderClient {
    *
    *   * `severity = CRITICAL OR severity = HIGH`
    *
+   *   * `targetResources :
+   *   //compute.googleapis.com/projects/1234/zones/us-central1-a/instances/instance-1`
+   *
    *   * `stateInfo.state = ACTIVE AND (severity = CRITICAL OR severity = HIGH)`
+   *
+   *   The max allowed filter length is 500 characters.
    *
    *   (These expressions are based on the filter language described at
    *   https://google.aip.dev/160)
@@ -1956,6 +1977,8 @@ export class RecommenderClient {
    *
    *   * `priority`
    *
+   *   * `targetResources`
+   *
    *   Examples:
    *
    *   * `stateInfo.state = ACTIVE OR stateInfo.state = DISMISSED`
@@ -1964,7 +1987,12 @@ export class RecommenderClient {
    *
    *   * `priority = P1 OR priority = P2`
    *
+   *   * `targetResources :
+   *   //compute.googleapis.com/projects/1234/zones/us-central1-a/instances/instance-1`
+   *
    *   * `stateInfo.state = ACTIVE AND (priority = P1 OR priority = P2)`
+   *
+   *   The max allowed filter length is 500 characters.
    *
    *   (These expressions are based on the filter language described at
    *   https://google.aip.dev/160)
@@ -2096,6 +2124,8 @@ export class RecommenderClient {
    *
    *   * `priority`
    *
+   *   * `targetResources`
+   *
    *   Examples:
    *
    *   * `stateInfo.state = ACTIVE OR stateInfo.state = DISMISSED`
@@ -2104,7 +2134,12 @@ export class RecommenderClient {
    *
    *   * `priority = P1 OR priority = P2`
    *
+   *   * `targetResources :
+   *   //compute.googleapis.com/projects/1234/zones/us-central1-a/instances/instance-1`
+   *
    *   * `stateInfo.state = ACTIVE AND (priority = P1 OR priority = P2)`
+   *
+   *   The max allowed filter length is 500 characters.
    *
    *   (These expressions are based on the filter language described at
    *   https://google.aip.dev/160)
@@ -2184,6 +2219,8 @@ export class RecommenderClient {
    *
    *   * `priority`
    *
+   *   * `targetResources`
+   *
    *   Examples:
    *
    *   * `stateInfo.state = ACTIVE OR stateInfo.state = DISMISSED`
@@ -2192,7 +2229,12 @@ export class RecommenderClient {
    *
    *   * `priority = P1 OR priority = P2`
    *
+   *   * `targetResources :
+   *   //compute.googleapis.com/projects/1234/zones/us-central1-a/instances/instance-1`
+   *
    *   * `stateInfo.state = ACTIVE AND (priority = P1 OR priority = P2)`
+   *
+   *   The max allowed filter length is 500 characters.
    *
    *   (These expressions are based on the filter language described at
    *   https://google.aip.dev/160)

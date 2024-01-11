@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,14 +30,14 @@ function main(parent, customConfig, resource) {
    */
   /**
    *  Required. The relative resource name of the organization, project, or
-   *  folder. See:
-   *  https://cloud.google.com/apis/design/resource_names#relative_resource_name
-   *  An example is:
-   *  "organizations/{organization_id}".
+   *  folder. For more information about relative resource names, see Relative
+   *  Resource
+   *  Name (https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+   *  Example: `organizations/{organization_id}`
    */
   // const parent = 'abc123'
   /**
-   *  Required. The user specified custom configuration to test.
+   *  Required. The custom configuration that you need to test.
    */
   // const customConfig = {}
   /**

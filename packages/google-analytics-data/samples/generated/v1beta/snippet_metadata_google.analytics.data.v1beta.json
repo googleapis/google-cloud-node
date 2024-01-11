@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-data",
-        "version": "4.0.1",
+        "version": "4.3.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -440,6 +440,186 @@
                 "method": {
                     "shortName": "CheckCompatibility",
                     "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.CheckCompatibility",
+                    "service": {
+                        "shortName": "BetaAnalyticsData",
+                        "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_CreateAudienceExport_async",
+            "title": "BetaAnalyticsData createAudienceExport Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates an audience export for later retrieval. This method quickly returns the audience export's resource name and initiates a long running asynchronous request to form an audience export. To export the users in an audience export, first create the audience export through this method and then send the audience resource name to the `QueryAudienceExport` method. See [Creating an Audience Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Exports with examples. An audience export is a snapshot of the users currently in the audience at the time of audience export creation. Creating audience exports for one audience on different days will return different results as users enter and exit the audience. Audiences in Google Analytics 4 allow you to segment your users in the ways that are important to your business. To learn more, see https://support.google.com/analytics/answer/9267572. Audience exports contain the users in each audience. Audience Export APIs have some methods at alpha and other methods at beta stability. The intention is to advance methods to beta stability after some feedback and adoption. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+            "canonical": true,
+            "file": "beta_analytics_data.create_audience_export.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateAudienceExport",
+                "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.CreateAudienceExport",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "audience_export",
+                        "type": ".google.analytics.data.v1beta.AudienceExport"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BetaAnalyticsDataClient",
+                    "fullName": "google.analytics.data.v1beta.BetaAnalyticsDataClient"
+                },
+                "method": {
+                    "shortName": "CreateAudienceExport",
+                    "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.CreateAudienceExport",
+                    "service": {
+                        "shortName": "BetaAnalyticsData",
+                        "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_QueryAudienceExport_async",
+            "title": "BetaAnalyticsData queryAudienceExport Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves an audience export of users. After creating an audience, the users are not immediately available for exporting. First, a request to `CreateAudienceExport` is necessary to create an audience export of users, and then second, this method is used to retrieve the users in the audience export. See [Creating an Audience Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Exports with examples. Audiences in Google Analytics 4 allow you to segment your users in the ways that are important to your business. To learn more, see https://support.google.com/analytics/answer/9267572. Audience Export APIs have some methods at alpha and other methods at beta stability. The intention is to advance methods to beta stability after some feedback and adoption. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+            "canonical": true,
+            "file": "beta_analytics_data.query_audience_export.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryAudienceExport",
+                "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.QueryAudienceExport",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "offset",
+                        "type": "TYPE_INT64"
+                    },
+                    {
+                        "name": "limit",
+                        "type": "TYPE_INT64"
+                    }
+                ],
+                "resultType": ".google.analytics.data.v1beta.QueryAudienceExportResponse",
+                "client": {
+                    "shortName": "BetaAnalyticsDataClient",
+                    "fullName": "google.analytics.data.v1beta.BetaAnalyticsDataClient"
+                },
+                "method": {
+                    "shortName": "QueryAudienceExport",
+                    "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.QueryAudienceExport",
+                    "service": {
+                        "shortName": "BetaAnalyticsData",
+                        "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_GetAudienceExport_async",
+            "title": "BetaAnalyticsData getAudienceExport Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets configuration metadata about a specific audience export. This method can be used to understand an audience export after it has been created. See [Creating an Audience Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Exports with examples. Audience Export APIs have some methods at alpha and other methods at beta stability. The intention is to advance methods to beta stability after some feedback and adoption. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+            "canonical": true,
+            "file": "beta_analytics_data.get_audience_export.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAudienceExport",
+                "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.GetAudienceExport",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.data.v1beta.AudienceExport",
+                "client": {
+                    "shortName": "BetaAnalyticsDataClient",
+                    "fullName": "google.analytics.data.v1beta.BetaAnalyticsDataClient"
+                },
+                "method": {
+                    "shortName": "GetAudienceExport",
+                    "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.GetAudienceExport",
+                    "service": {
+                        "shortName": "BetaAnalyticsData",
+                        "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsdata_v1beta_generated_BetaAnalyticsData_ListAudienceExports_async",
+            "title": "BetaAnalyticsData listAudienceExports Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all audience exports for a property. This method can be used for you to find and reuse existing audience exports rather than creating unnecessary new audience exports. The same audience can have multiple audience exports that represent the export of users that were in an audience on different days. See [Creating an Audience Export](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Exports with examples. Audience Export APIs have some methods at alpha and other methods at beta stability. The intention is to advance methods to beta stability after some feedback and adoption. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+            "canonical": true,
+            "file": "beta_analytics_data.list_audience_exports.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListAudienceExports",
+                "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.ListAudienceExports",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.data.v1beta.ListAudienceExportsResponse",
+                "client": {
+                    "shortName": "BetaAnalyticsDataClient",
+                    "fullName": "google.analytics.data.v1beta.BetaAnalyticsDataClient"
+                },
+                "method": {
+                    "shortName": "ListAudienceExports",
+                    "fullName": "google.analytics.data.v1beta.BetaAnalyticsData.ListAudienceExports",
                     "service": {
                         "shortName": "BetaAnalyticsData",
                         "fullName": "google.analytics.data.v1beta.BetaAnalyticsData"

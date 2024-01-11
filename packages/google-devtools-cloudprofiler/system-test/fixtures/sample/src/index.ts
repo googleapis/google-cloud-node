@@ -16,14 +16,23 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ProfilerServiceClient} from '@google-cloud/cloudprofiler';
+import {
+  ExportServiceClient,
+  ProfilerServiceClient,
+} from '@google-cloud/cloudprofiler';
 
 // check that the client class type name can be used
+function doStuffWithExportServiceClient(client: ExportServiceClient) {
+  client.close();
+}
 function doStuffWithProfilerServiceClient(client: ProfilerServiceClient) {
   client.close();
 }
 
 function main() {
+  // check that the client instance can be created
+  const exportServiceClient = new ExportServiceClient();
+  doStuffWithExportServiceClient(exportServiceClient);
   // check that the client instance can be created
   const profilerServiceClient = new ProfilerServiceClient();
   doStuffWithProfilerServiceClient(profilerServiceClient);

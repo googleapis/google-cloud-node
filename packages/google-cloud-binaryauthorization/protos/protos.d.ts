@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2532,6 +2532,12 @@ export namespace google {
                             /** ImageDetails image */
                             image?: (string|null);
 
+                            /** ImageDetails containerName */
+                            containerName?: (string|null);
+
+                            /** ImageDetails containerType */
+                            containerType?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType|null);
+
                             /** ImageDetails result */
                             result?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult|null);
 
@@ -2553,6 +2559,12 @@ export namespace google {
 
                             /** ImageDetails image. */
                             public image: string;
+
+                            /** ImageDetails containerName. */
+                            public containerName: string;
+
+                            /** ImageDetails containerType. */
+                            public containerType: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ContainerType);
 
                             /** ImageDetails result. */
                             public result: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult);
@@ -2642,6 +2654,14 @@ export namespace google {
                         }
 
                         namespace ImageDetails {
+
+                            /** ContainerType enum. */
+                            enum ContainerType {
+                                CONTAINER_TYPE_UNSPECIFIED = 0,
+                                CONTAINER = 1,
+                                INIT_CONTAINER = 2,
+                                EPHEMERAL_CONTAINER = 3
+                            }
 
                             /** AuditResult enum. */
                             enum AuditResult {

@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1157,7 +1157,9 @@ export namespace google {
                     enum SqlApiWarningCode {
                         SQL_API_WARNING_CODE_UNSPECIFIED = 0,
                         REGION_UNREACHABLE = 1,
-                        MAX_RESULTS_EXCEEDS_LIMIT = 2
+                        MAX_RESULTS_EXCEEDS_LIMIT = 2,
+                        COMPROMISED_CREDENTIALS = 3,
+                        INTERNAL_STATE_FAILURE = 4
                     }
                 }
 
@@ -3649,6 +3651,9 @@ export namespace google {
                     /** IpConfiguration enablePrivatePathForGoogleCloudServices */
                     enablePrivatePathForGoogleCloudServices?: (google.protobuf.IBoolValue|null);
 
+                    /** IpConfiguration sslMode */
+                    sslMode?: (google.cloud.sql.v1.IpConfiguration.SslMode|keyof typeof google.cloud.sql.v1.IpConfiguration.SslMode|null);
+
                     /** IpConfiguration pscConfig */
                     pscConfig?: (google.cloud.sql.v1.IPscConfig|null);
                 }
@@ -3679,6 +3684,9 @@ export namespace google {
 
                     /** IpConfiguration enablePrivatePathForGoogleCloudServices. */
                     public enablePrivatePathForGoogleCloudServices?: (google.protobuf.IBoolValue|null);
+
+                    /** IpConfiguration sslMode. */
+                    public sslMode: (google.cloud.sql.v1.IpConfiguration.SslMode|keyof typeof google.cloud.sql.v1.IpConfiguration.SslMode);
 
                     /** IpConfiguration pscConfig. */
                     public pscConfig?: (google.cloud.sql.v1.IPscConfig|null);
@@ -3762,6 +3770,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IpConfiguration {
+
+                    /** SslMode enum. */
+                    enum SslMode {
+                        SSL_MODE_UNSPECIFIED = 0,
+                        ALLOW_UNENCRYPTED_AND_ENCRYPTED = 1,
+                        ENCRYPTED_ONLY = 2,
+                        TRUSTED_CLIENT_CERTIFICATE_REQUIRED = 3
+                    }
                 }
 
                 /** Properties of a PscConfig. */
@@ -4829,6 +4848,9 @@ export namespace google {
                     /** Operation error */
                     error?: (google.cloud.sql.v1.IOperationErrors|null);
 
+                    /** Operation apiWarning */
+                    apiWarning?: (google.cloud.sql.v1.IApiWarning|null);
+
                     /** Operation operationType */
                     operationType?: (google.cloud.sql.v1.Operation.SqlOperationType|keyof typeof google.cloud.sql.v1.Operation.SqlOperationType|null);
 
@@ -4886,6 +4908,9 @@ export namespace google {
 
                     /** Operation error. */
                     public error?: (google.cloud.sql.v1.IOperationErrors|null);
+
+                    /** Operation apiWarning. */
+                    public apiWarning?: (google.cloud.sql.v1.IApiWarning|null);
 
                     /** Operation operationType. */
                     public operationType: (google.cloud.sql.v1.Operation.SqlOperationType|keyof typeof google.cloud.sql.v1.Operation.SqlOperationType);
@@ -5275,6 +5300,9 @@ export namespace google {
 
                     /** PasswordValidationPolicy enablePasswordPolicy */
                     enablePasswordPolicy?: (google.protobuf.IBoolValue|null);
+
+                    /** PasswordValidationPolicy disallowCompromisedCredentials */
+                    disallowCompromisedCredentials?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a PasswordValidationPolicy. */
@@ -5303,6 +5331,9 @@ export namespace google {
 
                     /** PasswordValidationPolicy enablePasswordPolicy. */
                     public enablePasswordPolicy?: (google.protobuf.IBoolValue|null);
+
+                    /** PasswordValidationPolicy disallowCompromisedCredentials. */
+                    public disallowCompromisedCredentials?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new PasswordValidationPolicy instance using the specified properties.
@@ -6450,7 +6481,8 @@ export namespace google {
                 enum SqlUpdateTrack {
                     SQL_UPDATE_TRACK_UNSPECIFIED = 0,
                     canary = 1,
-                    stable = 2
+                    stable = 2,
+                    week5 = 3
                 }
 
                 /** Represents a SqlConnectService */
@@ -8337,6 +8369,20 @@ export namespace google {
                     public demoteMaster(request: google.cloud.sql.v1.ISqlInstancesDemoteMasterRequest): Promise<google.cloud.sql.v1.Operation>;
 
                     /**
+                     * Calls Demote.
+                     * @param request SqlInstancesDemoteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public demote(request: google.cloud.sql.v1.ISqlInstancesDemoteRequest, callback: google.cloud.sql.v1.SqlInstancesService.DemoteCallback): void;
+
+                    /**
+                     * Calls Demote.
+                     * @param request SqlInstancesDemoteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public demote(request: google.cloud.sql.v1.ISqlInstancesDemoteRequest): Promise<google.cloud.sql.v1.Operation>;
+
+                    /**
                      * Calls Export.
                      * @param request SqlInstancesExportRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -8475,6 +8521,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public promoteReplica(request: google.cloud.sql.v1.ISqlInstancesPromoteReplicaRequest): Promise<google.cloud.sql.v1.Operation>;
+
+                    /**
+                     * Calls Switchover.
+                     * @param request SqlInstancesSwitchoverRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public switchover(request: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest, callback: google.cloud.sql.v1.SqlInstancesService.SwitchoverCallback): void;
+
+                    /**
+                     * Calls Switchover.
+                     * @param request SqlInstancesSwitchoverRequest message or plain object
+                     * @returns Promise
+                     */
+                    public switchover(request: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest): Promise<google.cloud.sql.v1.Operation>;
 
                     /**
                      * Calls ResetSslConfig.
@@ -8732,6 +8792,13 @@ export namespace google {
                     type DemoteMasterCallback = (error: (Error|null), response?: google.cloud.sql.v1.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|demote}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DemoteCallback = (error: (Error|null), response?: google.cloud.sql.v1.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|export_}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -8800,6 +8867,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type PromoteReplicaCallback = (error: (Error|null), response?: google.cloud.sql.v1.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|switchover}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SwitchoverCallback = (error: (Error|null), response?: google.cloud.sql.v1.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|resetSslConfig}.
@@ -9332,6 +9406,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SqlInstancesDemoteMasterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesDemoteRequest. */
+                interface ISqlInstancesDemoteRequest {
+
+                    /** SqlInstancesDemoteRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesDemoteRequest project */
+                    project?: (string|null);
+
+                    /** SqlInstancesDemoteRequest body */
+                    body?: (google.cloud.sql.v1.IInstancesDemoteRequest|null);
+                }
+
+                /** Represents a SqlInstancesDemoteRequest. */
+                class SqlInstancesDemoteRequest implements ISqlInstancesDemoteRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesDemoteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.ISqlInstancesDemoteRequest);
+
+                    /** SqlInstancesDemoteRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesDemoteRequest project. */
+                    public project: string;
+
+                    /** SqlInstancesDemoteRequest body. */
+                    public body?: (google.cloud.sql.v1.IInstancesDemoteRequest|null);
+
+                    /**
+                     * Creates a new SqlInstancesDemoteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesDemoteRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.ISqlInstancesDemoteRequest): google.cloud.sql.v1.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesDemoteRequest message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesDemoteRequest.verify|verify} messages.
+                     * @param message SqlInstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.ISqlInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesDemoteRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesDemoteRequest.verify|verify} messages.
+                     * @param message SqlInstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.ISqlInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesDemoteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Decodes a SqlInstancesDemoteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Verifies a SqlInstancesDemoteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesDemoteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesDemoteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesDemoteRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesDemoteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.SqlInstancesDemoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesDemoteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesDemoteRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -10206,6 +10389,9 @@ export namespace google {
 
                     /** SqlInstancesPromoteReplicaRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesPromoteReplicaRequest failover */
+                    failover?: (boolean|null);
                 }
 
                 /** Represents a SqlInstancesPromoteReplicaRequest. */
@@ -10222,6 +10408,9 @@ export namespace google {
 
                     /** SqlInstancesPromoteReplicaRequest project. */
                     public project: string;
+
+                    /** SqlInstancesPromoteReplicaRequest failover. */
+                    public failover: boolean;
 
                     /**
                      * Creates a new SqlInstancesPromoteReplicaRequest instance using the specified properties.
@@ -10295,6 +10484,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SqlInstancesPromoteReplicaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesSwitchoverRequest. */
+                interface ISqlInstancesSwitchoverRequest {
+
+                    /** SqlInstancesSwitchoverRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesSwitchoverRequest project */
+                    project?: (string|null);
+
+                    /** SqlInstancesSwitchoverRequest dbTimeout */
+                    dbTimeout?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a SqlInstancesSwitchoverRequest. */
+                class SqlInstancesSwitchoverRequest implements ISqlInstancesSwitchoverRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesSwitchoverRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest);
+
+                    /** SqlInstancesSwitchoverRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesSwitchoverRequest project. */
+                    public project: string;
+
+                    /** SqlInstancesSwitchoverRequest dbTimeout. */
+                    public dbTimeout?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new SqlInstancesSwitchoverRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesSwitchoverRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest): google.cloud.sql.v1.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesSwitchoverRequest message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesSwitchoverRequest.verify|verify} messages.
+                     * @param message SqlInstancesSwitchoverRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesSwitchoverRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesSwitchoverRequest.verify|verify} messages.
+                     * @param message SqlInstancesSwitchoverRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.ISqlInstancesSwitchoverRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesSwitchoverRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesSwitchoverRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Decodes a SqlInstancesSwitchoverRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesSwitchoverRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Verifies a SqlInstancesSwitchoverRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesSwitchoverRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesSwitchoverRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesSwitchoverRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesSwitchoverRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.SqlInstancesSwitchoverRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesSwitchoverRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesSwitchoverRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11695,6 +11993,14 @@ export namespace google {
                     }
                 }
 
+                /** ExternalSyncParallelLevel enum. */
+                enum ExternalSyncParallelLevel {
+                    EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0,
+                    MIN = 1,
+                    OPTIMAL = 2,
+                    MAX = 3
+                }
+
                 /** Properties of a SqlInstancesGetDiskShrinkConfigRequest. */
                 interface ISqlInstancesGetDiskShrinkConfigRequest {
 
@@ -11957,7 +12263,7 @@ export namespace google {
                     mysqlSyncConfig?: (google.cloud.sql.v1.IMySqlSyncConfig|null);
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel */
-                    syncParallelLevel?: (google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|null);
+                    syncParallelLevel?: (google.cloud.sql.v1.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.ExternalSyncParallelLevel|null);
                 }
 
                 /** Represents a SqlInstancesStartExternalSyncRequest. */
@@ -11985,7 +12291,7 @@ export namespace google {
                     public mysqlSyncConfig?: (google.cloud.sql.v1.IMySqlSyncConfig|null);
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel. */
-                    public syncParallelLevel: (google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel);
+                    public syncParallelLevel: (google.cloud.sql.v1.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.ExternalSyncParallelLevel);
 
                     /** SqlInstancesStartExternalSyncRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -12066,17 +12372,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace SqlInstancesStartExternalSyncRequest {
-
-                    /** ExternalSyncParallelLevel enum. */
-                    enum ExternalSyncParallelLevel {
-                        EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0,
-                        MIN = 1,
-                        OPTIMAL = 2,
-                        MAX = 3
-                    }
                 }
 
                 /** Properties of a SqlInstancesResetReplicaSizeRequest. */
@@ -12479,6 +12774,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for InstancesDemoteMasterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InstancesDemoteRequest. */
+                interface IInstancesDemoteRequest {
+
+                    /** InstancesDemoteRequest demoteContext */
+                    demoteContext?: (google.cloud.sql.v1.IDemoteContext|null);
+                }
+
+                /** Represents an InstancesDemoteRequest. */
+                class InstancesDemoteRequest implements IInstancesDemoteRequest {
+
+                    /**
+                     * Constructs a new InstancesDemoteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IInstancesDemoteRequest);
+
+                    /** InstancesDemoteRequest demoteContext. */
+                    public demoteContext?: (google.cloud.sql.v1.IDemoteContext|null);
+
+                    /**
+                     * Creates a new InstancesDemoteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstancesDemoteRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IInstancesDemoteRequest): google.cloud.sql.v1.InstancesDemoteRequest;
+
+                    /**
+                     * Encodes the specified InstancesDemoteRequest message. Does not implicitly {@link google.cloud.sql.v1.InstancesDemoteRequest.verify|verify} messages.
+                     * @param message InstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstancesDemoteRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.InstancesDemoteRequest.verify|verify} messages.
+                     * @param message InstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstancesDemoteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.InstancesDemoteRequest;
+
+                    /**
+                     * Decodes an InstancesDemoteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.InstancesDemoteRequest;
+
+                    /**
+                     * Verifies an InstancesDemoteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstancesDemoteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstancesDemoteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.InstancesDemoteRequest;
+
+                    /**
+                     * Creates a plain object from an InstancesDemoteRequest message. Also converts values to other types if specified.
+                     * @param message InstancesDemoteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.InstancesDemoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstancesDemoteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstancesDemoteRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -14180,11 +14572,20 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion */
                     maintenanceVersion?: (string|null);
 
+                    /** DatabaseInstance sqlNetworkArchitecture */
+                    sqlNetworkArchitecture?: (google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|null);
+
                     /** DatabaseInstance pscServiceAttachmentLink */
                     pscServiceAttachmentLink?: (string|null);
 
                     /** DatabaseInstance dnsName */
                     dnsName?: (string|null);
+
+                    /** DatabaseInstance primaryDnsName */
+                    primaryDnsName?: (string|null);
+
+                    /** DatabaseInstance writeEndpoint */
+                    writeEndpoint?: (string|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -14304,20 +14705,38 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion. */
                     public maintenanceVersion: string;
 
+                    /** DatabaseInstance sqlNetworkArchitecture. */
+                    public sqlNetworkArchitecture?: (google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1.DatabaseInstance.SqlNetworkArchitecture|null);
+
                     /** DatabaseInstance pscServiceAttachmentLink. */
                     public pscServiceAttachmentLink?: (string|null);
 
                     /** DatabaseInstance dnsName. */
                     public dnsName?: (string|null);
 
+                    /** DatabaseInstance primaryDnsName. */
+                    public primaryDnsName?: (string|null);
+
+                    /** DatabaseInstance writeEndpoint. */
+                    public writeEndpoint?: (string|null);
+
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
+
+                    /** DatabaseInstance _sqlNetworkArchitecture. */
+                    public _sqlNetworkArchitecture?: "sqlNetworkArchitecture";
 
                     /** DatabaseInstance _pscServiceAttachmentLink. */
                     public _pscServiceAttachmentLink?: "pscServiceAttachmentLink";
 
                     /** DatabaseInstance _dnsName. */
                     public _dnsName?: "dnsName";
+
+                    /** DatabaseInstance _primaryDnsName. */
+                    public _primaryDnsName?: "primaryDnsName";
+
+                    /** DatabaseInstance _writeEndpoint. */
+                    public _writeEndpoint?: "writeEndpoint";
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -14750,6 +15169,13 @@ export namespace google {
                             SOFT_SHUTDOWN = 2
                         }
                     }
+
+                    /** SqlNetworkArchitecture enum. */
+                    enum SqlNetworkArchitecture {
+                        SQL_NETWORK_ARCHITECTURE_UNSPECIFIED = 0,
+                        NEW_NETWORK_ARCHITECTURE = 1,
+                        OLD_NETWORK_ARCHITECTURE = 2
+                    }
                 }
 
                 /** Properties of a SqlInstancesRescheduleMaintenanceRequestBody. */
@@ -15078,6 +15504,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DemoteMasterContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DemoteContext. */
+                interface IDemoteContext {
+
+                    /** DemoteContext kind */
+                    kind?: (string|null);
+
+                    /** DemoteContext sourceRepresentativeInstanceName */
+                    sourceRepresentativeInstanceName?: (string|null);
+                }
+
+                /** Represents a DemoteContext. */
+                class DemoteContext implements IDemoteContext {
+
+                    /**
+                     * Constructs a new DemoteContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IDemoteContext);
+
+                    /** DemoteContext kind. */
+                    public kind: string;
+
+                    /** DemoteContext sourceRepresentativeInstanceName. */
+                    public sourceRepresentativeInstanceName: string;
+
+                    /**
+                     * Creates a new DemoteContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DemoteContext instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IDemoteContext): google.cloud.sql.v1.DemoteContext;
+
+                    /**
+                     * Encodes the specified DemoteContext message. Does not implicitly {@link google.cloud.sql.v1.DemoteContext.verify|verify} messages.
+                     * @param message DemoteContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IDemoteContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DemoteContext message, length delimited. Does not implicitly {@link google.cloud.sql.v1.DemoteContext.verify|verify} messages.
+                     * @param message DemoteContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IDemoteContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DemoteContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DemoteContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.DemoteContext;
+
+                    /**
+                     * Decodes a DemoteContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DemoteContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.DemoteContext;
+
+                    /**
+                     * Verifies a DemoteContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DemoteContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DemoteContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.DemoteContext;
+
+                    /**
+                     * Creates a plain object from a DemoteContext message. Also converts values to other types if specified.
+                     * @param message DemoteContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.DemoteContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DemoteContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DemoteContext
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -15655,7 +16184,9 @@ export namespace google {
                         INSUFFICIENT_GCS_PERMISSIONS = 31,
                         INVALID_FILE_INFO = 32,
                         UNSUPPORTED_DATABASE_SETTINGS = 33,
-                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34
+                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34,
+                        LOCAL_INFILE_OFF = 35,
+                        TURN_ON_PITR_AFTER_PROMOTE = 36
                     }
                 }
 
@@ -15815,6 +16346,9 @@ export namespace google {
 
                     /** ReplicaConfiguration failoverTarget */
                     failoverTarget?: (google.protobuf.IBoolValue|null);
+
+                    /** ReplicaConfiguration cascadableReplica */
+                    cascadableReplica?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a ReplicaConfiguration. */
@@ -15834,6 +16368,9 @@ export namespace google {
 
                     /** ReplicaConfiguration failoverTarget. */
                     public failoverTarget?: (google.protobuf.IBoolValue|null);
+
+                    /** ReplicaConfiguration cascadableReplica. */
+                    public cascadableReplica?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new ReplicaConfiguration instance using the specified properties.
@@ -18772,7 +19309,10 @@ export namespace google {
                     enum SqlUserType {
                         BUILT_IN = 0,
                         CLOUD_IAM_USER = 1,
-                        CLOUD_IAM_SERVICE_ACCOUNT = 2
+                        CLOUD_IAM_SERVICE_ACCOUNT = 2,
+                        CLOUD_IAM_GROUP = 3,
+                        CLOUD_IAM_GROUP_USER = 4,
+                        CLOUD_IAM_GROUP_SERVICE_ACCOUNT = 5
                     }
 
                     /** DualPasswordType enum. */
@@ -19380,6 +19920,20 @@ export namespace google {
                     public demoteMaster(request: google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest): Promise<google.cloud.sql.v1beta4.Operation>;
 
                     /**
+                     * Calls Demote.
+                     * @param request SqlInstancesDemoteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public demote(request: google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest, callback: google.cloud.sql.v1beta4.SqlInstancesService.DemoteCallback): void;
+
+                    /**
+                     * Calls Demote.
+                     * @param request SqlInstancesDemoteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public demote(request: google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest): Promise<google.cloud.sql.v1beta4.Operation>;
+
+                    /**
                      * Calls Export.
                      * @param request SqlInstancesExportRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -19518,6 +20072,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public promoteReplica(request: google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest): Promise<google.cloud.sql.v1beta4.Operation>;
+
+                    /**
+                     * Calls Switchover.
+                     * @param request SqlInstancesSwitchoverRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public switchover(request: google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest, callback: google.cloud.sql.v1beta4.SqlInstancesService.SwitchoverCallback): void;
+
+                    /**
+                     * Calls Switchover.
+                     * @param request SqlInstancesSwitchoverRequest message or plain object
+                     * @returns Promise
+                     */
+                    public switchover(request: google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest): Promise<google.cloud.sql.v1beta4.Operation>;
 
                     /**
                      * Calls ResetSslConfig.
@@ -19775,6 +20343,13 @@ export namespace google {
                     type DemoteMasterCallback = (error: (Error|null), response?: google.cloud.sql.v1beta4.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.sql.v1beta4.SqlInstancesService|demote}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DemoteCallback = (error: (Error|null), response?: google.cloud.sql.v1beta4.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.sql.v1beta4.SqlInstancesService|export_}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -19843,6 +20418,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type PromoteReplicaCallback = (error: (Error|null), response?: google.cloud.sql.v1beta4.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.sql.v1beta4.SqlInstancesService|switchover}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SwitchoverCallback = (error: (Error|null), response?: google.cloud.sql.v1beta4.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.sql.v1beta4.SqlInstancesService|resetSslConfig}.
@@ -21660,6 +22242,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SqlInstancesDemoteRequest. */
+                interface ISqlInstancesDemoteRequest {
+
+                    /** SqlInstancesDemoteRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesDemoteRequest project */
+                    project?: (string|null);
+
+                    /** SqlInstancesDemoteRequest body */
+                    body?: (google.cloud.sql.v1beta4.IInstancesDemoteRequest|null);
+                }
+
+                /** Represents a SqlInstancesDemoteRequest. */
+                class SqlInstancesDemoteRequest implements ISqlInstancesDemoteRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesDemoteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest);
+
+                    /** SqlInstancesDemoteRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesDemoteRequest project. */
+                    public project: string;
+
+                    /** SqlInstancesDemoteRequest body. */
+                    public body?: (google.cloud.sql.v1beta4.IInstancesDemoteRequest|null);
+
+                    /**
+                     * Creates a new SqlInstancesDemoteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesDemoteRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest): google.cloud.sql.v1beta4.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesDemoteRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesDemoteRequest.verify|verify} messages.
+                     * @param message SqlInstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesDemoteRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesDemoteRequest.verify|verify} messages.
+                     * @param message SqlInstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesDemoteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Decodes a SqlInstancesDemoteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Verifies a SqlInstancesDemoteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesDemoteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesDemoteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlInstancesDemoteRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesDemoteRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesDemoteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.SqlInstancesDemoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesDemoteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesDemoteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SqlInstancesExportRequest. */
                 interface ISqlInstancesExportRequest {
 
@@ -22528,6 +23219,9 @@ export namespace google {
 
                     /** SqlInstancesPromoteReplicaRequest project */
                     project?: (string|null);
+
+                    /** SqlInstancesPromoteReplicaRequest failover */
+                    failover?: (boolean|null);
                 }
 
                 /** Represents a SqlInstancesPromoteReplicaRequest. */
@@ -22544,6 +23238,9 @@ export namespace google {
 
                     /** SqlInstancesPromoteReplicaRequest project. */
                     public project: string;
+
+                    /** SqlInstancesPromoteReplicaRequest failover. */
+                    public failover: boolean;
 
                     /**
                      * Creates a new SqlInstancesPromoteReplicaRequest instance using the specified properties.
@@ -22617,6 +23314,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SqlInstancesPromoteReplicaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesSwitchoverRequest. */
+                interface ISqlInstancesSwitchoverRequest {
+
+                    /** SqlInstancesSwitchoverRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesSwitchoverRequest project */
+                    project?: (string|null);
+
+                    /** SqlInstancesSwitchoverRequest dbTimeout */
+                    dbTimeout?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a SqlInstancesSwitchoverRequest. */
+                class SqlInstancesSwitchoverRequest implements ISqlInstancesSwitchoverRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesSwitchoverRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest);
+
+                    /** SqlInstancesSwitchoverRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesSwitchoverRequest project. */
+                    public project: string;
+
+                    /** SqlInstancesSwitchoverRequest dbTimeout. */
+                    public dbTimeout?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new SqlInstancesSwitchoverRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesSwitchoverRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest): google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesSwitchoverRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest.verify|verify} messages.
+                     * @param message SqlInstancesSwitchoverRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesSwitchoverRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest.verify|verify} messages.
+                     * @param message SqlInstancesSwitchoverRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlInstancesSwitchoverRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesSwitchoverRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesSwitchoverRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Decodes a SqlInstancesSwitchoverRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesSwitchoverRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Verifies a SqlInstancesSwitchoverRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesSwitchoverRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesSwitchoverRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesSwitchoverRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesSwitchoverRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.SqlInstancesSwitchoverRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesSwitchoverRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesSwitchoverRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -24017,6 +24823,14 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** ExternalSyncParallelLevel enum. */
+                enum ExternalSyncParallelLevel {
+                    EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0,
+                    MIN = 1,
+                    OPTIMAL = 2,
+                    MAX = 3
+                }
+
                 /** Properties of a SqlInstancesVerifyExternalSyncSettingsRequest. */
                 interface ISqlInstancesVerifyExternalSyncSettingsRequest {
 
@@ -24176,7 +24990,7 @@ export namespace google {
                     mysqlSyncConfig?: (google.cloud.sql.v1beta4.IMySqlSyncConfig|null);
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel */
-                    syncParallelLevel?: (google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|null);
+                    syncParallelLevel?: (google.cloud.sql.v1beta4.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.ExternalSyncParallelLevel|null);
                 }
 
                 /** Represents a SqlInstancesStartExternalSyncRequest. */
@@ -24204,7 +25018,7 @@ export namespace google {
                     public mysqlSyncConfig?: (google.cloud.sql.v1beta4.IMySqlSyncConfig|null);
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel. */
-                    public syncParallelLevel: (google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel);
+                    public syncParallelLevel: (google.cloud.sql.v1beta4.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1beta4.ExternalSyncParallelLevel);
 
                     /** SqlInstancesStartExternalSyncRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -24285,17 +25099,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace SqlInstancesStartExternalSyncRequest {
-
-                    /** ExternalSyncParallelLevel enum. */
-                    enum ExternalSyncParallelLevel {
-                        EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0,
-                        MIN = 1,
-                        OPTIMAL = 2,
-                        MAX = 3
-                    }
                 }
 
                 /** Properties of a SqlInstancesResetReplicaSizeRequest. */
@@ -25800,7 +26603,9 @@ export namespace google {
                     enum SqlApiWarningCode {
                         SQL_API_WARNING_CODE_UNSPECIFIED = 0,
                         REGION_UNREACHABLE = 1,
-                        MAX_RESULTS_EXCEEDS_LIMIT = 2
+                        MAX_RESULTS_EXCEEDS_LIMIT = 2,
+                        COMPROMISED_CREDENTIALS = 3,
+                        INTERNAL_STATE_FAILURE = 4
                     }
                 }
 
@@ -27394,11 +28199,20 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion */
                     maintenanceVersion?: (string|null);
 
+                    /** DatabaseInstance sqlNetworkArchitecture */
+                    sqlNetworkArchitecture?: (google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|null);
+
                     /** DatabaseInstance pscServiceAttachmentLink */
                     pscServiceAttachmentLink?: (string|null);
 
                     /** DatabaseInstance dnsName */
                     dnsName?: (string|null);
+
+                    /** DatabaseInstance primaryDnsName */
+                    primaryDnsName?: (string|null);
+
+                    /** DatabaseInstance writeEndpoint */
+                    writeEndpoint?: (string|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -27518,20 +28332,38 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion. */
                     public maintenanceVersion: string;
 
+                    /** DatabaseInstance sqlNetworkArchitecture. */
+                    public sqlNetworkArchitecture?: (google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|keyof typeof google.cloud.sql.v1beta4.DatabaseInstance.SqlNetworkArchitecture|null);
+
                     /** DatabaseInstance pscServiceAttachmentLink. */
                     public pscServiceAttachmentLink?: (string|null);
 
                     /** DatabaseInstance dnsName. */
                     public dnsName?: (string|null);
 
+                    /** DatabaseInstance primaryDnsName. */
+                    public primaryDnsName?: (string|null);
+
+                    /** DatabaseInstance writeEndpoint. */
+                    public writeEndpoint?: (string|null);
+
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
+
+                    /** DatabaseInstance _sqlNetworkArchitecture. */
+                    public _sqlNetworkArchitecture?: "sqlNetworkArchitecture";
 
                     /** DatabaseInstance _pscServiceAttachmentLink. */
                     public _pscServiceAttachmentLink?: "pscServiceAttachmentLink";
 
                     /** DatabaseInstance _dnsName. */
                     public _dnsName?: "dnsName";
+
+                    /** DatabaseInstance _primaryDnsName. */
+                    public _primaryDnsName?: "primaryDnsName";
+
+                    /** DatabaseInstance _writeEndpoint. */
+                    public _writeEndpoint?: "writeEndpoint";
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -27963,6 +28795,13 @@ export namespace google {
                             NORMAL = 1,
                             SOFT_SHUTDOWN = 2
                         }
+                    }
+
+                    /** SqlNetworkArchitecture enum. */
+                    enum SqlNetworkArchitecture {
+                        SQL_NETWORK_ARCHITECTURE_UNSPECIFIED = 0,
+                        NEW_NETWORK_ARCHITECTURE = 1,
+                        OLD_NETWORK_ARCHITECTURE = 2
                     }
                 }
 
@@ -28414,6 +29253,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DemoteMasterMySqlReplicaConfiguration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DemoteContext. */
+                interface IDemoteContext {
+
+                    /** DemoteContext kind */
+                    kind?: (string|null);
+
+                    /** DemoteContext sourceRepresentativeInstanceName */
+                    sourceRepresentativeInstanceName?: (string|null);
+                }
+
+                /** Represents a DemoteContext. */
+                class DemoteContext implements IDemoteContext {
+
+                    /**
+                     * Constructs a new DemoteContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.IDemoteContext);
+
+                    /** DemoteContext kind. */
+                    public kind: string;
+
+                    /** DemoteContext sourceRepresentativeInstanceName. */
+                    public sourceRepresentativeInstanceName: string;
+
+                    /**
+                     * Creates a new DemoteContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DemoteContext instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.IDemoteContext): google.cloud.sql.v1beta4.DemoteContext;
+
+                    /**
+                     * Encodes the specified DemoteContext message. Does not implicitly {@link google.cloud.sql.v1beta4.DemoteContext.verify|verify} messages.
+                     * @param message DemoteContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.IDemoteContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DemoteContext message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.DemoteContext.verify|verify} messages.
+                     * @param message DemoteContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IDemoteContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DemoteContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DemoteContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.DemoteContext;
+
+                    /**
+                     * Decodes a DemoteContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DemoteContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.DemoteContext;
+
+                    /**
+                     * Verifies a DemoteContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DemoteContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DemoteContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.DemoteContext;
+
+                    /**
+                     * Creates a plain object from a DemoteContext message. Also converts values to other types if specified.
+                     * @param message DemoteContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.DemoteContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DemoteContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DemoteContext
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -30088,6 +31030,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an InstancesDemoteRequest. */
+                interface IInstancesDemoteRequest {
+
+                    /** InstancesDemoteRequest demoteContext */
+                    demoteContext?: (google.cloud.sql.v1beta4.IDemoteContext|null);
+                }
+
+                /** Represents an InstancesDemoteRequest. */
+                class InstancesDemoteRequest implements IInstancesDemoteRequest {
+
+                    /**
+                     * Constructs a new InstancesDemoteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.IInstancesDemoteRequest);
+
+                    /** InstancesDemoteRequest demoteContext. */
+                    public demoteContext?: (google.cloud.sql.v1beta4.IDemoteContext|null);
+
+                    /**
+                     * Creates a new InstancesDemoteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstancesDemoteRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.IInstancesDemoteRequest): google.cloud.sql.v1beta4.InstancesDemoteRequest;
+
+                    /**
+                     * Encodes the specified InstancesDemoteRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.InstancesDemoteRequest.verify|verify} messages.
+                     * @param message InstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.IInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstancesDemoteRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.InstancesDemoteRequest.verify|verify} messages.
+                     * @param message InstancesDemoteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IInstancesDemoteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstancesDemoteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.InstancesDemoteRequest;
+
+                    /**
+                     * Decodes an InstancesDemoteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstancesDemoteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.InstancesDemoteRequest;
+
+                    /**
+                     * Verifies an InstancesDemoteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstancesDemoteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstancesDemoteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.InstancesDemoteRequest;
+
+                    /**
+                     * Creates a plain object from an InstancesDemoteRequest message. Also converts values to other types if specified.
+                     * @param message InstancesDemoteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.InstancesDemoteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstancesDemoteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstancesDemoteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an InstancesExportRequest. */
                 interface IInstancesExportRequest {
 
@@ -31453,7 +32492,11 @@ export namespace google {
                         INSUFFICIENT_GCS_PERMISSIONS = 31,
                         INVALID_FILE_INFO = 32,
                         UNSUPPORTED_DATABASE_SETTINGS = 33,
-                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34
+                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34,
+                        LOCAL_INFILE_OFF = 35,
+                        TURN_ON_PITR_AFTER_PROMOTE = 36,
+                        INCOMPATIBLE_DATABASE_MINOR_VERSION = 37,
+                        SOURCE_MAX_SUBSCRIPTIONS = 38
                     }
                 }
 
@@ -31477,6 +32520,9 @@ export namespace google {
 
                     /** IpConfiguration enablePrivatePathForGoogleCloudServices */
                     enablePrivatePathForGoogleCloudServices?: (google.protobuf.IBoolValue|null);
+
+                    /** IpConfiguration sslMode */
+                    sslMode?: (google.cloud.sql.v1beta4.IpConfiguration.SslMode|keyof typeof google.cloud.sql.v1beta4.IpConfiguration.SslMode|null);
 
                     /** IpConfiguration pscConfig */
                     pscConfig?: (google.cloud.sql.v1beta4.IPscConfig|null);
@@ -31508,6 +32554,9 @@ export namespace google {
 
                     /** IpConfiguration enablePrivatePathForGoogleCloudServices. */
                     public enablePrivatePathForGoogleCloudServices?: (google.protobuf.IBoolValue|null);
+
+                    /** IpConfiguration sslMode. */
+                    public sslMode: (google.cloud.sql.v1beta4.IpConfiguration.SslMode|keyof typeof google.cloud.sql.v1beta4.IpConfiguration.SslMode);
 
                     /** IpConfiguration pscConfig. */
                     public pscConfig?: (google.cloud.sql.v1beta4.IPscConfig|null);
@@ -31591,6 +32640,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IpConfiguration {
+
+                    /** SslMode enum. */
+                    enum SslMode {
+                        SSL_MODE_UNSPECIFIED = 0,
+                        ALLOW_UNENCRYPTED_AND_ENCRYPTED = 1,
+                        ENCRYPTED_ONLY = 2,
+                        TRUSTED_CLIENT_CERTIFICATE_REQUIRED = 3
+                    }
                 }
 
                 /** Properties of a PscConfig. */
@@ -32803,6 +33863,9 @@ export namespace google {
                     /** Operation error */
                     error?: (google.cloud.sql.v1beta4.IOperationErrors|null);
 
+                    /** Operation apiWarning */
+                    apiWarning?: (google.cloud.sql.v1beta4.IApiWarning|null);
+
                     /** Operation operationType */
                     operationType?: (google.cloud.sql.v1beta4.Operation.SqlOperationType|keyof typeof google.cloud.sql.v1beta4.Operation.SqlOperationType|null);
 
@@ -32860,6 +33923,9 @@ export namespace google {
 
                     /** Operation error. */
                     public error?: (google.cloud.sql.v1beta4.IOperationErrors|null);
+
+                    /** Operation apiWarning. */
+                    public apiWarning?: (google.cloud.sql.v1beta4.IApiWarning|null);
 
                     /** Operation operationType. */
                     public operationType: (google.cloud.sql.v1beta4.Operation.SqlOperationType|keyof typeof google.cloud.sql.v1beta4.Operation.SqlOperationType);
@@ -33249,6 +34315,9 @@ export namespace google {
 
                     /** PasswordValidationPolicy enablePasswordPolicy */
                     enablePasswordPolicy?: (google.protobuf.IBoolValue|null);
+
+                    /** PasswordValidationPolicy disallowCompromisedCredentials */
+                    disallowCompromisedCredentials?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a PasswordValidationPolicy. */
@@ -33277,6 +34346,9 @@ export namespace google {
 
                     /** PasswordValidationPolicy enablePasswordPolicy. */
                     public enablePasswordPolicy?: (google.protobuf.IBoolValue|null);
+
+                    /** PasswordValidationPolicy disallowCompromisedCredentials. */
+                    public disallowCompromisedCredentials?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new PasswordValidationPolicy instance using the specified properties.
@@ -33485,6 +34557,9 @@ export namespace google {
 
                     /** ReplicaConfiguration failoverTarget */
                     failoverTarget?: (google.protobuf.IBoolValue|null);
+
+                    /** ReplicaConfiguration cascadableReplica */
+                    cascadableReplica?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a ReplicaConfiguration. */
@@ -33504,6 +34579,9 @@ export namespace google {
 
                     /** ReplicaConfiguration failoverTarget. */
                     public failoverTarget?: (google.protobuf.IBoolValue|null);
+
+                    /** ReplicaConfiguration cascadableReplica. */
+                    public cascadableReplica?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new ReplicaConfiguration instance using the specified properties.
@@ -35637,7 +36715,8 @@ export namespace google {
                 enum SqlUpdateTrack {
                     SQL_UPDATE_TRACK_UNSPECIFIED = 0,
                     canary = 1,
-                    stable = 2
+                    stable = 2,
+                    week5 = 3
                 }
 
                 /** SqlFlagType enum. */
@@ -37662,7 +38741,10 @@ export namespace google {
                     enum SqlUserType {
                         BUILT_IN = 0,
                         CLOUD_IAM_USER = 1,
-                        CLOUD_IAM_SERVICE_ACCOUNT = 2
+                        CLOUD_IAM_SERVICE_ACCOUNT = 2,
+                        CLOUD_IAM_GROUP = 3,
+                        CLOUD_IAM_GROUP_USER = 4,
+                        CLOUD_IAM_GROUP_SERVICE_ACCOUNT = 5
                     }
 
                     /** DualPasswordType enum. */

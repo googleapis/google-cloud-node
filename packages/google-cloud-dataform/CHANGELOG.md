@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v1.0.2...dataform-v1.1.0) (2023-11-03)
+
+
+### Features
+
+* Support for ReleaseConfigs ([#4764](https://github.com/googleapis/google-cloud-node/issues/4764)) ([50712d8](https://github.com/googleapis/google-cloud-node/commit/50712d88b6b2437a7536aa7525bd177cb1ea3903))
+
 ## [1.0.2](https://github.com/googleapis/google-cloud-node/compare/dataform-v1.0.1...dataform-v1.0.2) (2023-09-19)
 
 

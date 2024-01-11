@@ -2594,6 +2594,24 @@
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-edgecontainer"
   },
   {
+    "name": "edgenetwork",
+    "name_pretty": "Distributed Cloud Edge Network API",
+    "product_documentation": "https://cloud.google.com/distributed-cloud/edge/latest/docs/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/edgenetwork/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/edgenetwork",
+    "api_id": "edgenetwork.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "edgenetwork",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-edgenetwork",
+    "support_documentation": "https://cloud.google.com/distributed-cloud/edge/latest/docs/getting-support"
+  },
+  {
     "name": "generativelanguage",
     "name_pretty": "Generative Language API",
     "product_documentation": "https://developers.generativeai.google/",
@@ -2604,7 +2622,7 @@
     "repo": "googleapis/google-cloud-node",
     "distribution_name": "@google-ai/generativelanguage",
     "api_id": "generativelanguage.googleapis.com",
-    "default_version": "v1beta2",
+    "default_version": "v1beta",
     "requires_billing": true,
     "library_type": "GAPIC_AUTO",
     "api_shortname": "generativelanguage",
@@ -3022,6 +3040,18 @@
     "library_type": "AGENT",
     "linkToRepoHomepage": "https://github.com/googleapis/cloud-trace-nodejs",
     "support_documentation": "https://cloud.google.com/trace/docs/getting-support"
+  },
+  {
+    "name": "vertexai",
+    "name_pretty": "Vertex AI",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-vertexai",
+    "distribution_name": "@google-cloud/vertexai",
+    "api_id": "aiplatform.googleapis.com",
+    "api_shortname": "aiplatform",
+    "library_type": "GAPIC_MANUAL",
+    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-vertexai"
   },
   {
     "name": "workstations",

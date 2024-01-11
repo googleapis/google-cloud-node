@@ -1035,13 +1035,13 @@
                     "java_outer_classname": "ReportingApiProto",
                     "java_package": "com.google.analytics.data.v1alpha",
                     "(google.api.resource_definition).type": "analyticsadmin.googleapis.com/Property",
-                    "(google.api.resource_definition).pattern": "properties/{propertyId}"
+                    "(google.api.resource_definition).pattern": "properties/{property}"
                   },
                   "nested": {
                     "AlphaAnalyticsData": {
                       "options": {
                         "(google.api.default_host)": "analyticsdata.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/analytics,https://www.googleapis.com/auth/analytics.readonly"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/analytics,https://www.googleapis.com/auth/analytics.readonly,https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/drive.file,https://www.googleapis.com/auth/spreadsheets"
                       },
                       "methods": {
                         "RunFunnelReport": {
@@ -1108,6 +1108,26 @@
                             }
                           ]
                         },
+                        "SheetExportAudienceList": {
+                          "requestType": "SheetExportAudienceListRequest",
+                          "responseType": "SheetExportAudienceListResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=properties/*/audienceLists/*}:exportSheet",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=properties/*/audienceLists/*}:exportSheet",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "GetAudienceList": {
                           "requestType": "GetAudienceListRequest",
                           "responseType": "AudienceList",
@@ -1143,6 +1163,204 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "CreateRecurringAudienceList": {
+                          "requestType": "CreateRecurringAudienceListRequest",
+                          "responseType": "RecurringAudienceList",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/recurringAudienceLists",
+                            "(google.api.http).body": "recurring_audience_list",
+                            "(google.api.method_signature)": "parent,recurring_audience_list"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/recurringAudienceLists",
+                                "body": "recurring_audience_list"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,recurring_audience_list"
+                            }
+                          ]
+                        },
+                        "GetRecurringAudienceList": {
+                          "requestType": "GetRecurringAudienceListRequest",
+                          "responseType": "RecurringAudienceList",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/recurringAudienceLists/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/recurringAudienceLists/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListRecurringAudienceLists": {
+                          "requestType": "ListRecurringAudienceListsRequest",
+                          "responseType": "ListRecurringAudienceListsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/recurringAudienceLists",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/recurringAudienceLists"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateRecurringAudienceListRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsdata.googleapis.com/RecurringAudienceList"
+                          }
+                        },
+                        "recurringAudienceList": {
+                          "type": "RecurringAudienceList",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RecurringAudienceList": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsdata.googleapis.com/RecurringAudienceList",
+                        "(google.api.resource).pattern": "properties/{property}/recurringAudienceLists/{recurring_audience_list}",
+                        "(google.api.resource).plural": "recurringAudienceLists",
+                        "(google.api.resource).singular": "recurringAudienceList"
+                      },
+                      "oneofs": {
+                        "_activeDaysRemaining": {
+                          "oneof": [
+                            "activeDaysRemaining"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "audience": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "audienceDisplayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "AudienceDimension",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "activeDaysRemaining": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "audienceLists": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GetRecurringAudienceListRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsdata.googleapis.com/RecurringAudienceList"
+                          }
+                        }
+                      }
+                    },
+                    "ListRecurringAudienceListsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsdata.googleapis.com/RecurringAudienceList"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListRecurringAudienceListsResponse": {
+                      "oneofs": {
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "recurringAudienceLists": {
+                          "rule": "repeated",
+                          "type": "RecurringAudienceList",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -1170,11 +1388,17 @@
                         },
                         "pageSize": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1223,7 +1447,9 @@
                     "AudienceList": {
                       "options": {
                         "(google.api.resource).type": "analyticsdata.googleapis.com/AudienceList",
-                        "(google.api.resource).pattern": "properties/{propertyId}/audienceLists/{audienceListId}"
+                        "(google.api.resource).pattern": "properties/{property}/audienceLists/{audience_list}",
+                        "(google.api.resource).plural": "audienceLists",
+                        "(google.api.resource).singular": "audienceList"
                       },
                       "oneofs": {
                         "_state": {
@@ -1234,6 +1460,26 @@
                         "_beginCreatingTime": {
                           "oneof": [
                             "beginCreatingTime"
+                          ]
+                        },
+                        "_rowCount": {
+                          "oneof": [
+                            "rowCount"
+                          ]
+                        },
+                        "_errorMessage": {
+                          "oneof": [
+                            "errorMessage"
+                          ]
+                        },
+                        "_percentageCompleted": {
+                          "oneof": [
+                            "percentageCompleted"
+                          ]
+                        },
+                        "_recurringAudienceList": {
+                          "oneof": [
+                            "recurringAudienceList"
                           ]
                         }
                       },
@@ -1282,6 +1528,45 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
+                        },
+                        "creationQuotaTokensCharged": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "percentageCompleted": {
+                          "type": "double",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "recurringAudienceList": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -1302,15 +1587,24 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "offset": {
                           "type": "int64",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "limit": {
                           "type": "int64",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1349,6 +1643,86 @@
                         }
                       }
                     },
+                    "SheetExportAudienceListRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsdata.googleapis.com/AudienceList"
+                          }
+                        },
+                        "offset": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "limit": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SheetExportAudienceListResponse": {
+                      "oneofs": {
+                        "_spreadsheetUri": {
+                          "oneof": [
+                            "spreadsheetUri"
+                          ]
+                        },
+                        "_spreadsheetId": {
+                          "oneof": [
+                            "spreadsheetId"
+                          ]
+                        },
+                        "_rowCount": {
+                          "oneof": [
+                            "rowCount"
+                          ]
+                        },
+                        "_audienceList": {
+                          "oneof": [
+                            "audienceList"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "spreadsheetUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "spreadsheetId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "audienceList": {
+                          "type": "AudienceList",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "AudienceRow": {
                       "fields": {
                         "dimensionValues": {
@@ -1362,7 +1736,10 @@
                       "fields": {
                         "dimensionName": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1385,45 +1762,75 @@
                       "fields": {
                         "property": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "dateRanges": {
                           "rule": "repeated",
                           "type": "DateRange",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "funnel": {
                           "type": "Funnel",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "funnelBreakdown": {
                           "type": "FunnelBreakdown",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "funnelNextAction": {
                           "type": "FunnelNextAction",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "funnelVisualizationType": {
                           "type": "FunnelVisualizationType",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "segments": {
                           "rule": "repeated",
                           "type": "Segment",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "limit": {
                           "type": "int64",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "dimensionFilter": {
                           "type": "FilterExpression",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "returnPropertyQuota": {
                           "type": "bool",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2631,7 +3038,9 @@
                     "go_package": "google.golang.org/genproto/googleapis/analytics/data/v1beta;data",
                     "java_multiple_files": true,
                     "java_outer_classname": "ReportingApiProto",
-                    "java_package": "com.google.analytics.data.v1beta"
+                    "java_package": "com.google.analytics.data.v1beta",
+                    "(google.api.resource_definition).type": "analyticsadmin.googleapis.com/Property",
+                    "(google.api.resource_definition).pattern": "properties/{property}"
                   },
                   "nested": {
                     "BetaAnalyticsData": {
@@ -2751,6 +3160,90 @@
                                 "post": "/v1beta/{property=properties/*}:checkCompatibility",
                                 "body": "*"
                               }
+                            }
+                          ]
+                        },
+                        "CreateAudienceExport": {
+                          "requestType": "CreateAudienceExportRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=properties/*}/audienceExports",
+                            "(google.api.http).body": "audience_export",
+                            "(google.api.method_signature)": "parent,audience_export",
+                            "(google.longrunning.operation_info).response_type": "AudienceExport",
+                            "(google.longrunning.operation_info).metadata_type": "AudienceExportMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=properties/*}/audienceExports",
+                                "body": "audience_export"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,audience_export"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AudienceExport",
+                                "metadata_type": "AudienceExportMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "QueryAudienceExport": {
+                          "requestType": "QueryAudienceExportRequest",
+                          "responseType": "QueryAudienceExportResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=properties/*/audienceExports/*}:query",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=properties/*/audienceExports/*}:query",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetAudienceExport": {
+                          "requestType": "GetAudienceExportRequest",
+                          "responseType": "AudienceExport",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=properties/*/audienceExports/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=properties/*/audienceExports/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListAudienceExports": {
+                          "requestType": "ListAudienceExportsRequest",
+                          "responseType": "ListAudienceExportsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{parent=properties/*}/audienceExports",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=properties/*}/audienceExports"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         }
@@ -3186,6 +3679,307 @@
                         "kind": {
                           "type": "string",
                           "id": 9
+                        }
+                      }
+                    },
+                    "GetAudienceExportRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsdata.googleapis.com/AudienceExport"
+                          }
+                        }
+                      }
+                    },
+                    "ListAudienceExportsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsdata.googleapis.com/AudienceExport"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListAudienceExportsResponse": {
+                      "oneofs": {
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "audienceExports": {
+                          "rule": "repeated",
+                          "type": "AudienceExport",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "CreateAudienceExportRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsdata.googleapis.com/AudienceExport"
+                          }
+                        },
+                        "audienceExport": {
+                          "type": "AudienceExport",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AudienceExport": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsdata.googleapis.com/AudienceExport",
+                        "(google.api.resource).pattern": "properties/{property}/audienceExports/{audience_export}",
+                        "(google.api.resource).plural": "audienceExports",
+                        "(google.api.resource).singular": "audienceExport"
+                      },
+                      "oneofs": {
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        },
+                        "_beginCreatingTime": {
+                          "oneof": [
+                            "beginCreatingTime"
+                          ]
+                        },
+                        "_rowCount": {
+                          "oneof": [
+                            "rowCount"
+                          ]
+                        },
+                        "_errorMessage": {
+                          "oneof": [
+                            "errorMessage"
+                          ]
+                        },
+                        "_percentageCompleted": {
+                          "oneof": [
+                            "percentageCompleted"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "audience": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "audienceDisplayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "AudienceDimension",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "beginCreatingTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationQuotaTokensCharged": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "percentageCompleted": {
+                          "type": "double",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "ACTIVE": 2,
+                            "FAILED": 3
+                          }
+                        }
+                      }
+                    },
+                    "AudienceExportMetadata": {
+                      "fields": {}
+                    },
+                    "QueryAudienceExportRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "offset": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "limit": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QueryAudienceExportResponse": {
+                      "oneofs": {
+                        "_audienceExport": {
+                          "oneof": [
+                            "audienceExport"
+                          ]
+                        },
+                        "_rowCount": {
+                          "oneof": [
+                            "rowCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "audienceExport": {
+                          "type": "AudienceExport",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "audienceRows": {
+                          "rule": "repeated",
+                          "type": "AudienceRow",
+                          "id": 2
+                        },
+                        "rowCount": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AudienceRow": {
+                      "fields": {
+                        "dimensionValues": {
+                          "rule": "repeated",
+                          "type": "AudienceDimensionValue",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AudienceDimension": {
+                      "fields": {
+                        "dimensionName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AudienceDimensionValue": {
+                      "oneofs": {
+                        "oneValue": {
+                          "oneof": [
+                            "value"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "value": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -3717,6 +4511,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "samplingMetadatas": {
+                          "rule": "repeated",
+                          "type": "SamplingMetadata",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -3753,6 +4552,18 @@
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    "SamplingMetadata": {
+                      "fields": {
+                        "samplesReadCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "samplingSpaceSize": {
+                          "type": "int64",
+                          "id": 2
                         }
                       }
                     },
@@ -3891,14 +4702,32 @@
                       }
                     },
                     "QuotaStatus": {
+                      "oneofs": {
+                        "_consumed": {
+                          "oneof": [
+                            "consumed"
+                          ]
+                        },
+                        "_remaining": {
+                          "oneof": [
+                            "remaining"
+                          ]
+                        }
+                      },
                       "fields": {
                         "consumed": {
                           "type": "int32",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "remaining": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },

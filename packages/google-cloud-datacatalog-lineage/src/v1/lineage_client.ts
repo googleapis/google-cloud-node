@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -340,6 +340,7 @@ export class LineageClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const lineageStubMethods = [
+      'processOpenLineageRunEvent',
       'createProcess',
       'updateProcess',
       'getProcess',
@@ -442,6 +443,117 @@ export class LineageClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Creates new lineage events together with their parents: process and run.
+   * Updates the process and run if they already exist.
+   * Mapped from Open Lineage specification:
+   * https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project and its location that should own the
+   *   process, run, and lineage event.
+   * @param {google.protobuf.Struct} request.openLineage
+   *   Required. OpenLineage message following OpenLineage format:
+   *   https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json
+   * @param {string} request.requestId
+   *   A unique identifier for this request. Restricted to 36 ASCII characters.
+   *   A random UUID is recommended. This request is idempotent only if a
+   *   `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventResponse|ProcessOpenLineageRunEventResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lineage.process_open_lineage_run_event.js</caption>
+   * region_tag:datalineage_v1_generated_Lineage_ProcessOpenLineageRunEvent_async
+   */
+  processOpenLineageRunEvent(
+    request?: protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse,
+      (
+        | protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  processOpenLineageRunEvent(
+    request: protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse,
+      | protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  processOpenLineageRunEvent(
+    request: protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse,
+      | protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  processOpenLineageRunEvent(
+    request?: protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse,
+          | protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse,
+      | protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse,
+      (
+        | protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.processOpenLineageRunEvent(
+      request,
+      options,
+      callback
+    );
+  }
   /**
    * Creates a new process.
    *
@@ -849,6 +961,8 @@ export class LineageClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The list of fields to update. Currently not used. The whole message is
    *   updated.
+   * @param {boolean} request.allowMissing
+   *   If set to true and the run is not found, the request creates it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2245,7 +2359,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location you want search in the format `projects/* /locations/*`
+   *   Required. The project and location you want search in.
    * @param {google.cloud.datacatalog.lineage.v1.EntityReference} [request.source]
    *   Optional. Send asset information in the **source** field to retrieve all
    *   links that lead from the specified asset to downstream assets.
@@ -2357,7 +2471,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location you want search in the format `projects/* /locations/*`
+   *   Required. The project and location you want search in.
    * @param {google.cloud.datacatalog.lineage.v1.EntityReference} [request.source]
    *   Optional. Send asset information in the **source** field to retrieve all
    *   links that lead from the specified asset to downstream assets.
@@ -2417,7 +2531,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location you want search in the format `projects/* /locations/*`
+   *   Required. The project and location you want search in.
    * @param {google.cloud.datacatalog.lineage.v1.EntityReference} [request.source]
    *   Optional. Send asset information in the **source** field to retrieve all
    *   links that lead from the specified asset to downstream assets.
@@ -2489,7 +2603,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location you want search in the format `projects/* /locations/*`
+   *   Required. The project and location where you want to search.
    * @param {string[]} request.links
    *   Required. An array of links to check for their associated LineageProcesses.
    *
@@ -2604,7 +2718,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location you want search in the format `projects/* /locations/*`
+   *   Required. The project and location where you want to search.
    * @param {string[]} request.links
    *   Required. An array of links to check for their associated LineageProcesses.
    *
@@ -2663,7 +2777,7 @@ export class LineageClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location you want search in the format `projects/* /locations/*`
+   *   Required. The project and location where you want to search.
    * @param {string[]} request.links
    *   Required. An array of links to check for their associated LineageProcesses.
    *

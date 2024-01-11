@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.3.0...discoveryengine-v1.3.1) (2024-01-05)
+
+
+### Bug Fixes
+
+* [discoveryengine] correct long audio synthesis HTTP binding ([#4886](https://github.com/googleapis/google-cloud-node/issues/4886)) ([fb95ca7](https://github.com/googleapis/google-cloud-node/commit/fb95ca771318195714dfa47deab817ba19f5e1a4))
+
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.2.0...discoveryengine-v1.3.0) (2023-11-16)
+
+
+### Features
+
+* [discoveryengine] add data store and engine services ([#4810](https://github.com/googleapis/google-cloud-node/issues/4810)) ([7e95257](https://github.com/googleapis/google-cloud-node/commit/7e95257cb371509efce1e5b83a730cb1a1db4492))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.1.0...discoveryengine-v1.2.0) (2023-10-18)
 
 

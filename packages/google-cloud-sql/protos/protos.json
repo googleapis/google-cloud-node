@@ -314,7 +314,9 @@
                           "values": {
                             "SQL_API_WARNING_CODE_UNSPECIFIED": 0,
                             "REGION_UNREACHABLE": 1,
-                            "MAX_RESULTS_EXCEEDS_LIMIT": 2
+                            "MAX_RESULTS_EXCEEDS_LIMIT": 2,
+                            "COMPROMISED_CREDENTIALS": 3,
+                            "INTERNAL_STATE_FAILURE": 4
                           }
                         }
                       }
@@ -833,11 +835,25 @@
                           "type": "google.protobuf.BoolValue",
                           "id": 7
                         },
+                        "sslMode": {
+                          "type": "SslMode",
+                          "id": 8
+                        },
                         "pscConfig": {
                           "type": "PscConfig",
                           "id": 9,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SslMode": {
+                          "values": {
+                            "SSL_MODE_UNSPECIFIED": 0,
+                            "ALLOW_UNENCRYPTED_AND_ENCRYPTED": 1,
+                            "ENCRYPTED_ONLY": 2,
+                            "TRUSTED_CLIENT_CERTIFICATE_REQUIRED": 3
                           }
                         }
                       }
@@ -861,7 +877,10 @@
                         "allowedConsumerProjects": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1070,6 +1089,10 @@
                           "type": "OperationErrors",
                           "id": 8
                         },
+                        "apiWarning": {
+                          "type": "ApiWarning",
+                          "id": 19
+                        },
                         "operationType": {
                           "type": "SqlOperationType",
                           "id": 9
@@ -1228,6 +1251,10 @@
                         "enablePasswordPolicy": {
                           "type": "google.protobuf.BoolValue",
                           "id": 6
+                        },
+                        "disallowCompromisedCredentials": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -1628,7 +1655,8 @@
                       "values": {
                         "SQL_UPDATE_TRACK_UNSPECIFIED": 0,
                         "canary": 1,
-                        "stable": 2
+                        "stable": 2,
+                        "week5": 3
                       }
                     },
                     "SqlConnectService": {
@@ -2147,6 +2175,22 @@
                             }
                           ]
                         },
+                        "Demote": {
+                          "requestType": "SqlInstancesDemoteRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project}/instances/{instance}/demote",
+                            "(google.api.http).body": "body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project}/instances/{instance}/demote",
+                                "body": "body"
+                              }
+                            }
+                          ]
+                        },
                         "Export": {
                           "requestType": "SqlInstancesExportRequest",
                           "responseType": "Operation",
@@ -2295,6 +2339,20 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1/projects/{project}/instances/{instance}/promoteReplica"
+                              }
+                            }
+                          ]
+                        },
+                        "Switchover": {
+                          "requestType": "SqlInstancesSwitchoverRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/projects/{project}/instances/{instance}/switchover"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/projects/{project}/instances/{instance}/switchover"
                               }
                             }
                           ]
@@ -2601,6 +2659,31 @@
                         }
                       }
                     },
+                    "SqlInstancesDemoteRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "body": {
+                          "type": "InstancesDemoteRequest",
+                          "id": 100,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SqlInstancesExportRequest": {
                       "fields": {
                         "instance": {
@@ -2730,6 +2813,29 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "failover": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SqlInstancesSwitchoverRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "dbTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2950,6 +3056,14 @@
                         }
                       }
                     },
+                    "ExternalSyncParallelLevel": {
+                      "values": {
+                        "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED": 0,
+                        "MIN": 1,
+                        "OPTIMAL": 2,
+                        "MAX": 3
+                      }
+                    },
                     "SqlInstancesGetDiskShrinkConfigRequest": {
                       "fields": {
                         "instance": {
@@ -3048,16 +3162,6 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
-                      },
-                      "nested": {
-                        "ExternalSyncParallelLevel": {
-                          "values": {
-                            "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED": 0,
-                            "MIN": 1,
-                            "OPTIMAL": 2,
-                            "MAX": 3
-                          }
-                        }
                       }
                     },
                     "SqlInstancesResetReplicaSizeRequest": {
@@ -3101,6 +3205,17 @@
                         "demoteMasterContext": {
                           "type": "DemoteMasterContext",
                           "id": 1
+                        }
+                      }
+                    },
+                    "InstancesDemoteRequest": {
+                      "fields": {
+                        "demoteContext": {
+                          "type": "DemoteContext",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -3332,6 +3447,11 @@
                             "outOfDiskReport"
                           ]
                         },
+                        "_sqlNetworkArchitecture": {
+                          "oneof": [
+                            "sqlNetworkArchitecture"
+                          ]
+                        },
                         "_pscServiceAttachmentLink": {
                           "oneof": [
                             "pscServiceAttachmentLink"
@@ -3340,6 +3460,16 @@
                         "_dnsName": {
                           "oneof": [
                             "dnsName"
+                          ]
+                        },
+                        "_primaryDnsName": {
+                          "oneof": [
+                            "primaryDnsName"
+                          ]
+                        },
+                        "_writeEndpoint": {
+                          "oneof": [
+                            "writeEndpoint"
                           ]
                         }
                       },
@@ -3513,6 +3643,13 @@
                           "type": "string",
                           "id": 42
                         },
+                        "sqlNetworkArchitecture": {
+                          "type": "SqlNetworkArchitecture",
+                          "id": 47,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "pscServiceAttachmentLink": {
                           "type": "string",
                           "id": 48,
@@ -3524,6 +3661,23 @@
                         "dnsName": {
                           "type": "string",
                           "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "primaryDnsName": {
+                          "type": "string",
+                          "id": 51,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "writeEndpoint": {
+                          "type": "string",
+                          "id": 52,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
@@ -3631,6 +3785,13 @@
                               }
                             }
                           }
+                        },
+                        "SqlNetworkArchitecture": {
+                          "values": {
+                            "SQL_NETWORK_ARCHITECTURE_UNSPECIFIED": 0,
+                            "NEW_NETWORK_ARCHITECTURE": 1,
+                            "OLD_NETWORK_ARCHITECTURE": 2
+                          }
                         }
                       }
                     },
@@ -3688,6 +3849,21 @@
                         "skipReplicationSetup": {
                           "type": "bool",
                           "id": 5
+                        }
+                      }
+                    },
+                    "DemoteContext": {
+                      "fields": {
+                        "kind": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sourceRepresentativeInstanceName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -3799,7 +3975,9 @@
                             "INSUFFICIENT_GCS_PERMISSIONS": 31,
                             "INVALID_FILE_INFO": 32,
                             "UNSUPPORTED_DATABASE_SETTINGS": 33,
-                            "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34
+                            "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34,
+                            "LOCAL_INFILE_OFF": 35,
+                            "TURN_ON_PITR_AFTER_PROMOTE": 36
                           }
                         }
                       }
@@ -3857,6 +4035,13 @@
                         "failoverTarget": {
                           "type": "google.protobuf.BoolValue",
                           "id": 3
+                        },
+                        "cascadableReplica": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4515,7 +4700,10 @@
                           "values": {
                             "BUILT_IN": 0,
                             "CLOUD_IAM_USER": 1,
-                            "CLOUD_IAM_SERVICE_ACCOUNT": 2
+                            "CLOUD_IAM_SERVICE_ACCOUNT": 2,
+                            "CLOUD_IAM_GROUP": 3,
+                            "CLOUD_IAM_GROUP_USER": 4,
+                            "CLOUD_IAM_GROUP_SERVICE_ACCOUNT": 5
                           }
                         },
                         "DualPasswordType": {
@@ -4823,6 +5011,22 @@
                             }
                           ]
                         },
+                        "Demote": {
+                          "requestType": "SqlInstancesDemoteRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}/demote",
+                            "(google.api.http).body": "body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/sql/v1beta4/projects/{project}/instances/{instance}/demote",
+                                "body": "body"
+                              }
+                            }
+                          ]
+                        },
                         "Export": {
                           "requestType": "SqlInstancesExportRequest",
                           "responseType": "Operation",
@@ -4971,6 +5175,20 @@
                             {
                               "(google.api.http)": {
                                 "post": "/sql/v1beta4/projects/{project}/instances/{instance}/promoteReplica"
+                              }
+                            }
+                          ]
+                        },
+                        "Switchover": {
+                          "requestType": "SqlInstancesSwitchoverRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/sql/v1beta4/projects/{project}/instances/{instance}/switchover"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/sql/v1beta4/projects/{project}/instances/{instance}/switchover"
                               }
                             }
                           ]
@@ -5549,6 +5767,28 @@
                         }
                       }
                     },
+                    "SqlInstancesDemoteRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "body": {
+                          "type": "InstancesDemoteRequest",
+                          "id": 100
+                        }
+                      }
+                    },
                     "SqlInstancesExportRequest": {
                       "fields": {
                         "instance": {
@@ -5678,6 +5918,29 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "failover": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SqlInstancesSwitchoverRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "dbTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -5898,6 +6161,14 @@
                         }
                       }
                     },
+                    "ExternalSyncParallelLevel": {
+                      "values": {
+                        "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED": 0,
+                        "MIN": 1,
+                        "OPTIMAL": 2,
+                        "MAX": 3
+                      }
+                    },
                     "SqlInstancesVerifyExternalSyncSettingsRequest": {
                       "oneofs": {
                         "syncConfig": {
@@ -5982,16 +6253,6 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "ExternalSyncParallelLevel": {
-                          "values": {
-                            "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED": 0,
-                            "MIN": 1,
-                            "OPTIMAL": 2,
-                            "MAX": 3
                           }
                         }
                       }
@@ -6207,7 +6468,9 @@
                           "values": {
                             "SQL_API_WARNING_CODE_UNSPECIFIED": 0,
                             "REGION_UNREACHABLE": 1,
-                            "MAX_RESULTS_EXCEEDS_LIMIT": 2
+                            "MAX_RESULTS_EXCEEDS_LIMIT": 2,
+                            "COMPROMISED_CREDENTIALS": 3,
+                            "INTERNAL_STATE_FAILURE": 4
                           }
                         }
                       }
@@ -6543,6 +6806,11 @@
                             "outOfDiskReport"
                           ]
                         },
+                        "_sqlNetworkArchitecture": {
+                          "oneof": [
+                            "sqlNetworkArchitecture"
+                          ]
+                        },
                         "_pscServiceAttachmentLink": {
                           "oneof": [
                             "pscServiceAttachmentLink"
@@ -6551,6 +6819,16 @@
                         "_dnsName": {
                           "oneof": [
                             "dnsName"
+                          ]
+                        },
+                        "_primaryDnsName": {
+                          "oneof": [
+                            "primaryDnsName"
+                          ]
+                        },
+                        "_writeEndpoint": {
+                          "oneof": [
+                            "writeEndpoint"
                           ]
                         }
                       },
@@ -6724,6 +7002,13 @@
                           "type": "string",
                           "id": 42
                         },
+                        "sqlNetworkArchitecture": {
+                          "type": "SqlNetworkArchitecture",
+                          "id": 47,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "pscServiceAttachmentLink": {
                           "type": "string",
                           "id": 48,
@@ -6735,6 +7020,23 @@
                         "dnsName": {
                           "type": "string",
                           "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "primaryDnsName": {
+                          "type": "string",
+                          "id": 51,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "writeEndpoint": {
+                          "type": "string",
+                          "id": 52,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
@@ -6842,6 +7144,13 @@
                               }
                             }
                           }
+                        },
+                        "SqlNetworkArchitecture": {
+                          "values": {
+                            "SQL_NETWORK_ARCHITECTURE_UNSPECIFIED": 0,
+                            "NEW_NETWORK_ARCHITECTURE": 1,
+                            "OLD_NETWORK_ARCHITECTURE": 2
+                          }
                         }
                       }
                     },
@@ -6919,6 +7228,21 @@
                         "caCertificate": {
                           "type": "string",
                           "id": 6
+                        }
+                      }
+                    },
+                    "DemoteContext": {
+                      "fields": {
+                        "kind": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sourceRepresentativeInstanceName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -7262,6 +7586,17 @@
                         }
                       }
                     },
+                    "InstancesDemoteRequest": {
+                      "fields": {
+                        "demoteContext": {
+                          "type": "DemoteContext",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "InstancesExportRequest": {
                       "fields": {
                         "exportContext": {
@@ -7452,7 +7787,11 @@
                             "INSUFFICIENT_GCS_PERMISSIONS": 31,
                             "INVALID_FILE_INFO": 32,
                             "UNSUPPORTED_DATABASE_SETTINGS": 33,
-                            "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34
+                            "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34,
+                            "LOCAL_INFILE_OFF": 35,
+                            "TURN_ON_PITR_AFTER_PROMOTE": 36,
+                            "INCOMPATIBLE_DATABASE_MINOR_VERSION": 37,
+                            "SOURCE_MAX_SUBSCRIPTIONS": 38
                           }
                         }
                       }
@@ -7491,11 +7830,25 @@
                           "type": "google.protobuf.BoolValue",
                           "id": 7
                         },
+                        "sslMode": {
+                          "type": "SslMode",
+                          "id": 8
+                        },
                         "pscConfig": {
                           "type": "PscConfig",
                           "id": 9,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SslMode": {
+                          "values": {
+                            "SSL_MODE_UNSPECIFIED": 0,
+                            "ALLOW_UNENCRYPTED_AND_ENCRYPTED": 1,
+                            "ENCRYPTED_ONLY": 2,
+                            "TRUSTED_CLIENT_CERTIFICATE_REQUIRED": 3
                           }
                         }
                       }
@@ -7519,7 +7872,10 @@
                         "allowedConsumerProjects": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -7768,6 +8124,10 @@
                           "type": "OperationErrors",
                           "id": 8
                         },
+                        "apiWarning": {
+                          "type": "ApiWarning",
+                          "id": 19
+                        },
                         "operationType": {
                           "type": "SqlOperationType",
                           "id": 9
@@ -7926,6 +8286,10 @@
                         "enablePasswordPolicy": {
                           "type": "google.protobuf.BoolValue",
                           "id": 6
+                        },
+                        "disallowCompromisedCredentials": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -7967,6 +8331,13 @@
                         "failoverTarget": {
                           "type": "google.protobuf.BoolValue",
                           "id": 3
+                        },
+                        "cascadableReplica": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8534,7 +8905,8 @@
                       "values": {
                         "SQL_UPDATE_TRACK_UNSPECIFIED": 0,
                         "canary": 1,
-                        "stable": 2
+                        "stable": 2,
+                        "week5": 3
                       }
                     },
                     "SqlFlagType": {
@@ -9048,7 +9420,10 @@
                           "values": {
                             "BUILT_IN": 0,
                             "CLOUD_IAM_USER": 1,
-                            "CLOUD_IAM_SERVICE_ACCOUNT": 2
+                            "CLOUD_IAM_SERVICE_ACCOUNT": 2,
+                            "CLOUD_IAM_GROUP": 3,
+                            "CLOUD_IAM_GROUP_USER": 4,
+                            "CLOUD_IAM_GROUP_SERVICE_ACCOUNT": 5
                           }
                         },
                         "DualPasswordType": {

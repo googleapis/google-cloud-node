@@ -30,6 +30,21 @@
                 "deleteRepository"
               ]
             },
+            "CommitRepositoryChanges": {
+              "methods": [
+                "commitRepositoryChanges"
+              ]
+            },
+            "ReadRepositoryFile": {
+              "methods": [
+                "readRepositoryFile"
+              ]
+            },
+            "ComputeRepositoryAccessTokenStatus": {
+              "methods": [
+                "computeRepositoryAccessTokenStatus"
+              ]
+            },
             "FetchRemoteBranches": {
               "methods": [
                 "fetchRemoteBranches"
@@ -125,6 +140,26 @@
                 "writeFile"
               ]
             },
+            "GetReleaseConfig": {
+              "methods": [
+                "getReleaseConfig"
+              ]
+            },
+            "CreateReleaseConfig": {
+              "methods": [
+                "createReleaseConfig"
+              ]
+            },
+            "UpdateReleaseConfig": {
+              "methods": [
+                "updateReleaseConfig"
+              ]
+            },
+            "DeleteReleaseConfig": {
+              "methods": [
+                "deleteReleaseConfig"
+              ]
+            },
             "GetCompilationResult": {
               "methods": [
                 "getCompilationResult"
@@ -133,6 +168,26 @@
             "CreateCompilationResult": {
               "methods": [
                 "createCompilationResult"
+              ]
+            },
+            "GetWorkflowConfig": {
+              "methods": [
+                "getWorkflowConfig"
+              ]
+            },
+            "CreateWorkflowConfig": {
+              "methods": [
+                "createWorkflowConfig"
+              ]
+            },
+            "UpdateWorkflowConfig": {
+              "methods": [
+                "updateWorkflowConfig"
+              ]
+            },
+            "DeleteWorkflowConfig": {
+              "methods": [
+                "deleteWorkflowConfig"
               ]
             },
             "GetWorkflowInvocation": {
@@ -162,6 +217,20 @@
                 "listRepositoriesAsync"
               ]
             },
+            "QueryRepositoryDirectoryContents": {
+              "methods": [
+                "queryRepositoryDirectoryContents",
+                "queryRepositoryDirectoryContentsStream",
+                "queryRepositoryDirectoryContentsAsync"
+              ]
+            },
+            "FetchRepositoryHistory": {
+              "methods": [
+                "fetchRepositoryHistory",
+                "fetchRepositoryHistoryStream",
+                "fetchRepositoryHistoryAsync"
+              ]
+            },
             "ListWorkspaces": {
               "methods": [
                 "listWorkspaces",
@@ -176,6 +245,13 @@
                 "queryDirectoryContentsAsync"
               ]
             },
+            "ListReleaseConfigs": {
+              "methods": [
+                "listReleaseConfigs",
+                "listReleaseConfigsStream",
+                "listReleaseConfigsAsync"
+              ]
+            },
             "ListCompilationResults": {
               "methods": [
                 "listCompilationResults",
@@ -188,6 +264,13 @@
                 "queryCompilationResultActions",
                 "queryCompilationResultActionsStream",
                 "queryCompilationResultActionsAsync"
+              ]
+            },
+            "ListWorkflowConfigs": {
+              "methods": [
+                "listWorkflowConfigs",
+                "listWorkflowConfigsStream",
+                "listWorkflowConfigsAsync"
               ]
             },
             "ListWorkflowInvocations": {
@@ -229,6 +312,21 @@
                 "deleteRepository"
               ]
             },
+            "CommitRepositoryChanges": {
+              "methods": [
+                "commitRepositoryChanges"
+              ]
+            },
+            "ReadRepositoryFile": {
+              "methods": [
+                "readRepositoryFile"
+              ]
+            },
+            "ComputeRepositoryAccessTokenStatus": {
+              "methods": [
+                "computeRepositoryAccessTokenStatus"
+              ]
+            },
             "FetchRemoteBranches": {
               "methods": [
                 "fetchRemoteBranches"
@@ -324,6 +422,26 @@
                 "writeFile"
               ]
             },
+            "GetReleaseConfig": {
+              "methods": [
+                "getReleaseConfig"
+              ]
+            },
+            "CreateReleaseConfig": {
+              "methods": [
+                "createReleaseConfig"
+              ]
+            },
+            "UpdateReleaseConfig": {
+              "methods": [
+                "updateReleaseConfig"
+              ]
+            },
+            "DeleteReleaseConfig": {
+              "methods": [
+                "deleteReleaseConfig"
+              ]
+            },
             "GetCompilationResult": {
               "methods": [
                 "getCompilationResult"
@@ -332,6 +450,26 @@
             "CreateCompilationResult": {
               "methods": [
                 "createCompilationResult"
+              ]
+            },
+            "GetWorkflowConfig": {
+              "methods": [
+                "getWorkflowConfig"
+              ]
+            },
+            "CreateWorkflowConfig": {
+              "methods": [
+                "createWorkflowConfig"
+              ]
+            },
+            "UpdateWorkflowConfig": {
+              "methods": [
+                "updateWorkflowConfig"
+              ]
+            },
+            "DeleteWorkflowConfig": {
+              "methods": [
+                "deleteWorkflowConfig"
               ]
             },
             "GetWorkflowInvocation": {
@@ -361,6 +499,20 @@
                 "listRepositoriesAsync"
               ]
             },
+            "QueryRepositoryDirectoryContents": {
+              "methods": [
+                "queryRepositoryDirectoryContents",
+                "queryRepositoryDirectoryContentsStream",
+                "queryRepositoryDirectoryContentsAsync"
+              ]
+            },
+            "FetchRepositoryHistory": {
+              "methods": [
+                "fetchRepositoryHistory",
+                "fetchRepositoryHistoryStream",
+                "fetchRepositoryHistoryAsync"
+              ]
+            },
             "ListWorkspaces": {
               "methods": [
                 "listWorkspaces",
@@ -375,6 +527,13 @@
                 "queryDirectoryContentsAsync"
               ]
             },
+            "ListReleaseConfigs": {
+              "methods": [
+                "listReleaseConfigs",
+                "listReleaseConfigsStream",
+                "listReleaseConfigsAsync"
+              ]
+            },
             "ListCompilationResults": {
               "methods": [
                 "listCompilationResults",
@@ -387,6 +546,13 @@
                 "queryCompilationResultActions",
                 "queryCompilationResultActionsStream",
                 "queryCompilationResultActionsAsync"
+              ]
+            },
+            "ListWorkflowConfigs": {
+              "methods": [
+                "listWorkflowConfigs",
+                "listWorkflowConfigsStream",
+                "listWorkflowConfigsAsync"
               ]
             },
             "ListWorkflowInvocations": {

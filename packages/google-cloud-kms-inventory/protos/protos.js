@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3023,6 +3023,7 @@
                                 case 1:
                                 case 5:
                                 case 6:
+                                case 7:
                                 case 9:
                                     break;
                                 }
@@ -3112,6 +3113,10 @@
                             case "ASYMMETRIC_DECRYPT":
                             case 6:
                                 message.purpose = 6;
+                                break;
+                            case "RAW_ENCRYPT_DECRYPT":
+                            case 7:
+                                message.purpose = 7;
                                 break;
                             case "MAC":
                             case 9:
@@ -3249,6 +3254,7 @@
                          * @property {number} ENCRYPT_DECRYPT=1 ENCRYPT_DECRYPT value
                          * @property {number} ASYMMETRIC_SIGN=5 ASYMMETRIC_SIGN value
                          * @property {number} ASYMMETRIC_DECRYPT=6 ASYMMETRIC_DECRYPT value
+                         * @property {number} RAW_ENCRYPT_DECRYPT=7 RAW_ENCRYPT_DECRYPT value
                          * @property {number} MAC=9 MAC value
                          */
                         CryptoKey.CryptoKeyPurpose = (function() {
@@ -3257,6 +3263,7 @@
                             values[valuesById[1] = "ENCRYPT_DECRYPT"] = 1;
                             values[valuesById[5] = "ASYMMETRIC_SIGN"] = 5;
                             values[valuesById[6] = "ASYMMETRIC_DECRYPT"] = 6;
+                            values[valuesById[7] = "RAW_ENCRYPT_DECRYPT"] = 7;
                             values[valuesById[9] = "MAC"] = 9;
                             return values;
                         })();
@@ -3427,6 +3434,12 @@
                                     return "algorithm: enum value expected";
                                 case 0:
                                 case 1:
+                                case 41:
+                                case 19:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
                                 case 2:
                                 case 3:
                                 case 4:
@@ -3513,6 +3526,30 @@
                             case "GOOGLE_SYMMETRIC_ENCRYPTION":
                             case 1:
                                 message.algorithm = 1;
+                                break;
+                            case "AES_128_GCM":
+                            case 41:
+                                message.algorithm = 41;
+                                break;
+                            case "AES_256_GCM":
+                            case 19:
+                                message.algorithm = 19;
+                                break;
+                            case "AES_128_CBC":
+                            case 42:
+                                message.algorithm = 42;
+                                break;
+                            case "AES_256_CBC":
+                            case 43:
+                                message.algorithm = 43;
+                                break;
+                            case "AES_128_CTR":
+                            case 44:
+                                message.algorithm = 44;
+                                break;
+                            case "AES_256_CTR":
+                            case 45:
+                                message.algorithm = 45;
                                 break;
                             case "RSA_SIGN_PSS_2048_SHA256":
                             case 2:
@@ -4299,6 +4336,8 @@
                          * @property {string|null} [importJob] CryptoKeyVersion importJob
                          * @property {google.protobuf.ITimestamp|null} [importTime] CryptoKeyVersion importTime
                          * @property {string|null} [importFailureReason] CryptoKeyVersion importFailureReason
+                         * @property {string|null} [generationFailureReason] CryptoKeyVersion generationFailureReason
+                         * @property {string|null} [externalDestructionFailureReason] CryptoKeyVersion externalDestructionFailureReason
                          * @property {google.cloud.kms.v1.IExternalProtectionLevelOptions|null} [externalProtectionLevelOptions] CryptoKeyVersion externalProtectionLevelOptions
                          * @property {boolean|null} [reimportEligible] CryptoKeyVersion reimportEligible
                          */
@@ -4415,6 +4454,22 @@
                         CryptoKeyVersion.prototype.importFailureReason = "";
     
                         /**
+                         * CryptoKeyVersion generationFailureReason.
+                         * @member {string} generationFailureReason
+                         * @memberof google.cloud.kms.v1.CryptoKeyVersion
+                         * @instance
+                         */
+                        CryptoKeyVersion.prototype.generationFailureReason = "";
+    
+                        /**
+                         * CryptoKeyVersion externalDestructionFailureReason.
+                         * @member {string} externalDestructionFailureReason
+                         * @memberof google.cloud.kms.v1.CryptoKeyVersion
+                         * @instance
+                         */
+                        CryptoKeyVersion.prototype.externalDestructionFailureReason = "";
+    
+                        /**
                          * CryptoKeyVersion externalProtectionLevelOptions.
                          * @member {google.cloud.kms.v1.IExternalProtectionLevelOptions|null|undefined} externalProtectionLevelOptions
                          * @memberof google.cloud.kms.v1.CryptoKeyVersion
@@ -4482,6 +4537,10 @@
                                 $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.encode(message.externalProtectionLevelOptions, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             if (message.reimportEligible != null && Object.hasOwnProperty.call(message, "reimportEligible"))
                                 writer.uint32(/* id 18, wireType 0 =*/144).bool(message.reimportEligible);
+                            if (message.generationFailureReason != null && Object.hasOwnProperty.call(message, "generationFailureReason"))
+                                writer.uint32(/* id 19, wireType 2 =*/154).string(message.generationFailureReason);
+                            if (message.externalDestructionFailureReason != null && Object.hasOwnProperty.call(message, "externalDestructionFailureReason"))
+                                writer.uint32(/* id 20, wireType 2 =*/162).string(message.externalDestructionFailureReason);
                             return writer;
                         };
     
@@ -4564,6 +4623,14 @@
                                         message.importFailureReason = reader.string();
                                         break;
                                     }
+                                case 19: {
+                                        message.generationFailureReason = reader.string();
+                                        break;
+                                    }
+                                case 20: {
+                                        message.externalDestructionFailureReason = reader.string();
+                                        break;
+                                    }
                                 case 17: {
                                         message.externalProtectionLevelOptions = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.decode(reader, reader.uint32());
                                         break;
@@ -4622,6 +4689,9 @@
                                 case 4:
                                 case 6:
                                 case 7:
+                                case 8:
+                                case 9:
+                                case 10:
                                     break;
                                 }
                             if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
@@ -4641,6 +4711,12 @@
                                     return "algorithm: enum value expected";
                                 case 0:
                                 case 1:
+                                case 41:
+                                case 19:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
                                 case 2:
                                 case 3:
                                 case 4:
@@ -4706,6 +4782,12 @@
                             if (message.importFailureReason != null && message.hasOwnProperty("importFailureReason"))
                                 if (!$util.isString(message.importFailureReason))
                                     return "importFailureReason: string expected";
+                            if (message.generationFailureReason != null && message.hasOwnProperty("generationFailureReason"))
+                                if (!$util.isString(message.generationFailureReason))
+                                    return "generationFailureReason: string expected";
+                            if (message.externalDestructionFailureReason != null && message.hasOwnProperty("externalDestructionFailureReason"))
+                                if (!$util.isString(message.externalDestructionFailureReason))
+                                    return "externalDestructionFailureReason: string expected";
                             if (message.externalProtectionLevelOptions != null && message.hasOwnProperty("externalProtectionLevelOptions")) {
                                 var error = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.verify(message.externalProtectionLevelOptions);
                                 if (error)
@@ -4770,6 +4852,18 @@
                             case 7:
                                 message.state = 7;
                                 break;
+                            case "GENERATION_FAILED":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            case "PENDING_EXTERNAL_DESTRUCTION":
+                            case 9:
+                                message.state = 9;
+                                break;
+                            case "EXTERNAL_DESTRUCTION_FAILED":
+                            case 10:
+                                message.state = 10;
+                                break;
                             }
                             switch (object.protectionLevel) {
                             default:
@@ -4813,6 +4907,30 @@
                             case "GOOGLE_SYMMETRIC_ENCRYPTION":
                             case 1:
                                 message.algorithm = 1;
+                                break;
+                            case "AES_128_GCM":
+                            case 41:
+                                message.algorithm = 41;
+                                break;
+                            case "AES_256_GCM":
+                            case 19:
+                                message.algorithm = 19;
+                                break;
+                            case "AES_128_CBC":
+                            case 42:
+                                message.algorithm = 42;
+                                break;
+                            case "AES_256_CBC":
+                            case 43:
+                                message.algorithm = 43;
+                                break;
+                            case "AES_128_CTR":
+                            case 44:
+                                message.algorithm = 44;
+                                break;
+                            case "AES_256_CTR":
+                            case 45:
+                                message.algorithm = 45;
                                 break;
                             case "RSA_SIGN_PSS_2048_SHA256":
                             case 2:
@@ -4957,6 +5075,10 @@
                             }
                             if (object.importFailureReason != null)
                                 message.importFailureReason = String(object.importFailureReason);
+                            if (object.generationFailureReason != null)
+                                message.generationFailureReason = String(object.generationFailureReason);
+                            if (object.externalDestructionFailureReason != null)
+                                message.externalDestructionFailureReason = String(object.externalDestructionFailureReason);
                             if (object.externalProtectionLevelOptions != null) {
                                 if (typeof object.externalProtectionLevelOptions !== "object")
                                     throw TypeError(".google.cloud.kms.v1.CryptoKeyVersion.externalProtectionLevelOptions: object expected");
@@ -4995,6 +5117,8 @@
                                 object.importFailureReason = "";
                                 object.externalProtectionLevelOptions = null;
                                 object.reimportEligible = false;
+                                object.generationFailureReason = "";
+                                object.externalDestructionFailureReason = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5024,6 +5148,10 @@
                                 object.externalProtectionLevelOptions = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.toObject(message.externalProtectionLevelOptions, options);
                             if (message.reimportEligible != null && message.hasOwnProperty("reimportEligible"))
                                 object.reimportEligible = message.reimportEligible;
+                            if (message.generationFailureReason != null && message.hasOwnProperty("generationFailureReason"))
+                                object.generationFailureReason = message.generationFailureReason;
+                            if (message.externalDestructionFailureReason != null && message.hasOwnProperty("externalDestructionFailureReason"))
+                                object.externalDestructionFailureReason = message.externalDestructionFailureReason;
                             return object;
                         };
     
@@ -5059,6 +5187,12 @@
                          * @enum {number}
                          * @property {number} CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED=0 CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED value
                          * @property {number} GOOGLE_SYMMETRIC_ENCRYPTION=1 GOOGLE_SYMMETRIC_ENCRYPTION value
+                         * @property {number} AES_128_GCM=41 AES_128_GCM value
+                         * @property {number} AES_256_GCM=19 AES_256_GCM value
+                         * @property {number} AES_128_CBC=42 AES_128_CBC value
+                         * @property {number} AES_256_CBC=43 AES_256_CBC value
+                         * @property {number} AES_128_CTR=44 AES_128_CTR value
+                         * @property {number} AES_256_CTR=45 AES_256_CTR value
                          * @property {number} RSA_SIGN_PSS_2048_SHA256=2 RSA_SIGN_PSS_2048_SHA256 value
                          * @property {number} RSA_SIGN_PSS_3072_SHA256=3 RSA_SIGN_PSS_3072_SHA256 value
                          * @property {number} RSA_SIGN_PSS_4096_SHA256=4 RSA_SIGN_PSS_4096_SHA256 value
@@ -5091,6 +5225,12 @@
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "GOOGLE_SYMMETRIC_ENCRYPTION"] = 1;
+                            values[valuesById[41] = "AES_128_GCM"] = 41;
+                            values[valuesById[19] = "AES_256_GCM"] = 19;
+                            values[valuesById[42] = "AES_128_CBC"] = 42;
+                            values[valuesById[43] = "AES_256_CBC"] = 43;
+                            values[valuesById[44] = "AES_128_CTR"] = 44;
+                            values[valuesById[45] = "AES_256_CTR"] = 45;
                             values[valuesById[2] = "RSA_SIGN_PSS_2048_SHA256"] = 2;
                             values[valuesById[3] = "RSA_SIGN_PSS_3072_SHA256"] = 3;
                             values[valuesById[4] = "RSA_SIGN_PSS_4096_SHA256"] = 4;
@@ -5133,6 +5273,9 @@
                          * @property {number} DESTROY_SCHEDULED=4 DESTROY_SCHEDULED value
                          * @property {number} PENDING_IMPORT=6 PENDING_IMPORT value
                          * @property {number} IMPORT_FAILED=7 IMPORT_FAILED value
+                         * @property {number} GENERATION_FAILED=8 GENERATION_FAILED value
+                         * @property {number} PENDING_EXTERNAL_DESTRUCTION=9 PENDING_EXTERNAL_DESTRUCTION value
+                         * @property {number} EXTERNAL_DESTRUCTION_FAILED=10 EXTERNAL_DESTRUCTION_FAILED value
                          */
                         CryptoKeyVersion.CryptoKeyVersionState = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -5144,6 +5287,9 @@
                             values[valuesById[4] = "DESTROY_SCHEDULED"] = 4;
                             values[valuesById[6] = "PENDING_IMPORT"] = 6;
                             values[valuesById[7] = "IMPORT_FAILED"] = 7;
+                            values[valuesById[8] = "GENERATION_FAILED"] = 8;
+                            values[valuesById[9] = "PENDING_EXTERNAL_DESTRUCTION"] = 9;
+                            values[valuesById[10] = "EXTERNAL_DESTRUCTION_FAILED"] = 10;
                             return values;
                         })();
     
@@ -5364,6 +5510,12 @@
                                     return "algorithm: enum value expected";
                                 case 0:
                                 case 1:
+                                case 41:
+                                case 19:
+                                case 42:
+                                case 43:
+                                case 44:
+                                case 45:
                                 case 2:
                                 case 3:
                                 case 4:
@@ -5443,6 +5595,30 @@
                             case "GOOGLE_SYMMETRIC_ENCRYPTION":
                             case 1:
                                 message.algorithm = 1;
+                                break;
+                            case "AES_128_GCM":
+                            case 41:
+                                message.algorithm = 41;
+                                break;
+                            case "AES_256_GCM":
+                            case 19:
+                                message.algorithm = 19;
+                                break;
+                            case "AES_128_CBC":
+                            case 42:
+                                message.algorithm = 42;
+                                break;
+                            case "AES_256_CBC":
+                            case 43:
+                                message.algorithm = 43;
+                                break;
+                            case "AES_128_CTR":
+                            case 44:
+                                message.algorithm = 44;
+                                break;
+                            case "AES_256_CTR":
+                            case 45:
+                                message.algorithm = 45;
                                 break;
                             case "RSA_SIGN_PSS_2048_SHA256":
                             case 2:

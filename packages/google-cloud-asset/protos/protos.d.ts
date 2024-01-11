@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13913,6 +13913,206 @@ export namespace google {
                     type DeleteFeedCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
+                /** Properties of an ExportAssetsResponse. */
+                interface IExportAssetsResponse {
+
+                    /** ExportAssetsResponse readTime */
+                    readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportAssetsResponse outputConfig */
+                    outputConfig?: (google.cloud.asset.v1p2beta1.IOutputConfig|null);
+                }
+
+                /** Represents an ExportAssetsResponse. */
+                class ExportAssetsResponse implements IExportAssetsResponse {
+
+                    /**
+                     * Constructs a new ExportAssetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p2beta1.IExportAssetsResponse);
+
+                    /** ExportAssetsResponse readTime. */
+                    public readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportAssetsResponse outputConfig. */
+                    public outputConfig?: (google.cloud.asset.v1p2beta1.IOutputConfig|null);
+
+                    /**
+                     * Creates a new ExportAssetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportAssetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p2beta1.IExportAssetsResponse): google.cloud.asset.v1p2beta1.ExportAssetsResponse;
+
+                    /**
+                     * Encodes the specified ExportAssetsResponse message. Does not implicitly {@link google.cloud.asset.v1p2beta1.ExportAssetsResponse.verify|verify} messages.
+                     * @param message ExportAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p2beta1.IExportAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportAssetsResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.ExportAssetsResponse.verify|verify} messages.
+                     * @param message ExportAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.IExportAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportAssetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.ExportAssetsResponse;
+
+                    /**
+                     * Decodes an ExportAssetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.ExportAssetsResponse;
+
+                    /**
+                     * Verifies an ExportAssetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportAssetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportAssetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.ExportAssetsResponse;
+
+                    /**
+                     * Creates a plain object from an ExportAssetsResponse message. Also converts values to other types if specified.
+                     * @param message ExportAssetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p2beta1.ExportAssetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportAssetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportAssetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchGetAssetsHistoryResponse. */
+                interface IBatchGetAssetsHistoryResponse {
+
+                    /** BatchGetAssetsHistoryResponse assets */
+                    assets?: (google.cloud.asset.v1p2beta1.ITemporalAsset[]|null);
+                }
+
+                /** Represents a BatchGetAssetsHistoryResponse. */
+                class BatchGetAssetsHistoryResponse implements IBatchGetAssetsHistoryResponse {
+
+                    /**
+                     * Constructs a new BatchGetAssetsHistoryResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1p2beta1.IBatchGetAssetsHistoryResponse);
+
+                    /** BatchGetAssetsHistoryResponse assets. */
+                    public assets: google.cloud.asset.v1p2beta1.ITemporalAsset[];
+
+                    /**
+                     * Creates a new BatchGetAssetsHistoryResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchGetAssetsHistoryResponse instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1p2beta1.IBatchGetAssetsHistoryResponse): google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse;
+
+                    /**
+                     * Encodes the specified BatchGetAssetsHistoryResponse message. Does not implicitly {@link google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse.verify|verify} messages.
+                     * @param message BatchGetAssetsHistoryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1p2beta1.IBatchGetAssetsHistoryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchGetAssetsHistoryResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse.verify|verify} messages.
+                     * @param message BatchGetAssetsHistoryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1p2beta1.IBatchGetAssetsHistoryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchGetAssetsHistoryResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchGetAssetsHistoryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse;
+
+                    /**
+                     * Decodes a BatchGetAssetsHistoryResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchGetAssetsHistoryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse;
+
+                    /**
+                     * Verifies a BatchGetAssetsHistoryResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchGetAssetsHistoryResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchGetAssetsHistoryResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse;
+
+                    /**
+                     * Creates a plain object from a BatchGetAssetsHistoryResponse message. Also converts values to other types if specified.
+                     * @param message BatchGetAssetsHistoryResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1p2beta1.BatchGetAssetsHistoryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchGetAssetsHistoryResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchGetAssetsHistoryResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateFeedRequest. */
                 interface ICreateFeedRequest {
 
@@ -14713,6 +14913,13 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** ContentType enum. */
+                enum ContentType {
+                    CONTENT_TYPE_UNSPECIFIED = 0,
+                    RESOURCE = 1,
+                    IAM_POLICY = 2
+                }
+
                 /** Properties of a PubsubDestination. */
                 interface IPubsubDestination {
 
@@ -15031,13 +15238,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** ContentType enum. */
-                enum ContentType {
-                    CONTENT_TYPE_UNSPECIFIED = 0,
-                    RESOURCE = 1,
-                    IAM_POLICY = 2
-                }
-
                 /** Properties of a TemporalAsset. */
                 interface ITemporalAsset {
 
@@ -15267,6 +15467,18 @@ export namespace google {
 
                     /** Asset ancestors */
                     ancestors?: (string[]|null);
+
+                    /** Asset accessPolicy */
+                    accessPolicy?: (google.identity.accesscontextmanager.v1.IAccessPolicy|null);
+
+                    /** Asset accessLevel */
+                    accessLevel?: (google.identity.accesscontextmanager.v1.IAccessLevel|null);
+
+                    /** Asset servicePerimeter */
+                    servicePerimeter?: (google.identity.accesscontextmanager.v1.IServicePerimeter|null);
+
+                    /** Asset orgPolicy */
+                    orgPolicy?: (google.cloud.orgpolicy.v1.IPolicy[]|null);
                 }
 
                 /** Represents an Asset. */
@@ -15292,6 +15504,21 @@ export namespace google {
 
                     /** Asset ancestors. */
                     public ancestors: string[];
+
+                    /** Asset accessPolicy. */
+                    public accessPolicy?: (google.identity.accesscontextmanager.v1.IAccessPolicy|null);
+
+                    /** Asset accessLevel. */
+                    public accessLevel?: (google.identity.accesscontextmanager.v1.IAccessLevel|null);
+
+                    /** Asset servicePerimeter. */
+                    public servicePerimeter?: (google.identity.accesscontextmanager.v1.IServicePerimeter|null);
+
+                    /** Asset orgPolicy. */
+                    public orgPolicy: google.cloud.orgpolicy.v1.IPolicy[];
+
+                    /** Asset accessContextPolicy. */
+                    public accessContextPolicy?: ("accessPolicy"|"accessLevel"|"servicePerimeter");
 
                     /**
                      * Creates a new Asset instance using the specified properties.
@@ -27618,97 +27845,6 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of an Empty. */
-        interface IEmpty {
-        }
-
-        /** Represents an Empty. */
-        class Empty implements IEmpty {
-
-            /**
-             * Constructs a new Empty.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IEmpty);
-
-            /**
-             * Creates a new Empty instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Empty instance
-             */
-            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
-
-            /**
-             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
-
-            /**
-             * Verifies an Empty message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Empty
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
-
-            /**
-             * Creates a plain object from an Empty message. Also converts values to other types if specified.
-             * @param message Empty
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Empty to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Empty
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a Timestamp. */
         interface ITimestamp {
 
@@ -28238,6 +28374,97 @@ export namespace google {
 
             /**
              * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -30101,6 +30328,9 @@ export namespace google {
                     /** AccessPolicy title */
                     title?: (string|null);
 
+                    /** AccessPolicy scopes */
+                    scopes?: (string[]|null);
+
                     /** AccessPolicy createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -30128,6 +30358,9 @@ export namespace google {
 
                     /** AccessPolicy title. */
                     public title: string;
+
+                    /** AccessPolicy scopes. */
+                    public scopes: string[];
 
                     /** AccessPolicy createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -30384,6 +30617,12 @@ export namespace google {
 
                     /** ServicePerimeterConfig vpcAccessibleServices */
                     vpcAccessibleServices?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices|null);
+
+                    /** ServicePerimeterConfig ingressPolicies */
+                    ingressPolicies?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressPolicy[]|null);
+
+                    /** ServicePerimeterConfig egressPolicies */
+                    egressPolicies?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressPolicy[]|null);
                 }
 
                 /** Represents a ServicePerimeterConfig. */
@@ -30406,6 +30645,12 @@ export namespace google {
 
                     /** ServicePerimeterConfig vpcAccessibleServices. */
                     public vpcAccessibleServices?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IVpcAccessibleServices|null);
+
+                    /** ServicePerimeterConfig ingressPolicies. */
+                    public ingressPolicies: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressPolicy[];
+
+                    /** ServicePerimeterConfig egressPolicies. */
+                    public egressPolicies: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressPolicy[];
 
                     /**
                      * Creates a new ServicePerimeterConfig instance using the specified properties.
@@ -30584,6 +30829,959 @@ export namespace google {
 
                         /**
                          * Gets the default type url for VpcAccessibleServices
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** IdentityType enum. */
+                    enum IdentityType {
+                        IDENTITY_TYPE_UNSPECIFIED = 0,
+                        ANY_IDENTITY = 1,
+                        ANY_USER_ACCOUNT = 2,
+                        ANY_SERVICE_ACCOUNT = 3
+                    }
+
+                    /** Properties of a MethodSelector. */
+                    interface IMethodSelector {
+
+                        /** MethodSelector method */
+                        method?: (string|null);
+
+                        /** MethodSelector permission */
+                        permission?: (string|null);
+                    }
+
+                    /** Represents a MethodSelector. */
+                    class MethodSelector implements IMethodSelector {
+
+                        /**
+                         * Constructs a new MethodSelector.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IMethodSelector);
+
+                        /** MethodSelector method. */
+                        public method?: (string|null);
+
+                        /** MethodSelector permission. */
+                        public permission?: (string|null);
+
+                        /** MethodSelector kind. */
+                        public kind?: ("method"|"permission");
+
+                        /**
+                         * Creates a new MethodSelector instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MethodSelector instance
+                         */
+                        public static create(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IMethodSelector): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.MethodSelector;
+
+                        /**
+                         * Encodes the specified MethodSelector message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.MethodSelector.verify|verify} messages.
+                         * @param message MethodSelector message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IMethodSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MethodSelector message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.MethodSelector.verify|verify} messages.
+                         * @param message MethodSelector message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IMethodSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MethodSelector message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MethodSelector
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.MethodSelector;
+
+                        /**
+                         * Decodes a MethodSelector message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MethodSelector
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.MethodSelector;
+
+                        /**
+                         * Verifies a MethodSelector message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MethodSelector message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MethodSelector
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.MethodSelector;
+
+                        /**
+                         * Creates a plain object from a MethodSelector message. Also converts values to other types if specified.
+                         * @param message MethodSelector
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.MethodSelector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MethodSelector to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MethodSelector
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ApiOperation. */
+                    interface IApiOperation {
+
+                        /** ApiOperation serviceName */
+                        serviceName?: (string|null);
+
+                        /** ApiOperation methodSelectors */
+                        methodSelectors?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IMethodSelector[]|null);
+                    }
+
+                    /** Represents an ApiOperation. */
+                    class ApiOperation implements IApiOperation {
+
+                        /**
+                         * Constructs a new ApiOperation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IApiOperation);
+
+                        /** ApiOperation serviceName. */
+                        public serviceName: string;
+
+                        /** ApiOperation methodSelectors. */
+                        public methodSelectors: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IMethodSelector[];
+
+                        /**
+                         * Creates a new ApiOperation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ApiOperation instance
+                         */
+                        public static create(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IApiOperation): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation;
+
+                        /**
+                         * Encodes the specified ApiOperation message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation.verify|verify} messages.
+                         * @param message ApiOperation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IApiOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ApiOperation message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation.verify|verify} messages.
+                         * @param message ApiOperation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IApiOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ApiOperation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ApiOperation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation;
+
+                        /**
+                         * Decodes an ApiOperation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ApiOperation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation;
+
+                        /**
+                         * Verifies an ApiOperation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ApiOperation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ApiOperation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation;
+
+                        /**
+                         * Creates a plain object from an ApiOperation message. Also converts values to other types if specified.
+                         * @param message ApiOperation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ApiOperation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ApiOperation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an IngressSource. */
+                    interface IIngressSource {
+
+                        /** IngressSource accessLevel */
+                        accessLevel?: (string|null);
+
+                        /** IngressSource resource */
+                        resource?: (string|null);
+                    }
+
+                    /** Represents an IngressSource. */
+                    class IngressSource implements IIngressSource {
+
+                        /**
+                         * Constructs a new IngressSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressSource);
+
+                        /** IngressSource accessLevel. */
+                        public accessLevel?: (string|null);
+
+                        /** IngressSource resource. */
+                        public resource?: (string|null);
+
+                        /** IngressSource source. */
+                        public source?: ("accessLevel"|"resource");
+
+                        /**
+                         * Creates a new IngressSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IngressSource instance
+                         */
+                        public static create(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressSource): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressSource;
+
+                        /**
+                         * Encodes the specified IngressSource message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressSource.verify|verify} messages.
+                         * @param message IngressSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IngressSource message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressSource.verify|verify} messages.
+                         * @param message IngressSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IngressSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IngressSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressSource;
+
+                        /**
+                         * Decodes an IngressSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IngressSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressSource;
+
+                        /**
+                         * Verifies an IngressSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IngressSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IngressSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressSource;
+
+                        /**
+                         * Creates a plain object from an IngressSource message. Also converts values to other types if specified.
+                         * @param message IngressSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IngressSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IngressSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an IngressFrom. */
+                    interface IIngressFrom {
+
+                        /** IngressFrom sources */
+                        sources?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressSource[]|null);
+
+                        /** IngressFrom identities */
+                        identities?: (string[]|null);
+
+                        /** IngressFrom identityType */
+                        identityType?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType|keyof typeof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType|null);
+                    }
+
+                    /** Represents an IngressFrom. */
+                    class IngressFrom implements IIngressFrom {
+
+                        /**
+                         * Constructs a new IngressFrom.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressFrom);
+
+                        /** IngressFrom sources. */
+                        public sources: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressSource[];
+
+                        /** IngressFrom identities. */
+                        public identities: string[];
+
+                        /** IngressFrom identityType. */
+                        public identityType: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType|keyof typeof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType);
+
+                        /**
+                         * Creates a new IngressFrom instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IngressFrom instance
+                         */
+                        public static create(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressFrom): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom;
+
+                        /**
+                         * Encodes the specified IngressFrom message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom.verify|verify} messages.
+                         * @param message IngressFrom message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressFrom, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IngressFrom message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom.verify|verify} messages.
+                         * @param message IngressFrom message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressFrom, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IngressFrom message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IngressFrom
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom;
+
+                        /**
+                         * Decodes an IngressFrom message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IngressFrom
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom;
+
+                        /**
+                         * Verifies an IngressFrom message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IngressFrom message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IngressFrom
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom;
+
+                        /**
+                         * Creates a plain object from an IngressFrom message. Also converts values to other types if specified.
+                         * @param message IngressFrom
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IngressFrom to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IngressFrom
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an IngressTo. */
+                    interface IIngressTo {
+
+                        /** IngressTo operations */
+                        operations?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IApiOperation[]|null);
+
+                        /** IngressTo resources */
+                        resources?: (string[]|null);
+                    }
+
+                    /** Represents an IngressTo. */
+                    class IngressTo implements IIngressTo {
+
+                        /**
+                         * Constructs a new IngressTo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressTo);
+
+                        /** IngressTo operations. */
+                        public operations: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IApiOperation[];
+
+                        /** IngressTo resources. */
+                        public resources: string[];
+
+                        /**
+                         * Creates a new IngressTo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IngressTo instance
+                         */
+                        public static create(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressTo): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressTo;
+
+                        /**
+                         * Encodes the specified IngressTo message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressTo.verify|verify} messages.
+                         * @param message IngressTo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressTo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IngressTo message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressTo.verify|verify} messages.
+                         * @param message IngressTo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressTo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IngressTo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IngressTo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressTo;
+
+                        /**
+                         * Decodes an IngressTo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IngressTo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressTo;
+
+                        /**
+                         * Verifies an IngressTo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IngressTo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IngressTo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressTo;
+
+                        /**
+                         * Creates a plain object from an IngressTo message. Also converts values to other types if specified.
+                         * @param message IngressTo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressTo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IngressTo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IngressTo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an IngressPolicy. */
+                    interface IIngressPolicy {
+
+                        /** IngressPolicy ingressFrom */
+                        ingressFrom?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressFrom|null);
+
+                        /** IngressPolicy ingressTo */
+                        ingressTo?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressTo|null);
+                    }
+
+                    /** Represents an IngressPolicy. */
+                    class IngressPolicy implements IIngressPolicy {
+
+                        /**
+                         * Constructs a new IngressPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressPolicy);
+
+                        /** IngressPolicy ingressFrom. */
+                        public ingressFrom?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressFrom|null);
+
+                        /** IngressPolicy ingressTo. */
+                        public ingressTo?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressTo|null);
+
+                        /**
+                         * Creates a new IngressPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IngressPolicy instance
+                         */
+                        public static create(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressPolicy): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressPolicy;
+
+                        /**
+                         * Encodes the specified IngressPolicy message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressPolicy.verify|verify} messages.
+                         * @param message IngressPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IngressPolicy message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressPolicy.verify|verify} messages.
+                         * @param message IngressPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IIngressPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IngressPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IngressPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressPolicy;
+
+                        /**
+                         * Decodes an IngressPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IngressPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressPolicy;
+
+                        /**
+                         * Verifies an IngressPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IngressPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IngressPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressPolicy;
+
+                        /**
+                         * Creates a plain object from an IngressPolicy message. Also converts values to other types if specified.
+                         * @param message IngressPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IngressPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IngressPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an EgressFrom. */
+                    interface IEgressFrom {
+
+                        /** EgressFrom identities */
+                        identities?: (string[]|null);
+
+                        /** EgressFrom identityType */
+                        identityType?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType|keyof typeof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType|null);
+                    }
+
+                    /** Represents an EgressFrom. */
+                    class EgressFrom implements IEgressFrom {
+
+                        /**
+                         * Constructs a new EgressFrom.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressFrom);
+
+                        /** EgressFrom identities. */
+                        public identities: string[];
+
+                        /** EgressFrom identityType. */
+                        public identityType: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType|keyof typeof google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType);
+
+                        /**
+                         * Creates a new EgressFrom instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EgressFrom instance
+                         */
+                        public static create(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressFrom): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom;
+
+                        /**
+                         * Encodes the specified EgressFrom message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom.verify|verify} messages.
+                         * @param message EgressFrom message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressFrom, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EgressFrom message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom.verify|verify} messages.
+                         * @param message EgressFrom message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressFrom, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EgressFrom message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EgressFrom
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom;
+
+                        /**
+                         * Decodes an EgressFrom message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EgressFrom
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom;
+
+                        /**
+                         * Verifies an EgressFrom message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EgressFrom message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EgressFrom
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom;
+
+                        /**
+                         * Creates a plain object from an EgressFrom message. Also converts values to other types if specified.
+                         * @param message EgressFrom
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EgressFrom to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EgressFrom
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an EgressTo. */
+                    interface IEgressTo {
+
+                        /** EgressTo resources */
+                        resources?: (string[]|null);
+
+                        /** EgressTo operations */
+                        operations?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IApiOperation[]|null);
+
+                        /** EgressTo externalResources */
+                        externalResources?: (string[]|null);
+                    }
+
+                    /** Represents an EgressTo. */
+                    class EgressTo implements IEgressTo {
+
+                        /**
+                         * Constructs a new EgressTo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressTo);
+
+                        /** EgressTo resources. */
+                        public resources: string[];
+
+                        /** EgressTo operations. */
+                        public operations: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IApiOperation[];
+
+                        /** EgressTo externalResources. */
+                        public externalResources: string[];
+
+                        /**
+                         * Creates a new EgressTo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EgressTo instance
+                         */
+                        public static create(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressTo): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo;
+
+                        /**
+                         * Encodes the specified EgressTo message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo.verify|verify} messages.
+                         * @param message EgressTo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressTo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EgressTo message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo.verify|verify} messages.
+                         * @param message EgressTo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressTo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EgressTo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EgressTo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo;
+
+                        /**
+                         * Decodes an EgressTo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EgressTo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo;
+
+                        /**
+                         * Verifies an EgressTo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EgressTo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EgressTo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo;
+
+                        /**
+                         * Creates a plain object from an EgressTo message. Also converts values to other types if specified.
+                         * @param message EgressTo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EgressTo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EgressTo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an EgressPolicy. */
+                    interface IEgressPolicy {
+
+                        /** EgressPolicy egressFrom */
+                        egressFrom?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressFrom|null);
+
+                        /** EgressPolicy egressTo */
+                        egressTo?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressTo|null);
+                    }
+
+                    /** Represents an EgressPolicy. */
+                    class EgressPolicy implements IEgressPolicy {
+
+                        /**
+                         * Constructs a new EgressPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressPolicy);
+
+                        /** EgressPolicy egressFrom. */
+                        public egressFrom?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressFrom|null);
+
+                        /** EgressPolicy egressTo. */
+                        public egressTo?: (google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressTo|null);
+
+                        /**
+                         * Creates a new EgressPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EgressPolicy instance
+                         */
+                        public static create(properties?: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressPolicy): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy;
+
+                        /**
+                         * Encodes the specified EgressPolicy message. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy.verify|verify} messages.
+                         * @param message EgressPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EgressPolicy message, length delimited. Does not implicitly {@link google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy.verify|verify} messages.
+                         * @param message EgressPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IEgressPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EgressPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EgressPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy;
+
+                        /**
+                         * Decodes an EgressPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EgressPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy;
+
+                        /**
+                         * Verifies an EgressPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EgressPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EgressPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy;
+
+                        /**
+                         * Creates a plain object from an EgressPolicy message. Also converts values to other types if specified.
+                         * @param message EgressPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EgressPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EgressPolicy
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

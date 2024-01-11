@@ -13,12 +13,18 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Net_app.create_active_directory](#net_app.create_active_directory)
+  * [Net_app.create_backup](#net_app.create_backup)
+  * [Net_app.create_backup_policy](#net_app.create_backup_policy)
+  * [Net_app.create_backup_vault](#net_app.create_backup_vault)
   * [Net_app.create_kms_config](#net_app.create_kms_config)
   * [Net_app.create_replication](#net_app.create_replication)
   * [Net_app.create_snapshot](#net_app.create_snapshot)
   * [Net_app.create_storage_pool](#net_app.create_storage_pool)
   * [Net_app.create_volume](#net_app.create_volume)
   * [Net_app.delete_active_directory](#net_app.delete_active_directory)
+  * [Net_app.delete_backup](#net_app.delete_backup)
+  * [Net_app.delete_backup_policy](#net_app.delete_backup_policy)
+  * [Net_app.delete_backup_vault](#net_app.delete_backup_vault)
   * [Net_app.delete_kms_config](#net_app.delete_kms_config)
   * [Net_app.delete_replication](#net_app.delete_replication)
   * [Net_app.delete_snapshot](#net_app.delete_snapshot)
@@ -26,12 +32,18 @@
   * [Net_app.delete_volume](#net_app.delete_volume)
   * [Net_app.encrypt_volumes](#net_app.encrypt_volumes)
   * [Net_app.get_active_directory](#net_app.get_active_directory)
+  * [Net_app.get_backup](#net_app.get_backup)
+  * [Net_app.get_backup_policy](#net_app.get_backup_policy)
+  * [Net_app.get_backup_vault](#net_app.get_backup_vault)
   * [Net_app.get_kms_config](#net_app.get_kms_config)
   * [Net_app.get_replication](#net_app.get_replication)
   * [Net_app.get_snapshot](#net_app.get_snapshot)
   * [Net_app.get_storage_pool](#net_app.get_storage_pool)
   * [Net_app.get_volume](#net_app.get_volume)
   * [Net_app.list_active_directories](#net_app.list_active_directories)
+  * [Net_app.list_backup_policies](#net_app.list_backup_policies)
+  * [Net_app.list_backup_vaults](#net_app.list_backup_vaults)
+  * [Net_app.list_backups](#net_app.list_backups)
   * [Net_app.list_kms_configs](#net_app.list_kms_configs)
   * [Net_app.list_replications](#net_app.list_replications)
   * [Net_app.list_snapshots](#net_app.list_snapshots)
@@ -42,6 +54,9 @@
   * [Net_app.revert_volume](#net_app.revert_volume)
   * [Net_app.stop_replication](#net_app.stop_replication)
   * [Net_app.update_active_directory](#net_app.update_active_directory)
+  * [Net_app.update_backup](#net_app.update_backup)
+  * [Net_app.update_backup_policy](#net_app.update_backup_policy)
+  * [Net_app.update_backup_vault](#net_app.update_backup_vault)
   * [Net_app.update_kms_config](#net_app.update_kms_config)
   * [Net_app.update_replication](#net_app.update_replication)
   * [Net_app.update_snapshot](#net_app.update_snapshot)
@@ -75,6 +90,57 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.create_active_directory.js`
+
+
+-----
+
+
+
+
+### Net_app.create_backup
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup.js`
+
+
+-----
+
+
+
+
+### Net_app.create_backup_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_policy.js`
+
+
+-----
+
+
+
+
+### Net_app.create_backup_vault
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_vault.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_vault.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_vault.js`
 
 
 -----
@@ -177,6 +243,57 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.delete_active_directory.js`
+
+
+-----
+
+
+
+
+### Net_app.delete_backup
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup.js`
+
+
+-----
+
+
+
+
+### Net_app.delete_backup_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_policy.js`
+
+
+-----
+
+
+
+
+### Net_app.delete_backup_vault
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_vault.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_vault.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_vault.js`
 
 
 -----
@@ -303,6 +420,57 @@ __Usage:__
 
 
 
+### Net_app.get_backup
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup.js`
+
+
+-----
+
+
+
+
+### Net_app.get_backup_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_policy.js`
+
+
+-----
+
+
+
+
+### Net_app.get_backup_vault
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_vault.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_vault.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_vault.js`
+
+
+-----
+
+
+
+
 ### Net_app.get_kms_config
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_kms_config.js).
@@ -398,6 +566,57 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.list_active_directories.js`
+
+
+-----
+
+
+
+
+### Net_app.list_backup_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_policies.js`
+
+
+-----
+
+
+
+
+### Net_app.list_backup_vaults
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_vaults.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_vaults.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_vaults.js`
+
+
+-----
+
+
+
+
+### Net_app.list_backups
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_backups.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_backups.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.list_backups.js`
 
 
 -----
@@ -568,6 +787,57 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.update_active_directory.js`
+
+
+-----
+
+
+
+
+### Net_app.update_backup
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup.js`
+
+
+-----
+
+
+
+
+### Net_app.update_backup_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_policy.js`
+
+
+-----
+
+
+
+
+### Net_app.update_backup_vault
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_vault.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_vault.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_vault.js`
 
 
 -----

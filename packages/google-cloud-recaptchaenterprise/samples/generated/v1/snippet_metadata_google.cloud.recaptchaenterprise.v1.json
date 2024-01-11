@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-recaptchaenterprise",
-        "version": "4.1.0",
+        "version": "5.1.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -66,7 +66,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -86,6 +86,10 @@
                     {
                         "name": "reasons",
                         "type": "TYPE_ENUM[]"
+                    },
+                    {
+                        "name": "account_id",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "hashed_account_id",
@@ -774,7 +778,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -785,6 +789,10 @@
                 "parameters": [
                     {
                         "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "account_id",
                         "type": "TYPE_STRING"
                     },
                     {

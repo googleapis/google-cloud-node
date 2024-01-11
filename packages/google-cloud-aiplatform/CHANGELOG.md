@@ -1,5 +1,52 @@
 # Changelog
 
+## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.9.0...aiplatform-v3.10.0) (2024-01-05)
+
+
+### Features
+
+* Add Content ([#4880](https://github.com/googleapis/google-cloud-node/issues/4880)) ([d74d48d](https://github.com/googleapis/google-cloud-node/commit/d74d48dbdd24391c9777d06d306a64b15bead998))
+
+## [3.9.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.8.0...aiplatform-v3.9.0) (2023-12-11)
+
+
+### Features
+
+* Add data_stats to Model ([#4866](https://github.com/googleapis/google-cloud-node/issues/4866)) ([e7614ad](https://github.com/googleapis/google-cloud-node/commit/e7614ad5cb26d4828ac3cbc81d94bc7a9ea0a26c))
+
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.7.0...aiplatform-v3.8.0) (2023-11-30)
+
+
+### Features
+
+* Add grpc_ports to UploadModel ModelContainerSpec ([#4836](https://github.com/googleapis/google-cloud-node/issues/4836)) ([736ff8b](https://github.com/googleapis/google-cloud-node/commit/736ff8bf73959cbc6e0caa0125bf4dd2ba0776dc))
+
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.6.0...aiplatform-v3.7.0) (2023-11-16)
+
+
+### Features
+
+* [aiplatform] add protected_artifact_location_id to CustomJob ([#4809](https://github.com/googleapis/google-cloud-node/issues/4809)) ([9da9501](https://github.com/googleapis/google-cloud-node/commit/9da950110296e4fed58de27f35284091616ea1b7))
+
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.5.0...aiplatform-v3.6.0) (2023-11-09)
+
+
+### Features
+
+* Add Optimized to FeatureOnlineStore ([#4790](https://github.com/googleapis/google-cloud-node/issues/4790)) ([61cb5c9](https://github.com/googleapis/google-cloud-node/commit/61cb5c91e054639da95268ab13ae99f909d261c8))
+
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.4.0...aiplatform-v3.5.0) (2023-11-03)
+
+
+### Features
+
+* Adding new fields for concurrent explanations ([489e188](https://github.com/googleapis/google-cloud-node/commit/489e188d97af302f96299a5b40eb5e07020972fc))
+
+
+### Bug Fixes
+
+* **aiplatform/v1beta1:** Change CreateFeature metadata ([#4782](https://github.com/googleapis/google-cloud-node/issues/4782)) ([489e188](https://github.com/googleapis/google-cloud-node/commit/489e188d97af302f96299a5b40eb5e07020972fc))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.3.0...aiplatform-v3.4.0) (2023-10-24)
 
 
