@@ -26,7 +26,7 @@
     "@types/nunjucks": "^3.2.1",
     "@types/sinon": "^17.0.0",
     "@types/yargs": "^17.0.10",
-    "c8": "^7.11.3",
+    "c8": "^9.0.0",
     "cross-env": "^7.0.3",
     "gapic-tools": "^0.2.0",
     "gts": "^5.0.0",
