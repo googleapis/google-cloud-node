@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,10 +40,10 @@ module.exports = {
     includePattern: '\\.js$'
   },
   templates: {
-    copyright: 'Copyright 2023 Google LLC',
+    copyright: 'Copyright 2024 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/inventories',
+    systemName: '@google-shopping/inventories',
     theme: 'lumen',
     default: {
       outputSourceFiles: false
