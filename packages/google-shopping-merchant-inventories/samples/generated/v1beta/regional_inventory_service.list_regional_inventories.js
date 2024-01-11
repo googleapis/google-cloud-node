@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Inventories library
-  const {RegionalInventoryServiceClient} = require('@google-cloud/inventories').v1beta;
+  const {RegionalInventoryServiceClient} = require('@google-shopping/inventories').v1beta;
 
   // Instantiates a client
   const inventoriesClient = new RegionalInventoryServiceClient();

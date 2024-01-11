@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/channel-v3.1.0...channel-v3.2.0) (2024-01-05)
+
+
+### Features
+
+* [channel] `CloudChannelReportsService` is deprecated ([#4903](https://github.com/googleapis/google-cloud-node/issues/4903)) ([64a2e41](https://github.com/googleapis/google-cloud-node/commit/64a2e4179a393e34a235ff6b4ece0880fcf625dd))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/channel-v3.0.1...channel-v3.1.0) (2023-09-11)
 
 

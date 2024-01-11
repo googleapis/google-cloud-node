@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.2.0...dialogflow-v6.3.0) (2024-01-05)
+
+
+### Features
+
+* [dialogflow] add sections field to HumanAgentAssistantConfig.SuggestionQueryConfig ([#4890](https://github.com/googleapis/google-cloud-node/issues/4890)) ([9572b9a](https://github.com/googleapis/google-cloud-node/commit/9572b9abe6033afe521246948fc786c767987442))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.1.0...dialogflow-v6.2.0) (2023-10-18)
 
 

@@ -14,6 +14,8 @@
 * [Samples](#samples)
   * [Service_usage.batch_enable_services](#service_usage.batch_enable_services)
   * [Service_usage.batch_get_services](#service_usage.batch_get_services)
+  * [Service_usage.disable_service](#service_usage.disable_service)
+  * [Service_usage.enable_service](#service_usage.enable_service)
   * [Service_usage.get_service](#service_usage.get_service)
   * [Service_usage.list_services](#service_usage.list_services)
   * [Service_usage.batch_enable_services](#service_usage.batch_enable_services)
@@ -21,6 +23,8 @@
   * [Service_usage.create_consumer_override](#service_usage.create_consumer_override)
   * [Service_usage.delete_admin_override](#service_usage.delete_admin_override)
   * [Service_usage.delete_consumer_override](#service_usage.delete_consumer_override)
+  * [Service_usage.disable_service](#service_usage.disable_service)
+  * [Service_usage.enable_service](#service_usage.enable_service)
   * [Service_usage.generate_service_identity](#service_usage.generate_service_identity)
   * [Service_usage.get_consumer_quota_limit](#service_usage.get_consumer_quota_limit)
   * [Service_usage.get_consumer_quota_metric](#service_usage.get_consumer_quota_metric)
@@ -77,6 +81,40 @@ __Usage:__
 
 
 `node packages/google-api-serviceusage/samples/generated/v1/service_usage.batch_get_services.js`
+
+
+-----
+
+
+
+
+### Service_usage.disable_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.disable_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1/service_usage.disable_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-serviceusage/samples/generated/v1/service_usage.disable_service.js`
+
+
+-----
+
+
+
+
+### Service_usage.enable_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1/service_usage.enable_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1/service_usage.enable_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-serviceusage/samples/generated/v1/service_usage.enable_service.js`
 
 
 -----
@@ -196,6 +234,40 @@ __Usage:__
 
 
 `node packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.delete_consumer_override.js`
+
+
+-----
+
+
+
+
+### Service_usage.disable_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.disable_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.disable_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.disable_service.js`
+
+
+-----
+
+
+
+
+### Service_usage.enable_service
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.enable_service.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.enable_service.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-api-serviceusage/samples/generated/v1beta1/service_usage.enable_service.js`
 
 
 -----

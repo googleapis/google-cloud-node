@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Generativelanguage library
-  const {RetrieverServiceClient} = require('@google-cloud/generativelanguage').v1beta;
+  const {RetrieverServiceClient} = require('@google-ai/generativelanguage').v1beta;
 
   // Instantiates a client
   const generativelanguageClient = new RetrieverServiceClient();

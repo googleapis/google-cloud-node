@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/org-policy-v3.0.1...org-policy-v3.1.0) (2024-01-05)
+
+
+### Features
+
+* [orgpolicy] Add custom constraints CRUD APIs, proper etag support in Org Policy Update/Delete API ([#4896](https://github.com/googleapis/google-cloud-node/issues/4896)) ([adb6c37](https://github.com/googleapis/google-cloud-node/commit/adb6c375e550a8c72595d600491ed5ab869fd52f))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/org-policy-v3.0.0...org-policy-v3.0.1) (2023-09-06)
 
 

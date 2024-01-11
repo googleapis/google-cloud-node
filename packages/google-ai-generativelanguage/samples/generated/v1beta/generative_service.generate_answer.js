@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ function main(model, contents, answerStyle) {
   // const temperature = 1234
 
   // Imports the Generativelanguage library
-  const {GenerativeServiceClient} = require('@google-cloud/generativelanguage').v1beta;
+  const {GenerativeServiceClient} = require('@google-ai/generativelanguage').v1beta;
 
   // Instantiates a client
   const generativelanguageClient = new GenerativeServiceClient();
