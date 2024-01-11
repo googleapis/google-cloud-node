@@ -21,7 +21,8 @@ const {describe, it, before} = require('mocha');
 const {BatchServiceClient} = require('@google-cloud/batch').v1;
 const batchClient = new BatchServiceClient();
 
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd =>
+  cp.execSync(cmd, {encoding: 'utf-8', maxBuffer: 50 * 1024 * 1024});
 
 const cwd = path.join(__dirname, '..');
 

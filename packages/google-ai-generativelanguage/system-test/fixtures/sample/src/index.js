@@ -21,7 +21,13 @@ const generativelanguage = require('@google-ai/generativelanguage');
 
 function main() {
   const discussServiceClient = new generativelanguage.DiscussServiceClient();
+  const generativeServiceClient =
+    new generativelanguage.GenerativeServiceClient();
   const modelServiceClient = new generativelanguage.ModelServiceClient();
+  const permissionServiceClient =
+    new generativelanguage.PermissionServiceClient();
+  const retrieverServiceClient =
+    new generativelanguage.RetrieverServiceClient();
   const textServiceClient = new generativelanguage.TextServiceClient();
 }
 
