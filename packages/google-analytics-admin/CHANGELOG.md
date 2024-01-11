@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/admin-v7.0.0...admin-v7.0.1) (2024-01-05)
+
+
+### Bug Fixes
+
+* [analytics-admin] correct long audio synthesis HTTP binding ([#4888](https://github.com/googleapis/google-cloud-node/issues/4888)) ([60a26a1](https://github.com/googleapis/google-cloud-node/commit/60a26a1e60d46295a2688a6b123a092993698ee8))
+
 ## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v6.0.0...admin-v7.0.0) (2023-10-24)
 
 
