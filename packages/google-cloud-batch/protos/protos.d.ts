@@ -7826,6 +7826,9 @@ export namespace google {
 
                     /** AllocationPolicy placement */
                     placement?: (google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy|null);
+
+                    /** AllocationPolicy tags */
+                    tags?: (string[]|null);
                 }
 
                 /** Represents an AllocationPolicy. */
@@ -7866,6 +7869,9 @@ export namespace google {
 
                     /** AllocationPolicy placement. */
                     public placement?: (google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy|null);
+
+                    /** AllocationPolicy tags. */
+                    public tags: string[];
 
                     /**
                      * Creates a new AllocationPolicy instance using the specified properties.
@@ -9008,6 +9014,9 @@ export namespace google {
 
                     /** TaskGroup enableOslogin */
                     enableOslogin?: (boolean|null);
+
+                    /** TaskGroup runAsNonRoot */
+                    runAsNonRoot?: (boolean|null);
                 }
 
                 /** Represents a TaskGroup. */
@@ -9054,6 +9063,9 @@ export namespace google {
 
                     /** TaskGroup enableOslogin. */
                     public enableOslogin: boolean;
+
+                    /** TaskGroup runAsNonRoot. */
+                    public runAsNonRoot: boolean;
 
                     /**
                      * Creates a new TaskGroup instance using the specified properties.
