@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [8.0.3](https://github.com/googleapis/google-cloud-node/compare/translate-v8.0.2...translate-v8.0.3) (2024-01-05)
+
+
+### Bug Fixes
+
+* [translate] correct long audio synthesis HTTP binding ([#4889](https://github.com/googleapis/google-cloud-node/issues/4889)) ([f7ea397](https://github.com/googleapis/google-cloud-node/commit/f7ea397a129b9f2532be84f72ff455b454b59437))
+
 ## [8.0.2](https://github.com/googleapis/google-cloud-node/compare/translate-v8.0.1...translate-v8.0.2) (2023-09-06)
 
 

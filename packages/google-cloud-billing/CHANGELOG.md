@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/billing-v4.0.2...billing-v4.1.0) (2024-01-05)
+
+
+### Features
+
+* [billing] added the MoveBillingAccount method, which allows changing which organization a billing account belongs to ([#4865](https://github.com/googleapis/google-cloud-node/issues/4865)) ([5560948](https://github.com/googleapis/google-cloud-node/commit/5560948570389b22e16a621a9b66dc4afba823fa))
+
 ## [4.0.2](https://github.com/googleapis/google-cloud-node/compare/billing-v4.0.1...billing-v4.0.2) (2023-09-08)
 
 

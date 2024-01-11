@@ -4,6 +4,364 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "557011f7de32dfb6f500364a5317a6d1063362f4",
+          "message": "Add initial files for google.api.cloudquotas.v1",
+          "issues": [
+            "4920"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "74f22be1-dc5e-4fff-a07a-8ec4ed52e713",
+      "createTime": "2024-01-05T01:04:46.626Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "104566a4eb00aa2d91f24f98a1e0f0ec761e8471",
+          "message": "Add initial files for google.shopping.css.v1",
+          "issues": [
+            "4892"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "5b4d81f8-825d-48a3-9666-1d6e477b70d0",
+      "createTime": "2024-01-05T01:04:46.618Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "47c87d04ca86a56a98a85fe71b362d068b8161b0",
+          "message": "[cloudprofiler] add `ListProfiles` RPC to `ExportService`",
+          "issues": [
+            "4887"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "7d664ccd-9da8-4f7c-9516-63c2ab7dd2e4",
+      "createTime": "2024-01-05T01:04:46.608Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "effadd9e74c5d807c8c76a2d67f46e19df517a2d",
+          "message": "[container] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4899"
+          ]
+        }
+      ],
+      "version": "5.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "5e8ed861-0c0b-450d-aee4-ad75bf33f92e",
+      "createTime": "2024-01-05T01:04:46.600Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f7ea397a129b9f2532be84f72ff455b454b59437",
+          "message": "[translate] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4889"
+          ]
+        }
+      ],
+      "version": "8.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "9b27b4cd-8fdc-40f2-89d4-0e4b59ca0d94",
+      "createTime": "2024-01-05T01:04:46.591Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ddca2aa9eda50767bfb82771bd4b067d175b19a",
+          "message": "[sql] add `INCOMPATIBLE_DATABASE_MINOR_VERSION`, `SOURCE_MAX_SUBSCRIPTIONS` to `SqlExternalSyncSettingErrorType` enum",
+          "issues": [
+            "4867"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "a1ebd3b2-1027-4573-a734-294fa2975ca7",
+      "createTime": "2024-01-05T01:04:46.582Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "aa8dcf8c3f98e878eac8517cfd01ec2bfa7f54be",
+          "message": "[recommender] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4883"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "89557491-f208-46fa-9f96-b00de297e896",
+      "createTime": "2024-01-05T01:04:46.552Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "285e5aa4a45d9596d38cc7c76e8762e41dd7635f",
+          "message": "[recaptchaenterprise] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4873"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "32c72096-3a23-4d08-8944-0da38a7713a5",
+      "createTime": "2024-01-05T01:04:46.544Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "adb6c375e550a8c72595d600491ed5ab869fd52f",
+          "message": "[orgpolicy] Add custom constraints CRUD APIs, proper etag support in Org Policy Update/Delete API",
+          "issues": [
+            "4896"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "b11dd1cd-5d6e-413d-815e-9f1a62fb7887",
+      "createTime": "2024-01-05T01:04:46.535Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9acd314c35e778b3fb54675dbacadd76f699eaf7",
+          "message": "[netapp] Enable Backup, Backup Vault, and Backup Policy",
+          "issues": [
+            "4902"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "871357f4-2cdd-4b3d-8361-bb2953a42ac9",
+      "createTime": "2024-01-05T01:04:46.527Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c7b70b42c4a5023414c10b7a4075c94f0675fa32",
+          "message": "[gkemulticloud] added proxy support for Attached Clusters",
+          "issues": [
+            "4894"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "490190a6-6884-42af-8b25-a6f42da2f84a",
+      "createTime": "2024-01-05T01:04:46.518Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cca21ed5e5ac57397c77b23e5f310561f4b27102",
+          "message": "[documentai] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4884"
+          ]
+        }
+      ],
+      "version": "8.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "4be29202-e431-4b99-951f-fbd5242e4a62",
+      "createTime": "2024-01-05T01:04:46.509Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb95ca771318195714dfa47deab817ba19f5e1a4",
+          "message": "[discoveryengine] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4886"
+          ]
+        }
+      ],
+      "version": "1.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "9fd821d9-9f06-42a5-bdff-636e988ca0c7",
+      "createTime": "2024-01-05T01:04:46.501Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9572b9abe6033afe521246948fc786c767987442",
+          "message": "[dialogflow] add sections field to HumanAgentAssistantConfig.SuggestionQueryConfig",
+          "issues": [
+            "4890"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "b3848e96-8138-47cf-85bd-20f145b85f7d",
+      "createTime": "2024-01-05T01:04:46.492Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "64a2e4179a393e34a235ff6b4ece0880fcf625dd",
+          "message": "[channel] `CloudChannelReportsService` is deprecated",
+          "issues": [
+            "4903"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "5be17c75-3300-499d-9390-462043520c2e",
+      "createTime": "2024-01-05T01:04:46.483Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5560948570389b22e16a621a9b66dc4afba823fa",
+          "message": "[billing] added the MoveBillingAccount method, which allows changing which organization a billing account belongs to",
+          "issues": [
+            "4865"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "cfdad688-ab39-4bfa-9d70-223b6d050298",
+      "createTime": "2024-01-05T01:04:46.475Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "301305708389288ad361f7ef5a7d239d94a61a9f",
+          "message": "[asset] added new resource references to fields in AnalyzeMoveRequest",
+          "issues": [
+            "4881"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "b0ecbd6f-0d60-4930-a4f5-e3b536ff919c",
+      "createTime": "2024-01-05T01:04:46.466Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b1e76e9e52831d1c786918a99a4d96c74d8141f5",
+          "message": "[alloydb] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4898"
+          ]
+        }
+      ],
+      "version": "1.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "c758a4c4-10ac-4ced-b7c0-b835d5c03611",
+      "createTime": "2024-01-05T01:04:46.458Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d74d48dbdd24391c9777d06d306a64b15bead998",
+          "message": "Add Content",
+          "issues": [
+            "4880"
+          ]
+        }
+      ],
+      "version": "3.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "f7624f61-20cb-494f-aeed-bfa69901af62",
+      "createTime": "2024-01-05T01:04:46.448Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "60a26a1e60d46295a2688a6b123a092993698ee8",
+          "message": "[analytics-admin] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4888"
+          ]
+        }
+      ],
+      "version": "7.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "74bd07e8-88c3-4467-adf7-197fcbe49127",
+      "createTime": "2024-01-05T01:04:46.436Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "17cd1021fdc31e8077456a7f0f822287877f4f61",
           "message": "Update dependency p-queue to v8",
@@ -20626,5 +20984,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-12-11T21:58:07.215Z"
+  "updateTime": "2024-01-05T01:04:46.626Z"
 }
