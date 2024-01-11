@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,8 +32,8 @@ function main(updateMask, customTargetType) {
    *  Required. Field mask is used to specify the fields to be overwritten in the
    *  `CustomTargetType` resource by the update.
    *  The fields specified in the update_mask are relative to the resource, not
-   *  the full request. A field will be overwritten if it is in the mask. If the
-   *  user does not provide a mask then all fields will be overwritten.
+   *  the full request. A field will be overwritten if it's in the mask. If the
+   *  user doesn't provide a mask then all fields are overwritten.
    */
   // const updateMask = {}
   /**
@@ -42,9 +42,9 @@ function main(updateMask, customTargetType) {
   // const customTargetType = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
-   *  so that if you must retry your request, the server will know to ignore
-   *  the request if it has already been completed. The server will guarantee
-   *  that for at least 60 minutes since the first request.
+   *  so that if you must retry your request, the server knows to ignore the
+   *  request if it has already been completed. The server guarantees that for
+   *  at least 60 minutes after the first request.
    *  For example, consider a situation where you make an initial request and the
    *  request times out. If you make the request again with the same request ID,
    *  the server can check if original operation with the same request ID was
