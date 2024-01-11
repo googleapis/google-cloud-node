@@ -44,6 +44,12 @@ function main(sshPublicKey) {
    *  The view configures whether to retrieve security keys information.
    */
   // const view = {}
+  /**
+   *  Optional. The regions to which to assert that the key was written.
+   *  If unspecified, defaults to all regions.
+   *  Regions are listed at https://cloud.google.com/about/locations#region.
+   */
+  // const regions = ['abc','def']
 
   // Imports the Oslogin library
   const {OsLoginServiceClient} = require('@google-cloud/os-login').v1beta;

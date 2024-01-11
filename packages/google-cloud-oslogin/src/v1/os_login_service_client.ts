@@ -796,6 +796,10 @@ export class OsLoginServiceClient {
    *   Optional. The SSH public key and expiration time.
    * @param {string} request.projectId
    *   The project ID of the Google Cloud Platform project.
+   * @param {string[]} [request.regions]
+   *   Optional. The regions to which to assert that the key was written.
+   *   If unspecified, defaults to all regions.
+   *   Regions are listed at https://cloud.google.com/about/locations#region.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
