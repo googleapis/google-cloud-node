@@ -50,6 +50,16 @@
                 "exportLockInfo"
               ]
             },
+            "GetPreview": {
+              "methods": [
+                "getPreview"
+              ]
+            },
+            "ExportPreviewResult": {
+              "methods": [
+                "exportPreviewResult"
+              ]
+            },
             "CreateDeployment": {
               "methods": [
                 "createDeployment"
@@ -75,6 +85,16 @@
                 "unlockDeployment"
               ]
             },
+            "CreatePreview": {
+              "methods": [
+                "createPreview"
+              ]
+            },
+            "DeletePreview": {
+              "methods": [
+                "deletePreview"
+              ]
+            },
             "ListDeployments": {
               "methods": [
                 "listDeployments",
@@ -94,6 +114,13 @@
                 "listResources",
                 "listResourcesStream",
                 "listResourcesAsync"
+              ]
+            },
+            "ListPreviews": {
+              "methods": [
+                "listPreviews",
+                "listPreviewsStream",
+                "listPreviewsAsync"
               ]
             }
           }
@@ -141,6 +168,16 @@
                 "exportLockInfo"
               ]
             },
+            "GetPreview": {
+              "methods": [
+                "getPreview"
+              ]
+            },
+            "ExportPreviewResult": {
+              "methods": [
+                "exportPreviewResult"
+              ]
+            },
             "CreateDeployment": {
               "methods": [
                 "createDeployment"
@@ -166,6 +203,16 @@
                 "unlockDeployment"
               ]
             },
+            "CreatePreview": {
+              "methods": [
+                "createPreview"
+              ]
+            },
+            "DeletePreview": {
+              "methods": [
+                "deletePreview"
+              ]
+            },
             "ListDeployments": {
               "methods": [
                 "listDeployments",
@@ -185,6 +232,13 @@
                 "listResources",
                 "listResourcesStream",
                 "listResourcesAsync"
+              ]
+            },
+            "ListPreviews": {
+              "methods": [
+                "listPreviews",
+                "listPreviewsStream",
+                "listPreviewsAsync"
               ]
             }
           }
