@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.4.0...sql-v0.5.0) (2024-01-15)
+
+
+### Features
+
+* [sql] added value `UNABLE_TO_VERIFY_DEFINERS` to enum `SqlExternalSyncSettingErrorType` ([#4933](https://github.com/googleapis/google-cloud-node/issues/4933)) ([bb3a357](https://github.com/googleapis/google-cloud-node/commit/bb3a35760b4aebc0218f81be6b79b9e0a22b1857))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.3.0...sql-v0.4.0) (2024-01-05)
 
 

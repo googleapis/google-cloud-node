@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [5.0.2](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.0.1...text-to-speech-v5.0.2) (2024-01-15)
+
+
+### Bug Fixes
+
+* [texttospeech] correct long audio synthesis HTTP binding ([#4916](https://github.com/googleapis/google-cloud-node/issues/4916)) ([0be8b3e](https://github.com/googleapis/google-cloud-node/commit/0be8b3e3b2700f423eac094958d2c2e53500ff95))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.0.0...text-to-speech-v5.0.1) (2023-09-06)
 
 
