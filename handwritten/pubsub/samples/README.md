@@ -24,6 +24,7 @@ guides.
   * [Create BigQuery Subscription](#create-bigquery-subscription)
   * [Create a Proto based Schema](#create-a-proto-based-schema)
   * [Create Push Subscription](#create-push-subscription)
+  * [Create Push Subscription With No Wrapper](#create-push-subscription-with-no-wrapper)
   * [Create Subscription](#create-subscription)
   * [Create Subscription With Dead Letter Policy](#create-subscription-with-dead-letter-policy)
   * [Create an exactly-once delivery subscription](#create-an-exactly-once-delivery-subscription)
@@ -158,6 +159,25 @@ __Usage:__
 
 
 `node createPushSubscription.js <topic-name-or-id> <subscription-name-or-id>`
+
+
+-----
+
+
+
+
+### Create Push Subscription With No Wrapper
+
+Creates a new push subscription, but disables wrapping for payloads.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createPushSubscriptionNoWrapper.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createPushSubscriptionNoWrapper.js,samples/README.md)
+
+__Usage:__
+
+
+`node createPushSubscriptionNoWrapper.js <topic-name-or-id> <subscription-name-or-id>`
 
 
 -----

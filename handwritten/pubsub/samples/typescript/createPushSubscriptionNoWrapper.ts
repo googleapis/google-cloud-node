@@ -1,4 +1,4 @@
-// Copyright 2019-2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,10 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// This is a generated sample, using the typeless sample bot. Please
-// look for the source TypeScript sample (.ts) for modifications.
-'use strict';
-
 /**
  * This application demonstrates how to perform basic operations on
  * subscriptions with the Google Cloud Pub/Sub API.
@@ -25,11 +21,11 @@
  */
 
 // sample-metadata:
-//   title: Create Push Subscription
-//   description: Creates a new push subscription.
-//   usage: node createPushSubscription.js <topic-name-or-id> <subscription-name-or-id>
+//   title: Create Push Subscription With No Wrapper
+//   description: Creates a new push subscription, but disables wrapping for payloads.
+//   usage: node createPushSubscriptionNoWrapper.js <topic-name-or-id> <subscription-name-or-id>
 
-// [START pubsub_create_push_subscription]
+// [START pubsub_create_unwrapped_push_subscription]
 /**
  * TODO(developer): Uncomment these variables before running the sample.
  */
@@ -38,21 +34,27 @@
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
 
 // Imports the Google Cloud client library
-const {PubSub} = require('@google-cloud/pubsub');
+import {PubSub, CreateSubscriptionOptions} from '@google-cloud/pubsub';
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-async function createPushSubscription(
-  pushEndpoint,
-  topicNameOrId,
-  subscriptionNameOrId
+async function createPushSubscriptionNoWrapper(
+  pushEndpoint: string,
+  topicNameOrId: string,
+  subscriptionNameOrId: string
 ) {
-  const options = {
+  const options: CreateSubscriptionOptions = {
     pushConfig: {
       // Set to an HTTPS endpoint of your choice. If necessary, register
       // (authorize) the domain on which the server is hosted.
       pushEndpoint,
+      // When true, writes the Pub/Sub message metadata to
+      // `x-goog-pubsub-<KEY>:<VAL>` headers of the HTTP request. Writes the
+      // Pub/Sub message attributes to `<KEY>:<VAL>` headers of the HTTP request.
+      noWrapper: {
+        writeMetadata: true,
+      },
     },
   };
 
@@ -61,14 +63,14 @@ async function createPushSubscription(
     .createSubscription(subscriptionNameOrId, options);
   console.log(`Subscription ${subscriptionNameOrId} created.`);
 }
-// [END pubsub_create_push_subscription]
+// [END pubsub_create_unwrapped_push_subscription]
 
 function main(
   pushEndpoint = 'YOUR_ENDPOINT_URL',
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID'
 ) {
-  createPushSubscription(
+  createPushSubscriptionNoWrapper(
     pushEndpoint,
     topicNameOrId,
     subscriptionNameOrId
