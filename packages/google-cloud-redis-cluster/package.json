@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/cluster",
+  "name": "@google-cloud/redis-cluster",
   "version": "0.0.0",
   "description": "Google Cloud Memorystore for Redis API client for Node.js",
   "repository": {

@@ -5,7 +5,7 @@
 # [Google Cloud Memorystore for Redis API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-redis-cluster)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/cluster.svg)](https://www.npmjs.org/package/@google-cloud/cluster)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/redis-cluster.svg)](https://www.npmjs.org/package/@google-cloud/redis-cluster)
 
 
 
@@ -50,7 +50,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/cluster
+npm install @google-cloud/redis-cluster
 ```
 
 
@@ -85,7 +85,7 @@ npm install @google-cloud/cluster
 // const pageToken = 'abc123'
 
 // Imports the Cluster library
-const {CloudRedisClusterClient} = require('@google-cloud/cluster').v1;
+const {CloudRedisClusterClient} = require('@google-cloud/redis-cluster').v1;
 
 // Instantiates a client
 const clusterClient = new CloudRedisClusterClient();
@@ -150,7 +150,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/cluster@legacy-8` installs client libraries
+For example, `npm install @google-cloud/redis-cluster@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning

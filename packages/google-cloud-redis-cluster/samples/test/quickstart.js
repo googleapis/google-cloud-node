@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/cluster').v1;
-const redisClient = new Client();
+const {CloudRedisClusterClient} = require('@google-cloud/redis-cluster').v1;
+const clusterClient = new CloudRedisClusterClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -29,7 +29,7 @@ describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
-    projectId = await redisClient.getProjectId();
+    projectId = await clusterClient.getProjectId();
   });
 
   it('should run quickstart', async () => {
