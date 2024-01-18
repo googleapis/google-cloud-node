@@ -13,16 +13,21 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Config.create_deployment](#config.create_deployment)
+  * [Config.create_preview](#config.create_preview)
   * [Config.delete_deployment](#config.delete_deployment)
+  * [Config.delete_preview](#config.delete_preview)
   * [Config.delete_statefile](#config.delete_statefile)
   * [Config.export_deployment_statefile](#config.export_deployment_statefile)
   * [Config.export_lock_info](#config.export_lock_info)
+  * [Config.export_preview_result](#config.export_preview_result)
   * [Config.export_revision_statefile](#config.export_revision_statefile)
   * [Config.get_deployment](#config.get_deployment)
+  * [Config.get_preview](#config.get_preview)
   * [Config.get_resource](#config.get_resource)
   * [Config.get_revision](#config.get_revision)
   * [Config.import_statefile](#config.import_statefile)
   * [Config.list_deployments](#config.list_deployments)
+  * [Config.list_previews](#config.list_previews)
   * [Config.list_resources](#config.list_resources)
   * [Config.list_revisions](#config.list_revisions)
   * [Config.lock_deployment](#config.lock_deployment)
@@ -62,6 +67,23 @@ __Usage:__
 
 
 
+### Config.create_preview
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.create_preview.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.create_preview.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-config/samples/generated/v1/config.create_preview.js`
+
+
+-----
+
+
+
+
 ### Config.delete_deployment
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.delete_deployment.js).
@@ -72,6 +94,23 @@ __Usage:__
 
 
 `node packages/google-cloud-config/samples/generated/v1/config.delete_deployment.js`
+
+
+-----
+
+
+
+
+### Config.delete_preview
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.delete_preview.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.delete_preview.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-config/samples/generated/v1/config.delete_preview.js`
 
 
 -----
@@ -130,6 +169,23 @@ __Usage:__
 
 
 
+### Config.export_preview_result
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_preview_result.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.export_preview_result.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-config/samples/generated/v1/config.export_preview_result.js`
+
+
+-----
+
+
+
+
 ### Config.export_revision_statefile
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_revision_statefile.js).
@@ -157,6 +213,23 @@ __Usage:__
 
 
 `node packages/google-cloud-config/samples/generated/v1/config.get_deployment.js`
+
+
+-----
+
+
+
+
+### Config.get_preview
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_preview.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_preview.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-config/samples/generated/v1/config.get_preview.js`
 
 
 -----
@@ -225,6 +298,23 @@ __Usage:__
 
 
 `node packages/google-cloud-config/samples/generated/v1/config.list_deployments.js`
+
+
+-----
+
+
+
+
+### Config.list_previews
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_previews.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_previews.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-config/samples/generated/v1/config.list_previews.js`
 
 
 -----

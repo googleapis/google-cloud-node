@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.6.0...batch-v1.7.0) (2024-01-15)
+
+
+### Features
+
+* [batch] Add `tags` field in Job's AllocationPolicy field in v1alpha ([#4934](https://github.com/googleapis/google-cloud-node/issues/4934)) ([7c5e95c](https://github.com/googleapis/google-cloud-node/commit/7c5e95ca0d44890b35416de97d7b2096eeb16178))
+
 ## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.5.0...batch-v1.6.0) (2023-11-30)
 
 

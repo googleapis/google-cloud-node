@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.1.1...config-v0.2.0) (2024-01-15)
+
+
+### Features
+
+* [infra-manager] added Terraform Plan ([#4946](https://github.com/googleapis/google-cloud-node/issues/4946)) ([9c5c163](https://github.com/googleapis/google-cloud-node/commit/9c5c163714a11c4fe2484dbcbdd149ee0507f0d2))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/config-v0.1.0...config-v0.1.1) (2023-09-20)
 
 

@@ -4,6 +4,176 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "0be8b3e3b2700f423eac094958d2c2e53500ff95",
+          "message": "[texttospeech] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4916"
+          ]
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "5075b12a-b4d8-4edb-bd49-404260900e12",
+      "createTime": "2024-01-15T14:27:36.124Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bb3a35760b4aebc0218f81be6b79b9e0a22b1857",
+          "message": "[sql] added value `UNABLE_TO_VERIFY_DEFINERS` to enum `SqlExternalSyncSettingErrorType`",
+          "issues": [
+            "4933"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "d4f678df-139f-45f7-82ae-d97552a72f7a",
+      "createTime": "2024-01-15T14:27:36.088Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9f64b0d1f5af73aaa4369bbf000a71605fd0d5b2",
+          "message": "[recaptchaenterprise] add Storage Control API",
+          "issues": [
+            "4927"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "3c72003d-44bd-4f80-840d-23b840b47650",
+      "createTime": "2024-01-15T14:27:36.074Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d6163943c796278f130aa3c30b18a24f6a5ae2c2",
+          "message": "[oslogin] added field `ImportSshPublicKeyRequest.regions`",
+          "issues": [
+            "4932"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "cc1ec669-f39b-4cde-9a28-45940180681a",
+      "createTime": "2024-01-15T14:27:36.065Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fcbf005f75cfd034dcc26e1d06d6ec523675fd47",
+          "message": "[deploy] Add stable cutback duration configuration to the k8s gateway service mesh deployment strategy. This allows configuring the amount of time to migrate traffic back to the original Service in the stable phase",
+          "issues": [
+            "4921"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "55f1d787-3e02-4970-acb7-feb31e7ab648",
+      "createTime": "2024-01-15T14:27:36.055Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07059f7a849793696a88af1ab73ee143420441b5",
+          "message": "[datacatalog] Change field behavior of the property \"name\" to IDENTIFIER",
+          "issues": [
+            "4925"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "56d68cad-fcdf-424f-90f7-8a6706ac5144",
+      "createTime": "2024-01-15T14:27:36.046Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9c5c163714a11c4fe2484dbcbdd149ee0507f0d2",
+          "message": "[infra-manager] added Terraform Plan",
+          "issues": [
+            "4946"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "2e7452dc-3844-419b-9879-f71ef25b2ccc",
+      "createTime": "2024-01-15T14:27:36.037Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "86e08494011b7f4e147906087c29e35fbb940cf5",
+          "message": "[billing] add new types QueryMode, QueryPlan, ResultSetStats",
+          "issues": [
+            "4924"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "5346aaa8-6246-488d-a91c-88ccff53d5af",
+      "createTime": "2024-01-15T14:27:36.028Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7c5e95ca0d44890b35416de97d7b2096eeb16178",
+          "message": "[batch] Add `tags` field in Job's AllocationPolicy field in v1alpha",
+          "issues": [
+            "4934"
+          ]
+        }
+      ],
+      "version": "1.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "d4f9ac68-e645-4f78-9bb4-b9a5c4132c90",
+      "createTime": "2024-01-15T14:27:36.019Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "20b0f7c4769dbca009922327d9704dd5dbbdc7f1",
+          "message": "[asset] add new types QueryMode, QueryPlan, ResultSetStats",
+          "issues": [
+            "4923"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "96dc4a50-7970-4d09-90c9-c0b7e6fced8d",
+      "createTime": "2024-01-15T14:27:36.008Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "557011f7de32dfb6f500364a5317a6d1063362f4",
           "message": "Add initial files for google.api.cloudquotas.v1",
@@ -20984,5 +21154,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-01-05T01:04:46.626Z"
+  "updateTime": "2024-01-15T14:27:36.124Z"
 }

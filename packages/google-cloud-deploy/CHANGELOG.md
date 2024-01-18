@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.3.0...deploy-v3.4.0) (2024-01-15)
+
+
+### Features
+
+* [deploy] Add stable cutback duration configuration to the k8s gateway service mesh deployment strategy. This allows configuring the amount of time to migrate traffic back to the original Service in the stable phase ([#4921](https://github.com/googleapis/google-cloud-node/issues/4921)) ([fcbf005](https://github.com/googleapis/google-cloud-node/commit/fcbf005f75cfd034dcc26e1d06d6ec523675fd47))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.2.0...deploy-v3.3.0) (2023-12-05)
 
 

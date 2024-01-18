@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/billing-v4.1.0...billing-v4.2.0) (2024-01-15)
+
+
+### Features
+
+* [billing] add new types QueryMode, QueryPlan, ResultSetStats ([#4924](https://github.com/googleapis/google-cloud-node/issues/4924)) ([86e0849](https://github.com/googleapis/google-cloud-node/commit/86e08494011b7f4e147906087c29e35fbb940cf5))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/billing-v4.0.2...billing-v4.1.0) (2024-01-05)
 
 
