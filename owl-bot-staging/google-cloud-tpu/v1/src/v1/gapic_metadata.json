@@ -1,0 +1,145 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.tpu.v1",
+  "libraryPackage": "@google-cloud/tpu",
+  "services": {
+    "Tpu": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TpuClient",
+          "rpcs": {
+            "GetNode": {
+              "methods": [
+                "getNode"
+              ]
+            },
+            "GetTensorFlowVersion": {
+              "methods": [
+                "getTensorFlowVersion"
+              ]
+            },
+            "GetAcceleratorType": {
+              "methods": [
+                "getAcceleratorType"
+              ]
+            },
+            "CreateNode": {
+              "methods": [
+                "createNode"
+              ]
+            },
+            "DeleteNode": {
+              "methods": [
+                "deleteNode"
+              ]
+            },
+            "ReimageNode": {
+              "methods": [
+                "reimageNode"
+              ]
+            },
+            "StopNode": {
+              "methods": [
+                "stopNode"
+              ]
+            },
+            "StartNode": {
+              "methods": [
+                "startNode"
+              ]
+            },
+            "ListNodes": {
+              "methods": [
+                "listNodes",
+                "listNodesStream",
+                "listNodesAsync"
+              ]
+            },
+            "ListTensorFlowVersions": {
+              "methods": [
+                "listTensorFlowVersions",
+                "listTensorFlowVersionsStream",
+                "listTensorFlowVersionsAsync"
+              ]
+            },
+            "ListAcceleratorTypes": {
+              "methods": [
+                "listAcceleratorTypes",
+                "listAcceleratorTypesStream",
+                "listAcceleratorTypesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TpuClient",
+          "rpcs": {
+            "GetNode": {
+              "methods": [
+                "getNode"
+              ]
+            },
+            "GetTensorFlowVersion": {
+              "methods": [
+                "getTensorFlowVersion"
+              ]
+            },
+            "GetAcceleratorType": {
+              "methods": [
+                "getAcceleratorType"
+              ]
+            },
+            "CreateNode": {
+              "methods": [
+                "createNode"
+              ]
+            },
+            "DeleteNode": {
+              "methods": [
+                "deleteNode"
+              ]
+            },
+            "ReimageNode": {
+              "methods": [
+                "reimageNode"
+              ]
+            },
+            "StopNode": {
+              "methods": [
+                "stopNode"
+              ]
+            },
+            "StartNode": {
+              "methods": [
+                "startNode"
+              ]
+            },
+            "ListNodes": {
+              "methods": [
+                "listNodes",
+                "listNodesStream",
+                "listNodesAsync"
+              ]
+            },
+            "ListTensorFlowVersions": {
+              "methods": [
+                "listTensorFlowVersions",
+                "listTensorFlowVersionsStream",
+                "listTensorFlowVersionsAsync"
+              ]
+            },
+            "ListAcceleratorTypes": {
+              "methods": [
+                "listAcceleratorTypes",
+                "listAcceleratorTypesStream",
+                "listAcceleratorTypesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.video.stitcher.v1",
+  "libraryPackage": "@google-cloud/video-stitcher",
+  "services": {
+    "VideoStitcherService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VideoStitcherServiceClient",
+          "rpcs": {
+            "GetCdnKey": {
+              "methods": [
+                "getCdnKey"
+              ]
+            },
+            "CreateVodSession": {
+              "methods": [
+                "createVodSession"
+              ]
+            },
+            "GetVodSession": {
+              "methods": [
+                "getVodSession"
+              ]
+            },
+            "GetVodStitchDetail": {
+              "methods": [
+                "getVodStitchDetail"
+              ]
+            },
+            "GetVodAdTagDetail": {
+              "methods": [
+                "getVodAdTagDetail"
+              ]
+            },
+            "GetLiveAdTagDetail": {
+              "methods": [
+                "getLiveAdTagDetail"
+              ]
+            },
+            "GetSlate": {
+              "methods": [
+                "getSlate"
+              ]
+            },
+            "CreateLiveSession": {
+              "methods": [
+                "createLiveSession"
+              ]
+            },
+            "GetLiveSession": {
+              "methods": [
+                "getLiveSession"
+              ]
+            },
+            "GetLiveConfig": {
+              "methods": [
+                "getLiveConfig"
+              ]
+            },
+            "CreateCdnKey": {
+              "methods": [
+                "createCdnKey"
+              ]
+            },
+            "DeleteCdnKey": {
+              "methods": [
+                "deleteCdnKey"
+              ]
+            },
+            "UpdateCdnKey": {
+              "methods": [
+                "updateCdnKey"
+              ]
+            },
+            "CreateSlate": {
+              "methods": [
+                "createSlate"
+              ]
+            },
+            "UpdateSlate": {
+              "methods": [
+                "updateSlate"
+              ]
+            },
+            "DeleteSlate": {
+              "methods": [
+                "deleteSlate"
+              ]
+            },
+            "CreateLiveConfig": {
+              "methods": [
+                "createLiveConfig"
+              ]
+            },
+            "DeleteLiveConfig": {
+              "methods": [
+                "deleteLiveConfig"
+              ]
+            },
+            "ListCdnKeys": {
+              "methods": [
+                "listCdnKeys",
+                "listCdnKeysStream",
+                "listCdnKeysAsync"
+              ]
+            },
+            "ListVodStitchDetails": {
+              "methods": [
+                "listVodStitchDetails",
+                "listVodStitchDetailsStream",
+                "listVodStitchDetailsAsync"
+              ]
+            },
+            "ListVodAdTagDetails": {
+              "methods": [
+                "listVodAdTagDetails",
+                "listVodAdTagDetailsStream",
+                "listVodAdTagDetailsAsync"
+              ]
+            },
+            "ListLiveAdTagDetails": {
+              "methods": [
+                "listLiveAdTagDetails",
+                "listLiveAdTagDetailsStream",
+                "listLiveAdTagDetailsAsync"
+              ]
+            },
+            "ListSlates": {
+              "methods": [
+                "listSlates",
+                "listSlatesStream",
+                "listSlatesAsync"
+              ]
+            },
+            "ListLiveConfigs": {
+              "methods": [
+                "listLiveConfigs",
+                "listLiveConfigsStream",
+                "listLiveConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VideoStitcherServiceClient",
+          "rpcs": {
+            "GetCdnKey": {
+              "methods": [
+                "getCdnKey"
+              ]
+            },
+            "CreateVodSession": {
+              "methods": [
+                "createVodSession"
+              ]
+            },
+            "GetVodSession": {
+              "methods": [
+                "getVodSession"
+              ]
+            },
+            "GetVodStitchDetail": {
+              "methods": [
+                "getVodStitchDetail"
+              ]
+            },
+            "GetVodAdTagDetail": {
+              "methods": [
+                "getVodAdTagDetail"
+              ]
+            },
+            "GetLiveAdTagDetail": {
+              "methods": [
+                "getLiveAdTagDetail"
+              ]
+            },
+            "GetSlate": {
+              "methods": [
+                "getSlate"
+              ]
+            },
+            "CreateLiveSession": {
+              "methods": [
+                "createLiveSession"
+              ]
+            },
+            "GetLiveSession": {
+              "methods": [
+                "getLiveSession"
+              ]
+            },
+            "GetLiveConfig": {
+              "methods": [
+                "getLiveConfig"
+              ]
+            },
+            "CreateCdnKey": {
+              "methods": [
+                "createCdnKey"
+              ]
+            },
+            "DeleteCdnKey": {
+              "methods": [
+                "deleteCdnKey"
+              ]
+            },
+            "UpdateCdnKey": {
+              "methods": [
+                "updateCdnKey"
+              ]
+            },
+            "CreateSlate": {
+              "methods": [
+                "createSlate"
+              ]
+            },
+            "UpdateSlate": {
+              "methods": [
+                "updateSlate"
+              ]
+            },
+            "DeleteSlate": {
+              "methods": [
+                "deleteSlate"
+              ]
+            },
+            "CreateLiveConfig": {
+              "methods": [
+                "createLiveConfig"
+              ]
+            },
+            "DeleteLiveConfig": {
+              "methods": [
+                "deleteLiveConfig"
+              ]
+            },
+            "ListCdnKeys": {
+              "methods": [
+                "listCdnKeys",
+                "listCdnKeysStream",
+                "listCdnKeysAsync"
+              ]
+            },
+            "ListVodStitchDetails": {
+              "methods": [
+                "listVodStitchDetails",
+                "listVodStitchDetailsStream",
+                "listVodStitchDetailsAsync"
+              ]
+            },
+            "ListVodAdTagDetails": {
+              "methods": [
+                "listVodAdTagDetails",
+                "listVodAdTagDetailsStream",
+                "listVodAdTagDetailsAsync"
+              ]
+            },
+            "ListLiveAdTagDetails": {
+              "methods": [
+                "listLiveAdTagDetails",
+                "listLiveAdTagDetailsStream",
+                "listLiveAdTagDetailsAsync"
+              ]
+            },
+            "ListSlates": {
+              "methods": [
+                "listSlates",
+                "listSlatesStream",
+                "listSlatesAsync"
+              ]
+            },
+            "ListLiveConfigs": {
+              "methods": [
+                "listLiveConfigs",
+                "listLiveConfigsStream",
+                "listLiveConfigsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
