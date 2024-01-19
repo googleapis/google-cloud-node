@@ -1,0 +1,107 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.scheduler.v1beta1",
+  "libraryPackage": "@google-cloud/scheduler",
+  "services": {
+    "CloudScheduler": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudSchedulerClient",
+          "rpcs": {
+            "GetJob": {
+              "methods": [
+                "getJob"
+              ]
+            },
+            "CreateJob": {
+              "methods": [
+                "createJob"
+              ]
+            },
+            "UpdateJob": {
+              "methods": [
+                "updateJob"
+              ]
+            },
+            "DeleteJob": {
+              "methods": [
+                "deleteJob"
+              ]
+            },
+            "PauseJob": {
+              "methods": [
+                "pauseJob"
+              ]
+            },
+            "ResumeJob": {
+              "methods": [
+                "resumeJob"
+              ]
+            },
+            "RunJob": {
+              "methods": [
+                "runJob"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "listJobs",
+                "listJobsStream",
+                "listJobsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudSchedulerClient",
+          "rpcs": {
+            "GetJob": {
+              "methods": [
+                "getJob"
+              ]
+            },
+            "CreateJob": {
+              "methods": [
+                "createJob"
+              ]
+            },
+            "UpdateJob": {
+              "methods": [
+                "updateJob"
+              ]
+            },
+            "DeleteJob": {
+              "methods": [
+                "deleteJob"
+              ]
+            },
+            "PauseJob": {
+              "methods": [
+                "pauseJob"
+              ]
+            },
+            "ResumeJob": {
+              "methods": [
+                "resumeJob"
+              ]
+            },
+            "RunJob": {
+              "methods": [
+                "runJob"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "listJobs",
+                "listJobsStream",
+                "listJobsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
