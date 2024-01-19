@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const cluster = require('@google-cloud/redis-cluster');
+const cluster = require('@google-cloud/cluster');
 
 function main() {
   const cloudRedisClusterClient = new cluster.CloudRedisClusterClient();

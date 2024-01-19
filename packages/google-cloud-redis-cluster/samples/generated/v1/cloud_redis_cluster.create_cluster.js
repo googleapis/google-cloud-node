@@ -54,7 +54,7 @@ function main(parent, clusterId, cluster) {
   // const requestId = 'abc123'
 
   // Imports the Cluster library
-  const {CloudRedisClusterClient} = require('@google-cloud/redis-cluster').v1;
+  const {CloudRedisClusterClient} = require('@google-cloud/cluster').v1;
 
   // Instantiates a client
   const clusterClient = new CloudRedisClusterClient();
