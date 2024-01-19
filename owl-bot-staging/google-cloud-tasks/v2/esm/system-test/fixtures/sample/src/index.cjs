@@ -16,11 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v2beta2 from './v2beta2/index.js';
-const CloudTasksClient = v2beta2.CloudTasksClient;
-type CloudTasksClient = v2beta2.CloudTasksClient;
-export {v2beta2, CloudTasksClient};
-export default {v2beta2, CloudTasksClient};
-// @ts-ignore
-import * as protos from '../../protos/protos.js';
-export {protos}
+
+/* eslint-disable node/no-missing-require, no-unused-vars, no-undef */
+const tasks = require('@google-cloud/tasks');
+
+function main() {
+  const cloudTasksClient = new tasks.CloudTasksClient();
+}
+
+main();

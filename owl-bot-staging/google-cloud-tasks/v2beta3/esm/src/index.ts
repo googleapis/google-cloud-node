@@ -22,5 +22,5 @@ type CloudTasksClient = v2beta3.CloudTasksClient;
 export {v2beta3, CloudTasksClient};
 export default {v2beta3, CloudTasksClient};
 // @ts-ignore
-import type * as protos from '../../protos/protos.js';
+import * as protos from '../../protos/protos.js';
 export {protos}
