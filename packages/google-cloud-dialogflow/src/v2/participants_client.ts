@@ -342,7 +342,8 @@ export class ParticipantsClient {
     this.descriptors.stream = {
       streamingAnalyzeContent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
-        !!opts.fallback
+        !!opts.fallback,
+        /* gaxStreamingRetries: */ true
       ),
     };
 
