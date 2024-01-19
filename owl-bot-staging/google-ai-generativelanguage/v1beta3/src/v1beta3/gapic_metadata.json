@@ -1,0 +1,267 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.ai.generativelanguage.v1beta3",
+  "libraryPackage": "@google-ai/generativelanguage",
+  "services": {
+    "DiscussService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DiscussServiceClient",
+          "rpcs": {
+            "GenerateMessage": {
+              "methods": [
+                "generateMessage"
+              ]
+            },
+            "CountMessageTokens": {
+              "methods": [
+                "countMessageTokens"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DiscussServiceClient",
+          "rpcs": {
+            "GenerateMessage": {
+              "methods": [
+                "generateMessage"
+              ]
+            },
+            "CountMessageTokens": {
+              "methods": [
+                "countMessageTokens"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ModelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "GetTunedModel": {
+              "methods": [
+                "getTunedModel"
+              ]
+            },
+            "UpdateTunedModel": {
+              "methods": [
+                "updateTunedModel"
+              ]
+            },
+            "DeleteTunedModel": {
+              "methods": [
+                "deleteTunedModel"
+              ]
+            },
+            "CreateTunedModel": {
+              "methods": [
+                "createTunedModel"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels",
+                "listModelsStream",
+                "listModelsAsync"
+              ]
+            },
+            "ListTunedModels": {
+              "methods": [
+                "listTunedModels",
+                "listTunedModelsStream",
+                "listTunedModelsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ModelServiceClient",
+          "rpcs": {
+            "GetModel": {
+              "methods": [
+                "getModel"
+              ]
+            },
+            "GetTunedModel": {
+              "methods": [
+                "getTunedModel"
+              ]
+            },
+            "UpdateTunedModel": {
+              "methods": [
+                "updateTunedModel"
+              ]
+            },
+            "DeleteTunedModel": {
+              "methods": [
+                "deleteTunedModel"
+              ]
+            },
+            "CreateTunedModel": {
+              "methods": [
+                "createTunedModel"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "listModels",
+                "listModelsStream",
+                "listModelsAsync"
+              ]
+            },
+            "ListTunedModels": {
+              "methods": [
+                "listTunedModels",
+                "listTunedModelsStream",
+                "listTunedModelsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PermissionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PermissionServiceClient",
+          "rpcs": {
+            "CreatePermission": {
+              "methods": [
+                "createPermission"
+              ]
+            },
+            "GetPermission": {
+              "methods": [
+                "getPermission"
+              ]
+            },
+            "UpdatePermission": {
+              "methods": [
+                "updatePermission"
+              ]
+            },
+            "DeletePermission": {
+              "methods": [
+                "deletePermission"
+              ]
+            },
+            "TransferOwnership": {
+              "methods": [
+                "transferOwnership"
+              ]
+            },
+            "ListPermissions": {
+              "methods": [
+                "listPermissions",
+                "listPermissionsStream",
+                "listPermissionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PermissionServiceClient",
+          "rpcs": {
+            "CreatePermission": {
+              "methods": [
+                "createPermission"
+              ]
+            },
+            "GetPermission": {
+              "methods": [
+                "getPermission"
+              ]
+            },
+            "UpdatePermission": {
+              "methods": [
+                "updatePermission"
+              ]
+            },
+            "DeletePermission": {
+              "methods": [
+                "deletePermission"
+              ]
+            },
+            "TransferOwnership": {
+              "methods": [
+                "transferOwnership"
+              ]
+            },
+            "ListPermissions": {
+              "methods": [
+                "listPermissions",
+                "listPermissionsStream",
+                "listPermissionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TextService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TextServiceClient",
+          "rpcs": {
+            "GenerateText": {
+              "methods": [
+                "generateText"
+              ]
+            },
+            "EmbedText": {
+              "methods": [
+                "embedText"
+              ]
+            },
+            "BatchEmbedText": {
+              "methods": [
+                "batchEmbedText"
+              ]
+            },
+            "CountTextTokens": {
+              "methods": [
+                "countTextTokens"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TextServiceClient",
+          "rpcs": {
+            "GenerateText": {
+              "methods": [
+                "generateText"
+              ]
+            },
+            "EmbedText": {
+              "methods": [
+                "embedText"
+              ]
+            },
+            "BatchEmbedText": {
+              "methods": [
+                "batchEmbedText"
+              ]
+            },
+            "CountTextTokens": {
+              "methods": [
+                "countTextTokens"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
