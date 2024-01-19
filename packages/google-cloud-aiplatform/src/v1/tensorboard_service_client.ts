@@ -372,7 +372,8 @@ export class TensorboardServiceClient {
     this.descriptors.stream = {
       readTensorboardBlobData: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
-        !!opts.fallback
+        !!opts.fallback,
+        /* gaxStreamingRetries: */ true
       ),
     };
 
