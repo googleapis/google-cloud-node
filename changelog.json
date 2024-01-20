@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "7b062d5c5137f3493530775527144a1861496c47",
+          "message": "Add initial files for google.cloud.redis.cluster.v1",
+          "issues": [
+            "4957"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "ad2edaa6-2419-4a06-9a27-14116af5c269",
+      "createTime": "2024-01-18T21:25:21.465Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "0be8b3e3b2700f423eac094958d2c2e53500ff95",
           "message": "[texttospeech] correct long audio synthesis HTTP binding",
@@ -21154,5 +21171,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-01-15T14:27:36.124Z"
+  "updateTime": "2024-01-18T21:25:21.465Z"
 }
