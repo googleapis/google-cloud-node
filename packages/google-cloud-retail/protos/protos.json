@@ -4625,6 +4625,230 @@
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/catalogs/{catalog}/experiments/{experiment}"
                   },
                   "nested": {
+                    "AnalyticsService": {
+                      "options": {
+                        "(google.api.default_host)": "retail.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ExportAnalyticsMetrics": {
+                          "requestType": "ExportAnalyticsMetricsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2alpha/{catalog=projects/*/locations/*/catalogs/*}:exportAnalyticsMetrics",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.retail.v2alpha.ExportAnalyticsMetricsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.retail.v2alpha.ExportMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2alpha/{catalog=projects/*/locations/*/catalogs/*}:exportAnalyticsMetrics",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.retail.v2alpha.ExportAnalyticsMetricsResponse",
+                                "metadata_type": "google.cloud.retail.v2alpha.ExportMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "OutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination",
+                            "bigqueryDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1
+                        },
+                        "bigqueryDestination": {
+                          "type": "BigQueryDestination",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "GcsDestination": {
+                          "fields": {
+                            "outputUriPrefix": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "BigQueryDestination": {
+                          "fields": {
+                            "datasetId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "tableIdPrefix": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "tableType": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExportErrorsConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsPrefix"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsPrefix": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ExportAnalyticsMetricsRequest": {
+                      "fields": {
+                        "catalog": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outputConfig": {
+                          "type": "OutputConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExportMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ExportProductsResponse": {
+                      "fields": {
+                        "errorSamples": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        },
+                        "errorsConfig": {
+                          "type": "ExportErrorsConfig",
+                          "id": 2
+                        },
+                        "outputResult": {
+                          "type": "OutputResult",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExportUserEventsResponse": {
+                      "fields": {
+                        "errorSamples": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        },
+                        "errorsConfig": {
+                          "type": "ExportErrorsConfig",
+                          "id": 2
+                        },
+                        "outputResult": {
+                          "type": "OutputResult",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExportAnalyticsMetricsResponse": {
+                      "fields": {
+                        "errorSamples": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        },
+                        "errorsConfig": {
+                          "type": "ExportErrorsConfig",
+                          "id": 2
+                        },
+                        "outputResult": {
+                          "type": "OutputResult",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "OutputResult": {
+                      "fields": {
+                        "bigqueryResult": {
+                          "rule": "repeated",
+                          "type": "BigQueryOutputResult",
+                          "id": 1
+                        },
+                        "gcsResult": {
+                          "rule": "repeated",
+                          "type": "GcsOutputResult",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BigQueryOutputResult": {
+                      "fields": {
+                        "datasetId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tableId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GcsOutputResult": {
+                      "fields": {
+                        "outputUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "ProductLevelConfig": {
                       "fields": {
                         "ingestionProductType": {
@@ -7590,101 +7814,6 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
-                        }
-                      }
-                    },
-                    "ExportErrorsConfig": {
-                      "oneofs": {
-                        "destination": {
-                          "oneof": [
-                            "gcsPrefix"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsPrefix": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ExportMetadata": {
-                      "fields": {
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ExportProductsResponse": {
-                      "fields": {
-                        "errorSamples": {
-                          "rule": "repeated",
-                          "type": "google.rpc.Status",
-                          "id": 1
-                        },
-                        "errorsConfig": {
-                          "type": "ExportErrorsConfig",
-                          "id": 2
-                        },
-                        "outputResult": {
-                          "type": "OutputResult",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ExportUserEventsResponse": {
-                      "fields": {
-                        "errorSamples": {
-                          "rule": "repeated",
-                          "type": "google.rpc.Status",
-                          "id": 1
-                        },
-                        "errorsConfig": {
-                          "type": "ExportErrorsConfig",
-                          "id": 2
-                        },
-                        "outputResult": {
-                          "type": "OutputResult",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "OutputResult": {
-                      "fields": {
-                        "bigqueryResult": {
-                          "rule": "repeated",
-                          "type": "BigQueryOutputResult",
-                          "id": 1
-                        },
-                        "gcsResult": {
-                          "rule": "repeated",
-                          "type": "GcsOutputResult",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BigQueryOutputResult": {
-                      "fields": {
-                        "datasetId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "tableId": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GcsOutputResult": {
-                      "fields": {
-                        "outputUri": {
-                          "type": "string",
-                          "id": 1
                         }
                       }
                     },
