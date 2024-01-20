@@ -2301,6 +2301,11 @@
                       "oneof": [
                         "desiredEnableFqdnNetworkPolicy"
                       ]
+                    },
+                    "_desiredInTransitEncryptionConfig": {
+                      "oneof": [
+                        "desiredInTransitEncryptionConfig"
+                      ]
                     }
                   },
                   "fields": {
@@ -2510,6 +2515,13 @@
                     "desiredNodePoolAutoConfigResourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 136
+                    },
+                    "desiredInTransitEncryptionConfig": {
+                      "type": "InTransitEncryptionConfig",
+                      "id": 137,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -4722,6 +4734,11 @@
                       "oneof": [
                         "enableFqdnNetworkPolicy"
                       ]
+                    },
+                    "_inTransitEncryptionConfig": {
+                      "oneof": [
+                        "inTransitEncryptionConfig"
+                      ]
                     }
                   },
                   "fields": {
@@ -4776,6 +4793,13 @@
                     "enableFqdnNetworkPolicy": {
                       "type": "bool",
                       "id": 19,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "inTransitEncryptionConfig": {
+                      "type": "InTransitEncryptionConfig",
+                      "id": 20,
                       "options": {
                         "proto3_optional": true
                       }
@@ -5706,6 +5730,13 @@
                         "ENTERPRISE": 2
                       }
                     }
+                  }
+                },
+                "InTransitEncryptionConfig": {
+                  "values": {
+                    "IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED": 0,
+                    "IN_TRANSIT_ENCRYPTION_DISABLED": 1,
+                    "IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT": 2
                   }
                 }
               }
