@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import {
+  AnalyticsServiceClient,
   CatalogServiceClient,
   CompletionServiceClient,
   ControlServiceClient,
@@ -29,6 +30,9 @@ import {
 } from '@google-cloud/retail';
 
 // check that the client class type name can be used
+function doStuffWithAnalyticsServiceClient(client: AnalyticsServiceClient) {
+  client.close();
+}
 function doStuffWithCatalogServiceClient(client: CatalogServiceClient) {
   client.close();
 }
@@ -60,6 +64,9 @@ function doStuffWithUserEventServiceClient(client: UserEventServiceClient) {
 }
 
 function main() {
+  // check that the client instance can be created
+  const analyticsServiceClient = new AnalyticsServiceClient();
+  doStuffWithAnalyticsServiceClient(analyticsServiceClient);
   // check that the client instance can be created
   const catalogServiceClient = new CatalogServiceClient();
   doStuffWithCatalogServiceClient(catalogServiceClient);

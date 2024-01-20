@@ -20,6 +20,8 @@ import * as v2 from './v2';
 import * as v2alpha from './v2alpha';
 import * as v2beta from './v2beta';
 
+const AnalyticsServiceClient = v2beta.AnalyticsServiceClient;
+type AnalyticsServiceClient = v2beta.AnalyticsServiceClient;
 const CatalogServiceClient = v2beta.CatalogServiceClient;
 type CatalogServiceClient = v2beta.CatalogServiceClient;
 const CompletionServiceClient = v2beta.CompletionServiceClient;
@@ -43,6 +45,7 @@ export {
   v2,
   v2alpha,
   v2beta,
+  AnalyticsServiceClient,
   CatalogServiceClient,
   CompletionServiceClient,
   ControlServiceClient,
@@ -57,6 +60,7 @@ export default {
   v2,
   v2alpha,
   v2beta,
+  AnalyticsServiceClient,
   CatalogServiceClient,
   CompletionServiceClient,
   ControlServiceClient,

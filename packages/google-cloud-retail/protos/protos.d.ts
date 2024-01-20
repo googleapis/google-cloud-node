@@ -38379,6 +38379,1308 @@ export namespace google {
             /** Namespace v2beta. */
             namespace v2beta {
 
+                /** Represents an AnalyticsService */
+                class AnalyticsService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new AnalyticsService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new AnalyticsService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AnalyticsService;
+
+                    /**
+                     * Calls ExportAnalyticsMetrics.
+                     * @param request ExportAnalyticsMetricsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportAnalyticsMetrics(request: google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest, callback: google.cloud.retail.v2beta.AnalyticsService.ExportAnalyticsMetricsCallback): void;
+
+                    /**
+                     * Calls ExportAnalyticsMetrics.
+                     * @param request ExportAnalyticsMetricsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportAnalyticsMetrics(request: google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace AnalyticsService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.retail.v2beta.AnalyticsService|exportAnalyticsMetrics}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportAnalyticsMetricsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of an OutputConfig. */
+                interface IOutputConfig {
+
+                    /** OutputConfig gcsDestination */
+                    gcsDestination?: (google.cloud.retail.v2beta.OutputConfig.IGcsDestination|null);
+
+                    /** OutputConfig bigqueryDestination */
+                    bigqueryDestination?: (google.cloud.retail.v2beta.OutputConfig.IBigQueryDestination|null);
+                }
+
+                /** Represents an OutputConfig. */
+                class OutputConfig implements IOutputConfig {
+
+                    /**
+                     * Constructs a new OutputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IOutputConfig);
+
+                    /** OutputConfig gcsDestination. */
+                    public gcsDestination?: (google.cloud.retail.v2beta.OutputConfig.IGcsDestination|null);
+
+                    /** OutputConfig bigqueryDestination. */
+                    public bigqueryDestination?: (google.cloud.retail.v2beta.OutputConfig.IBigQueryDestination|null);
+
+                    /** OutputConfig destination. */
+                    public destination?: ("gcsDestination"|"bigqueryDestination");
+
+                    /**
+                     * Creates a new OutputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OutputConfig instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IOutputConfig): google.cloud.retail.v2beta.OutputConfig;
+
+                    /**
+                     * Encodes the specified OutputConfig message. Does not implicitly {@link google.cloud.retail.v2beta.OutputConfig.verify|verify} messages.
+                     * @param message OutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OutputConfig message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.OutputConfig.verify|verify} messages.
+                     * @param message OutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OutputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.OutputConfig;
+
+                    /**
+                     * Decodes an OutputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.OutputConfig;
+
+                    /**
+                     * Verifies an OutputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OutputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OutputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.OutputConfig;
+
+                    /**
+                     * Creates a plain object from an OutputConfig message. Also converts values to other types if specified.
+                     * @param message OutputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.OutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OutputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OutputConfig {
+
+                    /** Properties of a GcsDestination. */
+                    interface IGcsDestination {
+
+                        /** GcsDestination outputUriPrefix */
+                        outputUriPrefix?: (string|null);
+                    }
+
+                    /** Represents a GcsDestination. */
+                    class GcsDestination implements IGcsDestination {
+
+                        /**
+                         * Constructs a new GcsDestination.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.OutputConfig.IGcsDestination);
+
+                        /** GcsDestination outputUriPrefix. */
+                        public outputUriPrefix: string;
+
+                        /**
+                         * Creates a new GcsDestination instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsDestination instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.OutputConfig.IGcsDestination): google.cloud.retail.v2beta.OutputConfig.GcsDestination;
+
+                        /**
+                         * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.retail.v2beta.OutputConfig.GcsDestination.verify|verify} messages.
+                         * @param message GcsDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.OutputConfig.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.OutputConfig.GcsDestination.verify|verify} messages.
+                         * @param message GcsDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.OutputConfig.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.OutputConfig.GcsDestination;
+
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.OutputConfig.GcsDestination;
+
+                        /**
+                         * Verifies a GcsDestination message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsDestination
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.OutputConfig.GcsDestination;
+
+                        /**
+                         * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
+                         * @param message GcsDestination
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.OutputConfig.GcsDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsDestination to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BigQueryDestination. */
+                    interface IBigQueryDestination {
+
+                        /** BigQueryDestination datasetId */
+                        datasetId?: (string|null);
+
+                        /** BigQueryDestination tableIdPrefix */
+                        tableIdPrefix?: (string|null);
+
+                        /** BigQueryDestination tableType */
+                        tableType?: (string|null);
+                    }
+
+                    /** Represents a BigQueryDestination. */
+                    class BigQueryDestination implements IBigQueryDestination {
+
+                        /**
+                         * Constructs a new BigQueryDestination.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.retail.v2beta.OutputConfig.IBigQueryDestination);
+
+                        /** BigQueryDestination datasetId. */
+                        public datasetId: string;
+
+                        /** BigQueryDestination tableIdPrefix. */
+                        public tableIdPrefix: string;
+
+                        /** BigQueryDestination tableType. */
+                        public tableType: string;
+
+                        /**
+                         * Creates a new BigQueryDestination instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BigQueryDestination instance
+                         */
+                        public static create(properties?: google.cloud.retail.v2beta.OutputConfig.IBigQueryDestination): google.cloud.retail.v2beta.OutputConfig.BigQueryDestination;
+
+                        /**
+                         * Encodes the specified BigQueryDestination message. Does not implicitly {@link google.cloud.retail.v2beta.OutputConfig.BigQueryDestination.verify|verify} messages.
+                         * @param message BigQueryDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.retail.v2beta.OutputConfig.IBigQueryDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BigQueryDestination message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.OutputConfig.BigQueryDestination.verify|verify} messages.
+                         * @param message BigQueryDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.retail.v2beta.OutputConfig.IBigQueryDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BigQueryDestination message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BigQueryDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.OutputConfig.BigQueryDestination;
+
+                        /**
+                         * Decodes a BigQueryDestination message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BigQueryDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.OutputConfig.BigQueryDestination;
+
+                        /**
+                         * Verifies a BigQueryDestination message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BigQueryDestination message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BigQueryDestination
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.OutputConfig.BigQueryDestination;
+
+                        /**
+                         * Creates a plain object from a BigQueryDestination message. Also converts values to other types if specified.
+                         * @param message BigQueryDestination
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.retail.v2beta.OutputConfig.BigQueryDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BigQueryDestination to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BigQueryDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ExportErrorsConfig. */
+                interface IExportErrorsConfig {
+
+                    /** ExportErrorsConfig gcsPrefix */
+                    gcsPrefix?: (string|null);
+                }
+
+                /** Represents an ExportErrorsConfig. */
+                class ExportErrorsConfig implements IExportErrorsConfig {
+
+                    /**
+                     * Constructs a new ExportErrorsConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IExportErrorsConfig);
+
+                    /** ExportErrorsConfig gcsPrefix. */
+                    public gcsPrefix?: (string|null);
+
+                    /** ExportErrorsConfig destination. */
+                    public destination?: "gcsPrefix";
+
+                    /**
+                     * Creates a new ExportErrorsConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportErrorsConfig instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IExportErrorsConfig): google.cloud.retail.v2beta.ExportErrorsConfig;
+
+                    /**
+                     * Encodes the specified ExportErrorsConfig message. Does not implicitly {@link google.cloud.retail.v2beta.ExportErrorsConfig.verify|verify} messages.
+                     * @param message ExportErrorsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IExportErrorsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportErrorsConfig message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExportErrorsConfig.verify|verify} messages.
+                     * @param message ExportErrorsConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExportErrorsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportErrorsConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportErrorsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExportErrorsConfig;
+
+                    /**
+                     * Decodes an ExportErrorsConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportErrorsConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExportErrorsConfig;
+
+                    /**
+                     * Verifies an ExportErrorsConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportErrorsConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportErrorsConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExportErrorsConfig;
+
+                    /**
+                     * Creates a plain object from an ExportErrorsConfig message. Also converts values to other types if specified.
+                     * @param message ExportErrorsConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.ExportErrorsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportErrorsConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportErrorsConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportAnalyticsMetricsRequest. */
+                interface IExportAnalyticsMetricsRequest {
+
+                    /** ExportAnalyticsMetricsRequest catalog */
+                    catalog?: (string|null);
+
+                    /** ExportAnalyticsMetricsRequest outputConfig */
+                    outputConfig?: (google.cloud.retail.v2beta.IOutputConfig|null);
+
+                    /** ExportAnalyticsMetricsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents an ExportAnalyticsMetricsRequest. */
+                class ExportAnalyticsMetricsRequest implements IExportAnalyticsMetricsRequest {
+
+                    /**
+                     * Constructs a new ExportAnalyticsMetricsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest);
+
+                    /** ExportAnalyticsMetricsRequest catalog. */
+                    public catalog: string;
+
+                    /** ExportAnalyticsMetricsRequest outputConfig. */
+                    public outputConfig?: (google.cloud.retail.v2beta.IOutputConfig|null);
+
+                    /** ExportAnalyticsMetricsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ExportAnalyticsMetricsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportAnalyticsMetricsRequest instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest): google.cloud.retail.v2beta.ExportAnalyticsMetricsRequest;
+
+                    /**
+                     * Encodes the specified ExportAnalyticsMetricsRequest message. Does not implicitly {@link google.cloud.retail.v2beta.ExportAnalyticsMetricsRequest.verify|verify} messages.
+                     * @param message ExportAnalyticsMetricsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportAnalyticsMetricsRequest message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExportAnalyticsMetricsRequest.verify|verify} messages.
+                     * @param message ExportAnalyticsMetricsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExportAnalyticsMetricsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportAnalyticsMetricsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportAnalyticsMetricsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExportAnalyticsMetricsRequest;
+
+                    /**
+                     * Decodes an ExportAnalyticsMetricsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportAnalyticsMetricsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExportAnalyticsMetricsRequest;
+
+                    /**
+                     * Verifies an ExportAnalyticsMetricsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportAnalyticsMetricsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportAnalyticsMetricsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExportAnalyticsMetricsRequest;
+
+                    /**
+                     * Creates a plain object from an ExportAnalyticsMetricsRequest message. Also converts values to other types if specified.
+                     * @param message ExportAnalyticsMetricsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.ExportAnalyticsMetricsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportAnalyticsMetricsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportAnalyticsMetricsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportMetadata. */
+                interface IExportMetadata {
+
+                    /** ExportMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an ExportMetadata. */
+                class ExportMetadata implements IExportMetadata {
+
+                    /**
+                     * Constructs a new ExportMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IExportMetadata);
+
+                    /** ExportMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ExportMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportMetadata instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IExportMetadata): google.cloud.retail.v2beta.ExportMetadata;
+
+                    /**
+                     * Encodes the specified ExportMetadata message. Does not implicitly {@link google.cloud.retail.v2beta.ExportMetadata.verify|verify} messages.
+                     * @param message ExportMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IExportMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportMetadata message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExportMetadata.verify|verify} messages.
+                     * @param message ExportMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExportMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExportMetadata;
+
+                    /**
+                     * Decodes an ExportMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExportMetadata;
+
+                    /**
+                     * Verifies an ExportMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExportMetadata;
+
+                    /**
+                     * Creates a plain object from an ExportMetadata message. Also converts values to other types if specified.
+                     * @param message ExportMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.ExportMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportProductsResponse. */
+                interface IExportProductsResponse {
+
+                    /** ExportProductsResponse errorSamples */
+                    errorSamples?: (google.rpc.IStatus[]|null);
+
+                    /** ExportProductsResponse errorsConfig */
+                    errorsConfig?: (google.cloud.retail.v2beta.IExportErrorsConfig|null);
+
+                    /** ExportProductsResponse outputResult */
+                    outputResult?: (google.cloud.retail.v2beta.IOutputResult|null);
+                }
+
+                /** Represents an ExportProductsResponse. */
+                class ExportProductsResponse implements IExportProductsResponse {
+
+                    /**
+                     * Constructs a new ExportProductsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IExportProductsResponse);
+
+                    /** ExportProductsResponse errorSamples. */
+                    public errorSamples: google.rpc.IStatus[];
+
+                    /** ExportProductsResponse errorsConfig. */
+                    public errorsConfig?: (google.cloud.retail.v2beta.IExportErrorsConfig|null);
+
+                    /** ExportProductsResponse outputResult. */
+                    public outputResult?: (google.cloud.retail.v2beta.IOutputResult|null);
+
+                    /**
+                     * Creates a new ExportProductsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportProductsResponse instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IExportProductsResponse): google.cloud.retail.v2beta.ExportProductsResponse;
+
+                    /**
+                     * Encodes the specified ExportProductsResponse message. Does not implicitly {@link google.cloud.retail.v2beta.ExportProductsResponse.verify|verify} messages.
+                     * @param message ExportProductsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IExportProductsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportProductsResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExportProductsResponse.verify|verify} messages.
+                     * @param message ExportProductsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExportProductsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportProductsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportProductsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExportProductsResponse;
+
+                    /**
+                     * Decodes an ExportProductsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportProductsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExportProductsResponse;
+
+                    /**
+                     * Verifies an ExportProductsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportProductsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportProductsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExportProductsResponse;
+
+                    /**
+                     * Creates a plain object from an ExportProductsResponse message. Also converts values to other types if specified.
+                     * @param message ExportProductsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.ExportProductsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportProductsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportProductsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportUserEventsResponse. */
+                interface IExportUserEventsResponse {
+
+                    /** ExportUserEventsResponse errorSamples */
+                    errorSamples?: (google.rpc.IStatus[]|null);
+
+                    /** ExportUserEventsResponse errorsConfig */
+                    errorsConfig?: (google.cloud.retail.v2beta.IExportErrorsConfig|null);
+
+                    /** ExportUserEventsResponse outputResult */
+                    outputResult?: (google.cloud.retail.v2beta.IOutputResult|null);
+                }
+
+                /** Represents an ExportUserEventsResponse. */
+                class ExportUserEventsResponse implements IExportUserEventsResponse {
+
+                    /**
+                     * Constructs a new ExportUserEventsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IExportUserEventsResponse);
+
+                    /** ExportUserEventsResponse errorSamples. */
+                    public errorSamples: google.rpc.IStatus[];
+
+                    /** ExportUserEventsResponse errorsConfig. */
+                    public errorsConfig?: (google.cloud.retail.v2beta.IExportErrorsConfig|null);
+
+                    /** ExportUserEventsResponse outputResult. */
+                    public outputResult?: (google.cloud.retail.v2beta.IOutputResult|null);
+
+                    /**
+                     * Creates a new ExportUserEventsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportUserEventsResponse instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IExportUserEventsResponse): google.cloud.retail.v2beta.ExportUserEventsResponse;
+
+                    /**
+                     * Encodes the specified ExportUserEventsResponse message. Does not implicitly {@link google.cloud.retail.v2beta.ExportUserEventsResponse.verify|verify} messages.
+                     * @param message ExportUserEventsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IExportUserEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportUserEventsResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExportUserEventsResponse.verify|verify} messages.
+                     * @param message ExportUserEventsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExportUserEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportUserEventsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportUserEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExportUserEventsResponse;
+
+                    /**
+                     * Decodes an ExportUserEventsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportUserEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExportUserEventsResponse;
+
+                    /**
+                     * Verifies an ExportUserEventsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportUserEventsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportUserEventsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExportUserEventsResponse;
+
+                    /**
+                     * Creates a plain object from an ExportUserEventsResponse message. Also converts values to other types if specified.
+                     * @param message ExportUserEventsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.ExportUserEventsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportUserEventsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportUserEventsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportAnalyticsMetricsResponse. */
+                interface IExportAnalyticsMetricsResponse {
+
+                    /** ExportAnalyticsMetricsResponse errorSamples */
+                    errorSamples?: (google.rpc.IStatus[]|null);
+
+                    /** ExportAnalyticsMetricsResponse errorsConfig */
+                    errorsConfig?: (google.cloud.retail.v2beta.IExportErrorsConfig|null);
+
+                    /** ExportAnalyticsMetricsResponse outputResult */
+                    outputResult?: (google.cloud.retail.v2beta.IOutputResult|null);
+                }
+
+                /** Represents an ExportAnalyticsMetricsResponse. */
+                class ExportAnalyticsMetricsResponse implements IExportAnalyticsMetricsResponse {
+
+                    /**
+                     * Constructs a new ExportAnalyticsMetricsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse);
+
+                    /** ExportAnalyticsMetricsResponse errorSamples. */
+                    public errorSamples: google.rpc.IStatus[];
+
+                    /** ExportAnalyticsMetricsResponse errorsConfig. */
+                    public errorsConfig?: (google.cloud.retail.v2beta.IExportErrorsConfig|null);
+
+                    /** ExportAnalyticsMetricsResponse outputResult. */
+                    public outputResult?: (google.cloud.retail.v2beta.IOutputResult|null);
+
+                    /**
+                     * Creates a new ExportAnalyticsMetricsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportAnalyticsMetricsResponse instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse): google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse;
+
+                    /**
+                     * Encodes the specified ExportAnalyticsMetricsResponse message. Does not implicitly {@link google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse.verify|verify} messages.
+                     * @param message ExportAnalyticsMetricsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportAnalyticsMetricsResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse.verify|verify} messages.
+                     * @param message ExportAnalyticsMetricsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExportAnalyticsMetricsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportAnalyticsMetricsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportAnalyticsMetricsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse;
+
+                    /**
+                     * Decodes an ExportAnalyticsMetricsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportAnalyticsMetricsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse;
+
+                    /**
+                     * Verifies an ExportAnalyticsMetricsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportAnalyticsMetricsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportAnalyticsMetricsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse;
+
+                    /**
+                     * Creates a plain object from an ExportAnalyticsMetricsResponse message. Also converts values to other types if specified.
+                     * @param message ExportAnalyticsMetricsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.ExportAnalyticsMetricsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportAnalyticsMetricsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportAnalyticsMetricsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OutputResult. */
+                interface IOutputResult {
+
+                    /** OutputResult bigqueryResult */
+                    bigqueryResult?: (google.cloud.retail.v2beta.IBigQueryOutputResult[]|null);
+
+                    /** OutputResult gcsResult */
+                    gcsResult?: (google.cloud.retail.v2beta.IGcsOutputResult[]|null);
+                }
+
+                /** Represents an OutputResult. */
+                class OutputResult implements IOutputResult {
+
+                    /**
+                     * Constructs a new OutputResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IOutputResult);
+
+                    /** OutputResult bigqueryResult. */
+                    public bigqueryResult: google.cloud.retail.v2beta.IBigQueryOutputResult[];
+
+                    /** OutputResult gcsResult. */
+                    public gcsResult: google.cloud.retail.v2beta.IGcsOutputResult[];
+
+                    /**
+                     * Creates a new OutputResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OutputResult instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IOutputResult): google.cloud.retail.v2beta.OutputResult;
+
+                    /**
+                     * Encodes the specified OutputResult message. Does not implicitly {@link google.cloud.retail.v2beta.OutputResult.verify|verify} messages.
+                     * @param message OutputResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OutputResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.OutputResult.verify|verify} messages.
+                     * @param message OutputResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OutputResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OutputResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.OutputResult;
+
+                    /**
+                     * Decodes an OutputResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OutputResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.OutputResult;
+
+                    /**
+                     * Verifies an OutputResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OutputResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OutputResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.OutputResult;
+
+                    /**
+                     * Creates a plain object from an OutputResult message. Also converts values to other types if specified.
+                     * @param message OutputResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.OutputResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OutputResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OutputResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BigQueryOutputResult. */
+                interface IBigQueryOutputResult {
+
+                    /** BigQueryOutputResult datasetId */
+                    datasetId?: (string|null);
+
+                    /** BigQueryOutputResult tableId */
+                    tableId?: (string|null);
+                }
+
+                /** Represents a BigQueryOutputResult. */
+                class BigQueryOutputResult implements IBigQueryOutputResult {
+
+                    /**
+                     * Constructs a new BigQueryOutputResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IBigQueryOutputResult);
+
+                    /** BigQueryOutputResult datasetId. */
+                    public datasetId: string;
+
+                    /** BigQueryOutputResult tableId. */
+                    public tableId: string;
+
+                    /**
+                     * Creates a new BigQueryOutputResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryOutputResult instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IBigQueryOutputResult): google.cloud.retail.v2beta.BigQueryOutputResult;
+
+                    /**
+                     * Encodes the specified BigQueryOutputResult message. Does not implicitly {@link google.cloud.retail.v2beta.BigQueryOutputResult.verify|verify} messages.
+                     * @param message BigQueryOutputResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IBigQueryOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryOutputResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.BigQueryOutputResult.verify|verify} messages.
+                     * @param message BigQueryOutputResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IBigQueryOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryOutputResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryOutputResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.BigQueryOutputResult;
+
+                    /**
+                     * Decodes a BigQueryOutputResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryOutputResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.BigQueryOutputResult;
+
+                    /**
+                     * Verifies a BigQueryOutputResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryOutputResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryOutputResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.BigQueryOutputResult;
+
+                    /**
+                     * Creates a plain object from a BigQueryOutputResult message. Also converts values to other types if specified.
+                     * @param message BigQueryOutputResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.BigQueryOutputResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryOutputResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BigQueryOutputResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsOutputResult. */
+                interface IGcsOutputResult {
+
+                    /** GcsOutputResult outputUri */
+                    outputUri?: (string|null);
+                }
+
+                /** Represents a GcsOutputResult. */
+                class GcsOutputResult implements IGcsOutputResult {
+
+                    /**
+                     * Constructs a new GcsOutputResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.retail.v2beta.IGcsOutputResult);
+
+                    /** GcsOutputResult outputUri. */
+                    public outputUri: string;
+
+                    /**
+                     * Creates a new GcsOutputResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsOutputResult instance
+                     */
+                    public static create(properties?: google.cloud.retail.v2beta.IGcsOutputResult): google.cloud.retail.v2beta.GcsOutputResult;
+
+                    /**
+                     * Encodes the specified GcsOutputResult message. Does not implicitly {@link google.cloud.retail.v2beta.GcsOutputResult.verify|verify} messages.
+                     * @param message GcsOutputResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.retail.v2beta.IGcsOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsOutputResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.GcsOutputResult.verify|verify} messages.
+                     * @param message GcsOutputResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.retail.v2beta.IGcsOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsOutputResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsOutputResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.GcsOutputResult;
+
+                    /**
+                     * Decodes a GcsOutputResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsOutputResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.GcsOutputResult;
+
+                    /**
+                     * Verifies a GcsOutputResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsOutputResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsOutputResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.GcsOutputResult;
+
+                    /**
+                     * Creates a plain object from a GcsOutputResult message. Also converts values to other types if specified.
+                     * @param message GcsOutputResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.retail.v2beta.GcsOutputResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsOutputResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsOutputResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ProductLevelConfig. */
                 interface IProductLevelConfig {
 
@@ -49904,730 +51206,6 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListControlsResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an ExportErrorsConfig. */
-                interface IExportErrorsConfig {
-
-                    /** ExportErrorsConfig gcsPrefix */
-                    gcsPrefix?: (string|null);
-                }
-
-                /** Represents an ExportErrorsConfig. */
-                class ExportErrorsConfig implements IExportErrorsConfig {
-
-                    /**
-                     * Constructs a new ExportErrorsConfig.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2beta.IExportErrorsConfig);
-
-                    /** ExportErrorsConfig gcsPrefix. */
-                    public gcsPrefix?: (string|null);
-
-                    /** ExportErrorsConfig destination. */
-                    public destination?: "gcsPrefix";
-
-                    /**
-                     * Creates a new ExportErrorsConfig instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ExportErrorsConfig instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2beta.IExportErrorsConfig): google.cloud.retail.v2beta.ExportErrorsConfig;
-
-                    /**
-                     * Encodes the specified ExportErrorsConfig message. Does not implicitly {@link google.cloud.retail.v2beta.ExportErrorsConfig.verify|verify} messages.
-                     * @param message ExportErrorsConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2beta.IExportErrorsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ExportErrorsConfig message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExportErrorsConfig.verify|verify} messages.
-                     * @param message ExportErrorsConfig message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExportErrorsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ExportErrorsConfig message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ExportErrorsConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExportErrorsConfig;
-
-                    /**
-                     * Decodes an ExportErrorsConfig message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ExportErrorsConfig
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExportErrorsConfig;
-
-                    /**
-                     * Verifies an ExportErrorsConfig message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ExportErrorsConfig message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ExportErrorsConfig
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExportErrorsConfig;
-
-                    /**
-                     * Creates a plain object from an ExportErrorsConfig message. Also converts values to other types if specified.
-                     * @param message ExportErrorsConfig
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2beta.ExportErrorsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ExportErrorsConfig to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ExportErrorsConfig
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an ExportMetadata. */
-                interface IExportMetadata {
-
-                    /** ExportMetadata createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** ExportMetadata updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents an ExportMetadata. */
-                class ExportMetadata implements IExportMetadata {
-
-                    /**
-                     * Constructs a new ExportMetadata.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2beta.IExportMetadata);
-
-                    /** ExportMetadata createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** ExportMetadata updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /**
-                     * Creates a new ExportMetadata instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ExportMetadata instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2beta.IExportMetadata): google.cloud.retail.v2beta.ExportMetadata;
-
-                    /**
-                     * Encodes the specified ExportMetadata message. Does not implicitly {@link google.cloud.retail.v2beta.ExportMetadata.verify|verify} messages.
-                     * @param message ExportMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2beta.IExportMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ExportMetadata message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExportMetadata.verify|verify} messages.
-                     * @param message ExportMetadata message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExportMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ExportMetadata message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ExportMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExportMetadata;
-
-                    /**
-                     * Decodes an ExportMetadata message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ExportMetadata
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExportMetadata;
-
-                    /**
-                     * Verifies an ExportMetadata message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ExportMetadata message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ExportMetadata
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExportMetadata;
-
-                    /**
-                     * Creates a plain object from an ExportMetadata message. Also converts values to other types if specified.
-                     * @param message ExportMetadata
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2beta.ExportMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ExportMetadata to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ExportMetadata
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an ExportProductsResponse. */
-                interface IExportProductsResponse {
-
-                    /** ExportProductsResponse errorSamples */
-                    errorSamples?: (google.rpc.IStatus[]|null);
-
-                    /** ExportProductsResponse errorsConfig */
-                    errorsConfig?: (google.cloud.retail.v2beta.IExportErrorsConfig|null);
-
-                    /** ExportProductsResponse outputResult */
-                    outputResult?: (google.cloud.retail.v2beta.IOutputResult|null);
-                }
-
-                /** Represents an ExportProductsResponse. */
-                class ExportProductsResponse implements IExportProductsResponse {
-
-                    /**
-                     * Constructs a new ExportProductsResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2beta.IExportProductsResponse);
-
-                    /** ExportProductsResponse errorSamples. */
-                    public errorSamples: google.rpc.IStatus[];
-
-                    /** ExportProductsResponse errorsConfig. */
-                    public errorsConfig?: (google.cloud.retail.v2beta.IExportErrorsConfig|null);
-
-                    /** ExportProductsResponse outputResult. */
-                    public outputResult?: (google.cloud.retail.v2beta.IOutputResult|null);
-
-                    /**
-                     * Creates a new ExportProductsResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ExportProductsResponse instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2beta.IExportProductsResponse): google.cloud.retail.v2beta.ExportProductsResponse;
-
-                    /**
-                     * Encodes the specified ExportProductsResponse message. Does not implicitly {@link google.cloud.retail.v2beta.ExportProductsResponse.verify|verify} messages.
-                     * @param message ExportProductsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2beta.IExportProductsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ExportProductsResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExportProductsResponse.verify|verify} messages.
-                     * @param message ExportProductsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExportProductsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ExportProductsResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ExportProductsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExportProductsResponse;
-
-                    /**
-                     * Decodes an ExportProductsResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ExportProductsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExportProductsResponse;
-
-                    /**
-                     * Verifies an ExportProductsResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ExportProductsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ExportProductsResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExportProductsResponse;
-
-                    /**
-                     * Creates a plain object from an ExportProductsResponse message. Also converts values to other types if specified.
-                     * @param message ExportProductsResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2beta.ExportProductsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ExportProductsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ExportProductsResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an ExportUserEventsResponse. */
-                interface IExportUserEventsResponse {
-
-                    /** ExportUserEventsResponse errorSamples */
-                    errorSamples?: (google.rpc.IStatus[]|null);
-
-                    /** ExportUserEventsResponse errorsConfig */
-                    errorsConfig?: (google.cloud.retail.v2beta.IExportErrorsConfig|null);
-
-                    /** ExportUserEventsResponse outputResult */
-                    outputResult?: (google.cloud.retail.v2beta.IOutputResult|null);
-                }
-
-                /** Represents an ExportUserEventsResponse. */
-                class ExportUserEventsResponse implements IExportUserEventsResponse {
-
-                    /**
-                     * Constructs a new ExportUserEventsResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2beta.IExportUserEventsResponse);
-
-                    /** ExportUserEventsResponse errorSamples. */
-                    public errorSamples: google.rpc.IStatus[];
-
-                    /** ExportUserEventsResponse errorsConfig. */
-                    public errorsConfig?: (google.cloud.retail.v2beta.IExportErrorsConfig|null);
-
-                    /** ExportUserEventsResponse outputResult. */
-                    public outputResult?: (google.cloud.retail.v2beta.IOutputResult|null);
-
-                    /**
-                     * Creates a new ExportUserEventsResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ExportUserEventsResponse instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2beta.IExportUserEventsResponse): google.cloud.retail.v2beta.ExportUserEventsResponse;
-
-                    /**
-                     * Encodes the specified ExportUserEventsResponse message. Does not implicitly {@link google.cloud.retail.v2beta.ExportUserEventsResponse.verify|verify} messages.
-                     * @param message ExportUserEventsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2beta.IExportUserEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ExportUserEventsResponse message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.ExportUserEventsResponse.verify|verify} messages.
-                     * @param message ExportUserEventsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2beta.IExportUserEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ExportUserEventsResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ExportUserEventsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.ExportUserEventsResponse;
-
-                    /**
-                     * Decodes an ExportUserEventsResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ExportUserEventsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.ExportUserEventsResponse;
-
-                    /**
-                     * Verifies an ExportUserEventsResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ExportUserEventsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ExportUserEventsResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.ExportUserEventsResponse;
-
-                    /**
-                     * Creates a plain object from an ExportUserEventsResponse message. Also converts values to other types if specified.
-                     * @param message ExportUserEventsResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2beta.ExportUserEventsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ExportUserEventsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ExportUserEventsResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an OutputResult. */
-                interface IOutputResult {
-
-                    /** OutputResult bigqueryResult */
-                    bigqueryResult?: (google.cloud.retail.v2beta.IBigQueryOutputResult[]|null);
-
-                    /** OutputResult gcsResult */
-                    gcsResult?: (google.cloud.retail.v2beta.IGcsOutputResult[]|null);
-                }
-
-                /** Represents an OutputResult. */
-                class OutputResult implements IOutputResult {
-
-                    /**
-                     * Constructs a new OutputResult.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2beta.IOutputResult);
-
-                    /** OutputResult bigqueryResult. */
-                    public bigqueryResult: google.cloud.retail.v2beta.IBigQueryOutputResult[];
-
-                    /** OutputResult gcsResult. */
-                    public gcsResult: google.cloud.retail.v2beta.IGcsOutputResult[];
-
-                    /**
-                     * Creates a new OutputResult instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns OutputResult instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2beta.IOutputResult): google.cloud.retail.v2beta.OutputResult;
-
-                    /**
-                     * Encodes the specified OutputResult message. Does not implicitly {@link google.cloud.retail.v2beta.OutputResult.verify|verify} messages.
-                     * @param message OutputResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2beta.IOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified OutputResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.OutputResult.verify|verify} messages.
-                     * @param message OutputResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2beta.IOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an OutputResult message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns OutputResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.OutputResult;
-
-                    /**
-                     * Decodes an OutputResult message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns OutputResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.OutputResult;
-
-                    /**
-                     * Verifies an OutputResult message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an OutputResult message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns OutputResult
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.OutputResult;
-
-                    /**
-                     * Creates a plain object from an OutputResult message. Also converts values to other types if specified.
-                     * @param message OutputResult
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2beta.OutputResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this OutputResult to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for OutputResult
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a BigQueryOutputResult. */
-                interface IBigQueryOutputResult {
-
-                    /** BigQueryOutputResult datasetId */
-                    datasetId?: (string|null);
-
-                    /** BigQueryOutputResult tableId */
-                    tableId?: (string|null);
-                }
-
-                /** Represents a BigQueryOutputResult. */
-                class BigQueryOutputResult implements IBigQueryOutputResult {
-
-                    /**
-                     * Constructs a new BigQueryOutputResult.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2beta.IBigQueryOutputResult);
-
-                    /** BigQueryOutputResult datasetId. */
-                    public datasetId: string;
-
-                    /** BigQueryOutputResult tableId. */
-                    public tableId: string;
-
-                    /**
-                     * Creates a new BigQueryOutputResult instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns BigQueryOutputResult instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2beta.IBigQueryOutputResult): google.cloud.retail.v2beta.BigQueryOutputResult;
-
-                    /**
-                     * Encodes the specified BigQueryOutputResult message. Does not implicitly {@link google.cloud.retail.v2beta.BigQueryOutputResult.verify|verify} messages.
-                     * @param message BigQueryOutputResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2beta.IBigQueryOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified BigQueryOutputResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.BigQueryOutputResult.verify|verify} messages.
-                     * @param message BigQueryOutputResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2beta.IBigQueryOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a BigQueryOutputResult message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns BigQueryOutputResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.BigQueryOutputResult;
-
-                    /**
-                     * Decodes a BigQueryOutputResult message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns BigQueryOutputResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.BigQueryOutputResult;
-
-                    /**
-                     * Verifies a BigQueryOutputResult message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a BigQueryOutputResult message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns BigQueryOutputResult
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.BigQueryOutputResult;
-
-                    /**
-                     * Creates a plain object from a BigQueryOutputResult message. Also converts values to other types if specified.
-                     * @param message BigQueryOutputResult
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2beta.BigQueryOutputResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this BigQueryOutputResult to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for BigQueryOutputResult
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a GcsOutputResult. */
-                interface IGcsOutputResult {
-
-                    /** GcsOutputResult outputUri */
-                    outputUri?: (string|null);
-                }
-
-                /** Represents a GcsOutputResult. */
-                class GcsOutputResult implements IGcsOutputResult {
-
-                    /**
-                     * Constructs a new GcsOutputResult.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.retail.v2beta.IGcsOutputResult);
-
-                    /** GcsOutputResult outputUri. */
-                    public outputUri: string;
-
-                    /**
-                     * Creates a new GcsOutputResult instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GcsOutputResult instance
-                     */
-                    public static create(properties?: google.cloud.retail.v2beta.IGcsOutputResult): google.cloud.retail.v2beta.GcsOutputResult;
-
-                    /**
-                     * Encodes the specified GcsOutputResult message. Does not implicitly {@link google.cloud.retail.v2beta.GcsOutputResult.verify|verify} messages.
-                     * @param message GcsOutputResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.retail.v2beta.IGcsOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GcsOutputResult message, length delimited. Does not implicitly {@link google.cloud.retail.v2beta.GcsOutputResult.verify|verify} messages.
-                     * @param message GcsOutputResult message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.retail.v2beta.IGcsOutputResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GcsOutputResult message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GcsOutputResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.retail.v2beta.GcsOutputResult;
-
-                    /**
-                     * Decodes a GcsOutputResult message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GcsOutputResult
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.retail.v2beta.GcsOutputResult;
-
-                    /**
-                     * Verifies a GcsOutputResult message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GcsOutputResult message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GcsOutputResult
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.retail.v2beta.GcsOutputResult;
-
-                    /**
-                     * Creates a plain object from a GcsOutputResult message. Also converts values to other types if specified.
-                     * @param message GcsOutputResult
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.retail.v2beta.GcsOutputResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GcsOutputResult to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for GcsOutputResult
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
