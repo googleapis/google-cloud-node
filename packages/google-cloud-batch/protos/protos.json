@@ -2217,14 +2217,6 @@
                           "type": "bool",
                           "id": 12
                         },
-                        "enableOslogin": {
-                          "type": "bool",
-                          "id": 13,
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
                         "runAsNonRoot": {
                           "type": "bool",
                           "id": 14,
