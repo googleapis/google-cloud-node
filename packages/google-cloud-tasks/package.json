@@ -15,7 +15,7 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./build/cjs/src/index.d.ts",
+        "types": "./build/esm/src/index.d.ts",
         "default": "./build/esm/src/index.js"
       },
       "require": {
