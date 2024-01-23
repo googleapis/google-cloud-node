@@ -24,9 +24,5 @@ node.owlbot_main(relative_dir="packages/google-cloud-tasks",
     patch_staging=patch
 )
 
-    s.replace(library / 'esm/src/*/cloud_tasks_client_config.json',
-            '"initial_rpc_timeout_millis": 60000',
-            '"initial_rpc_timeout_millis": 20000')
-    s.replace(library / 'esm/src/*/cloud_tasks_client_config.json',
-            '"max_rpc_timeout_millis": 60000',
-            '"max_rpc_timeout_millis": 20000')
+s.replace(library / 'esm/src/*/cloud_tasks_client_config.json','"initial_rpc_timeout_millis": 60000','"initial_rpc_timeout_millis": 20000')
+s.replace(library / 'esm/src/*/cloud_tasks_client_config.json','"max_rpc_timeout_millis": 60000','"max_rpc_timeout_millis": 20000')
