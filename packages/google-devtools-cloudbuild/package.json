@@ -33,7 +33,7 @@
     "@types/sinon": "^17.0.0",
     "c8": "^8.0.1",
     "chai": "^4.2.0",
-    "gapic-tools": "^0.2.0",
+    "gapic-tools": "^0.3.0",
     "gts": "^5.0.0",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",
