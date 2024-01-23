@@ -1571,6 +1571,11 @@
         "grpc": {
           "libraryClient": "LlmUtilityServiceClient",
           "rpcs": {
+            "CountTokens": {
+              "methods": [
+                "countTokens"
+              ]
+            },
             "ComputeTokens": {
               "methods": [
                 "computeTokens"
@@ -1581,6 +1586,11 @@
         "grpc-fallback": {
           "libraryClient": "LlmUtilityServiceClient",
           "rpcs": {
+            "CountTokens": {
+              "methods": [
+                "countTokens"
+              ]
+            },
             "ComputeTokens": {
               "methods": [
                 "computeTokens"

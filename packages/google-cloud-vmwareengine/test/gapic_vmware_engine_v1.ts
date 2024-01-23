@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -523,6 +523,264 @@ describe('v1.VmwareEngineClient', () => {
     });
   });
 
+  describe('getNode', () => {
+    it('invokes getNode without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetNodeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetNodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.Node()
+      );
+      client.innerApiCalls.getNode = stubSimpleCall(expectedResponse);
+      const [response] = await client.getNode(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.getNode as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNode without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetNodeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetNodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.Node()
+      );
+      client.innerApiCalls.getNode =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getNode(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.INode | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.getNode as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNode with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetNodeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetNodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getNode = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getNode(request), expectedError);
+      const actualRequest = (client.innerApiCalls.getNode as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNode with closed client', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetNodeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetNodeRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getNode(request), expectedError);
+    });
+  });
+
+  describe('getExternalAddress', () => {
+    it('invokes getExternalAddress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetExternalAddressRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+      );
+      client.innerApiCalls.getExternalAddress =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getExternalAddress(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getExternalAddress without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetExternalAddressRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+      );
+      client.innerApiCalls.getExternalAddress =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getExternalAddress(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.IExternalAddress | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getExternalAddress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetExternalAddressRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getExternalAddress = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getExternalAddress(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getExternalAddress with closed client', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetExternalAddressRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getExternalAddress(request), expectedError);
+    });
+  });
+
   describe('getSubnet', () => {
     it('invokes getSubnet without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
@@ -647,6 +905,273 @@ describe('v1.VmwareEngineClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSubnet(request), expectedError);
+    });
+  });
+
+  describe('getExternalAccessRule', () => {
+    it('invokes getExternalAccessRule without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+      );
+      client.innerApiCalls.getExternalAccessRule =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getExternalAccessRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getExternalAccessRule without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+      );
+      client.innerApiCalls.getExternalAccessRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getExternalAccessRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.IExternalAccessRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getExternalAccessRule with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getExternalAccessRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getExternalAccessRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getExternalAccessRule with closed client', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getExternalAccessRule(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('getLoggingServer', () => {
+    it('invokes getLoggingServer without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetLoggingServerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.LoggingServer()
+      );
+      client.innerApiCalls.getLoggingServer = stubSimpleCall(expectedResponse);
+      const [response] = await client.getLoggingServer(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getLoggingServer without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetLoggingServerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.LoggingServer()
+      );
+      client.innerApiCalls.getLoggingServer =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLoggingServer(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.ILoggingServer | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getLoggingServer with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetLoggingServerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getLoggingServer = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getLoggingServer(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getLoggingServer with closed client', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetLoggingServerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getLoggingServer(request), expectedError);
     });
   });
 
@@ -1048,6 +1573,266 @@ describe('v1.VmwareEngineClient', () => {
     });
   });
 
+  describe('getDnsForwarding', () => {
+    it('invokes getDnsForwarding without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetDnsForwardingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetDnsForwardingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DnsForwarding()
+      );
+      client.innerApiCalls.getDnsForwarding = stubSimpleCall(expectedResponse);
+      const [response] = await client.getDnsForwarding(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDnsForwarding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDnsForwarding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDnsForwarding without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetDnsForwardingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetDnsForwardingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DnsForwarding()
+      );
+      client.innerApiCalls.getDnsForwarding =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDnsForwarding(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.IDnsForwarding | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDnsForwarding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDnsForwarding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDnsForwarding with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetDnsForwardingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetDnsForwardingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDnsForwarding = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getDnsForwarding(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getDnsForwarding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDnsForwarding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDnsForwarding with closed client', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetDnsForwardingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetDnsForwardingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDnsForwarding(request), expectedError);
+    });
+  });
+
+  describe('getNetworkPeering', () => {
+    it('invokes getNetworkPeering without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+      );
+      client.innerApiCalls.getNetworkPeering = stubSimpleCall(expectedResponse);
+      const [response] = await client.getNetworkPeering(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNetworkPeering without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+      );
+      client.innerApiCalls.getNetworkPeering =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getNetworkPeering(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.INetworkPeering | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNetworkPeering with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getNetworkPeering = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getNetworkPeering(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getNetworkPeering with closed client', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getNetworkPeering(request), expectedError);
+    });
+  });
+
   describe('getHcxActivationKey', () => {
     it('invokes getHcxActivationKey without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
@@ -1306,6 +2091,143 @@ describe('v1.VmwareEngineClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getNetworkPolicy(request), expectedError);
+    });
+  });
+
+  describe('getManagementDnsZoneBinding', () => {
+    it('invokes getManagementDnsZoneBinding without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+      );
+      client.innerApiCalls.getManagementDnsZoneBinding =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getManagementDnsZoneBinding(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getManagementDnsZoneBinding without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+      );
+      client.innerApiCalls.getManagementDnsZoneBinding =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getManagementDnsZoneBinding(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getManagementDnsZoneBinding with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getManagementDnsZoneBinding = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getManagementDnsZoneBinding(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getManagementDnsZoneBinding with closed client', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getManagementDnsZoneBinding(request),
+        expectedError
+      );
     });
   });
 
@@ -1574,6 +2496,137 @@ describe('v1.VmwareEngineClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPrivateConnection(request), expectedError);
+    });
+  });
+
+  describe('getDnsBindPermission', () => {
+    it('invokes getDnsBindPermission without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DnsBindPermission()
+      );
+      client.innerApiCalls.getDnsBindPermission =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getDnsBindPermission(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDnsBindPermission as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDnsBindPermission as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDnsBindPermission without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DnsBindPermission()
+      );
+      client.innerApiCalls.getDnsBindPermission =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDnsBindPermission(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.IDnsBindPermission | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDnsBindPermission as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDnsBindPermission as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDnsBindPermission with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDnsBindPermission = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getDnsBindPermission(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getDnsBindPermission as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDnsBindPermission as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDnsBindPermission with closed client', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getDnsBindPermission(request), expectedError);
     });
   });
 
@@ -2943,6 +3996,601 @@ describe('v1.VmwareEngineClient', () => {
     });
   });
 
+  describe('createExternalAddress', () => {
+    it('invokes createExternalAddress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateExternalAddressRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createExternalAddress =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createExternalAddress(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createExternalAddress without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateExternalAddressRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createExternalAddress =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createExternalAddress(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IExternalAddress,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createExternalAddress with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateExternalAddressRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createExternalAddress = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createExternalAddress(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createExternalAddress with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateExternalAddressRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createExternalAddress = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createExternalAddress(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateExternalAddressProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateExternalAddressProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateExternalAddressProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateExternalAddressProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateExternalAddress', () => {
+    it('invokes updateExternalAddress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest()
+      );
+      request.externalAddress ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest',
+        ['externalAddress', 'name']
+      );
+      request.externalAddress.name = defaultValue1;
+      const expectedHeaderRequestParams = `external_address.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateExternalAddress =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateExternalAddress(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateExternalAddress without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest()
+      );
+      request.externalAddress ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest',
+        ['externalAddress', 'name']
+      );
+      request.externalAddress.name = defaultValue1;
+      const expectedHeaderRequestParams = `external_address.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateExternalAddress =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateExternalAddress(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IExternalAddress,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateExternalAddress with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest()
+      );
+      request.externalAddress ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest',
+        ['externalAddress', 'name']
+      );
+      request.externalAddress.name = defaultValue1;
+      const expectedHeaderRequestParams = `external_address.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateExternalAddress = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateExternalAddress(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateExternalAddress with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest()
+      );
+      request.externalAddress ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest',
+        ['externalAddress', 'name']
+      );
+      request.externalAddress.name = defaultValue1;
+      const expectedHeaderRequestParams = `external_address.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateExternalAddress = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateExternalAddress(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateExternalAddressProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateExternalAddressProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateExternalAddressProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateExternalAddressProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteExternalAddress', () => {
+    it('invokes deleteExternalAddress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteExternalAddress =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteExternalAddress(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteExternalAddress without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteExternalAddress =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteExternalAddress(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteExternalAddress with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteExternalAddress = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteExternalAddress(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteExternalAddress with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteExternalAddress = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteExternalAddress(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteExternalAddress as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteExternalAddress as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteExternalAddressProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteExternalAddressProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteExternalAddressProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteExternalAddressProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('updateSubnet', () => {
     it('invokes updateSubnet without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
@@ -3133,6 +4781,1190 @@ describe('v1.VmwareEngineClient', () => {
         expectedError
       );
       await assert.rejects(client.checkUpdateSubnetProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createExternalAccessRule', () => {
+    it('invokes createExternalAccessRule without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createExternalAccessRule =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createExternalAccessRule(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createExternalAccessRule without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createExternalAccessRule =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createExternalAccessRule(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createExternalAccessRule with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createExternalAccessRule = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createExternalAccessRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createExternalAccessRule with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createExternalAccessRule = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createExternalAccessRule(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateExternalAccessRuleProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateExternalAccessRuleProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateExternalAccessRuleProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateExternalAccessRuleProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateExternalAccessRule', () => {
+    it('invokes updateExternalAccessRule without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest()
+      );
+      request.externalAccessRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest',
+        ['externalAccessRule', 'name']
+      );
+      request.externalAccessRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateExternalAccessRule =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateExternalAccessRule(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateExternalAccessRule without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest()
+      );
+      request.externalAccessRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest',
+        ['externalAccessRule', 'name']
+      );
+      request.externalAccessRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateExternalAccessRule =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateExternalAccessRule(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateExternalAccessRule with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest()
+      );
+      request.externalAccessRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest',
+        ['externalAccessRule', 'name']
+      );
+      request.externalAccessRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateExternalAccessRule = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateExternalAccessRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateExternalAccessRule with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest()
+      );
+      request.externalAccessRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest',
+        ['externalAccessRule', 'name']
+      );
+      request.externalAccessRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `external_access_rule.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateExternalAccessRule = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateExternalAccessRule(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateExternalAccessRuleProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkUpdateExternalAccessRuleProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateExternalAccessRuleProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateExternalAccessRuleProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteExternalAccessRule', () => {
+    it('invokes deleteExternalAccessRule without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteExternalAccessRule =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteExternalAccessRule(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteExternalAccessRule without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteExternalAccessRule =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteExternalAccessRule(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteExternalAccessRule with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteExternalAccessRule = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteExternalAccessRule(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteExternalAccessRule with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteExternalAccessRule = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteExternalAccessRule(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteExternalAccessRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteExternalAccessRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteExternalAccessRuleProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteExternalAccessRuleProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteExternalAccessRuleProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteExternalAccessRuleProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createLoggingServer', () => {
+    it('invokes createLoggingServer without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateLoggingServerRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createLoggingServer =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createLoggingServer(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createLoggingServer without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateLoggingServerRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createLoggingServer =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createLoggingServer(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.ILoggingServer,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createLoggingServer with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateLoggingServerRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createLoggingServer = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createLoggingServer(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createLoggingServer with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateLoggingServerRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createLoggingServer = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createLoggingServer(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateLoggingServerProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateLoggingServerProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateLoggingServerProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateLoggingServerProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateLoggingServer', () => {
+    it('invokes updateLoggingServer without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest()
+      );
+      request.loggingServer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest',
+        ['loggingServer', 'name']
+      );
+      request.loggingServer.name = defaultValue1;
+      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateLoggingServer =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateLoggingServer(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateLoggingServer without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest()
+      );
+      request.loggingServer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest',
+        ['loggingServer', 'name']
+      );
+      request.loggingServer.name = defaultValue1;
+      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateLoggingServer =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateLoggingServer(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.ILoggingServer,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateLoggingServer with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest()
+      );
+      request.loggingServer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest',
+        ['loggingServer', 'name']
+      );
+      request.loggingServer.name = defaultValue1;
+      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateLoggingServer = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateLoggingServer(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateLoggingServer with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest()
+      );
+      request.loggingServer ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest',
+        ['loggingServer', 'name']
+      );
+      request.loggingServer.name = defaultValue1;
+      const expectedHeaderRequestParams = `logging_server.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateLoggingServer = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateLoggingServer(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateLoggingServerProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateLoggingServerProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateLoggingServerProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateLoggingServerProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteLoggingServer', () => {
+    it('invokes deleteLoggingServer without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteLoggingServer =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteLoggingServer(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteLoggingServer without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteLoggingServer =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteLoggingServer(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteLoggingServer with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteLoggingServer = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteLoggingServer(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteLoggingServer with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteLoggingServer = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteLoggingServer(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteLoggingServer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteLoggingServer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteLoggingServerProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteLoggingServerProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteLoggingServerProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteLoggingServerProgress(''),
+        expectedError
+      );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -3523,6 +6355,790 @@ describe('v1.VmwareEngineClient', () => {
       );
       await assert.rejects(
         client.checkResetVcenterCredentialsProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateDnsForwarding', () => {
+    it('invokes updateDnsForwarding without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest()
+      );
+      request.dnsForwarding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest',
+        ['dnsForwarding', 'name']
+      );
+      request.dnsForwarding.name = defaultValue1;
+      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateDnsForwarding =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateDnsForwarding(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateDnsForwarding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDnsForwarding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDnsForwarding without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest()
+      );
+      request.dnsForwarding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest',
+        ['dnsForwarding', 'name']
+      );
+      request.dnsForwarding.name = defaultValue1;
+      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateDnsForwarding =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateDnsForwarding(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateDnsForwarding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDnsForwarding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDnsForwarding with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest()
+      );
+      request.dnsForwarding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest',
+        ['dnsForwarding', 'name']
+      );
+      request.dnsForwarding.name = defaultValue1;
+      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateDnsForwarding = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateDnsForwarding(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateDnsForwarding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDnsForwarding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDnsForwarding with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest()
+      );
+      request.dnsForwarding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest',
+        ['dnsForwarding', 'name']
+      );
+      request.dnsForwarding.name = defaultValue1;
+      const expectedHeaderRequestParams = `dns_forwarding.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateDnsForwarding = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateDnsForwarding(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateDnsForwarding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDnsForwarding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateDnsForwardingProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateDnsForwardingProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateDnsForwardingProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateDnsForwardingProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createNetworkPeering', () => {
+    it('invokes createNetworkPeering without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createNetworkPeering =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createNetworkPeering(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createNetworkPeering without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createNetworkPeering =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createNetworkPeering(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.INetworkPeering,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createNetworkPeering with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createNetworkPeering = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createNetworkPeering(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createNetworkPeering with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createNetworkPeering = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createNetworkPeering(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateNetworkPeeringProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateNetworkPeeringProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateNetworkPeeringProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateNetworkPeeringProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteNetworkPeering', () => {
+    it('invokes deleteNetworkPeering without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteNetworkPeering =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteNetworkPeering(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteNetworkPeering without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteNetworkPeering =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteNetworkPeering(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteNetworkPeering with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteNetworkPeering = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteNetworkPeering(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteNetworkPeering with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteNetworkPeering = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteNetworkPeering(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteNetworkPeeringProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteNetworkPeeringProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteNetworkPeeringProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteNetworkPeeringProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateNetworkPeering', () => {
+    it('invokes updateNetworkPeering without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest()
+      );
+      request.networkPeering ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest',
+        ['networkPeering', 'name']
+      );
+      request.networkPeering.name = defaultValue1;
+      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateNetworkPeering =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateNetworkPeering(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateNetworkPeering without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest()
+      );
+      request.networkPeering ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest',
+        ['networkPeering', 'name']
+      );
+      request.networkPeering.name = defaultValue1;
+      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateNetworkPeering =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateNetworkPeering(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.INetworkPeering,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateNetworkPeering with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest()
+      );
+      request.networkPeering ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest',
+        ['networkPeering', 'name']
+      );
+      request.networkPeering.name = defaultValue1;
+      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateNetworkPeering = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateNetworkPeering(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateNetworkPeering with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest()
+      );
+      request.networkPeering ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest',
+        ['networkPeering', 'name']
+      );
+      request.networkPeering.name = defaultValue1;
+      const expectedHeaderRequestParams = `network_peering.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateNetworkPeering = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateNetworkPeering(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateNetworkPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNetworkPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateNetworkPeeringProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateNetworkPeeringProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateNetworkPeeringProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateNetworkPeeringProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -4306,6 +7922,802 @@ describe('v1.VmwareEngineClient', () => {
       );
       await assert.rejects(
         client.checkDeleteNetworkPolicyProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createManagementDnsZoneBinding', () => {
+    it('invokes createManagementDnsZoneBinding without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createManagementDnsZoneBinding =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createManagementDnsZoneBinding(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createManagementDnsZoneBinding without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createManagementDnsZoneBinding =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createManagementDnsZoneBinding(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createManagementDnsZoneBinding with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createManagementDnsZoneBinding = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createManagementDnsZoneBinding(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createManagementDnsZoneBinding with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createManagementDnsZoneBinding = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createManagementDnsZoneBinding(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateManagementDnsZoneBindingProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateManagementDnsZoneBindingProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateManagementDnsZoneBindingProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateManagementDnsZoneBindingProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateManagementDnsZoneBinding', () => {
+    it('invokes updateManagementDnsZoneBinding without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest()
+      );
+      request.managementDnsZoneBinding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest',
+        ['managementDnsZoneBinding', 'name']
+      );
+      request.managementDnsZoneBinding.name = defaultValue1;
+      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateManagementDnsZoneBinding =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateManagementDnsZoneBinding(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateManagementDnsZoneBinding without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest()
+      );
+      request.managementDnsZoneBinding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest',
+        ['managementDnsZoneBinding', 'name']
+      );
+      request.managementDnsZoneBinding.name = defaultValue1;
+      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateManagementDnsZoneBinding =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateManagementDnsZoneBinding(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateManagementDnsZoneBinding with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest()
+      );
+      request.managementDnsZoneBinding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest',
+        ['managementDnsZoneBinding', 'name']
+      );
+      request.managementDnsZoneBinding.name = defaultValue1;
+      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateManagementDnsZoneBinding = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateManagementDnsZoneBinding(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateManagementDnsZoneBinding with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest()
+      );
+      request.managementDnsZoneBinding ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest',
+        ['managementDnsZoneBinding', 'name']
+      );
+      request.managementDnsZoneBinding.name = defaultValue1;
+      const expectedHeaderRequestParams = `management_dns_zone_binding.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateManagementDnsZoneBinding = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateManagementDnsZoneBinding(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateManagementDnsZoneBindingProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkUpdateManagementDnsZoneBindingProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateManagementDnsZoneBindingProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateManagementDnsZoneBindingProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteManagementDnsZoneBinding', () => {
+    it('invokes deleteManagementDnsZoneBinding without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteManagementDnsZoneBinding =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteManagementDnsZoneBinding(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteManagementDnsZoneBinding without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteManagementDnsZoneBinding =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteManagementDnsZoneBinding(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteManagementDnsZoneBinding with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteManagementDnsZoneBinding = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteManagementDnsZoneBinding(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteManagementDnsZoneBinding with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteManagementDnsZoneBinding = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteManagementDnsZoneBinding(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteManagementDnsZoneBindingProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteManagementDnsZoneBindingProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteManagementDnsZoneBindingProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteManagementDnsZoneBindingProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('repairManagementDnsZoneBinding', () => {
+    it('invokes repairManagementDnsZoneBinding without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.repairManagementDnsZoneBinding =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.repairManagementDnsZoneBinding(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.repairManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.repairManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes repairManagementDnsZoneBinding without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.repairManagementDnsZoneBinding =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.repairManagementDnsZoneBinding(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.repairManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.repairManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes repairManagementDnsZoneBinding with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.repairManagementDnsZoneBinding = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.repairManagementDnsZoneBinding(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.repairManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.repairManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes repairManagementDnsZoneBinding with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.repairManagementDnsZoneBinding = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.repairManagementDnsZoneBinding(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.repairManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.repairManagementDnsZoneBinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkRepairManagementDnsZoneBindingProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkRepairManagementDnsZoneBindingProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRepairManagementDnsZoneBindingProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkRepairManagementDnsZoneBindingProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -5508,6 +9920,401 @@ describe('v1.VmwareEngineClient', () => {
     });
   });
 
+  describe('grantDnsBindPermission', () => {
+    it('invokes grantDnsBindPermission without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.grantDnsBindPermission =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.grantDnsBindPermission(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.grantDnsBindPermission as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.grantDnsBindPermission as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes grantDnsBindPermission without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.grantDnsBindPermission =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.grantDnsBindPermission(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.grantDnsBindPermission as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.grantDnsBindPermission as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes grantDnsBindPermission with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.grantDnsBindPermission = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.grantDnsBindPermission(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.grantDnsBindPermission as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.grantDnsBindPermission as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes grantDnsBindPermission with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.grantDnsBindPermission = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.grantDnsBindPermission(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.grantDnsBindPermission as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.grantDnsBindPermission as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkGrantDnsBindPermissionProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkGrantDnsBindPermissionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkGrantDnsBindPermissionProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkGrantDnsBindPermissionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('revokeDnsBindPermission', () => {
+    it('invokes revokeDnsBindPermission without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.revokeDnsBindPermission =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.revokeDnsBindPermission(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.revokeDnsBindPermission as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.revokeDnsBindPermission as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes revokeDnsBindPermission without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.revokeDnsBindPermission =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.revokeDnsBindPermission(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+              protos.google.cloud.vmwareengine.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.revokeDnsBindPermission as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.revokeDnsBindPermission as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes revokeDnsBindPermission with call error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.revokeDnsBindPermission = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.revokeDnsBindPermission(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.revokeDnsBindPermission as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.revokeDnsBindPermission as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes revokeDnsBindPermission with LRO error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.revokeDnsBindPermission = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.revokeDnsBindPermission(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.revokeDnsBindPermission as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.revokeDnsBindPermission as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkRevokeDnsBindPermissionProgress without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkRevokeDnsBindPermissionProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRevokeDnsBindPermissionProgress with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkRevokeDnsBindPermissionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listPrivateClouds', () => {
     it('invokes listPrivateClouds without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
@@ -6163,6 +10970,1023 @@ describe('v1.VmwareEngineClient', () => {
     });
   });
 
+  describe('listNodes', () => {
+    it('invokes listNodes without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNodesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+      ];
+      client.innerApiCalls.listNodes = stubSimpleCall(expectedResponse);
+      const [response] = await client.listNodes(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNodes without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNodesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+      ];
+      client.innerApiCalls.listNodes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listNodes(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.INode[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNodes with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNodesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listNodes = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.listNodes(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNodes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNodesStream without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNodesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+      ];
+      client.descriptors.page.listNodes.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listNodesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.Node[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.Node) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listNodes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNodes, request)
+      );
+      assert(
+        (client.descriptors.page.listNodes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listNodesStream with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNodesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNodes.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listNodesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.Node[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.Node) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listNodes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNodes, request)
+      );
+      assert(
+        (client.descriptors.page.listNodes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listNodes without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNodesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+        generateSampleMessage(new protos.google.cloud.vmwareengine.v1.Node()),
+      ];
+      client.descriptors.page.listNodes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.vmwareengine.v1.INode[] = [];
+      const iterable = client.listNodesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listNodes.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listNodes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listNodes with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNodesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNodes.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listNodesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.vmwareengine.v1.INode[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listNodes.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listNodes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listExternalAddresses', () => {
+    it('invokes listExternalAddresses without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAddressesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+      ];
+      client.innerApiCalls.listExternalAddresses =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listExternalAddresses(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listExternalAddresses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExternalAddresses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listExternalAddresses without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAddressesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+      ];
+      client.innerApiCalls.listExternalAddresses =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listExternalAddresses(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.vmwareengine.v1.IExternalAddress[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listExternalAddresses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExternalAddresses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listExternalAddresses with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAddressesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listExternalAddresses = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listExternalAddresses(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listExternalAddresses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExternalAddresses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listExternalAddressesStream without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAddressesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+      ];
+      client.descriptors.page.listExternalAddresses.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listExternalAddressesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.ExternalAddress[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.ExternalAddress) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listExternalAddresses
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listExternalAddresses, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listExternalAddresses
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listExternalAddressesStream with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAddressesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listExternalAddresses.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listExternalAddressesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.ExternalAddress[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.ExternalAddress) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listExternalAddresses
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listExternalAddresses, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listExternalAddresses
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listExternalAddresses without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAddressesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+      ];
+      client.descriptors.page.listExternalAddresses.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.vmwareengine.v1.IExternalAddress[] =
+        [];
+      const iterable = client.listExternalAddressesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listExternalAddresses
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listExternalAddresses
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listExternalAddresses with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAddressesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listExternalAddresses.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listExternalAddressesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.vmwareengine.v1.IExternalAddress[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listExternalAddresses
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listExternalAddresses
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('fetchNetworkPolicyExternalAddresses', () => {
+    it('invokes fetchNetworkPolicyExternalAddresses without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest',
+        ['networkPolicy']
+      );
+      request.networkPolicy = defaultValue1;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+      ];
+      client.innerApiCalls.fetchNetworkPolicyExternalAddresses =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.fetchNetworkPolicyExternalAddresses(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchNetworkPolicyExternalAddresses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchNetworkPolicyExternalAddresses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchNetworkPolicyExternalAddresses without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest',
+        ['networkPolicy']
+      );
+      request.networkPolicy = defaultValue1;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+      ];
+      client.innerApiCalls.fetchNetworkPolicyExternalAddresses =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchNetworkPolicyExternalAddresses(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.vmwareengine.v1.IExternalAddress[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchNetworkPolicyExternalAddresses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchNetworkPolicyExternalAddresses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchNetworkPolicyExternalAddresses with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest',
+        ['networkPolicy']
+      );
+      request.networkPolicy = defaultValue1;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchNetworkPolicyExternalAddresses = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.fetchNetworkPolicyExternalAddresses(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchNetworkPolicyExternalAddresses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchNetworkPolicyExternalAddresses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchNetworkPolicyExternalAddressesStream without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest',
+        ['networkPolicy']
+      );
+      request.networkPolicy = defaultValue1;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+      ];
+      client.descriptors.page.fetchNetworkPolicyExternalAddresses.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.fetchNetworkPolicyExternalAddressesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.ExternalAddress[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.ExternalAddress) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.fetchNetworkPolicyExternalAddresses
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.fetchNetworkPolicyExternalAddresses,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.fetchNetworkPolicyExternalAddresses
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes fetchNetworkPolicyExternalAddressesStream with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest',
+        ['networkPolicy']
+      );
+      request.networkPolicy = defaultValue1;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchNetworkPolicyExternalAddresses.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.fetchNetworkPolicyExternalAddressesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.ExternalAddress[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.ExternalAddress) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.fetchNetworkPolicyExternalAddresses
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.fetchNetworkPolicyExternalAddresses,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.fetchNetworkPolicyExternalAddresses
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with fetchNetworkPolicyExternalAddresses without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest',
+        ['networkPolicy']
+      );
+      request.networkPolicy = defaultValue1;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAddress()
+        ),
+      ];
+      client.descriptors.page.fetchNetworkPolicyExternalAddresses.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.vmwareengine.v1.IExternalAddress[] =
+        [];
+      const iterable = client.fetchNetworkPolicyExternalAddressesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchNetworkPolicyExternalAddresses
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.fetchNetworkPolicyExternalAddresses
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with fetchNetworkPolicyExternalAddresses with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest',
+        ['networkPolicy']
+      );
+      request.networkPolicy = defaultValue1;
+      const expectedHeaderRequestParams = `network_policy=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchNetworkPolicyExternalAddresses.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.fetchNetworkPolicyExternalAddressesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.vmwareengine.v1.IExternalAddress[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchNetworkPolicyExternalAddresses
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.fetchNetworkPolicyExternalAddresses
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('listSubnets', () => {
     it('invokes listSubnets without error', async () => {
       const client = new vmwareengineModule.v1.VmwareEngineClient({
@@ -6460,6 +12284,695 @@ describe('v1.VmwareEngineClient', () => {
       );
       assert(
         (client.descriptors.page.listSubnets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listExternalAccessRules', () => {
+    it('invokes listExternalAccessRules without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+      ];
+      client.innerApiCalls.listExternalAccessRules =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listExternalAccessRules(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listExternalAccessRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExternalAccessRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listExternalAccessRules without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+      ];
+      client.innerApiCalls.listExternalAccessRules =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listExternalAccessRules(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.vmwareengine.v1.IExternalAccessRule[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listExternalAccessRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExternalAccessRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listExternalAccessRules with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listExternalAccessRules = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listExternalAccessRules(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listExternalAccessRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExternalAccessRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listExternalAccessRulesStream without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+      ];
+      client.descriptors.page.listExternalAccessRules.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listExternalAccessRulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.ExternalAccessRule[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.vmwareengine.v1.ExternalAccessRule
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listExternalAccessRules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listExternalAccessRules, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listExternalAccessRules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listExternalAccessRulesStream with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listExternalAccessRules.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listExternalAccessRulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.ExternalAccessRule[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.vmwareengine.v1.ExternalAccessRule
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listExternalAccessRules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listExternalAccessRules, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listExternalAccessRules
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listExternalAccessRules without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ExternalAccessRule()
+        ),
+      ];
+      client.descriptors.page.listExternalAccessRules.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.vmwareengine.v1.IExternalAccessRule[] =
+        [];
+      const iterable = client.listExternalAccessRulesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listExternalAccessRules
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listExternalAccessRules
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listExternalAccessRules with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listExternalAccessRules.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listExternalAccessRulesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.vmwareengine.v1.IExternalAccessRule[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listExternalAccessRules
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listExternalAccessRules
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listLoggingServers', () => {
+    it('invokes listLoggingServers without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListLoggingServersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+      ];
+      client.innerApiCalls.listLoggingServers =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listLoggingServers(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listLoggingServers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listLoggingServers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listLoggingServers without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListLoggingServersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+      ];
+      client.innerApiCalls.listLoggingServers =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listLoggingServers(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.ILoggingServer[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listLoggingServers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listLoggingServers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listLoggingServers with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListLoggingServersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listLoggingServers = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listLoggingServers(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listLoggingServers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listLoggingServers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listLoggingServersStream without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListLoggingServersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+      ];
+      client.descriptors.page.listLoggingServers.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listLoggingServersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.LoggingServer[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.LoggingServer) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listLoggingServers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listLoggingServers, request)
+      );
+      assert(
+        (client.descriptors.page.listLoggingServers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listLoggingServersStream with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListLoggingServersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listLoggingServers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listLoggingServersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.LoggingServer[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.LoggingServer) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listLoggingServers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listLoggingServers, request)
+      );
+      assert(
+        (client.descriptors.page.listLoggingServers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listLoggingServers without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListLoggingServersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.LoggingServer()
+        ),
+      ];
+      client.descriptors.page.listLoggingServers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.vmwareengine.v1.ILoggingServer[] =
+        [];
+      const iterable = client.listLoggingServersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listLoggingServers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listLoggingServers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listLoggingServers with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListLoggingServersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listLoggingServers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listLoggingServersAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.vmwareengine.v1.ILoggingServer[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listLoggingServers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listLoggingServers.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -6785,6 +13298,666 @@ describe('v1.VmwareEngineClient', () => {
       );
       assert(
         (client.descriptors.page.listNodeTypes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listNetworkPeerings', () => {
+    it('invokes listNetworkPeerings without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+      ];
+      client.innerApiCalls.listNetworkPeerings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listNetworkPeerings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNetworkPeerings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNetworkPeerings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNetworkPeerings without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+      ];
+      client.innerApiCalls.listNetworkPeerings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listNetworkPeerings(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.vmwareengine.v1.INetworkPeering[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listNetworkPeerings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNetworkPeerings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNetworkPeerings with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listNetworkPeerings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listNetworkPeerings(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listNetworkPeerings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listNetworkPeerings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listNetworkPeeringsStream without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+      ];
+      client.descriptors.page.listNetworkPeerings.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listNetworkPeeringsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.NetworkPeering[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.NetworkPeering) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listNetworkPeerings.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNetworkPeerings, request)
+      );
+      assert(
+        (client.descriptors.page.listNetworkPeerings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listNetworkPeeringsStream with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNetworkPeerings.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listNetworkPeeringsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.NetworkPeering[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.NetworkPeering) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listNetworkPeerings.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listNetworkPeerings, request)
+      );
+      assert(
+        (client.descriptors.page.listNetworkPeerings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listNetworkPeerings without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.NetworkPeering()
+        ),
+      ];
+      client.descriptors.page.listNetworkPeerings.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.vmwareengine.v1.INetworkPeering[] =
+        [];
+      const iterable = client.listNetworkPeeringsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listNetworkPeerings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listNetworkPeerings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listNetworkPeerings with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listNetworkPeerings.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listNetworkPeeringsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.vmwareengine.v1.INetworkPeering[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listNetworkPeerings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listNetworkPeerings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listPeeringRoutes', () => {
+    it('invokes listPeeringRoutes without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+      ];
+      client.innerApiCalls.listPeeringRoutes = stubSimpleCall(expectedResponse);
+      const [response] = await client.listPeeringRoutes(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPeeringRoutes without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+      ];
+      client.innerApiCalls.listPeeringRoutes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listPeeringRoutes(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.vmwareengine.v1.IPeeringRoute[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPeeringRoutes with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listPeeringRoutes = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listPeeringRoutes(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPeeringRoutesStream without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+      ];
+      client.descriptors.page.listPeeringRoutes.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listPeeringRoutesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.PeeringRoute[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.PeeringRoute) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPeeringRoutes, request)
+      );
+      assert(
+        (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listPeeringRoutesStream with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPeeringRoutes.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listPeeringRoutesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.PeeringRoute[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.vmwareengine.v1.PeeringRoute) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPeeringRoutes, request)
+      );
+      assert(
+        (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPeeringRoutes without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.PeeringRoute()
+        ),
+      ];
+      client.descriptors.page.listPeeringRoutes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.vmwareengine.v1.IPeeringRoute[] = [];
+      const iterable = client.listPeeringRoutesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPeeringRoutes with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPeeringRoutes.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listPeeringRoutesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.vmwareengine.v1.IPeeringRoute[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -7470,6 +14643,371 @@ describe('v1.VmwareEngineClient', () => {
       );
       assert(
         (client.descriptors.page.listNetworkPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listManagementDnsZoneBindings', () => {
+    it('invokes listManagementDnsZoneBindings without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+      ];
+      client.innerApiCalls.listManagementDnsZoneBindings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listManagementDnsZoneBindings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listManagementDnsZoneBindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listManagementDnsZoneBindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listManagementDnsZoneBindings without error using callback', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+      ];
+      client.innerApiCalls.listManagementDnsZoneBindings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listManagementDnsZoneBindings(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listManagementDnsZoneBindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listManagementDnsZoneBindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listManagementDnsZoneBindings with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listManagementDnsZoneBindings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listManagementDnsZoneBindings(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listManagementDnsZoneBindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listManagementDnsZoneBindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listManagementDnsZoneBindingsStream without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+      ];
+      client.descriptors.page.listManagementDnsZoneBindings.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listManagementDnsZoneBindingsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listManagementDnsZoneBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listManagementDnsZoneBindings,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.listManagementDnsZoneBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listManagementDnsZoneBindingsStream with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listManagementDnsZoneBindings.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listManagementDnsZoneBindingsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listManagementDnsZoneBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listManagementDnsZoneBindings,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.listManagementDnsZoneBindings
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listManagementDnsZoneBindings without error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding()
+        ),
+      ];
+      client.descriptors.page.listManagementDnsZoneBindings.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding[] =
+        [];
+      const iterable = client.listManagementDnsZoneBindingsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listManagementDnsZoneBindings
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listManagementDnsZoneBindings
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listManagementDnsZoneBindings with error', async () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listManagementDnsZoneBindings.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listManagementDnsZoneBindingsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listManagementDnsZoneBindings
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listManagementDnsZoneBindings
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -8221,9 +15759,8 @@ describe('v1.VmwareEngineClient', () => {
       ];
       client.innerApiCalls.listPrivateConnectionPeeringRoutes =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.listPrivateConnectionPeeringRoutes(
-        request
-      );
+      const [response] =
+        await client.listPrivateConnectionPeeringRoutes(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listPrivateConnectionPeeringRoutes as SinonStub
@@ -9456,6 +16993,302 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
+    describe('dnsBindPermission', () => {
+      const fakePath = '/rendered/path/dnsBindPermission';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.dnsBindPermissionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dnsBindPermissionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dnsBindPermissionPath', () => {
+        const result = client.dnsBindPermissionPath(
+          'projectValue',
+          'locationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.dnsBindPermissionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDnsBindPermissionName', () => {
+        const result = client.matchProjectFromDnsBindPermissionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.dnsBindPermissionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDnsBindPermissionName', () => {
+        const result = client.matchLocationFromDnsBindPermissionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.dnsBindPermissionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('dnsForwarding', () => {
+      const fakePath = '/rendered/path/dnsForwarding';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        private_cloud: 'privateCloudValue',
+      };
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.dnsForwardingPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dnsForwardingPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dnsForwardingPath', () => {
+        const result = client.dnsForwardingPath(
+          'projectValue',
+          'locationValue',
+          'privateCloudValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dnsForwardingPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDnsForwardingName', () => {
+        const result = client.matchProjectFromDnsForwardingName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dnsForwardingPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDnsForwardingName', () => {
+        const result = client.matchLocationFromDnsForwardingName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dnsForwardingPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPrivateCloudFromDnsForwardingName', () => {
+        const result = client.matchPrivateCloudFromDnsForwardingName(fakePath);
+        assert.strictEqual(result, 'privateCloudValue');
+        assert(
+          (client.pathTemplates.dnsForwardingPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('externalAccessRule', () => {
+      const fakePath = '/rendered/path/externalAccessRule';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        network_policy: 'networkPolicyValue',
+        external_access_rule: 'externalAccessRuleValue',
+      };
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.externalAccessRulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.externalAccessRulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('externalAccessRulePath', () => {
+        const result = client.externalAccessRulePath(
+          'projectValue',
+          'locationValue',
+          'networkPolicyValue',
+          'externalAccessRuleValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.externalAccessRulePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExternalAccessRuleName', () => {
+        const result = client.matchProjectFromExternalAccessRuleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.externalAccessRulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExternalAccessRuleName', () => {
+        const result = client.matchLocationFromExternalAccessRuleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.externalAccessRulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNetworkPolicyFromExternalAccessRuleName', () => {
+        const result =
+          client.matchNetworkPolicyFromExternalAccessRuleName(fakePath);
+        assert.strictEqual(result, 'networkPolicyValue');
+        assert(
+          (
+            client.pathTemplates.externalAccessRulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExternalAccessRuleFromExternalAccessRuleName', () => {
+        const result =
+          client.matchExternalAccessRuleFromExternalAccessRuleName(fakePath);
+        assert.strictEqual(result, 'externalAccessRuleValue');
+        assert(
+          (
+            client.pathTemplates.externalAccessRulePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('externalAddress', () => {
+      const fakePath = '/rendered/path/externalAddress';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        private_cloud: 'privateCloudValue',
+        external_address: 'externalAddressValue',
+      };
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.externalAddressPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.externalAddressPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('externalAddressPath', () => {
+        const result = client.externalAddressPath(
+          'projectValue',
+          'locationValue',
+          'privateCloudValue',
+          'externalAddressValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.externalAddressPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExternalAddressName', () => {
+        const result = client.matchProjectFromExternalAddressName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.externalAddressPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExternalAddressName', () => {
+        const result = client.matchLocationFromExternalAddressName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.externalAddressPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPrivateCloudFromExternalAddressName', () => {
+        const result =
+          client.matchPrivateCloudFromExternalAddressName(fakePath);
+        assert.strictEqual(result, 'privateCloudValue');
+        assert(
+          (client.pathTemplates.externalAddressPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExternalAddressFromExternalAddressName', () => {
+        const result =
+          client.matchExternalAddressFromExternalAddressName(fakePath);
+        assert.strictEqual(result, 'externalAddressValue');
+        assert(
+          (client.pathTemplates.externalAddressPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('hcxActivationKey', () => {
       const fakePath = '/rendered/path/hcxActivationKey';
       const expectedParameters = {
@@ -9586,6 +17419,244 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
+    describe('loggingServer', () => {
+      const fakePath = '/rendered/path/loggingServer';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        private_cloud: 'privateCloudValue',
+        logging_server: 'loggingServerValue',
+      };
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.loggingServerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.loggingServerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('loggingServerPath', () => {
+        const result = client.loggingServerPath(
+          'projectValue',
+          'locationValue',
+          'privateCloudValue',
+          'loggingServerValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.loggingServerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLoggingServerName', () => {
+        const result = client.matchProjectFromLoggingServerName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.loggingServerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLoggingServerName', () => {
+        const result = client.matchLocationFromLoggingServerName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.loggingServerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPrivateCloudFromLoggingServerName', () => {
+        const result = client.matchPrivateCloudFromLoggingServerName(fakePath);
+        assert.strictEqual(result, 'privateCloudValue');
+        assert(
+          (client.pathTemplates.loggingServerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLoggingServerFromLoggingServerName', () => {
+        const result = client.matchLoggingServerFromLoggingServerName(fakePath);
+        assert.strictEqual(result, 'loggingServerValue');
+        assert(
+          (client.pathTemplates.loggingServerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('managementDnsZoneBinding', () => {
+      const fakePath = '/rendered/path/managementDnsZoneBinding';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        private_cloud: 'privateCloudValue',
+        management_dns_zone_binding: 'managementDnsZoneBindingValue',
+      };
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.managementDnsZoneBindingPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.managementDnsZoneBindingPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('managementDnsZoneBindingPath', () => {
+        const result = client.managementDnsZoneBindingPath(
+          'projectValue',
+          'locationValue',
+          'privateCloudValue',
+          'managementDnsZoneBindingValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.managementDnsZoneBindingPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromManagementDnsZoneBindingName', () => {
+        const result =
+          client.matchProjectFromManagementDnsZoneBindingName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.managementDnsZoneBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromManagementDnsZoneBindingName', () => {
+        const result =
+          client.matchLocationFromManagementDnsZoneBindingName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.managementDnsZoneBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPrivateCloudFromManagementDnsZoneBindingName', () => {
+        const result =
+          client.matchPrivateCloudFromManagementDnsZoneBindingName(fakePath);
+        assert.strictEqual(result, 'privateCloudValue');
+        assert(
+          (
+            client.pathTemplates.managementDnsZoneBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchManagementDnsZoneBindingFromManagementDnsZoneBindingName', () => {
+        const result =
+          client.matchManagementDnsZoneBindingFromManagementDnsZoneBindingName(
+            fakePath
+          );
+        assert.strictEqual(result, 'managementDnsZoneBindingValue');
+        assert(
+          (
+            client.pathTemplates.managementDnsZoneBindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('networkPeering', () => {
+      const fakePath = '/rendered/path/networkPeering';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        network_peering: 'networkPeeringValue',
+      };
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.networkPeeringPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.networkPeeringPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('networkPeeringPath', () => {
+        const result = client.networkPeeringPath(
+          'projectValue',
+          'locationValue',
+          'networkPeeringValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.networkPeeringPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNetworkPeeringName', () => {
+        const result = client.matchProjectFromNetworkPeeringName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.networkPeeringPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNetworkPeeringName', () => {
+        const result = client.matchLocationFromNetworkPeeringName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.networkPeeringPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNetworkPeeringFromNetworkPeeringName', () => {
+        const result =
+          client.matchNetworkPeeringFromNetworkPeeringName(fakePath);
+        assert.strictEqual(result, 'networkPeeringValue');
+        assert(
+          (client.pathTemplates.networkPeeringPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('networkPolicy', () => {
       const fakePath = '/rendered/path/networkPolicy';
       const expectedParameters = {
@@ -9644,6 +17715,94 @@ describe('v1.VmwareEngineClient', () => {
         assert.strictEqual(result, 'networkPolicyValue');
         assert(
           (client.pathTemplates.networkPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('node', () => {
+      const fakePath = '/rendered/path/node';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        private_cloud: 'privateCloudValue',
+        cluster: 'clusterValue',
+        node: 'nodeValue',
+      };
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.nodePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nodePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nodePath', () => {
+        const result = client.nodePath(
+          'projectValue',
+          'locationValue',
+          'privateCloudValue',
+          'clusterValue',
+          'nodeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nodePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNodeName', () => {
+        const result = client.matchProjectFromNodeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNodeName', () => {
+        const result = client.matchLocationFromNodeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPrivateCloudFromNodeName', () => {
+        const result = client.matchPrivateCloudFromNodeName(fakePath);
+        assert.strictEqual(result, 'privateCloudValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchClusterFromNodeName', () => {
+        const result = client.matchClusterFromNodeName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNodeFromNodeName', () => {
+        const result = client.matchNodeFromNodeName(fakePath);
+        assert.strictEqual(result, 'nodeValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
