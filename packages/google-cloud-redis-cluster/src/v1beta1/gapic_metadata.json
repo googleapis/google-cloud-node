@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.redis.cluster.v1beta1",
-  "libraryPackage": "@google-cloud/cluster",
+  "libraryPackage": "@google-cloud/redis-cluster",
   "services": {
     "CloudRedisCluster": {
       "clients": {
