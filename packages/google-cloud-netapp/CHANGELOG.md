@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.2.0...netapp-v0.2.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4966](https://github.com/googleapis/google-cloud-node/issues/4966)) ([f42fe57](https://github.com/googleapis/google-cloud-node/commit/f42fe5790785ad2d45e7e317f7326719bf3f51bb))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.1.0...netapp-v0.2.0) (2024-01-05)
 
 

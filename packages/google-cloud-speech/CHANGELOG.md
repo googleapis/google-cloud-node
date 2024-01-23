@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [6.1.1](https://github.com/googleapis/google-cloud-node/compare/speech-v6.1.0...speech-v6.1.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4967](https://github.com/googleapis/google-cloud-node/issues/4967)) ([2b436da](https://github.com/googleapis/google-cloud-node/commit/2b436da08c000b06b7b17d2a0be139032d696274))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.0.2...speech-v6.1.0) (2023-11-03)
 
 

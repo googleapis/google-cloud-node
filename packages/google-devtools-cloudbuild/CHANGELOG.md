@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.1](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.1.0...cloudbuild-v4.1.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4968](https://github.com/googleapis/google-cloud-node/issues/4968)) ([7fbf16c](https://github.com/googleapis/google-cloud-node/commit/7fbf16c98d0521a0533ab36a00f6ec932c72a02e))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.0.1...cloudbuild-v4.1.0) (2023-11-03)
 
 

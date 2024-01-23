@@ -4,6 +4,516 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "70fe30af077ab6042822d62d31ca740dd5df55dd",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4969"
+          ]
+        }
+      ],
+      "version": "1.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "8e0d612b-b63c-47ff-9fe5-39823cd6571c",
+      "createTime": "2024-01-23T23:15:07.990Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "006b1997-3229-4d4c-83d9-94136c48ec2a",
+      "createTime": "2024-01-23T23:15:07.983Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "2350f6f0-d8c5-46c8-90c7-e8045ae3c615",
+      "createTime": "2024-01-23T23:15:07.975Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "0a77d976-4e13-4d8d-8618-5183f94c7133",
+      "createTime": "2024-01-23T23:15:07.966Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3ea1e29659486d15bfc03811d6800b081f21f5e0",
+          "message": "[container] add fields desired_in_transit_encryption_config and in_transit_encryption_config",
+          "issues": [
+            "4974"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "12fd417f-0d76-445f-9662-e43e18ecb7fd",
+      "createTime": "2024-01-23T23:15:07.959Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "1.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "c6947fa4-4ef1-44bd-92c1-9ec9bfaae3c6",
+      "createTime": "2024-01-23T23:15:07.952Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "e23ffc1d-e7b7-4e1f-9216-385952c4c1fe",
+      "createTime": "2024-01-23T23:15:07.941Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "fd32b56e-c0a2-46d4-aaf2-4edc1eeed9cc",
+      "createTime": "2024-01-23T23:15:07.929Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "d2fa047d-c6cf-4cbf-a805-3131e732fc59",
+      "createTime": "2024-01-23T23:15:07.890Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "97ce81d3-03b2-4a88-861a-e3ddfc73720e",
+      "createTime": "2024-01-23T23:15:07.883Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7d4365f0ff744462336597d7f3df8566e92623f8",
+          "message": "[vmwareengine] improve retry logic for streaming API calls",
+          "issues": [
+            "4960"
+          ]
+        }
+      ],
+      "version": "1.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "ede05934-b3d9-49ce-9ddc-1697189fa61f",
+      "createTime": "2024-01-23T23:15:07.875Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "4f77f6ba-d9ff-4e01-b5f3-aef9ff92393b",
+      "createTime": "2024-01-23T23:15:07.868Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "4.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "79340b26-650a-4332-bbc7-a94c6b9ea567",
+      "createTime": "2024-01-23T23:15:07.860Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "c7f7be0b-46ce-489c-9fa6-479473d4146c",
+      "createTime": "2024-01-23T23:15:07.853Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "08e63b8f-298b-4e09-89e0-5fc1b4aaa671",
+      "createTime": "2024-01-23T23:15:07.846Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "2.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "cb20bc06-0622-4367-9d28-a385d1d5241d",
+      "createTime": "2024-01-23T23:15:07.838Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "1.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "f46b302a-94bd-4cfc-97fb-0ee78b68a4bc",
+      "createTime": "2024-01-23T23:15:07.828Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "db235d4c-a732-4141-816c-40fff3003d5e",
+      "createTime": "2024-01-23T23:15:07.765Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "2b436da08c000b06b7b17d2a0be139032d696274",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4967"
+          ]
+        }
+      ],
+      "version": "6.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "93ddb66d-3e9f-46e9-9144-7a16d261fea7",
+      "createTime": "2024-01-23T23:15:07.757Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "2b436da08c000b06b7b17d2a0be139032d696274",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4967"
+          ]
+        }
+      ],
+      "version": "1.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "f467433c-646f-4087-8a00-e0d4e074354a",
+      "createTime": "2024-01-23T23:15:07.746Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "2b436da08c000b06b7b17d2a0be139032d696274",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4967"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "36c8012a-3a26-4c27-a8fd-c64ff19bda2d",
+      "createTime": "2024-01-23T23:15:07.739Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f42fe5790785ad2d45e7e317f7326719bf3f51bb",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4966"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "c8417329-94b5-46f2-b39f-ac6306877dca",
+      "createTime": "2024-01-23T23:15:07.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7316bd0adc045a2d2226dfb25fa33fa7ed055b09",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4965"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "223cb9d6-a400-4e65-b5ac-c6c06731e3e6",
+      "createTime": "2024-01-23T23:15:07.632Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "34bd4e2e40e51ffcd122e7d04307f9a5cce694a6",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4964"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "29c08a2f-394b-4bdb-a6f9-d765b8467077",
+      "createTime": "2024-01-23T23:15:07.536Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "34bd4e2e40e51ffcd122e7d04307f9a5cce694a6",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4964"
+          ]
+        }
+      ],
+      "version": "6.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "d2b7599b-4e3d-4a1a-9e89-bdfd86d2e1c8",
+      "createTime": "2024-01-23T23:15:07.523Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "34bd4e2e40e51ffcd122e7d04307f9a5cce694a6",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4964"
+          ]
+        }
+      ],
+      "version": "3.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "11eb7299-c895-401c-8bf0-35be08e4af4b",
+      "createTime": "2024-01-23T23:15:07.485Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4292a438a9a458e43fbe032f2bab8c11bf51867a",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4963"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "644da0ca-4a96-43b8-8fac-f43ee0de8032",
+      "createTime": "2024-01-23T23:15:07.478Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e49b31dc04ece6ce7d0dd4a4fb23f3b72b83540e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4962"
+          ]
+        }
+      ],
+      "version": "3.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "d6ddb979-ecaa-43be-8677-99d3967712fc",
+      "createTime": "2024-01-23T23:15:07.469Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0bca99dd38384b0cdeb2d418a001985d58297b3c",
+          "message": "Improve retry logic for streaming API calls",
+          "issues": [
+            "4942"
+          ]
+        }
+      ],
+      "version": "3.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "e7a43fd1-354b-4692-93a6-d38251b742e6",
+      "createTime": "2024-01-23T23:15:07.459Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cafe82f06e0afa498ae234b0afe01f8014311f4b",
+          "message": "[generativelanguage] improve retry logic for streaming API calls",
+          "issues": [
+            "4955"
+          ]
+        }
+      ],
+      "version": "2.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "652546e5-54d2-4145-8dbd-a9654d706a0f",
+      "createTime": "2024-01-23T23:15:07.448Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "7b062d5c5137f3493530775527144a1861496c47",
           "message": "Add initial files for google.cloud.redis.cluster.v1",
@@ -21171,5 +21681,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-01-18T21:25:21.465Z"
+  "updateTime": "2024-01-23T23:15:07.990Z"
 }

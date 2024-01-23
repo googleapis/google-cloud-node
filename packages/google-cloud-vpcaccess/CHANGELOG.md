@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/googleapis/google-cloud-node/compare/vpc-access-v3.0.1...vpc-access-v3.0.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4968](https://github.com/googleapis/google-cloud-node/issues/4968)) ([7fbf16c](https://github.com/googleapis/google-cloud-node/commit/7fbf16c98d0521a0533ab36a00f6ec932c72a02e))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/vpc-access-v3.0.0...vpc-access-v3.0.1) (2023-09-06)
 
 
