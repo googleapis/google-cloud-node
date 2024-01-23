@@ -23430,7 +23430,6 @@
                          * @property {number|Long|null} [taskCountPerNode] TaskGroup taskCountPerNode
                          * @property {boolean|null} [requireHostsFile] TaskGroup requireHostsFile
                          * @property {boolean|null} [permissiveSsh] TaskGroup permissiveSsh
-                         * @property {boolean|null} [enableOslogin] TaskGroup enableOslogin
                          * @property {boolean|null} [runAsNonRoot] TaskGroup runAsNonRoot
                          */
     
@@ -23540,14 +23539,6 @@
                         TaskGroup.prototype.permissiveSsh = false;
     
                         /**
-                         * TaskGroup enableOslogin.
-                         * @member {boolean} enableOslogin
-                         * @memberof google.cloud.batch.v1alpha.TaskGroup
-                         * @instance
-                         */
-                        TaskGroup.prototype.enableOslogin = false;
-    
-                        /**
                          * TaskGroup runAsNonRoot.
                          * @member {boolean} runAsNonRoot
                          * @memberof google.cloud.batch.v1alpha.TaskGroup
@@ -23603,8 +23594,6 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.requireHostsFile);
                             if (message.permissiveSsh != null && Object.hasOwnProperty.call(message, "permissiveSsh"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.permissiveSsh);
-                            if (message.enableOslogin != null && Object.hasOwnProperty.call(message, "enableOslogin"))
-                                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.enableOslogin);
                             if (message.runAsNonRoot != null && Object.hasOwnProperty.call(message, "runAsNonRoot"))
                                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.runAsNonRoot);
                             return writer;
@@ -23706,10 +23695,6 @@
                                         message.permissiveSsh = reader.bool();
                                         break;
                                     }
-                                case 13: {
-                                        message.enableOslogin = reader.bool();
-                                        break;
-                                    }
                                 case 14: {
                                         message.runAsNonRoot = reader.bool();
                                         break;
@@ -23803,9 +23788,6 @@
                             if (message.permissiveSsh != null && message.hasOwnProperty("permissiveSsh"))
                                 if (typeof message.permissiveSsh !== "boolean")
                                     return "permissiveSsh: boolean expected";
-                            if (message.enableOslogin != null && message.hasOwnProperty("enableOslogin"))
-                                if (typeof message.enableOslogin !== "boolean")
-                                    return "enableOslogin: boolean expected";
                             if (message.runAsNonRoot != null && message.hasOwnProperty("runAsNonRoot"))
                                 if (typeof message.runAsNonRoot !== "boolean")
                                     return "runAsNonRoot: boolean expected";
@@ -23904,8 +23886,6 @@
                                 message.requireHostsFile = Boolean(object.requireHostsFile);
                             if (object.permissiveSsh != null)
                                 message.permissiveSsh = Boolean(object.permissiveSsh);
-                            if (object.enableOslogin != null)
-                                message.enableOslogin = Boolean(object.enableOslogin);
                             if (object.runAsNonRoot != null)
                                 message.runAsNonRoot = Boolean(object.runAsNonRoot);
                             return message;
@@ -23950,7 +23930,6 @@
                                     object.taskCountPerNode = options.longs === String ? "0" : 0;
                                 object.requireHostsFile = false;
                                 object.permissiveSsh = false;
-                                object.enableOslogin = false;
                                 object.runAsNonRoot = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -23991,8 +23970,6 @@
                                 object.requireHostsFile = message.requireHostsFile;
                             if (message.permissiveSsh != null && message.hasOwnProperty("permissiveSsh"))
                                 object.permissiveSsh = message.permissiveSsh;
-                            if (message.enableOslogin != null && message.hasOwnProperty("enableOslogin"))
-                                object.enableOslogin = message.enableOslogin;
                             if (message.runAsNonRoot != null && message.hasOwnProperty("runAsNonRoot"))
                                 object.runAsNonRoot = message.runAsNonRoot;
                             return object;
