@@ -334,7 +334,8 @@ export class FeaturestoreOnlineServingServiceClient {
     this.descriptors.stream = {
       streamingReadFeatureValues: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
-        !!opts.fallback
+        !!opts.fallback,
+        /* gaxStreamingRetries: */ true
       ),
     };
 
