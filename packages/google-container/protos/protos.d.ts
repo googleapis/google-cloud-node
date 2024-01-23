@@ -6980,6 +6980,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNodePoolAutoConfigResourceManagerTags */
                 desiredNodePoolAutoConfigResourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
+
+                /** ClusterUpdate desiredInTransitEncryptionConfig */
+                desiredInTransitEncryptionConfig?: (google.container.v1.InTransitEncryptionConfig|keyof typeof google.container.v1.InTransitEncryptionConfig|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -7141,11 +7144,17 @@ export namespace google {
                 /** ClusterUpdate desiredNodePoolAutoConfigResourceManagerTags. */
                 public desiredNodePoolAutoConfigResourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
 
+                /** ClusterUpdate desiredInTransitEncryptionConfig. */
+                public desiredInTransitEncryptionConfig?: (google.container.v1.InTransitEncryptionConfig|keyof typeof google.container.v1.InTransitEncryptionConfig|null);
+
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
 
                 /** ClusterUpdate _desiredEnableFqdnNetworkPolicy. */
                 public _desiredEnableFqdnNetworkPolicy?: "desiredEnableFqdnNetworkPolicy";
+
+                /** ClusterUpdate _desiredInTransitEncryptionConfig. */
+                public _desiredInTransitEncryptionConfig?: "desiredInTransitEncryptionConfig";
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -15411,6 +15420,9 @@ export namespace google {
 
                 /** NetworkConfig enableFqdnNetworkPolicy */
                 enableFqdnNetworkPolicy?: (boolean|null);
+
+                /** NetworkConfig inTransitEncryptionConfig */
+                inTransitEncryptionConfig?: (google.container.v1.InTransitEncryptionConfig|keyof typeof google.container.v1.InTransitEncryptionConfig|null);
             }
 
             /** Represents a NetworkConfig. */
@@ -15461,8 +15473,14 @@ export namespace google {
                 /** NetworkConfig enableFqdnNetworkPolicy. */
                 public enableFqdnNetworkPolicy?: (boolean|null);
 
+                /** NetworkConfig inTransitEncryptionConfig. */
+                public inTransitEncryptionConfig?: (google.container.v1.InTransitEncryptionConfig|keyof typeof google.container.v1.InTransitEncryptionConfig|null);
+
                 /** NetworkConfig _enableFqdnNetworkPolicy. */
                 public _enableFqdnNetworkPolicy?: "enableFqdnNetworkPolicy";
+
+                /** NetworkConfig _inTransitEncryptionConfig. */
+                public _inTransitEncryptionConfig?: "inTransitEncryptionConfig";
 
                 /**
                  * Creates a new NetworkConfig instance using the specified properties.
@@ -21454,6 +21472,13 @@ export namespace google {
                     STANDARD = 1,
                     ENTERPRISE = 2
                 }
+            }
+
+            /** InTransitEncryptionConfig enum. */
+            enum InTransitEncryptionConfig {
+                IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED = 0,
+                IN_TRANSIT_ENCRYPTION_DISABLED = 1,
+                IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT = 2
             }
         }
 
