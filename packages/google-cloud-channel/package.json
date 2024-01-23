@@ -48,6 +48,7 @@
   "dependencies": {
     "google-gax": "^4.1.0"
   },
+  "devDependencies": {
     "@types/mocha": "^9.0.0",
     "@types/node": "^20.4.5",
     "@types/sinon": "^17.0.0",
