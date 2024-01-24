@@ -16,7 +16,7 @@ Google Compute Engine Client Library for Node.js
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-compute/CHANGELOG.md).
 
-* [Google Compute Engine Node.js Client API Reference][client-docs]
+* [Google Compute Engine Node.js Client API Reference](https://cloud.google.com/nodejs/docs/reference/compute/latest)
 * [Google Compute Engine Documentation][product-docs]
 * [github.com/googleapis/google-cloud-node/packages/google-cloud-compute](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-compute)
 
