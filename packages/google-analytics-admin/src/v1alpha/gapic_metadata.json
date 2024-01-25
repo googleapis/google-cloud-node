@@ -500,6 +500,26 @@
                 "getDataRedactionSettings"
               ]
             },
+            "GetCalculatedMetric": {
+              "methods": [
+                "getCalculatedMetric"
+              ]
+            },
+            "CreateCalculatedMetric": {
+              "methods": [
+                "createCalculatedMetric"
+              ]
+            },
+            "UpdateCalculatedMetric": {
+              "methods": [
+                "updateCalculatedMetric"
+              ]
+            },
+            "DeleteCalculatedMetric": {
+              "methods": [
+                "deleteCalculatedMetric"
+              ]
+            },
             "CreateRollupProperty": {
               "methods": [
                 "createRollupProperty"
@@ -697,6 +717,13 @@
                 "listEventCreateRules",
                 "listEventCreateRulesStream",
                 "listEventCreateRulesAsync"
+              ]
+            },
+            "ListCalculatedMetrics": {
+              "methods": [
+                "listCalculatedMetrics",
+                "listCalculatedMetricsStream",
+                "listCalculatedMetricsAsync"
               ]
             },
             "ListRollupPropertySourceLinks": {
@@ -1208,6 +1235,26 @@
                 "getDataRedactionSettings"
               ]
             },
+            "GetCalculatedMetric": {
+              "methods": [
+                "getCalculatedMetric"
+              ]
+            },
+            "CreateCalculatedMetric": {
+              "methods": [
+                "createCalculatedMetric"
+              ]
+            },
+            "UpdateCalculatedMetric": {
+              "methods": [
+                "updateCalculatedMetric"
+              ]
+            },
+            "DeleteCalculatedMetric": {
+              "methods": [
+                "deleteCalculatedMetric"
+              ]
+            },
             "CreateRollupProperty": {
               "methods": [
                 "createRollupProperty"
@@ -1405,6 +1452,13 @@
                 "listEventCreateRules",
                 "listEventCreateRulesStream",
                 "listEventCreateRulesAsync"
+              ]
+            },
+            "ListCalculatedMetrics": {
+              "methods": [
+                "listCalculatedMetrics",
+                "listCalculatedMetricsStream",
+                "listCalculatedMetricsAsync"
               ]
             },
             "ListRollupPropertySourceLinks": {

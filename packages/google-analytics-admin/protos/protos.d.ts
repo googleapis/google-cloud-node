@@ -3955,6 +3955,76 @@ export namespace google {
                     public getDataRedactionSettings(request: google.analytics.admin.v1alpha.IGetDataRedactionSettingsRequest): Promise<google.analytics.admin.v1alpha.DataRedactionSettings>;
 
                     /**
+                     * Calls GetCalculatedMetric.
+                     * @param request GetCalculatedMetricRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CalculatedMetric
+                     */
+                    public getCalculatedMetric(request: google.analytics.admin.v1alpha.IGetCalculatedMetricRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetCalculatedMetricCallback): void;
+
+                    /**
+                     * Calls GetCalculatedMetric.
+                     * @param request GetCalculatedMetricRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCalculatedMetric(request: google.analytics.admin.v1alpha.IGetCalculatedMetricRequest): Promise<google.analytics.admin.v1alpha.CalculatedMetric>;
+
+                    /**
+                     * Calls CreateCalculatedMetric.
+                     * @param request CreateCalculatedMetricRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CalculatedMetric
+                     */
+                    public createCalculatedMetric(request: google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CreateCalculatedMetricCallback): void;
+
+                    /**
+                     * Calls CreateCalculatedMetric.
+                     * @param request CreateCalculatedMetricRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCalculatedMetric(request: google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest): Promise<google.analytics.admin.v1alpha.CalculatedMetric>;
+
+                    /**
+                     * Calls ListCalculatedMetrics.
+                     * @param request ListCalculatedMetricsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCalculatedMetricsResponse
+                     */
+                    public listCalculatedMetrics(request: google.analytics.admin.v1alpha.IListCalculatedMetricsRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListCalculatedMetricsCallback): void;
+
+                    /**
+                     * Calls ListCalculatedMetrics.
+                     * @param request ListCalculatedMetricsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listCalculatedMetrics(request: google.analytics.admin.v1alpha.IListCalculatedMetricsRequest): Promise<google.analytics.admin.v1alpha.ListCalculatedMetricsResponse>;
+
+                    /**
+                     * Calls UpdateCalculatedMetric.
+                     * @param request UpdateCalculatedMetricRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CalculatedMetric
+                     */
+                    public updateCalculatedMetric(request: google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateCalculatedMetricCallback): void;
+
+                    /**
+                     * Calls UpdateCalculatedMetric.
+                     * @param request UpdateCalculatedMetricRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCalculatedMetric(request: google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest): Promise<google.analytics.admin.v1alpha.CalculatedMetric>;
+
+                    /**
+                     * Calls DeleteCalculatedMetric.
+                     * @param request DeleteCalculatedMetricRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteCalculatedMetric(request: google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteCalculatedMetricCallback): void;
+
+                    /**
+                     * Calls DeleteCalculatedMetric.
+                     * @param request DeleteCalculatedMetricRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCalculatedMetric(request: google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest): Promise<google.protobuf.Empty>;
+
+                    /**
                      * Calls CreateRollupProperty.
                      * @param request CreateRollupPropertyRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and CreateRollupPropertyResponse
@@ -4950,6 +5020,41 @@ export namespace google {
                      * @param [response] DataRedactionSettings
                      */
                     type GetDataRedactionSettingsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.DataRedactionSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getCalculatedMetric}.
+                     * @param error Error, if any
+                     * @param [response] CalculatedMetric
+                     */
+                    type GetCalculatedMetricCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.CalculatedMetric) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|createCalculatedMetric}.
+                     * @param error Error, if any
+                     * @param [response] CalculatedMetric
+                     */
+                    type CreateCalculatedMetricCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.CalculatedMetric) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|listCalculatedMetrics}.
+                     * @param error Error, if any
+                     * @param [response] ListCalculatedMetricsResponse
+                     */
+                    type ListCalculatedMetricsCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListCalculatedMetricsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|updateCalculatedMetric}.
+                     * @param error Error, if any
+                     * @param [response] CalculatedMetric
+                     */
+                    type UpdateCalculatedMetricCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.CalculatedMetric) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|deleteCalculatedMetric}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteCalculatedMetricCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|createRollupProperty}.
@@ -13687,6 +13792,624 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetCustomMetricRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCalculatedMetricRequest. */
+                interface ICreateCalculatedMetricRequest {
+
+                    /** CreateCalculatedMetricRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateCalculatedMetricRequest calculatedMetricId */
+                    calculatedMetricId?: (string|null);
+
+                    /** CreateCalculatedMetricRequest calculatedMetric */
+                    calculatedMetric?: (google.analytics.admin.v1alpha.ICalculatedMetric|null);
+                }
+
+                /** Represents a CreateCalculatedMetricRequest. */
+                class CreateCalculatedMetricRequest implements ICreateCalculatedMetricRequest {
+
+                    /**
+                     * Constructs a new CreateCalculatedMetricRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest);
+
+                    /** CreateCalculatedMetricRequest parent. */
+                    public parent: string;
+
+                    /** CreateCalculatedMetricRequest calculatedMetricId. */
+                    public calculatedMetricId: string;
+
+                    /** CreateCalculatedMetricRequest calculatedMetric. */
+                    public calculatedMetric?: (google.analytics.admin.v1alpha.ICalculatedMetric|null);
+
+                    /**
+                     * Creates a new CreateCalculatedMetricRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCalculatedMetricRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest): google.analytics.admin.v1alpha.CreateCalculatedMetricRequest;
+
+                    /**
+                     * Encodes the specified CreateCalculatedMetricRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateCalculatedMetricRequest.verify|verify} messages.
+                     * @param message CreateCalculatedMetricRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCalculatedMetricRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateCalculatedMetricRequest.verify|verify} messages.
+                     * @param message CreateCalculatedMetricRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCalculatedMetricRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCalculatedMetricRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateCalculatedMetricRequest;
+
+                    /**
+                     * Decodes a CreateCalculatedMetricRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCalculatedMetricRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateCalculatedMetricRequest;
+
+                    /**
+                     * Verifies a CreateCalculatedMetricRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCalculatedMetricRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCalculatedMetricRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateCalculatedMetricRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCalculatedMetricRequest message. Also converts values to other types if specified.
+                     * @param message CreateCalculatedMetricRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.CreateCalculatedMetricRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCalculatedMetricRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCalculatedMetricRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateCalculatedMetricRequest. */
+                interface IUpdateCalculatedMetricRequest {
+
+                    /** UpdateCalculatedMetricRequest calculatedMetric */
+                    calculatedMetric?: (google.analytics.admin.v1alpha.ICalculatedMetric|null);
+
+                    /** UpdateCalculatedMetricRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateCalculatedMetricRequest. */
+                class UpdateCalculatedMetricRequest implements IUpdateCalculatedMetricRequest {
+
+                    /**
+                     * Constructs a new UpdateCalculatedMetricRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest);
+
+                    /** UpdateCalculatedMetricRequest calculatedMetric. */
+                    public calculatedMetric?: (google.analytics.admin.v1alpha.ICalculatedMetric|null);
+
+                    /** UpdateCalculatedMetricRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateCalculatedMetricRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCalculatedMetricRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest): google.analytics.admin.v1alpha.UpdateCalculatedMetricRequest;
+
+                    /**
+                     * Encodes the specified UpdateCalculatedMetricRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateCalculatedMetricRequest.verify|verify} messages.
+                     * @param message UpdateCalculatedMetricRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCalculatedMetricRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateCalculatedMetricRequest.verify|verify} messages.
+                     * @param message UpdateCalculatedMetricRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCalculatedMetricRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCalculatedMetricRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateCalculatedMetricRequest;
+
+                    /**
+                     * Decodes an UpdateCalculatedMetricRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCalculatedMetricRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateCalculatedMetricRequest;
+
+                    /**
+                     * Verifies an UpdateCalculatedMetricRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCalculatedMetricRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCalculatedMetricRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateCalculatedMetricRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCalculatedMetricRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCalculatedMetricRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateCalculatedMetricRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCalculatedMetricRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCalculatedMetricRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCalculatedMetricRequest. */
+                interface IDeleteCalculatedMetricRequest {
+
+                    /** DeleteCalculatedMetricRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteCalculatedMetricRequest. */
+                class DeleteCalculatedMetricRequest implements IDeleteCalculatedMetricRequest {
+
+                    /**
+                     * Constructs a new DeleteCalculatedMetricRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest);
+
+                    /** DeleteCalculatedMetricRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteCalculatedMetricRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCalculatedMetricRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest): google.analytics.admin.v1alpha.DeleteCalculatedMetricRequest;
+
+                    /**
+                     * Encodes the specified DeleteCalculatedMetricRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteCalculatedMetricRequest.verify|verify} messages.
+                     * @param message DeleteCalculatedMetricRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCalculatedMetricRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteCalculatedMetricRequest.verify|verify} messages.
+                     * @param message DeleteCalculatedMetricRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCalculatedMetricRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCalculatedMetricRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DeleteCalculatedMetricRequest;
+
+                    /**
+                     * Decodes a DeleteCalculatedMetricRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCalculatedMetricRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DeleteCalculatedMetricRequest;
+
+                    /**
+                     * Verifies a DeleteCalculatedMetricRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCalculatedMetricRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCalculatedMetricRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DeleteCalculatedMetricRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCalculatedMetricRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCalculatedMetricRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.DeleteCalculatedMetricRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCalculatedMetricRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCalculatedMetricRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCalculatedMetricsRequest. */
+                interface IListCalculatedMetricsRequest {
+
+                    /** ListCalculatedMetricsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListCalculatedMetricsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCalculatedMetricsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListCalculatedMetricsRequest. */
+                class ListCalculatedMetricsRequest implements IListCalculatedMetricsRequest {
+
+                    /**
+                     * Constructs a new ListCalculatedMetricsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListCalculatedMetricsRequest);
+
+                    /** ListCalculatedMetricsRequest parent. */
+                    public parent: string;
+
+                    /** ListCalculatedMetricsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCalculatedMetricsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListCalculatedMetricsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCalculatedMetricsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListCalculatedMetricsRequest): google.analytics.admin.v1alpha.ListCalculatedMetricsRequest;
+
+                    /**
+                     * Encodes the specified ListCalculatedMetricsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListCalculatedMetricsRequest.verify|verify} messages.
+                     * @param message ListCalculatedMetricsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListCalculatedMetricsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCalculatedMetricsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListCalculatedMetricsRequest.verify|verify} messages.
+                     * @param message ListCalculatedMetricsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListCalculatedMetricsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCalculatedMetricsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCalculatedMetricsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListCalculatedMetricsRequest;
+
+                    /**
+                     * Decodes a ListCalculatedMetricsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCalculatedMetricsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListCalculatedMetricsRequest;
+
+                    /**
+                     * Verifies a ListCalculatedMetricsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCalculatedMetricsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCalculatedMetricsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListCalculatedMetricsRequest;
+
+                    /**
+                     * Creates a plain object from a ListCalculatedMetricsRequest message. Also converts values to other types if specified.
+                     * @param message ListCalculatedMetricsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListCalculatedMetricsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCalculatedMetricsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCalculatedMetricsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCalculatedMetricsResponse. */
+                interface IListCalculatedMetricsResponse {
+
+                    /** ListCalculatedMetricsResponse calculatedMetrics */
+                    calculatedMetrics?: (google.analytics.admin.v1alpha.ICalculatedMetric[]|null);
+
+                    /** ListCalculatedMetricsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListCalculatedMetricsResponse. */
+                class ListCalculatedMetricsResponse implements IListCalculatedMetricsResponse {
+
+                    /**
+                     * Constructs a new ListCalculatedMetricsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListCalculatedMetricsResponse);
+
+                    /** ListCalculatedMetricsResponse calculatedMetrics. */
+                    public calculatedMetrics: google.analytics.admin.v1alpha.ICalculatedMetric[];
+
+                    /** ListCalculatedMetricsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListCalculatedMetricsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCalculatedMetricsResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListCalculatedMetricsResponse): google.analytics.admin.v1alpha.ListCalculatedMetricsResponse;
+
+                    /**
+                     * Encodes the specified ListCalculatedMetricsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListCalculatedMetricsResponse.verify|verify} messages.
+                     * @param message ListCalculatedMetricsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListCalculatedMetricsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCalculatedMetricsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListCalculatedMetricsResponse.verify|verify} messages.
+                     * @param message ListCalculatedMetricsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListCalculatedMetricsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCalculatedMetricsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCalculatedMetricsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListCalculatedMetricsResponse;
+
+                    /**
+                     * Decodes a ListCalculatedMetricsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCalculatedMetricsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListCalculatedMetricsResponse;
+
+                    /**
+                     * Verifies a ListCalculatedMetricsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCalculatedMetricsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCalculatedMetricsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListCalculatedMetricsResponse;
+
+                    /**
+                     * Creates a plain object from a ListCalculatedMetricsResponse message. Also converts values to other types if specified.
+                     * @param message ListCalculatedMetricsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListCalculatedMetricsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCalculatedMetricsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCalculatedMetricsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetCalculatedMetricRequest. */
+                interface IGetCalculatedMetricRequest {
+
+                    /** GetCalculatedMetricRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCalculatedMetricRequest. */
+                class GetCalculatedMetricRequest implements IGetCalculatedMetricRequest {
+
+                    /**
+                     * Constructs a new GetCalculatedMetricRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetCalculatedMetricRequest);
+
+                    /** GetCalculatedMetricRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCalculatedMetricRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCalculatedMetricRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetCalculatedMetricRequest): google.analytics.admin.v1alpha.GetCalculatedMetricRequest;
+
+                    /**
+                     * Encodes the specified GetCalculatedMetricRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetCalculatedMetricRequest.verify|verify} messages.
+                     * @param message GetCalculatedMetricRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetCalculatedMetricRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCalculatedMetricRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetCalculatedMetricRequest.verify|verify} messages.
+                     * @param message GetCalculatedMetricRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetCalculatedMetricRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCalculatedMetricRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCalculatedMetricRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetCalculatedMetricRequest;
+
+                    /**
+                     * Decodes a GetCalculatedMetricRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCalculatedMetricRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetCalculatedMetricRequest;
+
+                    /**
+                     * Verifies a GetCalculatedMetricRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCalculatedMetricRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCalculatedMetricRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetCalculatedMetricRequest;
+
+                    /**
+                     * Creates a plain object from a GetCalculatedMetricRequest message. Also converts values to other types if specified.
+                     * @param message GetCalculatedMetricRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetCalculatedMetricRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCalculatedMetricRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCalculatedMetricRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -25912,7 +26635,8 @@ export namespace google {
                     SKADNETWORK_CONVERSION_VALUE_SCHEMA = 26,
                     ADSENSE_LINK = 27,
                     AUDIENCE = 28,
-                    EVENT_CREATE_RULE = 29
+                    EVENT_CREATE_RULE = 29,
+                    CALCULATED_METRIC = 31
                 }
 
                 /** GoogleSignalsState enum. */
@@ -28337,6 +29061,9 @@ export namespace google {
 
                         /** ChangeHistoryResource eventCreateRule */
                         eventCreateRule?: (google.analytics.admin.v1alpha.IEventCreateRule|null);
+
+                        /** ChangeHistoryResource calculatedMetric */
+                        calculatedMetric?: (google.analytics.admin.v1alpha.ICalculatedMetric|null);
                     }
 
                     /** Represents a ChangeHistoryResource. */
@@ -28420,8 +29147,11 @@ export namespace google {
                         /** ChangeHistoryResource eventCreateRule. */
                         public eventCreateRule?: (google.analytics.admin.v1alpha.IEventCreateRule|null);
 
+                        /** ChangeHistoryResource calculatedMetric. */
+                        public calculatedMetric?: (google.analytics.admin.v1alpha.ICalculatedMetric|null);
+
                         /** ChangeHistoryResource resource. */
-                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule");
+                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"dataRedactionSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule"|"calculatedMetric");
 
                         /**
                          * Creates a new ChangeHistoryResource instance using the specified properties.
@@ -29666,6 +30396,170 @@ export namespace google {
                     enum MetricScope {
                         METRIC_SCOPE_UNSPECIFIED = 0,
                         EVENT = 1
+                    }
+
+                    /** RestrictedMetricType enum. */
+                    enum RestrictedMetricType {
+                        RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0,
+                        COST_DATA = 1,
+                        REVENUE_DATA = 2
+                    }
+                }
+
+                /** Properties of a CalculatedMetric. */
+                interface ICalculatedMetric {
+
+                    /** CalculatedMetric name */
+                    name?: (string|null);
+
+                    /** CalculatedMetric description */
+                    description?: (string|null);
+
+                    /** CalculatedMetric displayName */
+                    displayName?: (string|null);
+
+                    /** CalculatedMetric calculatedMetricId */
+                    calculatedMetricId?: (string|null);
+
+                    /** CalculatedMetric metricUnit */
+                    metricUnit?: (google.analytics.admin.v1alpha.CalculatedMetric.MetricUnit|keyof typeof google.analytics.admin.v1alpha.CalculatedMetric.MetricUnit|null);
+
+                    /** CalculatedMetric restrictedMetricType */
+                    restrictedMetricType?: (google.analytics.admin.v1alpha.CalculatedMetric.RestrictedMetricType[]|null);
+
+                    /** CalculatedMetric formula */
+                    formula?: (string|null);
+
+                    /** CalculatedMetric invalidMetricReference */
+                    invalidMetricReference?: (boolean|null);
+                }
+
+                /** Represents a CalculatedMetric. */
+                class CalculatedMetric implements ICalculatedMetric {
+
+                    /**
+                     * Constructs a new CalculatedMetric.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ICalculatedMetric);
+
+                    /** CalculatedMetric name. */
+                    public name: string;
+
+                    /** CalculatedMetric description. */
+                    public description: string;
+
+                    /** CalculatedMetric displayName. */
+                    public displayName: string;
+
+                    /** CalculatedMetric calculatedMetricId. */
+                    public calculatedMetricId: string;
+
+                    /** CalculatedMetric metricUnit. */
+                    public metricUnit: (google.analytics.admin.v1alpha.CalculatedMetric.MetricUnit|keyof typeof google.analytics.admin.v1alpha.CalculatedMetric.MetricUnit);
+
+                    /** CalculatedMetric restrictedMetricType. */
+                    public restrictedMetricType: google.analytics.admin.v1alpha.CalculatedMetric.RestrictedMetricType[];
+
+                    /** CalculatedMetric formula. */
+                    public formula: string;
+
+                    /** CalculatedMetric invalidMetricReference. */
+                    public invalidMetricReference: boolean;
+
+                    /**
+                     * Creates a new CalculatedMetric instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CalculatedMetric instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ICalculatedMetric): google.analytics.admin.v1alpha.CalculatedMetric;
+
+                    /**
+                     * Encodes the specified CalculatedMetric message. Does not implicitly {@link google.analytics.admin.v1alpha.CalculatedMetric.verify|verify} messages.
+                     * @param message CalculatedMetric message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ICalculatedMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CalculatedMetric message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CalculatedMetric.verify|verify} messages.
+                     * @param message CalculatedMetric message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICalculatedMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CalculatedMetric message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CalculatedMetric
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CalculatedMetric;
+
+                    /**
+                     * Decodes a CalculatedMetric message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CalculatedMetric
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CalculatedMetric;
+
+                    /**
+                     * Verifies a CalculatedMetric message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CalculatedMetric message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CalculatedMetric
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CalculatedMetric;
+
+                    /**
+                     * Creates a plain object from a CalculatedMetric message. Also converts values to other types if specified.
+                     * @param message CalculatedMetric
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.CalculatedMetric, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CalculatedMetric to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CalculatedMetric
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CalculatedMetric {
+
+                    /** MetricUnit enum. */
+                    enum MetricUnit {
+                        METRIC_UNIT_UNSPECIFIED = 0,
+                        STANDARD = 1,
+                        CURRENCY = 2,
+                        FEET = 3,
+                        MILES = 4,
+                        METERS = 5,
+                        KILOMETERS = 6,
+                        MILLISECONDS = 7,
+                        SECONDS = 8,
+                        MINUTES = 9,
+                        HOURS = 10
                     }
 
                     /** RestrictedMetricType enum. */
