@@ -18722,6 +18722,7 @@
                          * @property {string|null} [languageCode] Conversation languageCode
                          * @property {string|null} [agentId] Conversation agentId
                          * @property {Object.<string,string>|null} [labels] Conversation labels
+                         * @property {google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata|null} [qualityMetadata] Conversation qualityMetadata
                          * @property {google.cloud.contactcenterinsights.v1.Conversation.ITranscript|null} [transcript] Conversation transcript
                          * @property {google.cloud.contactcenterinsights.v1.Conversation.Medium|null} [medium] Conversation medium
                          * @property {google.protobuf.IDuration|null} [duration] Conversation duration
@@ -18838,6 +18839,14 @@
                          * @instance
                          */
                         Conversation.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Conversation qualityMetadata.
+                         * @member {google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata|null|undefined} qualityMetadata
+                         * @memberof google.cloud.contactcenterinsights.v1.Conversation
+                         * @instance
+                         */
+                        Conversation.prototype.qualityMetadata = null;
     
                         /**
                          * Conversation transcript.
@@ -19005,6 +19014,8 @@
                                 $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.encode(message.latestSummary, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.obfuscatedUserId != null && Object.hasOwnProperty.call(message, "obfuscatedUserId"))
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.obfuscatedUserId);
+                            if (message.qualityMetadata != null && Object.hasOwnProperty.call(message, "qualityMetadata"))
+                                $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.encode(message.qualityMetadata, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             return writer;
                         };
     
@@ -19100,6 +19111,10 @@
                                             }
                                         }
                                         message.labels[key] = value;
+                                        break;
+                                    }
+                                case 24: {
+                                        message.qualityMetadata = $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 8: {
@@ -19258,6 +19273,11 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.qualityMetadata != null && message.hasOwnProperty("qualityMetadata")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.verify(message.qualityMetadata);
+                                if (error)
+                                    return "qualityMetadata." + error;
+                            }
                             if (message.transcript != null && message.hasOwnProperty("transcript")) {
                                 var error = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.verify(message.transcript);
                                 if (error)
@@ -19375,6 +19395,11 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.qualityMetadata != null) {
+                                if (typeof object.qualityMetadata !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.qualityMetadata: object expected");
+                                message.qualityMetadata = $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.fromObject(object.qualityMetadata);
+                            }
                             if (object.transcript != null) {
                                 if (typeof object.transcript !== "object")
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.transcript: object expected");
@@ -19476,6 +19501,7 @@
                                 object.startTime = null;
                                 object.latestSummary = null;
                                 object.obfuscatedUserId = "";
+                                object.qualityMetadata = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -19536,6 +19562,8 @@
                                 object.latestSummary = $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.toObject(message.latestSummary, options);
                             if (message.obfuscatedUserId != null && message.hasOwnProperty("obfuscatedUserId"))
                                 object.obfuscatedUserId = message.obfuscatedUserId;
+                            if (message.qualityMetadata != null && message.hasOwnProperty("qualityMetadata"))
+                                object.qualityMetadata = $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.toObject(message.qualityMetadata, options);
                             return object;
                         };
     
@@ -19790,6 +19818,579 @@
                             };
     
                             return CallMetadata;
+                        })();
+    
+                        Conversation.QualityMetadata = (function() {
+    
+                            /**
+                             * Properties of a QualityMetadata.
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation
+                             * @interface IQualityMetadata
+                             * @property {number|null} [customerSatisfactionRating] QualityMetadata customerSatisfactionRating
+                             * @property {google.protobuf.IDuration|null} [waitDuration] QualityMetadata waitDuration
+                             * @property {string|null} [menuPath] QualityMetadata menuPath
+                             * @property {Array.<google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo>|null} [agentInfo] QualityMetadata agentInfo
+                             */
+    
+                            /**
+                             * Constructs a new QualityMetadata.
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation
+                             * @classdesc Represents a QualityMetadata.
+                             * @implements IQualityMetadata
+                             * @constructor
+                             * @param {google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata=} [properties] Properties to set
+                             */
+                            function QualityMetadata(properties) {
+                                this.agentInfo = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * QualityMetadata customerSatisfactionRating.
+                             * @member {number} customerSatisfactionRating
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @instance
+                             */
+                            QualityMetadata.prototype.customerSatisfactionRating = 0;
+    
+                            /**
+                             * QualityMetadata waitDuration.
+                             * @member {google.protobuf.IDuration|null|undefined} waitDuration
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @instance
+                             */
+                            QualityMetadata.prototype.waitDuration = null;
+    
+                            /**
+                             * QualityMetadata menuPath.
+                             * @member {string} menuPath
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @instance
+                             */
+                            QualityMetadata.prototype.menuPath = "";
+    
+                            /**
+                             * QualityMetadata agentInfo.
+                             * @member {Array.<google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo>} agentInfo
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @instance
+                             */
+                            QualityMetadata.prototype.agentInfo = $util.emptyArray;
+    
+                            /**
+                             * Creates a new QualityMetadata instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata=} [properties] Properties to set
+                             * @returns {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata} QualityMetadata instance
+                             */
+                            QualityMetadata.create = function create(properties) {
+                                return new QualityMetadata(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified QualityMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata} message QualityMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QualityMetadata.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.customerSatisfactionRating != null && Object.hasOwnProperty.call(message, "customerSatisfactionRating"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.customerSatisfactionRating);
+                                if (message.waitDuration != null && Object.hasOwnProperty.call(message, "waitDuration"))
+                                    $root.google.protobuf.Duration.encode(message.waitDuration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.menuPath != null && Object.hasOwnProperty.call(message, "menuPath"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.menuPath);
+                                if (message.agentInfo != null && message.agentInfo.length)
+                                    for (var i = 0; i < message.agentInfo.length; ++i)
+                                        $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo.encode(message.agentInfo[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified QualityMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata} message QualityMetadata message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            QualityMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a QualityMetadata message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata} QualityMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QualityMetadata.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.customerSatisfactionRating = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.waitDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.menuPath = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.agentInfo && message.agentInfo.length))
+                                                message.agentInfo = [];
+                                            message.agentInfo.push($root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a QualityMetadata message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata} QualityMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            QualityMetadata.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a QualityMetadata message.
+                             * @function verify
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            QualityMetadata.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.customerSatisfactionRating != null && message.hasOwnProperty("customerSatisfactionRating"))
+                                    if (!$util.isInteger(message.customerSatisfactionRating))
+                                        return "customerSatisfactionRating: integer expected";
+                                if (message.waitDuration != null && message.hasOwnProperty("waitDuration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.waitDuration);
+                                    if (error)
+                                        return "waitDuration." + error;
+                                }
+                                if (message.menuPath != null && message.hasOwnProperty("menuPath"))
+                                    if (!$util.isString(message.menuPath))
+                                        return "menuPath: string expected";
+                                if (message.agentInfo != null && message.hasOwnProperty("agentInfo")) {
+                                    if (!Array.isArray(message.agentInfo))
+                                        return "agentInfo: array expected";
+                                    for (var i = 0; i < message.agentInfo.length; ++i) {
+                                        var error = $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo.verify(message.agentInfo[i]);
+                                        if (error)
+                                            return "agentInfo." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a QualityMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata} QualityMetadata
+                             */
+                            QualityMetadata.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata)
+                                    return object;
+                                var message = new $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata();
+                                if (object.customerSatisfactionRating != null)
+                                    message.customerSatisfactionRating = object.customerSatisfactionRating | 0;
+                                if (object.waitDuration != null) {
+                                    if (typeof object.waitDuration !== "object")
+                                        throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.waitDuration: object expected");
+                                    message.waitDuration = $root.google.protobuf.Duration.fromObject(object.waitDuration);
+                                }
+                                if (object.menuPath != null)
+                                    message.menuPath = String(object.menuPath);
+                                if (object.agentInfo) {
+                                    if (!Array.isArray(object.agentInfo))
+                                        throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.agentInfo: array expected");
+                                    message.agentInfo = [];
+                                    for (var i = 0; i < object.agentInfo.length; ++i) {
+                                        if (typeof object.agentInfo[i] !== "object")
+                                            throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.agentInfo: object expected");
+                                        message.agentInfo[i] = $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo.fromObject(object.agentInfo[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a QualityMetadata message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata} message QualityMetadata
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            QualityMetadata.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.agentInfo = [];
+                                if (options.defaults) {
+                                    object.customerSatisfactionRating = 0;
+                                    object.waitDuration = null;
+                                    object.menuPath = "";
+                                }
+                                if (message.customerSatisfactionRating != null && message.hasOwnProperty("customerSatisfactionRating"))
+                                    object.customerSatisfactionRating = message.customerSatisfactionRating;
+                                if (message.waitDuration != null && message.hasOwnProperty("waitDuration"))
+                                    object.waitDuration = $root.google.protobuf.Duration.toObject(message.waitDuration, options);
+                                if (message.menuPath != null && message.hasOwnProperty("menuPath"))
+                                    object.menuPath = message.menuPath;
+                                if (message.agentInfo && message.agentInfo.length) {
+                                    object.agentInfo = [];
+                                    for (var j = 0; j < message.agentInfo.length; ++j)
+                                        object.agentInfo[j] = $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo.toObject(message.agentInfo[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this QualityMetadata to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            QualityMetadata.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for QualityMetadata
+                             * @function getTypeUrl
+                             * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            QualityMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata";
+                            };
+    
+                            QualityMetadata.AgentInfo = (function() {
+    
+                                /**
+                                 * Properties of an AgentInfo.
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                                 * @interface IAgentInfo
+                                 * @property {string|null} [agentId] AgentInfo agentId
+                                 * @property {string|null} [displayName] AgentInfo displayName
+                                 * @property {string|null} [team] AgentInfo team
+                                 * @property {string|null} [dispositionCode] AgentInfo dispositionCode
+                                 */
+    
+                                /**
+                                 * Constructs a new AgentInfo.
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata
+                                 * @classdesc Represents an AgentInfo.
+                                 * @implements IAgentInfo
+                                 * @constructor
+                                 * @param {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo=} [properties] Properties to set
+                                 */
+                                function AgentInfo(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AgentInfo agentId.
+                                 * @member {string} agentId
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @instance
+                                 */
+                                AgentInfo.prototype.agentId = "";
+    
+                                /**
+                                 * AgentInfo displayName.
+                                 * @member {string} displayName
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @instance
+                                 */
+                                AgentInfo.prototype.displayName = "";
+    
+                                /**
+                                 * AgentInfo team.
+                                 * @member {string} team
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @instance
+                                 */
+                                AgentInfo.prototype.team = "";
+    
+                                /**
+                                 * AgentInfo dispositionCode.
+                                 * @member {string} dispositionCode
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @instance
+                                 */
+                                AgentInfo.prototype.dispositionCode = "";
+    
+                                /**
+                                 * Creates a new AgentInfo instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @static
+                                 * @param {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo=} [properties] Properties to set
+                                 * @returns {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo} AgentInfo instance
+                                 */
+                                AgentInfo.create = function create(properties) {
+                                    return new AgentInfo(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AgentInfo message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @static
+                                 * @param {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo} message AgentInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AgentInfo.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.agentId != null && Object.hasOwnProperty.call(message, "agentId"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.agentId);
+                                    if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                                    if (message.team != null && Object.hasOwnProperty.call(message, "team"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.team);
+                                    if (message.dispositionCode != null && Object.hasOwnProperty.call(message, "dispositionCode"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.dispositionCode);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AgentInfo message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @static
+                                 * @param {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo} message AgentInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AgentInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an AgentInfo message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo} AgentInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AgentInfo.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.agentId = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.displayName = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.team = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.dispositionCode = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an AgentInfo message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo} AgentInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AgentInfo.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an AgentInfo message.
+                                 * @function verify
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AgentInfo.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.agentId != null && message.hasOwnProperty("agentId"))
+                                        if (!$util.isString(message.agentId))
+                                            return "agentId: string expected";
+                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                        if (!$util.isString(message.displayName))
+                                            return "displayName: string expected";
+                                    if (message.team != null && message.hasOwnProperty("team"))
+                                        if (!$util.isString(message.team))
+                                            return "team: string expected";
+                                    if (message.dispositionCode != null && message.hasOwnProperty("dispositionCode"))
+                                        if (!$util.isString(message.dispositionCode))
+                                            return "dispositionCode: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an AgentInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo} AgentInfo
+                                 */
+                                AgentInfo.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo)
+                                        return object;
+                                    var message = new $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo();
+                                    if (object.agentId != null)
+                                        message.agentId = String(object.agentId);
+                                    if (object.displayName != null)
+                                        message.displayName = String(object.displayName);
+                                    if (object.team != null)
+                                        message.team = String(object.team);
+                                    if (object.dispositionCode != null)
+                                        message.dispositionCode = String(object.dispositionCode);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an AgentInfo message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @static
+                                 * @param {google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo} message AgentInfo
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AgentInfo.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.agentId = "";
+                                        object.displayName = "";
+                                        object.team = "";
+                                        object.dispositionCode = "";
+                                    }
+                                    if (message.agentId != null && message.hasOwnProperty("agentId"))
+                                        object.agentId = message.agentId;
+                                    if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                        object.displayName = message.displayName;
+                                    if (message.team != null && message.hasOwnProperty("team"))
+                                        object.team = message.team;
+                                    if (message.dispositionCode != null && message.hasOwnProperty("dispositionCode"))
+                                        object.dispositionCode = message.dispositionCode;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AgentInfo to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AgentInfo.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AgentInfo
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AgentInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo";
+                                };
+    
+                                return AgentInfo;
+                            })();
+    
+                            return QualityMetadata;
                         })();
     
                         Conversation.Transcript = (function() {

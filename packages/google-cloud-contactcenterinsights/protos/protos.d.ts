@@ -8307,6 +8307,9 @@ export namespace google {
                     /** Conversation labels */
                     labels?: ({ [k: string]: string }|null);
 
+                    /** Conversation qualityMetadata */
+                    qualityMetadata?: (google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata|null);
+
                     /** Conversation transcript */
                     transcript?: (google.cloud.contactcenterinsights.v1.Conversation.ITranscript|null);
 
@@ -8376,6 +8379,9 @@ export namespace google {
 
                     /** Conversation labels. */
                     public labels: { [k: string]: string };
+
+                    /** Conversation qualityMetadata. */
+                    public qualityMetadata?: (google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata|null);
 
                     /** Conversation transcript. */
                     public transcript?: (google.cloud.contactcenterinsights.v1.Conversation.ITranscript|null);
@@ -8591,6 +8597,239 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a QualityMetadata. */
+                    interface IQualityMetadata {
+
+                        /** QualityMetadata customerSatisfactionRating */
+                        customerSatisfactionRating?: (number|null);
+
+                        /** QualityMetadata waitDuration */
+                        waitDuration?: (google.protobuf.IDuration|null);
+
+                        /** QualityMetadata menuPath */
+                        menuPath?: (string|null);
+
+                        /** QualityMetadata agentInfo */
+                        agentInfo?: (google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo[]|null);
+                    }
+
+                    /** Represents a QualityMetadata. */
+                    class QualityMetadata implements IQualityMetadata {
+
+                        /**
+                         * Constructs a new QualityMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata);
+
+                        /** QualityMetadata customerSatisfactionRating. */
+                        public customerSatisfactionRating: number;
+
+                        /** QualityMetadata waitDuration. */
+                        public waitDuration?: (google.protobuf.IDuration|null);
+
+                        /** QualityMetadata menuPath. */
+                        public menuPath: string;
+
+                        /** QualityMetadata agentInfo. */
+                        public agentInfo: google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo[];
+
+                        /**
+                         * Creates a new QualityMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QualityMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata): google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata;
+
+                        /**
+                         * Encodes the specified QualityMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.verify|verify} messages.
+                         * @param message QualityMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QualityMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.verify|verify} messages.
+                         * @param message QualityMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QualityMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QualityMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata;
+
+                        /**
+                         * Decodes a QualityMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QualityMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata;
+
+                        /**
+                         * Verifies a QualityMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QualityMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QualityMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata;
+
+                        /**
+                         * Creates a plain object from a QualityMetadata message. Also converts values to other types if specified.
+                         * @param message QualityMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QualityMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QualityMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace QualityMetadata {
+
+                        /** Properties of an AgentInfo. */
+                        interface IAgentInfo {
+
+                            /** AgentInfo agentId */
+                            agentId?: (string|null);
+
+                            /** AgentInfo displayName */
+                            displayName?: (string|null);
+
+                            /** AgentInfo team */
+                            team?: (string|null);
+
+                            /** AgentInfo dispositionCode */
+                            dispositionCode?: (string|null);
+                        }
+
+                        /** Represents an AgentInfo. */
+                        class AgentInfo implements IAgentInfo {
+
+                            /**
+                             * Constructs a new AgentInfo.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo);
+
+                            /** AgentInfo agentId. */
+                            public agentId: string;
+
+                            /** AgentInfo displayName. */
+                            public displayName: string;
+
+                            /** AgentInfo team. */
+                            public team: string;
+
+                            /** AgentInfo dispositionCode. */
+                            public dispositionCode: string;
+
+                            /**
+                             * Creates a new AgentInfo instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AgentInfo instance
+                             */
+                            public static create(properties?: google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo): google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo;
+
+                            /**
+                             * Encodes the specified AgentInfo message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo.verify|verify} messages.
+                             * @param message AgentInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AgentInfo message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo.verify|verify} messages.
+                             * @param message AgentInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.IAgentInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AgentInfo message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AgentInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo;
+
+                            /**
+                             * Decodes an AgentInfo message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AgentInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo;
+
+                            /**
+                             * Verifies an AgentInfo message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AgentInfo message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AgentInfo
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo;
+
+                            /**
+                             * Creates a plain object from an AgentInfo message. Also converts values to other types if specified.
+                             * @param message AgentInfo
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.AgentInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AgentInfo to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AgentInfo
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a Transcript. */
