@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/channel",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Channel client for Node.js",
   "repository": {
     "type": "git",
@@ -68,5 +68,5 @@
   "engines": {
     "node": ">=v14"
   },
-"homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-channel"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-channel"
 }

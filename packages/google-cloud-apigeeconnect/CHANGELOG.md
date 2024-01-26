@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/googleapis/google-cloud-node/compare/apigee-connect-v3.0.1...apigee-connect-v3.0.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4962](https://github.com/googleapis/google-cloud-node/issues/4962)) ([e49b31d](https://github.com/googleapis/google-cloud-node/commit/e49b31dc04ece6ce7d0dd4a4fb23f3b72b83540e))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/apigee-connect-v3.0.0...apigee-connect-v3.0.1) (2023-09-06)
 
 

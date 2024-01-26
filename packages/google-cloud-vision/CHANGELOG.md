@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [4.0.3](https://github.com/googleapis/google-cloud-node/compare/vision-v4.0.2...vision-v4.0.3) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4968](https://github.com/googleapis/google-cloud-node/issues/4968)) ([7fbf16c](https://github.com/googleapis/google-cloud-node/commit/7fbf16c98d0521a0533ab36a00f6ec932c72a02e))
+
 ## [4.0.2](https://github.com/googleapis/google-cloud-node/compare/vision-v4.0.1...vision-v4.0.2) (2023-09-06)
 
 

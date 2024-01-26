@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/googleapis/google-cloud-node/compare/routing-v1.0.1...routing-v1.0.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4969](https://github.com/googleapis/google-cloud-node/issues/4969)) ([70fe30a](https://github.com/googleapis/google-cloud-node/commit/70fe30af077ab6042822d62d31ca740dd5df55dd))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/routing-v1.0.0...routing-v1.0.1) (2023-09-06)
 
 

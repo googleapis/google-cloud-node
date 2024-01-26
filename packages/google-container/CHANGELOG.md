@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.4.1...container-v5.5.0) (2024-01-23)
+
+
+### Features
+
+* [container] add fields desired_in_transit_encryption_config and in_transit_encryption_config ([#4974](https://github.com/googleapis/google-cloud-node/issues/4974)) ([3ea1e29](https://github.com/googleapis/google-cloud-node/commit/3ea1e29659486d15bfc03811d6800b081f21f5e0))
+
 ## [5.4.1](https://github.com/googleapis/google-cloud-node/compare/container-v5.4.0...container-v5.4.1) (2024-01-05)
 
 
