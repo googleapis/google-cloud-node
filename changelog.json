@@ -4,6 +4,32 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "12cbef539df64e88bb7b00dd7e5983a766a8f688",
+          "message": "Add initial files for google.cloud.servicehealth.v1",
+          "issues": [
+            "4989"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/servicehealth",
+      "id": "fed57edb-cb61-4b4e-a1e9-32a6602acf04",
+      "createTime": "2024-01-26T19:12:20.351Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "70fe30af077ab6042822d62d31ca740dd5df55dd",
           "message": "[Many APIs] improve retry logic for streaming API calls",
@@ -21681,5 +21707,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-01-23T23:15:07.990Z"
+  "updateTime": "2024-01-26T19:12:20.351Z"
 }
