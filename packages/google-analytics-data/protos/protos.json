@@ -1253,6 +1253,11 @@
                           "oneof": [
                             "activeDaysRemaining"
                           ]
+                        },
+                        "_webhookNotification": {
+                          "oneof": [
+                            "webhookNotification"
+                          ]
                         }
                       },
                       "fields": {
@@ -1299,6 +1304,46 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "webhookNotification": {
+                          "type": "WebhookNotification",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "WebhookNotification": {
+                      "oneofs": {
+                        "_uri": {
+                          "oneof": [
+                            "uri"
+                          ]
+                        },
+                        "_channelToken": {
+                          "oneof": [
+                            "channelToken"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "channelToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -1481,6 +1526,11 @@
                           "oneof": [
                             "recurringAudienceList"
                           ]
+                        },
+                        "_webhookNotification": {
+                          "oneof": [
+                            "webhookNotification"
+                          ]
                         }
                       },
                       "fields": {
@@ -1565,6 +1615,14 @@
                           "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "webhookNotification": {
+                          "type": "WebhookNotification",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
                           }
                         }
