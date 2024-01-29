@@ -37,7 +37,7 @@ async function main() {
       });
   }
 
-  await listIndexes();
+  listIndexes();
   // [END datastore_admin_index_list]
 }
 

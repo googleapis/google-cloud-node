@@ -45,7 +45,7 @@ async function main(file = 'YOUR_FILE_NAME') {
     await specificImportOperation.cancel();
   }
 
-  await importEntities();
+  importEntities();
   // [END datastore_admin_entities_import]
 }
 

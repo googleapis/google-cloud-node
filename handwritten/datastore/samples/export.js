@@ -40,7 +40,7 @@ async function main(bucket = 'YOUR_BUCKET_NAME') {
     console.log(specificExportOperation.result.outputUrl);
   }
 
-  await exportEntities();
+  exportEntities();
   // [END datastore_admin_entities_export]
 }
 
