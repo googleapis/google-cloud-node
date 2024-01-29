@@ -5,6 +5,24 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "2aa0e2ef432b5803fda0a5dc775f1ad78ee4a9df",
+          "message": "[tasks] publish in ESM and CJS, and remove bufferTask",
+          "issues": [
+            "4952"
+          ],
+          "breakingChangeNote": "[tasks] publish in ESM and CJS, and remove bufferTask ([#4952](https://github.com/googleapis/google-cloud-node/issues/4952))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "9668c668-0576-41e6-b945-c986fbff8d6f",
+      "createTime": "2024-01-29T19:16:23.135Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "12cbef539df64e88bb7b00dd7e5983a766a8f688",
           "message": "Add initial files for google.cloud.servicehealth.v1",
           "issues": [
@@ -21707,5 +21725,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-01-26T19:12:20.351Z"
+  "updateTime": "2024-01-29T19:16:23.135Z"
 }
