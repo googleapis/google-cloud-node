@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/asset",
   "description": "Cloud Asset API client for Node.js",
-  "version": "5.1.0",
+  "version": "5.3.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -56,7 +56,7 @@
     "@types/sinon": "^17.0.0",
     "c8": "^8.0.1",
     "codecov": "^3.6.5",
-    "gapic-tools": "^0.2.0",
+    "gapic-tools": "^0.3.0",
     "gts": "^5.0.0",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",

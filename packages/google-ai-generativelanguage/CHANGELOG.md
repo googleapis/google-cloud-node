@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.0.0...generativelanguage-v2.0.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* [generativelanguage] improve retry logic for streaming API calls ([#4955](https://github.com/googleapis/google-cloud-node/issues/4955)) ([cafe82f](https://github.com/googleapis/google-cloud-node/commit/cafe82f06e0afa498ae234b0afe01f8014311f4b))
+
 ## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v1.1.0...generativelanguage-v2.0.0) (2023-12-11)
 
 

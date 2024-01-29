@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [4.1.1](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.1.0...datacatalog-v4.1.1) (2024-01-15)
+
+
+### Bug Fixes
+
+* [datacatalog] Change field behavior of the property "name" to IDENTIFIER ([#4925](https://github.com/googleapis/google-cloud-node/issues/4925)) ([07059f7](https://github.com/googleapis/google-cloud-node/commit/07059f7a849793696a88af1ab73ee143420441b5))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.0.1...datacatalog-v4.1.0) (2023-10-18)
 
 

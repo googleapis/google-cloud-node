@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.3.0...dialogflow-v6.3.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4964](https://github.com/googleapis/google-cloud-node/issues/4964)) ([34bd4e2](https://github.com/googleapis/google-cloud-node/commit/34bd4e2e40e51ffcd122e7d04307f9a5cce694a6))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.2.0...dialogflow-v6.3.0) (2024-01-05)
+
+
+### Features
+
+* [dialogflow] add sections field to HumanAgentAssistantConfig.SuggestionQueryConfig ([#4890](https://github.com/googleapis/google-cloud-node/issues/4890)) ([9572b9a](https://github.com/googleapis/google-cloud-node/commit/9572b9abe6033afe521246948fc786c767987442))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.1.0...dialogflow-v6.2.0) (2023-10-18)
 
 

@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/translate",
   "description": "Cloud Translation API Client Library for Node.js",
-  "version": "8.0.2",
+  "version": "8.0.3",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -65,7 +65,7 @@
     "@types/sinon": "^17.0.0",
     "c8": "^8.0.1",
     "codecov": "^3.0.2",
-    "gapic-tools": "^0.2.0",
+    "gapic-tools": "^0.3.0",
     "google-auth-library": "^9.0.0",
     "gts": "^5.0.0",
     "http2spy": "^2.0.0",

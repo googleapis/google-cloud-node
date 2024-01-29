@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1193,7 +1193,7 @@ export class CloudBillingClient {
    *   The specified billing account cannot be a subaccount, since a subaccount
    *   always belongs to the same organization as its parent account.
    * @param {string} request.destinationParent
-   *   Required. The resource name of the Organization to reparent
+   *   Required. The resource name of the Organization to move
    *   the billing account under.
    *   Must be of the form `organizations/{organization_id}`.
    * @param {object} [options]

@@ -2756,6 +2756,24 @@
     "support_documentation": "https://cloud.google.com/life-sciences/docs/getting-support"
   },
   {
+    "name": "redis",
+    "name_pretty": "Memorystore for Redis API",
+    "product_documentation": "https://cloud.google.com/redis/docs",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/redis/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/redis-cluster",
+    "api_id": "redis.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "redis",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-redis-cluster",
+    "support_documentation": "https://cloud.google.com/redis/docs/getting-support"
+  },
+  {
     "name": "migrationcenter",
     "name_pretty": "Migration Center API",
     "product_documentation": "https://cloud.google.com/migration-center/docs/migration-center-overview",
@@ -2954,6 +2972,24 @@
     "support_documentation": "https://cloud.google.com/certificate-manager/docs/getting-support"
   },
   {
+    "name": "cloudquotas",
+    "name_pretty": "Quotas API",
+    "product_documentation": "https://cloud.google.com/docs/quota/api-overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudquotas/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/cloudquotas",
+    "api_id": "cloudquotas.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "cloudquotas",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-api-cloudquotas",
+    "support_documentation": "https://cloud.google.com/docs/getting-support"
+  },
+  {
     "name": "rapidmigrationassessment",
     "name_pretty": "Rapid Migration Assessment API",
     "product_documentation": "https://cloud.google.com/migration-center/docs",
@@ -3051,6 +3087,7 @@
     "api_id": "aiplatform.googleapis.com",
     "api_shortname": "aiplatform",
     "library_type": "GAPIC_MANUAL",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vertexai/latest",
     "linkToRepoHomepage": "https://github.com/googleapis/nodejs-vertexai"
   },
   {

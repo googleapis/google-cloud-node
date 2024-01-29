@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -7826,6 +7826,9 @@ export namespace google {
 
                     /** AllocationPolicy placement */
                     placement?: (google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy|null);
+
+                    /** AllocationPolicy tags */
+                    tags?: (string[]|null);
                 }
 
                 /** Represents an AllocationPolicy. */
@@ -7866,6 +7869,9 @@ export namespace google {
 
                     /** AllocationPolicy placement. */
                     public placement?: (google.cloud.batch.v1alpha.AllocationPolicy.IPlacementPolicy|null);
+
+                    /** AllocationPolicy tags. */
+                    public tags: string[];
 
                     /**
                      * Creates a new AllocationPolicy instance using the specified properties.
@@ -9006,8 +9012,8 @@ export namespace google {
                     /** TaskGroup permissiveSsh */
                     permissiveSsh?: (boolean|null);
 
-                    /** TaskGroup enableOslogin */
-                    enableOslogin?: (boolean|null);
+                    /** TaskGroup runAsNonRoot */
+                    runAsNonRoot?: (boolean|null);
                 }
 
                 /** Represents a TaskGroup. */
@@ -9052,8 +9058,8 @@ export namespace google {
                     /** TaskGroup permissiveSsh. */
                     public permissiveSsh: boolean;
 
-                    /** TaskGroup enableOslogin. */
-                    public enableOslogin: boolean;
+                    /** TaskGroup runAsNonRoot. */
+                    public runAsNonRoot: boolean;
 
                     /**
                      * Creates a new TaskGroup instance using the specified properties.

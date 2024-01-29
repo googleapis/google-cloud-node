@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-oslogin",
-        "version": "5.3.0",
+        "version": "5.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -234,7 +234,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -254,6 +254,10 @@
                     {
                         "name": "project_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "regions",
+                        "type": "TYPE_STRING[]"
                     }
                 ],
                 "resultType": ".google.cloud.oslogin.v1.ImportSshPublicKeyResponse",

@@ -1317,6 +1317,267 @@ describe('v1.ConfigClient', () => {
     });
   });
 
+  describe('getPreview', () => {
+    it('invokes getPreview without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.GetPreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.GetPreviewRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.config.v1.Preview()
+      );
+      client.innerApiCalls.getPreview = stubSimpleCall(expectedResponse);
+      const [response] = await client.getPreview(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPreview as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPreview as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPreview without error using callback', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.GetPreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.GetPreviewRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.config.v1.Preview()
+      );
+      client.innerApiCalls.getPreview =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPreview(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.config.v1.IPreview | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPreview as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPreview as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPreview with error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.GetPreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.GetPreviewRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getPreview = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getPreview(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getPreview as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPreview as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPreview with closed client', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.GetPreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.GetPreviewRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getPreview(request), expectedError);
+    });
+  });
+
+  describe('exportPreviewResult', () => {
+    it('invokes exportPreviewResult without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ExportPreviewResultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ExportPreviewResultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.config.v1.ExportPreviewResultResponse()
+      );
+      client.innerApiCalls.exportPreviewResult =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.exportPreviewResult(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportPreviewResult as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportPreviewResult as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportPreviewResult without error using callback', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ExportPreviewResultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ExportPreviewResultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.config.v1.ExportPreviewResultResponse()
+      );
+      client.innerApiCalls.exportPreviewResult =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.exportPreviewResult(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.config.v1.IExportPreviewResultResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportPreviewResult as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportPreviewResult as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportPreviewResult with error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ExportPreviewResultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ExportPreviewResultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.exportPreviewResult = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.exportPreviewResult(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.exportPreviewResult as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportPreviewResult as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportPreviewResult with closed client', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ExportPreviewResultRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ExportPreviewResultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.exportPreviewResult(request), expectedError);
+    });
+  });
+
   describe('createDeployment', () => {
     it('invokes createDeployment without error', async () => {
       const client = new configModule.v1.ConfigClient({
@@ -2291,6 +2552,394 @@ describe('v1.ConfigClient', () => {
     });
   });
 
+  describe('createPreview', () => {
+    it('invokes createPreview without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.CreatePreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.CreatePreviewRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createPreview =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createPreview(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createPreview as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPreview as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createPreview without error using callback', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.CreatePreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.CreatePreviewRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createPreview =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createPreview(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.config.v1.IPreview,
+              protos.google.cloud.config.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createPreview as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPreview as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createPreview with call error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.CreatePreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.CreatePreviewRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createPreview = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createPreview(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createPreview as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPreview as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createPreview with LRO error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.CreatePreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.CreatePreviewRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createPreview = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createPreview(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createPreview as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPreview as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreatePreviewProgress without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreatePreviewProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreatePreviewProgress with error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreatePreviewProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deletePreview', () => {
+    it('invokes deletePreview without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.DeletePreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.DeletePreviewRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deletePreview =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deletePreview(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deletePreview as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePreview as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deletePreview without error using callback', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.DeletePreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.DeletePreviewRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deletePreview =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deletePreview(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.config.v1.IPreview,
+              protos.google.cloud.config.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deletePreview as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePreview as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deletePreview with call error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.DeletePreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.DeletePreviewRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deletePreview = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deletePreview(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deletePreview as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePreview as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deletePreview with LRO error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.DeletePreviewRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.DeletePreviewRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deletePreview = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deletePreview(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deletePreview as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePreview as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeletePreviewProgress without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeletePreviewProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeletePreviewProgress with error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeletePreviewProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listDeployments', () => {
     it('invokes listDeployments without error', async () => {
       const client = new configModule.v1.ConfigClient({
@@ -3186,6 +3835,303 @@ describe('v1.ConfigClient', () => {
       );
       assert(
         (client.descriptors.page.listResources.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
+  describe('listPreviews', () => {
+    it('invokes listPreviews without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListPreviewsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListPreviewsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+      ];
+      client.innerApiCalls.listPreviews = stubSimpleCall(expectedResponse);
+      const [response] = await client.listPreviews(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPreviews as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPreviews as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPreviews without error using callback', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListPreviewsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListPreviewsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+      ];
+      client.innerApiCalls.listPreviews =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listPreviews(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.config.v1.IPreview[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPreviews as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPreviews as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPreviews with error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListPreviewsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListPreviewsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listPreviews = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listPreviews(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listPreviews as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPreviews as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPreviewsStream without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListPreviewsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListPreviewsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+      ];
+      client.descriptors.page.listPreviews.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listPreviewsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.config.v1.Preview[] = [];
+        stream.on('data', (response: protos.google.cloud.config.v1.Preview) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listPreviews.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPreviews, request)
+      );
+      assert(
+        (client.descriptors.page.listPreviews.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listPreviewsStream with error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListPreviewsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListPreviewsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPreviews.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listPreviewsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.config.v1.Preview[] = [];
+        stream.on('data', (response: protos.google.cloud.config.v1.Preview) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listPreviews.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPreviews, request)
+      );
+      assert(
+        (client.descriptors.page.listPreviews.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPreviews without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListPreviewsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListPreviewsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+        generateSampleMessage(new protos.google.cloud.config.v1.Preview()),
+      ];
+      client.descriptors.page.listPreviews.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.config.v1.IPreview[] = [];
+      const iterable = client.listPreviewsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPreviews.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listPreviews.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listPreviews with error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListPreviewsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListPreviewsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPreviews.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listPreviewsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.config.v1.IPreview[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPreviews.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listPreviews.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -4129,6 +5075,70 @@ describe('v1.ConfigClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('preview', () => {
+      const fakePath = '/rendered/path/preview';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        preview: 'previewValue',
+      };
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.previewPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.previewPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('previewPath', () => {
+        const result = client.previewPath(
+          'projectValue',
+          'locationValue',
+          'previewValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.previewPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPreviewName', () => {
+        const result = client.matchProjectFromPreviewName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.previewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPreviewName', () => {
+        const result = client.matchLocationFromPreviewName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.previewPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPreviewFromPreviewName', () => {
+        const result = client.matchPreviewFromPreviewName(fakePath);
+        assert.strictEqual(result, 'previewValue');
+        assert(
+          (client.pathTemplates.previewPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

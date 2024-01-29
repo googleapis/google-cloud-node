@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.1.2](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.1.1...documentai-v8.1.2) (2024-01-05)
+
+
+### Bug Fixes
+
+* [documentai] correct long audio synthesis HTTP binding ([#4884](https://github.com/googleapis/google-cloud-node/issues/4884)) ([cca21ed](https://github.com/googleapis/google-cloud-node/commit/cca21ed5e5ac57397c77b23e5f310561f4b27102))
+
 ## [8.1.1](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.1.0...documentai-v8.1.1) (2023-12-11)
 
 

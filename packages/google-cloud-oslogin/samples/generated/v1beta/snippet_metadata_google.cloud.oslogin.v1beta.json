@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-oslogin",
-        "version": "5.3.0",
+        "version": "5.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -238,7 +238,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -262,6 +262,10 @@
                     {
                         "name": "view",
                         "type": ".google.cloud.oslogin.v1beta.LoginProfileView"
+                    },
+                    {
+                        "name": "regions",
+                        "type": "TYPE_STRING[]"
                     }
                 ],
                 "resultType": ".google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse",

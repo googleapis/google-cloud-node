@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -531,6 +531,18 @@ export class FeatureOnlineStoreAdminServiceClient {
               post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
             },
             {
@@ -620,6 +632,18 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
             },
             {
               post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
@@ -740,6 +764,22 @@ export class FeatureOnlineStoreAdminServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
             },
             {
               delete:
@@ -877,6 +917,22 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               delete:
+                '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
@@ -1002,6 +1058,18 @@ export class FeatureOnlineStoreAdminServiceClient {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
@@ -1091,6 +1159,18 @@ export class FeatureOnlineStoreAdminServiceClient {
             {get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
             },
             {
               get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
@@ -1189,6 +1269,18 @@ export class FeatureOnlineStoreAdminServiceClient {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
             },
             {
@@ -1276,6 +1368,18 @@ export class FeatureOnlineStoreAdminServiceClient {
             {get: '/v1/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
             },
             {
               get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
@@ -1386,6 +1490,18 @@ export class FeatureOnlineStoreAdminServiceClient {
               post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
             },
             {
@@ -1487,6 +1603,18 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
             },
             {
               post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
@@ -2161,7 +2289,7 @@ export class FeatureOnlineStoreAdminServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the Location to create FeatureOnlineStores.
    *   Format:
-   *   `projects/{project}/locations/{location}'`
+   *   `projects/{project}/locations/{location}`
    * @param {google.cloud.aiplatform.v1.FeatureOnlineStore} request.featureOnlineStore
    *   Required. The FeatureOnlineStore to create.
    * @param {string} request.featureOnlineStoreId

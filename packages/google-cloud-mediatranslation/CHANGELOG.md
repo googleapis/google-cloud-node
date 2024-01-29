@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.2](https://github.com/googleapis/google-cloud-node/compare/media-translation-v4.0.1...media-translation-v4.0.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4965](https://github.com/googleapis/google-cloud-node/issues/4965)) ([7316bd0](https://github.com/googleapis/google-cloud-node/commit/7316bd0adc045a2d2226dfb25fa33fa7ed055b09))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/media-translation-v4.0.0...media-translation-v4.0.1) (2023-09-06)
 
 

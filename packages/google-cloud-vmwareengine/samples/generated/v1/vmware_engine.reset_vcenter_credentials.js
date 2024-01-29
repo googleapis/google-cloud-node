@@ -52,6 +52,18 @@ function main(privateCloud) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. The username of the user to be to reset the credentials.
+   *  The default value of this field is CloudOwner@gve.local.
+   *  The provided value should be one of the following:
+   *  solution-user-01@gve.local,
+   *  solution-user-02@gve.local,
+   *  solution-user-03@gve.local,
+   *  solution-user-04@gve.local,
+   *  solution-user-05@gve.local,
+   *  zertoadmin@gve.local.
+   */
+  // const username = 'abc123'
 
   // Imports the Vmwareengine library
   const {VmwareEngineClient} = require('@google-cloud/vmwareengine').v1;

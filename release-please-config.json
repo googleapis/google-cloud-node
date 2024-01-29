@@ -161,7 +161,9 @@
     "packages/google-shopping-merchant-reports": {},
     "packages/google-shopping-merchant-inventories": {},
     "packages/google-shopping-css": {},
-    "packages/google-api-cloudquotas": {}
+    "packages/google-api-cloudquotas": {},
+    "packages/google-cloud-redis-cluster": {},
+    "packages/google-cloud-servicehealth": {}
   },
   "plugins": [
     {

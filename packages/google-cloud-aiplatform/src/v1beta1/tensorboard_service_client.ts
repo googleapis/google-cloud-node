@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -375,7 +375,8 @@ export class TensorboardServiceClient {
     this.descriptors.stream = {
       readTensorboardBlobData: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
-        !!opts.fallback
+        !!opts.fallback,
+        /* gaxStreamingRetries: */ true
       ),
     };
 
@@ -578,6 +579,18 @@ export class TensorboardServiceClient {
               post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
             },
             {
@@ -686,6 +699,18 @@ export class TensorboardServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
             },
             {
@@ -714,6 +739,9 @@ export class TensorboardServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
@@ -810,6 +838,22 @@ export class TensorboardServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
             },
             {
               delete:
@@ -967,6 +1011,22 @@ export class TensorboardServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
@@ -988,6 +1048,10 @@ export class TensorboardServiceClient {
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
             },
             {
               delete:
@@ -1107,6 +1171,18 @@ export class TensorboardServiceClient {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
@@ -1219,6 +1295,18 @@ export class TensorboardServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
             },
             {
@@ -1235,6 +1323,9 @@ export class TensorboardServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
@@ -1328,6 +1419,18 @@ export class TensorboardServiceClient {
             {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
             },
             {
               get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
@@ -1442,6 +1545,18 @@ export class TensorboardServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
             },
             {
@@ -1456,6 +1571,9 @@ export class TensorboardServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',
@@ -1561,6 +1679,18 @@ export class TensorboardServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
             },
             {
               post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
@@ -1681,6 +1811,18 @@ export class TensorboardServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
             },
             {
@@ -1697,6 +1839,9 @@ export class TensorboardServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',

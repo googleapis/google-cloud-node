@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1138,7 +1138,11 @@ describe('v1beta1.PredictionServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       const stream = client.serverStreamingPredict(request, {
-        retryRequestOptions: {noResponseRetries: 0},
+        retry: {
+          shouldRetryFn: () => {
+            return false;
+          },
+        },
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1269,7 +1273,11 @@ describe('v1beta1.PredictionServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       const stream = client.streamGenerateContent(request, {
-        retryRequestOptions: {noResponseRetries: 0},
+        retry: {
+          shouldRetryFn: () => {
+            return false;
+          },
+        },
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(

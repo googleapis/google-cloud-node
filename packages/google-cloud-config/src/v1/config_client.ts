@@ -199,6 +199,9 @@ export class ConfigClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      previewPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/previews/{preview}'
+      ),
       resourcePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/deployments/{deployment}/revisions/{revision}/resources/{resource}'
       ),
@@ -231,6 +234,11 @@ export class ConfigClient {
         'pageToken',
         'nextPageToken',
         'resources'
+      ),
+      listPreviews: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'previews'
       ),
     };
 
@@ -319,6 +327,18 @@ export class ConfigClient {
     const unlockDeploymentMetadata = protoFilesRoot.lookup(
       '.google.cloud.config.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createPreviewResponse = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.Preview'
+    ) as gax.protobuf.Type;
+    const createPreviewMetadata = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deletePreviewResponse = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.Preview'
+    ) as gax.protobuf.Type;
+    const deletePreviewMetadata = protoFilesRoot.lookup(
+      '.google.cloud.config.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDeployment: new this._gaxModule.LongrunningDescriptor(
@@ -345,6 +365,16 @@ export class ConfigClient {
         this.operationsClient,
         unlockDeploymentResponse.decode.bind(unlockDeploymentResponse),
         unlockDeploymentMetadata.decode.bind(unlockDeploymentMetadata)
+      ),
+      createPreview: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createPreviewResponse.decode.bind(createPreviewResponse),
+        createPreviewMetadata.decode.bind(createPreviewMetadata)
+      ),
+      deletePreview: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deletePreviewResponse.decode.bind(deletePreviewResponse),
+        deletePreviewMetadata.decode.bind(deletePreviewMetadata)
       ),
     };
 
@@ -414,6 +444,11 @@ export class ConfigClient {
       'lockDeployment',
       'unlockDeployment',
       'exportLockInfo',
+      'createPreview',
+      'getPreview',
+      'listPreviews',
+      'deletePreview',
+      'exportPreviewResult',
     ];
     for (const methodName of configStubMethods) {
       const callPromise = this.configStub.then(
@@ -1219,6 +1254,181 @@ export class ConfigClient {
     this.initialize();
     return this.innerApiCalls.exportLockInfo(request, options, callback);
   }
+  /**
+   * Gets details about a {@link protos.google.cloud.config.v1.Preview|Preview}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the preview. Format:
+   *   'projects/{project_id}/locations/{location}/previews/{preview}'.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.config.v1.Preview|Preview}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.get_preview.js</caption>
+   * region_tag:config_v1_generated_Config_GetPreview_async
+   */
+  getPreview(
+    request?: protos.google.cloud.config.v1.IGetPreviewRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.config.v1.IPreview,
+      protos.google.cloud.config.v1.IGetPreviewRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getPreview(
+    request: protos.google.cloud.config.v1.IGetPreviewRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.config.v1.IPreview,
+      protos.google.cloud.config.v1.IGetPreviewRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPreview(
+    request: protos.google.cloud.config.v1.IGetPreviewRequest,
+    callback: Callback<
+      protos.google.cloud.config.v1.IPreview,
+      protos.google.cloud.config.v1.IGetPreviewRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPreview(
+    request?: protos.google.cloud.config.v1.IGetPreviewRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.config.v1.IPreview,
+          protos.google.cloud.config.v1.IGetPreviewRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.config.v1.IPreview,
+      protos.google.cloud.config.v1.IGetPreviewRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.config.v1.IPreview,
+      protos.google.cloud.config.v1.IGetPreviewRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getPreview(request, options, callback);
+  }
+  /**
+   * Export {@link protos.google.cloud.config.v1.Preview|Preview} results.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The preview whose results should be exported. The preview value
+   *   is in the format:
+   *   'projects/{project_id}/locations/{location}/previews/{preview}'.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.config.v1.ExportPreviewResultResponse|ExportPreviewResultResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.export_preview_result.js</caption>
+   * region_tag:config_v1_generated_Config_ExportPreviewResult_async
+   */
+  exportPreviewResult(
+    request?: protos.google.cloud.config.v1.IExportPreviewResultRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.config.v1.IExportPreviewResultResponse,
+      protos.google.cloud.config.v1.IExportPreviewResultRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportPreviewResult(
+    request: protos.google.cloud.config.v1.IExportPreviewResultRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.config.v1.IExportPreviewResultResponse,
+      | protos.google.cloud.config.v1.IExportPreviewResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportPreviewResult(
+    request: protos.google.cloud.config.v1.IExportPreviewResultRequest,
+    callback: Callback<
+      protos.google.cloud.config.v1.IExportPreviewResultResponse,
+      | protos.google.cloud.config.v1.IExportPreviewResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportPreviewResult(
+    request?: protos.google.cloud.config.v1.IExportPreviewResultRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.config.v1.IExportPreviewResultResponse,
+          | protos.google.cloud.config.v1.IExportPreviewResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.config.v1.IExportPreviewResultResponse,
+      | protos.google.cloud.config.v1.IExportPreviewResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.config.v1.IExportPreviewResultResponse,
+      protos.google.cloud.config.v1.IExportPreviewResultRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.exportPreviewResult(request, options, callback);
+  }
 
   /**
    * Creates a {@link protos.google.cloud.config.v1.Deployment|Deployment}.
@@ -1969,6 +2179,312 @@ export class ConfigClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.config.v1.Deployment,
+      protos.google.cloud.config.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a {@link protos.google.cloud.config.v1.Preview|Preview}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent in whose context the Preview is created. The parent
+   *   value is in the format: 'projects/{project_id}/locations/{location}'.
+   * @param {string} [request.previewId]
+   *   Optional. The preview ID.
+   * @param {google.cloud.config.v1.Preview} request.preview
+   *   Required. {@link protos.google.cloud.config.v1.Preview|Preview} resource to be created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.create_preview.js</caption>
+   * region_tag:config_v1_generated_Config_CreatePreview_async
+   */
+  createPreview(
+    request?: protos.google.cloud.config.v1.ICreatePreviewRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createPreview(
+    request: protos.google.cloud.config.v1.ICreatePreviewRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createPreview(
+    request: protos.google.cloud.config.v1.ICreatePreviewRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createPreview(
+    request?: protos.google.cloud.config.v1.ICreatePreviewRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.config.v1.IPreview,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createPreview(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createPreview()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.create_preview.js</caption>
+   * region_tag:config_v1_generated_Config_CreatePreview_async
+   */
+  async checkCreatePreviewProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.config.v1.Preview,
+      protos.google.cloud.config.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createPreview,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.config.v1.Preview,
+      protos.google.cloud.config.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a {@link protos.google.cloud.config.v1.Preview|Preview}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Preview in the format:
+   *   'projects/{project_id}/locations/{location}/previews/{preview}'.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.delete_preview.js</caption>
+   * region_tag:config_v1_generated_Config_DeletePreview_async
+   */
+  deletePreview(
+    request?: protos.google.cloud.config.v1.IDeletePreviewRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deletePreview(
+    request: protos.google.cloud.config.v1.IDeletePreviewRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deletePreview(
+    request: protos.google.cloud.config.v1.IDeletePreviewRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deletePreview(
+    request?: protos.google.cloud.config.v1.IDeletePreviewRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.config.v1.IPreview,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.config.v1.IPreview,
+        protos.google.cloud.config.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deletePreview(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deletePreview()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.delete_preview.js</caption>
+   * region_tag:config_v1_generated_Config_DeletePreview_async
+   */
+  async checkDeletePreviewProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.config.v1.Preview,
+      protos.google.cloud.config.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deletePreview,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.config.v1.Preview,
       protos.google.cloud.config.v1.OperationMetadata
     >;
   }
@@ -2751,6 +3267,274 @@ export class ConfigClient {
     ) as AsyncIterable<protos.google.cloud.config.v1.IResource>;
   }
   /**
+   * Lists {@link protos.google.cloud.config.v1.Preview|Preview}s in a given project and
+   * location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent in whose context the Previews are listed. The parent
+   *   value is in the format: 'projects/{project_id}/locations/{location}'.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a page of resources, 'page_size' specifies number
+   *   of resources to return. If unspecified or set to 0, all resources will be
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to 'ListDeployments' which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists the Deployments that match the filter expression. A filter
+   *   expression filters the resources listed in the response. The expression
+   *   must be of the form '{field} {operator} {value}' where operators: '<', '>',
+   *   '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+   *   operator which is roughly synonymous with equality). {field} can refer to a
+   *   proto or JSON field, or a synthetic field. Field names can be camelCase or
+   *   snake_case.
+   *
+   *   Examples:
+   *   - Filter by name:
+   *     name = "projects/foo/locations/us-central1/deployments/bar
+   *
+   *   - Filter by labels:
+   *     - Resources that have a key called 'foo'
+   *       labels.foo:*
+   *     - Resources that have a key called 'foo' whose value is 'bar'
+   *       labels.foo = bar
+   *
+   *   - Filter by state:
+   *     - Deployments in CREATING state.
+   *       state=CREATING
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.config.v1.Preview|Preview}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPreviewsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listPreviews(
+    request?: protos.google.cloud.config.v1.IListPreviewsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.config.v1.IPreview[],
+      protos.google.cloud.config.v1.IListPreviewsRequest | null,
+      protos.google.cloud.config.v1.IListPreviewsResponse,
+    ]
+  >;
+  listPreviews(
+    request: protos.google.cloud.config.v1.IListPreviewsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.config.v1.IListPreviewsRequest,
+      protos.google.cloud.config.v1.IListPreviewsResponse | null | undefined,
+      protos.google.cloud.config.v1.IPreview
+    >
+  ): void;
+  listPreviews(
+    request: protos.google.cloud.config.v1.IListPreviewsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.config.v1.IListPreviewsRequest,
+      protos.google.cloud.config.v1.IListPreviewsResponse | null | undefined,
+      protos.google.cloud.config.v1.IPreview
+    >
+  ): void;
+  listPreviews(
+    request?: protos.google.cloud.config.v1.IListPreviewsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.config.v1.IListPreviewsRequest,
+          | protos.google.cloud.config.v1.IListPreviewsResponse
+          | null
+          | undefined,
+          protos.google.cloud.config.v1.IPreview
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.config.v1.IListPreviewsRequest,
+      protos.google.cloud.config.v1.IListPreviewsResponse | null | undefined,
+      protos.google.cloud.config.v1.IPreview
+    >
+  ): Promise<
+    [
+      protos.google.cloud.config.v1.IPreview[],
+      protos.google.cloud.config.v1.IListPreviewsRequest | null,
+      protos.google.cloud.config.v1.IListPreviewsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listPreviews(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent in whose context the Previews are listed. The parent
+   *   value is in the format: 'projects/{project_id}/locations/{location}'.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a page of resources, 'page_size' specifies number
+   *   of resources to return. If unspecified or set to 0, all resources will be
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to 'ListDeployments' which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists the Deployments that match the filter expression. A filter
+   *   expression filters the resources listed in the response. The expression
+   *   must be of the form '{field} {operator} {value}' where operators: '<', '>',
+   *   '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+   *   operator which is roughly synonymous with equality). {field} can refer to a
+   *   proto or JSON field, or a synthetic field. Field names can be camelCase or
+   *   snake_case.
+   *
+   *   Examples:
+   *   - Filter by name:
+   *     name = "projects/foo/locations/us-central1/deployments/bar
+   *
+   *   - Filter by labels:
+   *     - Resources that have a key called 'foo'
+   *       labels.foo:*
+   *     - Resources that have a key called 'foo' whose value is 'bar'
+   *       labels.foo = bar
+   *
+   *   - Filter by state:
+   *     - Deployments in CREATING state.
+   *       state=CREATING
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.config.v1.Preview|Preview} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPreviewsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listPreviewsStream(
+    request?: protos.google.cloud.config.v1.IListPreviewsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPreviews'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPreviews.createStream(
+      this.innerApiCalls.listPreviews as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listPreviews`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent in whose context the Previews are listed. The parent
+   *   value is in the format: 'projects/{project_id}/locations/{location}'.
+   * @param {number} [request.pageSize]
+   *   Optional. When requesting a page of resources, 'page_size' specifies number
+   *   of resources to return. If unspecified or set to 0, all resources will be
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Token returned by previous call to 'ListDeployments' which
+   *   specifies the position in the list from where to continue listing the
+   *   resources.
+   * @param {string} [request.filter]
+   *   Optional. Lists the Deployments that match the filter expression. A filter
+   *   expression filters the resources listed in the response. The expression
+   *   must be of the form '{field} {operator} {value}' where operators: '<', '>',
+   *   '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
+   *   operator which is roughly synonymous with equality). {field} can refer to a
+   *   proto or JSON field, or a synthetic field. Field names can be camelCase or
+   *   snake_case.
+   *
+   *   Examples:
+   *   - Filter by name:
+   *     name = "projects/foo/locations/us-central1/deployments/bar
+   *
+   *   - Filter by labels:
+   *     - Resources that have a key called 'foo'
+   *       labels.foo:*
+   *     - Resources that have a key called 'foo' whose value is 'bar'
+   *       labels.foo = bar
+   *
+   *   - Filter by state:
+   *     - Deployments in CREATING state.
+   *       state=CREATING
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.config.v1.Preview|Preview}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.list_previews.js</caption>
+   * region_tag:config_v1_generated_Config_ListPreviews_async
+   */
+  listPreviewsAsync(
+    request?: protos.google.cloud.config.v1.IListPreviewsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.config.v1.IPreview> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPreviews'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPreviews.asyncIterate(
+      this.innerApiCalls['listPreviews'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.config.v1.IPreview>;
+  }
+  /**
    * Gets the access control policy for a resource. Returns an empty policy
    * if the resource exists and does not have a policy set.
    *
@@ -3231,6 +4015,55 @@ export class ConfigClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified preview resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} preview
+   * @returns {string} Resource name string.
+   */
+  previewPath(project: string, location: string, preview: string) {
+    return this.pathTemplates.previewPathTemplate.render({
+      project: project,
+      location: location,
+      preview: preview,
+    });
+  }
+
+  /**
+   * Parse the project from Preview resource.
+   *
+   * @param {string} previewName
+   *   A fully-qualified path representing Preview resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPreviewName(previewName: string) {
+    return this.pathTemplates.previewPathTemplate.match(previewName).project;
+  }
+
+  /**
+   * Parse the location from Preview resource.
+   *
+   * @param {string} previewName
+   *   A fully-qualified path representing Preview resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPreviewName(previewName: string) {
+    return this.pathTemplates.previewPathTemplate.match(previewName).location;
+  }
+
+  /**
+   * Parse the preview from Preview resource.
+   *
+   * @param {string} previewName
+   *   A fully-qualified path representing Preview resource.
+   * @returns {string} A string representing the preview.
+   */
+  matchPreviewFromPreviewName(previewName: string) {
+    return this.pathTemplates.previewPathTemplate.match(previewName).preview;
   }
 
   /**

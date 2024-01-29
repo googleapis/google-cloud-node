@@ -37,6 +37,19 @@ function main(privateCloud) {
    *  `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
    */
   // const privateCloud = 'abc123'
+  /**
+   *  Optional. The username of the user to be queried for credentials.
+   *  The default value of this field is CloudOwner@gve.local.
+   *  The provided value must be one of the following:
+   *  CloudOwner@gve.local,
+   *  solution-user-01@gve.local,
+   *  solution-user-02@gve.local,
+   *  solution-user-03@gve.local,
+   *  solution-user-04@gve.local,
+   *  solution-user-05@gve.local,
+   *  zertoadmin@gve.local.
+   */
+  // const username = 'abc123'
 
   // Imports the Vmwareengine library
   const {VmwareEngineClient} = require('@google-cloud/vmwareengine').v1;

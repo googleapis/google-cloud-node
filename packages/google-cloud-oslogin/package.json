@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/os-login",
   "description": "Google Cloud OS Login API client for Node.js",
-  "version": "5.3.0",
+  "version": "5.4.0",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
@@ -58,7 +58,7 @@
     "@types/node": "^20.4.5",
     "@types/sinon": "^17.0.0",
     "c8": "^8.0.1",
-    "gapic-tools": "^0.2.0",
+    "gapic-tools": "^0.3.0",
     "gts": "^5.0.0",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",

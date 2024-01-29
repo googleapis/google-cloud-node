@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v4.1.0...tasks-v5.0.0) (2024-01-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* [tasks] publish in ESM and CJS, and remove bufferTask ([#4952](https://github.com/googleapis/google-cloud-node/issues/4952))
+
+### Features
+
+* [tasks] publish in ESM and CJS, and remove bufferTask ([#4952](https://github.com/googleapis/google-cloud-node/issues/4952)) ([2aa0e2e](https://github.com/googleapis/google-cloud-node/commit/2aa0e2ef432b5803fda0a5dc775f1ad78ee4a9df))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v4.0.1...tasks-v4.1.0) (2023-11-30)
 
 

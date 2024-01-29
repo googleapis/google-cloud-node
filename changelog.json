@@ -4,6 +4,1105 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "2aa0e2ef432b5803fda0a5dc775f1ad78ee4a9df",
+          "message": "[tasks] publish in ESM and CJS, and remove bufferTask",
+          "issues": [
+            "4952"
+          ],
+          "breakingChangeNote": "[tasks] publish in ESM and CJS, and remove bufferTask ([#4952](https://github.com/googleapis/google-cloud-node/issues/4952))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "9668c668-0576-41e6-b945-c986fbff8d6f",
+      "createTime": "2024-01-29T19:16:23.135Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "12cbef539df64e88bb7b00dd7e5983a766a8f688",
+          "message": "Add initial files for google.cloud.servicehealth.v1",
+          "issues": [
+            "4989"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/servicehealth",
+      "id": "fed57edb-cb61-4b4e-a1e9-32a6602acf04",
+      "createTime": "2024-01-26T19:12:20.351Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "70fe30af077ab6042822d62d31ca740dd5df55dd",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4969"
+          ]
+        }
+      ],
+      "version": "1.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "8e0d612b-b63c-47ff-9fe5-39823cd6571c",
+      "createTime": "2024-01-23T23:15:07.990Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "006b1997-3229-4d4c-83d9-94136c48ec2a",
+      "createTime": "2024-01-23T23:15:07.983Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "2350f6f0-d8c5-46c8-90c7-e8045ae3c615",
+      "createTime": "2024-01-23T23:15:07.975Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "0a77d976-4e13-4d8d-8618-5183f94c7133",
+      "createTime": "2024-01-23T23:15:07.966Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3ea1e29659486d15bfc03811d6800b081f21f5e0",
+          "message": "[container] add fields desired_in_transit_encryption_config and in_transit_encryption_config",
+          "issues": [
+            "4974"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "12fd417f-0d76-445f-9662-e43e18ecb7fd",
+      "createTime": "2024-01-23T23:15:07.959Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "1.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "c6947fa4-4ef1-44bd-92c1-9ec9bfaae3c6",
+      "createTime": "2024-01-23T23:15:07.952Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "e23ffc1d-e7b7-4e1f-9216-385952c4c1fe",
+      "createTime": "2024-01-23T23:15:07.941Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "fd32b56e-c0a2-46d4-aaf2-4edc1eeed9cc",
+      "createTime": "2024-01-23T23:15:07.929Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "d2fa047d-c6cf-4cbf-a805-3131e732fc59",
+      "createTime": "2024-01-23T23:15:07.890Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "97ce81d3-03b2-4a88-861a-e3ddfc73720e",
+      "createTime": "2024-01-23T23:15:07.883Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7d4365f0ff744462336597d7f3df8566e92623f8",
+          "message": "[vmwareengine] improve retry logic for streaming API calls",
+          "issues": [
+            "4960"
+          ]
+        }
+      ],
+      "version": "1.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "ede05934-b3d9-49ce-9ddc-1697189fa61f",
+      "createTime": "2024-01-23T23:15:07.875Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "4f77f6ba-d9ff-4e01-b5f3-aef9ff92393b",
+      "createTime": "2024-01-23T23:15:07.868Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "4.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "79340b26-650a-4332-bbc7-a94c6b9ea567",
+      "createTime": "2024-01-23T23:15:07.860Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "c7f7be0b-46ce-489c-9fa6-479473d4146c",
+      "createTime": "2024-01-23T23:15:07.853Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "08e63b8f-298b-4e09-89e0-5fc1b4aaa671",
+      "createTime": "2024-01-23T23:15:07.846Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "2.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "cb20bc06-0622-4367-9d28-a385d1d5241d",
+      "createTime": "2024-01-23T23:15:07.838Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "1.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "f46b302a-94bd-4cfc-97fb-0ee78b68a4bc",
+      "createTime": "2024-01-23T23:15:07.828Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fbf16c98d0521a0533ab36a00f6ec932c72a02e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4968"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "db235d4c-a732-4141-816c-40fff3003d5e",
+      "createTime": "2024-01-23T23:15:07.765Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "2b436da08c000b06b7b17d2a0be139032d696274",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4967"
+          ]
+        }
+      ],
+      "version": "6.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "93ddb66d-3e9f-46e9-9144-7a16d261fea7",
+      "createTime": "2024-01-23T23:15:07.757Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "2b436da08c000b06b7b17d2a0be139032d696274",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4967"
+          ]
+        }
+      ],
+      "version": "1.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "f467433c-646f-4087-8a00-e0d4e074354a",
+      "createTime": "2024-01-23T23:15:07.746Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "2b436da08c000b06b7b17d2a0be139032d696274",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4967"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "36c8012a-3a26-4c27-a8fd-c64ff19bda2d",
+      "createTime": "2024-01-23T23:15:07.739Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f42fe5790785ad2d45e7e317f7326719bf3f51bb",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4966"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "c8417329-94b5-46f2-b39f-ac6306877dca",
+      "createTime": "2024-01-23T23:15:07.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7316bd0adc045a2d2226dfb25fa33fa7ed055b09",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4965"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "223cb9d6-a400-4e65-b5ac-c6c06731e3e6",
+      "createTime": "2024-01-23T23:15:07.632Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "34bd4e2e40e51ffcd122e7d04307f9a5cce694a6",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4964"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "29c08a2f-394b-4bdb-a6f9-d765b8467077",
+      "createTime": "2024-01-23T23:15:07.536Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "34bd4e2e40e51ffcd122e7d04307f9a5cce694a6",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4964"
+          ]
+        }
+      ],
+      "version": "6.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "d2b7599b-4e3d-4a1a-9e89-bdfd86d2e1c8",
+      "createTime": "2024-01-23T23:15:07.523Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "34bd4e2e40e51ffcd122e7d04307f9a5cce694a6",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4964"
+          ]
+        }
+      ],
+      "version": "3.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "11eb7299-c895-401c-8bf0-35be08e4af4b",
+      "createTime": "2024-01-23T23:15:07.485Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4292a438a9a458e43fbe032f2bab8c11bf51867a",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4963"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "644da0ca-4a96-43b8-8fac-f43ee0de8032",
+      "createTime": "2024-01-23T23:15:07.478Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e49b31dc04ece6ce7d0dd4a4fb23f3b72b83540e",
+          "message": "[Many APIs] improve retry logic for streaming API calls",
+          "issues": [
+            "4962"
+          ]
+        }
+      ],
+      "version": "3.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "d6ddb979-ecaa-43be-8677-99d3967712fc",
+      "createTime": "2024-01-23T23:15:07.469Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0bca99dd38384b0cdeb2d418a001985d58297b3c",
+          "message": "Improve retry logic for streaming API calls",
+          "issues": [
+            "4942"
+          ]
+        }
+      ],
+      "version": "3.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "e7a43fd1-354b-4692-93a6-d38251b742e6",
+      "createTime": "2024-01-23T23:15:07.459Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cafe82f06e0afa498ae234b0afe01f8014311f4b",
+          "message": "[generativelanguage] improve retry logic for streaming API calls",
+          "issues": [
+            "4955"
+          ]
+        }
+      ],
+      "version": "2.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "652546e5-54d2-4145-8dbd-a9654d706a0f",
+      "createTime": "2024-01-23T23:15:07.448Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7b062d5c5137f3493530775527144a1861496c47",
+          "message": "Add initial files for google.cloud.redis.cluster.v1",
+          "issues": [
+            "4957"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "ad2edaa6-2419-4a06-9a27-14116af5c269",
+      "createTime": "2024-01-18T21:25:21.465Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0be8b3e3b2700f423eac094958d2c2e53500ff95",
+          "message": "[texttospeech] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4916"
+          ]
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "5075b12a-b4d8-4edb-bd49-404260900e12",
+      "createTime": "2024-01-15T14:27:36.124Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bb3a35760b4aebc0218f81be6b79b9e0a22b1857",
+          "message": "[sql] added value `UNABLE_TO_VERIFY_DEFINERS` to enum `SqlExternalSyncSettingErrorType`",
+          "issues": [
+            "4933"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "d4f678df-139f-45f7-82ae-d97552a72f7a",
+      "createTime": "2024-01-15T14:27:36.088Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9f64b0d1f5af73aaa4369bbf000a71605fd0d5b2",
+          "message": "[recaptchaenterprise] add Storage Control API",
+          "issues": [
+            "4927"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "3c72003d-44bd-4f80-840d-23b840b47650",
+      "createTime": "2024-01-15T14:27:36.074Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d6163943c796278f130aa3c30b18a24f6a5ae2c2",
+          "message": "[oslogin] added field `ImportSshPublicKeyRequest.regions`",
+          "issues": [
+            "4932"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "cc1ec669-f39b-4cde-9a28-45940180681a",
+      "createTime": "2024-01-15T14:27:36.065Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fcbf005f75cfd034dcc26e1d06d6ec523675fd47",
+          "message": "[deploy] Add stable cutback duration configuration to the k8s gateway service mesh deployment strategy. This allows configuring the amount of time to migrate traffic back to the original Service in the stable phase",
+          "issues": [
+            "4921"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "55f1d787-3e02-4970-acb7-feb31e7ab648",
+      "createTime": "2024-01-15T14:27:36.055Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07059f7a849793696a88af1ab73ee143420441b5",
+          "message": "[datacatalog] Change field behavior of the property \"name\" to IDENTIFIER",
+          "issues": [
+            "4925"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "56d68cad-fcdf-424f-90f7-8a6706ac5144",
+      "createTime": "2024-01-15T14:27:36.046Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9c5c163714a11c4fe2484dbcbdd149ee0507f0d2",
+          "message": "[infra-manager] added Terraform Plan",
+          "issues": [
+            "4946"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "2e7452dc-3844-419b-9879-f71ef25b2ccc",
+      "createTime": "2024-01-15T14:27:36.037Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "86e08494011b7f4e147906087c29e35fbb940cf5",
+          "message": "[billing] add new types QueryMode, QueryPlan, ResultSetStats",
+          "issues": [
+            "4924"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "5346aaa8-6246-488d-a91c-88ccff53d5af",
+      "createTime": "2024-01-15T14:27:36.028Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7c5e95ca0d44890b35416de97d7b2096eeb16178",
+          "message": "[batch] Add `tags` field in Job's AllocationPolicy field in v1alpha",
+          "issues": [
+            "4934"
+          ]
+        }
+      ],
+      "version": "1.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "d4f9ac68-e645-4f78-9bb4-b9a5c4132c90",
+      "createTime": "2024-01-15T14:27:36.019Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "20b0f7c4769dbca009922327d9704dd5dbbdc7f1",
+          "message": "[asset] add new types QueryMode, QueryPlan, ResultSetStats",
+          "issues": [
+            "4923"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "96dc4a50-7970-4d09-90c9-c0b7e6fced8d",
+      "createTime": "2024-01-15T14:27:36.008Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "557011f7de32dfb6f500364a5317a6d1063362f4",
+          "message": "Add initial files for google.api.cloudquotas.v1",
+          "issues": [
+            "4920"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "74f22be1-dc5e-4fff-a07a-8ec4ed52e713",
+      "createTime": "2024-01-05T01:04:46.626Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "104566a4eb00aa2d91f24f98a1e0f0ec761e8471",
+          "message": "Add initial files for google.shopping.css.v1",
+          "issues": [
+            "4892"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "5b4d81f8-825d-48a3-9666-1d6e477b70d0",
+      "createTime": "2024-01-05T01:04:46.618Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "47c87d04ca86a56a98a85fe71b362d068b8161b0",
+          "message": "[cloudprofiler] add `ListProfiles` RPC to `ExportService`",
+          "issues": [
+            "4887"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "7d664ccd-9da8-4f7c-9516-63c2ab7dd2e4",
+      "createTime": "2024-01-05T01:04:46.608Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "effadd9e74c5d807c8c76a2d67f46e19df517a2d",
+          "message": "[container] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4899"
+          ]
+        }
+      ],
+      "version": "5.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "5e8ed861-0c0b-450d-aee4-ad75bf33f92e",
+      "createTime": "2024-01-05T01:04:46.600Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f7ea397a129b9f2532be84f72ff455b454b59437",
+          "message": "[translate] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4889"
+          ]
+        }
+      ],
+      "version": "8.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "9b27b4cd-8fdc-40f2-89d4-0e4b59ca0d94",
+      "createTime": "2024-01-05T01:04:46.591Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1ddca2aa9eda50767bfb82771bd4b067d175b19a",
+          "message": "[sql] add `INCOMPATIBLE_DATABASE_MINOR_VERSION`, `SOURCE_MAX_SUBSCRIPTIONS` to `SqlExternalSyncSettingErrorType` enum",
+          "issues": [
+            "4867"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "a1ebd3b2-1027-4573-a734-294fa2975ca7",
+      "createTime": "2024-01-05T01:04:46.582Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "aa8dcf8c3f98e878eac8517cfd01ec2bfa7f54be",
+          "message": "[recommender] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4883"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "89557491-f208-46fa-9f96-b00de297e896",
+      "createTime": "2024-01-05T01:04:46.552Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "285e5aa4a45d9596d38cc7c76e8762e41dd7635f",
+          "message": "[recaptchaenterprise] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4873"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "32c72096-3a23-4d08-8944-0da38a7713a5",
+      "createTime": "2024-01-05T01:04:46.544Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "adb6c375e550a8c72595d600491ed5ab869fd52f",
+          "message": "[orgpolicy] Add custom constraints CRUD APIs, proper etag support in Org Policy Update/Delete API",
+          "issues": [
+            "4896"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "b11dd1cd-5d6e-413d-815e-9f1a62fb7887",
+      "createTime": "2024-01-05T01:04:46.535Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9acd314c35e778b3fb54675dbacadd76f699eaf7",
+          "message": "[netapp] Enable Backup, Backup Vault, and Backup Policy",
+          "issues": [
+            "4902"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "871357f4-2cdd-4b3d-8361-bb2953a42ac9",
+      "createTime": "2024-01-05T01:04:46.527Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c7b70b42c4a5023414c10b7a4075c94f0675fa32",
+          "message": "[gkemulticloud] added proxy support for Attached Clusters",
+          "issues": [
+            "4894"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "490190a6-6884-42af-8b25-a6f42da2f84a",
+      "createTime": "2024-01-05T01:04:46.518Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cca21ed5e5ac57397c77b23e5f310561f4b27102",
+          "message": "[documentai] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4884"
+          ]
+        }
+      ],
+      "version": "8.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "4be29202-e431-4b99-951f-fbd5242e4a62",
+      "createTime": "2024-01-05T01:04:46.509Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fb95ca771318195714dfa47deab817ba19f5e1a4",
+          "message": "[discoveryengine] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4886"
+          ]
+        }
+      ],
+      "version": "1.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "9fd821d9-9f06-42a5-bdff-636e988ca0c7",
+      "createTime": "2024-01-05T01:04:46.501Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9572b9abe6033afe521246948fc786c767987442",
+          "message": "[dialogflow] add sections field to HumanAgentAssistantConfig.SuggestionQueryConfig",
+          "issues": [
+            "4890"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "b3848e96-8138-47cf-85bd-20f145b85f7d",
+      "createTime": "2024-01-05T01:04:46.492Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "64a2e4179a393e34a235ff6b4ece0880fcf625dd",
+          "message": "[channel] `CloudChannelReportsService` is deprecated",
+          "issues": [
+            "4903"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "5be17c75-3300-499d-9390-462043520c2e",
+      "createTime": "2024-01-05T01:04:46.483Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5560948570389b22e16a621a9b66dc4afba823fa",
+          "message": "[billing] added the MoveBillingAccount method, which allows changing which organization a billing account belongs to",
+          "issues": [
+            "4865"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "cfdad688-ab39-4bfa-9d70-223b6d050298",
+      "createTime": "2024-01-05T01:04:46.475Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "301305708389288ad361f7ef5a7d239d94a61a9f",
+          "message": "[asset] added new resource references to fields in AnalyzeMoveRequest",
+          "issues": [
+            "4881"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "b0ecbd6f-0d60-4930-a4f5-e3b536ff919c",
+      "createTime": "2024-01-05T01:04:46.466Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b1e76e9e52831d1c786918a99a4d96c74d8141f5",
+          "message": "[alloydb] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4898"
+          ]
+        }
+      ],
+      "version": "1.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "c758a4c4-10ac-4ced-b7c0-b835d5c03611",
+      "createTime": "2024-01-05T01:04:46.458Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d74d48dbdd24391c9777d06d306a64b15bead998",
+          "message": "Add Content",
+          "issues": [
+            "4880"
+          ]
+        }
+      ],
+      "version": "3.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "f7624f61-20cb-494f-aeed-bfa69901af62",
+      "createTime": "2024-01-05T01:04:46.448Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "60a26a1e60d46295a2688a6b123a092993698ee8",
+          "message": "[analytics-admin] correct long audio synthesis HTTP binding",
+          "issues": [
+            "4888"
+          ]
+        }
+      ],
+      "version": "7.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "74bd07e8-88c3-4467-adf7-197fcbe49127",
+      "createTime": "2024-01-05T01:04:46.436Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "17cd1021fdc31e8077456a7f0f822287877f4f61",
           "message": "Update dependency p-queue to v8",
@@ -20626,5 +21725,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-12-11T21:58:07.215Z"
+  "updateTime": "2024-01-29T19:16:23.135Z"
 }

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v5.3.0...os-login-v5.4.0) (2024-01-15)
+
+
+### Features
+
+* [oslogin] added field `ImportSshPublicKeyRequest.regions` ([#4932](https://github.com/googleapis/google-cloud-node/issues/4932)) ([d616394](https://github.com/googleapis/google-cloud-node/commit/d6163943c796278f130aa3c30b18a24f6a5ae2c2))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v5.2.0...os-login-v5.3.0) (2023-10-24)
 
 

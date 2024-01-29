@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.2.1](https://github.com/googleapis/google-cloud-node/compare/channel-v3.2.0...channel-v3.2.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4963](https://github.com/googleapis/google-cloud-node/issues/4963)) ([4292a43](https://github.com/googleapis/google-cloud-node/commit/4292a438a9a458e43fbe032f2bab8c11bf51867a))
+
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/channel-v3.1.0...channel-v3.2.0) (2024-01-05)
+
+
+### Features
+
+* [channel] `CloudChannelReportsService` is deprecated ([#4903](https://github.com/googleapis/google-cloud-node/issues/4903)) ([64a2e41](https://github.com/googleapis/google-cloud-node/commit/64a2e4179a393e34a235ff6b4ece0880fcf625dd))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/channel-v3.0.1...channel-v3.1.0) (2023-09-11)
 
 

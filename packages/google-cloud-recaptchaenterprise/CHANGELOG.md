@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.1.1...recaptcha-enterprise-v5.2.0) (2024-01-15)
+
+
+### Features
+
+* [recaptchaenterprise] add Storage Control API ([#4927](https://github.com/googleapis/google-cloud-node/issues/4927)) ([9f64b0d](https://github.com/googleapis/google-cloud-node/commit/9f64b0d1f5af73aaa4369bbf000a71605fd0d5b2))
+
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.1.0...recaptcha-enterprise-v5.1.1) (2024-01-05)
+
+
+### Bug Fixes
+
+* [recaptchaenterprise] correct long audio synthesis HTTP binding ([#4873](https://github.com/googleapis/google-cloud-node/issues/4873)) ([285e5aa](https://github.com/googleapis/google-cloud-node/commit/285e5aa4a45d9596d38cc7c76e8762e41dd7635f))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.0.0...recaptcha-enterprise-v5.1.0) (2023-11-30)
 
 

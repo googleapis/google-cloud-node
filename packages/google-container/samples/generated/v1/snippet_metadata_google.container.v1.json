@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-container",
-        "version": "5.4.0",
+        "version": "5.5.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1023,7 +1023,7 @@
             "regionTag": "container_v1_generated_ClusterManager_GetJSONWebKeys_async",
             "title": "ClusterManager getJSONWebKeys Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets the public component of the cluster signing keys in JSON Web Key format. This API is not yet intended for general use, and is not available for all clusters.",
+            "description": " Gets the public component of the cluster signing keys in JSON Web Key format.",
             "canonical": true,
             "file": "cluster_manager.get_j_s_o_n_web_keys.js",
             "language": "JAVASCRIPT",

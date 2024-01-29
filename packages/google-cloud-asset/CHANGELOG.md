@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.2.0...asset-v5.3.0) (2024-01-15)
+
+
+### Features
+
+* [asset] add new types QueryMode, QueryPlan, ResultSetStats ([#4923](https://github.com/googleapis/google-cloud-node/issues/4923)) ([20b0f7c](https://github.com/googleapis/google-cloud-node/commit/20b0f7c4769dbca009922327d9704dd5dbbdc7f1))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.1.0...asset-v5.2.0) (2024-01-05)
+
+
+### Features
+
+* [asset] added new resource references to fields in AnalyzeMoveRequest ([#4881](https://github.com/googleapis/google-cloud-node/issues/4881)) ([3013057](https://github.com/googleapis/google-cloud-node/commit/301305708389288ad361f7ef5a7d239d94a61a9f))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.0.2...asset-v5.1.0) (2023-10-18)
 
 

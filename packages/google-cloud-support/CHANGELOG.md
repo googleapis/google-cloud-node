@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/googleapis/google-cloud-node/compare/support-v1.0.1...support-v1.0.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4967](https://github.com/googleapis/google-cloud-node/issues/4967)) ([2b436da](https://github.com/googleapis/google-cloud-node/commit/2b436da08c000b06b7b17d2a0be139032d696274))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/support-v1.0.0...support-v1.0.1) (2023-09-06)
 
 
