@@ -21,9 +21,9 @@ import {readFileSync} from 'fs';
 import {describe, it} from 'mocha';
 
 describe('📦 pack-n-play test', () => {
-  it('TypeScript', async function () {
+  it('TypeScript code', async function () {
     this.timeout(300000);
-    await packNTest({
+    const options = {
       packageDir: process.cwd(),
       sample: {
         description: 'TypeScript user can use the type definitions',
@@ -31,30 +31,21 @@ describe('📦 pack-n-play test', () => {
           './esm/system-test/fixtures/sample/src/index.ts'
         ).toString(),
       },
-    });
+    };
+    await packNTest(options);
   });
 
-  it('ESM module', async function () {
+  it('JavaScript code', async function () {
     this.timeout(300000);
-    await packNTest({
+    const options = {
+      packageDir: process.cwd(),
       sample: {
-        description: 'Should be able to import using ESM',
-        esm: readFileSync(
+        description: 'JavaScript user can use the library',
+        ts: readFileSync(
           './esm/system-test/fixtures/sample/src/index.js'
         ).toString(),
       },
-    });
-  });
-
-  it('CJS module', async function () {
-    this.timeout(300000);
-    await packNTest({
-      sample: {
-        description: 'Should be able to import using CJS',
-        cjs: readFileSync(
-          './esm/system-test/fixtures/sample/src/index.cjs'
-        ).toString(),
-      },
-    });
+    };
+    await packNTest(options);
   });
 });

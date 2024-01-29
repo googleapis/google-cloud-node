@@ -105,6 +105,11 @@
                 "runTask"
               ]
             },
+            "BufferTask": {
+              "methods": [
+                "bufferTask"
+              ]
+            },
             "ListQueues": {
               "methods": [
                 "listQueues",
@@ -217,6 +222,11 @@
             "RunTask": {
               "methods": [
                 "runTask"
+              ]
+            },
+            "BufferTask": {
+              "methods": [
+                "bufferTask"
               ]
             },
             "ListQueues": {

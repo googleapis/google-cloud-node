@@ -312,6 +312,7 @@ export class CloudTasksClient {
       'createTask',
       'deleteTask',
       'runTask',
+      'bufferTask',
     ];
     for (const methodName of cloudTasksStubMethods) {
       const callPromise = this.cloudTasksStub.then(
@@ -1816,6 +1817,112 @@ export class CloudTasksClient {
       });
     this.initialize();
     return this.innerApiCalls.runTask(request, options, callback);
+  }
+  /**
+   * Creates and buffers a new task without the need to explicitly define a Task
+   * message. The queue must have [HTTP
+   * target][google.cloud.tasks.v2beta3.HttpTarget]. To create the task with a
+   * custom ID, use the following format and set TASK_ID to your desired ID:
+   * projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID:buffer
+   * To create the task with an automatically generated ID, use the following
+   * format:
+   * projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks:buffer.
+   * Note: This feature is in its experimental stage. You must request access to
+   * the API through the [Cloud Tasks BufferTask Experiment Signup
+   * form](https://forms.gle/X8Zr5hiXH5tTGFqh8).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.queue
+   *   Required. The parent queue name. For example:
+   *   projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+   *
+   *   The queue must already exist.
+   * @param {string} [request.taskId]
+   *   Optional. Task ID for the task being created. If not provided, a random
+   *   task ID is assigned to the task.
+   * @param {google.api.HttpBody} [request.body]
+   *   Optional. Body of the HTTP request.
+   *
+   *   The body can take any generic value. The value is written to the
+   *   {@link protos.payload|HttpRequest} of the [Task].
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta3.BufferTaskResponse|BufferTaskResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.buffer_task.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_BufferTask_async
+   */
+  bufferTask(
+    request?: protos.google.cloud.tasks.v2beta3.IBufferTaskRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta3.IBufferTaskRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  bufferTask(
+    request: protos.google.cloud.tasks.v2beta3.IBufferTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta3.IBufferTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bufferTask(
+    request: protos.google.cloud.tasks.v2beta3.IBufferTaskRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta3.IBufferTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bufferTask(
+    request?: protos.google.cloud.tasks.v2beta3.IBufferTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.IBufferTaskResponse,
+          | protos.google.cloud.tasks.v2beta3.IBufferTaskRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.tasks.v2beta3.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta3.IBufferTaskRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.IBufferTaskResponse,
+      protos.google.cloud.tasks.v2beta3.IBufferTaskRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        queue: request.queue ?? '',
+        task_id: request.taskId ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.bufferTask(request, options, callback);
   }
 
   /**
