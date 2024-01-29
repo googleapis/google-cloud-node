@@ -1380,6 +1380,454 @@
             }
         },
         {
+            "regionTag": "dataproc_v1_generated_SessionController_CreateSession_async",
+            "title": "dataproc createSession Sample",
+            "origin": "API_DEFINITION",
+            "description": " Create an interactive session asynchronously.",
+            "canonical": true,
+            "file": "session_controller.create_session.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateSession",
+                "fullName": "google.cloud.dataproc.v1.SessionController.CreateSession",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "session",
+                        "type": ".google.cloud.dataproc.v1.Session"
+                    },
+                    {
+                        "name": "session_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SessionControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.SessionControllerClient"
+                },
+                "method": {
+                    "shortName": "CreateSession",
+                    "fullName": "google.cloud.dataproc.v1.SessionController.CreateSession",
+                    "service": {
+                        "shortName": "SessionController",
+                        "fullName": "google.cloud.dataproc.v1.SessionController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_SessionController_GetSession_async",
+            "title": "dataproc getSession Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the resource representation for an interactive session.",
+            "canonical": true,
+            "file": "session_controller.get_session.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetSession",
+                "fullName": "google.cloud.dataproc.v1.SessionController.GetSession",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataproc.v1.Session",
+                "client": {
+                    "shortName": "SessionControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.SessionControllerClient"
+                },
+                "method": {
+                    "shortName": "GetSession",
+                    "fullName": "google.cloud.dataproc.v1.SessionController.GetSession",
+                    "service": {
+                        "shortName": "SessionController",
+                        "fullName": "google.cloud.dataproc.v1.SessionController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_SessionController_ListSessions_async",
+            "title": "dataproc listSessions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists interactive sessions.",
+            "canonical": true,
+            "file": "session_controller.list_sessions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 79,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListSessions",
+                "fullName": "google.cloud.dataproc.v1.SessionController.ListSessions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataproc.v1.ListSessionsResponse",
+                "client": {
+                    "shortName": "SessionControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.SessionControllerClient"
+                },
+                "method": {
+                    "shortName": "ListSessions",
+                    "fullName": "google.cloud.dataproc.v1.SessionController.ListSessions",
+                    "service": {
+                        "shortName": "SessionController",
+                        "fullName": "google.cloud.dataproc.v1.SessionController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_SessionController_TerminateSession_async",
+            "title": "dataproc terminateSession Sample",
+            "origin": "API_DEFINITION",
+            "description": " Terminates the interactive session.",
+            "canonical": true,
+            "file": "session_controller.terminate_session.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TerminateSession",
+                "fullName": "google.cloud.dataproc.v1.SessionController.TerminateSession",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SessionControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.SessionControllerClient"
+                },
+                "method": {
+                    "shortName": "TerminateSession",
+                    "fullName": "google.cloud.dataproc.v1.SessionController.TerminateSession",
+                    "service": {
+                        "shortName": "SessionController",
+                        "fullName": "google.cloud.dataproc.v1.SessionController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_SessionController_DeleteSession_async",
+            "title": "dataproc deleteSession Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes the interactive session resource. If the session is not in terminal state, it is terminated, and then deleted.",
+            "canonical": true,
+            "file": "session_controller.delete_session.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSession",
+                "fullName": "google.cloud.dataproc.v1.SessionController.DeleteSession",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SessionControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.SessionControllerClient"
+                },
+                "method": {
+                    "shortName": "DeleteSession",
+                    "fullName": "google.cloud.dataproc.v1.SessionController.DeleteSession",
+                    "service": {
+                        "shortName": "SessionController",
+                        "fullName": "google.cloud.dataproc.v1.SessionController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_SessionTemplateController_CreateSessionTemplate_async",
+            "title": "dataproc createSessionTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Create a session template synchronously.",
+            "canonical": true,
+            "file": "session_template_controller.create_session_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateSessionTemplate",
+                "fullName": "google.cloud.dataproc.v1.SessionTemplateController.CreateSessionTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "session_template",
+                        "type": ".google.cloud.dataproc.v1.SessionTemplate"
+                    }
+                ],
+                "resultType": ".google.cloud.dataproc.v1.SessionTemplate",
+                "client": {
+                    "shortName": "SessionTemplateControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.SessionTemplateControllerClient"
+                },
+                "method": {
+                    "shortName": "CreateSessionTemplate",
+                    "fullName": "google.cloud.dataproc.v1.SessionTemplateController.CreateSessionTemplate",
+                    "service": {
+                        "shortName": "SessionTemplateController",
+                        "fullName": "google.cloud.dataproc.v1.SessionTemplateController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_SessionTemplateController_UpdateSessionTemplate_async",
+            "title": "dataproc updateSessionTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the session template synchronously.",
+            "canonical": true,
+            "file": "session_template_controller.update_session_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateSessionTemplate",
+                "fullName": "google.cloud.dataproc.v1.SessionTemplateController.UpdateSessionTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "session_template",
+                        "type": ".google.cloud.dataproc.v1.SessionTemplate"
+                    }
+                ],
+                "resultType": ".google.cloud.dataproc.v1.SessionTemplate",
+                "client": {
+                    "shortName": "SessionTemplateControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.SessionTemplateControllerClient"
+                },
+                "method": {
+                    "shortName": "UpdateSessionTemplate",
+                    "fullName": "google.cloud.dataproc.v1.SessionTemplateController.UpdateSessionTemplate",
+                    "service": {
+                        "shortName": "SessionTemplateController",
+                        "fullName": "google.cloud.dataproc.v1.SessionTemplateController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_SessionTemplateController_GetSessionTemplate_async",
+            "title": "dataproc getSessionTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the resource representation for a session template.",
+            "canonical": true,
+            "file": "session_template_controller.get_session_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetSessionTemplate",
+                "fullName": "google.cloud.dataproc.v1.SessionTemplateController.GetSessionTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataproc.v1.SessionTemplate",
+                "client": {
+                    "shortName": "SessionTemplateControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.SessionTemplateControllerClient"
+                },
+                "method": {
+                    "shortName": "GetSessionTemplate",
+                    "fullName": "google.cloud.dataproc.v1.SessionTemplateController.GetSessionTemplate",
+                    "service": {
+                        "shortName": "SessionTemplateController",
+                        "fullName": "google.cloud.dataproc.v1.SessionTemplateController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_SessionTemplateController_ListSessionTemplates_async",
+            "title": "dataproc listSessionTemplates Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists session templates.",
+            "canonical": true,
+            "file": "session_template_controller.list_session_templates.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListSessionTemplates",
+                "fullName": "google.cloud.dataproc.v1.SessionTemplateController.ListSessionTemplates",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dataproc.v1.ListSessionTemplatesResponse",
+                "client": {
+                    "shortName": "SessionTemplateControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.SessionTemplateControllerClient"
+                },
+                "method": {
+                    "shortName": "ListSessionTemplates",
+                    "fullName": "google.cloud.dataproc.v1.SessionTemplateController.ListSessionTemplates",
+                    "service": {
+                        "shortName": "SessionTemplateController",
+                        "fullName": "google.cloud.dataproc.v1.SessionTemplateController"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dataproc_v1_generated_SessionTemplateController_DeleteSessionTemplate_async",
+            "title": "dataproc deleteSessionTemplate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a session template.",
+            "canonical": true,
+            "file": "session_template_controller.delete_session_template.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSessionTemplate",
+                "fullName": "google.cloud.dataproc.v1.SessionTemplateController.DeleteSessionTemplate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "SessionTemplateControllerClient",
+                    "fullName": "google.cloud.dataproc.v1.SessionTemplateControllerClient"
+                },
+                "method": {
+                    "shortName": "DeleteSessionTemplate",
+                    "fullName": "google.cloud.dataproc.v1.SessionTemplateController.DeleteSessionTemplate",
+                    "service": {
+                        "shortName": "SessionTemplateController",
+                        "fullName": "google.cloud.dataproc.v1.SessionTemplateController"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "dataproc_v1_generated_WorkflowTemplateService_CreateWorkflowTemplate_async",
             "title": "dataproc createWorkflowTemplate Sample",
             "origin": "API_DEFINITION",

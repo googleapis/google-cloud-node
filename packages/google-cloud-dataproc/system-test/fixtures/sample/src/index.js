@@ -26,6 +26,9 @@ function main() {
   const clusterControllerClient = new dataproc.ClusterControllerClient();
   const jobControllerClient = new dataproc.JobControllerClient();
   const nodeGroupControllerClient = new dataproc.NodeGroupControllerClient();
+  const sessionControllerClient = new dataproc.SessionControllerClient();
+  const sessionTemplateControllerClient =
+    new dataproc.SessionTemplateControllerClient();
   const workflowTemplateServiceClient =
     new dataproc.WorkflowTemplateServiceClient();
 }

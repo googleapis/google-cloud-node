@@ -2797,5 +2797,135 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         );
       });
     });
+
+    describe('session', () => {
+      const fakePath = '/rendered/path/session';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        session: 'sessionValue',
+      };
+      const client =
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.sessionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.sessionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('sessionPath', () => {
+        const result = client.sessionPath(
+          'projectValue',
+          'locationValue',
+          'sessionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.sessionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSessionName', () => {
+        const result = client.matchProjectFromSessionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.sessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSessionName', () => {
+        const result = client.matchLocationFromSessionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.sessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSessionFromSessionName', () => {
+        const result = client.matchSessionFromSessionName(fakePath);
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (client.pathTemplates.sessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('sessionTemplate', () => {
+      const fakePath = '/rendered/path/sessionTemplate';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        template: 'templateValue',
+      };
+      const client =
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.sessionTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.sessionTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('sessionTemplatePath', () => {
+        const result = client.sessionTemplatePath(
+          'projectValue',
+          'locationValue',
+          'templateValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.sessionTemplatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSessionTemplateName', () => {
+        const result = client.matchProjectFromSessionTemplateName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.sessionTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSessionTemplateName', () => {
+        const result = client.matchLocationFromSessionTemplateName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.sessionTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTemplateFromSessionTemplateName', () => {
+        const result = client.matchTemplateFromSessionTemplateName(fakePath);
+        assert.strictEqual(result, 'templateValue');
+        assert(
+          (client.pathTemplates.sessionTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
   });
 });

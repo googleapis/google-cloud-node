@@ -39,6 +39,16 @@
   * [Node_group_controller.create_node_group](#node_group_controller.create_node_group)
   * [Node_group_controller.get_node_group](#node_group_controller.get_node_group)
   * [Node_group_controller.resize_node_group](#node_group_controller.resize_node_group)
+  * [Session_controller.create_session](#session_controller.create_session)
+  * [Session_controller.delete_session](#session_controller.delete_session)
+  * [Session_controller.get_session](#session_controller.get_session)
+  * [Session_controller.list_sessions](#session_controller.list_sessions)
+  * [Session_controller.terminate_session](#session_controller.terminate_session)
+  * [Session_template_controller.create_session_template](#session_template_controller.create_session_template)
+  * [Session_template_controller.delete_session_template](#session_template_controller.delete_session_template)
+  * [Session_template_controller.get_session_template](#session_template_controller.get_session_template)
+  * [Session_template_controller.list_session_templates](#session_template_controller.list_session_templates)
+  * [Session_template_controller.update_session_template](#session_template_controller.update_session_template)
   * [Workflow_template_service.create_workflow_template](#workflow_template_service.create_workflow_template)
   * [Workflow_template_service.delete_workflow_template](#workflow_template_service.delete_workflow_template)
   * [Workflow_template_service.get_workflow_template](#workflow_template_service.get_workflow_template)
@@ -515,6 +525,176 @@ __Usage:__
 
 
 `node packages/google-cloud-dataproc/samples/generated/v1/node_group_controller.resize_node_group.js`
+
+
+-----
+
+
+
+
+### Session_controller.create_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/session_controller.create_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/session_controller.create_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/session_controller.create_session.js`
+
+
+-----
+
+
+
+
+### Session_controller.delete_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/session_controller.delete_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/session_controller.delete_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/session_controller.delete_session.js`
+
+
+-----
+
+
+
+
+### Session_controller.get_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/session_controller.get_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/session_controller.get_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/session_controller.get_session.js`
+
+
+-----
+
+
+
+
+### Session_controller.list_sessions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/session_controller.list_sessions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/session_controller.list_sessions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/session_controller.list_sessions.js`
+
+
+-----
+
+
+
+
+### Session_controller.terminate_session
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/session_controller.terminate_session.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/session_controller.terminate_session.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/session_controller.terminate_session.js`
+
+
+-----
+
+
+
+
+### Session_template_controller.create_session_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.create_session_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.create_session_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.create_session_template.js`
+
+
+-----
+
+
+
+
+### Session_template_controller.delete_session_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.delete_session_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.delete_session_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.delete_session_template.js`
+
+
+-----
+
+
+
+
+### Session_template_controller.get_session_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.get_session_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.get_session_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.get_session_template.js`
+
+
+-----
+
+
+
+
+### Session_template_controller.list_session_templates
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.list_session_templates.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.list_session_templates.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.list_session_templates.js`
+
+
+-----
+
+
+
+
+### Session_template_controller.update_session_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.update_session_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.update_session_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dataproc/samples/generated/v1/session_template_controller.update_session_template.js`
 
 
 -----
