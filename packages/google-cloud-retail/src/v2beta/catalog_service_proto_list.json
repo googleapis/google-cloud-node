@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/retail/v2beta/analytics_service.proto",
   "../../protos/google/cloud/retail/v2beta/catalog.proto",
   "../../protos/google/cloud/retail/v2beta/catalog_service.proto",
   "../../protos/google/cloud/retail/v2beta/common.proto",
