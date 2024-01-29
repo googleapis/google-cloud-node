@@ -122,7 +122,7 @@
   "packages/google-cloud-storageinsights": "1.0.1",
   "packages/google-cloud-support": "1.0.2",
   "packages/google-cloud-talent": "6.0.2",
-  "packages/google-cloud-tasks": "4.1.0",
+  "packages/google-cloud-tasks": "5.0.0",
   "packages/google-cloud-texttospeech": "5.0.2",
   "packages/google-cloud-tpu": "3.2.1",
   "packages/google-cloud-translate": "8.0.3",
