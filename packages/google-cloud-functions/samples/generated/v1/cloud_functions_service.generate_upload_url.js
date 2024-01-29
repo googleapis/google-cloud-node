@@ -35,11 +35,11 @@ function main() {
   // const parent = 'abc123'
   /**
    *  Resource name of a KMS crypto key (managed by the user) used to
-   *  encrypt/decrypt function source code objects in staging Cloud Storage
+   *  encrypt/decrypt function source code objects in intermediate Cloud Storage
    *  buckets. When you generate an upload url and upload your source code, it
-   *  gets copied to a staging Cloud Storage bucket in an internal regional
-   *  project. The source code is then copied to a versioned directory in the
-   *  sources bucket in the consumer project during the function deployment.
+   *  gets copied to an intermediate Cloud Storage bucket. The source code is
+   *  then copied to a versioned directory in the sources bucket in the consumer
+   *  project during the function deployment.
    *  It must match the pattern
    *  `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
    *  The Google Cloud Functions service account
