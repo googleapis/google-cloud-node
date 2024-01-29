@@ -48,6 +48,7 @@ function main(model, contents, answerStyle) {
    *  single-turn queries, this is a single question to answer. For multi-turn
    *  queries, this is a repeated field that contains conversation history and
    *  the last `Content` in the list containing the question.
+   *  Note: GenerateAnswer currently only supports queries in English.
    */
   // const contents = [1,2,3,4]
   /**
