@@ -2009,6 +2009,19 @@
                               "rule": "repeated",
                               "type": "SubnetStatus",
                               "id": 1
+                            },
+                            "macsecStatusInternalLinks": {
+                              "type": "MacsecStatus",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "MacsecStatus": {
+                              "values": {
+                                "MACSEC_STATUS_UNSPECIFIED": 0,
+                                "SECURE": 1,
+                                "UNSECURE": 2
+                              }
                             }
                           }
                         }
