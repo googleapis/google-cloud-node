@@ -40,6 +40,7 @@ import * as gapicConfig from './feature_online_store_service_client_config.json'
 const version = require('../../../package.json').version;
 
 /**
+ *  A service for fetching feature values from the online store.
  * @class
  * @memberof v1
  */
