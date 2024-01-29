@@ -31,7 +31,7 @@ async function main(indexId = 'YOUR_INDEX_ID') {
     console.log('Properties:', metadata.properties);
   }
 
-  await getIndex();
+  getIndex();
   // [END datastore_admin_index_get]
 }
 
