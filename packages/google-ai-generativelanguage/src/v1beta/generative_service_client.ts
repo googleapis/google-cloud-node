@@ -200,7 +200,8 @@ export class GenerativeServiceClient {
     this.descriptors.stream = {
       streamGenerateContent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
-        !!opts.fallback
+        !!opts.fallback,
+        /* gaxStreamingRetries: */ true
       ),
     };
 
@@ -506,6 +507,8 @@ export class GenerativeServiceClient {
    *   single-turn queries, this is a single question to answer. For multi-turn
    *   queries, this is a repeated field that contains conversation history and
    *   the last `Content` in the list containing the question.
+   *
+   *   Note: GenerateAnswer currently only supports queries in English.
    * @param {google.ai.generativelanguage.v1beta.GenerateAnswerRequest.AnswerStyle} request.answerStyle
    *   Required. Style in which answers should be returned.
    * @param {number[]} [request.safetySettings]
@@ -638,6 +641,9 @@ export class GenerativeServiceClient {
    * @param {string} [request.title]
    *   Optional. An optional title for the text. Only applicable when TaskType is
    *   `RETRIEVAL_DOCUMENT`.
+   *
+   *   Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality
+   *   embeddings for retrieval.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

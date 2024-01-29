@@ -9012,9 +9012,6 @@ export namespace google {
                     /** TaskGroup permissiveSsh */
                     permissiveSsh?: (boolean|null);
 
-                    /** TaskGroup enableOslogin */
-                    enableOslogin?: (boolean|null);
-
                     /** TaskGroup runAsNonRoot */
                     runAsNonRoot?: (boolean|null);
                 }
@@ -9060,9 +9057,6 @@ export namespace google {
 
                     /** TaskGroup permissiveSsh. */
                     public permissiveSsh: boolean;
-
-                    /** TaskGroup enableOslogin. */
-                    public enableOslogin: boolean;
 
                     /** TaskGroup runAsNonRoot. */
                     public runAsNonRoot: boolean;

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.10.0...aiplatform-v3.10.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* Improve retry logic for streaming API calls ([#4942](https://github.com/googleapis/google-cloud-node/issues/4942)) ([0bca99d](https://github.com/googleapis/google-cloud-node/commit/0bca99dd38384b0cdeb2d418a001985d58297b3c))
+
 ## [3.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.9.0...aiplatform-v3.10.0) (2024-01-05)
 
 

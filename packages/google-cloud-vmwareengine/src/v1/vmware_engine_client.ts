@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -195,14 +195,38 @@ export class VmwareEngineClient {
       clusterPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/privateClouds/{private_cloud}/clusters/{cluster}'
       ),
+      dnsBindPermissionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dnsBindPermission'
+      ),
+      dnsForwardingPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/privateClouds/{private_cloud}/dnsForwarding'
+      ),
+      externalAccessRulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/networkPolicies/{network_policy}/externalAccessRules/{external_access_rule}'
+      ),
+      externalAddressPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/privateClouds/{private_cloud}/externalAddresses/{external_address}'
+      ),
       hcxActivationKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/privateClouds/{private_cloud}/hcxActivationKeys/{hcx_activation_key}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      loggingServerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/privateClouds/{private_cloud}/loggingServers/{logging_server}'
+      ),
+      managementDnsZoneBindingPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/privateClouds/{private_cloud}/managementDnsZoneBindings/{management_dns_zone_binding}'
+      ),
+      networkPeeringPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/networkPeerings/{network_peering}'
+      ),
       networkPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/networkPolicies/{network_policy}'
+      ),
+      nodePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/privateClouds/{private_cloud}/clusters/{cluster}/nodes/{node}'
       ),
       nodeTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nodeTypes/{node_type}'
@@ -238,15 +262,50 @@ export class VmwareEngineClient {
         'nextPageToken',
         'clusters'
       ),
+      listNodes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'nodes'
+      ),
+      listExternalAddresses: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'externalAddresses'
+      ),
+      fetchNetworkPolicyExternalAddresses: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'externalAddresses'
+      ),
       listSubnets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'subnets'
       ),
+      listExternalAccessRules: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'externalAccessRules'
+      ),
+      listLoggingServers: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'loggingServers'
+      ),
       listNodeTypes: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'nodeTypes'
+      ),
+      listNetworkPeerings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'networkPeerings'
+      ),
+      listPeeringRoutes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'peeringRoutes'
       ),
       listHcxActivationKeys: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -257,6 +316,11 @@ export class VmwareEngineClient {
         'pageToken',
         'nextPageToken',
         'networkPolicies'
+      ),
+      listManagementDnsZoneBindings: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'managementDnsZoneBindings'
       ),
       listVmwareEngineNetworks: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -395,10 +459,64 @@ export class VmwareEngineClient {
     const deleteClusterMetadata = protoFilesRoot.lookup(
       '.google.cloud.vmwareengine.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createExternalAddressResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.ExternalAddress'
+    ) as gax.protobuf.Type;
+    const createExternalAddressMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateExternalAddressResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.ExternalAddress'
+    ) as gax.protobuf.Type;
+    const updateExternalAddressMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteExternalAddressResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteExternalAddressMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const updateSubnetResponse = protoFilesRoot.lookup(
       '.google.cloud.vmwareengine.v1.Subnet'
     ) as gax.protobuf.Type;
     const updateSubnetMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createExternalAccessRuleResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.ExternalAccessRule'
+    ) as gax.protobuf.Type;
+    const createExternalAccessRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateExternalAccessRuleResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.ExternalAccessRule'
+    ) as gax.protobuf.Type;
+    const updateExternalAccessRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteExternalAccessRuleResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteExternalAccessRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createLoggingServerResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.LoggingServer'
+    ) as gax.protobuf.Type;
+    const createLoggingServerMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateLoggingServerResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.LoggingServer'
+    ) as gax.protobuf.Type;
+    const updateLoggingServerMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteLoggingServerResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteLoggingServerMetadata = protoFilesRoot.lookup(
       '.google.cloud.vmwareengine.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const resetNsxCredentialsResponse = protoFilesRoot.lookup(
@@ -411,6 +529,30 @@ export class VmwareEngineClient {
       '.google.cloud.vmwareengine.v1.PrivateCloud'
     ) as gax.protobuf.Type;
     const resetVcenterCredentialsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateDnsForwardingResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.DnsForwarding'
+    ) as gax.protobuf.Type;
+    const updateDnsForwardingMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createNetworkPeeringResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.NetworkPeering'
+    ) as gax.protobuf.Type;
+    const createNetworkPeeringMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteNetworkPeeringResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteNetworkPeeringMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateNetworkPeeringResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.NetworkPeering'
+    ) as gax.protobuf.Type;
+    const updateNetworkPeeringMetadata = protoFilesRoot.lookup(
       '.google.cloud.vmwareengine.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const createHcxActivationKeyResponse = protoFilesRoot.lookup(
@@ -435,6 +577,30 @@ export class VmwareEngineClient {
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteNetworkPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createManagementDnsZoneBindingResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding'
+    ) as gax.protobuf.Type;
+    const createManagementDnsZoneBindingMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateManagementDnsZoneBindingResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding'
+    ) as gax.protobuf.Type;
+    const updateManagementDnsZoneBindingMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteManagementDnsZoneBindingResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteManagementDnsZoneBindingMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const repairManagementDnsZoneBindingResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding'
+    ) as gax.protobuf.Type;
+    const repairManagementDnsZoneBindingMetadata = protoFilesRoot.lookup(
       '.google.cloud.vmwareengine.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const createVmwareEngineNetworkResponse = protoFilesRoot.lookup(
@@ -471,6 +637,18 @@ export class VmwareEngineClient {
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deletePrivateConnectionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const grantDnsBindPermissionResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.DnsBindPermission'
+    ) as gax.protobuf.Type;
+    const grantDnsBindPermissionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const revokeDnsBindPermissionResponse = protoFilesRoot.lookup(
+      '.google.cloud.vmwareengine.v1.DnsBindPermission'
+    ) as gax.protobuf.Type;
+    const revokeDnsBindPermissionMetadata = protoFilesRoot.lookup(
       '.google.cloud.vmwareengine.v1.OperationMetadata'
     ) as gax.protobuf.Type;
 
@@ -510,10 +688,73 @@ export class VmwareEngineClient {
         deleteClusterResponse.decode.bind(deleteClusterResponse),
         deleteClusterMetadata.decode.bind(deleteClusterMetadata)
       ),
+      createExternalAddress: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createExternalAddressResponse.decode.bind(
+          createExternalAddressResponse
+        ),
+        createExternalAddressMetadata.decode.bind(createExternalAddressMetadata)
+      ),
+      updateExternalAddress: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateExternalAddressResponse.decode.bind(
+          updateExternalAddressResponse
+        ),
+        updateExternalAddressMetadata.decode.bind(updateExternalAddressMetadata)
+      ),
+      deleteExternalAddress: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteExternalAddressResponse.decode.bind(
+          deleteExternalAddressResponse
+        ),
+        deleteExternalAddressMetadata.decode.bind(deleteExternalAddressMetadata)
+      ),
       updateSubnet: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateSubnetResponse.decode.bind(updateSubnetResponse),
         updateSubnetMetadata.decode.bind(updateSubnetMetadata)
+      ),
+      createExternalAccessRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createExternalAccessRuleResponse.decode.bind(
+          createExternalAccessRuleResponse
+        ),
+        createExternalAccessRuleMetadata.decode.bind(
+          createExternalAccessRuleMetadata
+        )
+      ),
+      updateExternalAccessRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateExternalAccessRuleResponse.decode.bind(
+          updateExternalAccessRuleResponse
+        ),
+        updateExternalAccessRuleMetadata.decode.bind(
+          updateExternalAccessRuleMetadata
+        )
+      ),
+      deleteExternalAccessRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteExternalAccessRuleResponse.decode.bind(
+          deleteExternalAccessRuleResponse
+        ),
+        deleteExternalAccessRuleMetadata.decode.bind(
+          deleteExternalAccessRuleMetadata
+        )
+      ),
+      createLoggingServer: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createLoggingServerResponse.decode.bind(createLoggingServerResponse),
+        createLoggingServerMetadata.decode.bind(createLoggingServerMetadata)
+      ),
+      updateLoggingServer: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateLoggingServerResponse.decode.bind(updateLoggingServerResponse),
+        updateLoggingServerMetadata.decode.bind(updateLoggingServerMetadata)
+      ),
+      deleteLoggingServer: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteLoggingServerResponse.decode.bind(deleteLoggingServerResponse),
+        deleteLoggingServerMetadata.decode.bind(deleteLoggingServerMetadata)
       ),
       resetNsxCredentials: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -528,6 +769,26 @@ export class VmwareEngineClient {
         resetVcenterCredentialsMetadata.decode.bind(
           resetVcenterCredentialsMetadata
         )
+      ),
+      updateDnsForwarding: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateDnsForwardingResponse.decode.bind(updateDnsForwardingResponse),
+        updateDnsForwardingMetadata.decode.bind(updateDnsForwardingMetadata)
+      ),
+      createNetworkPeering: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createNetworkPeeringResponse.decode.bind(createNetworkPeeringResponse),
+        createNetworkPeeringMetadata.decode.bind(createNetworkPeeringMetadata)
+      ),
+      deleteNetworkPeering: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteNetworkPeeringResponse.decode.bind(deleteNetworkPeeringResponse),
+        deleteNetworkPeeringMetadata.decode.bind(deleteNetworkPeeringMetadata)
+      ),
+      updateNetworkPeering: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateNetworkPeeringResponse.decode.bind(updateNetworkPeeringResponse),
+        updateNetworkPeeringMetadata.decode.bind(updateNetworkPeeringMetadata)
       ),
       createHcxActivationKey: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -552,6 +813,42 @@ export class VmwareEngineClient {
         this.operationsClient,
         deleteNetworkPolicyResponse.decode.bind(deleteNetworkPolicyResponse),
         deleteNetworkPolicyMetadata.decode.bind(deleteNetworkPolicyMetadata)
+      ),
+      createManagementDnsZoneBinding: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createManagementDnsZoneBindingResponse.decode.bind(
+          createManagementDnsZoneBindingResponse
+        ),
+        createManagementDnsZoneBindingMetadata.decode.bind(
+          createManagementDnsZoneBindingMetadata
+        )
+      ),
+      updateManagementDnsZoneBinding: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateManagementDnsZoneBindingResponse.decode.bind(
+          updateManagementDnsZoneBindingResponse
+        ),
+        updateManagementDnsZoneBindingMetadata.decode.bind(
+          updateManagementDnsZoneBindingMetadata
+        )
+      ),
+      deleteManagementDnsZoneBinding: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteManagementDnsZoneBindingResponse.decode.bind(
+          deleteManagementDnsZoneBindingResponse
+        ),
+        deleteManagementDnsZoneBindingMetadata.decode.bind(
+          deleteManagementDnsZoneBindingMetadata
+        )
+      ),
+      repairManagementDnsZoneBinding: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        repairManagementDnsZoneBindingResponse.decode.bind(
+          repairManagementDnsZoneBindingResponse
+        ),
+        repairManagementDnsZoneBindingMetadata.decode.bind(
+          repairManagementDnsZoneBindingMetadata
+        )
       ),
       createVmwareEngineNetwork: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -605,6 +902,24 @@ export class VmwareEngineClient {
         ),
         deletePrivateConnectionMetadata.decode.bind(
           deletePrivateConnectionMetadata
+        )
+      ),
+      grantDnsBindPermission: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        grantDnsBindPermissionResponse.decode.bind(
+          grantDnsBindPermissionResponse
+        ),
+        grantDnsBindPermissionMetadata.decode.bind(
+          grantDnsBindPermissionMetadata
+        )
+      ),
+      revokeDnsBindPermission: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        revokeDnsBindPermissionResponse.decode.bind(
+          revokeDnsBindPermissionResponse
+        ),
+        revokeDnsBindPermissionMetadata.decode.bind(
+          revokeDnsBindPermissionMetadata
         )
       ),
     };
@@ -670,15 +985,41 @@ export class VmwareEngineClient {
       'createCluster',
       'updateCluster',
       'deleteCluster',
+      'listNodes',
+      'getNode',
+      'listExternalAddresses',
+      'fetchNetworkPolicyExternalAddresses',
+      'getExternalAddress',
+      'createExternalAddress',
+      'updateExternalAddress',
+      'deleteExternalAddress',
       'listSubnets',
       'getSubnet',
       'updateSubnet',
+      'listExternalAccessRules',
+      'getExternalAccessRule',
+      'createExternalAccessRule',
+      'updateExternalAccessRule',
+      'deleteExternalAccessRule',
+      'listLoggingServers',
+      'getLoggingServer',
+      'createLoggingServer',
+      'updateLoggingServer',
+      'deleteLoggingServer',
       'listNodeTypes',
       'getNodeType',
       'showNsxCredentials',
       'showVcenterCredentials',
       'resetNsxCredentials',
       'resetVcenterCredentials',
+      'getDnsForwarding',
+      'updateDnsForwarding',
+      'getNetworkPeering',
+      'listNetworkPeerings',
+      'createNetworkPeering',
+      'deleteNetworkPeering',
+      'updateNetworkPeering',
+      'listPeeringRoutes',
       'createHcxActivationKey',
       'listHcxActivationKeys',
       'getHcxActivationKey',
@@ -687,6 +1028,12 @@ export class VmwareEngineClient {
       'createNetworkPolicy',
       'updateNetworkPolicy',
       'deleteNetworkPolicy',
+      'listManagementDnsZoneBindings',
+      'getManagementDnsZoneBinding',
+      'createManagementDnsZoneBinding',
+      'updateManagementDnsZoneBinding',
+      'deleteManagementDnsZoneBinding',
+      'repairManagementDnsZoneBinding',
       'createVmwareEngineNetwork',
       'updateVmwareEngineNetwork',
       'deleteVmwareEngineNetwork',
@@ -698,6 +1045,9 @@ export class VmwareEngineClient {
       'updatePrivateConnection',
       'deletePrivateConnection',
       'listPrivateConnectionPeeringRoutes',
+      'grantDnsBindPermission',
+      'getDnsBindPermission',
+      'revokeDnsBindPermission',
     ];
     for (const methodName of vmwareEngineStubMethods) {
       const callPromise = this.vmwareEngineStub.then(
@@ -967,6 +1317,192 @@ export class VmwareEngineClient {
     return this.innerApiCalls.getCluster(request, options, callback);
   }
   /**
+   * Gets details of a single node.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the node to retrieve.
+   *   For example:
+   *   `projects/{project}/locations/{location}/privateClouds/{private_cloud}/clusters/{cluster}/nodes/{node}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vmwareengine.v1.Node|Node}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.get_node.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GetNode_async
+   */
+  getNode(
+    request?: protos.google.cloud.vmwareengine.v1.IGetNodeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.INode,
+      protos.google.cloud.vmwareengine.v1.IGetNodeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getNode(
+    request: protos.google.cloud.vmwareengine.v1.IGetNodeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.INode,
+      protos.google.cloud.vmwareengine.v1.IGetNodeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNode(
+    request: protos.google.cloud.vmwareengine.v1.IGetNodeRequest,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.INode,
+      protos.google.cloud.vmwareengine.v1.IGetNodeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNode(
+    request?: protos.google.cloud.vmwareengine.v1.IGetNodeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.INode,
+          | protos.google.cloud.vmwareengine.v1.IGetNodeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vmwareengine.v1.INode,
+      protos.google.cloud.vmwareengine.v1.IGetNodeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.INode,
+      protos.google.cloud.vmwareengine.v1.IGetNodeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getNode(request, options, callback);
+  }
+  /**
+   * Gets details of a single external IP address.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the external IP address to retrieve.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/externalAddresses/my-ip`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vmwareengine.v1.ExternalAddress|ExternalAddress}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.get_external_address.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GetExternalAddress_async
+   */
+  getExternalAddress(
+    request?: protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IExternalAddress,
+      (
+        | protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getExternalAddress(
+    request: protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IExternalAddress,
+      | protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getExternalAddress(
+    request: protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IExternalAddress,
+      | protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getExternalAddress(
+    request?: protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IExternalAddress,
+          | protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vmwareengine.v1.IExternalAddress,
+      | protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IExternalAddress,
+      (
+        | protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getExternalAddress(request, options, callback);
+  }
+  /**
    * Gets details of a single subnet.
    *
    * @param {Object} request
@@ -1053,6 +1589,200 @@ export class VmwareEngineClient {
       });
     this.initialize();
     return this.innerApiCalls.getSubnet(request, options, callback);
+  }
+  /**
+   * Gets details of a single external access rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the external access firewall rule to
+   *   retrieve. Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1/networkPolicies/my-policy/externalAccessRules/my-rule`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vmwareengine.v1.ExternalAccessRule|ExternalAccessRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.get_external_access_rule.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GetExternalAccessRule_async
+   */
+  getExternalAccessRule(
+    request?: protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+      (
+        | protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getExternalAccessRule(
+    request: protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+      | protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getExternalAccessRule(
+    request: protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+      | protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getExternalAccessRule(
+    request?: protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+          | protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+      | protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+      (
+        | protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getExternalAccessRule(request, options, callback);
+  }
+  /**
+   * Gets details of a logging server.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Logging Server to retrieve.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/loggingServers/my-logging-server`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vmwareengine.v1.LoggingServer|LoggingServer}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.get_logging_server.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GetLoggingServer_async
+   */
+  getLoggingServer(
+    request?: protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.ILoggingServer,
+      protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getLoggingServer(
+    request: protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.ILoggingServer,
+      | protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getLoggingServer(
+    request: protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.ILoggingServer,
+      | protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getLoggingServer(
+    request?: protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.ILoggingServer,
+          | protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vmwareengine.v1.ILoggingServer,
+      | protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.ILoggingServer,
+      protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getLoggingServer(request, options, callback);
   }
   /**
    * Gets details of a single `NodeType`.
@@ -1261,6 +1991,17 @@ export class VmwareEngineClient {
    *   https://cloud.google.com/apis/design/resource_names.
    *   For example:
    *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {string} [request.username]
+   *   Optional. The username of the user to be queried for credentials.
+   *   The default value of this field is CloudOwner@gve.local.
+   *   The provided value must be one of the following:
+   *   CloudOwner@gve.local,
+   *   solution-user-01@gve.local,
+   *   solution-user-02@gve.local,
+   *   solution-user-03@gve.local,
+   *   solution-user-04@gve.local,
+   *   solution-user-05@gve.local,
+   *   zertoadmin@gve.local.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1353,6 +2094,197 @@ export class VmwareEngineClient {
       options,
       callback
     );
+  }
+  /**
+   * Gets details of the `DnsForwarding` config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of a `DnsForwarding` to retrieve.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/dnsForwarding`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vmwareengine.v1.DnsForwarding|DnsForwarding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.get_dns_forwarding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GetDnsForwarding_async
+   */
+  getDnsForwarding(
+    request?: protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+      protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getDnsForwarding(
+    request: protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+      | protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDnsForwarding(
+    request: protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+      | protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDnsForwarding(
+    request?: protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+          | protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+      | protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+      protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getDnsForwarding(request, options, callback);
+  }
+  /**
+   * Retrieves a `NetworkPeering` resource by its resource name. The resource
+   * contains details of the network peering, such as peered
+   * networks, import and export custom route configurations, and peering state.
+   * NetworkPeering is a global resource and location can only be global.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the network peering to retrieve.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/global/networkPeerings/my-peering`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vmwareengine.v1.NetworkPeering|NetworkPeering}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.get_network_peering.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GetNetworkPeering_async
+   */
+  getNetworkPeering(
+    request?: protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.INetworkPeering,
+      protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getNetworkPeering(
+    request: protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.INetworkPeering,
+      | protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNetworkPeering(
+    request: protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.INetworkPeering,
+      | protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getNetworkPeering(
+    request?: protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.INetworkPeering,
+          | protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vmwareengine.v1.INetworkPeering,
+      | protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.INetworkPeering,
+      protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getNetworkPeering(request, options, callback);
   }
   /**
    * Retrieves a `HcxActivationKey` resource by its resource name.
@@ -1547,6 +2479,110 @@ export class VmwareEngineClient {
       });
     this.initialize();
     return this.innerApiCalls.getNetworkPolicy(request, options, callback);
+  }
+  /**
+   * Retrieves a 'ManagementDnsZoneBinding' resource by its resource name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the management DNS zone binding to
+   *   retrieve. Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/managementDnsZoneBindings/my-management-dns-zone-binding`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding|ManagementDnsZoneBinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.get_management_dns_zone_binding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GetManagementDnsZoneBinding_async
+   */
+  getManagementDnsZoneBinding(
+    request?: protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+      (
+        | protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getManagementDnsZoneBinding(
+    request: protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+      | protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getManagementDnsZoneBinding(
+    request: protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+      | protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getManagementDnsZoneBinding(
+    request?: protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+          | protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+      | protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+      (
+        | protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getManagementDnsZoneBinding(
+      request,
+      options,
+      callback
+    );
   }
   /**
    * Retrieves a `VmwareEngineNetwork` resource by its resource name. The
@@ -1757,12 +2793,115 @@ export class VmwareEngineClient {
     this.initialize();
     return this.innerApiCalls.getPrivateConnection(request, options, callback);
   }
+  /**
+   * Gets all the principals having bind permission on the intranet VPC
+   * associated with the consumer project granted by the Grant API.
+   * DnsBindPermission is a global resource and location can only be global.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the resource which stores the users/service accounts
+   *   having the permission to bind to the corresponding intranet VPC of the
+   *   consumer project. DnsBindPermission is a global resource. Resource names
+   *   are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names. For example:
+   *   `projects/my-project/locations/global/dnsBindPermission`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vmwareengine.v1.DnsBindPermission|DnsBindPermission}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.get_dns_bind_permission.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GetDnsBindPermission_async
+   */
+  getDnsBindPermission(
+    request?: protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+      (
+        | protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getDnsBindPermission(
+    request: protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+      | protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDnsBindPermission(
+    request: protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest,
+    callback: Callback<
+      protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+      | protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDnsBindPermission(
+    request?: protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+          | protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+      | protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+      (
+        | protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getDnsBindPermission(request, options, callback);
+  }
 
   /**
    * Creates a new `PrivateCloud` resource in a given project and location.
-   * Private clouds can only be created in zones, regional private clouds are
-   * not supported.
-   *
+   * Private clouds of type `STANDARD` and
+   * `TIME_LIMITED` are zonal resources, `STRETCHED` private clouds are
+   * regional.
    * Creating a private cloud also creates a [management
    * cluster](https://cloud.google.com/vmware-engine/docs/concepts-vmware-components)
    * for that private cloud.
@@ -2558,8 +3697,7 @@ export class VmwareEngineClient {
     >;
   }
   /**
-   * Modifies a `Cluster` resource. Only the following fields can be updated:
-   * `node_type_configs.*.node_count`. Only fields specified in `updateMask` are
+   * Modifies a `Cluster` resource. Only fields specified in `updateMask` are
    * applied.
    *
    * During operation processing, the resource is temporarily in the `ACTIVE`
@@ -2859,6 +3997,498 @@ export class VmwareEngineClient {
     >;
   }
   /**
+   * Creates a new `ExternalAddress` resource in a given private cloud. The
+   * network policy that corresponds to the private cloud must have the external
+   * IP address network service enabled (`NetworkPolicy.external_ip`).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud
+   *   to create a new external IP address in.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {google.cloud.vmwareengine.v1.ExternalAddress} request.externalAddress
+   *   Required. The initial description of a new external IP address.
+   * @param {string} request.externalAddressId
+   *   Required. The user-provided identifier of the `ExternalAddress` to be
+   *   created. This identifier must be unique among `ExternalAddress` resources
+   *   within the parent and becomes the final token in the name URI. The
+   *   identifier must meet the following requirements:
+   *
+   *   * Only contains 1-63 alphanumeric characters and hyphens
+   *   * Begins with an alphabetical character
+   *   * Ends with a non-hyphen character
+   *   * Not formatted as a UUID
+   *   * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+   *   (section 3.5)
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if the original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_external_address.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreateExternalAddress_async
+   */
+  createExternalAddress(
+    request?: protos.google.cloud.vmwareengine.v1.ICreateExternalAddressRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createExternalAddress(
+    request: protos.google.cloud.vmwareengine.v1.ICreateExternalAddressRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createExternalAddress(
+    request: protos.google.cloud.vmwareengine.v1.ICreateExternalAddressRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createExternalAddress(
+    request?: protos.google.cloud.vmwareengine.v1.ICreateExternalAddressRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAddress,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createExternalAddress(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createExternalAddress()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_external_address.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreateExternalAddress_async
+   */
+  async checkCreateExternalAddressProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.ExternalAddress,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createExternalAddress,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.ExternalAddress,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the parameters of a single external IP address.
+   * Only fields specified in `update_mask` are applied.
+   *
+   * During operation processing, the resource is temporarily in the `ACTIVE`
+   * state before the operation fully completes. For that period of time, you
+   * can't update the resource. Use the operation status to determine when the
+   * processing fully completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   `ExternalAddress` resource by the update.
+   *   The fields specified in the `update_mask` are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.vmwareengine.v1.ExternalAddress} request.externalAddress
+   *   Required. External IP address description.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if the original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_external_address.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateExternalAddress_async
+   */
+  updateExternalAddress(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateExternalAddressRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateExternalAddress(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateExternalAddressRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateExternalAddress(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateExternalAddressRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateExternalAddress(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateExternalAddressRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAddress,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAddress,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'external_address.name': request.externalAddress!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateExternalAddress(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateExternalAddress()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_external_address.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateExternalAddress_async
+   */
+  async checkUpdateExternalAddressProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.ExternalAddress,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateExternalAddress,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.ExternalAddress,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single external IP address. When you delete an external IP
+   * address, connectivity between the external IP address and the corresponding
+   * internal IP address is lost.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the external IP address to delete.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/externalAddresses/my-ip`
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_external_address.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeleteExternalAddress_async
+   */
+  deleteExternalAddress(
+    request?: protos.google.cloud.vmwareengine.v1.IDeleteExternalAddressRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteExternalAddress(
+    request: protos.google.cloud.vmwareengine.v1.IDeleteExternalAddressRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteExternalAddress(
+    request: protos.google.cloud.vmwareengine.v1.IDeleteExternalAddressRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteExternalAddress(
+    request?: protos.google.cloud.vmwareengine.v1.IDeleteExternalAddressRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteExternalAddress(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteExternalAddress()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_external_address.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeleteExternalAddress_async
+   */
+  async checkDeleteExternalAddressProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteExternalAddress,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
    * Updates the parameters of a single subnet. Only fields specified in
    * `update_mask` are applied.
    *
@@ -3002,6 +4632,984 @@ export class VmwareEngineClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmwareengine.v1.Subnet,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new external access rule in a given network policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the network policy
+   *   to create a new external access firewall rule in.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+   * @param {google.cloud.vmwareengine.v1.ExternalAccessRule} request.externalAccessRule
+   *   Required. The initial description of a new external access rule.
+   * @param {string} request.externalAccessRuleId
+   *   Required. The user-provided identifier of the `ExternalAccessRule` to be
+   *   created. This identifier must be unique among `ExternalAccessRule`
+   *   resources within the parent and becomes the final token in the name URI.
+   *   The identifier must meet the following requirements:
+   *
+   *   * Only contains 1-63 alphanumeric characters and hyphens
+   *   * Begins with an alphabetical character
+   *   * Ends with a non-hyphen character
+   *   * Not formatted as a UUID
+   *   * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+   *   (section 3.5)
+   * @param {string} request.requestId
+   *   A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if the original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_external_access_rule.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreateExternalAccessRule_async
+   */
+  createExternalAccessRule(
+    request?: protos.google.cloud.vmwareengine.v1.ICreateExternalAccessRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createExternalAccessRule(
+    request: protos.google.cloud.vmwareengine.v1.ICreateExternalAccessRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createExternalAccessRule(
+    request: protos.google.cloud.vmwareengine.v1.ICreateExternalAccessRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createExternalAccessRule(
+    request?: protos.google.cloud.vmwareengine.v1.ICreateExternalAccessRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createExternalAccessRule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `createExternalAccessRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_external_access_rule.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreateExternalAccessRule_async
+   */
+  async checkCreateExternalAccessRuleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.ExternalAccessRule,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createExternalAccessRule,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.ExternalAccessRule,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the parameters of a single external access rule.
+   * Only fields specified in `update_mask` are applied.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   `ExternalAccessRule` resource by the update.
+   *   The fields specified in the `update_mask` are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.vmwareengine.v1.ExternalAccessRule} request.externalAccessRule
+   *   Required. Description of the external access rule.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if the original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_external_access_rule.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateExternalAccessRule_async
+   */
+  updateExternalAccessRule(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateExternalAccessRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateExternalAccessRule(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateExternalAccessRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateExternalAccessRule(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateExternalAccessRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateExternalAccessRule(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateExternalAccessRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'external_access_rule.name': request.externalAccessRule!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateExternalAccessRule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateExternalAccessRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_external_access_rule.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateExternalAccessRule_async
+   */
+  async checkUpdateExternalAccessRuleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.ExternalAccessRule,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateExternalAccessRule,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.ExternalAccessRule,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single external access rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the external access firewall rule to delete.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1/networkPolicies/my-policy/externalAccessRules/my-rule`
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_external_access_rule.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeleteExternalAccessRule_async
+   */
+  deleteExternalAccessRule(
+    request?: protos.google.cloud.vmwareengine.v1.IDeleteExternalAccessRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteExternalAccessRule(
+    request: protos.google.cloud.vmwareengine.v1.IDeleteExternalAccessRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteExternalAccessRule(
+    request: protos.google.cloud.vmwareengine.v1.IDeleteExternalAccessRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteExternalAccessRule(
+    request?: protos.google.cloud.vmwareengine.v1.IDeleteExternalAccessRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteExternalAccessRule(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteExternalAccessRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_external_access_rule.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeleteExternalAccessRule_async
+   */
+  async checkDeleteExternalAccessRuleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteExternalAccessRule,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Create a new logging server for a given private cloud.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud
+   *   to create a new Logging Server in.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {google.cloud.vmwareengine.v1.LoggingServer} request.loggingServer
+   *   Required. The initial description of a new logging server.
+   * @param {string} request.loggingServerId
+   *   Required. The user-provided identifier of the `LoggingServer` to be
+   *   created. This identifier must be unique among `LoggingServer` resources
+   *   within the parent and becomes the final token in the name URI.
+   *   The identifier must meet the following requirements:
+   *
+   *   * Only contains 1-63 alphanumeric characters and hyphens
+   *   * Begins with an alphabetical character
+   *   * Ends with a non-hyphen character
+   *   * Not formatted as a UUID
+   *   * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+   *   (section 3.5)
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_logging_server.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreateLoggingServer_async
+   */
+  createLoggingServer(
+    request?: protos.google.cloud.vmwareengine.v1.ICreateLoggingServerRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createLoggingServer(
+    request: protos.google.cloud.vmwareengine.v1.ICreateLoggingServerRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createLoggingServer(
+    request: protos.google.cloud.vmwareengine.v1.ICreateLoggingServerRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createLoggingServer(
+    request?: protos.google.cloud.vmwareengine.v1.ICreateLoggingServerRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ILoggingServer,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createLoggingServer(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createLoggingServer()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_logging_server.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreateLoggingServer_async
+   */
+  async checkCreateLoggingServerProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.LoggingServer,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createLoggingServer,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.LoggingServer,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the parameters of a single logging server.
+   * Only fields specified in `update_mask` are applied.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   `LoggingServer` resource by the update.
+   *   The fields specified in the `update_mask` are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.vmwareengine.v1.LoggingServer} request.loggingServer
+   *   Required. Logging server description.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_logging_server.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateLoggingServer_async
+   */
+  updateLoggingServer(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateLoggingServerRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateLoggingServer(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateLoggingServerRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateLoggingServer(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateLoggingServerRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateLoggingServer(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateLoggingServerRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ILoggingServer,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.ILoggingServer,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'logging_server.name': request.loggingServer!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateLoggingServer(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateLoggingServer()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_logging_server.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateLoggingServer_async
+   */
+  async checkUpdateLoggingServerProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.LoggingServer,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateLoggingServer,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.LoggingServer,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single logging server.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the logging server to delete.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/loggingServers/my-logging-server`
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_logging_server.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeleteLoggingServer_async
+   */
+  deleteLoggingServer(
+    request?: protos.google.cloud.vmwareengine.v1.IDeleteLoggingServerRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteLoggingServer(
+    request: protos.google.cloud.vmwareengine.v1.IDeleteLoggingServerRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteLoggingServer(
+    request: protos.google.cloud.vmwareengine.v1.IDeleteLoggingServerRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteLoggingServer(
+    request?: protos.google.cloud.vmwareengine.v1.IDeleteLoggingServerRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteLoggingServer(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteLoggingServer()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_logging_server.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeleteLoggingServer_async
+   */
+  async checkDeleteLoggingServerProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteLoggingServer,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >;
   }
@@ -3188,6 +5796,16 @@ export class VmwareEngineClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {string} [request.username]
+   *   Optional. The username of the user to be to reset the credentials.
+   *   The default value of this field is CloudOwner@gve.local.
+   *   The provided value should be one of the following:
+   *   solution-user-01@gve.local,
+   *   solution-user-02@gve.local,
+   *   solution-user-03@gve.local,
+   *   solution-user-04@gve.local,
+   *   solution-user-05@gve.local,
+   *   zertoadmin@gve.local.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3318,6 +5936,652 @@ export class VmwareEngineClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.vmwareengine.v1.PrivateCloud,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the parameters of the `DnsForwarding` config, like associated
+   * domains. Only fields specified in `update_mask` are applied.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.vmwareengine.v1.DnsForwarding} request.dnsForwarding
+   *   Required. DnsForwarding config details.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   `DnsForwarding` resource by the update.
+   *   The fields specified in the `update_mask` are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_dns_forwarding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateDnsForwarding_async
+   */
+  updateDnsForwarding(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateDnsForwardingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateDnsForwarding(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateDnsForwardingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDnsForwarding(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateDnsForwardingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDnsForwarding(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateDnsForwardingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'dns_forwarding.name': request.dnsForwarding!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateDnsForwarding(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateDnsForwarding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_dns_forwarding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateDnsForwarding_async
+   */
+  async checkUpdateDnsForwardingProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.DnsForwarding,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateDnsForwarding,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.DnsForwarding,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new network peering between the peer network and VMware Engine
+   * network provided in a `NetworkPeering` resource. NetworkPeering is a
+   * global resource and location can only be global.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location to create the new network
+   *   peering in. This value is always `global`, because `NetworkPeering` is a
+   *   global resource. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example: `projects/my-project/locations/global`
+   * @param {string} request.networkPeeringId
+   *   Required. The user-provided identifier of the new `NetworkPeering`.
+   *   This identifier must be unique among `NetworkPeering` resources within the
+   *   parent and becomes the final token in the name URI.
+   *   The identifier must meet the following requirements:
+   *
+   *   * Only contains 1-63 alphanumeric characters and hyphens
+   *   * Begins with an alphabetical character
+   *   * Ends with a non-hyphen character
+   *   * Not formatted as a UUID
+   *   * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+   *   (section 3.5)
+   * @param {google.cloud.vmwareengine.v1.NetworkPeering} request.networkPeering
+   *   Required. The initial description of the new network peering.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_network_peering.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreateNetworkPeering_async
+   */
+  createNetworkPeering(
+    request?: protos.google.cloud.vmwareengine.v1.ICreateNetworkPeeringRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createNetworkPeering(
+    request: protos.google.cloud.vmwareengine.v1.ICreateNetworkPeeringRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createNetworkPeering(
+    request: protos.google.cloud.vmwareengine.v1.ICreateNetworkPeeringRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createNetworkPeering(
+    request?: protos.google.cloud.vmwareengine.v1.ICreateNetworkPeeringRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.INetworkPeering,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createNetworkPeering(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createNetworkPeering()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_network_peering.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreateNetworkPeering_async
+   */
+  async checkCreateNetworkPeeringProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.NetworkPeering,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createNetworkPeering,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.NetworkPeering,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a `NetworkPeering` resource. When a network peering is deleted for
+   * a VMware Engine network, the peer network becomes inaccessible to that
+   * VMware Engine network. NetworkPeering is a global resource and location can
+   * only be global.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the network peering to be deleted.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/global/networkPeerings/my-peering`
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_network_peering.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeleteNetworkPeering_async
+   */
+  deleteNetworkPeering(
+    request?: protos.google.cloud.vmwareengine.v1.IDeleteNetworkPeeringRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteNetworkPeering(
+    request: protos.google.cloud.vmwareengine.v1.IDeleteNetworkPeeringRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNetworkPeering(
+    request: protos.google.cloud.vmwareengine.v1.IDeleteNetworkPeeringRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNetworkPeering(
+    request?: protos.google.cloud.vmwareengine.v1.IDeleteNetworkPeeringRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteNetworkPeering(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteNetworkPeering()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_network_peering.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeleteNetworkPeering_async
+   */
+  async checkDeleteNetworkPeeringProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteNetworkPeering,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Modifies a `NetworkPeering` resource. Only the `description` field can be
+   * updated. Only fields specified in `updateMask` are applied. NetworkPeering
+   * is a global resource and location can only be global.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.vmwareengine.v1.NetworkPeering} request.networkPeering
+   *   Required. Network peering description.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   `NetworkPeering` resource by the update.
+   *   The fields specified in the `update_mask` are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_network_peering.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateNetworkPeering_async
+   */
+  updateNetworkPeering(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateNetworkPeeringRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateNetworkPeering(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateNetworkPeeringRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateNetworkPeering(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateNetworkPeeringRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateNetworkPeering(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateNetworkPeeringRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.INetworkPeering,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.INetworkPeering,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'network_peering.name': request.networkPeering!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateNetworkPeering(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateNetworkPeering()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_network_peering.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateNetworkPeering_async
+   */
+  async checkUpdateNetworkPeeringProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.NetworkPeering,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateNetworkPeering,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.NetworkPeering,
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >;
   }
@@ -3990,6 +7254,671 @@ export class VmwareEngineClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new `ManagementDnsZoneBinding` resource in a private cloud.
+   * This RPC creates the DNS binding and the resource that represents the
+   * DNS binding of the consumer VPC network to the management DNS zone. A
+   * management DNS zone is the Cloud DNS cross-project binding zone that
+   * VMware Engine creates for each private cloud. It contains FQDNs and
+   * corresponding IP addresses for the private cloud's ESXi hosts and
+   * management VM appliances like vCenter and NSX Manager.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud
+   *   to create a new management DNS zone binding for.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {google.cloud.vmwareengine.v1.ManagementDnsZoneBinding} request.managementDnsZoneBinding
+   *   Required. The initial values for a new management DNS zone binding.
+   * @param {string} request.managementDnsZoneBindingId
+   *   Required. The user-provided identifier of the `ManagementDnsZoneBinding`
+   *   resource to be created. This identifier must be unique among
+   *   `ManagementDnsZoneBinding` resources within the parent and becomes the
+   *   final token in the name URI. The identifier must meet the following
+   *   requirements:
+   *
+   *   * Only contains 1-63 alphanumeric characters and hyphens
+   *   * Begins with an alphabetical character
+   *   * Ends with a non-hyphen character
+   *   * Not formatted as a UUID
+   *   * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+   *   (section 3.5)
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if the original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_management_dns_zone_binding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreateManagementDnsZoneBinding_async
+   */
+  createManagementDnsZoneBinding(
+    request?: protos.google.cloud.vmwareengine.v1.ICreateManagementDnsZoneBindingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createManagementDnsZoneBinding(
+    request: protos.google.cloud.vmwareengine.v1.ICreateManagementDnsZoneBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createManagementDnsZoneBinding(
+    request: protos.google.cloud.vmwareengine.v1.ICreateManagementDnsZoneBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createManagementDnsZoneBinding(
+    request?: protos.google.cloud.vmwareengine.v1.ICreateManagementDnsZoneBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createManagementDnsZoneBinding(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `createManagementDnsZoneBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.create_management_dns_zone_binding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_CreateManagementDnsZoneBinding_async
+   */
+  async checkCreateManagementDnsZoneBindingProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createManagementDnsZoneBinding,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates a `ManagementDnsZoneBinding` resource.
+   * Only fields specified in `update_mask` are applied.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   `ManagementDnsZoneBinding` resource by the update.
+   *   The fields specified in the `update_mask` are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.vmwareengine.v1.ManagementDnsZoneBinding} request.managementDnsZoneBinding
+   *   Required. New values to update the management DNS zone binding with.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if the original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_management_dns_zone_binding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateManagementDnsZoneBinding_async
+   */
+  updateManagementDnsZoneBinding(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateManagementDnsZoneBindingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateManagementDnsZoneBinding(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateManagementDnsZoneBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateManagementDnsZoneBinding(
+    request: protos.google.cloud.vmwareengine.v1.IUpdateManagementDnsZoneBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateManagementDnsZoneBinding(
+    request?: protos.google.cloud.vmwareengine.v1.IUpdateManagementDnsZoneBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'management_dns_zone_binding.name':
+          request.managementDnsZoneBinding!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateManagementDnsZoneBinding(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateManagementDnsZoneBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.update_management_dns_zone_binding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_UpdateManagementDnsZoneBinding_async
+   */
+  async checkUpdateManagementDnsZoneBindingProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateManagementDnsZoneBinding,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a `ManagementDnsZoneBinding` resource. When a management DNS zone
+   * binding is deleted, the corresponding consumer VPC network is no longer
+   * bound to the management DNS zone.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the management DNS zone binding to delete.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/managementDnsZoneBindings/my-management-dns-zone-binding`
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if the original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_management_dns_zone_binding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeleteManagementDnsZoneBinding_async
+   */
+  deleteManagementDnsZoneBinding(
+    request?: protos.google.cloud.vmwareengine.v1.IDeleteManagementDnsZoneBindingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteManagementDnsZoneBinding(
+    request: protos.google.cloud.vmwareengine.v1.IDeleteManagementDnsZoneBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteManagementDnsZoneBinding(
+    request: protos.google.cloud.vmwareengine.v1.IDeleteManagementDnsZoneBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteManagementDnsZoneBinding(
+    request?: protos.google.cloud.vmwareengine.v1.IDeleteManagementDnsZoneBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteManagementDnsZoneBinding(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteManagementDnsZoneBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.delete_management_dns_zone_binding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_DeleteManagementDnsZoneBinding_async
+   */
+  async checkDeleteManagementDnsZoneBindingProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteManagementDnsZoneBinding,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Retries to create a `ManagementDnsZoneBinding` resource that is
+   * in failed state.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the management DNS zone binding to repair.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/managementDnsZoneBindings/my-management-dns-zone-binding`
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID,
+   *   the server can check if the original operation with the same request ID was
+   *   received, and if so, will ignore the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.repair_management_dns_zone_binding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_RepairManagementDnsZoneBinding_async
+   */
+  repairManagementDnsZoneBinding(
+    request?: protos.google.cloud.vmwareengine.v1.IRepairManagementDnsZoneBindingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  repairManagementDnsZoneBinding(
+    request: protos.google.cloud.vmwareengine.v1.IRepairManagementDnsZoneBindingRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  repairManagementDnsZoneBinding(
+    request: protos.google.cloud.vmwareengine.v1.IRepairManagementDnsZoneBindingRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  repairManagementDnsZoneBinding(
+    request?: protos.google.cloud.vmwareengine.v1.IRepairManagementDnsZoneBindingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.repairManagementDnsZoneBinding(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `repairManagementDnsZoneBinding()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.repair_management_dns_zone_binding.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_RepairManagementDnsZoneBinding_async
+   */
+  async checkRepairManagementDnsZoneBindingProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.repairManagementDnsZoneBinding,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding,
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >;
   }
@@ -5001,6 +8930,339 @@ export class VmwareEngineClient {
     >;
   }
   /**
+   * Grants the bind permission to the customer provided principal(user /
+   * service account) to bind their DNS zone with the intranet VPC associated
+   * with the project. DnsBindPermission is a global resource and location can
+   * only be global.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the resource which stores the users/service accounts
+   *   having the permission to bind to the corresponding intranet VPC of the
+   *   consumer project. DnsBindPermission is a global resource. Resource names
+   *   are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names. For example:
+   *   `projects/my-project/locations/global/dnsBindPermission`
+   * @param {google.cloud.vmwareengine.v1.Principal} request.principal
+   *   Required. The consumer provided user/service account which needs to be
+   *   granted permission to bind with the intranet VPC corresponding to the
+   *   consumer project.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.grant_dns_bind_permission.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GrantDnsBindPermission_async
+   */
+  grantDnsBindPermission(
+    request?: protos.google.cloud.vmwareengine.v1.IGrantDnsBindPermissionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  grantDnsBindPermission(
+    request: protos.google.cloud.vmwareengine.v1.IGrantDnsBindPermissionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  grantDnsBindPermission(
+    request: protos.google.cloud.vmwareengine.v1.IGrantDnsBindPermissionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  grantDnsBindPermission(
+    request?: protos.google.cloud.vmwareengine.v1.IGrantDnsBindPermissionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.grantDnsBindPermission(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `grantDnsBindPermission()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.grant_dns_bind_permission.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_GrantDnsBindPermission_async
+   */
+  async checkGrantDnsBindPermissionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.DnsBindPermission,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.grantDnsBindPermission,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.DnsBindPermission,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Revokes the bind permission from the customer provided principal(user /
+   * service account) on the intranet VPC associated with the consumer project.
+   * DnsBindPermission is a global resource and location can only be global.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the resource which stores the users/service accounts
+   *   having the permission to bind to the corresponding intranet VPC of the
+   *   consumer project. DnsBindPermission is a global resource. Resource names
+   *   are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names. For example:
+   *   `projects/my-project/locations/global/dnsBindPermission`
+   * @param {google.cloud.vmwareengine.v1.Principal} request.principal
+   *   Required. The consumer provided user/service account which needs to be
+   *   granted permission to bind with the intranet VPC corresponding to the
+   *   consumer project.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate commitments for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.revoke_dns_bind_permission.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_RevokeDnsBindPermission_async
+   */
+  revokeDnsBindPermission(
+    request?: protos.google.cloud.vmwareengine.v1.IRevokeDnsBindPermissionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  revokeDnsBindPermission(
+    request: protos.google.cloud.vmwareengine.v1.IRevokeDnsBindPermissionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  revokeDnsBindPermission(
+    request: protos.google.cloud.vmwareengine.v1.IRevokeDnsBindPermissionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  revokeDnsBindPermission(
+    request?: protos.google.cloud.vmwareengine.v1.IRevokeDnsBindPermissionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+        protos.google.cloud.vmwareengine.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.revokeDnsBindPermission(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `revokeDnsBindPermission()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.revoke_dns_bind_permission.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_RevokeDnsBindPermission_async
+   */
+  async checkRevokeDnsBindPermissionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.vmwareengine.v1.DnsBindPermission,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.revokeDnsBindPermission,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.vmwareengine.v1.DnsBindPermission,
+      protos.google.cloud.vmwareengine.v1.OperationMetadata
+    >;
+  }
+  /**
    * Lists `PrivateCloud` resources in a given project and location.
    *
    * @param {Object} request
@@ -5601,6 +9863,773 @@ export class VmwareEngineClient {
     ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.ICluster>;
   }
   /**
+   * Lists nodes in a given cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the cluster to be queried for nodes.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/clusters/my-cluster`
+   * @param {number} request.pageSize
+   *   The maximum number of nodes to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListNodes` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListNodes` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vmwareengine.v1.Node|Node}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNodesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listNodes(
+    request?: protos.google.cloud.vmwareengine.v1.IListNodesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.INode[],
+      protos.google.cloud.vmwareengine.v1.IListNodesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListNodesResponse,
+    ]
+  >;
+  listNodes(
+    request: protos.google.cloud.vmwareengine.v1.IListNodesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListNodesRequest,
+      protos.google.cloud.vmwareengine.v1.IListNodesResponse | null | undefined,
+      protos.google.cloud.vmwareengine.v1.INode
+    >
+  ): void;
+  listNodes(
+    request: protos.google.cloud.vmwareengine.v1.IListNodesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListNodesRequest,
+      protos.google.cloud.vmwareengine.v1.IListNodesResponse | null | undefined,
+      protos.google.cloud.vmwareengine.v1.INode
+    >
+  ): void;
+  listNodes(
+    request?: protos.google.cloud.vmwareengine.v1.IListNodesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListNodesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListNodesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.INode
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListNodesRequest,
+      protos.google.cloud.vmwareengine.v1.IListNodesResponse | null | undefined,
+      protos.google.cloud.vmwareengine.v1.INode
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.INode[],
+      protos.google.cloud.vmwareengine.v1.IListNodesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListNodesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listNodes(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the cluster to be queried for nodes.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/clusters/my-cluster`
+   * @param {number} request.pageSize
+   *   The maximum number of nodes to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListNodes` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListNodes` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vmwareengine.v1.Node|Node} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNodesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listNodesStream(
+    request?: protos.google.cloud.vmwareengine.v1.IListNodesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNodes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNodes.createStream(
+      this.innerApiCalls.listNodes as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listNodes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the cluster to be queried for nodes.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/clusters/my-cluster`
+   * @param {number} request.pageSize
+   *   The maximum number of nodes to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListNodes` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListNodes` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vmwareengine.v1.Node|Node}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.list_nodes.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_ListNodes_async
+   */
+  listNodesAsync(
+    request?: protos.google.cloud.vmwareengine.v1.IListNodesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.vmwareengine.v1.INode> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNodes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNodes.asyncIterate(
+      this.innerApiCalls['listNodes'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.INode>;
+  }
+  /**
+   * Lists external IP addresses assigned to VMware workload VMs in a given
+   * private cloud.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud to be queried for
+   *   external IP addresses.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {number} request.pageSize
+   *   The maximum number of external IP addresses to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListExternalAddresses` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListExternalAddresses` must match the call that provided the page token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of IP addresses, you can
+   *   exclude the ones named `example-ip` by specifying
+   *   `name != "example-ip"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-ip")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-ip-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-ip-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vmwareengine.v1.ExternalAddress|ExternalAddress}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listExternalAddressesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listExternalAddresses(
+    request?: protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IExternalAddress[],
+      protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListExternalAddressesResponse,
+    ]
+  >;
+  listExternalAddresses(
+    request: protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListExternalAddressesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IExternalAddress
+    >
+  ): void;
+  listExternalAddresses(
+    request: protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListExternalAddressesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IExternalAddress
+    >
+  ): void;
+  listExternalAddresses(
+    request?: protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListExternalAddressesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IExternalAddress
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListExternalAddressesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IExternalAddress
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IExternalAddress[],
+      protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListExternalAddressesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listExternalAddresses(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud to be queried for
+   *   external IP addresses.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {number} request.pageSize
+   *   The maximum number of external IP addresses to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListExternalAddresses` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListExternalAddresses` must match the call that provided the page token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of IP addresses, you can
+   *   exclude the ones named `example-ip` by specifying
+   *   `name != "example-ip"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-ip")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-ip-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-ip-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vmwareengine.v1.ExternalAddress|ExternalAddress} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listExternalAddressesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listExternalAddressesStream(
+    request?: protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExternalAddresses'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listExternalAddresses.createStream(
+      this.innerApiCalls.listExternalAddresses as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listExternalAddresses`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud to be queried for
+   *   external IP addresses.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {number} request.pageSize
+   *   The maximum number of external IP addresses to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListExternalAddresses` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListExternalAddresses` must match the call that provided the page token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of IP addresses, you can
+   *   exclude the ones named `example-ip` by specifying
+   *   `name != "example-ip"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-ip")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-ip-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-ip-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vmwareengine.v1.ExternalAddress|ExternalAddress}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.list_external_addresses.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_ListExternalAddresses_async
+   */
+  listExternalAddressesAsync(
+    request?: protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.vmwareengine.v1.IExternalAddress> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExternalAddresses'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listExternalAddresses.asyncIterate(
+      this.innerApiCalls['listExternalAddresses'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.IExternalAddress>;
+  }
+  /**
+   * Lists external IP addresses assigned to VMware workload VMs within the
+   * scope of the given network policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.networkPolicy
+   *   Required. The resource name of the network policy to query for assigned
+   *   external IP addresses. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example:
+   *   `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+   * @param {number} request.pageSize
+   *   The maximum number of external IP addresses to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `FetchNetworkPolicyExternalAddresses` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all parameters provided to
+   *   `FetchNetworkPolicyExternalAddresses`, except for `page_size` and
+   *   `page_token`, must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vmwareengine.v1.ExternalAddress|ExternalAddress}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchNetworkPolicyExternalAddressesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchNetworkPolicyExternalAddresses(
+    request?: protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IExternalAddress[],
+      protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesResponse,
+    ]
+  >;
+  fetchNetworkPolicyExternalAddresses(
+    request: protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest,
+      | protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IExternalAddress
+    >
+  ): void;
+  fetchNetworkPolicyExternalAddresses(
+    request: protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest,
+      | protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IExternalAddress
+    >
+  ): void;
+  fetchNetworkPolicyExternalAddresses(
+    request?: protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest,
+          | protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IExternalAddress
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest,
+      | protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IExternalAddress
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IExternalAddress[],
+      protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        network_policy: request.networkPolicy ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.fetchNetworkPolicyExternalAddresses(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.networkPolicy
+   *   Required. The resource name of the network policy to query for assigned
+   *   external IP addresses. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example:
+   *   `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+   * @param {number} request.pageSize
+   *   The maximum number of external IP addresses to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `FetchNetworkPolicyExternalAddresses` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all parameters provided to
+   *   `FetchNetworkPolicyExternalAddresses`, except for `page_size` and
+   *   `page_token`, must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vmwareengine.v1.ExternalAddress|ExternalAddress} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchNetworkPolicyExternalAddressesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchNetworkPolicyExternalAddressesStream(
+    request?: protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        network_policy: request.networkPolicy ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['fetchNetworkPolicyExternalAddresses'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.fetchNetworkPolicyExternalAddresses.createStream(
+      this.innerApiCalls.fetchNetworkPolicyExternalAddresses as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `fetchNetworkPolicyExternalAddresses`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.networkPolicy
+   *   Required. The resource name of the network policy to query for assigned
+   *   external IP addresses. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example:
+   *   `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+   * @param {number} request.pageSize
+   *   The maximum number of external IP addresses to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `FetchNetworkPolicyExternalAddresses` call. Provide this to retrieve the
+   *   subsequent page.
+   *
+   *   When paginating, all parameters provided to
+   *   `FetchNetworkPolicyExternalAddresses`, except for `page_size` and
+   *   `page_token`, must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vmwareengine.v1.ExternalAddress|ExternalAddress}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.fetch_network_policy_external_addresses.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_FetchNetworkPolicyExternalAddresses_async
+   */
+  fetchNetworkPolicyExternalAddressesAsync(
+    request?: protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.vmwareengine.v1.IExternalAddress> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        network_policy: request.networkPolicy ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['fetchNetworkPolicyExternalAddresses'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.fetchNetworkPolicyExternalAddresses.asyncIterate(
+      this.innerApiCalls['fetchNetworkPolicyExternalAddresses'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.IExternalAddress>;
+  }
+  /**
    * Lists subnets in a given private cloud.
    *
    * @param {Object} request
@@ -5821,6 +10850,650 @@ export class VmwareEngineClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.ISubnet>;
+  }
+  /**
+   * Lists `ExternalAccessRule` resources in the specified network policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the network policy to query for external
+   *   access firewall rules. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example:
+   *   `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+   * @param {number} request.pageSize
+   *   The maximum number of external access rules to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListExternalAccessRulesRequest`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListExternalAccessRulesRequest` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of external access rules, you can
+   *   exclude the ones named `example-rule` by specifying
+   *   `name != "example-rule"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-rule")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-rule-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-rule-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vmwareengine.v1.ExternalAccessRule|ExternalAccessRule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listExternalAccessRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listExternalAccessRules(
+    request?: protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IExternalAccessRule[],
+      protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesResponse,
+    ]
+  >;
+  listExternalAccessRules(
+    request: protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IExternalAccessRule
+    >
+  ): void;
+  listExternalAccessRules(
+    request: protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IExternalAccessRule
+    >
+  ): void;
+  listExternalAccessRules(
+    request?: protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IExternalAccessRule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IExternalAccessRule
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IExternalAccessRule[],
+      protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listExternalAccessRules(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the network policy to query for external
+   *   access firewall rules. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example:
+   *   `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+   * @param {number} request.pageSize
+   *   The maximum number of external access rules to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListExternalAccessRulesRequest`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListExternalAccessRulesRequest` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of external access rules, you can
+   *   exclude the ones named `example-rule` by specifying
+   *   `name != "example-rule"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-rule")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-rule-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-rule-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vmwareengine.v1.ExternalAccessRule|ExternalAccessRule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listExternalAccessRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listExternalAccessRulesStream(
+    request?: protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExternalAccessRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listExternalAccessRules.createStream(
+      this.innerApiCalls.listExternalAccessRules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listExternalAccessRules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the network policy to query for external
+   *   access firewall rules. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example:
+   *   `projects/my-project/locations/us-central1/networkPolicies/my-policy`
+   * @param {number} request.pageSize
+   *   The maximum number of external access rules to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListExternalAccessRulesRequest`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListExternalAccessRulesRequest` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of external access rules, you can
+   *   exclude the ones named `example-rule` by specifying
+   *   `name != "example-rule"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-rule")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-rule-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-rule-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vmwareengine.v1.ExternalAccessRule|ExternalAccessRule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.list_external_access_rules.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_ListExternalAccessRules_async
+   */
+  listExternalAccessRulesAsync(
+    request?: protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.vmwareengine.v1.IExternalAccessRule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExternalAccessRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listExternalAccessRules.asyncIterate(
+      this.innerApiCalls['listExternalAccessRules'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.IExternalAccessRule>;
+  }
+  /**
+   * Lists logging servers configured for a given private
+   * cloud.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud to be queried for
+   *   logging servers.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {number} request.pageSize
+   *   The maximum number of logging servers to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListLoggingServersRequest` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListLoggingServersRequest` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of logging servers, you can
+   *   exclude the ones named `example-server` by specifying
+   *   `name != "example-server"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-server")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-server-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-server-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vmwareengine.v1.LoggingServer|LoggingServer}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listLoggingServersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listLoggingServers(
+    request?: protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.ILoggingServer[],
+      protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListLoggingServersResponse,
+    ]
+  >;
+  listLoggingServers(
+    request: protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest,
+      | protos.google.cloud.vmwareengine.v1.IListLoggingServersResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.ILoggingServer
+    >
+  ): void;
+  listLoggingServers(
+    request: protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest,
+      | protos.google.cloud.vmwareengine.v1.IListLoggingServersResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.ILoggingServer
+    >
+  ): void;
+  listLoggingServers(
+    request?: protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest,
+          | protos.google.cloud.vmwareengine.v1.IListLoggingServersResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.ILoggingServer
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest,
+      | protos.google.cloud.vmwareengine.v1.IListLoggingServersResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.ILoggingServer
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.ILoggingServer[],
+      protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListLoggingServersResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listLoggingServers(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud to be queried for
+   *   logging servers.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {number} request.pageSize
+   *   The maximum number of logging servers to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListLoggingServersRequest` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListLoggingServersRequest` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of logging servers, you can
+   *   exclude the ones named `example-server` by specifying
+   *   `name != "example-server"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-server")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-server-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-server-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vmwareengine.v1.LoggingServer|LoggingServer} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listLoggingServersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listLoggingServersStream(
+    request?: protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listLoggingServers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listLoggingServers.createStream(
+      this.innerApiCalls.listLoggingServers as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listLoggingServers`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud to be queried for
+   *   logging servers.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {number} request.pageSize
+   *   The maximum number of logging servers to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListLoggingServersRequest` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListLoggingServersRequest` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of logging servers, you can
+   *   exclude the ones named `example-server` by specifying
+   *   `name != "example-server"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-server")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-server-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-server-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vmwareengine.v1.LoggingServer|LoggingServer}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.list_logging_servers.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_ListLoggingServers_async
+   */
+  listLoggingServersAsync(
+    request?: protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.vmwareengine.v1.ILoggingServer> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listLoggingServers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listLoggingServers.asyncIterate(
+      this.innerApiCalls['listLoggingServers'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.ILoggingServer>;
   }
   /**
    * Lists node types
@@ -6118,6 +11791,551 @@ export class VmwareEngineClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.INodeType>;
+  }
+  /**
+   * Lists `NetworkPeering` resources in a given project. NetworkPeering is a
+   * global resource and location can only be global.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location (global) to query for
+   *   network peerings. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example: `projects/my-project/locations/global`
+   * @param {number} request.pageSize
+   *   The maximum number of network peerings to return in one page.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListNetworkPeerings` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListNetworkPeerings` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of network peerings, you can
+   *   exclude the ones named `example-peering` by specifying
+   *   `name != "example-peering"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-peering")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-peering-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-peering-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vmwareengine.v1.NetworkPeering|NetworkPeering}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNetworkPeeringsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listNetworkPeerings(
+    request?: protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.INetworkPeering[],
+      protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsResponse,
+    ]
+  >;
+  listNetworkPeerings(
+    request: protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest,
+      | protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.INetworkPeering
+    >
+  ): void;
+  listNetworkPeerings(
+    request: protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest,
+      | protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.INetworkPeering
+    >
+  ): void;
+  listNetworkPeerings(
+    request?: protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest,
+          | protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.INetworkPeering
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest,
+      | protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.INetworkPeering
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.INetworkPeering[],
+      protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listNetworkPeerings(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location (global) to query for
+   *   network peerings. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example: `projects/my-project/locations/global`
+   * @param {number} request.pageSize
+   *   The maximum number of network peerings to return in one page.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListNetworkPeerings` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListNetworkPeerings` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of network peerings, you can
+   *   exclude the ones named `example-peering` by specifying
+   *   `name != "example-peering"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-peering")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-peering-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-peering-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vmwareengine.v1.NetworkPeering|NetworkPeering} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNetworkPeeringsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listNetworkPeeringsStream(
+    request?: protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNetworkPeerings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNetworkPeerings.createStream(
+      this.innerApiCalls.listNetworkPeerings as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listNetworkPeerings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location (global) to query for
+   *   network peerings. Resource names are schemeless URIs that follow the
+   *   conventions in https://cloud.google.com/apis/design/resource_names. For
+   *   example: `projects/my-project/locations/global`
+   * @param {number} request.pageSize
+   *   The maximum number of network peerings to return in one page.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListNetworkPeerings` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListNetworkPeerings` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of network peerings, you can
+   *   exclude the ones named `example-peering` by specifying
+   *   `name != "example-peering"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-peering")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-peering-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-peering-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vmwareengine.v1.NetworkPeering|NetworkPeering}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.list_network_peerings.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_ListNetworkPeerings_async
+   */
+  listNetworkPeeringsAsync(
+    request?: protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.vmwareengine.v1.INetworkPeering> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNetworkPeerings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listNetworkPeerings.asyncIterate(
+      this.innerApiCalls['listNetworkPeerings'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.INetworkPeering>;
+  }
+  /**
+   * Lists the network peering routes exchanged over a peering connection.
+   * NetworkPeering is a global resource and location can only be global.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the network peering to retrieve peering
+   *   routes from. Resource names are schemeless URIs that follow the conventions
+   *   in https://cloud.google.com/apis/design/resource_names. For example:
+   *   `projects/my-project/locations/global/networkPeerings/my-peering`
+   * @param {number} request.pageSize
+   *   The maximum number of peering routes to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListPeeringRoutes` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListPeeringRoutes` must
+   *   match the call that provided the page token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   Currently, only filtering on the `direction` field is supported. To return
+   *   routes imported from the peer network, provide "direction=INCOMING". To
+   *   return routes exported from the VMware Engine network, provide
+   *   "direction=OUTGOING". Other filter expressions return an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vmwareengine.v1.PeeringRoute|PeeringRoute}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPeeringRoutesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listPeeringRoutes(
+    request?: protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IPeeringRoute[],
+      protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListPeeringRoutesResponse,
+    ]
+  >;
+  listPeeringRoutes(
+    request: protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListPeeringRoutesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IPeeringRoute
+    >
+  ): void;
+  listPeeringRoutes(
+    request: protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListPeeringRoutesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IPeeringRoute
+    >
+  ): void;
+  listPeeringRoutes(
+    request?: protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListPeeringRoutesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IPeeringRoute
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest,
+      | protos.google.cloud.vmwareengine.v1.IListPeeringRoutesResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IPeeringRoute
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IPeeringRoute[],
+      protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListPeeringRoutesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listPeeringRoutes(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the network peering to retrieve peering
+   *   routes from. Resource names are schemeless URIs that follow the conventions
+   *   in https://cloud.google.com/apis/design/resource_names. For example:
+   *   `projects/my-project/locations/global/networkPeerings/my-peering`
+   * @param {number} request.pageSize
+   *   The maximum number of peering routes to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListPeeringRoutes` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListPeeringRoutes` must
+   *   match the call that provided the page token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   Currently, only filtering on the `direction` field is supported. To return
+   *   routes imported from the peer network, provide "direction=INCOMING". To
+   *   return routes exported from the VMware Engine network, provide
+   *   "direction=OUTGOING". Other filter expressions return an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vmwareengine.v1.PeeringRoute|PeeringRoute} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPeeringRoutesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listPeeringRoutesStream(
+    request?: protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPeeringRoutes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPeeringRoutes.createStream(
+      this.innerApiCalls.listPeeringRoutes as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listPeeringRoutes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the network peering to retrieve peering
+   *   routes from. Resource names are schemeless URIs that follow the conventions
+   *   in https://cloud.google.com/apis/design/resource_names. For example:
+   *   `projects/my-project/locations/global/networkPeerings/my-peering`
+   * @param {number} request.pageSize
+   *   The maximum number of peering routes to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListPeeringRoutes` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListPeeringRoutes` must
+   *   match the call that provided the page token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   Currently, only filtering on the `direction` field is supported. To return
+   *   routes imported from the peer network, provide "direction=INCOMING". To
+   *   return routes exported from the VMware Engine network, provide
+   *   "direction=OUTGOING". Other filter expressions return an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vmwareengine.v1.PeeringRoute|PeeringRoute}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.list_peering_routes.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_ListPeeringRoutes_async
+   */
+  listPeeringRoutesAsync(
+    request?: protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.vmwareengine.v1.IPeeringRoute> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listPeeringRoutes'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listPeeringRoutes.asyncIterate(
+      this.innerApiCalls['listPeeringRoutes'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.IPeeringRoute>;
   }
   /**
    * Lists `HcxActivationKey` resources in a given private cloud.
@@ -6658,6 +12876,331 @@ export class VmwareEngineClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.INetworkPolicy>;
+  }
+  /**
+   * Lists Consumer VPCs bound to Management DNS Zone of a given private cloud.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud to be queried for
+   *   management DNS zone bindings.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {number} request.pageSize
+   *   The maximum number of management DNS zone bindings to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListManagementDnsZoneBindings`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListManagementDnsZoneBindings` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of Management DNS Zone Bindings,
+   *   you can exclude the ones named `example-management-dns-zone-binding` by
+   *   specifying `name != "example-management-dns-zone-binding"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-management-dns-zone-binding")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-management-dns-zone-binding-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-management-dns-zone-binding-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding|ManagementDnsZoneBinding}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listManagementDnsZoneBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listManagementDnsZoneBindings(
+    request?: protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding[],
+      protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsResponse,
+    ]
+  >;
+  listManagementDnsZoneBindings(
+    request: protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest,
+      | protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding
+    >
+  ): void;
+  listManagementDnsZoneBindings(
+    request: protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest,
+      | protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding
+    >
+  ): void;
+  listManagementDnsZoneBindings(
+    request?: protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest,
+          | protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest,
+      | protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsResponse
+      | null
+      | undefined,
+      protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding
+    >
+  ): Promise<
+    [
+      protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding[],
+      protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest | null,
+      protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listManagementDnsZoneBindings(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud to be queried for
+   *   management DNS zone bindings.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {number} request.pageSize
+   *   The maximum number of management DNS zone bindings to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListManagementDnsZoneBindings`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListManagementDnsZoneBindings` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of Management DNS Zone Bindings,
+   *   you can exclude the ones named `example-management-dns-zone-binding` by
+   *   specifying `name != "example-management-dns-zone-binding"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-management-dns-zone-binding")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-management-dns-zone-binding-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-management-dns-zone-binding-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding|ManagementDnsZoneBinding} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listManagementDnsZoneBindingsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listManagementDnsZoneBindingsStream(
+    request?: protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listManagementDnsZoneBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listManagementDnsZoneBindings.createStream(
+      this.innerApiCalls.listManagementDnsZoneBindings as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listManagementDnsZoneBindings`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the private cloud to be queried for
+   *   management DNS zone bindings.
+   *   Resource names are schemeless URIs that follow the conventions in
+   *   https://cloud.google.com/apis/design/resource_names.
+   *   For example:
+   *   `projects/my-project/locations/us-central1-a/privateClouds/my-cloud`
+   * @param {number} request.pageSize
+   *   The maximum number of management DNS zone bindings to return in one page.
+   *   The service may return fewer than this value.
+   *   The maximum value is coerced to 1000.
+   *   The default value of this field is 500.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListManagementDnsZoneBindings`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListManagementDnsZoneBindings` must match the call that provided the page
+   *   token.
+   * @param {string} request.filter
+   *   A filter expression that matches resources returned in the response.
+   *   The expression must specify the field name, a comparison
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The comparison operator
+   *   must be `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering a list of Management DNS Zone Bindings,
+   *   you can exclude the ones named `example-management-dns-zone-binding` by
+   *   specifying `name != "example-management-dns-zone-binding"`.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (name = "example-management-dns-zone-binding")
+   *   (createTime > "2021-04-12T08:15:10.40Z")
+   *   ```
+   *
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (name = "example-management-dns-zone-binding-1") AND
+   *   (createTime > "2021-04-12T08:15:10.40Z") OR
+   *   (name = "example-management-dns-zone-binding-2")
+   *   ```
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, returned results
+   *   are ordered by `name` in ascending order.
+   *   You can also sort results in descending order based on the `name` value
+   *   using `orderBy="name desc"`.
+   *   Currently, only ordering by `name` is supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.vmwareengine.v1.ManagementDnsZoneBinding|ManagementDnsZoneBinding}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vmware_engine.list_management_dns_zone_bindings.js</caption>
+   * region_tag:vmwareengine_v1_generated_VmwareEngine_ListManagementDnsZoneBindings_async
+   */
+  listManagementDnsZoneBindingsAsync(
+    request?: protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listManagementDnsZoneBindings'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listManagementDnsZoneBindings.asyncIterate(
+      this.innerApiCalls['listManagementDnsZoneBindings'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding>;
   }
   /**
    * Lists `VmwareEngineNetwork` resources in a given project and location.
@@ -7974,6 +14517,250 @@ export class VmwareEngineClient {
   }
 
   /**
+   * Return a fully-qualified dnsBindPermission resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  dnsBindPermissionPath(project: string, location: string) {
+    return this.pathTemplates.dnsBindPermissionPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from DnsBindPermission resource.
+   *
+   * @param {string} dnsBindPermissionName
+   *   A fully-qualified path representing DnsBindPermission resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDnsBindPermissionName(dnsBindPermissionName: string) {
+    return this.pathTemplates.dnsBindPermissionPathTemplate.match(
+      dnsBindPermissionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DnsBindPermission resource.
+   *
+   * @param {string} dnsBindPermissionName
+   *   A fully-qualified path representing DnsBindPermission resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDnsBindPermissionName(dnsBindPermissionName: string) {
+    return this.pathTemplates.dnsBindPermissionPathTemplate.match(
+      dnsBindPermissionName
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified dnsForwarding resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} private_cloud
+   * @returns {string} Resource name string.
+   */
+  dnsForwardingPath(project: string, location: string, privateCloud: string) {
+    return this.pathTemplates.dnsForwardingPathTemplate.render({
+      project: project,
+      location: location,
+      private_cloud: privateCloud,
+    });
+  }
+
+  /**
+   * Parse the project from DnsForwarding resource.
+   *
+   * @param {string} dnsForwardingName
+   *   A fully-qualified path representing DnsForwarding resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDnsForwardingName(dnsForwardingName: string) {
+    return this.pathTemplates.dnsForwardingPathTemplate.match(dnsForwardingName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DnsForwarding resource.
+   *
+   * @param {string} dnsForwardingName
+   *   A fully-qualified path representing DnsForwarding resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDnsForwardingName(dnsForwardingName: string) {
+    return this.pathTemplates.dnsForwardingPathTemplate.match(dnsForwardingName)
+      .location;
+  }
+
+  /**
+   * Parse the private_cloud from DnsForwarding resource.
+   *
+   * @param {string} dnsForwardingName
+   *   A fully-qualified path representing DnsForwarding resource.
+   * @returns {string} A string representing the private_cloud.
+   */
+  matchPrivateCloudFromDnsForwardingName(dnsForwardingName: string) {
+    return this.pathTemplates.dnsForwardingPathTemplate.match(dnsForwardingName)
+      .private_cloud;
+  }
+
+  /**
+   * Return a fully-qualified externalAccessRule resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} network_policy
+   * @param {string} external_access_rule
+   * @returns {string} Resource name string.
+   */
+  externalAccessRulePath(
+    project: string,
+    location: string,
+    networkPolicy: string,
+    externalAccessRule: string
+  ) {
+    return this.pathTemplates.externalAccessRulePathTemplate.render({
+      project: project,
+      location: location,
+      network_policy: networkPolicy,
+      external_access_rule: externalAccessRule,
+    });
+  }
+
+  /**
+   * Parse the project from ExternalAccessRule resource.
+   *
+   * @param {string} externalAccessRuleName
+   *   A fully-qualified path representing ExternalAccessRule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExternalAccessRuleName(externalAccessRuleName: string) {
+    return this.pathTemplates.externalAccessRulePathTemplate.match(
+      externalAccessRuleName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ExternalAccessRule resource.
+   *
+   * @param {string} externalAccessRuleName
+   *   A fully-qualified path representing ExternalAccessRule resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExternalAccessRuleName(externalAccessRuleName: string) {
+    return this.pathTemplates.externalAccessRulePathTemplate.match(
+      externalAccessRuleName
+    ).location;
+  }
+
+  /**
+   * Parse the network_policy from ExternalAccessRule resource.
+   *
+   * @param {string} externalAccessRuleName
+   *   A fully-qualified path representing ExternalAccessRule resource.
+   * @returns {string} A string representing the network_policy.
+   */
+  matchNetworkPolicyFromExternalAccessRuleName(externalAccessRuleName: string) {
+    return this.pathTemplates.externalAccessRulePathTemplate.match(
+      externalAccessRuleName
+    ).network_policy;
+  }
+
+  /**
+   * Parse the external_access_rule from ExternalAccessRule resource.
+   *
+   * @param {string} externalAccessRuleName
+   *   A fully-qualified path representing ExternalAccessRule resource.
+   * @returns {string} A string representing the external_access_rule.
+   */
+  matchExternalAccessRuleFromExternalAccessRuleName(
+    externalAccessRuleName: string
+  ) {
+    return this.pathTemplates.externalAccessRulePathTemplate.match(
+      externalAccessRuleName
+    ).external_access_rule;
+  }
+
+  /**
+   * Return a fully-qualified externalAddress resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} private_cloud
+   * @param {string} external_address
+   * @returns {string} Resource name string.
+   */
+  externalAddressPath(
+    project: string,
+    location: string,
+    privateCloud: string,
+    externalAddress: string
+  ) {
+    return this.pathTemplates.externalAddressPathTemplate.render({
+      project: project,
+      location: location,
+      private_cloud: privateCloud,
+      external_address: externalAddress,
+    });
+  }
+
+  /**
+   * Parse the project from ExternalAddress resource.
+   *
+   * @param {string} externalAddressName
+   *   A fully-qualified path representing ExternalAddress resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExternalAddressName(externalAddressName: string) {
+    return this.pathTemplates.externalAddressPathTemplate.match(
+      externalAddressName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ExternalAddress resource.
+   *
+   * @param {string} externalAddressName
+   *   A fully-qualified path representing ExternalAddress resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExternalAddressName(externalAddressName: string) {
+    return this.pathTemplates.externalAddressPathTemplate.match(
+      externalAddressName
+    ).location;
+  }
+
+  /**
+   * Parse the private_cloud from ExternalAddress resource.
+   *
+   * @param {string} externalAddressName
+   *   A fully-qualified path representing ExternalAddress resource.
+   * @returns {string} A string representing the private_cloud.
+   */
+  matchPrivateCloudFromExternalAddressName(externalAddressName: string) {
+    return this.pathTemplates.externalAddressPathTemplate.match(
+      externalAddressName
+    ).private_cloud;
+  }
+
+  /**
+   * Parse the external_address from ExternalAddress resource.
+   *
+   * @param {string} externalAddressName
+   *   A fully-qualified path representing ExternalAddress resource.
+   * @returns {string} A string representing the external_address.
+   */
+  matchExternalAddressFromExternalAddressName(externalAddressName: string) {
+    return this.pathTemplates.externalAddressPathTemplate.match(
+      externalAddressName
+    ).external_address;
+  }
+
+  /**
    * Return a fully-qualified hcxActivationKey resource name string.
    *
    * @param {string} project
@@ -8085,6 +14872,219 @@ export class VmwareEngineClient {
   }
 
   /**
+   * Return a fully-qualified loggingServer resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} private_cloud
+   * @param {string} logging_server
+   * @returns {string} Resource name string.
+   */
+  loggingServerPath(
+    project: string,
+    location: string,
+    privateCloud: string,
+    loggingServer: string
+  ) {
+    return this.pathTemplates.loggingServerPathTemplate.render({
+      project: project,
+      location: location,
+      private_cloud: privateCloud,
+      logging_server: loggingServer,
+    });
+  }
+
+  /**
+   * Parse the project from LoggingServer resource.
+   *
+   * @param {string} loggingServerName
+   *   A fully-qualified path representing LoggingServer resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLoggingServerName(loggingServerName: string) {
+    return this.pathTemplates.loggingServerPathTemplate.match(loggingServerName)
+      .project;
+  }
+
+  /**
+   * Parse the location from LoggingServer resource.
+   *
+   * @param {string} loggingServerName
+   *   A fully-qualified path representing LoggingServer resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLoggingServerName(loggingServerName: string) {
+    return this.pathTemplates.loggingServerPathTemplate.match(loggingServerName)
+      .location;
+  }
+
+  /**
+   * Parse the private_cloud from LoggingServer resource.
+   *
+   * @param {string} loggingServerName
+   *   A fully-qualified path representing LoggingServer resource.
+   * @returns {string} A string representing the private_cloud.
+   */
+  matchPrivateCloudFromLoggingServerName(loggingServerName: string) {
+    return this.pathTemplates.loggingServerPathTemplate.match(loggingServerName)
+      .private_cloud;
+  }
+
+  /**
+   * Parse the logging_server from LoggingServer resource.
+   *
+   * @param {string} loggingServerName
+   *   A fully-qualified path representing LoggingServer resource.
+   * @returns {string} A string representing the logging_server.
+   */
+  matchLoggingServerFromLoggingServerName(loggingServerName: string) {
+    return this.pathTemplates.loggingServerPathTemplate.match(loggingServerName)
+      .logging_server;
+  }
+
+  /**
+   * Return a fully-qualified managementDnsZoneBinding resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} private_cloud
+   * @param {string} management_dns_zone_binding
+   * @returns {string} Resource name string.
+   */
+  managementDnsZoneBindingPath(
+    project: string,
+    location: string,
+    privateCloud: string,
+    managementDnsZoneBinding: string
+  ) {
+    return this.pathTemplates.managementDnsZoneBindingPathTemplate.render({
+      project: project,
+      location: location,
+      private_cloud: privateCloud,
+      management_dns_zone_binding: managementDnsZoneBinding,
+    });
+  }
+
+  /**
+   * Parse the project from ManagementDnsZoneBinding resource.
+   *
+   * @param {string} managementDnsZoneBindingName
+   *   A fully-qualified path representing ManagementDnsZoneBinding resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromManagementDnsZoneBindingName(
+    managementDnsZoneBindingName: string
+  ) {
+    return this.pathTemplates.managementDnsZoneBindingPathTemplate.match(
+      managementDnsZoneBindingName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ManagementDnsZoneBinding resource.
+   *
+   * @param {string} managementDnsZoneBindingName
+   *   A fully-qualified path representing ManagementDnsZoneBinding resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromManagementDnsZoneBindingName(
+    managementDnsZoneBindingName: string
+  ) {
+    return this.pathTemplates.managementDnsZoneBindingPathTemplate.match(
+      managementDnsZoneBindingName
+    ).location;
+  }
+
+  /**
+   * Parse the private_cloud from ManagementDnsZoneBinding resource.
+   *
+   * @param {string} managementDnsZoneBindingName
+   *   A fully-qualified path representing ManagementDnsZoneBinding resource.
+   * @returns {string} A string representing the private_cloud.
+   */
+  matchPrivateCloudFromManagementDnsZoneBindingName(
+    managementDnsZoneBindingName: string
+  ) {
+    return this.pathTemplates.managementDnsZoneBindingPathTemplate.match(
+      managementDnsZoneBindingName
+    ).private_cloud;
+  }
+
+  /**
+   * Parse the management_dns_zone_binding from ManagementDnsZoneBinding resource.
+   *
+   * @param {string} managementDnsZoneBindingName
+   *   A fully-qualified path representing ManagementDnsZoneBinding resource.
+   * @returns {string} A string representing the management_dns_zone_binding.
+   */
+  matchManagementDnsZoneBindingFromManagementDnsZoneBindingName(
+    managementDnsZoneBindingName: string
+  ) {
+    return this.pathTemplates.managementDnsZoneBindingPathTemplate.match(
+      managementDnsZoneBindingName
+    ).management_dns_zone_binding;
+  }
+
+  /**
+   * Return a fully-qualified networkPeering resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} network_peering
+   * @returns {string} Resource name string.
+   */
+  networkPeeringPath(
+    project: string,
+    location: string,
+    networkPeering: string
+  ) {
+    return this.pathTemplates.networkPeeringPathTemplate.render({
+      project: project,
+      location: location,
+      network_peering: networkPeering,
+    });
+  }
+
+  /**
+   * Parse the project from NetworkPeering resource.
+   *
+   * @param {string} networkPeeringName
+   *   A fully-qualified path representing NetworkPeering resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNetworkPeeringName(networkPeeringName: string) {
+    return this.pathTemplates.networkPeeringPathTemplate.match(
+      networkPeeringName
+    ).project;
+  }
+
+  /**
+   * Parse the location from NetworkPeering resource.
+   *
+   * @param {string} networkPeeringName
+   *   A fully-qualified path representing NetworkPeering resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNetworkPeeringName(networkPeeringName: string) {
+    return this.pathTemplates.networkPeeringPathTemplate.match(
+      networkPeeringName
+    ).location;
+  }
+
+  /**
+   * Parse the network_peering from NetworkPeering resource.
+   *
+   * @param {string} networkPeeringName
+   *   A fully-qualified path representing NetworkPeering resource.
+   * @returns {string} A string representing the network_peering.
+   */
+  matchNetworkPeeringFromNetworkPeeringName(networkPeeringName: string) {
+    return this.pathTemplates.networkPeeringPathTemplate.match(
+      networkPeeringName
+    ).network_peering;
+  }
+
+  /**
    * Return a fully-qualified networkPolicy resource name string.
    *
    * @param {string} project
@@ -8134,6 +15134,87 @@ export class VmwareEngineClient {
   matchNetworkPolicyFromNetworkPolicyName(networkPolicyName: string) {
     return this.pathTemplates.networkPolicyPathTemplate.match(networkPolicyName)
       .network_policy;
+  }
+
+  /**
+   * Return a fully-qualified node resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} private_cloud
+   * @param {string} cluster
+   * @param {string} node
+   * @returns {string} Resource name string.
+   */
+  nodePath(
+    project: string,
+    location: string,
+    privateCloud: string,
+    cluster: string,
+    node: string
+  ) {
+    return this.pathTemplates.nodePathTemplate.render({
+      project: project,
+      location: location,
+      private_cloud: privateCloud,
+      cluster: cluster,
+      node: node,
+    });
+  }
+
+  /**
+   * Parse the project from Node resource.
+   *
+   * @param {string} nodeName
+   *   A fully-qualified path representing Node resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNodeName(nodeName: string) {
+    return this.pathTemplates.nodePathTemplate.match(nodeName).project;
+  }
+
+  /**
+   * Parse the location from Node resource.
+   *
+   * @param {string} nodeName
+   *   A fully-qualified path representing Node resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNodeName(nodeName: string) {
+    return this.pathTemplates.nodePathTemplate.match(nodeName).location;
+  }
+
+  /**
+   * Parse the private_cloud from Node resource.
+   *
+   * @param {string} nodeName
+   *   A fully-qualified path representing Node resource.
+   * @returns {string} A string representing the private_cloud.
+   */
+  matchPrivateCloudFromNodeName(nodeName: string) {
+    return this.pathTemplates.nodePathTemplate.match(nodeName).private_cloud;
+  }
+
+  /**
+   * Parse the cluster from Node resource.
+   *
+   * @param {string} nodeName
+   *   A fully-qualified path representing Node resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromNodeName(nodeName: string) {
+    return this.pathTemplates.nodePathTemplate.match(nodeName).cluster;
+  }
+
+  /**
+   * Parse the node from Node resource.
+   *
+   * @param {string} nodeName
+   *   A fully-qualified path representing Node resource.
+   * @returns {string} A string representing the node.
+   */
+  matchNodeFromNodeName(nodeName: string) {
+    return this.pathTemplates.nodePathTemplate.match(nodeName).node;
   }
 
   /**

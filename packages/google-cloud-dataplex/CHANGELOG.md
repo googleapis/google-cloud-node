@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.5.0...dataplex-v3.5.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4964](https://github.com/googleapis/google-cloud-node/issues/4964)) ([34bd4e2](https://github.com/googleapis/google-cloud-node/commit/34bd4e2e40e51ffcd122e7d04307f9a5cce694a6))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.4.0...dataplex-v3.5.0) (2023-12-05)
 
 

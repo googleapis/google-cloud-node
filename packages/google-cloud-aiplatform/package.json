@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/aiplatform",
-  "version": "3.10.0",
+  "version": "3.10.1",
   "description": "Vertex AI client for Node.js",
   "repository": {
     "type": "git",
@@ -61,7 +61,7 @@
     "@types/node": "^20.4.5",
     "@types/sinon": "^17.0.0",
     "c8": "^8.0.1",
-    "gapic-tools": "^0.2.0",
+    "gapic-tools": "^0.3.0",
     "gts": "^5.0.0",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",

@@ -17,8 +17,11 @@
 import synthtool as s
 import synthtool.languages.node_mono_repo as node
 import pathlib
+from synthtool import shell
 
 node.owlbot_main(relative_dir="packages/google-cloud-channel",
-    templates_exclides=['test/gapic_cloud_channel_service_v1.ts'],
-    staging_excludes=['test/gapic_cloud_channel_service_v1.ts']
+    templates_excludes=['test/gapic_cloud_channel_service_v1.ts', 'package.json'],
+    staging_excludes=['test/gapic_cloud_channel_service_v1.ts', 'package.json']
 )
+
+shell.run(("rm", "-rf", "packages/google-cloud-channel/test/gapic_cloud_channel_reports_service_v1.ts"), hide_output=True)

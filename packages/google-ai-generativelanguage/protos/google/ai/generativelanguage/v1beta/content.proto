@@ -123,7 +123,7 @@ message Tool {
   // [FunctionCall][content.part.function_call] in the response. The next
   // conversation turn may contain a
   // [FunctionResponse][content.part.function_response]
-  // with the [conent.role] "function" generation context for the next model
+  // with the [content.role] "function" generation context for the next model
   // turn.
   repeated FunctionDeclaration function_declarations = 1
       [(google.api.field_behavior) = OPTIONAL];
@@ -184,10 +184,10 @@ message FunctionResponse {
 // Represents a select subset of an [OpenAPI 3.0 schema
 // object](https://spec.openapis.org/oas/v3.0.3#schema).
 message Schema {
-  // Optional. Data type.
-  Type type = 1 [(google.api.field_behavior) = OPTIONAL];
+  // Required. Data type.
+  Type type = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // Optional. The format of the data. This is used obnly for primative
+  // Optional. The format of the data. This is used only for primitive
   // datatypes. Supported formats:
   //  for NUMBER type: float, double
   //  for INTEGER type: int32, int64

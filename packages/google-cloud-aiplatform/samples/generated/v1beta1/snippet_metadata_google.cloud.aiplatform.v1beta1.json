@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.10.0",
+        "version": "3.10.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -6103,6 +6103,58 @@
                     "service": {
                         "shortName": "JobService",
                         "fullName": "google.cloud.aiplatform.v1beta1.JobService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_LlmUtilityService_CountTokens_async",
+            "title": "DatasetService countTokens Sample",
+            "origin": "API_DEFINITION",
+            "description": " Perform a token counting.",
+            "canonical": true,
+            "file": "llm_utility_service.count_tokens.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 73,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CountTokens",
+                "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService.CountTokens",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instances",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "contents",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.CountTokensResponse",
+                "client": {
+                    "shortName": "LlmUtilityServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityServiceClient"
+                },
+                "method": {
+                    "shortName": "CountTokens",
+                    "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService.CountTokens",
+                    "service": {
+                        "shortName": "LlmUtilityService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService"
                     }
                 }
             }

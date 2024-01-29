@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/googleapis/google-cloud-node/compare/vmwareengine-v1.0.1...vmwareengine-v1.0.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* [vmwareengine] improve retry logic for streaming API calls ([#4960](https://github.com/googleapis/google-cloud-node/issues/4960)) ([7d4365f](https://github.com/googleapis/google-cloud-node/commit/7d4365f0ff744462336597d7f3df8566e92623f8))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/vmwareengine-v1.0.0...vmwareengine-v1.0.1) (2023-09-06)
 
 

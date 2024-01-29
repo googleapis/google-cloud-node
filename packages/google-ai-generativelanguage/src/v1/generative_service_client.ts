@@ -184,7 +184,8 @@ export class GenerativeServiceClient {
     this.descriptors.stream = {
       streamGenerateContent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
-        !!opts.fallback
+        !!opts.fallback,
+        /* gaxStreamingRetries: */ true
       ),
     };
 
@@ -481,6 +482,9 @@ export class GenerativeServiceClient {
    * @param {string} [request.title]
    *   Optional. An optional title for the text. Only applicable when TaskType is
    *   `RETRIEVAL_DOCUMENT`.
+   *
+   *   Note: Specifying a `title` for `RETRIEVAL_DOCUMENT` provides better quality
+   *   embeddings for retrieval.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-generativelanguage",
-        "version": "2.0.0",
+        "version": "2.0.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -126,7 +126,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 74,
                     "type": "FULL"
                 }
             ],

@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.3.0...dialogflow-cx-v4.3.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* [Many APIs] improve retry logic for streaming API calls ([#4964](https://github.com/googleapis/google-cloud-node/issues/4964)) ([34bd4e2](https://github.com/googleapis/google-cloud-node/commit/34bd4e2e40e51ffcd122e7d04307f9a5cce694a6))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.2.0...dialogflow-cx-v4.3.0) (2023-11-30)
 
 

@@ -239,7 +239,8 @@ export class SpeechClient {
     this.descriptors.stream = {
       streamingRecognize: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
-        !!opts.fallback
+        !!opts.fallback,
+        /* gaxStreamingRetries: */ true
       ),
     };
 

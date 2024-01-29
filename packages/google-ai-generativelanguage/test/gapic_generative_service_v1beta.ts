@@ -1006,7 +1006,11 @@ describe('v1beta.GenerativeServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       const stream = client.streamGenerateContent(request, {
-        retryRequestOptions: {noResponseRetries: 0},
+        retry: {
+          shouldRetryFn: () => {
+            return false;
+          },
+        },
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
