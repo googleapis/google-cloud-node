@@ -361,6 +361,142 @@
         }
       }
     },
+    "SessionController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SessionControllerClient",
+          "rpcs": {
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "TerminateSession": {
+              "methods": [
+                "terminateSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SessionControllerClient",
+          "rpcs": {
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "TerminateSession": {
+              "methods": [
+                "terminateSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SessionTemplateController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SessionTemplateControllerClient",
+          "rpcs": {
+            "CreateSessionTemplate": {
+              "methods": [
+                "createSessionTemplate"
+              ]
+            },
+            "UpdateSessionTemplate": {
+              "methods": [
+                "updateSessionTemplate"
+              ]
+            },
+            "GetSessionTemplate": {
+              "methods": [
+                "getSessionTemplate"
+              ]
+            },
+            "DeleteSessionTemplate": {
+              "methods": [
+                "deleteSessionTemplate"
+              ]
+            },
+            "ListSessionTemplates": {
+              "methods": [
+                "listSessionTemplates",
+                "listSessionTemplatesStream",
+                "listSessionTemplatesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SessionTemplateControllerClient",
+          "rpcs": {
+            "CreateSessionTemplate": {
+              "methods": [
+                "createSessionTemplate"
+              ]
+            },
+            "UpdateSessionTemplate": {
+              "methods": [
+                "updateSessionTemplate"
+              ]
+            },
+            "GetSessionTemplate": {
+              "methods": [
+                "getSessionTemplate"
+              ]
+            },
+            "DeleteSessionTemplate": {
+              "methods": [
+                "deleteSessionTemplate"
+              ]
+            },
+            "ListSessionTemplates": {
+              "methods": [
+                "listSessionTemplates",
+                "listSessionTemplatesStream",
+                "listSessionTemplatesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "WorkflowTemplateService": {
       "clients": {
         "grpc": {

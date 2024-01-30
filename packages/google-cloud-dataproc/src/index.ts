@@ -28,6 +28,10 @@ const JobControllerClient = v1.JobControllerClient;
 type JobControllerClient = v1.JobControllerClient;
 const NodeGroupControllerClient = v1.NodeGroupControllerClient;
 type NodeGroupControllerClient = v1.NodeGroupControllerClient;
+const SessionControllerClient = v1.SessionControllerClient;
+type SessionControllerClient = v1.SessionControllerClient;
+const SessionTemplateControllerClient = v1.SessionTemplateControllerClient;
+type SessionTemplateControllerClient = v1.SessionTemplateControllerClient;
 const WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
 type WorkflowTemplateServiceClient = v1.WorkflowTemplateServiceClient;
 
@@ -38,6 +42,8 @@ export {
   ClusterControllerClient,
   JobControllerClient,
   NodeGroupControllerClient,
+  SessionControllerClient,
+  SessionTemplateControllerClient,
   WorkflowTemplateServiceClient,
 };
 export default {
@@ -47,6 +53,8 @@ export default {
   ClusterControllerClient,
   JobControllerClient,
   NodeGroupControllerClient,
+  SessionControllerClient,
+  SessionTemplateControllerClient,
   WorkflowTemplateServiceClient,
 };
 import * as protos from '../protos/protos';

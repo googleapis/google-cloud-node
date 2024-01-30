@@ -211,6 +211,12 @@ export class AutoscalingPolicyServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
         ),
+      sessionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sessions/{session}'
+      ),
+      sessionTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sessionTemplates/{template}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -1594,6 +1600,110 @@ export class AutoscalingPolicyServiceClient {
     return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
       projectRegionWorkflowTemplateName
     ).workflow_template;
+  }
+
+  /**
+   * Return a fully-qualified session resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  sessionPath(project: string, location: string, session: string) {
+    return this.pathTemplates.sessionPathTemplate.render({
+      project: project,
+      location: location,
+      session: session,
+    });
+  }
+
+  /**
+   * Parse the project from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).project;
+  }
+
+  /**
+   * Parse the location from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).location;
+  }
+
+  /**
+   * Parse the session from Session resource.
+   *
+   * @param {string} sessionName
+   *   A fully-qualified path representing Session resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromSessionName(sessionName: string) {
+    return this.pathTemplates.sessionPathTemplate.match(sessionName).session;
+  }
+
+  /**
+   * Return a fully-qualified sessionTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} template
+   * @returns {string} Resource name string.
+   */
+  sessionTemplatePath(project: string, location: string, template: string) {
+    return this.pathTemplates.sessionTemplatePathTemplate.render({
+      project: project,
+      location: location,
+      template: template,
+    });
+  }
+
+  /**
+   * Parse the project from SessionTemplate resource.
+   *
+   * @param {string} sessionTemplateName
+   *   A fully-qualified path representing SessionTemplate resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSessionTemplateName(sessionTemplateName: string) {
+    return this.pathTemplates.sessionTemplatePathTemplate.match(
+      sessionTemplateName
+    ).project;
+  }
+
+  /**
+   * Parse the location from SessionTemplate resource.
+   *
+   * @param {string} sessionTemplateName
+   *   A fully-qualified path representing SessionTemplate resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSessionTemplateName(sessionTemplateName: string) {
+    return this.pathTemplates.sessionTemplatePathTemplate.match(
+      sessionTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the template from SessionTemplate resource.
+   *
+   * @param {string} sessionTemplateName
+   *   A fully-qualified path representing SessionTemplate resource.
+   * @returns {string} A string representing the template.
+   */
+  matchTemplateFromSessionTemplateName(sessionTemplateName: string) {
+    return this.pathTemplates.sessionTemplatePathTemplate.match(
+      sessionTemplateName
+    ).template;
   }
 
   /**
