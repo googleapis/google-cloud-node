@@ -2216,6 +2216,10 @@
                           "type": "string",
                           "id": 6
                         },
+                        "qualityMetadata": {
+                          "type": "QualityMetadata",
+                          "id": 24
+                        },
                         "transcript": {
                           "type": "Transcript",
                           "id": 8,
@@ -2289,6 +2293,49 @@
                             "agentChannel": {
                               "type": "int32",
                               "id": 2
+                            }
+                          }
+                        },
+                        "QualityMetadata": {
+                          "fields": {
+                            "customerSatisfactionRating": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "waitDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            },
+                            "menuPath": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "agentInfo": {
+                              "rule": "repeated",
+                              "type": "AgentInfo",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "AgentInfo": {
+                              "fields": {
+                                "agentId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "displayName": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "team": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "dispositionCode": {
+                                  "type": "string",
+                                  "id": 4
+                                }
+                              }
                             }
                           }
                         },
