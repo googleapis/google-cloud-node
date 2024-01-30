@@ -3746,8 +3746,7 @@
                               "type": "string",
                               "id": 3,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "compute.googleapis.com/BackendService"
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             },
                             "supportedEvents": {
@@ -3798,14 +3797,16 @@
                     "LbTrafficExtension": {
                       "options": {
                         "(google.api.resource).type": "networkservices.googleapis.com/LbTrafficExtension",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}",
+                        "(google.api.resource).plural": "lbTrafficExtensions",
+                        "(google.api.resource).singular": "lbTrafficExtension"
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "createTime": {
@@ -3842,8 +3843,7 @@
                           "type": "string",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/ForwardingRule"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "extensionChains": {
@@ -3961,6 +3961,7 @@
                           "type": "string",
                           "id": 4,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -3986,6 +3987,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -4005,6 +4007,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -4013,14 +4016,16 @@
                     "LbRouteExtension": {
                       "options": {
                         "(google.api.resource).type": "networkservices.googleapis.com/LbRouteExtension",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}",
+                        "(google.api.resource).plural": "lbRouteExtensions",
+                        "(google.api.resource).singular": "lbRouteExtension"
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "createTime": {
@@ -4057,8 +4062,7 @@
                           "type": "string",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/ForwardingRule"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "extensionChains": {
@@ -4176,6 +4180,7 @@
                           "type": "string",
                           "id": 4,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -4201,6 +4206,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
@@ -4220,6 +4226,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
+                            "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
