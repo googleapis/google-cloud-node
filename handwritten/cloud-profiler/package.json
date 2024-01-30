@@ -49,7 +49,7 @@
     "@types/nock": "^10.0.0",
     "@types/node": "^20.4.9",
     "@types/pretty-ms": "^4.0.0",
-    "@types/sinon": "^10.0.0",
+    "@types/sinon": "^17.0.0",
     "@types/tmp": "0.2.6",
     "c8": "^9.0.0",
     "codecov": "^3.0.0",
@@ -61,7 +61,7 @@
     "linkinator": "^5.0.0",
     "mocha": "^9.2.2",
     "nock": "^13.0.0",
-    "sinon": "^16.0.0",
+    "sinon": "^17.0.0",
     "source-map": "^0.7.0",
     "tmp": "0.2.1",
     "typescript": "^5.1.6"
