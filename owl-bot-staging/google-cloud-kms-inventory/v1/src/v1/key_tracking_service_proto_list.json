@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/kms/inventory/v1/key_dashboard_service.proto",
+  "../../protos/google/cloud/kms/inventory/v1/key_tracking_service.proto",
+  "../../protos/google/cloud/kms/v1/resources.proto"
+]
