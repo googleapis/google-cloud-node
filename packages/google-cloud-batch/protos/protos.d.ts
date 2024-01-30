@@ -1451,6 +1451,9 @@ export namespace google {
 
                     /** Properties of a CloudLoggingOption. */
                     interface ICloudLoggingOption {
+
+                        /** CloudLoggingOption useGenericTaskMonitoredResource */
+                        useGenericTaskMonitoredResource?: (boolean|null);
                     }
 
                     /** Represents a CloudLoggingOption. */
@@ -1461,6 +1464,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.batch.v1.LogsPolicy.ICloudLoggingOption);
+
+                        /** CloudLoggingOption useGenericTaskMonitoredResource. */
+                        public useGenericTaskMonitoredResource: boolean;
 
                         /**
                          * Creates a new CloudLoggingOption instance using the specified properties.
@@ -2137,6 +2143,9 @@ export namespace google {
 
                     /** AllocationPolicy placement */
                     placement?: (google.cloud.batch.v1.AllocationPolicy.IPlacementPolicy|null);
+
+                    /** AllocationPolicy tags */
+                    tags?: (string[]|null);
                 }
 
                 /** Represents an AllocationPolicy. */
@@ -2165,6 +2174,9 @@ export namespace google {
 
                     /** AllocationPolicy placement. */
                     public placement?: (google.cloud.batch.v1.AllocationPolicy.IPlacementPolicy|null);
+
+                    /** AllocationPolicy tags. */
+                    public tags: string[];
 
                     /**
                      * Creates a new AllocationPolicy instance using the specified properties.
@@ -3286,6 +3298,9 @@ export namespace google {
 
                     /** TaskGroup permissiveSsh */
                     permissiveSsh?: (boolean|null);
+
+                    /** TaskGroup runAsNonRoot */
+                    runAsNonRoot?: (boolean|null);
                 }
 
                 /** Represents a TaskGroup. */
@@ -3323,6 +3338,9 @@ export namespace google {
 
                     /** TaskGroup permissiveSsh. */
                     public permissiveSsh: boolean;
+
+                    /** TaskGroup runAsNonRoot. */
+                    public runAsNonRoot: boolean;
 
                     /**
                      * Creates a new TaskGroup instance using the specified properties.
@@ -4141,6 +4159,9 @@ export namespace google {
 
                         /** Container password */
                         password?: (string|null);
+
+                        /** Container enableImageStreaming */
+                        enableImageStreaming?: (boolean|null);
                     }
 
                     /** Represents a Container. */
@@ -4175,6 +4196,9 @@ export namespace google {
 
                         /** Container password. */
                         public password: string;
+
+                        /** Container enableImageStreaming. */
+                        public enableImageStreaming: boolean;
 
                         /**
                          * Creates a new Container instance using the specified properties.

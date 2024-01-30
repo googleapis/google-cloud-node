@@ -453,7 +453,15 @@
                       },
                       "nested": {
                         "CloudLoggingOption": {
-                          "fields": {}
+                          "fields": {
+                            "useGenericTaskMonitoredResource": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
                         },
                         "Destination": {
                           "values": {
@@ -597,6 +605,14 @@
                         "placement": {
                           "type": "PlacementPolicy",
                           "id": 10
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -847,6 +863,13 @@
                         "permissiveSsh": {
                           "type": "bool",
                           "id": 12
+                        },
+                        "runAsNonRoot": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1038,6 +1061,13 @@
                             "password": {
                               "type": "string",
                               "id": 11
+                            },
+                            "enableImageStreaming": {
+                              "type": "bool",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
