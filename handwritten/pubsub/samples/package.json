@@ -22,21 +22,21 @@
   },
   "dependencies": {
     "@google-cloud/pubsub": "^4.1.1",
-    "@opentelemetry/api": "^1.0.0",
+    "@opentelemetry/api": "^1.6.0",
     "@opentelemetry/tracing": "^0.24.0",
-    "avro-js": "^1.10.1",
+    "avro-js": "^1.11.3",
     "p-defer": "^3.0.0",
-    "protobufjs": "^7.0.0"
+    "protobufjs": "~7.2.5"
   },
   "devDependencies": {
     "@google-cloud/bigquery": "^7.0.0",
     "@types/chai": "^4.2.16",
     "@types/rimraf": "^3.0.0",
     "chai": "^4.2.0",
-    "gts": "^3.1.0",
-    "mocha": "^8.0.0",
+    "gts": "^5.0.0",
+    "mocha": "^9.2.2",
     "rimraf": "^5.0.0",
-    "typescript": "~4.3.0",
+    "typescript": "^5.1.6",
     "uuid": "^9.0.0"
   }
 }

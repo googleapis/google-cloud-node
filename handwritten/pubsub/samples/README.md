@@ -20,6 +20,8 @@ guides.
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Commit an Avro-Based Schema](#commit-an-avro-based-schema)
+  * [Commit an Proto-Based Schema](#commit-an-proto-based-schema)
   * [Create an Avro based Schema](#create-an-avro-based-schema)
   * [Create BigQuery Subscription](#create-bigquery-subscription)
   * [Create a Proto based Schema](#create-a-proto-based-schema)
@@ -33,19 +35,24 @@ guides.
   * [Create Subscription With Retry Policy](#create-subscription-with-retry-policy)
   * [Create Topic](#create-topic)
   * [Create Topic With Schema](#create-topic-with-schema)
+  * [Create Topic With Schema Revisions](#create-topic-with-schema-revisions)
   * [Delete a previously created schema](#delete-a-previously-created-schema)
+  * [Delete a Schema Revision](#delete-a-schema-revision)
   * [Delete Subscription](#delete-subscription)
   * [Delete Topic](#delete-topic)
   * [Detach Subscription](#detach-subscription)
   * [Get a previously created schema](#get-a-previously-created-schema)
+  * [Get a previously created schema revision](#get-a-previously-created-schema-revision)
   * [Get Subscription](#get-subscription)
   * [Get Subscription Policy](#get-subscription-policy)
   * [Get Topic Policy](#get-topic-policy)
   * [List All Topics](#list-all-topics)
+  * [List Revisions on a Schema](#list-revisions-on-a-schema)
   * [List schemas on a project](#list-schemas-on-a-project)
   * [List Subscriptions](#list-subscriptions)
   * [List Subscriptions On a Topic](#list-subscriptions-on-a-topic)
   * [Listen For Avro Records](#listen-for-avro-records)
+  * [Listen For Avro Records With Revisions](#listen-for-avro-records-with-revisions)
   * [Listen For Errors](#listen-for-errors)
   * [Listen For Messages](#listen-for-messages)
   * [Listen with exactly-once delivery](#listen-with-exactly-once-delivery)
@@ -64,6 +71,7 @@ guides.
   * [Quickstart](#quickstart)
   * [Remove Dead Letter Policy](#remove-dead-letter-policy)
   * [Resume Publish](#resume-publish)
+  * [Rollback a Schema](#rollback-a-schema)
   * [Set Subscription IAM Policy](#set-subscription-iam-policy)
   * [Set Topic IAM Policy](#set-topic-iam-policy)
   * [Subscribe With Flow Control Settings](#subscribe-with-flow-control-settings)
@@ -73,6 +81,7 @@ guides.
   * [Test Subscription Permissions](#test-subscription-permissions)
   * [Test Topic Permissions](#test-topic-permissions)
   * [Update Dead Letter Policy](#update-dead-letter-policy)
+  * [Update Topic Schema](#update-topic-schema)
   * [Validate a schema definition](#validate-a-schema-definition)
 
 ## Before you begin
@@ -87,6 +96,44 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Commit an Avro-Based Schema
+
+Commits a new schema definition revision on a project, using Avro
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/commitAvroSchema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/commitAvroSchema.js,samples/README.md)
+
+__Usage:__
+
+
+`node commitAvroSchema.js <schema-name> <avsc-filename>`
+
+
+-----
+
+
+
+
+### Commit an Proto-Based Schema
+
+Commits a new schema definition revision on a project, using Protos
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/commitProtoSchema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/commitProtoSchema.js,samples/README.md)
+
+__Usage:__
+
+
+`node commitProtoSchema.js <schema-name> <proto-filename>`
+
+
+-----
+
 
 
 
@@ -337,6 +384,25 @@ __Usage:__
 
 
 
+### Create Topic With Schema Revisions
+
+Creates a new topic, with a schema definition and revisions.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createTopicWithSchemaRevisions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createTopicWithSchemaRevisions.js,samples/README.md)
+
+__Usage:__
+
+
+`node createTopicWithSchema.js <topic-name> <schema-name> <encoding-type> <first-revision-id> <last-revision-id>`
+
+
+-----
+
+
+
+
 ### Delete a previously created schema
 
 Deletes a schema which was previously created in the project.
@@ -349,6 +415,25 @@ __Usage:__
 
 
 `node deleteSchema.js <schema-name-or-id>`
+
+
+-----
+
+
+
+
+### Delete a Schema Revision
+
+Deletes a schema revision on a project
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/deleteSchemaRevision.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/deleteSchemaRevision.js,samples/README.md)
+
+__Usage:__
+
+
+`node deleteSchemaRevision.js <schema-name> <revision-id>`
 
 
 -----
@@ -432,6 +517,25 @@ __Usage:__
 
 
 
+### Get a previously created schema revision
+
+Gets information about a schema revision which was previously created in the project.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/getSchemaRevision.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/getSchemaRevision.js,samples/README.md)
+
+__Usage:__
+
+
+`node getSchemaRevision.js <schema-name>`
+
+
+-----
+
+
+
+
 ### Get Subscription
 
 Gets the metadata for a subscription.
@@ -508,6 +612,25 @@ __Usage:__
 
 
 
+### List Revisions on a Schema
+
+Gets a list of revisions on a schema which was previously created in the project.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listSchemaRevisions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listSchemaRevisions.js,samples/README.md)
+
+__Usage:__
+
+
+`node listSchemaRevisions.js <schema-name>`
+
+
+-----
+
+
+
+
 ### List schemas on a project
 
 Gets a list of schemas which were previously created in the project.
@@ -577,6 +700,25 @@ __Usage:__
 
 
 `node listenForAvroRecords.js <subscription-name-or-id> [timeout-in-seconds]`
+
+
+-----
+
+
+
+
+### Listen For Avro Records With Revisions
+
+Listens for records in Avro encoding from a subscription with schema revisions.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listenForAvroRecordsWithRevisions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenForAvroRecordsWithRevisions.js,samples/README.md)
+
+__Usage:__
+
+
+`node listenForAvroRecordsWithRevisions.js <subscription-name-or-id> [timeout-in-seconds]`
 
 
 -----
@@ -926,6 +1068,25 @@ __Usage:__
 
 
 
+### Rollback a Schema
+
+Rolls back a schema on a project
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/rollbackSchema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/rollbackSchema.js,samples/README.md)
+
+__Usage:__
+
+
+`node rollbackSchema.js <schema-name> <revision-id>`
+
+
+-----
+
+
+
+
 ### Set Subscription IAM Policy
 
 Sets the IAM policy for a subscription.
@@ -1090,6 +1251,25 @@ __Usage:__
 
 
 `node updateDeadLetterPolicy.js <topic-name-or-id> <subscription-name-or-id>`
+
+
+-----
+
+
+
+
+### Update Topic Schema
+
+Update the schema on a topic.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/updateTopicSchema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/updateTopicSchema.js,samples/README.md)
+
+__Usage:__
+
+
+`node updateTopicSchema.js <topic-name-or-id> <first-revision-id> <last-revision-id>`
 
 
 -----

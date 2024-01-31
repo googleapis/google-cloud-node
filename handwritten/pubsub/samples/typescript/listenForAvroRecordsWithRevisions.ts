@@ -1,4 +1,4 @@
-// Copyright 2019-2021 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * This application demonstrates how to perform basic operations on
+ * This snippet demonstrates how to perform basic operations on
  * subscriptions with the Google Cloud Pub/Sub API.
  *
  * For more information, see the README.md under /pubsub and the documentation
@@ -21,11 +21,11 @@
  */
 
 // sample-metadata:
-//   title: Listen For Avro Records
-//   description: Listens for records in Avro encoding from a subscription.
-//   usage: node listenForAvroRecords.js <subscription-name-or-id> [timeout-in-seconds]
+//   title: Listen For Avro Records With Revisions
+//   description: Listens for records in Avro encoding from a subscription with schema revisions.
+//   usage: node listenForAvroRecordsWithRevisions.js <subscription-name-or-id> [timeout-in-seconds]
 
-// [START pubsub_subscribe_avro_records]
+// [START pubsub_subscribe_avro_records_with_revisions]
 /**
  * TODO(developer): Uncomment these variables before running the sample.
  */
@@ -35,51 +35,82 @@
 // Imports the Google Cloud client library
 import {PubSub, Schema, Encodings, Message} from '@google-cloud/pubsub';
 
-// Node FS library, to load definitions
-import * as fs from 'fs';
-
-// And the Apache Avro library
+// And the Apache Avro library; this lacks typings, so for
+// TypeScript, a few synthetic types were created.
 import * as avro from 'avro-js';
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-function listenForAvroRecords(subscriptionNameOrId: string, timeout: number) {
+interface ProvinceObject {
+  name: string;
+  post_abbr: string;
+}
+
+async function listenForAvroRecordsWithRevisions(
+  subscriptionNameOrId: string,
+  timeout: number
+) {
   // References an existing subscription
   const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
-  // Make an encoder using the official avro-js library.
-  const definition = fs
-    .readFileSync('system-test/fixtures/provinces.avsc')
-    .toString();
-  const type = avro.parse(definition);
+  // Cache decoders for various schema revisions.
+  const revisionReaders = new Map<string, avro.Parser>();
+
+  // We need a schema admin service client to retrieve revisions.
+  const schemaClient = await pubSubClient.getSchemaClient();
 
   // Create an event handler to handle messages
   let messageCount = 0;
   const messageHandler = async (message: Message) => {
-    // "Ack" (acknowledge receipt of) the message
-    message.ack();
-
     // Get the schema metadata from the message.
     const schemaMetadata = Schema.metadataFromMessage(message.attributes);
 
-    let result: object | undefined;
+    let reader: avro.Parser;
+    try {
+      // Do we already have a decoder for this revision?
+      const revision = schemaMetadata.revision!;
+      if (revisionReaders.has(revision)) {
+        reader = revisionReaders.get(revision)!;
+      } else {
+        // This is the first time we are seeing this revision. We need to
+        // fetch the schema and cache its decoder.
+        const [schema] = await schemaClient.getSchema({
+          name: `${schemaMetadata.name}@${schemaMetadata.revision}`,
+        });
+        reader = avro.parse(schema.definition!);
+        revisionReaders.set(revision, reader);
+      }
+    } catch (err: unknown) {
+      console.log('Could not get schema', err);
+      message.nack();
+      return;
+    }
+
+    let result: ProvinceObject | undefined;
     switch (schemaMetadata.encoding) {
       case Encodings.Binary:
-        result = type.fromBuffer(message.data);
+        result = reader.fromBuffer(message.data);
         break;
       case Encodings.Json:
-        result = type.fromString(message.data.toString());
+        result = reader.fromString(message.data.toString());
         break;
       default:
         console.log(`Unknown schema encoding: ${schemaMetadata.encoding}`);
-        break;
+        message.nack();
+        return;
     }
 
     console.log(`Received message ${message.id}:`);
     console.log(`\tData: ${JSON.stringify(result, null, 4)}`);
     console.log(`\tAttributes: ${message.attributes}`);
+    console.log(
+      `\tProvince ${result?.name} is abbreviated as ${result?.post_abbr}`
+    );
     messageCount += 1;
+
+    // Ack the message.
+    message.ack();
   };
 
   // Listen for new messages until timeout is hit
@@ -90,7 +121,7 @@ function listenForAvroRecords(subscriptionNameOrId: string, timeout: number) {
     console.log(`${messageCount} message(s) received.`);
   }, timeout * 1000);
 }
-// [END pubsub_subscribe_avro_records]
+// [END pubsub_subscribe_avro_records_with_revisions]
 
 function main(
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
@@ -98,13 +129,12 @@ function main(
 ) {
   timeout = Number(timeout);
 
-  try {
-    listenForAvroRecords(subscriptionNameOrId, timeout);
-  } catch (e) {
-    const err = e as Error;
-    console.error(err.message);
-    process.exitCode = 1;
-  }
+  listenForAvroRecordsWithRevisions(subscriptionNameOrId, timeout).catch(
+    err => {
+      console.error(err.message);
+      process.exitCode = 1;
+    }
+  );
 }
 
 main(...process.argv.slice(2));
