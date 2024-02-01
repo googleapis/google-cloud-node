@@ -7360,6 +7360,13 @@
                     "gcsFuseCsiDriverConfig": {
                       "type": "GcsFuseCsiDriverConfig",
                       "id": 17
+                    },
+                    "statefulHaConfig": {
+                      "type": "StatefulHAConfig",
+                      "id": 18,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -7415,6 +7422,14 @@
                   }
                 },
                 "GkeBackupAgentConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "StatefulHAConfig": {
                   "fields": {
                     "enabled": {
                       "type": "bool",
@@ -11755,7 +11770,10 @@
                     },
                     "conversionStatus": {
                       "type": "AutopilotConversionStatus",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
