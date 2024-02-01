@@ -503,6 +503,8 @@
                          * @property {string|null} [sourceToken] CloudFunction sourceToken
                          * @property {string|null} [dockerRepository] CloudFunction dockerRepository
                          * @property {google.cloud.functions.v1.CloudFunction.DockerRegistry|null} [dockerRegistry] CloudFunction dockerRegistry
+                         * @property {google.cloud.functions.v1.CloudFunction.IAutomaticUpdatePolicy|null} [automaticUpdatePolicy] CloudFunction automaticUpdatePolicy
+                         * @property {google.cloud.functions.v1.CloudFunction.IOnDeployUpdatePolicy|null} [onDeployUpdatePolicy] CloudFunction onDeployUpdatePolicy
                          */
     
                         /**
@@ -789,6 +791,22 @@
                          */
                         CloudFunction.prototype.dockerRegistry = 0;
     
+                        /**
+                         * CloudFunction automaticUpdatePolicy.
+                         * @member {google.cloud.functions.v1.CloudFunction.IAutomaticUpdatePolicy|null|undefined} automaticUpdatePolicy
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.automaticUpdatePolicy = null;
+    
+                        /**
+                         * CloudFunction onDeployUpdatePolicy.
+                         * @member {google.cloud.functions.v1.CloudFunction.IOnDeployUpdatePolicy|null|undefined} onDeployUpdatePolicy
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.onDeployUpdatePolicy = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -811,6 +829,17 @@
                          */
                         Object.defineProperty(CloudFunction.prototype, "trigger", {
                             get: $util.oneOfGetter($oneOfFields = ["httpsTrigger", "eventTrigger"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * CloudFunction runtimeUpdatePolicy.
+                         * @member {"automaticUpdatePolicy"|"onDeployUpdatePolicy"|undefined} runtimeUpdatePolicy
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        Object.defineProperty(CloudFunction.prototype, "runtimeUpdatePolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["automaticUpdatePolicy", "onDeployUpdatePolicy"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -909,6 +938,10 @@
                                 writer.uint32(/* id 34, wireType 2 =*/274).string(message.dockerRepository);
                             if (message.dockerRegistry != null && Object.hasOwnProperty.call(message, "dockerRegistry"))
                                 writer.uint32(/* id 35, wireType 0 =*/280).int32(message.dockerRegistry);
+                            if (message.automaticUpdatePolicy != null && Object.hasOwnProperty.call(message, "automaticUpdatePolicy"))
+                                $root.google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy.encode(message.automaticUpdatePolicy, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
+                            if (message.onDeployUpdatePolicy != null && Object.hasOwnProperty.call(message, "onDeployUpdatePolicy"))
+                                $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.encode(message.onDeployUpdatePolicy, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
                             return writer;
                         };
     
@@ -1136,6 +1169,14 @@
                                         message.dockerRegistry = reader.int32();
                                         break;
                                     }
+                                case 40: {
+                                        message.automaticUpdatePolicy = $root.google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 41: {
+                                        message.onDeployUpdatePolicy = $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1355,6 +1396,24 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.automaticUpdatePolicy != null && message.hasOwnProperty("automaticUpdatePolicy")) {
+                                properties.runtimeUpdatePolicy = 1;
+                                {
+                                    var error = $root.google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy.verify(message.automaticUpdatePolicy);
+                                    if (error)
+                                        return "automaticUpdatePolicy." + error;
+                                }
+                            }
+                            if (message.onDeployUpdatePolicy != null && message.hasOwnProperty("onDeployUpdatePolicy")) {
+                                if (properties.runtimeUpdatePolicy === 1)
+                                    return "runtimeUpdatePolicy: multiple values";
+                                properties.runtimeUpdatePolicy = 1;
+                                {
+                                    var error = $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.verify(message.onDeployUpdatePolicy);
+                                    if (error)
+                                        return "onDeployUpdatePolicy." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1577,6 +1636,16 @@
                                 message.dockerRegistry = 2;
                                 break;
                             }
+                            if (object.automaticUpdatePolicy != null) {
+                                if (typeof object.automaticUpdatePolicy !== "object")
+                                    throw TypeError(".google.cloud.functions.v1.CloudFunction.automaticUpdatePolicy: object expected");
+                                message.automaticUpdatePolicy = $root.google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy.fromObject(object.automaticUpdatePolicy);
+                            }
+                            if (object.onDeployUpdatePolicy != null) {
+                                if (typeof object.onDeployUpdatePolicy !== "object")
+                                    throw TypeError(".google.cloud.functions.v1.CloudFunction.onDeployUpdatePolicy: object expected");
+                                message.onDeployUpdatePolicy = $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.fromObject(object.onDeployUpdatePolicy);
+                            }
                             return message;
                         };
     
@@ -1731,6 +1800,16 @@
                                 object.dockerRepository = message.dockerRepository;
                             if (message.dockerRegistry != null && message.hasOwnProperty("dockerRegistry"))
                                 object.dockerRegistry = options.enums === String ? $root.google.cloud.functions.v1.CloudFunction.DockerRegistry[message.dockerRegistry] === undefined ? message.dockerRegistry : $root.google.cloud.functions.v1.CloudFunction.DockerRegistry[message.dockerRegistry] : message.dockerRegistry;
+                            if (message.automaticUpdatePolicy != null && message.hasOwnProperty("automaticUpdatePolicy")) {
+                                object.automaticUpdatePolicy = $root.google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy.toObject(message.automaticUpdatePolicy, options);
+                                if (options.oneofs)
+                                    object.runtimeUpdatePolicy = "automaticUpdatePolicy";
+                            }
+                            if (message.onDeployUpdatePolicy != null && message.hasOwnProperty("onDeployUpdatePolicy")) {
+                                object.onDeployUpdatePolicy = $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.toObject(message.onDeployUpdatePolicy, options);
+                                if (options.oneofs)
+                                    object.runtimeUpdatePolicy = "onDeployUpdatePolicy";
+                            }
                             return object;
                         };
     
@@ -1808,6 +1887,384 @@
                             values[valuesById[1] = "CONTAINER_REGISTRY"] = 1;
                             values[valuesById[2] = "ARTIFACT_REGISTRY"] = 2;
                             return values;
+                        })();
+    
+                        CloudFunction.AutomaticUpdatePolicy = (function() {
+    
+                            /**
+                             * Properties of an AutomaticUpdatePolicy.
+                             * @memberof google.cloud.functions.v1.CloudFunction
+                             * @interface IAutomaticUpdatePolicy
+                             */
+    
+                            /**
+                             * Constructs a new AutomaticUpdatePolicy.
+                             * @memberof google.cloud.functions.v1.CloudFunction
+                             * @classdesc Represents an AutomaticUpdatePolicy.
+                             * @implements IAutomaticUpdatePolicy
+                             * @constructor
+                             * @param {google.cloud.functions.v1.CloudFunction.IAutomaticUpdatePolicy=} [properties] Properties to set
+                             */
+                            function AutomaticUpdatePolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new AutomaticUpdatePolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy
+                             * @static
+                             * @param {google.cloud.functions.v1.CloudFunction.IAutomaticUpdatePolicy=} [properties] Properties to set
+                             * @returns {google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy} AutomaticUpdatePolicy instance
+                             */
+                            AutomaticUpdatePolicy.create = function create(properties) {
+                                return new AutomaticUpdatePolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticUpdatePolicy message. Does not implicitly {@link google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy
+                             * @static
+                             * @param {google.cloud.functions.v1.CloudFunction.IAutomaticUpdatePolicy} message AutomaticUpdatePolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticUpdatePolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticUpdatePolicy message, length delimited. Does not implicitly {@link google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy
+                             * @static
+                             * @param {google.cloud.functions.v1.CloudFunction.IAutomaticUpdatePolicy} message AutomaticUpdatePolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticUpdatePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutomaticUpdatePolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticUpdatePolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutomaticUpdatePolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticUpdatePolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutomaticUpdatePolicy message.
+                             * @function verify
+                             * @memberof google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutomaticUpdatePolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutomaticUpdatePolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy} AutomaticUpdatePolicy
+                             */
+                            AutomaticUpdatePolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy)
+                                    return object;
+                                return new $root.google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy();
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutomaticUpdatePolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy
+                             * @static
+                             * @param {google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy} message AutomaticUpdatePolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutomaticUpdatePolicy.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this AutomaticUpdatePolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutomaticUpdatePolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AutomaticUpdatePolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AutomaticUpdatePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy";
+                            };
+    
+                            return AutomaticUpdatePolicy;
+                        })();
+    
+                        CloudFunction.OnDeployUpdatePolicy = (function() {
+    
+                            /**
+                             * Properties of an OnDeployUpdatePolicy.
+                             * @memberof google.cloud.functions.v1.CloudFunction
+                             * @interface IOnDeployUpdatePolicy
+                             * @property {string|null} [runtimeVersion] OnDeployUpdatePolicy runtimeVersion
+                             */
+    
+                            /**
+                             * Constructs a new OnDeployUpdatePolicy.
+                             * @memberof google.cloud.functions.v1.CloudFunction
+                             * @classdesc Represents an OnDeployUpdatePolicy.
+                             * @implements IOnDeployUpdatePolicy
+                             * @constructor
+                             * @param {google.cloud.functions.v1.CloudFunction.IOnDeployUpdatePolicy=} [properties] Properties to set
+                             */
+                            function OnDeployUpdatePolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OnDeployUpdatePolicy runtimeVersion.
+                             * @member {string} runtimeVersion
+                             * @memberof google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy
+                             * @instance
+                             */
+                            OnDeployUpdatePolicy.prototype.runtimeVersion = "";
+    
+                            /**
+                             * Creates a new OnDeployUpdatePolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy
+                             * @static
+                             * @param {google.cloud.functions.v1.CloudFunction.IOnDeployUpdatePolicy=} [properties] Properties to set
+                             * @returns {google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy} OnDeployUpdatePolicy instance
+                             */
+                            OnDeployUpdatePolicy.create = function create(properties) {
+                                return new OnDeployUpdatePolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OnDeployUpdatePolicy message. Does not implicitly {@link google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy
+                             * @static
+                             * @param {google.cloud.functions.v1.CloudFunction.IOnDeployUpdatePolicy} message OnDeployUpdatePolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OnDeployUpdatePolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.runtimeVersion != null && Object.hasOwnProperty.call(message, "runtimeVersion"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.runtimeVersion);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OnDeployUpdatePolicy message, length delimited. Does not implicitly {@link google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy
+                             * @static
+                             * @param {google.cloud.functions.v1.CloudFunction.IOnDeployUpdatePolicy} message OnDeployUpdatePolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OnDeployUpdatePolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an OnDeployUpdatePolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OnDeployUpdatePolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.runtimeVersion = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an OnDeployUpdatePolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OnDeployUpdatePolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an OnDeployUpdatePolicy message.
+                             * @function verify
+                             * @memberof google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OnDeployUpdatePolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.runtimeVersion != null && message.hasOwnProperty("runtimeVersion"))
+                                    if (!$util.isString(message.runtimeVersion))
+                                        return "runtimeVersion: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an OnDeployUpdatePolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy} OnDeployUpdatePolicy
+                             */
+                            OnDeployUpdatePolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy)
+                                    return object;
+                                var message = new $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy();
+                                if (object.runtimeVersion != null)
+                                    message.runtimeVersion = String(object.runtimeVersion);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an OnDeployUpdatePolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy
+                             * @static
+                             * @param {google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy} message OnDeployUpdatePolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OnDeployUpdatePolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.runtimeVersion = "";
+                                if (message.runtimeVersion != null && message.hasOwnProperty("runtimeVersion"))
+                                    object.runtimeVersion = message.runtimeVersion;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OnDeployUpdatePolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OnDeployUpdatePolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for OnDeployUpdatePolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            OnDeployUpdatePolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy";
+                            };
+    
+                            return OnDeployUpdatePolicy;
                         })();
     
                         return CloudFunction;
@@ -4280,6 +4737,7 @@
                          * @memberof google.cloud.functions.v1
                          * @interface IGetFunctionRequest
                          * @property {string|null} [name] GetFunctionRequest name
+                         * @property {number|Long|null} [versionId] GetFunctionRequest versionId
                          */
     
                         /**
@@ -4304,6 +4762,14 @@
                          * @instance
                          */
                         GetFunctionRequest.prototype.name = "";
+    
+                        /**
+                         * GetFunctionRequest versionId.
+                         * @member {number|Long} versionId
+                         * @memberof google.cloud.functions.v1.GetFunctionRequest
+                         * @instance
+                         */
+                        GetFunctionRequest.prototype.versionId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
                          * Creates a new GetFunctionRequest instance using the specified properties.
@@ -4331,6 +4797,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.versionId != null && Object.hasOwnProperty.call(message, "versionId"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.versionId);
                             return writer;
                         };
     
@@ -4367,6 +4835,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.versionId = reader.int64();
                                         break;
                                     }
                                 default:
@@ -4407,6 +4879,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.versionId != null && message.hasOwnProperty("versionId"))
+                                if (!$util.isInteger(message.versionId) && !(message.versionId && $util.isInteger(message.versionId.low) && $util.isInteger(message.versionId.high)))
+                                    return "versionId: integer|Long expected";
                             return null;
                         };
     
@@ -4424,6 +4899,15 @@
                             var message = new $root.google.cloud.functions.v1.GetFunctionRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.versionId != null)
+                                if ($util.Long)
+                                    (message.versionId = $util.Long.fromValue(object.versionId)).unsigned = false;
+                                else if (typeof object.versionId === "string")
+                                    message.versionId = parseInt(object.versionId, 10);
+                                else if (typeof object.versionId === "number")
+                                    message.versionId = object.versionId;
+                                else if (typeof object.versionId === "object")
+                                    message.versionId = new $util.LongBits(object.versionId.low >>> 0, object.versionId.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -4440,10 +4924,21 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.versionId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.versionId = options.longs === String ? "0" : 0;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.versionId != null && message.hasOwnProperty("versionId"))
+                                if (typeof message.versionId === "number")
+                                    object.versionId = options.longs === String ? String(message.versionId) : message.versionId;
+                                else
+                                    object.versionId = options.longs === String ? $util.Long.prototype.toString.call(message.versionId) : options.longs === Number ? new $util.LongBits(message.versionId.low >>> 0, message.versionId.high >>> 0).toNumber() : message.versionId;
                             return object;
                         };
     

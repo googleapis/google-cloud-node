@@ -432,6 +432,13 @@ export class CloudFunctionsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the function which details should be obtained.
+   * @param {number} [request.versionId]
+   *   Optional. The optional version of the function whose details should be
+   *   obtained. The version of a 1st Gen function is an integer that starts from
+   *   1 and gets incremented on redeployments. Each deployment creates a config
+   *   version of the underlying function. GCF may keep historical configs for old
+   *   versions. This field can be specified to fetch the historical configs.
+   *   Leave it blank or set to 0 to get the latest version of the function.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -616,12 +623,12 @@ export class CloudFunctionsServiceClient {
    *   attached, the identity from the credentials would be used, but that
    *   identity does not have permissions to upload files to the URL.
    *
-   * When making an HTTP PUT request, these two headers must be specified:
+   * When making a HTTP PUT request, these two headers need to be specified:
    *
    * * `content-type: application/zip`
    * * `x-goog-content-length-range: 0,104857600`
    *
-   * And this header must NOT be specified:
+   * And this header SHOULD NOT be specified:
    *
    * * `Authorization: Bearer YOUR_TOKEN`
    *
@@ -632,11 +639,11 @@ export class CloudFunctionsServiceClient {
    *   should be generated, specified in the format `projects/* /locations/*`.
    * @param {string} request.kmsKeyName
    *   Resource name of a KMS crypto key (managed by the user) used to
-   *   encrypt/decrypt function source code objects in staging Cloud Storage
+   *   encrypt/decrypt function source code objects in intermediate Cloud Storage
    *   buckets. When you generate an upload url and upload your source code, it
-   *   gets copied to a staging Cloud Storage bucket in an internal regional
-   *   project. The source code is then copied to a versioned directory in the
-   *   sources bucket in the consumer project during the function deployment.
+   *   gets copied to an intermediate Cloud Storage bucket. The source code is
+   *   then copied to a versioned directory in the sources bucket in the consumer
+   *   project during the function deployment.
    *
    *   It must match the pattern
    *   `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
@@ -733,9 +740,9 @@ export class CloudFunctionsServiceClient {
   }
   /**
    * Returns a signed URL for downloading deployed function source code.
-   * The URL is only valid for a limited period and must be used within
+   * The URL is only valid for a limited period and should be used within
    * minutes after generation.
-   * For more information about the signed URL usage, see:
+   * For more information about the signed URL usage see:
    * https://cloud.google.com/storage/docs/access-control/signed-urls
    *
    * @param {Object} request
@@ -1015,7 +1022,7 @@ export class CloudFunctionsServiceClient {
   /**
    * Tests the specified permissions against the IAM access control policy
    * for a function.
-   * If the function does not exist, this returns an empty set of
+   * If the function does not exist, this will return an empty set of
    * permissions, not a NOT_FOUND error.
    *
    * @param {Object} request
@@ -1106,7 +1113,7 @@ export class CloudFunctionsServiceClient {
 
   /**
    * Creates a new function. If a function with the given name already exists in
-   * the specified project, the long running operation returns an
+   * the specified project, the long running operation will return
    * `ALREADY_EXISTS` error.
    *
    * @param {Object} request
@@ -1385,7 +1392,7 @@ export class CloudFunctionsServiceClient {
   }
   /**
    * Deletes a function with the given name from the specified project. If the
-   * given function is used by some trigger, the trigger is updated to
+   * given function is used by some trigger, the trigger will be updated to
    * remove this function.
    *
    * @param {Object} request

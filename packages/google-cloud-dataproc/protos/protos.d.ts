@@ -2679,6 +2679,9 @@ export namespace google {
 
                     /** RuntimeConfig properties */
                     properties?: ({ [k: string]: string }|null);
+
+                    /** RuntimeConfig repositoryConfig */
+                    repositoryConfig?: (google.cloud.dataproc.v1.IRepositoryConfig|null);
                 }
 
                 /** Represents a RuntimeConfig. */
@@ -2698,6 +2701,9 @@ export namespace google {
 
                     /** RuntimeConfig properties. */
                     public properties: { [k: string]: string };
+
+                    /** RuntimeConfig repositoryConfig. */
+                    public repositoryConfig?: (google.cloud.dataproc.v1.IRepositoryConfig|null);
 
                     /**
                      * Creates a new RuntimeConfig instance using the specified properties.
@@ -2898,6 +2904,9 @@ export namespace google {
                     /** ExecutionConfig kmsKey */
                     kmsKey?: (string|null);
 
+                    /** ExecutionConfig idleTtl */
+                    idleTtl?: (google.protobuf.IDuration|null);
+
                     /** ExecutionConfig ttl */
                     ttl?: (google.protobuf.IDuration|null);
 
@@ -2928,6 +2937,9 @@ export namespace google {
 
                     /** ExecutionConfig kmsKey. */
                     public kmsKey: string;
+
+                    /** ExecutionConfig idleTtl. */
+                    public idleTtl?: (google.protobuf.IDuration|null);
 
                     /** ExecutionConfig ttl. */
                     public ttl?: (google.protobuf.IDuration|null);
@@ -3345,6 +3357,12 @@ export namespace google {
 
                     /** UsageMetrics shuffleStorageGbSeconds */
                     shuffleStorageGbSeconds?: (number|Long|string|null);
+
+                    /** UsageMetrics milliAcceleratorSeconds */
+                    milliAcceleratorSeconds?: (number|Long|string|null);
+
+                    /** UsageMetrics acceleratorType */
+                    acceleratorType?: (string|null);
                 }
 
                 /** Represents a UsageMetrics. */
@@ -3361,6 +3379,12 @@ export namespace google {
 
                     /** UsageMetrics shuffleStorageGbSeconds. */
                     public shuffleStorageGbSeconds: (number|Long|string);
+
+                    /** UsageMetrics milliAcceleratorSeconds. */
+                    public milliAcceleratorSeconds: (number|Long|string);
+
+                    /** UsageMetrics acceleratorType. */
+                    public acceleratorType: string;
 
                     /**
                      * Creates a new UsageMetrics instance using the specified properties.
@@ -3449,6 +3473,18 @@ export namespace google {
                     /** UsageSnapshot shuffleStorageGb */
                     shuffleStorageGb?: (number|Long|string|null);
 
+                    /** UsageSnapshot milliDcuPremium */
+                    milliDcuPremium?: (number|Long|string|null);
+
+                    /** UsageSnapshot shuffleStorageGbPremium */
+                    shuffleStorageGbPremium?: (number|Long|string|null);
+
+                    /** UsageSnapshot milliAccelerator */
+                    milliAccelerator?: (number|Long|string|null);
+
+                    /** UsageSnapshot acceleratorType */
+                    acceleratorType?: (string|null);
+
                     /** UsageSnapshot snapshotTime */
                     snapshotTime?: (google.protobuf.ITimestamp|null);
                 }
@@ -3467,6 +3503,18 @@ export namespace google {
 
                     /** UsageSnapshot shuffleStorageGb. */
                     public shuffleStorageGb: (number|Long|string);
+
+                    /** UsageSnapshot milliDcuPremium. */
+                    public milliDcuPremium: (number|Long|string);
+
+                    /** UsageSnapshot shuffleStorageGbPremium. */
+                    public shuffleStorageGbPremium: (number|Long|string);
+
+                    /** UsageSnapshot milliAccelerator. */
+                    public milliAccelerator: (number|Long|string);
+
+                    /** UsageSnapshot acceleratorType. */
+                    public acceleratorType: string;
 
                     /** UsageSnapshot snapshotTime. */
                     public snapshotTime?: (google.protobuf.ITimestamp|null);
@@ -4443,6 +4491,200 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a RepositoryConfig. */
+                interface IRepositoryConfig {
+
+                    /** RepositoryConfig pypiRepositoryConfig */
+                    pypiRepositoryConfig?: (google.cloud.dataproc.v1.IPyPiRepositoryConfig|null);
+                }
+
+                /** Represents a RepositoryConfig. */
+                class RepositoryConfig implements IRepositoryConfig {
+
+                    /**
+                     * Constructs a new RepositoryConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IRepositoryConfig);
+
+                    /** RepositoryConfig pypiRepositoryConfig. */
+                    public pypiRepositoryConfig?: (google.cloud.dataproc.v1.IPyPiRepositoryConfig|null);
+
+                    /**
+                     * Creates a new RepositoryConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RepositoryConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IRepositoryConfig): google.cloud.dataproc.v1.RepositoryConfig;
+
+                    /**
+                     * Encodes the specified RepositoryConfig message. Does not implicitly {@link google.cloud.dataproc.v1.RepositoryConfig.verify|verify} messages.
+                     * @param message RepositoryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IRepositoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RepositoryConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.RepositoryConfig.verify|verify} messages.
+                     * @param message RepositoryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IRepositoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RepositoryConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RepositoryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.RepositoryConfig;
+
+                    /**
+                     * Decodes a RepositoryConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RepositoryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.RepositoryConfig;
+
+                    /**
+                     * Verifies a RepositoryConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RepositoryConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RepositoryConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.RepositoryConfig;
+
+                    /**
+                     * Creates a plain object from a RepositoryConfig message. Also converts values to other types if specified.
+                     * @param message RepositoryConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.RepositoryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RepositoryConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RepositoryConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PyPiRepositoryConfig. */
+                interface IPyPiRepositoryConfig {
+
+                    /** PyPiRepositoryConfig pypiRepository */
+                    pypiRepository?: (string|null);
+                }
+
+                /** Represents a PyPiRepositoryConfig. */
+                class PyPiRepositoryConfig implements IPyPiRepositoryConfig {
+
+                    /**
+                     * Constructs a new PyPiRepositoryConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IPyPiRepositoryConfig);
+
+                    /** PyPiRepositoryConfig pypiRepository. */
+                    public pypiRepository: string;
+
+                    /**
+                     * Creates a new PyPiRepositoryConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PyPiRepositoryConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IPyPiRepositoryConfig): google.cloud.dataproc.v1.PyPiRepositoryConfig;
+
+                    /**
+                     * Encodes the specified PyPiRepositoryConfig message. Does not implicitly {@link google.cloud.dataproc.v1.PyPiRepositoryConfig.verify|verify} messages.
+                     * @param message PyPiRepositoryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IPyPiRepositoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PyPiRepositoryConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.PyPiRepositoryConfig.verify|verify} messages.
+                     * @param message PyPiRepositoryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IPyPiRepositoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PyPiRepositoryConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PyPiRepositoryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.PyPiRepositoryConfig;
+
+                    /**
+                     * Decodes a PyPiRepositoryConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PyPiRepositoryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.PyPiRepositoryConfig;
+
+                    /**
+                     * Verifies a PyPiRepositoryConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PyPiRepositoryConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PyPiRepositoryConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.PyPiRepositoryConfig;
+
+                    /**
+                     * Creates a plain object from a PyPiRepositoryConfig message. Also converts values to other types if specified.
+                     * @param message PyPiRepositoryConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.PyPiRepositoryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PyPiRepositoryConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PyPiRepositoryConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Component enum. */
@@ -9989,6 +10231,156 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a SessionOperationMetadata. */
+                interface ISessionOperationMetadata {
+
+                    /** SessionOperationMetadata session */
+                    session?: (string|null);
+
+                    /** SessionOperationMetadata sessionUuid */
+                    sessionUuid?: (string|null);
+
+                    /** SessionOperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SessionOperationMetadata doneTime */
+                    doneTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SessionOperationMetadata operationType */
+                    operationType?: (google.cloud.dataproc.v1.SessionOperationMetadata.SessionOperationType|keyof typeof google.cloud.dataproc.v1.SessionOperationMetadata.SessionOperationType|null);
+
+                    /** SessionOperationMetadata description */
+                    description?: (string|null);
+
+                    /** SessionOperationMetadata labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** SessionOperationMetadata warnings */
+                    warnings?: (string[]|null);
+                }
+
+                /** Represents a SessionOperationMetadata. */
+                class SessionOperationMetadata implements ISessionOperationMetadata {
+
+                    /**
+                     * Constructs a new SessionOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.ISessionOperationMetadata);
+
+                    /** SessionOperationMetadata session. */
+                    public session: string;
+
+                    /** SessionOperationMetadata sessionUuid. */
+                    public sessionUuid: string;
+
+                    /** SessionOperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SessionOperationMetadata doneTime. */
+                    public doneTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SessionOperationMetadata operationType. */
+                    public operationType: (google.cloud.dataproc.v1.SessionOperationMetadata.SessionOperationType|keyof typeof google.cloud.dataproc.v1.SessionOperationMetadata.SessionOperationType);
+
+                    /** SessionOperationMetadata description. */
+                    public description: string;
+
+                    /** SessionOperationMetadata labels. */
+                    public labels: { [k: string]: string };
+
+                    /** SessionOperationMetadata warnings. */
+                    public warnings: string[];
+
+                    /**
+                     * Creates a new SessionOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SessionOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.ISessionOperationMetadata): google.cloud.dataproc.v1.SessionOperationMetadata;
+
+                    /**
+                     * Encodes the specified SessionOperationMetadata message. Does not implicitly {@link google.cloud.dataproc.v1.SessionOperationMetadata.verify|verify} messages.
+                     * @param message SessionOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.ISessionOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SessionOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.SessionOperationMetadata.verify|verify} messages.
+                     * @param message SessionOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.ISessionOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SessionOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SessionOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.SessionOperationMetadata;
+
+                    /**
+                     * Decodes a SessionOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SessionOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.SessionOperationMetadata;
+
+                    /**
+                     * Verifies a SessionOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SessionOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SessionOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.SessionOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a SessionOperationMetadata message. Also converts values to other types if specified.
+                     * @param message SessionOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.SessionOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SessionOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SessionOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SessionOperationMetadata {
+
+                    /** SessionOperationType enum. */
+                    enum SessionOperationType {
+                        SESSION_OPERATION_TYPE_UNSPECIFIED = 0,
+                        CREATE = 1,
+                        TERMINATE = 2,
+                        DELETE = 3
+                    }
+                }
+
                 /** Properties of a ClusterOperationStatus. */
                 interface IClusterOperationStatus {
 
@@ -14255,6 +14647,2085 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a SessionTemplateController */
+                class SessionTemplateController extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SessionTemplateController service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SessionTemplateController service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SessionTemplateController;
+
+                    /**
+                     * Calls CreateSessionTemplate.
+                     * @param request CreateSessionTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SessionTemplate
+                     */
+                    public createSessionTemplate(request: google.cloud.dataproc.v1.ICreateSessionTemplateRequest, callback: google.cloud.dataproc.v1.SessionTemplateController.CreateSessionTemplateCallback): void;
+
+                    /**
+                     * Calls CreateSessionTemplate.
+                     * @param request CreateSessionTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSessionTemplate(request: google.cloud.dataproc.v1.ICreateSessionTemplateRequest): Promise<google.cloud.dataproc.v1.SessionTemplate>;
+
+                    /**
+                     * Calls UpdateSessionTemplate.
+                     * @param request UpdateSessionTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SessionTemplate
+                     */
+                    public updateSessionTemplate(request: google.cloud.dataproc.v1.IUpdateSessionTemplateRequest, callback: google.cloud.dataproc.v1.SessionTemplateController.UpdateSessionTemplateCallback): void;
+
+                    /**
+                     * Calls UpdateSessionTemplate.
+                     * @param request UpdateSessionTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSessionTemplate(request: google.cloud.dataproc.v1.IUpdateSessionTemplateRequest): Promise<google.cloud.dataproc.v1.SessionTemplate>;
+
+                    /**
+                     * Calls GetSessionTemplate.
+                     * @param request GetSessionTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SessionTemplate
+                     */
+                    public getSessionTemplate(request: google.cloud.dataproc.v1.IGetSessionTemplateRequest, callback: google.cloud.dataproc.v1.SessionTemplateController.GetSessionTemplateCallback): void;
+
+                    /**
+                     * Calls GetSessionTemplate.
+                     * @param request GetSessionTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSessionTemplate(request: google.cloud.dataproc.v1.IGetSessionTemplateRequest): Promise<google.cloud.dataproc.v1.SessionTemplate>;
+
+                    /**
+                     * Calls ListSessionTemplates.
+                     * @param request ListSessionTemplatesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSessionTemplatesResponse
+                     */
+                    public listSessionTemplates(request: google.cloud.dataproc.v1.IListSessionTemplatesRequest, callback: google.cloud.dataproc.v1.SessionTemplateController.ListSessionTemplatesCallback): void;
+
+                    /**
+                     * Calls ListSessionTemplates.
+                     * @param request ListSessionTemplatesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSessionTemplates(request: google.cloud.dataproc.v1.IListSessionTemplatesRequest): Promise<google.cloud.dataproc.v1.ListSessionTemplatesResponse>;
+
+                    /**
+                     * Calls DeleteSessionTemplate.
+                     * @param request DeleteSessionTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteSessionTemplate(request: google.cloud.dataproc.v1.IDeleteSessionTemplateRequest, callback: google.cloud.dataproc.v1.SessionTemplateController.DeleteSessionTemplateCallback): void;
+
+                    /**
+                     * Calls DeleteSessionTemplate.
+                     * @param request DeleteSessionTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSessionTemplate(request: google.cloud.dataproc.v1.IDeleteSessionTemplateRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace SessionTemplateController {
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.SessionTemplateController|createSessionTemplate}.
+                     * @param error Error, if any
+                     * @param [response] SessionTemplate
+                     */
+                    type CreateSessionTemplateCallback = (error: (Error|null), response?: google.cloud.dataproc.v1.SessionTemplate) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.SessionTemplateController|updateSessionTemplate}.
+                     * @param error Error, if any
+                     * @param [response] SessionTemplate
+                     */
+                    type UpdateSessionTemplateCallback = (error: (Error|null), response?: google.cloud.dataproc.v1.SessionTemplate) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.SessionTemplateController|getSessionTemplate}.
+                     * @param error Error, if any
+                     * @param [response] SessionTemplate
+                     */
+                    type GetSessionTemplateCallback = (error: (Error|null), response?: google.cloud.dataproc.v1.SessionTemplate) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.SessionTemplateController|listSessionTemplates}.
+                     * @param error Error, if any
+                     * @param [response] ListSessionTemplatesResponse
+                     */
+                    type ListSessionTemplatesCallback = (error: (Error|null), response?: google.cloud.dataproc.v1.ListSessionTemplatesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.SessionTemplateController|deleteSessionTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteSessionTemplateCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a CreateSessionTemplateRequest. */
+                interface ICreateSessionTemplateRequest {
+
+                    /** CreateSessionTemplateRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSessionTemplateRequest sessionTemplate */
+                    sessionTemplate?: (google.cloud.dataproc.v1.ISessionTemplate|null);
+                }
+
+                /** Represents a CreateSessionTemplateRequest. */
+                class CreateSessionTemplateRequest implements ICreateSessionTemplateRequest {
+
+                    /**
+                     * Constructs a new CreateSessionTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.ICreateSessionTemplateRequest);
+
+                    /** CreateSessionTemplateRequest parent. */
+                    public parent: string;
+
+                    /** CreateSessionTemplateRequest sessionTemplate. */
+                    public sessionTemplate?: (google.cloud.dataproc.v1.ISessionTemplate|null);
+
+                    /**
+                     * Creates a new CreateSessionTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSessionTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.ICreateSessionTemplateRequest): google.cloud.dataproc.v1.CreateSessionTemplateRequest;
+
+                    /**
+                     * Encodes the specified CreateSessionTemplateRequest message. Does not implicitly {@link google.cloud.dataproc.v1.CreateSessionTemplateRequest.verify|verify} messages.
+                     * @param message CreateSessionTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.ICreateSessionTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSessionTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.CreateSessionTemplateRequest.verify|verify} messages.
+                     * @param message CreateSessionTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.ICreateSessionTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSessionTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSessionTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.CreateSessionTemplateRequest;
+
+                    /**
+                     * Decodes a CreateSessionTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSessionTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.CreateSessionTemplateRequest;
+
+                    /**
+                     * Verifies a CreateSessionTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSessionTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSessionTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.CreateSessionTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSessionTemplateRequest message. Also converts values to other types if specified.
+                     * @param message CreateSessionTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.CreateSessionTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSessionTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSessionTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSessionTemplateRequest. */
+                interface IUpdateSessionTemplateRequest {
+
+                    /** UpdateSessionTemplateRequest sessionTemplate */
+                    sessionTemplate?: (google.cloud.dataproc.v1.ISessionTemplate|null);
+                }
+
+                /** Represents an UpdateSessionTemplateRequest. */
+                class UpdateSessionTemplateRequest implements IUpdateSessionTemplateRequest {
+
+                    /**
+                     * Constructs a new UpdateSessionTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IUpdateSessionTemplateRequest);
+
+                    /** UpdateSessionTemplateRequest sessionTemplate. */
+                    public sessionTemplate?: (google.cloud.dataproc.v1.ISessionTemplate|null);
+
+                    /**
+                     * Creates a new UpdateSessionTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSessionTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IUpdateSessionTemplateRequest): google.cloud.dataproc.v1.UpdateSessionTemplateRequest;
+
+                    /**
+                     * Encodes the specified UpdateSessionTemplateRequest message. Does not implicitly {@link google.cloud.dataproc.v1.UpdateSessionTemplateRequest.verify|verify} messages.
+                     * @param message UpdateSessionTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IUpdateSessionTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSessionTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.UpdateSessionTemplateRequest.verify|verify} messages.
+                     * @param message UpdateSessionTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IUpdateSessionTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSessionTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSessionTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.UpdateSessionTemplateRequest;
+
+                    /**
+                     * Decodes an UpdateSessionTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSessionTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.UpdateSessionTemplateRequest;
+
+                    /**
+                     * Verifies an UpdateSessionTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSessionTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSessionTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.UpdateSessionTemplateRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSessionTemplateRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSessionTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.UpdateSessionTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSessionTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSessionTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSessionTemplateRequest. */
+                interface IGetSessionTemplateRequest {
+
+                    /** GetSessionTemplateRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSessionTemplateRequest. */
+                class GetSessionTemplateRequest implements IGetSessionTemplateRequest {
+
+                    /**
+                     * Constructs a new GetSessionTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IGetSessionTemplateRequest);
+
+                    /** GetSessionTemplateRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSessionTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSessionTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IGetSessionTemplateRequest): google.cloud.dataproc.v1.GetSessionTemplateRequest;
+
+                    /**
+                     * Encodes the specified GetSessionTemplateRequest message. Does not implicitly {@link google.cloud.dataproc.v1.GetSessionTemplateRequest.verify|verify} messages.
+                     * @param message GetSessionTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IGetSessionTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSessionTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GetSessionTemplateRequest.verify|verify} messages.
+                     * @param message GetSessionTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IGetSessionTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSessionTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSessionTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GetSessionTemplateRequest;
+
+                    /**
+                     * Decodes a GetSessionTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSessionTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GetSessionTemplateRequest;
+
+                    /**
+                     * Verifies a GetSessionTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSessionTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSessionTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GetSessionTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a GetSessionTemplateRequest message. Also converts values to other types if specified.
+                     * @param message GetSessionTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.GetSessionTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSessionTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSessionTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSessionTemplatesRequest. */
+                interface IListSessionTemplatesRequest {
+
+                    /** ListSessionTemplatesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSessionTemplatesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSessionTemplatesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSessionTemplatesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListSessionTemplatesRequest. */
+                class ListSessionTemplatesRequest implements IListSessionTemplatesRequest {
+
+                    /**
+                     * Constructs a new ListSessionTemplatesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IListSessionTemplatesRequest);
+
+                    /** ListSessionTemplatesRequest parent. */
+                    public parent: string;
+
+                    /** ListSessionTemplatesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSessionTemplatesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSessionTemplatesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListSessionTemplatesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSessionTemplatesRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IListSessionTemplatesRequest): google.cloud.dataproc.v1.ListSessionTemplatesRequest;
+
+                    /**
+                     * Encodes the specified ListSessionTemplatesRequest message. Does not implicitly {@link google.cloud.dataproc.v1.ListSessionTemplatesRequest.verify|verify} messages.
+                     * @param message ListSessionTemplatesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IListSessionTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSessionTemplatesRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.ListSessionTemplatesRequest.verify|verify} messages.
+                     * @param message ListSessionTemplatesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IListSessionTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSessionTemplatesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSessionTemplatesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.ListSessionTemplatesRequest;
+
+                    /**
+                     * Decodes a ListSessionTemplatesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSessionTemplatesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.ListSessionTemplatesRequest;
+
+                    /**
+                     * Verifies a ListSessionTemplatesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSessionTemplatesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSessionTemplatesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.ListSessionTemplatesRequest;
+
+                    /**
+                     * Creates a plain object from a ListSessionTemplatesRequest message. Also converts values to other types if specified.
+                     * @param message ListSessionTemplatesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.ListSessionTemplatesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSessionTemplatesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSessionTemplatesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSessionTemplatesResponse. */
+                interface IListSessionTemplatesResponse {
+
+                    /** ListSessionTemplatesResponse sessionTemplates */
+                    sessionTemplates?: (google.cloud.dataproc.v1.ISessionTemplate[]|null);
+
+                    /** ListSessionTemplatesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSessionTemplatesResponse. */
+                class ListSessionTemplatesResponse implements IListSessionTemplatesResponse {
+
+                    /**
+                     * Constructs a new ListSessionTemplatesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IListSessionTemplatesResponse);
+
+                    /** ListSessionTemplatesResponse sessionTemplates. */
+                    public sessionTemplates: google.cloud.dataproc.v1.ISessionTemplate[];
+
+                    /** ListSessionTemplatesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSessionTemplatesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSessionTemplatesResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IListSessionTemplatesResponse): google.cloud.dataproc.v1.ListSessionTemplatesResponse;
+
+                    /**
+                     * Encodes the specified ListSessionTemplatesResponse message. Does not implicitly {@link google.cloud.dataproc.v1.ListSessionTemplatesResponse.verify|verify} messages.
+                     * @param message ListSessionTemplatesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IListSessionTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSessionTemplatesResponse message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.ListSessionTemplatesResponse.verify|verify} messages.
+                     * @param message ListSessionTemplatesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IListSessionTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSessionTemplatesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSessionTemplatesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.ListSessionTemplatesResponse;
+
+                    /**
+                     * Decodes a ListSessionTemplatesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSessionTemplatesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.ListSessionTemplatesResponse;
+
+                    /**
+                     * Verifies a ListSessionTemplatesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSessionTemplatesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSessionTemplatesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.ListSessionTemplatesResponse;
+
+                    /**
+                     * Creates a plain object from a ListSessionTemplatesResponse message. Also converts values to other types if specified.
+                     * @param message ListSessionTemplatesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.ListSessionTemplatesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSessionTemplatesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSessionTemplatesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSessionTemplateRequest. */
+                interface IDeleteSessionTemplateRequest {
+
+                    /** DeleteSessionTemplateRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteSessionTemplateRequest. */
+                class DeleteSessionTemplateRequest implements IDeleteSessionTemplateRequest {
+
+                    /**
+                     * Constructs a new DeleteSessionTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IDeleteSessionTemplateRequest);
+
+                    /** DeleteSessionTemplateRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteSessionTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSessionTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IDeleteSessionTemplateRequest): google.cloud.dataproc.v1.DeleteSessionTemplateRequest;
+
+                    /**
+                     * Encodes the specified DeleteSessionTemplateRequest message. Does not implicitly {@link google.cloud.dataproc.v1.DeleteSessionTemplateRequest.verify|verify} messages.
+                     * @param message DeleteSessionTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IDeleteSessionTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSessionTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.DeleteSessionTemplateRequest.verify|verify} messages.
+                     * @param message DeleteSessionTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IDeleteSessionTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSessionTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSessionTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.DeleteSessionTemplateRequest;
+
+                    /**
+                     * Decodes a DeleteSessionTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSessionTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.DeleteSessionTemplateRequest;
+
+                    /**
+                     * Verifies a DeleteSessionTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSessionTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSessionTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.DeleteSessionTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSessionTemplateRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSessionTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.DeleteSessionTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSessionTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSessionTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SessionTemplate. */
+                interface ISessionTemplate {
+
+                    /** SessionTemplate name */
+                    name?: (string|null);
+
+                    /** SessionTemplate description */
+                    description?: (string|null);
+
+                    /** SessionTemplate createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SessionTemplate jupyterSession */
+                    jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
+
+                    /** SessionTemplate creator */
+                    creator?: (string|null);
+
+                    /** SessionTemplate labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** SessionTemplate runtimeConfig */
+                    runtimeConfig?: (google.cloud.dataproc.v1.IRuntimeConfig|null);
+
+                    /** SessionTemplate environmentConfig */
+                    environmentConfig?: (google.cloud.dataproc.v1.IEnvironmentConfig|null);
+
+                    /** SessionTemplate updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SessionTemplate uuid */
+                    uuid?: (string|null);
+                }
+
+                /** Represents a SessionTemplate. */
+                class SessionTemplate implements ISessionTemplate {
+
+                    /**
+                     * Constructs a new SessionTemplate.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.ISessionTemplate);
+
+                    /** SessionTemplate name. */
+                    public name: string;
+
+                    /** SessionTemplate description. */
+                    public description: string;
+
+                    /** SessionTemplate createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SessionTemplate jupyterSession. */
+                    public jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
+
+                    /** SessionTemplate creator. */
+                    public creator: string;
+
+                    /** SessionTemplate labels. */
+                    public labels: { [k: string]: string };
+
+                    /** SessionTemplate runtimeConfig. */
+                    public runtimeConfig?: (google.cloud.dataproc.v1.IRuntimeConfig|null);
+
+                    /** SessionTemplate environmentConfig. */
+                    public environmentConfig?: (google.cloud.dataproc.v1.IEnvironmentConfig|null);
+
+                    /** SessionTemplate updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SessionTemplate uuid. */
+                    public uuid: string;
+
+                    /** SessionTemplate sessionConfig. */
+                    public sessionConfig?: "jupyterSession";
+
+                    /**
+                     * Creates a new SessionTemplate instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SessionTemplate instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.ISessionTemplate): google.cloud.dataproc.v1.SessionTemplate;
+
+                    /**
+                     * Encodes the specified SessionTemplate message. Does not implicitly {@link google.cloud.dataproc.v1.SessionTemplate.verify|verify} messages.
+                     * @param message SessionTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.ISessionTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SessionTemplate message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.SessionTemplate.verify|verify} messages.
+                     * @param message SessionTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.ISessionTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SessionTemplate message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SessionTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.SessionTemplate;
+
+                    /**
+                     * Decodes a SessionTemplate message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SessionTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.SessionTemplate;
+
+                    /**
+                     * Verifies a SessionTemplate message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SessionTemplate message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SessionTemplate
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.SessionTemplate;
+
+                    /**
+                     * Creates a plain object from a SessionTemplate message. Also converts values to other types if specified.
+                     * @param message SessionTemplate
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.SessionTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SessionTemplate to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SessionTemplate
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a SessionController */
+                class SessionController extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SessionController service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SessionController service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SessionController;
+
+                    /**
+                     * Calls CreateSession.
+                     * @param request CreateSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSession(request: google.cloud.dataproc.v1.ICreateSessionRequest, callback: google.cloud.dataproc.v1.SessionController.CreateSessionCallback): void;
+
+                    /**
+                     * Calls CreateSession.
+                     * @param request CreateSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSession(request: google.cloud.dataproc.v1.ICreateSessionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetSession.
+                     * @param request GetSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Session
+                     */
+                    public getSession(request: google.cloud.dataproc.v1.IGetSessionRequest, callback: google.cloud.dataproc.v1.SessionController.GetSessionCallback): void;
+
+                    /**
+                     * Calls GetSession.
+                     * @param request GetSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSession(request: google.cloud.dataproc.v1.IGetSessionRequest): Promise<google.cloud.dataproc.v1.Session>;
+
+                    /**
+                     * Calls ListSessions.
+                     * @param request ListSessionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSessionsResponse
+                     */
+                    public listSessions(request: google.cloud.dataproc.v1.IListSessionsRequest, callback: google.cloud.dataproc.v1.SessionController.ListSessionsCallback): void;
+
+                    /**
+                     * Calls ListSessions.
+                     * @param request ListSessionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSessions(request: google.cloud.dataproc.v1.IListSessionsRequest): Promise<google.cloud.dataproc.v1.ListSessionsResponse>;
+
+                    /**
+                     * Calls TerminateSession.
+                     * @param request TerminateSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public terminateSession(request: google.cloud.dataproc.v1.ITerminateSessionRequest, callback: google.cloud.dataproc.v1.SessionController.TerminateSessionCallback): void;
+
+                    /**
+                     * Calls TerminateSession.
+                     * @param request TerminateSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public terminateSession(request: google.cloud.dataproc.v1.ITerminateSessionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteSession.
+                     * @param request DeleteSessionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteSession(request: google.cloud.dataproc.v1.IDeleteSessionRequest, callback: google.cloud.dataproc.v1.SessionController.DeleteSessionCallback): void;
+
+                    /**
+                     * Calls DeleteSession.
+                     * @param request DeleteSessionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSession(request: google.cloud.dataproc.v1.IDeleteSessionRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace SessionController {
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.SessionController|createSession}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSessionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.SessionController|getSession}.
+                     * @param error Error, if any
+                     * @param [response] Session
+                     */
+                    type GetSessionCallback = (error: (Error|null), response?: google.cloud.dataproc.v1.Session) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.SessionController|listSessions}.
+                     * @param error Error, if any
+                     * @param [response] ListSessionsResponse
+                     */
+                    type ListSessionsCallback = (error: (Error|null), response?: google.cloud.dataproc.v1.ListSessionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.SessionController|terminateSession}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TerminateSessionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataproc.v1.SessionController|deleteSession}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteSessionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a CreateSessionRequest. */
+                interface ICreateSessionRequest {
+
+                    /** CreateSessionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSessionRequest session */
+                    session?: (google.cloud.dataproc.v1.ISession|null);
+
+                    /** CreateSessionRequest sessionId */
+                    sessionId?: (string|null);
+
+                    /** CreateSessionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateSessionRequest. */
+                class CreateSessionRequest implements ICreateSessionRequest {
+
+                    /**
+                     * Constructs a new CreateSessionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.ICreateSessionRequest);
+
+                    /** CreateSessionRequest parent. */
+                    public parent: string;
+
+                    /** CreateSessionRequest session. */
+                    public session?: (google.cloud.dataproc.v1.ISession|null);
+
+                    /** CreateSessionRequest sessionId. */
+                    public sessionId: string;
+
+                    /** CreateSessionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateSessionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSessionRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.ICreateSessionRequest): google.cloud.dataproc.v1.CreateSessionRequest;
+
+                    /**
+                     * Encodes the specified CreateSessionRequest message. Does not implicitly {@link google.cloud.dataproc.v1.CreateSessionRequest.verify|verify} messages.
+                     * @param message CreateSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.ICreateSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSessionRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.CreateSessionRequest.verify|verify} messages.
+                     * @param message CreateSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.ICreateSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSessionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.CreateSessionRequest;
+
+                    /**
+                     * Decodes a CreateSessionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.CreateSessionRequest;
+
+                    /**
+                     * Verifies a CreateSessionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSessionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSessionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.CreateSessionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSessionRequest message. Also converts values to other types if specified.
+                     * @param message CreateSessionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.CreateSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSessionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSessionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSessionRequest. */
+                interface IGetSessionRequest {
+
+                    /** GetSessionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSessionRequest. */
+                class GetSessionRequest implements IGetSessionRequest {
+
+                    /**
+                     * Constructs a new GetSessionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IGetSessionRequest);
+
+                    /** GetSessionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSessionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSessionRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IGetSessionRequest): google.cloud.dataproc.v1.GetSessionRequest;
+
+                    /**
+                     * Encodes the specified GetSessionRequest message. Does not implicitly {@link google.cloud.dataproc.v1.GetSessionRequest.verify|verify} messages.
+                     * @param message GetSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IGetSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSessionRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.GetSessionRequest.verify|verify} messages.
+                     * @param message GetSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IGetSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSessionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.GetSessionRequest;
+
+                    /**
+                     * Decodes a GetSessionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.GetSessionRequest;
+
+                    /**
+                     * Verifies a GetSessionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSessionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSessionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.GetSessionRequest;
+
+                    /**
+                     * Creates a plain object from a GetSessionRequest message. Also converts values to other types if specified.
+                     * @param message GetSessionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.GetSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSessionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSessionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSessionsRequest. */
+                interface IListSessionsRequest {
+
+                    /** ListSessionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSessionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSessionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSessionsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListSessionsRequest. */
+                class ListSessionsRequest implements IListSessionsRequest {
+
+                    /**
+                     * Constructs a new ListSessionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IListSessionsRequest);
+
+                    /** ListSessionsRequest parent. */
+                    public parent: string;
+
+                    /** ListSessionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSessionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSessionsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListSessionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSessionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IListSessionsRequest): google.cloud.dataproc.v1.ListSessionsRequest;
+
+                    /**
+                     * Encodes the specified ListSessionsRequest message. Does not implicitly {@link google.cloud.dataproc.v1.ListSessionsRequest.verify|verify} messages.
+                     * @param message ListSessionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IListSessionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSessionsRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.ListSessionsRequest.verify|verify} messages.
+                     * @param message ListSessionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IListSessionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSessionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSessionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.ListSessionsRequest;
+
+                    /**
+                     * Decodes a ListSessionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSessionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.ListSessionsRequest;
+
+                    /**
+                     * Verifies a ListSessionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSessionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSessionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.ListSessionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSessionsRequest message. Also converts values to other types if specified.
+                     * @param message ListSessionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.ListSessionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSessionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSessionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSessionsResponse. */
+                interface IListSessionsResponse {
+
+                    /** ListSessionsResponse sessions */
+                    sessions?: (google.cloud.dataproc.v1.ISession[]|null);
+
+                    /** ListSessionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSessionsResponse. */
+                class ListSessionsResponse implements IListSessionsResponse {
+
+                    /**
+                     * Constructs a new ListSessionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IListSessionsResponse);
+
+                    /** ListSessionsResponse sessions. */
+                    public sessions: google.cloud.dataproc.v1.ISession[];
+
+                    /** ListSessionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSessionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSessionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IListSessionsResponse): google.cloud.dataproc.v1.ListSessionsResponse;
+
+                    /**
+                     * Encodes the specified ListSessionsResponse message. Does not implicitly {@link google.cloud.dataproc.v1.ListSessionsResponse.verify|verify} messages.
+                     * @param message ListSessionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IListSessionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSessionsResponse message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.ListSessionsResponse.verify|verify} messages.
+                     * @param message ListSessionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IListSessionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSessionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSessionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.ListSessionsResponse;
+
+                    /**
+                     * Decodes a ListSessionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSessionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.ListSessionsResponse;
+
+                    /**
+                     * Verifies a ListSessionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSessionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSessionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.ListSessionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSessionsResponse message. Also converts values to other types if specified.
+                     * @param message ListSessionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.ListSessionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSessionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSessionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TerminateSessionRequest. */
+                interface ITerminateSessionRequest {
+
+                    /** TerminateSessionRequest name */
+                    name?: (string|null);
+
+                    /** TerminateSessionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a TerminateSessionRequest. */
+                class TerminateSessionRequest implements ITerminateSessionRequest {
+
+                    /**
+                     * Constructs a new TerminateSessionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.ITerminateSessionRequest);
+
+                    /** TerminateSessionRequest name. */
+                    public name: string;
+
+                    /** TerminateSessionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new TerminateSessionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TerminateSessionRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.ITerminateSessionRequest): google.cloud.dataproc.v1.TerminateSessionRequest;
+
+                    /**
+                     * Encodes the specified TerminateSessionRequest message. Does not implicitly {@link google.cloud.dataproc.v1.TerminateSessionRequest.verify|verify} messages.
+                     * @param message TerminateSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.ITerminateSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TerminateSessionRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.TerminateSessionRequest.verify|verify} messages.
+                     * @param message TerminateSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.ITerminateSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TerminateSessionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TerminateSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.TerminateSessionRequest;
+
+                    /**
+                     * Decodes a TerminateSessionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TerminateSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.TerminateSessionRequest;
+
+                    /**
+                     * Verifies a TerminateSessionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TerminateSessionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TerminateSessionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.TerminateSessionRequest;
+
+                    /**
+                     * Creates a plain object from a TerminateSessionRequest message. Also converts values to other types if specified.
+                     * @param message TerminateSessionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.TerminateSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TerminateSessionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TerminateSessionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSessionRequest. */
+                interface IDeleteSessionRequest {
+
+                    /** DeleteSessionRequest name */
+                    name?: (string|null);
+
+                    /** DeleteSessionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteSessionRequest. */
+                class DeleteSessionRequest implements IDeleteSessionRequest {
+
+                    /**
+                     * Constructs a new DeleteSessionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IDeleteSessionRequest);
+
+                    /** DeleteSessionRequest name. */
+                    public name: string;
+
+                    /** DeleteSessionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteSessionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSessionRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IDeleteSessionRequest): google.cloud.dataproc.v1.DeleteSessionRequest;
+
+                    /**
+                     * Encodes the specified DeleteSessionRequest message. Does not implicitly {@link google.cloud.dataproc.v1.DeleteSessionRequest.verify|verify} messages.
+                     * @param message DeleteSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IDeleteSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSessionRequest message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.DeleteSessionRequest.verify|verify} messages.
+                     * @param message DeleteSessionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IDeleteSessionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSessionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.DeleteSessionRequest;
+
+                    /**
+                     * Decodes a DeleteSessionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSessionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.DeleteSessionRequest;
+
+                    /**
+                     * Verifies a DeleteSessionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSessionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSessionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.DeleteSessionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSessionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSessionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.DeleteSessionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSessionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSessionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Session. */
+                interface ISession {
+
+                    /** Session name */
+                    name?: (string|null);
+
+                    /** Session uuid */
+                    uuid?: (string|null);
+
+                    /** Session createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session jupyterSession */
+                    jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
+
+                    /** Session runtimeInfo */
+                    runtimeInfo?: (google.cloud.dataproc.v1.IRuntimeInfo|null);
+
+                    /** Session state */
+                    state?: (google.cloud.dataproc.v1.Session.State|keyof typeof google.cloud.dataproc.v1.Session.State|null);
+
+                    /** Session stateMessage */
+                    stateMessage?: (string|null);
+
+                    /** Session stateTime */
+                    stateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session creator */
+                    creator?: (string|null);
+
+                    /** Session labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Session runtimeConfig */
+                    runtimeConfig?: (google.cloud.dataproc.v1.IRuntimeConfig|null);
+
+                    /** Session environmentConfig */
+                    environmentConfig?: (google.cloud.dataproc.v1.IEnvironmentConfig|null);
+
+                    /** Session user */
+                    user?: (string|null);
+
+                    /** Session stateHistory */
+                    stateHistory?: (google.cloud.dataproc.v1.Session.ISessionStateHistory[]|null);
+
+                    /** Session sessionTemplate */
+                    sessionTemplate?: (string|null);
+                }
+
+                /** Represents a Session. */
+                class Session implements ISession {
+
+                    /**
+                     * Constructs a new Session.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.ISession);
+
+                    /** Session name. */
+                    public name: string;
+
+                    /** Session uuid. */
+                    public uuid: string;
+
+                    /** Session createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session jupyterSession. */
+                    public jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
+
+                    /** Session runtimeInfo. */
+                    public runtimeInfo?: (google.cloud.dataproc.v1.IRuntimeInfo|null);
+
+                    /** Session state. */
+                    public state: (google.cloud.dataproc.v1.Session.State|keyof typeof google.cloud.dataproc.v1.Session.State);
+
+                    /** Session stateMessage. */
+                    public stateMessage: string;
+
+                    /** Session stateTime. */
+                    public stateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Session creator. */
+                    public creator: string;
+
+                    /** Session labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Session runtimeConfig. */
+                    public runtimeConfig?: (google.cloud.dataproc.v1.IRuntimeConfig|null);
+
+                    /** Session environmentConfig. */
+                    public environmentConfig?: (google.cloud.dataproc.v1.IEnvironmentConfig|null);
+
+                    /** Session user. */
+                    public user: string;
+
+                    /** Session stateHistory. */
+                    public stateHistory: google.cloud.dataproc.v1.Session.ISessionStateHistory[];
+
+                    /** Session sessionTemplate. */
+                    public sessionTemplate: string;
+
+                    /** Session sessionConfig. */
+                    public sessionConfig?: "jupyterSession";
+
+                    /**
+                     * Creates a new Session instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Session instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.ISession): google.cloud.dataproc.v1.Session;
+
+                    /**
+                     * Encodes the specified Session message. Does not implicitly {@link google.cloud.dataproc.v1.Session.verify|verify} messages.
+                     * @param message Session message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.ISession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Session message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.Session.verify|verify} messages.
+                     * @param message Session message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.ISession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Session message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Session
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.Session;
+
+                    /**
+                     * Decodes a Session message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Session
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.Session;
+
+                    /**
+                     * Verifies a Session message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Session message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Session
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.Session;
+
+                    /**
+                     * Creates a plain object from a Session message. Also converts values to other types if specified.
+                     * @param message Session
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.Session, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Session to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Session
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Session {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        TERMINATING = 3,
+                        TERMINATED = 4,
+                        FAILED = 5
+                    }
+
+                    /** Properties of a SessionStateHistory. */
+                    interface ISessionStateHistory {
+
+                        /** SessionStateHistory state */
+                        state?: (google.cloud.dataproc.v1.Session.State|keyof typeof google.cloud.dataproc.v1.Session.State|null);
+
+                        /** SessionStateHistory stateMessage */
+                        stateMessage?: (string|null);
+
+                        /** SessionStateHistory stateStartTime */
+                        stateStartTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a SessionStateHistory. */
+                    class SessionStateHistory implements ISessionStateHistory {
+
+                        /**
+                         * Constructs a new SessionStateHistory.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1.Session.ISessionStateHistory);
+
+                        /** SessionStateHistory state. */
+                        public state: (google.cloud.dataproc.v1.Session.State|keyof typeof google.cloud.dataproc.v1.Session.State);
+
+                        /** SessionStateHistory stateMessage. */
+                        public stateMessage: string;
+
+                        /** SessionStateHistory stateStartTime. */
+                        public stateStartTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new SessionStateHistory instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SessionStateHistory instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1.Session.ISessionStateHistory): google.cloud.dataproc.v1.Session.SessionStateHistory;
+
+                        /**
+                         * Encodes the specified SessionStateHistory message. Does not implicitly {@link google.cloud.dataproc.v1.Session.SessionStateHistory.verify|verify} messages.
+                         * @param message SessionStateHistory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1.Session.ISessionStateHistory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SessionStateHistory message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.Session.SessionStateHistory.verify|verify} messages.
+                         * @param message SessionStateHistory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1.Session.ISessionStateHistory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SessionStateHistory message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SessionStateHistory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.Session.SessionStateHistory;
+
+                        /**
+                         * Decodes a SessionStateHistory message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SessionStateHistory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.Session.SessionStateHistory;
+
+                        /**
+                         * Verifies a SessionStateHistory message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SessionStateHistory message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SessionStateHistory
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.Session.SessionStateHistory;
+
+                        /**
+                         * Creates a plain object from a SessionStateHistory message. Also converts values to other types if specified.
+                         * @param message SessionStateHistory
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1.Session.SessionStateHistory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SessionStateHistory to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SessionStateHistory
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a JupyterConfig. */
+                interface IJupyterConfig {
+
+                    /** JupyterConfig kernel */
+                    kernel?: (google.cloud.dataproc.v1.JupyterConfig.Kernel|keyof typeof google.cloud.dataproc.v1.JupyterConfig.Kernel|null);
+
+                    /** JupyterConfig displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a JupyterConfig. */
+                class JupyterConfig implements IJupyterConfig {
+
+                    /**
+                     * Constructs a new JupyterConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IJupyterConfig);
+
+                    /** JupyterConfig kernel. */
+                    public kernel: (google.cloud.dataproc.v1.JupyterConfig.Kernel|keyof typeof google.cloud.dataproc.v1.JupyterConfig.Kernel);
+
+                    /** JupyterConfig displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new JupyterConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns JupyterConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IJupyterConfig): google.cloud.dataproc.v1.JupyterConfig;
+
+                    /**
+                     * Encodes the specified JupyterConfig message. Does not implicitly {@link google.cloud.dataproc.v1.JupyterConfig.verify|verify} messages.
+                     * @param message JupyterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IJupyterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified JupyterConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.JupyterConfig.verify|verify} messages.
+                     * @param message JupyterConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IJupyterConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a JupyterConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns JupyterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.JupyterConfig;
+
+                    /**
+                     * Decodes a JupyterConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns JupyterConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.JupyterConfig;
+
+                    /**
+                     * Verifies a JupyterConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a JupyterConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns JupyterConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.JupyterConfig;
+
+                    /**
+                     * Creates a plain object from a JupyterConfig message. Also converts values to other types if specified.
+                     * @param message JupyterConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.JupyterConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this JupyterConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for JupyterConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace JupyterConfig {
+
+                    /** Kernel enum. */
+                    enum Kernel {
+                        KERNEL_UNSPECIFIED = 0,
+                        PYTHON = 1,
+                        SCALA = 2
+                    }
                 }
 
                 /** Represents a WorkflowTemplateService */

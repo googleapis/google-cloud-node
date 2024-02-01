@@ -11191,6 +11191,7 @@
                          * @property {Array.<google.analytics.data.v1alpha.IAudienceDimension>|null} [dimensions] RecurringAudienceList dimensions
                          * @property {number|null} [activeDaysRemaining] RecurringAudienceList activeDaysRemaining
                          * @property {Array.<string>|null} [audienceLists] RecurringAudienceList audienceLists
+                         * @property {google.analytics.data.v1alpha.IWebhookNotification|null} [webhookNotification] RecurringAudienceList webhookNotification
                          */
     
                         /**
@@ -11258,6 +11259,14 @@
                          */
                         RecurringAudienceList.prototype.audienceLists = $util.emptyArray;
     
+                        /**
+                         * RecurringAudienceList webhookNotification.
+                         * @member {google.analytics.data.v1alpha.IWebhookNotification|null|undefined} webhookNotification
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        RecurringAudienceList.prototype.webhookNotification = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -11269,6 +11278,17 @@
                          */
                         Object.defineProperty(RecurringAudienceList.prototype, "_activeDaysRemaining", {
                             get: $util.oneOfGetter($oneOfFields = ["activeDaysRemaining"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * RecurringAudienceList _webhookNotification.
+                         * @member {"webhookNotification"|undefined} _webhookNotification
+                         * @memberof google.analytics.data.v1alpha.RecurringAudienceList
+                         * @instance
+                         */
+                        Object.defineProperty(RecurringAudienceList.prototype, "_webhookNotification", {
+                            get: $util.oneOfGetter($oneOfFields = ["webhookNotification"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -11310,6 +11330,8 @@
                             if (message.audienceLists != null && message.audienceLists.length)
                                 for (var i = 0; i < message.audienceLists.length; ++i)
                                     writer.uint32(/* id 6, wireType 2 =*/50).string(message.audienceLists[i]);
+                            if (message.webhookNotification != null && Object.hasOwnProperty.call(message, "webhookNotification"))
+                                $root.google.analytics.data.v1alpha.WebhookNotification.encode(message.webhookNotification, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -11370,6 +11392,10 @@
                                         if (!(message.audienceLists && message.audienceLists.length))
                                             message.audienceLists = [];
                                         message.audienceLists.push(reader.string());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.webhookNotification = $root.google.analytics.data.v1alpha.WebhookNotification.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -11438,6 +11464,14 @@
                                     if (!$util.isString(message.audienceLists[i]))
                                         return "audienceLists: string[] expected";
                             }
+                            if (message.webhookNotification != null && message.hasOwnProperty("webhookNotification")) {
+                                properties._webhookNotification = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1alpha.WebhookNotification.verify(message.webhookNotification);
+                                    if (error)
+                                        return "webhookNotification." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -11477,6 +11511,11 @@
                                 message.audienceLists = [];
                                 for (var i = 0; i < object.audienceLists.length; ++i)
                                     message.audienceLists[i] = String(object.audienceLists[i]);
+                            }
+                            if (object.webhookNotification != null) {
+                                if (typeof object.webhookNotification !== "object")
+                                    throw TypeError(".google.analytics.data.v1alpha.RecurringAudienceList.webhookNotification: object expected");
+                                message.webhookNotification = $root.google.analytics.data.v1alpha.WebhookNotification.fromObject(object.webhookNotification);
                             }
                             return message;
                         };
@@ -11524,6 +11563,11 @@
                                 for (var j = 0; j < message.audienceLists.length; ++j)
                                     object.audienceLists[j] = message.audienceLists[j];
                             }
+                            if (message.webhookNotification != null && message.hasOwnProperty("webhookNotification")) {
+                                object.webhookNotification = $root.google.analytics.data.v1alpha.WebhookNotification.toObject(message.webhookNotification, options);
+                                if (options.oneofs)
+                                    object._webhookNotification = "webhookNotification";
+                            }
                             return object;
                         };
     
@@ -11554,6 +11598,265 @@
                         };
     
                         return RecurringAudienceList;
+                    })();
+    
+                    v1alpha.WebhookNotification = (function() {
+    
+                        /**
+                         * Properties of a WebhookNotification.
+                         * @memberof google.analytics.data.v1alpha
+                         * @interface IWebhookNotification
+                         * @property {string|null} [uri] WebhookNotification uri
+                         * @property {string|null} [channelToken] WebhookNotification channelToken
+                         */
+    
+                        /**
+                         * Constructs a new WebhookNotification.
+                         * @memberof google.analytics.data.v1alpha
+                         * @classdesc Represents a WebhookNotification.
+                         * @implements IWebhookNotification
+                         * @constructor
+                         * @param {google.analytics.data.v1alpha.IWebhookNotification=} [properties] Properties to set
+                         */
+                        function WebhookNotification(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WebhookNotification uri.
+                         * @member {string|null|undefined} uri
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @instance
+                         */
+                        WebhookNotification.prototype.uri = null;
+    
+                        /**
+                         * WebhookNotification channelToken.
+                         * @member {string|null|undefined} channelToken
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @instance
+                         */
+                        WebhookNotification.prototype.channelToken = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * WebhookNotification _uri.
+                         * @member {"uri"|undefined} _uri
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @instance
+                         */
+                        Object.defineProperty(WebhookNotification.prototype, "_uri", {
+                            get: $util.oneOfGetter($oneOfFields = ["uri"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * WebhookNotification _channelToken.
+                         * @member {"channelToken"|undefined} _channelToken
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @instance
+                         */
+                        Object.defineProperty(WebhookNotification.prototype, "_channelToken", {
+                            get: $util.oneOfGetter($oneOfFields = ["channelToken"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new WebhookNotification instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IWebhookNotification=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1alpha.WebhookNotification} WebhookNotification instance
+                         */
+                        WebhookNotification.create = function create(properties) {
+                            return new WebhookNotification(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WebhookNotification message. Does not implicitly {@link google.analytics.data.v1alpha.WebhookNotification.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IWebhookNotification} message WebhookNotification message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WebhookNotification.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.channelToken != null && Object.hasOwnProperty.call(message, "channelToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.channelToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WebhookNotification message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.WebhookNotification.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @static
+                         * @param {google.analytics.data.v1alpha.IWebhookNotification} message WebhookNotification message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WebhookNotification.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WebhookNotification message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1alpha.WebhookNotification} WebhookNotification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WebhookNotification.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1alpha.WebhookNotification();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.channelToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WebhookNotification message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1alpha.WebhookNotification} WebhookNotification
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WebhookNotification.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WebhookNotification message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WebhookNotification.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.uri != null && message.hasOwnProperty("uri")) {
+                                properties._uri = 1;
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            }
+                            if (message.channelToken != null && message.hasOwnProperty("channelToken")) {
+                                properties._channelToken = 1;
+                                if (!$util.isString(message.channelToken))
+                                    return "channelToken: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WebhookNotification message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1alpha.WebhookNotification} WebhookNotification
+                         */
+                        WebhookNotification.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1alpha.WebhookNotification)
+                                return object;
+                            var message = new $root.google.analytics.data.v1alpha.WebhookNotification();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.channelToken != null)
+                                message.channelToken = String(object.channelToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WebhookNotification message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @static
+                         * @param {google.analytics.data.v1alpha.WebhookNotification} message WebhookNotification
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WebhookNotification.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.uri != null && message.hasOwnProperty("uri")) {
+                                object.uri = message.uri;
+                                if (options.oneofs)
+                                    object._uri = "uri";
+                            }
+                            if (message.channelToken != null && message.hasOwnProperty("channelToken")) {
+                                object.channelToken = message.channelToken;
+                                if (options.oneofs)
+                                    object._channelToken = "channelToken";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WebhookNotification to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WebhookNotification.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WebhookNotification
+                         * @function getTypeUrl
+                         * @memberof google.analytics.data.v1alpha.WebhookNotification
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WebhookNotification.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.analytics.data.v1alpha.WebhookNotification";
+                        };
+    
+                        return WebhookNotification;
                     })();
     
                     v1alpha.GetRecurringAudienceListRequest = (function() {
@@ -13243,6 +13546,7 @@
                          * @property {string|null} [errorMessage] AudienceList errorMessage
                          * @property {number|null} [percentageCompleted] AudienceList percentageCompleted
                          * @property {string|null} [recurringAudienceList] AudienceList recurringAudienceList
+                         * @property {google.analytics.data.v1alpha.IWebhookNotification|null} [webhookNotification] AudienceList webhookNotification
                          */
     
                         /**
@@ -13349,6 +13653,14 @@
                          */
                         AudienceList.prototype.recurringAudienceList = null;
     
+                        /**
+                         * AudienceList webhookNotification.
+                         * @member {google.analytics.data.v1alpha.IWebhookNotification|null|undefined} webhookNotification
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        AudienceList.prototype.webhookNotification = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -13419,6 +13731,17 @@
                         });
     
                         /**
+                         * AudienceList _webhookNotification.
+                         * @member {"webhookNotification"|undefined} _webhookNotification
+                         * @memberof google.analytics.data.v1alpha.AudienceList
+                         * @instance
+                         */
+                        Object.defineProperty(AudienceList.prototype, "_webhookNotification", {
+                            get: $util.oneOfGetter($oneOfFields = ["webhookNotification"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new AudienceList instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.data.v1alpha.AudienceList
@@ -13465,6 +13788,8 @@
                                 writer.uint32(/* id 11, wireType 1 =*/89).double(message.percentageCompleted);
                             if (message.recurringAudienceList != null && Object.hasOwnProperty.call(message, "recurringAudienceList"))
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.recurringAudienceList);
+                            if (message.webhookNotification != null && Object.hasOwnProperty.call(message, "webhookNotification"))
+                                $root.google.analytics.data.v1alpha.WebhookNotification.encode(message.webhookNotification, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -13543,6 +13868,10 @@
                                     }
                                 case 12: {
                                         message.recurringAudienceList = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.webhookNotification = $root.google.analytics.data.v1alpha.WebhookNotification.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -13642,6 +13971,14 @@
                                 if (!$util.isString(message.recurringAudienceList))
                                     return "recurringAudienceList: string expected";
                             }
+                            if (message.webhookNotification != null && message.hasOwnProperty("webhookNotification")) {
+                                properties._webhookNotification = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1alpha.WebhookNotification.verify(message.webhookNotification);
+                                    if (error)
+                                        return "webhookNotification." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -13712,6 +14049,11 @@
                                 message.percentageCompleted = Number(object.percentageCompleted);
                             if (object.recurringAudienceList != null)
                                 message.recurringAudienceList = String(object.recurringAudienceList);
+                            if (object.webhookNotification != null) {
+                                if (typeof object.webhookNotification !== "object")
+                                    throw TypeError(".google.analytics.data.v1alpha.AudienceList.webhookNotification: object expected");
+                                message.webhookNotification = $root.google.analytics.data.v1alpha.WebhookNotification.fromObject(object.webhookNotification);
+                            }
                             return message;
                         };
     
@@ -13778,6 +14120,11 @@
                                 object.recurringAudienceList = message.recurringAudienceList;
                                 if (options.oneofs)
                                     object._recurringAudienceList = "recurringAudienceList";
+                            }
+                            if (message.webhookNotification != null && message.hasOwnProperty("webhookNotification")) {
+                                object.webhookNotification = $root.google.analytics.data.v1alpha.WebhookNotification.toObject(message.webhookNotification, options);
+                                if (options.oneofs)
+                                    object._webhookNotification = "webhookNotification";
                             }
                             return object;
                         };

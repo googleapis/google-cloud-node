@@ -2601,6 +2601,100 @@
                             }
                           ]
                         },
+                        "GetCalculatedMetric": {
+                          "requestType": "GetCalculatedMetricRequest",
+                          "responseType": "CalculatedMetric",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/calculatedMetrics/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/calculatedMetrics/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateCalculatedMetric": {
+                          "requestType": "CreateCalculatedMetricRequest",
+                          "responseType": "CalculatedMetric",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/calculatedMetrics",
+                            "(google.api.http).body": "calculated_metric",
+                            "(google.api.method_signature)": "parent,calculated_metric,calculated_metric_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/calculatedMetrics",
+                                "body": "calculated_metric"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,calculated_metric,calculated_metric_id"
+                            }
+                          ]
+                        },
+                        "ListCalculatedMetrics": {
+                          "requestType": "ListCalculatedMetricsRequest",
+                          "responseType": "ListCalculatedMetricsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/calculatedMetrics",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/calculatedMetrics"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateCalculatedMetric": {
+                          "requestType": "UpdateCalculatedMetricRequest",
+                          "responseType": "CalculatedMetric",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{calculated_metric.name=properties/*/calculatedMetrics/*}",
+                            "(google.api.http).body": "calculated_metric",
+                            "(google.api.method_signature)": "calculated_metric,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{calculated_metric.name=properties/*/calculatedMetrics/*}",
+                                "body": "calculated_metric"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "calculated_metric,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteCalculatedMetric": {
+                          "requestType": "DeleteCalculatedMetricRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/calculatedMetrics/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/calculatedMetrics/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "CreateRollupProperty": {
                           "requestType": "CreateRollupPropertyRequest",
                           "responseType": "CreateRollupPropertyResponse",
@@ -4155,6 +4249,113 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/CustomMetric"
+                          }
+                        }
+                      }
+                    },
+                    "CreateCalculatedMetricRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/CalculatedMetric"
+                          }
+                        },
+                        "calculatedMetricId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "calculatedMetric": {
+                          "type": "CalculatedMetric",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCalculatedMetricRequest": {
+                      "fields": {
+                        "calculatedMetric": {
+                          "type": "CalculatedMetric",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteCalculatedMetricRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/CalculatedMetric"
+                          }
+                        }
+                      }
+                    },
+                    "ListCalculatedMetricsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/CalculatedMetric"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListCalculatedMetricsResponse": {
+                      "fields": {
+                        "calculatedMetrics": {
+                          "rule": "repeated",
+                          "type": "CalculatedMetric",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetCalculatedMetricRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/CalculatedMetric"
                           }
                         }
                       }
@@ -6412,7 +6613,8 @@
                         "SKADNETWORK_CONVERSION_VALUE_SCHEMA": 26,
                         "ADSENSE_LINK": 27,
                         "AUDIENCE": 28,
-                        "EVENT_CREATE_RULE": 29
+                        "EVENT_CREATE_RULE": 29,
+                        "CALCULATED_METRIC": 31
                       }
                     },
                     "GoogleSignalsState": {
@@ -7175,7 +7377,8 @@
                                 "skadnetworkConversionValueSchema",
                                 "adsenseLink",
                                 "audience",
-                                "eventCreateRule"
+                                "eventCreateRule",
+                                "calculatedMetric"
                               ]
                             }
                           },
@@ -7275,6 +7478,10 @@
                             "eventCreateRule": {
                               "type": "EventCreateRule",
                               "id": 29
+                            },
+                            "calculatedMetric": {
+                              "type": "CalculatedMetric",
+                              "id": 31
                             }
                           }
                         }
@@ -7734,6 +7941,97 @@
                           "values": {
                             "METRIC_SCOPE_UNSPECIFIED": 0,
                             "EVENT": 1
+                          }
+                        },
+                        "RestrictedMetricType": {
+                          "values": {
+                            "RESTRICTED_METRIC_TYPE_UNSPECIFIED": 0,
+                            "COST_DATA": 1,
+                            "REVENUE_DATA": 2
+                          }
+                        }
+                      }
+                    },
+                    "CalculatedMetric": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/CalculatedMetric",
+                        "(google.api.resource).pattern": "properties/{property}/calculatedMetrics/{calculated_metric}",
+                        "(google.api.resource).plural": "calculatedMetrics",
+                        "(google.api.resource).singular": "calculatedMetric"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "calculatedMetricId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "metricUnit": {
+                          "type": "MetricUnit",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "restrictedMetricType": {
+                          "rule": "repeated",
+                          "type": "RestrictedMetricType",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "formula": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "invalidMetricReference": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MetricUnit": {
+                          "values": {
+                            "METRIC_UNIT_UNSPECIFIED": 0,
+                            "STANDARD": 1,
+                            "CURRENCY": 2,
+                            "FEET": 3,
+                            "MILES": 4,
+                            "METERS": 5,
+                            "KILOMETERS": 6,
+                            "MILLISECONDS": 7,
+                            "SECONDS": 8,
+                            "MINUTES": 9,
+                            "HOURS": 10
                           }
                         },
                         "RestrictedMetricType": {

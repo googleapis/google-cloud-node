@@ -195,12 +195,6 @@ export class DepServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
-      projectGlobalForwardingRulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/global/forwardingRules/{forwarding_rule}'
-      ),
-      projectRegionForwardingRulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/regions/{region}/forwardingRules/{forwarding_rule}'
-      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -2322,115 +2316,6 @@ export class DepServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
-  }
-
-  /**
-   * Return a fully-qualified projectGlobalForwardingRule resource name string.
-   *
-   * @param {string} project
-   * @param {string} forwarding_rule
-   * @returns {string} Resource name string.
-   */
-  projectGlobalForwardingRulePath(project: string, forwardingRule: string) {
-    return this.pathTemplates.projectGlobalForwardingRulePathTemplate.render({
-      project: project,
-      forwarding_rule: forwardingRule,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectGlobalForwardingRule resource.
-   *
-   * @param {string} projectGlobalForwardingRuleName
-   *   A fully-qualified path representing project_global_forwarding_rule resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectGlobalForwardingRuleName(
-    projectGlobalForwardingRuleName: string
-  ) {
-    return this.pathTemplates.projectGlobalForwardingRulePathTemplate.match(
-      projectGlobalForwardingRuleName
-    ).project;
-  }
-
-  /**
-   * Parse the forwarding_rule from ProjectGlobalForwardingRule resource.
-   *
-   * @param {string} projectGlobalForwardingRuleName
-   *   A fully-qualified path representing project_global_forwarding_rule resource.
-   * @returns {string} A string representing the forwarding_rule.
-   */
-  matchForwardingRuleFromProjectGlobalForwardingRuleName(
-    projectGlobalForwardingRuleName: string
-  ) {
-    return this.pathTemplates.projectGlobalForwardingRulePathTemplate.match(
-      projectGlobalForwardingRuleName
-    ).forwarding_rule;
-  }
-
-  /**
-   * Return a fully-qualified projectRegionForwardingRule resource name string.
-   *
-   * @param {string} project
-   * @param {string} region
-   * @param {string} forwarding_rule
-   * @returns {string} Resource name string.
-   */
-  projectRegionForwardingRulePath(
-    project: string,
-    region: string,
-    forwardingRule: string
-  ) {
-    return this.pathTemplates.projectRegionForwardingRulePathTemplate.render({
-      project: project,
-      region: region,
-      forwarding_rule: forwardingRule,
-    });
-  }
-
-  /**
-   * Parse the project from ProjectRegionForwardingRule resource.
-   *
-   * @param {string} projectRegionForwardingRuleName
-   *   A fully-qualified path representing project_region_forwarding_rule resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProjectRegionForwardingRuleName(
-    projectRegionForwardingRuleName: string
-  ) {
-    return this.pathTemplates.projectRegionForwardingRulePathTemplate.match(
-      projectRegionForwardingRuleName
-    ).project;
-  }
-
-  /**
-   * Parse the region from ProjectRegionForwardingRule resource.
-   *
-   * @param {string} projectRegionForwardingRuleName
-   *   A fully-qualified path representing project_region_forwarding_rule resource.
-   * @returns {string} A string representing the region.
-   */
-  matchRegionFromProjectRegionForwardingRuleName(
-    projectRegionForwardingRuleName: string
-  ) {
-    return this.pathTemplates.projectRegionForwardingRulePathTemplate.match(
-      projectRegionForwardingRuleName
-    ).region;
-  }
-
-  /**
-   * Parse the forwarding_rule from ProjectRegionForwardingRule resource.
-   *
-   * @param {string} projectRegionForwardingRuleName
-   *   A fully-qualified path representing project_region_forwarding_rule resource.
-   * @returns {string} A string representing the forwarding_rule.
-   */
-  matchForwardingRuleFromProjectRegionForwardingRuleName(
-    projectRegionForwardingRuleName: string
-  ) {
-    return this.pathTemplates.projectRegionForwardingRulePathTemplate.match(
-      projectRegionForwardingRuleName
-    ).forwarding_rule;
   }
 
   /**

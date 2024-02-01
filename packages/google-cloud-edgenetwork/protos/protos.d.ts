@@ -6443,6 +6443,9 @@ export namespace google {
 
                         /** NetworkStatus subnetStatus */
                         subnetStatus?: (google.cloud.edgenetwork.v1.ISubnetStatus[]|null);
+
+                        /** NetworkStatus macsecStatusInternalLinks */
+                        macsecStatusInternalLinks?: (google.cloud.edgenetwork.v1.DiagnoseNetworkResponse.NetworkStatus.MacsecStatus|keyof typeof google.cloud.edgenetwork.v1.DiagnoseNetworkResponse.NetworkStatus.MacsecStatus|null);
                     }
 
                     /** Represents a NetworkStatus. */
@@ -6456,6 +6459,9 @@ export namespace google {
 
                         /** NetworkStatus subnetStatus. */
                         public subnetStatus: google.cloud.edgenetwork.v1.ISubnetStatus[];
+
+                        /** NetworkStatus macsecStatusInternalLinks. */
+                        public macsecStatusInternalLinks: (google.cloud.edgenetwork.v1.DiagnoseNetworkResponse.NetworkStatus.MacsecStatus|keyof typeof google.cloud.edgenetwork.v1.DiagnoseNetworkResponse.NetworkStatus.MacsecStatus);
 
                         /**
                          * Creates a new NetworkStatus instance using the specified properties.
@@ -6533,6 +6539,16 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace NetworkStatus {
+
+                        /** MacsecStatus enum. */
+                        enum MacsecStatus {
+                            MACSEC_STATUS_UNSPECIFIED = 0,
+                            SECURE = 1,
+                            UNSECURE = 2
+                        }
                     }
                 }
 

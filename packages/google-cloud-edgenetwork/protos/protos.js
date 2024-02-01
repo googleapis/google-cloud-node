@@ -16021,6 +16021,7 @@
                              * @memberof google.cloud.edgenetwork.v1.DiagnoseNetworkResponse
                              * @interface INetworkStatus
                              * @property {Array.<google.cloud.edgenetwork.v1.ISubnetStatus>|null} [subnetStatus] NetworkStatus subnetStatus
+                             * @property {google.cloud.edgenetwork.v1.DiagnoseNetworkResponse.NetworkStatus.MacsecStatus|null} [macsecStatusInternalLinks] NetworkStatus macsecStatusInternalLinks
                              */
     
                             /**
@@ -16046,6 +16047,14 @@
                              * @instance
                              */
                             NetworkStatus.prototype.subnetStatus = $util.emptyArray;
+    
+                            /**
+                             * NetworkStatus macsecStatusInternalLinks.
+                             * @member {google.cloud.edgenetwork.v1.DiagnoseNetworkResponse.NetworkStatus.MacsecStatus} macsecStatusInternalLinks
+                             * @memberof google.cloud.edgenetwork.v1.DiagnoseNetworkResponse.NetworkStatus
+                             * @instance
+                             */
+                            NetworkStatus.prototype.macsecStatusInternalLinks = 0;
     
                             /**
                              * Creates a new NetworkStatus instance using the specified properties.
@@ -16074,6 +16083,8 @@
                                 if (message.subnetStatus != null && message.subnetStatus.length)
                                     for (var i = 0; i < message.subnetStatus.length; ++i)
                                         $root.google.cloud.edgenetwork.v1.SubnetStatus.encode(message.subnetStatus[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.macsecStatusInternalLinks != null && Object.hasOwnProperty.call(message, "macsecStatusInternalLinks"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.macsecStatusInternalLinks);
                                 return writer;
                             };
     
@@ -16112,6 +16123,10 @@
                                             if (!(message.subnetStatus && message.subnetStatus.length))
                                                 message.subnetStatus = [];
                                             message.subnetStatus.push($root.google.cloud.edgenetwork.v1.SubnetStatus.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.macsecStatusInternalLinks = reader.int32();
                                             break;
                                         }
                                     default:
@@ -16158,6 +16173,15 @@
                                             return "subnetStatus." + error;
                                     }
                                 }
+                                if (message.macsecStatusInternalLinks != null && message.hasOwnProperty("macsecStatusInternalLinks"))
+                                    switch (message.macsecStatusInternalLinks) {
+                                    default:
+                                        return "macsecStatusInternalLinks: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -16183,6 +16207,26 @@
                                         message.subnetStatus[i] = $root.google.cloud.edgenetwork.v1.SubnetStatus.fromObject(object.subnetStatus[i]);
                                     }
                                 }
+                                switch (object.macsecStatusInternalLinks) {
+                                default:
+                                    if (typeof object.macsecStatusInternalLinks === "number") {
+                                        message.macsecStatusInternalLinks = object.macsecStatusInternalLinks;
+                                        break;
+                                    }
+                                    break;
+                                case "MACSEC_STATUS_UNSPECIFIED":
+                                case 0:
+                                    message.macsecStatusInternalLinks = 0;
+                                    break;
+                                case "SECURE":
+                                case 1:
+                                    message.macsecStatusInternalLinks = 1;
+                                    break;
+                                case "UNSECURE":
+                                case 2:
+                                    message.macsecStatusInternalLinks = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -16201,11 +16245,15 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.subnetStatus = [];
+                                if (options.defaults)
+                                    object.macsecStatusInternalLinks = options.enums === String ? "MACSEC_STATUS_UNSPECIFIED" : 0;
                                 if (message.subnetStatus && message.subnetStatus.length) {
                                     object.subnetStatus = [];
                                     for (var j = 0; j < message.subnetStatus.length; ++j)
                                         object.subnetStatus[j] = $root.google.cloud.edgenetwork.v1.SubnetStatus.toObject(message.subnetStatus[j], options);
                                 }
+                                if (message.macsecStatusInternalLinks != null && message.hasOwnProperty("macsecStatusInternalLinks"))
+                                    object.macsecStatusInternalLinks = options.enums === String ? $root.google.cloud.edgenetwork.v1.DiagnoseNetworkResponse.NetworkStatus.MacsecStatus[message.macsecStatusInternalLinks] === undefined ? message.macsecStatusInternalLinks : $root.google.cloud.edgenetwork.v1.DiagnoseNetworkResponse.NetworkStatus.MacsecStatus[message.macsecStatusInternalLinks] : message.macsecStatusInternalLinks;
                                 return object;
                             };
     
@@ -16234,6 +16282,22 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.edgenetwork.v1.DiagnoseNetworkResponse.NetworkStatus";
                             };
+    
+                            /**
+                             * MacsecStatus enum.
+                             * @name google.cloud.edgenetwork.v1.DiagnoseNetworkResponse.NetworkStatus.MacsecStatus
+                             * @enum {number}
+                             * @property {number} MACSEC_STATUS_UNSPECIFIED=0 MACSEC_STATUS_UNSPECIFIED value
+                             * @property {number} SECURE=1 SECURE value
+                             * @property {number} UNSECURE=2 UNSECURE value
+                             */
+                            NetworkStatus.MacsecStatus = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "MACSEC_STATUS_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SECURE"] = 1;
+                                values[valuesById[2] = "UNSECURE"] = 2;
+                                return values;
+                            })();
     
                             return NetworkStatus;
                         })();

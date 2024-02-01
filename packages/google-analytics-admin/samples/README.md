@@ -30,6 +30,7 @@
   * [Analytics_admin_service.create_access_binding](#analytics_admin_service.create_access_binding)
   * [Analytics_admin_service.create_ad_sense_link](#analytics_admin_service.create_ad_sense_link)
   * [Analytics_admin_service.create_audience](#analytics_admin_service.create_audience)
+  * [Analytics_admin_service.create_calculated_metric](#analytics_admin_service.create_calculated_metric)
   * [Analytics_admin_service.create_channel_group](#analytics_admin_service.create_channel_group)
   * [Analytics_admin_service.create_connected_site_tag](#analytics_admin_service.create_connected_site_tag)
   * [Analytics_admin_service.create_conversion_event](#analytics_admin_service.create_conversion_event)
@@ -56,6 +57,7 @@
   * [Analytics_admin_service.delete_account](#analytics_admin_service.delete_account)
   * [Analytics_admin_service.delete_ad_sense_link](#analytics_admin_service.delete_ad_sense_link)
   * [Analytics_admin_service.delete_android_app_data_stream](#analytics_admin_service.delete_android_app_data_stream)
+  * [Analytics_admin_service.delete_calculated_metric](#analytics_admin_service.delete_calculated_metric)
   * [Analytics_admin_service.delete_channel_group](#analytics_admin_service.delete_channel_group)
   * [Analytics_admin_service.delete_connected_site_tag](#analytics_admin_service.delete_connected_site_tag)
   * [Analytics_admin_service.delete_conversion_event](#analytics_admin_service.delete_conversion_event)
@@ -84,6 +86,7 @@
   * [Analytics_admin_service.get_attribution_settings](#analytics_admin_service.get_attribution_settings)
   * [Analytics_admin_service.get_audience](#analytics_admin_service.get_audience)
   * [Analytics_admin_service.get_big_query_link](#analytics_admin_service.get_big_query_link)
+  * [Analytics_admin_service.get_calculated_metric](#analytics_admin_service.get_calculated_metric)
   * [Analytics_admin_service.get_channel_group](#analytics_admin_service.get_channel_group)
   * [Analytics_admin_service.get_conversion_event](#analytics_admin_service.get_conversion_event)
   * [Analytics_admin_service.get_custom_dimension](#analytics_admin_service.get_custom_dimension)
@@ -115,6 +118,7 @@
   * [Analytics_admin_service.list_android_app_data_streams](#analytics_admin_service.list_android_app_data_streams)
   * [Analytics_admin_service.list_audiences](#analytics_admin_service.list_audiences)
   * [Analytics_admin_service.list_big_query_links](#analytics_admin_service.list_big_query_links)
+  * [Analytics_admin_service.list_calculated_metrics](#analytics_admin_service.list_calculated_metrics)
   * [Analytics_admin_service.list_channel_groups](#analytics_admin_service.list_channel_groups)
   * [Analytics_admin_service.list_connected_site_tags](#analytics_admin_service.list_connected_site_tags)
   * [Analytics_admin_service.list_conversion_events](#analytics_admin_service.list_conversion_events)
@@ -145,6 +149,7 @@
   * [Analytics_admin_service.update_android_app_data_stream](#analytics_admin_service.update_android_app_data_stream)
   * [Analytics_admin_service.update_attribution_settings](#analytics_admin_service.update_attribution_settings)
   * [Analytics_admin_service.update_audience](#analytics_admin_service.update_audience)
+  * [Analytics_admin_service.update_calculated_metric](#analytics_admin_service.update_calculated_metric)
   * [Analytics_admin_service.update_channel_group](#analytics_admin_service.update_channel_group)
   * [Analytics_admin_service.update_conversion_event](#analytics_admin_service.update_conversion_event)
   * [Analytics_admin_service.update_custom_dimension](#analytics_admin_service.update_custom_dimension)
@@ -531,6 +536,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_audience.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.create_calculated_metric
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_calculated_metric.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_calculated_metric.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_calculated_metric.js`
 
 
 -----
@@ -973,6 +995,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_android_app_data_stream.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.delete_calculated_metric
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_calculated_metric.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_calculated_metric.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_calculated_metric.js`
 
 
 -----
@@ -1449,6 +1488,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_big_query_link.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.get_calculated_metric
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_calculated_metric.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_calculated_metric.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_calculated_metric.js`
 
 
 -----
@@ -1983,6 +2039,23 @@ __Usage:__
 
 
 
+### Analytics_admin_service.list_calculated_metrics
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_calculated_metrics.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_calculated_metrics.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_calculated_metrics.js`
+
+
+-----
+
+
+
+
 ### Analytics_admin_service.list_channel_groups
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_channel_groups.js).
@@ -2486,6 +2559,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_audience.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.update_calculated_metric
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_calculated_metric.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_calculated_metric.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_calculated_metric.js`
 
 
 -----

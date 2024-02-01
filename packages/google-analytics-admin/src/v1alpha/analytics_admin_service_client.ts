@@ -199,6 +199,9 @@ export class AnalyticsAdminServiceClient {
       bigQueryLinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/bigQueryLinks/{bigquery_link}'
       ),
+      calculatedMetricPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/calculatedMetrics/{calculated_metric}'
+      ),
       channelGroupPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/channelGroups/{channel_group}'
       ),
@@ -391,6 +394,11 @@ export class AnalyticsAdminServiceClient {
         'nextPageToken',
         'eventCreateRules'
       ),
+      listCalculatedMetrics: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'calculatedMetrics'
+      ),
       listRollupPropertySourceLinks: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -574,6 +582,11 @@ export class AnalyticsAdminServiceClient {
       'deleteEventCreateRule',
       'updateDataRedactionSettings',
       'getDataRedactionSettings',
+      'getCalculatedMetric',
+      'createCalculatedMetric',
+      'listCalculatedMetrics',
+      'updateCalculatedMetric',
+      'deleteCalculatedMetric',
       'createRollupProperty',
       'getRollupPropertySourceLink',
       'listRollupPropertySourceLinks',
@@ -10565,6 +10578,422 @@ export class AnalyticsAdminServiceClient {
     );
   }
   /**
+   * Lookup for a single CalculatedMetric.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CalculatedMetric to get.
+   *   Format: properties/{property_id}/calculatedMetrics/{calculated_metric_id}
+   *   Example: properties/1234/calculatedMetrics/Metric01
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.CalculatedMetric|CalculatedMetric}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_calculated_metric.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetCalculatedMetric_async
+   */
+  getCalculatedMetric(
+    request?: protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getCalculatedMetric(
+    request: protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      | protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCalculatedMetric(
+    request: protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      | protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCalculatedMetric(
+    request?: protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+          | protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      | protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetCalculatedMetricRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getCalculatedMetric(request, options, callback);
+  }
+  /**
+   * Creates a CalculatedMetric.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: properties/{property_id}
+   *   Example: properties/1234
+   * @param {string} request.calculatedMetricId
+   *   Required. The ID to use for the calculated metric which will become the
+   *   final component of the calculated metric's resource name.
+   *
+   *   This value should be 1-80 characters and valid characters are
+   *   /[a-zA-Z0-9_]/, no spaces allowed. calculated_metric_id must be unique
+   *   between all calculated metrics under a property. The calculated_metric_id
+   *   is used when referencing this calculated metric from external APIs, for
+   *   example, "calcMetric:{calculated_metric_id}".
+   * @param {google.analytics.admin.v1alpha.CalculatedMetric} request.calculatedMetric
+   *   Required. The CalculatedMetric to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.CalculatedMetric|CalculatedMetric}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_calculated_metric.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateCalculatedMetric_async
+   */
+  createCalculatedMetric(
+    request?: protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createCalculatedMetric(
+    request: protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      | protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCalculatedMetric(
+    request: protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      | protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCalculatedMetric(
+    request?: protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+          | protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      | protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateCalculatedMetricRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createCalculatedMetric(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates a CalculatedMetric on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.CalculatedMetric} request.calculatedMetric
+   *   Required. The CalculatedMetric to update
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Omitted fields will not be
+   *   updated. To replace the entire entity, use one path with the string "*" to
+   *   match all fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.CalculatedMetric|CalculatedMetric}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_calculated_metric.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateCalculatedMetric_async
+   */
+  updateCalculatedMetric(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateCalculatedMetric(
+    request: protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      | protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCalculatedMetric(
+    request: protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      | protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCalculatedMetric(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+          | protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      | protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateCalculatedMetricRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'calculated_metric.name': request.calculatedMetric!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateCalculatedMetric(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes a CalculatedMetric on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CalculatedMetric to delete.
+   *   Format: properties/{property_id}/calculatedMetrics/{calculated_metric_id}
+   *   Example: properties/1234/calculatedMetrics/Metric01
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_calculated_metric.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteCalculatedMetric_async
+   */
+  deleteCalculatedMetric(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteCalculatedMetric(
+    request: protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCalculatedMetric(
+    request: protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteCalculatedMetric(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteCalculatedMetricRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteCalculatedMetric(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Create a roll-up property and all roll-up property source links.
    *
    * @param {Object} request
@@ -12987,10 +13416,12 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.account
    *   Required. The account resource for which to return change history
-   *   resources.
+   *   resources. Format: accounts/{account} Example: "accounts/100"
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
+   *   Format: properties/{propertyId}
+   *   Example: "properties/100"
    * @param {number[]} [request.resourceType]
    *   Optional. If set, only return changes if they are for a resource that
    *   matches at least one of these types.
@@ -13112,10 +13543,12 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.account
    *   Required. The account resource for which to return change history
-   *   resources.
+   *   resources. Format: accounts/{account} Example: "accounts/100"
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
+   *   Format: properties/{propertyId}
+   *   Example: "properties/100"
    * @param {number[]} [request.resourceType]
    *   Optional. If set, only return changes if they are for a resource that
    *   matches at least one of these types.
@@ -13181,10 +13614,12 @@ export class AnalyticsAdminServiceClient {
    *   The request object that will be sent.
    * @param {string} request.account
    *   Required. The account resource for which to return change history
-   *   resources.
+   *   resources. Format: accounts/{account} Example: "accounts/100"
    * @param {string} [request.property]
    *   Optional. Resource name for a child property. If set, only return changes
    *   made to this property or its child resources.
+   *   Format: properties/{propertyId}
+   *   Example: "properties/100"
    * @param {number[]} [request.resourceType]
    *   Optional. If set, only return changes if they are for a resource that
    *   matches at least one of these types.
@@ -16150,6 +16585,210 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IEventCreateRule>;
   }
   /**
+   * Lists CalculatedMetrics on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCalculatedMetrics`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCalculatedMetrics`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.CalculatedMetric|CalculatedMetric}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCalculatedMetricsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listCalculatedMetrics(
+    request?: protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric[],
+      protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListCalculatedMetricsResponse,
+    ]
+  >;
+  listCalculatedMetrics(
+    request: protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest,
+      | protos.google.analytics.admin.v1alpha.IListCalculatedMetricsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric
+    >
+  ): void;
+  listCalculatedMetrics(
+    request: protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest,
+      | protos.google.analytics.admin.v1alpha.IListCalculatedMetricsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric
+    >
+  ): void;
+  listCalculatedMetrics(
+    request?: protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest,
+          | protos.google.analytics.admin.v1alpha.IListCalculatedMetricsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ICalculatedMetric
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest,
+      | protos.google.analytics.admin.v1alpha.IListCalculatedMetricsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICalculatedMetric[],
+      protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListCalculatedMetricsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listCalculatedMetrics(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCalculatedMetrics`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCalculatedMetrics`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.CalculatedMetric|CalculatedMetric} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCalculatedMetricsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listCalculatedMetricsStream(
+    request?: protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listCalculatedMetrics'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listCalculatedMetrics.createStream(
+      this.innerApiCalls.listCalculatedMetrics as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listCalculatedMetrics`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCalculatedMetrics`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCalculatedMetrics`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.analytics.admin.v1alpha.CalculatedMetric|CalculatedMetric}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_calculated_metrics.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListCalculatedMetrics_async
+   */
+  listCalculatedMetricsAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListCalculatedMetricsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.ICalculatedMetric> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listCalculatedMetrics'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listCalculatedMetrics.asyncIterate(
+      this.innerApiCalls['listCalculatedMetrics'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ICalculatedMetric>;
+  }
+  /**
    * Lists roll-up property source Links on a property.
    * Only roll-up properties can have source links, so this method will throw an
    * error if used on other types of properties.
@@ -16811,6 +17450,46 @@ export class AnalyticsAdminServiceClient {
   matchBigqueryLinkFromBigQueryLinkName(bigQueryLinkName: string) {
     return this.pathTemplates.bigQueryLinkPathTemplate.match(bigQueryLinkName)
       .bigquery_link;
+  }
+
+  /**
+   * Return a fully-qualified calculatedMetric resource name string.
+   *
+   * @param {string} property
+   * @param {string} calculated_metric
+   * @returns {string} Resource name string.
+   */
+  calculatedMetricPath(property: string, calculatedMetric: string) {
+    return this.pathTemplates.calculatedMetricPathTemplate.render({
+      property: property,
+      calculated_metric: calculatedMetric,
+    });
+  }
+
+  /**
+   * Parse the property from CalculatedMetric resource.
+   *
+   * @param {string} calculatedMetricName
+   *   A fully-qualified path representing CalculatedMetric resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromCalculatedMetricName(calculatedMetricName: string) {
+    return this.pathTemplates.calculatedMetricPathTemplate.match(
+      calculatedMetricName
+    ).property;
+  }
+
+  /**
+   * Parse the calculated_metric from CalculatedMetric resource.
+   *
+   * @param {string} calculatedMetricName
+   *   A fully-qualified path representing CalculatedMetric resource.
+   * @returns {string} A string representing the calculated_metric.
+   */
+  matchCalculatedMetricFromCalculatedMetricName(calculatedMetricName: string) {
+    return this.pathTemplates.calculatedMetricPathTemplate.match(
+      calculatedMetricName
+    ).calculated_metric;
   }
 
   /**

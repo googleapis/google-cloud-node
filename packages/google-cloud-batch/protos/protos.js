@@ -3565,6 +3565,7 @@
                              * Properties of a CloudLoggingOption.
                              * @memberof google.cloud.batch.v1.LogsPolicy
                              * @interface ICloudLoggingOption
+                             * @property {boolean|null} [useGenericTaskMonitoredResource] CloudLoggingOption useGenericTaskMonitoredResource
                              */
     
                             /**
@@ -3581,6 +3582,14 @@
                                         if (properties[keys[i]] != null)
                                             this[keys[i]] = properties[keys[i]];
                             }
+    
+                            /**
+                             * CloudLoggingOption useGenericTaskMonitoredResource.
+                             * @member {boolean} useGenericTaskMonitoredResource
+                             * @memberof google.cloud.batch.v1.LogsPolicy.CloudLoggingOption
+                             * @instance
+                             */
+                            CloudLoggingOption.prototype.useGenericTaskMonitoredResource = false;
     
                             /**
                              * Creates a new CloudLoggingOption instance using the specified properties.
@@ -3606,6 +3615,8 @@
                             CloudLoggingOption.encode = function encode(message, writer) {
                                 if (!writer)
                                     writer = $Writer.create();
+                                if (message.useGenericTaskMonitoredResource != null && Object.hasOwnProperty.call(message, "useGenericTaskMonitoredResource"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.useGenericTaskMonitoredResource);
                                 return writer;
                             };
     
@@ -3640,6 +3651,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
+                                    case 1: {
+                                            message.useGenericTaskMonitoredResource = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -3675,6 +3690,9 @@
                             CloudLoggingOption.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (message.useGenericTaskMonitoredResource != null && message.hasOwnProperty("useGenericTaskMonitoredResource"))
+                                    if (typeof message.useGenericTaskMonitoredResource !== "boolean")
+                                        return "useGenericTaskMonitoredResource: boolean expected";
                                 return null;
                             };
     
@@ -3689,7 +3707,10 @@
                             CloudLoggingOption.fromObject = function fromObject(object) {
                                 if (object instanceof $root.google.cloud.batch.v1.LogsPolicy.CloudLoggingOption)
                                     return object;
-                                return new $root.google.cloud.batch.v1.LogsPolicy.CloudLoggingOption();
+                                var message = new $root.google.cloud.batch.v1.LogsPolicy.CloudLoggingOption();
+                                if (object.useGenericTaskMonitoredResource != null)
+                                    message.useGenericTaskMonitoredResource = Boolean(object.useGenericTaskMonitoredResource);
+                                return message;
                             };
     
                             /**
@@ -3701,8 +3722,15 @@
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            CloudLoggingOption.toObject = function toObject() {
-                                return {};
+                            CloudLoggingOption.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.useGenericTaskMonitoredResource = false;
+                                if (message.useGenericTaskMonitoredResource != null && message.hasOwnProperty("useGenericTaskMonitoredResource"))
+                                    object.useGenericTaskMonitoredResource = message.useGenericTaskMonitoredResource;
+                                return object;
                             };
     
                             /**
@@ -5400,6 +5428,7 @@
                          * @property {Object.<string,string>|null} [labels] AllocationPolicy labels
                          * @property {google.cloud.batch.v1.AllocationPolicy.INetworkPolicy|null} [network] AllocationPolicy network
                          * @property {google.cloud.batch.v1.AllocationPolicy.IPlacementPolicy|null} [placement] AllocationPolicy placement
+                         * @property {Array.<string>|null} [tags] AllocationPolicy tags
                          */
     
                         /**
@@ -5413,6 +5442,7 @@
                         function AllocationPolicy(properties) {
                             this.instances = [];
                             this.labels = {};
+                            this.tags = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -5468,6 +5498,14 @@
                         AllocationPolicy.prototype.placement = null;
     
                         /**
+                         * AllocationPolicy tags.
+                         * @member {Array.<string>} tags
+                         * @memberof google.cloud.batch.v1.AllocationPolicy
+                         * @instance
+                         */
+                        AllocationPolicy.prototype.tags = $util.emptyArray;
+    
+                        /**
                          * Creates a new AllocationPolicy instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1.AllocationPolicy
@@ -5505,6 +5543,9 @@
                                 $root.google.cloud.batch.v1.ServiceAccount.encode(message.serviceAccount, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.placement != null && Object.hasOwnProperty.call(message, "placement"))
                                 $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy.encode(message.placement, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.tags != null && message.tags.length)
+                                for (var i = 0; i < message.tags.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.tags[i]);
                             return writer;
                         };
     
@@ -5584,6 +5625,12 @@
                                         message.placement = $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 11: {
+                                        if (!(message.tags && message.tags.length))
+                                            message.tags = [];
+                                        message.tags.push(reader.string());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5656,6 +5703,13 @@
                                 if (error)
                                     return "placement." + error;
                             }
+                            if (message.tags != null && message.hasOwnProperty("tags")) {
+                                if (!Array.isArray(message.tags))
+                                    return "tags: array expected";
+                                for (var i = 0; i < message.tags.length; ++i)
+                                    if (!$util.isString(message.tags[i]))
+                                        return "tags: string[] expected";
+                            }
                             return null;
                         };
     
@@ -5708,6 +5762,13 @@
                                     throw TypeError(".google.cloud.batch.v1.AllocationPolicy.placement: object expected");
                                 message.placement = $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy.fromObject(object.placement);
                             }
+                            if (object.tags) {
+                                if (!Array.isArray(object.tags))
+                                    throw TypeError(".google.cloud.batch.v1.AllocationPolicy.tags: array expected");
+                                message.tags = [];
+                                for (var i = 0; i < object.tags.length; ++i)
+                                    message.tags[i] = String(object.tags[i]);
+                            }
                             return message;
                         };
     
@@ -5724,8 +5785,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.instances = [];
+                                object.tags = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -5753,6 +5816,11 @@
                                 object.serviceAccount = $root.google.cloud.batch.v1.ServiceAccount.toObject(message.serviceAccount, options);
                             if (message.placement != null && message.hasOwnProperty("placement"))
                                 object.placement = $root.google.cloud.batch.v1.AllocationPolicy.PlacementPolicy.toObject(message.placement, options);
+                            if (message.tags && message.tags.length) {
+                                object.tags = [];
+                                for (var j = 0; j < message.tags.length; ++j)
+                                    object.tags[j] = message.tags[j];
+                            }
                             return object;
                         };
     
@@ -8354,6 +8422,7 @@
                          * @property {number|Long|null} [taskCountPerNode] TaskGroup taskCountPerNode
                          * @property {boolean|null} [requireHostsFile] TaskGroup requireHostsFile
                          * @property {boolean|null} [permissiveSsh] TaskGroup permissiveSsh
+                         * @property {boolean|null} [runAsNonRoot] TaskGroup runAsNonRoot
                          */
     
                         /**
@@ -8445,6 +8514,14 @@
                         TaskGroup.prototype.permissiveSsh = false;
     
                         /**
+                         * TaskGroup runAsNonRoot.
+                         * @member {boolean} runAsNonRoot
+                         * @memberof google.cloud.batch.v1.TaskGroup
+                         * @instance
+                         */
+                        TaskGroup.prototype.runAsNonRoot = false;
+    
+                        /**
                          * Creates a new TaskGroup instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.batch.v1.TaskGroup
@@ -8487,6 +8564,8 @@
                                 writer.uint32(/* id 11, wireType 0 =*/88).bool(message.requireHostsFile);
                             if (message.permissiveSsh != null && Object.hasOwnProperty.call(message, "permissiveSsh"))
                                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.permissiveSsh);
+                            if (message.runAsNonRoot != null && Object.hasOwnProperty.call(message, "runAsNonRoot"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.runAsNonRoot);
                             return writer;
                         };
     
@@ -8557,6 +8636,10 @@
                                     }
                                 case 12: {
                                         message.permissiveSsh = reader.bool();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.runAsNonRoot = reader.bool();
                                         break;
                                     }
                                 default:
@@ -8635,6 +8718,9 @@
                             if (message.permissiveSsh != null && message.hasOwnProperty("permissiveSsh"))
                                 if (typeof message.permissiveSsh !== "boolean")
                                     return "permissiveSsh: boolean expected";
+                            if (message.runAsNonRoot != null && message.hasOwnProperty("runAsNonRoot"))
+                                if (typeof message.runAsNonRoot !== "boolean")
+                                    return "runAsNonRoot: boolean expected";
                             return null;
                         };
     
@@ -8718,6 +8804,8 @@
                                 message.requireHostsFile = Boolean(object.requireHostsFile);
                             if (object.permissiveSsh != null)
                                 message.permissiveSsh = Boolean(object.permissiveSsh);
+                            if (object.runAsNonRoot != null)
+                                message.runAsNonRoot = Boolean(object.runAsNonRoot);
                             return message;
                         };
     
@@ -8757,6 +8845,7 @@
                                     object.taskCountPerNode = options.longs === String ? "0" : 0;
                                 object.requireHostsFile = false;
                                 object.permissiveSsh = false;
+                                object.runAsNonRoot = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -8788,6 +8877,8 @@
                                 object.requireHostsFile = message.requireHostsFile;
                             if (message.permissiveSsh != null && message.hasOwnProperty("permissiveSsh"))
                                 object.permissiveSsh = message.permissiveSsh;
+                            if (message.runAsNonRoot != null && message.hasOwnProperty("runAsNonRoot"))
+                                object.runAsNonRoot = message.runAsNonRoot;
                             return object;
                         };
     
@@ -10757,6 +10848,7 @@
                              * @property {boolean|null} [blockExternalNetwork] Container blockExternalNetwork
                              * @property {string|null} [username] Container username
                              * @property {string|null} [password] Container password
+                             * @property {boolean|null} [enableImageStreaming] Container enableImageStreaming
                              */
     
                             /**
@@ -10841,6 +10933,14 @@
                             Container.prototype.password = "";
     
                             /**
+                             * Container enableImageStreaming.
+                             * @member {boolean} enableImageStreaming
+                             * @memberof google.cloud.batch.v1.Runnable.Container
+                             * @instance
+                             */
+                            Container.prototype.enableImageStreaming = false;
+    
+                            /**
                              * Creates a new Container instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.batch.v1.Runnable.Container
@@ -10882,6 +10982,8 @@
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.username);
                                 if (message.password != null && Object.hasOwnProperty.call(message, "password"))
                                     writer.uint32(/* id 11, wireType 2 =*/90).string(message.password);
+                                if (message.enableImageStreaming != null && Object.hasOwnProperty.call(message, "enableImageStreaming"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).bool(message.enableImageStreaming);
                                 return writer;
                             };
     
@@ -10952,6 +11054,10 @@
                                             message.password = reader.string();
                                             break;
                                         }
+                                    case 12: {
+                                            message.enableImageStreaming = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -11019,6 +11125,9 @@
                                 if (message.password != null && message.hasOwnProperty("password"))
                                     if (!$util.isString(message.password))
                                         return "password: string expected";
+                                if (message.enableImageStreaming != null && message.hasOwnProperty("enableImageStreaming"))
+                                    if (typeof message.enableImageStreaming !== "boolean")
+                                        return "enableImageStreaming: boolean expected";
                                 return null;
                             };
     
@@ -11060,6 +11169,8 @@
                                     message.username = String(object.username);
                                 if (object.password != null)
                                     message.password = String(object.password);
+                                if (object.enableImageStreaming != null)
+                                    message.enableImageStreaming = Boolean(object.enableImageStreaming);
                                 return message;
                             };
     
@@ -11087,6 +11198,7 @@
                                     object.blockExternalNetwork = false;
                                     object.username = "";
                                     object.password = "";
+                                    object.enableImageStreaming = false;
                                 }
                                 if (message.imageUri != null && message.hasOwnProperty("imageUri"))
                                     object.imageUri = message.imageUri;
@@ -11110,6 +11222,8 @@
                                     object.username = message.username;
                                 if (message.password != null && message.hasOwnProperty("password"))
                                     object.password = message.password;
+                                if (message.enableImageStreaming != null && message.hasOwnProperty("enableImageStreaming"))
+                                    object.enableImageStreaming = message.enableImageStreaming;
                                 return object;
                             };
     
