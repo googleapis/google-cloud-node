@@ -55,19 +55,14 @@ npm install @google-cloud/profiler
 
 ### Prerequisites
 
-1. Your application will need to be using Node.js 10.4.1 or greater or Node.js
-12. The profiler will not be enabled when using earlier versions of 10 because
-versions of Node.js 10 prior to 10.4.1 are impacted by
-[this](https://bugs.chromium.org/p/chromium/issues/detail?id=847863) issue,
-which can cause garbage collection to take several minutes when heap profiling
-is enabled.
+1. Your application will need to be using Node.js version between 14 and 20.
 
 1. `@google-cloud/profiler` depends on the
 [`pprof`](https://www.npmjs.com/package/pprof) module, a module with a native
 component that is used to collect profiles with v8's CPU and Heap profilers.
 You may need to install additional dependencies to build the `pprof` module.
     * For Linux: `pprof` has prebuilt binaries available for Linux and Alpine
-    Linux for Node 10 and 12. No additional dependencies are required.
+    Linux for Node 14 and 16. No additional dependencies are required.
     * For other environments: when using `@google-cloud/profiler` on environments
     that `pprof` does not have prebuilt binaries for, the module
     [`node-gyp`](https://www.npmjs.com/package/node-gyp) will be used to
@@ -195,10 +190,10 @@ the following to your `package.json`:
 
 ```json
 "engines": {
-    "node": ">=10.4.1"
+    "node": ">=14.0.0"
 }
 ```
-The above snippet will ensure that you're using 10.4.1 or greater.
+The above snippet will ensure that you're using 14.0.0 or greater.
 
 Deploy your application to App Engine Flexible environment as usual.
 
