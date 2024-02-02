@@ -13804,6 +13804,9 @@ export namespace google {
 
                     /** ProcessorVersion deprecationInfo */
                     deprecationInfo?: (google.cloud.documentai.v1.ProcessorVersion.IDeprecationInfo|null);
+
+                    /** ProcessorVersion modelType */
+                    modelType?: (google.cloud.documentai.v1.ProcessorVersion.ModelType|keyof typeof google.cloud.documentai.v1.ProcessorVersion.ModelType|null);
                 }
 
                 /** Represents a ProcessorVersion. */
@@ -13844,6 +13847,9 @@ export namespace google {
 
                     /** ProcessorVersion deprecationInfo. */
                     public deprecationInfo?: (google.cloud.documentai.v1.ProcessorVersion.IDeprecationInfo|null);
+
+                    /** ProcessorVersion modelType. */
+                    public modelType: (google.cloud.documentai.v1.ProcessorVersion.ModelType|keyof typeof google.cloud.documentai.v1.ProcessorVersion.ModelType);
 
                     /**
                      * Creates a new ProcessorVersion instance using the specified properties.
@@ -14039,6 +14045,13 @@ export namespace google {
                         DELETING = 6,
                         FAILED = 7,
                         IMPORTING = 8
+                    }
+
+                    /** ModelType enum. */
+                    enum ModelType {
+                        MODEL_TYPE_UNSPECIFIED = 0,
+                        MODEL_TYPE_GENERATIVE = 1,
+                        MODEL_TYPE_CUSTOM = 2
                     }
                 }
 
