@@ -2509,6 +2509,21 @@
                 "countTokens"
               ]
             },
+            "GenerateContent": {
+              "methods": [
+                "generateContent"
+              ]
+            },
+            "StreamDirectPredict": {
+              "methods": [
+                "streamDirectPredict"
+              ]
+            },
+            "StreamDirectRawPredict": {
+              "methods": [
+                "streamDirectRawPredict"
+              ]
+            },
             "StreamingPredict": {
               "methods": [
                 "streamingPredict"
@@ -2562,6 +2577,11 @@
             "CountTokens": {
               "methods": [
                 "countTokens"
+              ]
+            },
+            "GenerateContent": {
+              "methods": [
+                "generateContent"
               ]
             }
           }
