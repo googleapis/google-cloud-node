@@ -23,13 +23,6 @@ const logging = new Logging();
 // min and max log levels numeric interface used there
 const [MIN_LEVEL, MAX_LEVEL] = [0, 4];
 
-logging.setProjectId().catch(err => {
-  console.error(`failed to set logging project id ${err}`);
-});
-logging.setDetectedResource().catch(err => {
-  console.error(`failed to discover resource metadata ${err}`);
-});
-
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pjson = require('../../package.json');
 
@@ -80,6 +73,19 @@ export class Logger {
   }
 }
 
+let didLoggingInit = false;
+
 export function createLogger(level?: number): Logger {
+  if (!didLoggingInit) {
+    logging.setProjectId().catch(err => {
+      console.error(`failed to set logging project id ${err}`);
+    });
+    logging.setDetectedResource().catch(err => {
+      console.error(`failed to discover resource metadata ${err}`);
+    });
+
+    didLoggingInit = true;
+  }
+
   return new Logger(level);
 }
