@@ -211,10 +211,14 @@
   * [Prediction_service.direct_predict](#prediction_service.direct_predict)
   * [Prediction_service.direct_raw_predict](#prediction_service.direct_raw_predict)
   * [Prediction_service.explain](#prediction_service.explain)
+  * [Prediction_service.generate_content](#prediction_service.generate_content)
   * [Prediction_service.predict](#prediction_service.predict)
   * [Prediction_service.raw_predict](#prediction_service.raw_predict)
   * [Prediction_service.server_streaming_predict](#prediction_service.server_streaming_predict)
+  * [Prediction_service.stream_direct_predict](#prediction_service.stream_direct_predict)
+  * [Prediction_service.stream_direct_raw_predict](#prediction_service.stream_direct_raw_predict)
   * [Prediction_service.stream_generate_content](#prediction_service.stream_generate_content)
+  * [Prediction_service.stream_raw_predict](#prediction_service.stream_raw_predict)
   * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
   * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
   * [Schedule_service.create_schedule](#schedule_service.create_schedule)
@@ -482,9 +486,12 @@
   * [Prediction_service.direct_predict](#prediction_service.direct_predict)
   * [Prediction_service.direct_raw_predict](#prediction_service.direct_raw_predict)
   * [Prediction_service.explain](#prediction_service.explain)
+  * [Prediction_service.generate_content](#prediction_service.generate_content)
   * [Prediction_service.predict](#prediction_service.predict)
   * [Prediction_service.raw_predict](#prediction_service.raw_predict)
   * [Prediction_service.server_streaming_predict](#prediction_service.server_streaming_predict)
+  * [Prediction_service.stream_direct_predict](#prediction_service.stream_direct_predict)
+  * [Prediction_service.stream_direct_raw_predict](#prediction_service.stream_direct_raw_predict)
   * [Prediction_service.stream_generate_content](#prediction_service.stream_generate_content)
   * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
   * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
@@ -3945,6 +3952,23 @@ __Usage:__
 
 
 
+### Prediction_service.generate_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.generate_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.generate_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.generate_content.js`
+
+
+-----
+
+
+
+
 ### Prediction_service.predict
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.predict.js).
@@ -3996,6 +4020,40 @@ __Usage:__
 
 
 
+### Prediction_service.stream_direct_predict
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_predict.js`
+
+
+-----
+
+
+
+
+### Prediction_service.stream_direct_raw_predict
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_raw_predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_raw_predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_direct_raw_predict.js`
+
+
+-----
+
+
+
+
 ### Prediction_service.stream_generate_content
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_generate_content.js).
@@ -4006,6 +4064,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_generate_content.js`
+
+
+-----
+
+
+
+
+### Prediction_service.stream_raw_predict
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_raw_predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_raw_predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.stream_raw_predict.js`
 
 
 -----
@@ -8552,6 +8627,23 @@ __Usage:__
 
 
 
+### Prediction_service.generate_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.generate_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.generate_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.generate_content.js`
+
+
+-----
+
+
+
+
 ### Prediction_service.predict
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.predict.js).
@@ -8596,6 +8688,40 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.server_streaming_predict.js`
+
+
+-----
+
+
+
+
+### Prediction_service.stream_direct_predict
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_predict.js`
+
+
+-----
+
+
+
+
+### Prediction_service.stream_direct_raw_predict
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_raw_predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_raw_predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_direct_raw_predict.js`
 
 
 -----

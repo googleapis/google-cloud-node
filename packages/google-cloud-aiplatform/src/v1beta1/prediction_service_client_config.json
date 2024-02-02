@@ -37,6 +37,14 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "StreamDirectPredict": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StreamDirectRawPredict": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "StreamingPredict": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -55,6 +63,10 @@
           "retry_params_name": "default"
         },
         "CountTokens": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GenerateContent": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
