@@ -9272,10 +9272,54 @@
       }
     },
     {
+      "regionTag": "aiplatform_v1_generated_PredictionService_StreamRawPredict_async",
+      "title": "DatasetService streamRawPredict Sample",
+      "origin": "API_DEFINITION",
+      "description": " Perform a streaming online prediction with an arbitrary HTTP payload.",
+      "canonical": true,
+      "file": "prediction_service.stream_raw_predict.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StreamRawPredict",
+        "fullName": "google.cloud.aiplatform.v1.PredictionService.StreamRawPredict",
+        "async": true,
+        "parameters": [
+          {
+            "name": "endpoint",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "http_body",
+            "type": ".google.api.HttpBody"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "PredictionServiceClient",
+          "fullName": "google.cloud.aiplatform.v1.PredictionServiceClient"
+        },
+        "method": {
+          "shortName": "StreamRawPredict",
+          "fullName": "google.cloud.aiplatform.v1.PredictionService.StreamRawPredict",
+          "service": {
+            "shortName": "PredictionService",
+            "fullName": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "aiplatform_v1_generated_PredictionService_DirectPredict_async",
       "title": "DatasetService directPredict Sample",
       "origin": "API_DEFINITION",
-      "description": " Perform an unary online prediction request for Vertex first-party products and frameworks.",
+      "description": " Perform an unary online prediction request to a gRPC model server for Vertex first-party products and frameworks.",
       "canonical": true,
       "file": "prediction_service.direct_predict.js",
       "language": "JAVASCRIPT",
@@ -9323,7 +9367,7 @@
       "regionTag": "aiplatform_v1_generated_PredictionService_DirectRawPredict_async",
       "title": "DatasetService directRawPredict Sample",
       "origin": "API_DEFINITION",
-      "description": " Perform an online prediction request through gRPC.",
+      "description": " Perform an unary online prediction request to a gRPC model server for custom containers.",
       "canonical": true,
       "file": "prediction_service.direct_raw_predict.js",
       "language": "JAVASCRIPT",
@@ -9360,6 +9404,102 @@
         "method": {
           "shortName": "DirectRawPredict",
           "fullName": "google.cloud.aiplatform.v1.PredictionService.DirectRawPredict",
+          "service": {
+            "shortName": "PredictionService",
+            "fullName": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1_generated_PredictionService_StreamDirectPredict_async",
+      "title": "DatasetService streamDirectPredict Sample",
+      "origin": "API_DEFINITION",
+      "description": " Perform a streaming online prediction request to a gRPC model server for Vertex first-party products and frameworks.",
+      "canonical": true,
+      "file": "prediction_service.stream_direct_predict.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StreamDirectPredict",
+        "fullName": "google.cloud.aiplatform.v1.PredictionService.StreamDirectPredict",
+        "async": true,
+        "parameters": [
+          {
+            "name": "endpoint",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "inputs",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "parameters",
+            "type": ".google.cloud.aiplatform.v1.Tensor"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1.StreamDirectPredictResponse",
+        "client": {
+          "shortName": "PredictionServiceClient",
+          "fullName": "google.cloud.aiplatform.v1.PredictionServiceClient"
+        },
+        "method": {
+          "shortName": "StreamDirectPredict",
+          "fullName": "google.cloud.aiplatform.v1.PredictionService.StreamDirectPredict",
+          "service": {
+            "shortName": "PredictionService",
+            "fullName": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1_generated_PredictionService_StreamDirectRawPredict_async",
+      "title": "DatasetService streamDirectRawPredict Sample",
+      "origin": "API_DEFINITION",
+      "description": " Perform a streaming online prediction request to a gRPC model server for custom containers.",
+      "canonical": true,
+      "file": "prediction_service.stream_direct_raw_predict.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StreamDirectRawPredict",
+        "fullName": "google.cloud.aiplatform.v1.PredictionService.StreamDirectRawPredict",
+        "async": true,
+        "parameters": [
+          {
+            "name": "endpoint",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "method_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1.StreamDirectRawPredictResponse",
+        "client": {
+          "shortName": "PredictionServiceClient",
+          "fullName": "google.cloud.aiplatform.v1.PredictionServiceClient"
+        },
+        "method": {
+          "shortName": "StreamDirectRawPredict",
+          "fullName": "google.cloud.aiplatform.v1.PredictionService.StreamDirectRawPredict",
           "service": {
             "shortName": "PredictionService",
             "fullName": "google.cloud.aiplatform.v1.PredictionService"
@@ -9560,6 +9700,62 @@
         "method": {
           "shortName": "Explain",
           "fullName": "google.cloud.aiplatform.v1.PredictionService.Explain",
+          "service": {
+            "shortName": "PredictionService",
+            "fullName": "google.cloud.aiplatform.v1.PredictionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "aiplatform_v1_generated_PredictionService_GenerateContent_async",
+      "title": "DatasetService generateContent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generate content with multimodal inputs.",
+      "canonical": true,
+      "file": "prediction_service.generate_content.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateContent",
+        "fullName": "google.cloud.aiplatform.v1.PredictionService.GenerateContent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "model",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "contents",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "tools",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "safety_settings",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "generation_config",
+            "type": ".google.cloud.aiplatform.v1.GenerationConfig"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1.GenerateContentResponse",
+        "client": {
+          "shortName": "PredictionServiceClient",
+          "fullName": "google.cloud.aiplatform.v1.PredictionServiceClient"
+        },
+        "method": {
+          "shortName": "GenerateContent",
+          "fullName": "google.cloud.aiplatform.v1.PredictionService.GenerateContent",
           "service": {
             "shortName": "PredictionService",
             "fullName": "google.cloud.aiplatform.v1.PredictionService"

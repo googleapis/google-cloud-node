@@ -311,6 +311,9 @@ export class PredictionServiceClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
+      streamRawPredict: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.SERVER_STREAMING, !!opts.fallback, /* gaxStreamingRetries: */ true),
+      streamDirectPredict: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, /* gaxStreamingRetries: */ true),
+      streamDirectRawPredict: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, /* gaxStreamingRetries: */ true),
       streamingPredict: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, /* gaxStreamingRetries: */ true),
       serverStreamingPredict: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.SERVER_STREAMING, !!opts.fallback, /* gaxStreamingRetries: */ true),
       streamingRawPredict: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, /* gaxStreamingRetries: */ true),
@@ -360,7 +363,7 @@ export class PredictionServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const predictionServiceStubMethods =
-        ['predict', 'rawPredict', 'directPredict', 'directRawPredict', 'streamingPredict', 'serverStreamingPredict', 'streamingRawPredict', 'explain', 'streamGenerateContent'];
+        ['predict', 'rawPredict', 'streamRawPredict', 'directPredict', 'directRawPredict', 'streamDirectPredict', 'streamDirectRawPredict', 'streamingPredict', 'serverStreamingPredict', 'streamingRawPredict', 'explain', 'generateContent', 'streamGenerateContent'];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -638,8 +641,8 @@ export class PredictionServiceClient {
     return this.innerApiCalls.rawPredict(request, options, callback);
   }
 /**
- * Perform an unary online prediction request for Vertex first-party products
- * and frameworks.
+ * Perform an unary online prediction request to a gRPC model server for
+ * Vertex first-party products and frameworks.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -715,7 +718,8 @@ export class PredictionServiceClient {
     return this.innerApiCalls.directPredict(request, options, callback);
   }
 /**
- * Perform an online prediction request through gRPC.
+ * Perform an unary online prediction request to a gRPC model server for
+ * custom containers.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -906,6 +910,178 @@ export class PredictionServiceClient {
     });
     this.initialize();
     return this.innerApiCalls.explain(request, options, callback);
+  }
+/**
+ * Generate content with multimodal inputs.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.model
+ *   Required. The name of the publisher model requested to serve the
+ *   prediction. Format:
+ *   `projects/{project}/locations/{location}/publishers/* /models/*`
+ * @param {number[]} request.contents
+ *   Required. The content of the current conversation with the model.
+ *
+ *   For single-turn queries, this is a single instance. For multi-turn queries,
+ *   this is a repeated field that contains conversation history + latest
+ *   request.
+ * @param {number[]} [request.tools]
+ *   Optional. A list of `Tools` the model may use to generate the next
+ *   response.
+ *
+ *   A `Tool` is a piece of code that enables the system to interact with
+ *   external systems to perform an action, or set of actions, outside of
+ *   knowledge and scope of the model. The only supported tool is currently
+ *   `Function`
+ * @param {number[]} [request.safetySettings]
+ *   Optional. Per request settings for blocking unsafe content.
+ *   Enforced on GenerateContentResponse.candidates.
+ * @param {google.cloud.aiplatform.v1.GenerationConfig} [request.generationConfig]
+ *   Optional. Generation config.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.GenerateContentResponse|GenerateContentResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/prediction_service.generate_content.js</caption>
+ * region_tag:aiplatform_v1_generated_PredictionService_GenerateContent_async
+ */
+  generateContent(
+      request?: protos.google.cloud.aiplatform.v1.IGenerateContentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1.IGenerateContentResponse,
+        protos.google.cloud.aiplatform.v1.IGenerateContentRequest|undefined, {}|undefined
+      ]>;
+  generateContent(
+      request: protos.google.cloud.aiplatform.v1.IGenerateContentRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1.IGenerateContentResponse,
+          protos.google.cloud.aiplatform.v1.IGenerateContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateContent(
+      request: protos.google.cloud.aiplatform.v1.IGenerateContentRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1.IGenerateContentResponse,
+          protos.google.cloud.aiplatform.v1.IGenerateContentRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateContent(
+      request?: protos.google.cloud.aiplatform.v1.IGenerateContentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1.IGenerateContentResponse,
+          protos.google.cloud.aiplatform.v1.IGenerateContentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1.IGenerateContentResponse,
+          protos.google.cloud.aiplatform.v1.IGenerateContentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1.IGenerateContentResponse,
+        protos.google.cloud.aiplatform.v1.IGenerateContentRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'model': request.model ?? '',
+    });
+    this.initialize();
+    return this.innerApiCalls.generateContent(request, options, callback);
+  }
+
+/**
+ * Perform a streaming online prediction with an arbitrary HTTP payload.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.endpoint
+ *   Required. The name of the Endpoint requested to serve the prediction.
+ *   Format:
+ *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+ * @param {google.api.HttpBody} request.httpBody
+ *   The prediction input. Supports HTTP headers and arbitrary data payload.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits {@link protos.google.api.HttpBody|HttpBody} on 'data' event.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/prediction_service.stream_raw_predict.js</caption>
+ * region_tag:aiplatform_v1_generated_PredictionService_StreamRawPredict_async
+ */
+  streamRawPredict(
+      request?: protos.google.cloud.aiplatform.v1.IStreamRawPredictRequest,
+      options?: CallOptions):
+    gax.CancellableStream{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'endpoint': request.endpoint ?? '',
+    });
+    this.initialize();
+    return this.innerApiCalls.streamRawPredict(request, options);
+  }
+
+/**
+ * Perform a streaming online prediction request to a gRPC model server for
+ * Vertex first-party products and frameworks.
+ *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing {@link protos.google.cloud.aiplatform.v1.StreamDirectPredictRequest|StreamDirectPredictRequest} for write() method, and
+ *   will emit objects representing {@link protos.google.cloud.aiplatform.v1.StreamDirectPredictResponse|StreamDirectPredictResponse} on 'data' event asynchronously.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/prediction_service.stream_direct_predict.js</caption>
+ * region_tag:aiplatform_v1_generated_PredictionService_StreamDirectPredict_async
+ */
+  streamDirectPredict(
+      options?: CallOptions):
+    gax.CancellableStream {
+    this.initialize();
+    return this.innerApiCalls.streamDirectPredict(null, options);
+  }
+
+/**
+ * Perform a streaming online prediction request to a gRPC model server for
+ * custom containers.
+ *
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing {@link protos.google.cloud.aiplatform.v1.StreamDirectRawPredictRequest|StreamDirectRawPredictRequest} for write() method, and
+ *   will emit objects representing {@link protos.google.cloud.aiplatform.v1.StreamDirectRawPredictResponse|StreamDirectRawPredictResponse} on 'data' event asynchronously.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/prediction_service.stream_direct_raw_predict.js</caption>
+ * region_tag:aiplatform_v1_generated_PredictionService_StreamDirectRawPredict_async
+ */
+  streamDirectRawPredict(
+      options?: CallOptions):
+    gax.CancellableStream {
+    this.initialize();
+    return this.innerApiCalls.streamDirectRawPredict(null, options);
   }
 
 /**

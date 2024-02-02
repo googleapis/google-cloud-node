@@ -14367,6 +14367,33 @@
                             }
                           ]
                         },
+                        "StreamRawPredict": {
+                          "requestType": "StreamRawPredictRequest",
+                          "responseType": "google.api.HttpBody",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:streamRawPredict",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:streamRawPredict",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "endpoint,http_body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:streamRawPredict",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{endpoint=projects/*/locations/*/publishers/*/models/*}:streamRawPredict",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint,http_body"
+                            }
+                          ]
+                        },
                         "DirectPredict": {
                           "requestType": "DirectPredictRequest",
                           "responseType": "DirectPredictResponse",
@@ -14398,6 +14425,18 @@
                               }
                             }
                           ]
+                        },
+                        "StreamDirectPredict": {
+                          "requestType": "StreamDirectPredictRequest",
+                          "requestStream": true,
+                          "responseType": "StreamDirectPredictResponse",
+                          "responseStream": true
+                        },
+                        "StreamDirectRawPredict": {
+                          "requestType": "StreamDirectRawPredictRequest",
+                          "requestStream": true,
+                          "responseType": "StreamDirectRawPredictResponse",
+                          "responseStream": true
                         },
                         "StreamingPredict": {
                           "requestType": "StreamingPredictRequest",
@@ -14451,6 +14490,32 @@
                             },
                             {
                               "(google.api.method_signature)": "endpoint,instances,parameters,deployed_model_id"
+                            }
+                          ]
+                        },
+                        "GenerateContent": {
+                          "requestType": "GenerateContentRequest",
+                          "responseType": "GenerateContentResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{model=projects/*/locations/*/endpoints/*}:generateContent",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{model=projects/*/locations/*/publishers/*/models/*}:generateContent",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "model,contents"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{model=projects/*/locations/*/endpoints/*}:generateContent",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{model=projects/*/locations/*/publishers/*/models/*}:generateContent",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "model,contents"
                             }
                           ]
                         },
@@ -14565,6 +14630,22 @@
                         }
                       }
                     },
+                    "StreamRawPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "httpBody": {
+                          "type": "google.api.HttpBody",
+                          "id": 2
+                        }
+                      }
+                    },
                     "DirectPredictRequest": {
                       "fields": {
                         "endpoint": {
@@ -14620,6 +14701,80 @@
                       }
                     },
                     "DirectRawPredictResponse": {
+                      "fields": {
+                        "output": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StreamDirectPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "inputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StreamDirectPredictResponse": {
+                      "fields": {
+                        "outputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamDirectRawPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "methodName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "input": {
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StreamDirectRawPredictResponse": {
                       "fields": {
                         "output": {
                           "type": "bytes",
