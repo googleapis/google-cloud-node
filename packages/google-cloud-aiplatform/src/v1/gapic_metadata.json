@@ -2402,6 +2402,26 @@
                 "explain"
               ]
             },
+            "GenerateContent": {
+              "methods": [
+                "generateContent"
+              ]
+            },
+            "StreamRawPredict": {
+              "methods": [
+                "streamRawPredict"
+              ]
+            },
+            "StreamDirectPredict": {
+              "methods": [
+                "streamDirectPredict"
+              ]
+            },
+            "StreamDirectRawPredict": {
+              "methods": [
+                "streamDirectRawPredict"
+              ]
+            },
             "StreamingPredict": {
               "methods": [
                 "streamingPredict"
@@ -2450,6 +2470,11 @@
             "Explain": {
               "methods": [
                 "explain"
+              ]
+            },
+            "GenerateContent": {
+              "methods": [
+                "generateContent"
               ]
             }
           }
