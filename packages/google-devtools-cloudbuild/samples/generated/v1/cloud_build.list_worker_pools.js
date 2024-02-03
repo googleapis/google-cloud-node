@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cloudbuildClient.listWorkerPoolsAsync(request);
+    const iterable = cloudbuildClient.listWorkerPoolsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

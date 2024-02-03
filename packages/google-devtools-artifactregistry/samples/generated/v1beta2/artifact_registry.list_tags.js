@@ -62,7 +62,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listTagsAsync(request);
+    const iterable = artifactregistryClient.listTagsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

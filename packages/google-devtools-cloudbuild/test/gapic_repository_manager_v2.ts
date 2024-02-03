@@ -168,15 +168,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v2.RepositoryManagerClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        repositorymanagerModule.v2.RepositoryManagerClient.servicePath;
-      assert(servicePath);
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudbuild.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        repositorymanagerModule.v2.RepositoryManagerClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          repositorymanagerModule.v2.RepositoryManagerClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudbuild.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          repositorymanagerModule.v2.RepositoryManagerClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudbuild.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudbuild.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new repositorymanagerModule.v2.RepositoryManagerClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudbuild.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new repositorymanagerModule.v2.RepositoryManagerClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

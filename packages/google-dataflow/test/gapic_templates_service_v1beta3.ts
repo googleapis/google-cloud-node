@@ -67,15 +67,70 @@ function stubSimpleCallWithCallback<ResponseType>(
 describe('v1beta3.TemplatesServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        templatesserviceModule.v1beta3.TemplatesServiceClient.servicePath;
-      assert(servicePath);
+      const client =
+        new templatesserviceModule.v1beta3.TemplatesServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataflow.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        templatesserviceModule.v1beta3.TemplatesServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new templatesserviceModule.v1beta3.TemplatesServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dataflow.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new templatesserviceModule.v1beta3.TemplatesServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          templatesserviceModule.v1beta3.TemplatesServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'dataflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          templatesserviceModule.v1beta3.TemplatesServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dataflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataflow.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new templatesserviceModule.v1beta3.TemplatesServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataflow.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new templatesserviceModule.v1beta3.TemplatesServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

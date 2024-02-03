@@ -67,15 +67,67 @@ function stubSimpleCallWithCallback<ResponseType>(
 describe('v2.ProfilerServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        profilerserviceModule.v2.ProfilerServiceClient.servicePath;
-      assert(servicePath);
+      const client = new profilerserviceModule.v2.ProfilerServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudprofiler.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        profilerserviceModule.v2.ProfilerServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new profilerserviceModule.v2.ProfilerServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudprofiler.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new profilerserviceModule.v2.ProfilerServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          profilerserviceModule.v2.ProfilerServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudprofiler.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          profilerserviceModule.v2.ProfilerServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudprofiler.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new profilerserviceModule.v2.ProfilerServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudprofiler.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new profilerserviceModule.v2.ProfilerServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudprofiler.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new profilerserviceModule.v2.ProfilerServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

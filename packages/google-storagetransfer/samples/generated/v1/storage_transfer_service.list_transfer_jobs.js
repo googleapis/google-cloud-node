@@ -64,7 +64,7 @@ function main(filter) {
     };
 
     // Run request
-    const iterable = await storagetransferClient.listTransferJobsAsync(request);
+    const iterable = storagetransferClient.listTransferJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

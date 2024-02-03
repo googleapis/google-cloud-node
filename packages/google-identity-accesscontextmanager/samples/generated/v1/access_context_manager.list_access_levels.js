@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await accesscontextmanagerClient.listAccessLevelsAsync(request);
+    const iterable = accesscontextmanagerClient.listAccessLevelsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -130,13 +130,65 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v2.DlpServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = dlpserviceModule.v2.DlpServiceClient.servicePath;
-      assert(servicePath);
+      const client = new dlpserviceModule.v2.DlpServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dlp.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = dlpserviceModule.v2.DlpServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new dlpserviceModule.v2.DlpServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dlp.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = dlpserviceModule.v2.DlpServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'dlp.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = dlpserviceModule.v2.DlpServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dlp.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dlp.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dlp.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new dlpserviceModule.v2.DlpServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

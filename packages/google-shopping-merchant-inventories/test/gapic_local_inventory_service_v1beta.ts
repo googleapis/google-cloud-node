@@ -130,17 +130,74 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta.LocalInventoryServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        localinventoryserviceModule.v1beta.LocalInventoryServiceClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'merchantapi.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        localinventoryserviceModule.v1beta.LocalInventoryServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          localinventoryserviceModule.v1beta.LocalInventoryServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'merchantapi.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          localinventoryserviceModule.v1beta.LocalInventoryServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'merchantapi.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'merchantapi.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new localinventoryserviceModule.v1beta.LocalInventoryServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

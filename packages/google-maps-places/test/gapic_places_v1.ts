@@ -67,13 +67,65 @@ function stubSimpleCallWithCallback<ResponseType>(
 describe('v1.PlacesClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = placesModule.v1.PlacesClient.servicePath;
-      assert(servicePath);
+      const client = new placesModule.v1.PlacesClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'places.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = placesModule.v1.PlacesClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new placesModule.v1.PlacesClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'places.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new placesModule.v1.PlacesClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = placesModule.v1.PlacesClient.servicePath;
+        assert.strictEqual(servicePath, 'places.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = placesModule.v1.PlacesClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'places.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new placesModule.v1.PlacesClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'places.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new placesModule.v1.PlacesClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'places.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new placesModule.v1.PlacesClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
