@@ -143,13 +143,67 @@ describe('v1.ReservationsClient', () => {
   });
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = reservationsModule.v1.ReservationsClient.servicePath;
-      assert(servicePath);
+      const client = new reservationsModule.v1.ReservationsClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = reservationsModule.v1.ReservationsClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new reservationsModule.v1.ReservationsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new reservationsModule.v1.ReservationsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          reservationsModule.v1.ReservationsClient.servicePath;
+        assert.strictEqual(servicePath, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          reservationsModule.v1.ReservationsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new reservationsModule.v1.ReservationsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new reservationsModule.v1.ReservationsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

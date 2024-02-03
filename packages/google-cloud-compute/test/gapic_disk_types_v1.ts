@@ -143,13 +143,65 @@ describe('v1.DiskTypesClient', () => {
   });
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = disktypesModule.v1.DiskTypesClient.servicePath;
-      assert(servicePath);
+      const client = new disktypesModule.v1.DiskTypesClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = disktypesModule.v1.DiskTypesClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new disktypesModule.v1.DiskTypesClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new disktypesModule.v1.DiskTypesClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = disktypesModule.v1.DiskTypesClient.servicePath;
+        assert.strictEqual(servicePath, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = disktypesModule.v1.DiskTypesClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new disktypesModule.v1.DiskTypesClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new disktypesModule.v1.DiskTypesClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new disktypesModule.v1.DiskTypesClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

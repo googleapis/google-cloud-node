@@ -143,15 +143,72 @@ describe('v1.RegionInstanceGroupsClient', () => {
   });
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        regioninstancegroupsModule.v1.RegionInstanceGroupsClient.servicePath;
-      assert(servicePath);
+      const client =
+        new regioninstancegroupsModule.v1.RegionInstanceGroupsClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        regioninstancegroupsModule.v1.RegionInstanceGroupsClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new regioninstancegroupsModule.v1.RegionInstanceGroupsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new regioninstancegroupsModule.v1.RegionInstanceGroupsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          regioninstancegroupsModule.v1.RegionInstanceGroupsClient.servicePath;
+        assert.strictEqual(servicePath, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          regioninstancegroupsModule.v1.RegionInstanceGroupsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new regioninstancegroupsModule.v1.RegionInstanceGroupsClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new regioninstancegroupsModule.v1.RegionInstanceGroupsClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new regioninstancegroupsModule.v1.RegionInstanceGroupsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

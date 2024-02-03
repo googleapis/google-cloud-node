@@ -143,15 +143,74 @@ describe('v1.InstanceGroupManagersClient', () => {
   });
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        instancegroupmanagersModule.v1.InstanceGroupManagersClient.servicePath;
-      assert(servicePath);
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        instancegroupmanagersModule.v1.InstanceGroupManagersClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          instancegroupmanagersModule.v1.InstanceGroupManagersClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          instancegroupmanagersModule.v1.InstanceGroupManagersClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new instancegroupmanagersModule.v1.InstanceGroupManagersClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

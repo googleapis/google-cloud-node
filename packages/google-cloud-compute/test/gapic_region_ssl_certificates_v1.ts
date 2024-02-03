@@ -143,15 +143,74 @@ describe('v1.RegionSslCertificatesClient', () => {
   });
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        regionsslcertificatesModule.v1.RegionSslCertificatesClient.servicePath;
-      assert(servicePath);
+      const client =
+        new regionsslcertificatesModule.v1.RegionSslCertificatesClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        regionsslcertificatesModule.v1.RegionSslCertificatesClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new regionsslcertificatesModule.v1.RegionSslCertificatesClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new regionsslcertificatesModule.v1.RegionSslCertificatesClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          regionsslcertificatesModule.v1.RegionSslCertificatesClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          regionsslcertificatesModule.v1.RegionSslCertificatesClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new regionsslcertificatesModule.v1.RegionSslCertificatesClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new regionsslcertificatesModule.v1.RegionSslCertificatesClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new regionsslcertificatesModule.v1.RegionSslCertificatesClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

@@ -143,17 +143,73 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
   });
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new globalnetworkendpointgroupsModule.v1.GlobalNetworkEndpointGroupsClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

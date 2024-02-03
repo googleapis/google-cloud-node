@@ -143,17 +143,74 @@ describe('v1.RegionSecurityPoliciesClient', () => {
   });
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new regionsecuritypoliciesModule.v1.RegionSecurityPoliciesClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
