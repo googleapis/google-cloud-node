@@ -58,7 +58,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await serviceClient.listImageVersionsAsync(request);
+    const iterable = serviceClient.listImageVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

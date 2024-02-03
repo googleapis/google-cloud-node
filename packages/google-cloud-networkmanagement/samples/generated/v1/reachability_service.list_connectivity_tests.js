@@ -78,7 +78,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkmanagementClient.listConnectivityTestsAsync(request);
+    const iterable = networkmanagementClient.listConnectivityTestsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

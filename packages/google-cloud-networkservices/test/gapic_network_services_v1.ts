@@ -168,15 +168,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.NetworkServicesClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        networkservicesModule.v1.NetworkServicesClient.servicePath;
-      assert(servicePath);
+      const client = new networkservicesModule.v1.NetworkServicesClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'networkservices.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        networkservicesModule.v1.NetworkServicesClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new networkservicesModule.v1.NetworkServicesClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'networkservices.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          networkservicesModule.v1.NetworkServicesClient.servicePath;
+        assert.strictEqual(servicePath, 'networkservices.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          networkservicesModule.v1.NetworkServicesClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'networkservices.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'networkservices.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'networkservices.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new networkservicesModule.v1.NetworkServicesClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

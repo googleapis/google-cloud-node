@@ -162,15 +162,74 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta1.ReachabilityServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        reachabilityserviceModule.v1beta1.ReachabilityServiceClient.servicePath;
-      assert(servicePath);
+      const client =
+        new reachabilityserviceModule.v1beta1.ReachabilityServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'networkmanagement.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        reachabilityserviceModule.v1beta1.ReachabilityServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new reachabilityserviceModule.v1beta1.ReachabilityServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'networkmanagement.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new reachabilityserviceModule.v1beta1.ReachabilityServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          reachabilityserviceModule.v1beta1.ReachabilityServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'networkmanagement.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          reachabilityserviceModule.v1beta1.ReachabilityServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'networkmanagement.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new reachabilityserviceModule.v1beta1.ReachabilityServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'networkmanagement.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new reachabilityserviceModule.v1beta1.ReachabilityServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'networkmanagement.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new reachabilityserviceModule.v1beta1.ReachabilityServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

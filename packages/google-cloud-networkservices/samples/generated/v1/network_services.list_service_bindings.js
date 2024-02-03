@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkservicesClient.listServiceBindingsAsync(request);
+    const iterable = networkservicesClient.listServiceBindingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

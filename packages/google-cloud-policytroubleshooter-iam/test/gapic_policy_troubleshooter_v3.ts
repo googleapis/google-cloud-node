@@ -67,15 +67,72 @@ function stubSimpleCallWithCallback<ResponseType>(
 describe('v3.PolicyTroubleshooterClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        policytroubleshooterModule.v3.PolicyTroubleshooterClient.servicePath;
-      assert(servicePath);
+      const client =
+        new policytroubleshooterModule.v3.PolicyTroubleshooterClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'policytroubleshooter.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        policytroubleshooterModule.v3.PolicyTroubleshooterClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new policytroubleshooterModule.v3.PolicyTroubleshooterClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'policytroubleshooter.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new policytroubleshooterModule.v3.PolicyTroubleshooterClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          policytroubleshooterModule.v3.PolicyTroubleshooterClient.servicePath;
+        assert.strictEqual(servicePath, 'policytroubleshooter.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          policytroubleshooterModule.v3.PolicyTroubleshooterClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'policytroubleshooter.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new policytroubleshooterModule.v3.PolicyTroubleshooterClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'policytroubleshooter.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new policytroubleshooterModule.v3.PolicyTroubleshooterClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'policytroubleshooter.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new policytroubleshooterModule.v3.PolicyTroubleshooterClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

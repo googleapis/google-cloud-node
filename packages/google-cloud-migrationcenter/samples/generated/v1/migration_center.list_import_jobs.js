@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await migrationcenterClient.listImportJobsAsync(request);
+    const iterable = migrationcenterClient.listImportJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

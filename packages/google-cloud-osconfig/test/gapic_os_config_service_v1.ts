@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.OsConfigServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        osconfigserviceModule.v1.OsConfigServiceClient.servicePath;
-      assert(servicePath);
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'osconfig.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        osconfigserviceModule.v1.OsConfigServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'osconfig.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          osconfigserviceModule.v1.OsConfigServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'osconfig.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          osconfigserviceModule.v1.OsConfigServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'osconfig.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'osconfig.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new osconfigserviceModule.v1.OsConfigServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'osconfig.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new osconfigserviceModule.v1.OsConfigServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

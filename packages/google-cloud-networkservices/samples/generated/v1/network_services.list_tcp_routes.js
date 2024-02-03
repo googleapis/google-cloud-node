@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkservicesClient.listTcpRoutesAsync(request);
+    const iterable = networkservicesClient.listTcpRoutesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

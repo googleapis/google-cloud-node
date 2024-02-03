@@ -167,15 +167,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.CloudMemcacheClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        cloudmemcacheModule.v1.CloudMemcacheClient.servicePath;
-      assert(servicePath);
+      const client = new cloudmemcacheModule.v1.CloudMemcacheClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'memcache.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        cloudmemcacheModule.v1.CloudMemcacheClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new cloudmemcacheModule.v1.CloudMemcacheClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'memcache.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new cloudmemcacheModule.v1.CloudMemcacheClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          cloudmemcacheModule.v1.CloudMemcacheClient.servicePath;
+        assert.strictEqual(servicePath, 'memcache.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          cloudmemcacheModule.v1.CloudMemcacheClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'memcache.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new cloudmemcacheModule.v1.CloudMemcacheClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'memcache.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new cloudmemcacheModule.v1.CloudMemcacheClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'memcache.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new cloudmemcacheModule.v1.CloudMemcacheClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

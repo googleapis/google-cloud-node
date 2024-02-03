@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta1.ImageVersionsClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        imageversionsModule.v1beta1.ImageVersionsClient.servicePath;
-      assert(servicePath);
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'composer.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        imageversionsModule.v1beta1.ImageVersionsClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          imageversionsModule.v1beta1.ImageVersionsClient.servicePath;
+        assert.strictEqual(servicePath, 'composer.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          imageversionsModule.v1beta1.ImageVersionsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'composer.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'composer.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'composer.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new imageversionsModule.v1beta1.ImageVersionsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

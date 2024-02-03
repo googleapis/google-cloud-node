@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await notebooksClient.listInstancesAsync(request);
+    const iterable = notebooksClient.listInstancesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
