@@ -55,7 +55,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await adminClient.listAccountSummariesAsync(request);
+    const iterable = adminClient.listAccountSummariesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

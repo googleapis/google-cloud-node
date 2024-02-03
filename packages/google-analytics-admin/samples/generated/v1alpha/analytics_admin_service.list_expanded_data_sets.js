@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listExpandedDataSetsAsync(request);
+    const iterable = adminClient.listExpandedDataSetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

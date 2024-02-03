@@ -95,7 +95,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listEntityTypesAsync(request);
+    const iterable = aiplatformClient.listEntityTypesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

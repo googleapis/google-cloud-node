@@ -57,7 +57,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await serviceusageClient.listConsumerOverridesAsync(request);
+    const iterable = serviceusageClient.listConsumerOverridesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -69,7 +69,7 @@ function main(serviceName, filter) {
     };
 
     // Run request
-    const iterable = await servicemanagementClient.listServiceRolloutsAsync(request);
+    const iterable = servicemanagementClient.listServiceRolloutsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1p5beta1.AssetServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        assetserviceModule.v1p5beta1.AssetServiceClient.servicePath;
-      assert(servicePath);
+      const client = new assetserviceModule.v1p5beta1.AssetServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudasset.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        assetserviceModule.v1p5beta1.AssetServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new assetserviceModule.v1p5beta1.AssetServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudasset.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new assetserviceModule.v1p5beta1.AssetServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          assetserviceModule.v1p5beta1.AssetServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudasset.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          assetserviceModule.v1p5beta1.AssetServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudasset.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudasset.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudasset.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new assetserviceModule.v1p5beta1.AssetServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

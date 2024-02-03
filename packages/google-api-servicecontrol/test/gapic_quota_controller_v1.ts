@@ -67,15 +67,67 @@ function stubSimpleCallWithCallback<ResponseType>(
 describe('v1.QuotaControllerClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        quotacontrollerModule.v1.QuotaControllerClient.servicePath;
-      assert(servicePath);
+      const client = new quotacontrollerModule.v1.QuotaControllerClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'servicecontrol.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        quotacontrollerModule.v1.QuotaControllerClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new quotacontrollerModule.v1.QuotaControllerClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'servicecontrol.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new quotacontrollerModule.v1.QuotaControllerClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          quotacontrollerModule.v1.QuotaControllerClient.servicePath;
+        assert.strictEqual(servicePath, 'servicecontrol.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          quotacontrollerModule.v1.QuotaControllerClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'servicecontrol.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new quotacontrollerModule.v1.QuotaControllerClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'servicecontrol.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new quotacontrollerModule.v1.QuotaControllerClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'servicecontrol.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new quotacontrollerModule.v1.QuotaControllerClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

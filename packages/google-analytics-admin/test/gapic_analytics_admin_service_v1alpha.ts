@@ -130,17 +130,74 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1alpha.AnalyticsAdminServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'analyticsadmin.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'analyticsadmin.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'analyticsadmin.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'analyticsadmin.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'analyticsadmin.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'analyticsadmin.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

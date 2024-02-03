@@ -90,15 +90,67 @@ function stubServerStreamingCall<ResponseType>(
 describe('v1.GenerativeServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        generativeserviceModule.v1.GenerativeServiceClient.servicePath;
-      assert(servicePath);
+      const client = new generativeserviceModule.v1.GenerativeServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'generativelanguage.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        generativeserviceModule.v1.GenerativeServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new generativeserviceModule.v1.GenerativeServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'generativelanguage.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new generativeserviceModule.v1.GenerativeServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          generativeserviceModule.v1.GenerativeServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'generativelanguage.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          generativeserviceModule.v1.GenerativeServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'generativelanguage.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new generativeserviceModule.v1.GenerativeServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'generativelanguage.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new generativeserviceModule.v1.GenerativeServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'generativelanguage.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new generativeserviceModule.v1.GenerativeServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -817,11 +869,7 @@ describe('v1.GenerativeServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       const stream = client.streamGenerateContent(request, {
-        retry: {
-          shouldRetryFn: () => {
-            return false;
-          },
-        },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(

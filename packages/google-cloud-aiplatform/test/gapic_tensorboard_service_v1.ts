@@ -189,15 +189,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.TensorboardServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        tensorboardserviceModule.v1.TensorboardServiceClient.servicePath;
-      assert(servicePath);
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        tensorboardserviceModule.v1.TensorboardServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          tensorboardserviceModule.v1.TensorboardServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          tensorboardserviceModule.v1.TensorboardServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new tensorboardserviceModule.v1.TensorboardServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -4012,11 +4064,7 @@ describe('v1.TensorboardServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       const stream = client.readTensorboardBlobData(request, {
-        retry: {
-          shouldRetryFn: () => {
-            return false;
-          },
-        },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(

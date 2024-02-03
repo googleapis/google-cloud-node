@@ -168,17 +168,74 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta1.SpecialistPoolServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new specialistpoolserviceModule.v1beta1.SpecialistPoolServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

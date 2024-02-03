@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await automlClient.listTableSpecsAsync(request);
+    const iterable = automlClient.listTableSpecsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

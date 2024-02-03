@@ -168,15 +168,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.DatasetServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        datasetserviceModule.v1.DatasetServiceClient.servicePath;
-      assert(servicePath);
+      const client = new datasetserviceModule.v1.DatasetServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        datasetserviceModule.v1.DatasetServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new datasetserviceModule.v1.DatasetServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new datasetserviceModule.v1.DatasetServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          datasetserviceModule.v1.DatasetServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          datasetserviceModule.v1.DatasetServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new datasetserviceModule.v1.DatasetServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new datasetserviceModule.v1.DatasetServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new datasetserviceModule.v1.DatasetServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

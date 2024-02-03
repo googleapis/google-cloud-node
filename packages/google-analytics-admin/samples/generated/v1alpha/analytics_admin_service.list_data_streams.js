@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listDataStreamsAsync(request);
+    const iterable = adminClient.listDataStreamsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

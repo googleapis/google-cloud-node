@@ -130,17 +130,73 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.AdvisoryNotificationsServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'advisorynotifications.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'advisorynotifications.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          advisorynotificationsserviceModule.v1
+            .AdvisoryNotificationsServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'advisorynotifications.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          advisorynotificationsserviceModule.v1
+            .AdvisoryNotificationsServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'advisorynotifications.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'advisorynotifications.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'advisorynotifications.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

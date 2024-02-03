@@ -162,13 +162,65 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.VersionsClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = versionsModule.v1.VersionsClient.servicePath;
-      assert(servicePath);
+      const client = new versionsModule.v1.VersionsClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'appengine.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = versionsModule.v1.VersionsClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new versionsModule.v1.VersionsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'appengine.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new versionsModule.v1.VersionsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = versionsModule.v1.VersionsClient.servicePath;
+        assert.strictEqual(servicePath, 'appengine.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = versionsModule.v1.VersionsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'appengine.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new versionsModule.v1.VersionsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'appengine.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new versionsModule.v1.VersionsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'appengine.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new versionsModule.v1.VersionsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

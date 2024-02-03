@@ -162,15 +162,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.ApiGatewayServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        apigatewayserviceModule.v1.ApiGatewayServiceClient.servicePath;
-      assert(servicePath);
+      const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'apigateway.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        apigatewayserviceModule.v1.ApiGatewayServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'apigateway.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          apigatewayserviceModule.v1.ApiGatewayServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'apigateway.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          apigatewayserviceModule.v1.ApiGatewayServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'apigateway.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'apigateway.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'apigateway.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new apigatewayserviceModule.v1.ApiGatewayServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

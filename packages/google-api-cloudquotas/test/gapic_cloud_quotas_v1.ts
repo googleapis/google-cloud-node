@@ -130,13 +130,65 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.CloudQuotasClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = cloudquotasModule.v1.CloudQuotasClient.servicePath;
-      assert(servicePath);
+      const client = new cloudquotasModule.v1.CloudQuotasClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudquotas.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = cloudquotasModule.v1.CloudQuotasClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new cloudquotasModule.v1.CloudQuotasClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudquotas.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new cloudquotasModule.v1.CloudQuotasClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = cloudquotasModule.v1.CloudQuotasClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudquotas.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = cloudquotasModule.v1.CloudQuotasClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudquotas.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new cloudquotasModule.v1.CloudQuotasClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudquotas.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new cloudquotasModule.v1.CloudQuotasClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudquotas.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new cloudquotasModule.v1.CloudQuotasClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

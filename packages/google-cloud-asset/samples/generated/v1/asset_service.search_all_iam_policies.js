@@ -143,7 +143,7 @@ function main(scope) {
     };
 
     // Run request
-    const iterable = await assetClient.searchAllIamPoliciesAsync(request);
+    const iterable = assetClient.searchAllIamPoliciesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

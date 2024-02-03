@@ -83,7 +83,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listNasJobsAsync(request);
+    const iterable = aiplatformClient.listNasJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

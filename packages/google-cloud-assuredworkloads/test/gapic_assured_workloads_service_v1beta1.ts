@@ -162,17 +162,73 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta1.AssuredWorkloadsServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'assuredworkloads.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'assuredworkloads.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'assuredworkloads.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'assuredworkloads.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'assuredworkloads.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'assuredworkloads.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new assuredworkloadsserviceModule.v1beta1.AssuredWorkloadsServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

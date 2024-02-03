@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1beta1/model_garden_service_client_config.json`.
@@ -54,6 +55,8 @@ export class ModelGardenServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -113,8 +116,20 @@ export class ModelGardenServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ModelGardenServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    this._universeDomain =
+      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+    this._servicePath = 'aiplatform.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -126,7 +141,7 @@ export class ModelGardenServiceClient {
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -151,10 +166,10 @@ export class ModelGardenServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
@@ -426,19 +441,59 @@ export class ModelGardenServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process !== undefined &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'aiplatform.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
+   * The DNS address for this API service - same as servicePath,
    * exists for compatibility reasons.
+   * @deprecated
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process !== undefined &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'aiplatform.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get servicePath() {
+    return this._servicePath;
+  }
+
+  /**
+   * The DNS address for this API service - same as servicePath().
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**

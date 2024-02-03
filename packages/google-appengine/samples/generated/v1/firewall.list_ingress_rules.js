@@ -60,7 +60,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await appengineClient.listIngressRulesAsync(request);
+    const iterable = appengineClient.listIngressRulesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

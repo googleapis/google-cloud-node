@@ -168,15 +168,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.ScheduleServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        scheduleserviceModule.v1.ScheduleServiceClient.servicePath;
-      assert(servicePath);
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        scheduleserviceModule.v1.ScheduleServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          scheduleserviceModule.v1.ScheduleServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          scheduleserviceModule.v1.ScheduleServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new scheduleserviceModule.v1.ScheduleServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new scheduleserviceModule.v1.ScheduleServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

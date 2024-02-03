@@ -86,7 +86,7 @@ function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.searchModelDeploymentMonitoringStatsAnomaliesAsync(request);
+    const iterable = aiplatformClient.searchModelDeploymentMonitoringStatsAnomaliesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await alloydbClient.listDatabasesAsync(request);
+    const iterable = alloydbClient.listDatabasesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await generativelanguageClient.listPermissionsAsync(request);
+    const iterable = generativelanguageClient.listPermissionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
