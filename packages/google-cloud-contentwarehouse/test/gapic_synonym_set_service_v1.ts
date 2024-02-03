@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.SynonymSetServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        synonymsetserviceModule.v1.SynonymSetServiceClient.servicePath;
-      assert(servicePath);
+      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'contentwarehouse.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        synonymsetserviceModule.v1.SynonymSetServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          synonymsetserviceModule.v1.SynonymSetServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'contentwarehouse.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          synonymsetserviceModule.v1.SynonymSetServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'contentwarehouse.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new synonymsetserviceModule.v1.SynonymSetServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'contentwarehouse.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new synonymsetserviceModule.v1.SynonymSetServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

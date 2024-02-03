@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await deployClient.listJobRunsAsync(request);
+    const iterable = deployClient.listJobRunsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

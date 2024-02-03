@@ -78,7 +78,7 @@ function main(projectId, region) {
     };
 
     // Run request
-    const iterable = await dataprocClient.listClustersAsync(request);
+    const iterable = dataprocClient.listClustersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

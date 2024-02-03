@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listEnvironmentsAsync(request);
+    const iterable = cxClient.listEnvironmentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

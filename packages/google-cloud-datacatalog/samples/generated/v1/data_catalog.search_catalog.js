@@ -101,7 +101,7 @@ function main(scope) {
     };
 
     // Run request
-    const iterable = await datacatalogClient.searchCatalogAsync(request);
+    const iterable = datacatalogClient.searchCatalogAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

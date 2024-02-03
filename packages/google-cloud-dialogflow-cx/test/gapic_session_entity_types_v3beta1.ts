@@ -130,15 +130,72 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v3beta1.SessionEntityTypesClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        sessionentitytypesModule.v3beta1.SessionEntityTypesClient.servicePath;
-      assert(servicePath);
+      const client =
+        new sessionentitytypesModule.v3beta1.SessionEntityTypesClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        sessionentitytypesModule.v3beta1.SessionEntityTypesClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new sessionentitytypesModule.v3beta1.SessionEntityTypesClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new sessionentitytypesModule.v3beta1.SessionEntityTypesClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          sessionentitytypesModule.v3beta1.SessionEntityTypesClient.servicePath;
+        assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          sessionentitytypesModule.v3beta1.SessionEntityTypesClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new sessionentitytypesModule.v3beta1.SessionEntityTypesClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new sessionentitytypesModule.v3beta1.SessionEntityTypesClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new sessionentitytypesModule.v3beta1.SessionEntityTypesClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

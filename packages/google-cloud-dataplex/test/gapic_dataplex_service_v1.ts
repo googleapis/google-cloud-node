@@ -167,15 +167,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.DataplexServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        dataplexserviceModule.v1.DataplexServiceClient.servicePath;
-      assert(servicePath);
+      const client = new dataplexserviceModule.v1.DataplexServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataplex.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        dataplexserviceModule.v1.DataplexServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new dataplexserviceModule.v1.DataplexServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dataplex.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new dataplexserviceModule.v1.DataplexServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          dataplexserviceModule.v1.DataplexServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'dataplex.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          dataplexserviceModule.v1.DataplexServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dataplex.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new dataplexserviceModule.v1.DataplexServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataplex.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new dataplexserviceModule.v1.DataplexServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataplex.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new dataplexserviceModule.v1.DataplexServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

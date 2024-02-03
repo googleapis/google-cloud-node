@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listGeneratorsAsync(request);
+    const iterable = cxClient.listGeneratorsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

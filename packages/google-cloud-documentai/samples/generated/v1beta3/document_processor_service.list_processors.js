@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await documentaiClient.listProcessorsAsync(request);
+    const iterable = documentaiClient.listProcessorsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

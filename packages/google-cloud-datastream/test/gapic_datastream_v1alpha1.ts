@@ -162,15 +162,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1alpha1.DatastreamClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        datastreamModule.v1alpha1.DatastreamClient.servicePath;
-      assert(servicePath);
+      const client = new datastreamModule.v1alpha1.DatastreamClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'datastream.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        datastreamModule.v1alpha1.DatastreamClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new datastreamModule.v1alpha1.DatastreamClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'datastream.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new datastreamModule.v1alpha1.DatastreamClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          datastreamModule.v1alpha1.DatastreamClient.servicePath;
+        assert.strictEqual(servicePath, 'datastream.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          datastreamModule.v1alpha1.DatastreamClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'datastream.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new datastreamModule.v1alpha1.DatastreamClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'datastream.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new datastreamModule.v1alpha1.DatastreamClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'datastream.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new datastreamModule.v1alpha1.DatastreamClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

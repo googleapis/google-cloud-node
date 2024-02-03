@@ -249,7 +249,7 @@ function main(servingConfig) {
     };
 
     // Run request
-    const iterable = await discoveryengineClient.searchAsync(request);
+    const iterable = discoveryengineClient.searchAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

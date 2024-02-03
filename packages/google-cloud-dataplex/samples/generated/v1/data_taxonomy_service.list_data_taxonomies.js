@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataplexClient.listDataTaxonomiesAsync(request);
+    const iterable = dataplexClient.listDataTaxonomiesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

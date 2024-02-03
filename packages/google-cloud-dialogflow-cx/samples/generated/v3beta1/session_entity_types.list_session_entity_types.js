@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listSessionEntityTypesAsync(request);
+    const iterable = cxClient.listSessionEntityTypesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

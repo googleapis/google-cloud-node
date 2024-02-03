@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datastreamClient.listPrivateConnectionsAsync(request);
+    const iterable = datastreamClient.listPrivateConnectionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

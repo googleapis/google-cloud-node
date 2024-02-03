@@ -130,17 +130,73 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.ConversationalSearchServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        conversationalsearchserviceModule.v1.ConversationalSearchServiceClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        conversationalsearchserviceModule.v1.ConversationalSearchServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          conversationalsearchserviceModule.v1.ConversationalSearchServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          conversationalsearchserviceModule.v1.ConversationalSearchServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'discoveryengine.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'discoveryengine.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

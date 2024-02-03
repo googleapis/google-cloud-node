@@ -168,13 +168,65 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.ConfigClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = configModule.v1.ConfigClient.servicePath;
-      assert(servicePath);
+      const client = new configModule.v1.ConfigClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'config.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = configModule.v1.ConfigClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new configModule.v1.ConfigClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'config.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new configModule.v1.ConfigClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = configModule.v1.ConfigClient.servicePath;
+        assert.strictEqual(servicePath, 'config.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = configModule.v1.ConfigClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'config.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new configModule.v1.ConfigClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'config.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new configModule.v1.ConfigClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'config.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new configModule.v1.ConfigClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

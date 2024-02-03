@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await discoveryengineClient.listEnginesAsync(request);
+    const iterable = discoveryengineClient.listEnginesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataplexClient.listJobsAsync(request);
+    const iterable = dataplexClient.listJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

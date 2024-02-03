@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datastreamClient.listStreamsAsync(request);
+    const iterable = datastreamClient.listStreamsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -162,17 +162,91 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1alpha1.ConsumerProcurementServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        consumerprocurementserviceModule.v1alpha1
-          .ConsumerProcurementServiceClient.servicePath;
-      assert(servicePath);
+      const client =
+        new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(
+        servicePath,
+        'cloudcommerceconsumerprocurement.googleapis.com'
+      );
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        consumerprocurementserviceModule.v1alpha1
-          .ConsumerProcurementServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(
+        apiEndpoint,
+        'cloudcommerceconsumerprocurement.googleapis.com'
+      );
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          consumerprocurementserviceModule.v1alpha1
+            .ConsumerProcurementServiceClient.servicePath;
+        assert.strictEqual(
+          servicePath,
+          'cloudcommerceconsumerprocurement.googleapis.com'
+        );
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          consumerprocurementserviceModule.v1alpha1
+            .ConsumerProcurementServiceClient.apiEndpoint;
+        assert.strictEqual(
+          apiEndpoint,
+          'cloudcommerceconsumerprocurement.googleapis.com'
+        );
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(
+        servicePath,
+        'cloudcommerceconsumerprocurement.example.com'
+      );
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(
+        servicePath,
+        'cloudcommerceconsumerprocurement.example.com'
+      );
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new consumerprocurementserviceModule.v1alpha1.ConsumerProcurementServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

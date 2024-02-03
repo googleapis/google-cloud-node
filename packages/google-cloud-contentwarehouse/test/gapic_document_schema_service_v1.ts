@@ -130,15 +130,74 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.DocumentSchemaServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        documentschemaserviceModule.v1.DocumentSchemaServiceClient.servicePath;
-      assert(servicePath);
+      const client =
+        new documentschemaserviceModule.v1.DocumentSchemaServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'contentwarehouse.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        documentschemaserviceModule.v1.DocumentSchemaServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new documentschemaserviceModule.v1.DocumentSchemaServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new documentschemaserviceModule.v1.DocumentSchemaServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          documentschemaserviceModule.v1.DocumentSchemaServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'contentwarehouse.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          documentschemaserviceModule.v1.DocumentSchemaServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'contentwarehouse.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'contentwarehouse.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'contentwarehouse.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
