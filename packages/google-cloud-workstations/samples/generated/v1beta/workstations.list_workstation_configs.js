@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await workstationsClient.listWorkstationConfigsAsync(request);
+    const iterable = workstationsClient.listWorkstationConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

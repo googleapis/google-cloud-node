@@ -67,15 +67,67 @@ function stubSimpleCallWithCallback<ResponseType>(
 describe('v1beta1.TextToSpeechClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        texttospeechModule.v1beta1.TextToSpeechClient.servicePath;
-      assert(servicePath);
+      const client = new texttospeechModule.v1beta1.TextToSpeechClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'texttospeech.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        texttospeechModule.v1beta1.TextToSpeechClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new texttospeechModule.v1beta1.TextToSpeechClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'texttospeech.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new texttospeechModule.v1beta1.TextToSpeechClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          texttospeechModule.v1beta1.TextToSpeechClient.servicePath;
+        assert.strictEqual(servicePath, 'texttospeech.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          texttospeechModule.v1beta1.TextToSpeechClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'texttospeech.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new texttospeechModule.v1beta1.TextToSpeechClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'texttospeech.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new texttospeechModule.v1beta1.TextToSpeechClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'texttospeech.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new texttospeechModule.v1beta1.TextToSpeechClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

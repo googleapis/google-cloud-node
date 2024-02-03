@@ -99,7 +99,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listManagementDnsZoneBindingsAsync(request);
+    const iterable = vmwareengineClient.listManagementDnsZoneBindingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

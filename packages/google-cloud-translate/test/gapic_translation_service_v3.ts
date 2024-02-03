@@ -162,15 +162,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v3.TranslationServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        translationserviceModule.v3.TranslationServiceClient.servicePath;
-      assert(servicePath);
+      const client = new translationserviceModule.v3.TranslationServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'translate.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        translationserviceModule.v3.TranslationServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new translationserviceModule.v3.TranslationServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'translate.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          translationserviceModule.v3.TranslationServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'translate.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          translationserviceModule.v3.TranslationServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'translate.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'translate.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new translationserviceModule.v3.TranslationServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'translate.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new translationserviceModule.v3.TranslationServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

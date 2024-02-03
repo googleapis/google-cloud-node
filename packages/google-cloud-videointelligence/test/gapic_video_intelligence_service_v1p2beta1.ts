@@ -90,17 +90,73 @@ function stubLongRunningCallWithCallback<ResponseType>(
 describe('v1p2beta1.VideoIntelligenceServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        videointelligenceserviceModule.v1p2beta1.VideoIntelligenceServiceClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new videointelligenceserviceModule.v1p2beta1.VideoIntelligenceServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'videointelligence.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        videointelligenceserviceModule.v1p2beta1.VideoIntelligenceServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new videointelligenceserviceModule.v1p2beta1.VideoIntelligenceServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'videointelligence.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new videointelligenceserviceModule.v1p2beta1.VideoIntelligenceServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          videointelligenceserviceModule.v1p2beta1
+            .VideoIntelligenceServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'videointelligence.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          videointelligenceserviceModule.v1p2beta1
+            .VideoIntelligenceServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'videointelligence.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new videointelligenceserviceModule.v1p2beta1.VideoIntelligenceServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'videointelligence.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new videointelligenceserviceModule.v1p2beta1.VideoIntelligenceServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'videointelligence.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new videointelligenceserviceModule.v1p2beta1.VideoIntelligenceServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

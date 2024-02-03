@@ -67,13 +67,65 @@ function stubSimpleCallWithCallback<ResponseType>(
 describe('v4.CompletionClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = completionModule.v4.CompletionClient.servicePath;
-      assert(servicePath);
+      const client = new completionModule.v4.CompletionClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'jobs.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = completionModule.v4.CompletionClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new completionModule.v4.CompletionClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'jobs.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new completionModule.v4.CompletionClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = completionModule.v4.CompletionClient.servicePath;
+        assert.strictEqual(servicePath, 'jobs.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = completionModule.v4.CompletionClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'jobs.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new completionModule.v4.CompletionClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'jobs.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new completionModule.v4.CompletionClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'jobs.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new completionModule.v4.CompletionClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

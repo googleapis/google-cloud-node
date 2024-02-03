@@ -97,7 +97,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listNetworkPoliciesAsync(request);
+    const iterable = vmwareengineClient.listNetworkPoliciesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

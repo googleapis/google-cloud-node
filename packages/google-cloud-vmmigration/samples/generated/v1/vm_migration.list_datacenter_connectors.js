@@ -70,7 +70,7 @@ function main(parent, pageToken) {
     };
 
     // Run request
-    const iterable = await vmmigrationClient.listDatacenterConnectorsAsync(request);
+    const iterable = vmmigrationClient.listDatacenterConnectorsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

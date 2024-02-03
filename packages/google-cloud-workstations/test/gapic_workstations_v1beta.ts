@@ -168,15 +168,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta.WorkstationsClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        workstationsModule.v1beta.WorkstationsClient.servicePath;
-      assert(servicePath);
+      const client = new workstationsModule.v1beta.WorkstationsClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'workstations.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        workstationsModule.v1beta.WorkstationsClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new workstationsModule.v1beta.WorkstationsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'workstations.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new workstationsModule.v1beta.WorkstationsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          workstationsModule.v1beta.WorkstationsClient.servicePath;
+        assert.strictEqual(servicePath, 'workstations.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          workstationsModule.v1beta.WorkstationsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'workstations.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new workstationsModule.v1beta.WorkstationsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'workstations.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new workstationsModule.v1beta.WorkstationsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'workstations.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new workstationsModule.v1beta.WorkstationsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

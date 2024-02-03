@@ -69,7 +69,7 @@ function main(parent, pageToken) {
     };
 
     // Run request
-    const iterable = await vmmigrationClient.listCutoverJobsAsync(request);
+    const iterable = vmmigrationClient.listCutoverJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

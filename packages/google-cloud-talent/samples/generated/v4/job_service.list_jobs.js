@@ -89,7 +89,7 @@ function main(parent, filter) {
     };
 
     // Run request
-    const iterable = await talentClient.listJobsAsync(request);
+    const iterable = talentClient.listJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

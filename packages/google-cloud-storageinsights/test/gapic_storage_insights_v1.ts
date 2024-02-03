@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.StorageInsightsClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        storageinsightsModule.v1.StorageInsightsClient.servicePath;
-      assert(servicePath);
+      const client = new storageinsightsModule.v1.StorageInsightsClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'storageinsights.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        storageinsightsModule.v1.StorageInsightsClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new storageinsightsModule.v1.StorageInsightsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'storageinsights.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new storageinsightsModule.v1.StorageInsightsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          storageinsightsModule.v1.StorageInsightsClient.servicePath;
+        assert.strictEqual(servicePath, 'storageinsights.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          storageinsightsModule.v1.StorageInsightsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'storageinsights.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new storageinsightsModule.v1.StorageInsightsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'storageinsights.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new storageinsightsModule.v1.StorageInsightsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'storageinsights.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new storageinsightsModule.v1.StorageInsightsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

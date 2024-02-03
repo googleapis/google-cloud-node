@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta1.ClusterManagerClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        clustermanagerModule.v1beta1.ClusterManagerClient.servicePath;
-      assert(servicePath);
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'container.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        clustermanagerModule.v1beta1.ClusterManagerClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'container.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          clustermanagerModule.v1beta1.ClusterManagerClient.servicePath;
+        assert.strictEqual(servicePath, 'container.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          clustermanagerModule.v1beta1.ClusterManagerClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'container.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'container.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'container.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new clustermanagerModule.v1beta1.ClusterManagerClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

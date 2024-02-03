@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await storageinsightsClient.listReportDetailsAsync(request);
+    const iterable = storageinsightsClient.listReportDetailsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

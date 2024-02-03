@@ -168,13 +168,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.VmwareEngineClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = vmwareengineModule.v1.VmwareEngineClient.servicePath;
-      assert(servicePath);
+      const client = new vmwareengineModule.v1.VmwareEngineClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'vmwareengine.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = vmwareengineModule.v1.VmwareEngineClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new vmwareengineModule.v1.VmwareEngineClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'vmwareengine.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          vmwareengineModule.v1.VmwareEngineClient.servicePath;
+        assert.strictEqual(servicePath, 'vmwareengine.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          vmwareengineModule.v1.VmwareEngineClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'vmwareengine.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'vmwareengine.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new vmwareengineModule.v1.VmwareEngineClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'vmwareengine.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new vmwareengineModule.v1.VmwareEngineClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

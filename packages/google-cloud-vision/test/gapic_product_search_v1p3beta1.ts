@@ -162,15 +162,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1p3beta1.ProductSearchClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        productsearchModule.v1p3beta1.ProductSearchClient.servicePath;
-      assert(servicePath);
+      const client = new productsearchModule.v1p3beta1.ProductSearchClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'vision.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        productsearchModule.v1p3beta1.ProductSearchClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new productsearchModule.v1p3beta1.ProductSearchClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'vision.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new productsearchModule.v1p3beta1.ProductSearchClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          productsearchModule.v1p3beta1.ProductSearchClient.servicePath;
+        assert.strictEqual(servicePath, 'vision.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          productsearchModule.v1p3beta1.ProductSearchClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'vision.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new productsearchModule.v1p3beta1.ProductSearchClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'vision.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new productsearchModule.v1p3beta1.ProductSearchClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'vision.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new productsearchModule.v1p3beta1.ProductSearchClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

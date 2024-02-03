@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v4.TenantServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        tenantserviceModule.v4.TenantServiceClient.servicePath;
-      assert(servicePath);
+      const client = new tenantserviceModule.v4.TenantServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'jobs.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        tenantserviceModule.v4.TenantServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new tenantserviceModule.v4.TenantServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'jobs.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new tenantserviceModule.v4.TenantServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          tenantserviceModule.v4.TenantServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'jobs.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          tenantserviceModule.v4.TenantServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'jobs.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new tenantserviceModule.v4.TenantServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'jobs.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new tenantserviceModule.v4.TenantServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'jobs.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new tenantserviceModule.v4.TenantServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

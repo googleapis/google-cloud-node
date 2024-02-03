@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await stitcherClient.listLiveConfigsAsync(request);
+    const iterable = stitcherClient.listLiveConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

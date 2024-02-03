@@ -97,7 +97,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listPrivateCloudsAsync(request);
+    const iterable = vmwareengineClient.listPrivateCloudsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

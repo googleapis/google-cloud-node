@@ -79,7 +79,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await tasksClient.listQueuesAsync(request);
+    const iterable = tasksClient.listQueuesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
