@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await iapClient.listIdentityAwareProxyClientsAsync(request);
+    const iterable = iapClient.listIdentityAwareProxyClientsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

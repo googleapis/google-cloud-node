@@ -167,17 +167,74 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta1.CloudFilestoreManagerClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'file.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'file.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'file.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'file.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'file.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'file.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

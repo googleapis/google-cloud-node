@@ -162,13 +162,65 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1alpha2.GkeHubClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = gkehubModule.v1alpha2.GkeHubClient.servicePath;
-      assert(servicePath);
+      const client = new gkehubModule.v1alpha2.GkeHubClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'gkehub.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = gkehubModule.v1alpha2.GkeHubClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new gkehubModule.v1alpha2.GkeHubClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'gkehub.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new gkehubModule.v1alpha2.GkeHubClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = gkehubModule.v1alpha2.GkeHubClient.servicePath;
+        assert.strictEqual(servicePath, 'gkehub.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = gkehubModule.v1alpha2.GkeHubClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'gkehub.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new gkehubModule.v1alpha2.GkeHubClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'gkehub.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new gkehubModule.v1alpha2.GkeHubClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'gkehub.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new gkehubModule.v1alpha2.GkeHubClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

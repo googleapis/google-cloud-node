@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.KeyTrackingServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        keytrackingserviceModule.v1.KeyTrackingServiceClient.servicePath;
-      assert(servicePath);
+      const client = new keytrackingserviceModule.v1.KeyTrackingServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'kmsinventory.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        keytrackingserviceModule.v1.KeyTrackingServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new keytrackingserviceModule.v1.KeyTrackingServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'kmsinventory.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new keytrackingserviceModule.v1.KeyTrackingServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          keytrackingserviceModule.v1.KeyTrackingServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'kmsinventory.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          keytrackingserviceModule.v1.KeyTrackingServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'kmsinventory.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new keytrackingserviceModule.v1.KeyTrackingServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'kmsinventory.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new keytrackingserviceModule.v1.KeyTrackingServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'kmsinventory.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new keytrackingserviceModule.v1.KeyTrackingServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

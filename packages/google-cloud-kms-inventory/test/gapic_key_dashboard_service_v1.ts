@@ -130,15 +130,70 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.KeyDashboardServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        keydashboardserviceModule.v1.KeyDashboardServiceClient.servicePath;
-      assert(servicePath);
+      const client =
+        new keydashboardserviceModule.v1.KeyDashboardServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'kmsinventory.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        keydashboardserviceModule.v1.KeyDashboardServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new keydashboardserviceModule.v1.KeyDashboardServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'kmsinventory.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new keydashboardserviceModule.v1.KeyDashboardServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          keydashboardserviceModule.v1.KeyDashboardServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'kmsinventory.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          keydashboardserviceModule.v1.KeyDashboardServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'kmsinventory.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
+        {universeDomain: 'example.com'}
+      );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'kmsinventory.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new keydashboardserviceModule.v1.KeyDashboardServiceClient(
+        {universe_domain: 'example.com'}
+      );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'kmsinventory.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new keydashboardserviceModule.v1.KeyDashboardServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

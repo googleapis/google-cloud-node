@@ -168,13 +168,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.BackupForGKEClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = backupforgkeModule.v1.BackupForGKEClient.servicePath;
-      assert(servicePath);
+      const client = new backupforgkeModule.v1.BackupForGKEClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'gkebackup.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = backupforgkeModule.v1.BackupForGKEClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new backupforgkeModule.v1.BackupForGKEClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'gkebackup.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new backupforgkeModule.v1.BackupForGKEClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          backupforgkeModule.v1.BackupForGKEClient.servicePath;
+        assert.strictEqual(servicePath, 'gkebackup.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          backupforgkeModule.v1.BackupForGKEClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'gkebackup.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new backupforgkeModule.v1.BackupForGKEClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'gkebackup.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new backupforgkeModule.v1.BackupForGKEClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'gkebackup.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new backupforgkeModule.v1.BackupForGKEClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
