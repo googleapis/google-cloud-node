@@ -90,17 +90,74 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta4.SqlBackupRunsServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        sqlbackuprunsserviceModule.v1beta4.SqlBackupRunsServiceClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new sqlbackuprunsserviceModule.v1beta4.SqlBackupRunsServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'sqladmin.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        sqlbackuprunsserviceModule.v1beta4.SqlBackupRunsServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new sqlbackuprunsserviceModule.v1beta4.SqlBackupRunsServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'sqladmin.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new sqlbackuprunsserviceModule.v1beta4.SqlBackupRunsServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          sqlbackuprunsserviceModule.v1beta4.SqlBackupRunsServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'sqladmin.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          sqlbackuprunsserviceModule.v1beta4.SqlBackupRunsServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'sqladmin.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new sqlbackuprunsserviceModule.v1beta4.SqlBackupRunsServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'sqladmin.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new sqlbackuprunsserviceModule.v1beta4.SqlBackupRunsServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'sqladmin.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new sqlbackuprunsserviceModule.v1beta4.SqlBackupRunsServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

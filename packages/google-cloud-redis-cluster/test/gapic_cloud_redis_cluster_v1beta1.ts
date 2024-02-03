@@ -167,15 +167,72 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta1.CloudRedisClusterClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        cloudredisclusterModule.v1beta1.CloudRedisClusterClient.servicePath;
-      assert(servicePath);
+      const client =
+        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'redis.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        cloudredisclusterModule.v1beta1.CloudRedisClusterClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'redis.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          cloudredisclusterModule.v1beta1.CloudRedisClusterClient.servicePath;
+        assert.strictEqual(servicePath, 'redis.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          cloudredisclusterModule.v1beta1.CloudRedisClusterClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'redis.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'redis.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'redis.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new cloudredisclusterModule.v1beta1.CloudRedisClusterClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

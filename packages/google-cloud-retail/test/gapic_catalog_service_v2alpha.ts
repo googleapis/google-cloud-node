@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v2alpha.CatalogServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        catalogserviceModule.v2alpha.CatalogServiceClient.servicePath;
-      assert(servicePath);
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'retail.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        catalogserviceModule.v2alpha.CatalogServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          catalogserviceModule.v2alpha.CatalogServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'retail.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          catalogserviceModule.v2alpha.CatalogServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'retail.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'retail.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new catalogserviceModule.v2alpha.CatalogServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

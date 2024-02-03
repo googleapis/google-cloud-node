@@ -90,15 +90,72 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta4.SqlConnectServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        sqlconnectserviceModule.v1beta4.SqlConnectServiceClient.servicePath;
-      assert(servicePath);
+      const client =
+        new sqlconnectserviceModule.v1beta4.SqlConnectServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'sqladmin.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        sqlconnectserviceModule.v1beta4.SqlConnectServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new sqlconnectserviceModule.v1beta4.SqlConnectServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'sqladmin.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new sqlconnectserviceModule.v1beta4.SqlConnectServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          sqlconnectserviceModule.v1beta4.SqlConnectServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'sqladmin.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          sqlconnectserviceModule.v1beta4.SqlConnectServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'sqladmin.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new sqlconnectserviceModule.v1beta4.SqlConnectServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'sqladmin.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new sqlconnectserviceModule.v1beta4.SqlConnectServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'sqladmin.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new sqlconnectserviceModule.v1beta4.SqlConnectServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

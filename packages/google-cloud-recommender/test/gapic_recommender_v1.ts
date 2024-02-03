@@ -130,13 +130,65 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.RecommenderClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = recommenderModule.v1.RecommenderClient.servicePath;
-      assert(servicePath);
+      const client = new recommenderModule.v1.RecommenderClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'recommender.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = recommenderModule.v1.RecommenderClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new recommenderModule.v1.RecommenderClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'recommender.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new recommenderModule.v1.RecommenderClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = recommenderModule.v1.RecommenderClient.servicePath;
+        assert.strictEqual(servicePath, 'recommender.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = recommenderModule.v1.RecommenderClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'recommender.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'recommender.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'recommender.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new recommenderModule.v1.RecommenderClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

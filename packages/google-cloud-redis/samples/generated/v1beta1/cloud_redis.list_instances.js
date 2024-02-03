@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await redisClient.listInstancesAsync(request);
+    const iterable = redisClient.listInstancesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

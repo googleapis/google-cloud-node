@@ -90,15 +90,72 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.SqlOperationsServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        sqloperationsserviceModule.v1.SqlOperationsServiceClient.servicePath;
-      assert(servicePath);
+      const client =
+        new sqloperationsserviceModule.v1.SqlOperationsServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'sqladmin.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        sqloperationsserviceModule.v1.SqlOperationsServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new sqloperationsserviceModule.v1.SqlOperationsServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'sqladmin.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new sqloperationsserviceModule.v1.SqlOperationsServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          sqloperationsserviceModule.v1.SqlOperationsServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'sqladmin.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          sqloperationsserviceModule.v1.SqlOperationsServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'sqladmin.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new sqloperationsserviceModule.v1.SqlOperationsServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'sqladmin.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new sqloperationsserviceModule.v1.SqlOperationsServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'sqladmin.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new sqloperationsserviceModule.v1.SqlOperationsServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

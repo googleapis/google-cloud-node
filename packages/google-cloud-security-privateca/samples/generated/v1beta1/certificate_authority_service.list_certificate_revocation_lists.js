@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await privatecaClient.listCertificateRevocationListsAsync(request);
+    const iterable = privatecaClient.listCertificateRevocationListsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

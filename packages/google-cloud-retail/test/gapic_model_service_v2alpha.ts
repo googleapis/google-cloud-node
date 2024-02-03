@@ -167,15 +167,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v2alpha.ModelServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        modelserviceModule.v2alpha.ModelServiceClient.servicePath;
-      assert(servicePath);
+      const client = new modelserviceModule.v2alpha.ModelServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'retail.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        modelserviceModule.v2alpha.ModelServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new modelserviceModule.v2alpha.ModelServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new modelserviceModule.v2alpha.ModelServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          modelserviceModule.v2alpha.ModelServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'retail.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          modelserviceModule.v2alpha.ModelServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'retail.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new modelserviceModule.v2alpha.ModelServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'retail.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new modelserviceModule.v2alpha.ModelServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

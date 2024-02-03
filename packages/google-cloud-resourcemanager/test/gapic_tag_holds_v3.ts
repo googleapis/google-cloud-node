@@ -162,13 +162,65 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v3.TagHoldsClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = tagholdsModule.v3.TagHoldsClient.servicePath;
-      assert(servicePath);
+      const client = new tagholdsModule.v3.TagHoldsClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudresourcemanager.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = tagholdsModule.v3.TagHoldsClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new tagholdsModule.v3.TagHoldsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudresourcemanager.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new tagholdsModule.v3.TagHoldsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = tagholdsModule.v3.TagHoldsClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudresourcemanager.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = tagholdsModule.v3.TagHoldsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudresourcemanager.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new tagholdsModule.v3.TagHoldsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new tagholdsModule.v3.TagHoldsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudresourcemanager.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new tagholdsModule.v3.TagHoldsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

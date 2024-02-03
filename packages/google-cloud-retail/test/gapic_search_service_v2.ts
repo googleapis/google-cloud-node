@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v2.SearchServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        searchserviceModule.v2.SearchServiceClient.servicePath;
-      assert(servicePath);
+      const client = new searchserviceModule.v2.SearchServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'retail.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        searchserviceModule.v2.SearchServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new searchserviceModule.v2.SearchServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new searchserviceModule.v2.SearchServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          searchserviceModule.v2.SearchServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'retail.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          searchserviceModule.v2.SearchServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'retail.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new searchserviceModule.v2.SearchServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'retail.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new searchserviceModule.v2.SearchServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'retail.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new searchserviceModule.v2.SearchServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

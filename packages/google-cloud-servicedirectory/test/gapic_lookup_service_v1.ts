@@ -90,15 +90,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.LookupServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        lookupserviceModule.v1.LookupServiceClient.servicePath;
-      assert(servicePath);
+      const client = new lookupserviceModule.v1.LookupServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'servicedirectory.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        lookupserviceModule.v1.LookupServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new lookupserviceModule.v1.LookupServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'servicedirectory.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new lookupserviceModule.v1.LookupServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          lookupserviceModule.v1.LookupServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'servicedirectory.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          lookupserviceModule.v1.LookupServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'servicedirectory.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new lookupserviceModule.v1.LookupServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'servicedirectory.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new lookupserviceModule.v1.LookupServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'servicedirectory.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new lookupserviceModule.v1.LookupServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

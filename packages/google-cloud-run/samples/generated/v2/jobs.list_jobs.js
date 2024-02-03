@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await runClient.listJobsAsync(request);
+    const iterable = runClient.listJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

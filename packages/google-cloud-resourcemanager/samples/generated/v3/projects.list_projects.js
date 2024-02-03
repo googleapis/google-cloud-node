@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await resourcemanagerClient.listProjectsAsync(request);
+    const iterable = resourcemanagerClient.listProjectsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -67,17 +67,73 @@ function stubSimpleCallWithCallback<ResponseType>(
 describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        recaptchaenterpriseservicev1beta1Module.v1beta1
-          .RecaptchaEnterpriseServiceV1Beta1Client.servicePath;
-      assert(servicePath);
+      const client =
+        new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'recaptchaenterprise.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        recaptchaenterpriseservicev1beta1Module.v1beta1
-          .RecaptchaEnterpriseServiceV1Beta1Client.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'recaptchaenterprise.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          recaptchaenterpriseservicev1beta1Module.v1beta1
+            .RecaptchaEnterpriseServiceV1Beta1Client.servicePath;
+        assert.strictEqual(servicePath, 'recaptchaenterprise.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          recaptchaenterpriseservicev1beta1Module.v1beta1
+            .RecaptchaEnterpriseServiceV1Beta1Client.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'recaptchaenterprise.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'recaptchaenterprise.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'recaptchaenterprise.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new recaptchaenterpriseservicev1beta1Module.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

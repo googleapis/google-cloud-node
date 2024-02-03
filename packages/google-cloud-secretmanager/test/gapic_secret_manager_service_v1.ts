@@ -130,15 +130,72 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.SecretManagerServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        secretmanagerserviceModule.v1.SecretManagerServiceClient.servicePath;
-      assert(servicePath);
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'secretmanager.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        secretmanagerserviceModule.v1.SecretManagerServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'secretmanager.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          secretmanagerserviceModule.v1.SecretManagerServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'secretmanager.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          secretmanagerserviceModule.v1.SecretManagerServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'secretmanager.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'secretmanager.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'secretmanager.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

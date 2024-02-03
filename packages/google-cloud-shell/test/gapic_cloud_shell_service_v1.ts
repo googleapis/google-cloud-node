@@ -122,15 +122,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.CloudShellServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        cloudshellserviceModule.v1.CloudShellServiceClient.servicePath;
-      assert(servicePath);
+      const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudshell.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        cloudshellserviceModule.v1.CloudShellServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudshell.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new cloudshellserviceModule.v1.CloudShellServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          cloudshellserviceModule.v1.CloudShellServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudshell.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          cloudshellserviceModule.v1.CloudShellServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudshell.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudshell.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new cloudshellserviceModule.v1.CloudShellServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'cloudshell.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new cloudshellserviceModule.v1.CloudShellServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await privatecaClient.listReusableConfigsAsync(request);
+    const iterable = privatecaClient.listReusableConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

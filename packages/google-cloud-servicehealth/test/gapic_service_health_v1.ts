@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.ServiceHealthClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        servicehealthModule.v1.ServiceHealthClient.servicePath;
-      assert(servicePath);
+      const client = new servicehealthModule.v1.ServiceHealthClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'servicehealth.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        servicehealthModule.v1.ServiceHealthClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new servicehealthModule.v1.ServiceHealthClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'servicehealth.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new servicehealthModule.v1.ServiceHealthClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          servicehealthModule.v1.ServiceHealthClient.servicePath;
+        assert.strictEqual(servicePath, 'servicehealth.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          servicehealthModule.v1.ServiceHealthClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'servicehealth.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new servicehealthModule.v1.ServiceHealthClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'servicehealth.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new servicehealthModule.v1.ServiceHealthClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'servicehealth.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new servicehealthModule.v1.ServiceHealthClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

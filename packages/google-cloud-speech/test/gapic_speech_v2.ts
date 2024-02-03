@@ -181,13 +181,65 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v2.SpeechClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = speechModule.v2.SpeechClient.servicePath;
-      assert(servicePath);
+      const client = new speechModule.v2.SpeechClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'speech.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = speechModule.v2.SpeechClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new speechModule.v2.SpeechClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'speech.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new speechModule.v2.SpeechClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = speechModule.v2.SpeechClient.servicePath;
+        assert.strictEqual(servicePath, 'speech.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = speechModule.v2.SpeechClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'speech.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new speechModule.v2.SpeechClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'speech.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new speechModule.v2.SpeechClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'speech.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new speechModule.v2.SpeechClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

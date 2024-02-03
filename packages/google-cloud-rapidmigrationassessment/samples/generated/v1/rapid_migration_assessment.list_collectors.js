@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await rapidmigrationassessmentClient.listCollectorsAsync(request);
+    const iterable = rapidmigrationassessmentClient.listCollectorsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
