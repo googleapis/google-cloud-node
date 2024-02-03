@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await documentaiClient.listEvaluationsAsync(request);
+    const iterable = documentaiClient.listEvaluationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

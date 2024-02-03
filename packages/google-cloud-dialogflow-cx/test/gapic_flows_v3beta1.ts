@@ -167,13 +167,65 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v3beta1.FlowsClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = flowsModule.v3beta1.FlowsClient.servicePath;
-      assert(servicePath);
+      const client = new flowsModule.v3beta1.FlowsClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = flowsModule.v3beta1.FlowsClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new flowsModule.v3beta1.FlowsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new flowsModule.v3beta1.FlowsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = flowsModule.v3beta1.FlowsClient.servicePath;
+        assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = flowsModule.v3beta1.FlowsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new flowsModule.v3beta1.FlowsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new flowsModule.v3beta1.FlowsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new flowsModule.v3beta1.FlowsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

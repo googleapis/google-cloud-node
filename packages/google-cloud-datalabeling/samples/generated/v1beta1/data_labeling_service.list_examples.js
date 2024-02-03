@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datalabelingClient.listExamplesAsync(request);
+    const iterable = datalabelingClient.listExamplesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

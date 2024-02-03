@@ -67,17 +67,74 @@ function stubSimpleCallWithCallback<ResponseType>(
 describe('v1alpha.AutoSuggestionServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataqna.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dataqna.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'dataqna.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dataqna.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataqna.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataqna.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new autosuggestionserviceModule.v1alpha.AutoSuggestionServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

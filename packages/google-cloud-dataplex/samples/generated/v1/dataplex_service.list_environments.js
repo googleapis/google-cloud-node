@@ -69,7 +69,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataplexClient.listEnvironmentsAsync(request);
+    const iterable = dataplexClient.listEnvironmentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

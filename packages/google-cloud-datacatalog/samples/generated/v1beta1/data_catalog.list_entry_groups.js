@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datacatalogClient.listEntryGroupsAsync(request);
+    const iterable = datacatalogClient.listEntryGroupsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -130,15 +130,67 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v2beta1.AnswerRecordsClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        answerrecordsModule.v2beta1.AnswerRecordsClient.servicePath;
-      assert(servicePath);
+      const client = new answerrecordsModule.v2beta1.AnswerRecordsClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        answerrecordsModule.v2beta1.AnswerRecordsClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new answerrecordsModule.v2beta1.AnswerRecordsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new answerrecordsModule.v2beta1.AnswerRecordsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          answerrecordsModule.v2beta1.AnswerRecordsClient.servicePath;
+        assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          answerrecordsModule.v2beta1.AnswerRecordsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new answerrecordsModule.v2beta1.AnswerRecordsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

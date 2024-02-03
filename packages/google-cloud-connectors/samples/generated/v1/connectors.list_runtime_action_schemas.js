@@ -66,7 +66,7 @@ function main(parent, filter) {
     };
 
     // Run request
-    const iterable = await connectorsClient.listRuntimeActionSchemasAsync(request);
+    const iterable = connectorsClient.listRuntimeActionSchemasAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

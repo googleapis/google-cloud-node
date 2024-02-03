@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataprocClient.listSessionTemplatesAsync(request);
+    const iterable = dataprocClient.listSessionTemplatesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

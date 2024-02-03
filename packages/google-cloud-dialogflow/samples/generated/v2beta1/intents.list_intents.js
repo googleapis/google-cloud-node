@@ -75,7 +75,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dialogflowClient.listIntentsAsync(request);
+    const iterable = dialogflowClient.listIntentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

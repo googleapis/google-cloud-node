@@ -84,7 +84,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await configClient.listDeploymentsAsync(request);
+    const iterable = configClient.listDeploymentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -167,15 +167,70 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.DataTaxonomyServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        datataxonomyserviceModule.v1.DataTaxonomyServiceClient.servicePath;
-      assert(servicePath);
+      const client =
+        new datataxonomyserviceModule.v1.DataTaxonomyServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataplex.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        datataxonomyserviceModule.v1.DataTaxonomyServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new datataxonomyserviceModule.v1.DataTaxonomyServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dataplex.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new datataxonomyserviceModule.v1.DataTaxonomyServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          datataxonomyserviceModule.v1.DataTaxonomyServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'dataplex.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          datataxonomyserviceModule.v1.DataTaxonomyServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dataplex.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new datataxonomyserviceModule.v1.DataTaxonomyServiceClient(
+        {universeDomain: 'example.com'}
+      );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataplex.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new datataxonomyserviceModule.v1.DataTaxonomyServiceClient(
+        {universe_domain: 'example.com'}
+      );
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataplex.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new datataxonomyserviceModule.v1.DataTaxonomyServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

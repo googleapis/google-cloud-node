@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataformClient.listRepositoriesAsync(request);
+    const iterable = dataformClient.listRepositoriesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -74,7 +74,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dialogflowClient.listConversationsAsync(request);
+    const iterable = dialogflowClient.listConversationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

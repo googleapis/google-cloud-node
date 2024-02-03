@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataformClient.listWorkflowConfigsAsync(request);
+    const iterable = dataformClient.listWorkflowConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

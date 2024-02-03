@@ -79,7 +79,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listPagesAsync(request);
+    const iterable = cxClient.listPagesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

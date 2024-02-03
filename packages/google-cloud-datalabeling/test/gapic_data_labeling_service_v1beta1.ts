@@ -162,15 +162,74 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1beta1.DataLabelingServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        datalabelingserviceModule.v1beta1.DataLabelingServiceClient.servicePath;
-      assert(servicePath);
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'datalabeling.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        datalabelingserviceModule.v1beta1.DataLabelingServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'datalabeling.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          datalabelingserviceModule.v1beta1.DataLabelingServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'datalabeling.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          datalabelingserviceModule.v1beta1.DataLabelingServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'datalabeling.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'datalabeling.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'datalabeling.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

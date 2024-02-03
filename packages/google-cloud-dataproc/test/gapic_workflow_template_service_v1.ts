@@ -162,17 +162,74 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.WorkflowTemplateServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient
-          .servicePath;
-      assert(servicePath);
+      const client =
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataproc.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dataproc.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'dataproc.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dataproc.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataproc.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'dataproc.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new workflowtemplateserviceModule.v1.WorkflowTemplateServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

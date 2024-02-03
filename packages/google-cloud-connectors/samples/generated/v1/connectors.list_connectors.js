@@ -56,7 +56,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await connectorsClient.listConnectorsAsync(request);
+    const iterable = connectorsClient.listConnectorsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
