@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await channelClient.listSkuGroupBillableSkusAsync(request);
+    const iterable = channelClient.listSkuGroupBillableSkusAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

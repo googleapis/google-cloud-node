@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await migrationClient.listMigrationWorkflowsAsync(request);
+    const iterable = migrationClient.listMigrationWorkflowsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

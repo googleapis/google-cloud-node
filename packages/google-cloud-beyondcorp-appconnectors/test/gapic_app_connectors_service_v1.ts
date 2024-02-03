@@ -168,15 +168,72 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.AppConnectorsServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath =
-        appconnectorsserviceModule.v1.AppConnectorsServiceClient.servicePath;
-      assert(servicePath);
+      const client =
+        new appconnectorsserviceModule.v1.AppConnectorsServiceClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'beyondcorp.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint =
-        appconnectorsserviceModule.v1.AppConnectorsServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client =
+        new appconnectorsserviceModule.v1.AppConnectorsServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'beyondcorp.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new appconnectorsserviceModule.v1.AppConnectorsServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          appconnectorsserviceModule.v1.AppConnectorsServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'beyondcorp.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          appconnectorsserviceModule.v1.AppConnectorsServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'beyondcorp.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client =
+        new appconnectorsserviceModule.v1.AppConnectorsServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'beyondcorp.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client =
+        new appconnectorsserviceModule.v1.AppConnectorsServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'beyondcorp.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new appconnectorsserviceModule.v1.AppConnectorsServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

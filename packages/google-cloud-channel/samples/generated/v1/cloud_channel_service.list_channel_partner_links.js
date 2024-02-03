@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await channelClient.listChannelPartnerLinksAsync(request);
+    const iterable = channelClient.listChannelPartnerLinksAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

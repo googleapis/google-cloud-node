@@ -62,7 +62,7 @@ function main(resource) {
     };
 
     // Run request
-    const iterable = await analyticshubClient.listSharedResourceSubscriptionsAsync(request);
+    const iterable = analyticshubClient.listSharedResourceSubscriptionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -73,7 +73,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await channelClient.listCustomerRepricingConfigsAsync(request);
+    const iterable = channelClient.listCustomerRepricingConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

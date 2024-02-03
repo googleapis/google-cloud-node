@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await binaryauthorizationClient.listAttestorsAsync(request);
+    const iterable = binaryauthorizationClient.listAttestorsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -72,7 +72,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await appgatewaysClient.listAppGatewaysAsync(request);
+    const iterable = appgatewaysClient.listAppGatewaysAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

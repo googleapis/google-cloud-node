@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await certificatemanagerClient.listCertificateMapsAsync(request);
+    const iterable = certificatemanagerClient.listCertificateMapsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -63,7 +63,7 @@ function main(account) {
     };
 
     // Run request
-    const iterable = await channelClient.listProductsAsync(request);
+    const iterable = channelClient.listProductsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

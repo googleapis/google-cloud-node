@@ -78,7 +78,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await clouddmsClient.listMigrationJobsAsync(request);
+    const iterable = clouddmsClient.listMigrationJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -71,7 +71,7 @@ function main(customer) {
     };
 
     // Run request
-    const iterable = await channelClient.listPurchasableOffersAsync(request);
+    const iterable = channelClient.listPurchasableOffersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

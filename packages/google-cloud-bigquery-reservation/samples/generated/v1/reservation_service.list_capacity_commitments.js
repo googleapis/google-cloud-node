@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await reservationClient.listCapacityCommitmentsAsync(request);
+    const iterable = reservationClient.listCapacityCommitmentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

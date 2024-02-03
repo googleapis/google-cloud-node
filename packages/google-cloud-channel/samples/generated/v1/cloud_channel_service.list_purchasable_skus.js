@@ -71,7 +71,7 @@ function main(customer) {
     };
 
     // Run request
-    const iterable = await channelClient.listPurchasableSkusAsync(request);
+    const iterable = channelClient.listPurchasableSkusAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
