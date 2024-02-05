@@ -104,7 +104,7 @@ async function callListParticipants() {
   // Run request
   const iterable = meetClient.listParticipantsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
