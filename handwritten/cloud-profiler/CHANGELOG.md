@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [6.0.1](https://github.com/googleapis/cloud-profiler-nodejs/compare/v6.0.0...v6.0.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency pprof to v4 ([#917](https://github.com/googleapis/cloud-profiler-nodejs/issues/917)) ([2411b71](https://github.com/googleapis/cloud-profiler-nodejs/commit/2411b7140e30fe89d10004010c3395aa18fbb543))
+* Lazily init logging ([#801](https://github.com/googleapis/cloud-profiler-nodejs/issues/801)) ([04853a9](https://github.com/googleapis/cloud-profiler-nodejs/commit/04853a96896b54694d6480c5263af7145ee129ea))
+
 ## [6.0.0](https://github.com/googleapis/cloud-profiler-nodejs/compare/v5.0.5...v6.0.0) (2023-08-15)
 
 
