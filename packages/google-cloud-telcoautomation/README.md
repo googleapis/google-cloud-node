@@ -90,9 +90,10 @@ async function callListDeploymentRevisions() {
   };
 
   // Run request
-  const iterable = telcoautomationClient.listDeploymentRevisionsAsync(request);
+  const iterable =
+    telcoautomationClient.listDeploymentRevisionsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
