@@ -14732,7 +14732,6 @@
                      * @property {google.datastore.v1.IReadOptions|null} [readOptions] RunQueryRequest readOptions
                      * @property {google.datastore.v1.IQuery|null} [query] RunQueryRequest query
                      * @property {google.datastore.v1.IGqlQuery|null} [gqlQuery] RunQueryRequest gqlQuery
-                     * @property {google.datastore.v1.QueryMode|null} [mode] RunQueryRequest mode
                      */
     
                     /**
@@ -14798,14 +14797,6 @@
                      */
                     RunQueryRequest.prototype.gqlQuery = null;
     
-                    /**
-                     * RunQueryRequest mode.
-                     * @member {google.datastore.v1.QueryMode} mode
-                     * @memberof google.datastore.v1.RunQueryRequest
-                     * @instance
-                     */
-                    RunQueryRequest.prototype.mode = 0;
-    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -14856,8 +14847,6 @@
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
                         if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
-                        if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
-                            writer.uint32(/* id 11, wireType 0 =*/88).int32(message.mode);
                         return writer;
                     };
     
@@ -14914,10 +14903,6 @@
                                 }
                             case 7: {
                                     message.gqlQuery = $root.google.datastore.v1.GqlQuery.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 11: {
-                                    message.mode = reader.int32();
                                     break;
                                 }
                             default:
@@ -14990,15 +14975,6 @@
                                     return "gqlQuery." + error;
                             }
                         }
-                        if (message.mode != null && message.hasOwnProperty("mode"))
-                            switch (message.mode) {
-                            default:
-                                return "mode: enum value expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                                break;
-                            }
                         return null;
                     };
     
@@ -15038,26 +15014,6 @@
                                 throw TypeError(".google.datastore.v1.RunQueryRequest.gqlQuery: object expected");
                             message.gqlQuery = $root.google.datastore.v1.GqlQuery.fromObject(object.gqlQuery);
                         }
-                        switch (object.mode) {
-                        default:
-                            if (typeof object.mode === "number") {
-                                message.mode = object.mode;
-                                break;
-                            }
-                            break;
-                        case "NORMAL":
-                        case 0:
-                            message.mode = 0;
-                            break;
-                        case "PLAN":
-                        case 1:
-                            message.mode = 1;
-                            break;
-                        case "PROFILE":
-                        case 2:
-                            message.mode = 2;
-                            break;
-                        }
                         return message;
                     };
     
@@ -15079,7 +15035,6 @@
                             object.partitionId = null;
                             object.projectId = "";
                             object.databaseId = "";
-                            object.mode = options.enums === String ? "NORMAL" : 0;
                         }
                         if (message.readOptions != null && message.hasOwnProperty("readOptions"))
                             object.readOptions = $root.google.datastore.v1.ReadOptions.toObject(message.readOptions, options);
@@ -15099,8 +15054,6 @@
                             object.projectId = message.projectId;
                         if (message.databaseId != null && message.hasOwnProperty("databaseId"))
                             object.databaseId = message.databaseId;
-                        if (message.mode != null && message.hasOwnProperty("mode"))
-                            object.mode = options.enums === String ? $root.google.datastore.v1.QueryMode[message.mode] === undefined ? message.mode : $root.google.datastore.v1.QueryMode[message.mode] : message.mode;
                         return object;
                     };
     
@@ -15142,7 +15095,6 @@
                      * @property {google.datastore.v1.IQueryResultBatch|null} [batch] RunQueryResponse batch
                      * @property {google.datastore.v1.IQuery|null} [query] RunQueryResponse query
                      * @property {Uint8Array|null} [transaction] RunQueryResponse transaction
-                     * @property {google.datastore.v1.IResultSetStats|null} [stats] RunQueryResponse stats
                      */
     
                     /**
@@ -15185,14 +15137,6 @@
                     RunQueryResponse.prototype.transaction = $util.newBuffer([]);
     
                     /**
-                     * RunQueryResponse stats.
-                     * @member {google.datastore.v1.IResultSetStats|null|undefined} stats
-                     * @memberof google.datastore.v1.RunQueryResponse
-                     * @instance
-                     */
-                    RunQueryResponse.prototype.stats = null;
-    
-                    /**
                      * Creates a new RunQueryResponse instance using the specified properties.
                      * @function create
                      * @memberof google.datastore.v1.RunQueryResponse
@@ -15222,8 +15166,6 @@
                             $root.google.datastore.v1.Query.encode(message.query, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.transaction != null && Object.hasOwnProperty.call(message, "transaction"))
                             writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.transaction);
-                        if (message.stats != null && Object.hasOwnProperty.call(message, "stats"))
-                            $root.google.datastore.v1.ResultSetStats.encode(message.stats, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -15268,10 +15210,6 @@
                                 }
                             case 5: {
                                     message.transaction = reader.bytes();
-                                    break;
-                                }
-                            case 6: {
-                                    message.stats = $root.google.datastore.v1.ResultSetStats.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -15322,11 +15260,6 @@
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             if (!(message.transaction && typeof message.transaction.length === "number" || $util.isString(message.transaction)))
                                 return "transaction: buffer expected";
-                        if (message.stats != null && message.hasOwnProperty("stats")) {
-                            var error = $root.google.datastore.v1.ResultSetStats.verify(message.stats);
-                            if (error)
-                                return "stats." + error;
-                        }
                         return null;
                     };
     
@@ -15357,11 +15290,6 @@
                                 $util.base64.decode(object.transaction, message.transaction = $util.newBuffer($util.base64.length(object.transaction)), 0);
                             else if (object.transaction.length >= 0)
                                 message.transaction = object.transaction;
-                        if (object.stats != null) {
-                            if (typeof object.stats !== "object")
-                                throw TypeError(".google.datastore.v1.RunQueryResponse.stats: object expected");
-                            message.stats = $root.google.datastore.v1.ResultSetStats.fromObject(object.stats);
-                        }
                         return message;
                     };
     
@@ -15388,7 +15316,6 @@
                                 if (options.bytes !== Array)
                                     object.transaction = $util.newBuffer(object.transaction);
                             }
-                            object.stats = null;
                         }
                         if (message.batch != null && message.hasOwnProperty("batch"))
                             object.batch = $root.google.datastore.v1.QueryResultBatch.toObject(message.batch, options);
@@ -15396,8 +15323,6 @@
                             object.query = $root.google.datastore.v1.Query.toObject(message.query, options);
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             object.transaction = options.bytes === String ? $util.base64.encode(message.transaction, 0, message.transaction.length) : options.bytes === Array ? Array.prototype.slice.call(message.transaction) : message.transaction;
-                        if (message.stats != null && message.hasOwnProperty("stats"))
-                            object.stats = $root.google.datastore.v1.ResultSetStats.toObject(message.stats, options);
                         return object;
                     };
     
@@ -15442,7 +15367,6 @@
                      * @property {google.datastore.v1.IReadOptions|null} [readOptions] RunAggregationQueryRequest readOptions
                      * @property {google.datastore.v1.IAggregationQuery|null} [aggregationQuery] RunAggregationQueryRequest aggregationQuery
                      * @property {google.datastore.v1.IGqlQuery|null} [gqlQuery] RunAggregationQueryRequest gqlQuery
-                     * @property {google.datastore.v1.QueryMode|null} [mode] RunAggregationQueryRequest mode
                      */
     
                     /**
@@ -15508,14 +15432,6 @@
                      */
                     RunAggregationQueryRequest.prototype.gqlQuery = null;
     
-                    /**
-                     * RunAggregationQueryRequest mode.
-                     * @member {google.datastore.v1.QueryMode} mode
-                     * @memberof google.datastore.v1.RunAggregationQueryRequest
-                     * @instance
-                     */
-                    RunAggregationQueryRequest.prototype.mode = 0;
-    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -15566,8 +15482,6 @@
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
                         if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
-                        if (message.mode != null && Object.hasOwnProperty.call(message, "mode"))
-                            writer.uint32(/* id 10, wireType 0 =*/80).int32(message.mode);
                         return writer;
                     };
     
@@ -15624,10 +15538,6 @@
                                 }
                             case 7: {
                                     message.gqlQuery = $root.google.datastore.v1.GqlQuery.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 10: {
-                                    message.mode = reader.int32();
                                     break;
                                 }
                             default:
@@ -15700,15 +15610,6 @@
                                     return "gqlQuery." + error;
                             }
                         }
-                        if (message.mode != null && message.hasOwnProperty("mode"))
-                            switch (message.mode) {
-                            default:
-                                return "mode: enum value expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                                break;
-                            }
                         return null;
                     };
     
@@ -15748,26 +15649,6 @@
                                 throw TypeError(".google.datastore.v1.RunAggregationQueryRequest.gqlQuery: object expected");
                             message.gqlQuery = $root.google.datastore.v1.GqlQuery.fromObject(object.gqlQuery);
                         }
-                        switch (object.mode) {
-                        default:
-                            if (typeof object.mode === "number") {
-                                message.mode = object.mode;
-                                break;
-                            }
-                            break;
-                        case "NORMAL":
-                        case 0:
-                            message.mode = 0;
-                            break;
-                        case "PLAN":
-                        case 1:
-                            message.mode = 1;
-                            break;
-                        case "PROFILE":
-                        case 2:
-                            message.mode = 2;
-                            break;
-                        }
                         return message;
                     };
     
@@ -15789,7 +15670,6 @@
                             object.partitionId = null;
                             object.projectId = "";
                             object.databaseId = "";
-                            object.mode = options.enums === String ? "NORMAL" : 0;
                         }
                         if (message.readOptions != null && message.hasOwnProperty("readOptions"))
                             object.readOptions = $root.google.datastore.v1.ReadOptions.toObject(message.readOptions, options);
@@ -15809,8 +15689,6 @@
                             object.projectId = message.projectId;
                         if (message.databaseId != null && message.hasOwnProperty("databaseId"))
                             object.databaseId = message.databaseId;
-                        if (message.mode != null && message.hasOwnProperty("mode"))
-                            object.mode = options.enums === String ? $root.google.datastore.v1.QueryMode[message.mode] === undefined ? message.mode : $root.google.datastore.v1.QueryMode[message.mode] : message.mode;
                         return object;
                     };
     
@@ -15852,7 +15730,6 @@
                      * @property {google.datastore.v1.IAggregationResultBatch|null} [batch] RunAggregationQueryResponse batch
                      * @property {google.datastore.v1.IAggregationQuery|null} [query] RunAggregationQueryResponse query
                      * @property {Uint8Array|null} [transaction] RunAggregationQueryResponse transaction
-                     * @property {google.datastore.v1.IResultSetStats|null} [stats] RunAggregationQueryResponse stats
                      */
     
                     /**
@@ -15895,14 +15772,6 @@
                     RunAggregationQueryResponse.prototype.transaction = $util.newBuffer([]);
     
                     /**
-                     * RunAggregationQueryResponse stats.
-                     * @member {google.datastore.v1.IResultSetStats|null|undefined} stats
-                     * @memberof google.datastore.v1.RunAggregationQueryResponse
-                     * @instance
-                     */
-                    RunAggregationQueryResponse.prototype.stats = null;
-    
-                    /**
                      * Creates a new RunAggregationQueryResponse instance using the specified properties.
                      * @function create
                      * @memberof google.datastore.v1.RunAggregationQueryResponse
@@ -15932,8 +15801,6 @@
                             $root.google.datastore.v1.AggregationQuery.encode(message.query, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.transaction != null && Object.hasOwnProperty.call(message, "transaction"))
                             writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.transaction);
-                        if (message.stats != null && Object.hasOwnProperty.call(message, "stats"))
-                            $root.google.datastore.v1.ResultSetStats.encode(message.stats, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -15978,10 +15845,6 @@
                                 }
                             case 5: {
                                     message.transaction = reader.bytes();
-                                    break;
-                                }
-                            case 6: {
-                                    message.stats = $root.google.datastore.v1.ResultSetStats.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -16032,11 +15895,6 @@
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             if (!(message.transaction && typeof message.transaction.length === "number" || $util.isString(message.transaction)))
                                 return "transaction: buffer expected";
-                        if (message.stats != null && message.hasOwnProperty("stats")) {
-                            var error = $root.google.datastore.v1.ResultSetStats.verify(message.stats);
-                            if (error)
-                                return "stats." + error;
-                        }
                         return null;
                     };
     
@@ -16067,11 +15925,6 @@
                                 $util.base64.decode(object.transaction, message.transaction = $util.newBuffer($util.base64.length(object.transaction)), 0);
                             else if (object.transaction.length >= 0)
                                 message.transaction = object.transaction;
-                        if (object.stats != null) {
-                            if (typeof object.stats !== "object")
-                                throw TypeError(".google.datastore.v1.RunAggregationQueryResponse.stats: object expected");
-                            message.stats = $root.google.datastore.v1.ResultSetStats.fromObject(object.stats);
-                        }
                         return message;
                     };
     
@@ -16098,7 +15951,6 @@
                                 if (options.bytes !== Array)
                                     object.transaction = $util.newBuffer(object.transaction);
                             }
-                            object.stats = null;
                         }
                         if (message.batch != null && message.hasOwnProperty("batch"))
                             object.batch = $root.google.datastore.v1.AggregationResultBatch.toObject(message.batch, options);
@@ -16106,8 +15958,6 @@
                             object.query = $root.google.datastore.v1.AggregationQuery.toObject(message.query, options);
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             object.transaction = options.bytes === String ? $util.base64.encode(message.transaction, 0, message.transaction.length) : options.bytes === Array ? Array.prototype.slice.call(message.transaction) : message.transaction;
-                        if (message.stats != null && message.hasOwnProperty("stats"))
-                            object.stats = $root.google.datastore.v1.ResultSetStats.toObject(message.stats, options);
                         return object;
                     };
     
@@ -20459,467 +20309,6 @@
                     })();
     
                     return TransactionOptions;
-                })();
-    
-                /**
-                 * QueryMode enum.
-                 * @name google.datastore.v1.QueryMode
-                 * @enum {number}
-                 * @property {number} NORMAL=0 NORMAL value
-                 * @property {number} PLAN=1 PLAN value
-                 * @property {number} PROFILE=2 PROFILE value
-                 */
-                v1.QueryMode = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "NORMAL"] = 0;
-                    values[valuesById[1] = "PLAN"] = 1;
-                    values[valuesById[2] = "PROFILE"] = 2;
-                    return values;
-                })();
-    
-                v1.QueryPlan = (function() {
-    
-                    /**
-                     * Properties of a QueryPlan.
-                     * @memberof google.datastore.v1
-                     * @interface IQueryPlan
-                     * @property {google.protobuf.IStruct|null} [planInfo] QueryPlan planInfo
-                     */
-    
-                    /**
-                     * Constructs a new QueryPlan.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a QueryPlan.
-                     * @implements IQueryPlan
-                     * @constructor
-                     * @param {google.datastore.v1.IQueryPlan=} [properties] Properties to set
-                     */
-                    function QueryPlan(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * QueryPlan planInfo.
-                     * @member {google.protobuf.IStruct|null|undefined} planInfo
-                     * @memberof google.datastore.v1.QueryPlan
-                     * @instance
-                     */
-                    QueryPlan.prototype.planInfo = null;
-    
-                    /**
-                     * Creates a new QueryPlan instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.QueryPlan
-                     * @static
-                     * @param {google.datastore.v1.IQueryPlan=} [properties] Properties to set
-                     * @returns {google.datastore.v1.QueryPlan} QueryPlan instance
-                     */
-                    QueryPlan.create = function create(properties) {
-                        return new QueryPlan(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified QueryPlan message. Does not implicitly {@link google.datastore.v1.QueryPlan.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.QueryPlan
-                     * @static
-                     * @param {google.datastore.v1.IQueryPlan} message QueryPlan message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    QueryPlan.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.planInfo != null && Object.hasOwnProperty.call(message, "planInfo"))
-                            $root.google.protobuf.Struct.encode(message.planInfo, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified QueryPlan message, length delimited. Does not implicitly {@link google.datastore.v1.QueryPlan.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.QueryPlan
-                     * @static
-                     * @param {google.datastore.v1.IQueryPlan} message QueryPlan message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    QueryPlan.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a QueryPlan message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.QueryPlan
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.QueryPlan} QueryPlan
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    QueryPlan.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.QueryPlan();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.planInfo = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a QueryPlan message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.QueryPlan
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.QueryPlan} QueryPlan
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    QueryPlan.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a QueryPlan message.
-                     * @function verify
-                     * @memberof google.datastore.v1.QueryPlan
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    QueryPlan.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.planInfo != null && message.hasOwnProperty("planInfo")) {
-                            var error = $root.google.protobuf.Struct.verify(message.planInfo);
-                            if (error)
-                                return "planInfo." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a QueryPlan message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.QueryPlan
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.QueryPlan} QueryPlan
-                     */
-                    QueryPlan.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.QueryPlan)
-                            return object;
-                        var message = new $root.google.datastore.v1.QueryPlan();
-                        if (object.planInfo != null) {
-                            if (typeof object.planInfo !== "object")
-                                throw TypeError(".google.datastore.v1.QueryPlan.planInfo: object expected");
-                            message.planInfo = $root.google.protobuf.Struct.fromObject(object.planInfo);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a QueryPlan message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.QueryPlan
-                     * @static
-                     * @param {google.datastore.v1.QueryPlan} message QueryPlan
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    QueryPlan.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults)
-                            object.planInfo = null;
-                        if (message.planInfo != null && message.hasOwnProperty("planInfo"))
-                            object.planInfo = $root.google.protobuf.Struct.toObject(message.planInfo, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this QueryPlan to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.QueryPlan
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    QueryPlan.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for QueryPlan
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.QueryPlan
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    QueryPlan.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.QueryPlan";
-                    };
-    
-                    return QueryPlan;
-                })();
-    
-                v1.ResultSetStats = (function() {
-    
-                    /**
-                     * Properties of a ResultSetStats.
-                     * @memberof google.datastore.v1
-                     * @interface IResultSetStats
-                     * @property {google.datastore.v1.IQueryPlan|null} [queryPlan] ResultSetStats queryPlan
-                     * @property {google.protobuf.IStruct|null} [queryStats] ResultSetStats queryStats
-                     */
-    
-                    /**
-                     * Constructs a new ResultSetStats.
-                     * @memberof google.datastore.v1
-                     * @classdesc Represents a ResultSetStats.
-                     * @implements IResultSetStats
-                     * @constructor
-                     * @param {google.datastore.v1.IResultSetStats=} [properties] Properties to set
-                     */
-                    function ResultSetStats(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * ResultSetStats queryPlan.
-                     * @member {google.datastore.v1.IQueryPlan|null|undefined} queryPlan
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @instance
-                     */
-                    ResultSetStats.prototype.queryPlan = null;
-    
-                    /**
-                     * ResultSetStats queryStats.
-                     * @member {google.protobuf.IStruct|null|undefined} queryStats
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @instance
-                     */
-                    ResultSetStats.prototype.queryStats = null;
-    
-                    /**
-                     * Creates a new ResultSetStats instance using the specified properties.
-                     * @function create
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @static
-                     * @param {google.datastore.v1.IResultSetStats=} [properties] Properties to set
-                     * @returns {google.datastore.v1.ResultSetStats} ResultSetStats instance
-                     */
-                    ResultSetStats.create = function create(properties) {
-                        return new ResultSetStats(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified ResultSetStats message. Does not implicitly {@link google.datastore.v1.ResultSetStats.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @static
-                     * @param {google.datastore.v1.IResultSetStats} message ResultSetStats message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ResultSetStats.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.queryPlan != null && Object.hasOwnProperty.call(message, "queryPlan"))
-                            $root.google.datastore.v1.QueryPlan.encode(message.queryPlan, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.queryStats != null && Object.hasOwnProperty.call(message, "queryStats"))
-                            $root.google.protobuf.Struct.encode(message.queryStats, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified ResultSetStats message, length delimited. Does not implicitly {@link google.datastore.v1.ResultSetStats.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @static
-                     * @param {google.datastore.v1.IResultSetStats} message ResultSetStats message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ResultSetStats.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a ResultSetStats message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.datastore.v1.ResultSetStats} ResultSetStats
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ResultSetStats.decode = function decode(reader, length) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.ResultSetStats();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.queryPlan = $root.google.datastore.v1.QueryPlan.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 2: {
-                                    message.queryStats = $root.google.protobuf.Struct.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a ResultSetStats message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.datastore.v1.ResultSetStats} ResultSetStats
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ResultSetStats.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a ResultSetStats message.
-                     * @function verify
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    ResultSetStats.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.queryPlan != null && message.hasOwnProperty("queryPlan")) {
-                            var error = $root.google.datastore.v1.QueryPlan.verify(message.queryPlan);
-                            if (error)
-                                return "queryPlan." + error;
-                        }
-                        if (message.queryStats != null && message.hasOwnProperty("queryStats")) {
-                            var error = $root.google.protobuf.Struct.verify(message.queryStats);
-                            if (error)
-                                return "queryStats." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a ResultSetStats message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.datastore.v1.ResultSetStats} ResultSetStats
-                     */
-                    ResultSetStats.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.datastore.v1.ResultSetStats)
-                            return object;
-                        var message = new $root.google.datastore.v1.ResultSetStats();
-                        if (object.queryPlan != null) {
-                            if (typeof object.queryPlan !== "object")
-                                throw TypeError(".google.datastore.v1.ResultSetStats.queryPlan: object expected");
-                            message.queryPlan = $root.google.datastore.v1.QueryPlan.fromObject(object.queryPlan);
-                        }
-                        if (object.queryStats != null) {
-                            if (typeof object.queryStats !== "object")
-                                throw TypeError(".google.datastore.v1.ResultSetStats.queryStats: object expected");
-                            message.queryStats = $root.google.protobuf.Struct.fromObject(object.queryStats);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a ResultSetStats message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @static
-                     * @param {google.datastore.v1.ResultSetStats} message ResultSetStats
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    ResultSetStats.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.queryPlan = null;
-                            object.queryStats = null;
-                        }
-                        if (message.queryPlan != null && message.hasOwnProperty("queryPlan"))
-                            object.queryPlan = $root.google.datastore.v1.QueryPlan.toObject(message.queryPlan, options);
-                        if (message.queryStats != null && message.hasOwnProperty("queryStats"))
-                            object.queryStats = $root.google.protobuf.Struct.toObject(message.queryStats, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this ResultSetStats to JSON.
-                     * @function toJSON
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    ResultSetStats.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for ResultSetStats
-                     * @function getTypeUrl
-                     * @memberof google.datastore.v1.ResultSetStats
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    ResultSetStats.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.datastore.v1.ResultSetStats";
-                    };
-    
-                    return ResultSetStats;
                 })();
     
                 return v1;

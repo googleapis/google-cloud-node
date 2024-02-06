@@ -57,7 +57,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await adminClient.listIndexesAsync(request);
+    const iterable = adminClient.listIndexesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

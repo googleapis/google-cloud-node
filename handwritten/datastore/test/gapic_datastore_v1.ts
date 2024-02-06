@@ -90,13 +90,65 @@ function stubAsyncIterationCall<ResponseType>(
 describe('v1.DatastoreClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = datastoreModule.v1.DatastoreClient.servicePath;
-      assert(servicePath);
+      const client = new datastoreModule.v1.DatastoreClient();
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'datastore.googleapis.com');
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = datastoreModule.v1.DatastoreClient.apiEndpoint;
-      assert(apiEndpoint);
+      const client = new datastoreModule.v1.DatastoreClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'datastore.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new datastoreModule.v1.DatastoreClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = datastoreModule.v1.DatastoreClient.servicePath;
+        assert.strictEqual(servicePath, 'datastore.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = datastoreModule.v1.DatastoreClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'datastore.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets servicePath according to universe domain camelCase', () => {
+      const client = new datastoreModule.v1.DatastoreClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'datastore.example.com');
+    });
+
+    it('sets servicePath according to universe domain snakeCase', () => {
+      const client = new datastoreModule.v1.DatastoreClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.servicePath;
+      assert.strictEqual(servicePath, 'datastore.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new datastoreModule.v1.DatastoreClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

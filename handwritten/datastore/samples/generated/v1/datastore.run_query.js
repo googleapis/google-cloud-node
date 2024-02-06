@@ -57,12 +57,6 @@ function main(projectId) {
    *  The GQL query to run. This query must be a non-aggregation query.
    */
   // const gqlQuery = {}
-  /**
-   *  Optional. The mode in which the query request is processed. This field is
-   *  optional, and when not provided, it defaults to `NORMAL` mode where no
-   *  additional statistics will be returned with the query results.
-   */
-  // const mode = {}
 
   // Imports the Datastore library
   const {DatastoreClient} = require('@google-cloud/datastore').v1;
