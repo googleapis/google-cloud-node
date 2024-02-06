@@ -78,7 +78,7 @@ function main(scope, constraint) {
     };
 
     // Run request
-    const iterable = await assetClient.analyzeOrgPoliciesAsync(request);
+    const iterable = assetClient.analyzeOrgPoliciesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

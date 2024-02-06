@@ -80,7 +80,7 @@ function main(scope, constraint) {
     };
 
     // Run request
-    const iterable = await assetClient.analyzeOrgPolicyGovernedContainersAsync(request);
+    const iterable = assetClient.analyzeOrgPolicyGovernedContainersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

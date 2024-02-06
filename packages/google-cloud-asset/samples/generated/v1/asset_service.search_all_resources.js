@@ -216,7 +216,7 @@ function main(scope) {
     };
 
     // Run request
-    const iterable = await assetClient.searchAllResourcesAsync(request);
+    const iterable = assetClient.searchAllResourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
