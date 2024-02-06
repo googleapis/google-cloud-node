@@ -2,6 +2,5 @@
   "../../protos/google/datastore/v1/aggregation_result.proto",
   "../../protos/google/datastore/v1/datastore.proto",
   "../../protos/google/datastore/v1/entity.proto",
-  "../../protos/google/datastore/v1/query.proto",
-  "../../protos/google/datastore/v1/query_profile.proto"
+  "../../protos/google/datastore/v1/query.proto"
 ]
