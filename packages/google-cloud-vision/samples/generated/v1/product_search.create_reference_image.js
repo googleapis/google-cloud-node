@@ -29,7 +29,8 @@ function main(parent, referenceImage) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the product in which to create the reference image.
+   *  Required. Resource name of the product in which to create the reference
+   *  image.
    *  Format is
    *  `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
    */
