@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {SpacesServiceClient} = require('@google-cloud/meet').v2;
-const meetClient = new SpacesServiceClient();
+const {ConferenceRecordsServiceClient} = require('@google-apps/meet').v2beta;
+const meetClient = new ConferenceRecordsServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 

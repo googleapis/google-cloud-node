@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/meet",
+  "name": "@google-apps/meet",
   "version": "0.0.0",
   "description": "Google Meet API client for Node.js",
   "repository": {

@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/meet": "0.0.0"
+    "@google-apps/meet": "0.0.0"
   },
   "devDependencies": {
     "c8": "^8.0.0",
