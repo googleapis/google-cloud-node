@@ -72,7 +72,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await workflowsClient.listWorkflowsAsync(request);
+    const iterable = workflowsClient.listWorkflowsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

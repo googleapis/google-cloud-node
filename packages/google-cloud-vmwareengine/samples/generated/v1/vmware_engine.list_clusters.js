@@ -87,7 +87,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listClustersAsync(request);
+    const iterable = vmwareengineClient.listClustersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

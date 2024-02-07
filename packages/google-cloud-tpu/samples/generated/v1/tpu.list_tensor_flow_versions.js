@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await tpuClient.listTensorFlowVersionsAsync(request);
+    const iterable = tpuClient.listTensorFlowVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

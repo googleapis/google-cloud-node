@@ -54,7 +54,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listPackagesAsync(request);
+    const iterable = artifactregistryClient.listPackagesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

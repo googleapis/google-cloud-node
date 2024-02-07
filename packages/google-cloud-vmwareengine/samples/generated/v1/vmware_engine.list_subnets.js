@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listSubnetsAsync(request);
+    const iterable = vmwareengineClient.listSubnetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

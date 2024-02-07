@@ -69,7 +69,7 @@ function main(parent, pageToken) {
     };
 
     // Run request
-    const iterable = await vmmigrationClient.listGroupsAsync(request);
+    const iterable = vmmigrationClient.listGroupsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

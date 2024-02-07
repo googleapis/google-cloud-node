@@ -98,7 +98,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listExternalAccessRulesAsync(request);
+    const iterable = vmwareengineClient.listExternalAccessRulesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

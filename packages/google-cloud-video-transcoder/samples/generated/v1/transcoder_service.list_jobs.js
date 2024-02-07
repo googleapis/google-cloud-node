@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await transcoderClient.listJobsAsync(request);
+    const iterable = transcoderClient.listJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

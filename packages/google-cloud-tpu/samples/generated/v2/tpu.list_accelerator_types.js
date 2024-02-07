@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await tpuClient.listAcceleratorTypesAsync(request);
+    const iterable = tpuClient.listAcceleratorTypesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

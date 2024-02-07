@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listPeeringRoutesAsync(request);
+    const iterable = vmwareengineClient.listPeeringRoutesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
