@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listAudiencesAsync(request);
+    const iterable = adminClient.listAudiencesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

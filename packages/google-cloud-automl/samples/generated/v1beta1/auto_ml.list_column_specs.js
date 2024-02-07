@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await automlClient.listColumnSpecsAsync(request);
+    const iterable = automlClient.listColumnSpecsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

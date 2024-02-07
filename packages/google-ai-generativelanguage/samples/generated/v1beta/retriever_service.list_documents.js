@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await generativelanguageClient.listDocumentsAsync(request);
+    const iterable = generativelanguageClient.listDocumentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -92,7 +92,7 @@ function main(account) {
     };
 
     // Run request
-    const iterable = await adminClient.searchChangeHistoryEventsAsync(request);
+    const iterable = adminClient.searchChangeHistoryEventsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

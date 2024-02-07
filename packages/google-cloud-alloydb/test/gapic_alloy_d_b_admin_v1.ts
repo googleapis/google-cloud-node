@@ -167,14 +167,62 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.AlloyDBAdminClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = alloydbadminModule.v1.AlloyDBAdminClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'alloydb.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = alloydbadminModule.v1.AlloyDBAdminClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          alloydbadminModule.v1.AlloyDBAdminClient.servicePath;
+        assert.strictEqual(servicePath, 'alloydb.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          alloydbadminModule.v1.AlloyDBAdminClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'alloydb.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'alloydb.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new alloydbadminModule.v1.AlloyDBAdminClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'alloydb.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new alloydbadminModule.v1.AlloyDBAdminClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

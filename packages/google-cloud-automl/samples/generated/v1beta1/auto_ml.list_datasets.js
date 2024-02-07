@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await automlClient.listDatasetsAsync(request);
+    const iterable = automlClient.listDatasetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

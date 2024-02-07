@@ -53,7 +53,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await appengineClient.listServicesAsync(request);
+    const iterable = appengineClient.listServicesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

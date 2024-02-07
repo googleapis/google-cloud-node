@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await assuredworkloadsClient.listViolationsAsync(request);
+    const iterable = assuredworkloadsClient.listViolationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

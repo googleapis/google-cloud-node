@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listFirebaseLinksAsync(request);
+    const iterable = adminClient.listFirebaseLinksAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

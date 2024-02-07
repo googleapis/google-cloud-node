@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listSubpropertyEventFiltersAsync(request);
+    const iterable = adminClient.listSubpropertyEventFiltersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

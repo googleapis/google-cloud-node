@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listAccessBindingsAsync(request);
+    const iterable = adminClient.listAccessBindingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

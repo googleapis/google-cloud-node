@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await automlClient.listModelsAsync(request);
+    const iterable = automlClient.listModelsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

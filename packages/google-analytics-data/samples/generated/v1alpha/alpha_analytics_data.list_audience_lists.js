@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataClient.listAudienceListsAsync(request);
+    const iterable = dataClient.listAudienceListsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

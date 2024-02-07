@@ -161,16 +161,66 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1alpha.AlphaAnalyticsDataClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'analyticsdata.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient.servicePath;
+        assert.strictEqual(servicePath, 'analyticsdata.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'analyticsdata.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'analyticsdata.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'analyticsdata.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new alphaanalyticsdataModule.v1alpha.AlphaAnalyticsDataClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
