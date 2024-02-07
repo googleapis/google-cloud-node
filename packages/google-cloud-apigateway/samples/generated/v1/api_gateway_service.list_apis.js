@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await apigatewayClient.listApisAsync(request);
+    const iterable = apigatewayClient.listApisAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

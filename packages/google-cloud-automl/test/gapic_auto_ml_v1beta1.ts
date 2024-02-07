@@ -161,14 +161,60 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1beta1.AutoMlClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = automlModule.v1beta1.AutoMlClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new automlModule.v1beta1.AutoMlClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'automl.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = automlModule.v1beta1.AutoMlClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new automlModule.v1beta1.AutoMlClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = automlModule.v1beta1.AutoMlClient.servicePath;
+        assert.strictEqual(servicePath, 'automl.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = automlModule.v1beta1.AutoMlClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'automl.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'automl.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new automlModule.v1beta1.AutoMlClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'automl.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new automlModule.v1beta1.AutoMlClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

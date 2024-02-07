@@ -57,7 +57,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await generativelanguageClient.listModelsAsync(request);
+    const iterable = generativelanguageClient.listModelsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

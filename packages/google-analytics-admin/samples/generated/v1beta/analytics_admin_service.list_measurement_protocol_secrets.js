@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listMeasurementProtocolSecretsAsync(request);
+    const iterable = adminClient.listMeasurementProtocolSecretsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

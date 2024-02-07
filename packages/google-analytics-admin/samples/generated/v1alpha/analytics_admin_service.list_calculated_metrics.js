@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listCalculatedMetricsAsync(request);
+    const iterable = adminClient.listCalculatedMetricsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

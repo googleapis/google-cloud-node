@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await baremetalsolutionClient.listInstancesAsync(request);
+    const iterable = baremetalsolutionClient.listInstancesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

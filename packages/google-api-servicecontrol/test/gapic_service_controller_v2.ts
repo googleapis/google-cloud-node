@@ -66,16 +66,62 @@ function stubSimpleCallWithCallback<ResponseType>(
 
 describe('v2.ServiceControllerClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        servicecontrollerModule.v2.ServiceControllerClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new servicecontrollerModule.v2.ServiceControllerClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'servicecontrol.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        servicecontrollerModule.v2.ServiceControllerClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new servicecontrollerModule.v2.ServiceControllerClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          servicecontrollerModule.v2.ServiceControllerClient.servicePath;
+        assert.strictEqual(servicePath, 'servicecontrol.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          servicecontrollerModule.v2.ServiceControllerClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'servicecontrol.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new servicecontrollerModule.v2.ServiceControllerClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'servicecontrol.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new servicecontrollerModule.v2.ServiceControllerClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'servicecontrol.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new servicecontrollerModule.v2.ServiceControllerClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
