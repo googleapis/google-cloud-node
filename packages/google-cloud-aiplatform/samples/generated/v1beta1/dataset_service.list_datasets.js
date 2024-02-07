@@ -82,7 +82,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listDatasetsAsync(request);
+    const iterable = aiplatformClient.listDatasetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
