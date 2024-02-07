@@ -92,7 +92,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datalabelingClient.searchEvaluationsAsync(request);
+    const iterable = datalabelingClient.searchEvaluationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

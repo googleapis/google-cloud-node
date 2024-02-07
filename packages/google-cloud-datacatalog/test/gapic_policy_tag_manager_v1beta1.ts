@@ -129,16 +129,64 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1beta1.PolicyTagManagerClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        policytagmanagerModule.v1beta1.PolicyTagManagerClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new policytagmanagerModule.v1beta1.PolicyTagManagerClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'datacatalog.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        policytagmanagerModule.v1beta1.PolicyTagManagerClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new policytagmanagerModule.v1beta1.PolicyTagManagerClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          policytagmanagerModule.v1beta1.PolicyTagManagerClient.servicePath;
+        assert.strictEqual(servicePath, 'datacatalog.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          policytagmanagerModule.v1beta1.PolicyTagManagerClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'datacatalog.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new policytagmanagerModule.v1beta1.PolicyTagManagerClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'datacatalog.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new policytagmanagerModule.v1beta1.PolicyTagManagerClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'datacatalog.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new policytagmanagerModule.v1beta1.PolicyTagManagerClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

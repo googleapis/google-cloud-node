@@ -161,16 +161,68 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.ContactCenterInsightsClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        contactcenterinsightsModule.v1.ContactCenterInsightsClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'contactcenterinsights.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        contactcenterinsightsModule.v1.ContactCenterInsightsClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          contactcenterinsightsModule.v1.ContactCenterInsightsClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'contactcenterinsights.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          contactcenterinsightsModule.v1.ContactCenterInsightsClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'contactcenterinsights.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'contactcenterinsights.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'contactcenterinsights.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new contactcenterinsightsModule.v1.ContactCenterInsightsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

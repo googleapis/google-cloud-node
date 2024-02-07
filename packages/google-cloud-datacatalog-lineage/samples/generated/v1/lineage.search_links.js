@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await lineageClient.searchLinksAsync(request);
+    const iterable = lineageClient.searchLinksAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

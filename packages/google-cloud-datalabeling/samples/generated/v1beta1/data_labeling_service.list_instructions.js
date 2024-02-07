@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datalabelingClient.listInstructionsAsync(request);
+    const iterable = datalabelingClient.listInstructionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

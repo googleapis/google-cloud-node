@@ -89,14 +89,62 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2.FulfillmentsClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = fulfillmentsModule.v2.FulfillmentsClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new fulfillmentsModule.v2.FulfillmentsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = fulfillmentsModule.v2.FulfillmentsClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new fulfillmentsModule.v2.FulfillmentsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          fulfillmentsModule.v2.FulfillmentsClient.servicePath;
+        assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          fulfillmentsModule.v2.FulfillmentsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new fulfillmentsModule.v2.FulfillmentsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new fulfillmentsModule.v2.FulfillmentsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new fulfillmentsModule.v2.FulfillmentsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datafusionClient.listInstancesAsync(request);
+    const iterable = datafusionClient.listInstancesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

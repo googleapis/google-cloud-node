@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datacatalogClient.listPolicyTagsAsync(request);
+    const iterable = datacatalogClient.listPolicyTagsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

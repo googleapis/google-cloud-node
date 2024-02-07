@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dialogflowClient.listContextsAsync(request);
+    const iterable = dialogflowClient.listContextsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

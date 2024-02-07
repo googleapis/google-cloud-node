@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datafusionClient.listAvailableVersionsAsync(request);
+    const iterable = datafusionClient.listAvailableVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

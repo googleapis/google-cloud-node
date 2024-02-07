@@ -161,14 +161,60 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.LineageClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = lineageModule.v1.LineageClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new lineageModule.v1.LineageClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'datalineage.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = lineageModule.v1.LineageClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new lineageModule.v1.LineageClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = lineageModule.v1.LineageClient.servicePath;
+        assert.strictEqual(servicePath, 'datalineage.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = lineageModule.v1.LineageClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'datalineage.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new lineageModule.v1.LineageClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'datalineage.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new lineageModule.v1.LineageClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'datalineage.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new lineageModule.v1.LineageClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

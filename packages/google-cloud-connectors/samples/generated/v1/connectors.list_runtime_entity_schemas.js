@@ -66,7 +66,7 @@ function main(parent, filter) {
     };
 
     // Run request
-    const iterable = await connectorsClient.listRuntimeEntitySchemasAsync(request);
+    const iterable = connectorsClient.listRuntimeEntitySchemasAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

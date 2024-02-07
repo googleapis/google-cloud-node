@@ -85,7 +85,7 @@ function main(projectId, region) {
     };
 
     // Run request
-    const iterable = await dataprocClient.listJobsAsync(request);
+    const iterable = dataprocClient.listJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

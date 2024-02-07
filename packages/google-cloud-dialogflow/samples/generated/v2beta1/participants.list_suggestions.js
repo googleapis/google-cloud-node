@@ -66,7 +66,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await dialogflowClient.listSuggestionsAsync(request);
+    const iterable = dialogflowClient.listSuggestionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

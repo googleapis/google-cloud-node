@@ -166,14 +166,60 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2.DocumentsClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = documentsModule.v2.DocumentsClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new documentsModule.v2.DocumentsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = documentsModule.v2.DocumentsClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new documentsModule.v2.DocumentsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = documentsModule.v2.DocumentsClient.servicePath;
+        assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = documentsModule.v2.DocumentsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new documentsModule.v2.DocumentsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new documentsModule.v2.DocumentsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new documentsModule.v2.DocumentsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
