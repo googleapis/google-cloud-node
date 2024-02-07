@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await iotClient.listDeviceRegistriesAsync(request);
+    const iterable = iotClient.listDeviceRegistriesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listChannelGroupsAsync(request);
+    const iterable = adminClient.listChannelGroupsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -129,18 +129,68 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.AutoscalingPolicyServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient
-          .servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dataproc.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'dataproc.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dataproc.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'dataproc.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'dataproc.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

@@ -55,7 +55,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await tablesClient.listTablesAsync(request);
+    const iterable = tablesClient.listTablesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

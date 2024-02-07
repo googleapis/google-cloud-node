@@ -72,7 +72,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await tablesClient.listRowsAsync(request);
+    const iterable = tablesClient.listRowsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

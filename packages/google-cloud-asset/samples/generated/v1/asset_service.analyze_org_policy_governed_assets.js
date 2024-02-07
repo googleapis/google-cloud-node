@@ -95,7 +95,7 @@ function main(scope, constraint) {
     };
 
     // Run request
-    const iterable = await assetClient.analyzeOrgPolicyGovernedAssetsAsync(request);
+    const iterable = assetClient.analyzeOrgPolicyGovernedAssetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

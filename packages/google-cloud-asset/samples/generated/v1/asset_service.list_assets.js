@@ -109,7 +109,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await assetClient.listAssetsAsync(request);
+    const iterable = assetClient.listAssetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

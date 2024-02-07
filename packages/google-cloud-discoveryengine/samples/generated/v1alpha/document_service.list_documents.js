@@ -73,7 +73,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await discoveryengineClient.listDocumentsAsync(request);
+    const iterable = discoveryengineClient.listDocumentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -56,7 +56,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dialogflowClient.listConversationModelsAsync(request);
+    const iterable = dialogflowClient.listConversationModelsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

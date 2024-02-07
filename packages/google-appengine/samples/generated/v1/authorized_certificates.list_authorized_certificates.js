@@ -57,7 +57,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await appengineClient.listAuthorizedCertificatesAsync(request);
+    const iterable = appengineClient.listAuthorizedCertificatesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

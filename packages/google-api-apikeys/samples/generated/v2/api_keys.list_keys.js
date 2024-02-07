@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await apikeysClient.listKeysAsync(request);
+    const iterable = apikeysClient.listKeysAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

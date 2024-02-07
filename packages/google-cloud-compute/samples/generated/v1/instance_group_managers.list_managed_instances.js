@@ -76,7 +76,7 @@ function main(instanceGroupManager, project, zone) {
     };
 
     // Run request
-    const iterable = await computeClient.listManagedInstancesAsync(request);
+    const iterable = computeClient.listManagedInstancesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

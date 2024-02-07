@@ -7173,6 +7173,22 @@
                               "(google.api.method_signature)": "feature_view, data_key"
                             }
                           ]
+                        },
+                        "SearchNearestEntities": {
+                          "requestType": "SearchNearestEntitiesRequest",
+                          "responseType": "SearchNearestEntitiesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:searchNearestEntities",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:searchNearestEntities",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -7273,6 +7289,181 @@
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    "NearestNeighborQuery": {
+                      "oneofs": {
+                        "instance": {
+                          "oneof": [
+                            "entityId",
+                            "embedding"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "entityId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "embedding": {
+                          "type": "Embedding",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "neighborCount": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "stringFilters": {
+                          "rule": "repeated",
+                          "type": "StringFilter",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "perCrowdingAttributeNeighborCount": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "parameters": {
+                          "type": "Parameters",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Embedding": {
+                          "fields": {
+                            "value": {
+                              "rule": "repeated",
+                              "type": "float",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "StringFilter": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "allowTokens": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "denyTokens": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Parameters": {
+                          "fields": {
+                            "approximateNeighborCandidates": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "leafNodesSearchFraction": {
+                              "type": "double",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchNearestEntitiesRequest": {
+                      "fields": {
+                        "featureView": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/FeatureView"
+                          }
+                        },
+                        "query": {
+                          "type": "NearestNeighborQuery",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnFullEntity": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "NearestNeighbors": {
+                      "fields": {
+                        "neighbors": {
+                          "rule": "repeated",
+                          "type": "Neighbor",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Neighbor": {
+                          "fields": {
+                            "entityId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "distance": {
+                              "type": "double",
+                              "id": 2
+                            },
+                            "entityKeyValues": {
+                              "type": "FetchFeatureValuesResponse",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchNearestEntitiesResponse": {
+                      "fields": {
+                        "nearestNeighbors": {
+                          "type": "NearestNeighbors",
+                          "id": 1
                         }
                       }
                     },

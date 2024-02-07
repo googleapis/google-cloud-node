@@ -76,7 +76,7 @@ function main(instance, project, zone) {
     };
 
     // Run request
-    const iterable = await computeClient.listReferrersAsync(request);
+    const iterable = computeClient.listReferrersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

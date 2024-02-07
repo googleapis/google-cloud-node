@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listConversionEventsAsync(request);
+    const iterable = adminClient.listConversionEventsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

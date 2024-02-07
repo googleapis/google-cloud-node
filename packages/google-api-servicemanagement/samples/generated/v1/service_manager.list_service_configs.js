@@ -57,7 +57,7 @@ function main(serviceName) {
     };
 
     // Run request
-    const iterable = await servicemanagementClient.listServiceConfigsAsync(request);
+    const iterable = servicemanagementClient.listServiceConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -102,7 +102,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listExecutionsAsync(request);
+    const iterable = aiplatformClient.listExecutionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

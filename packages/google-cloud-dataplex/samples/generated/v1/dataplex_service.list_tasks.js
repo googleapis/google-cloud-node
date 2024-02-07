@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataplexClient.listTasksAsync(request);
+    const iterable = dataplexClient.listTasksAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

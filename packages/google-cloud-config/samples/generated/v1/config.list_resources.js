@@ -78,7 +78,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await configClient.listResourcesAsync(request);
+    const iterable = configClient.listResourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dialogflowClient.listEntityTypesAsync(request);
+    const iterable = dialogflowClient.listEntityTypesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -69,7 +69,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listDataItemsAsync(request);
+    const iterable = aiplatformClient.listDataItemsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

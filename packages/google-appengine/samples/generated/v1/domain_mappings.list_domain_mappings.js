@@ -53,7 +53,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await appengineClient.listDomainMappingsAsync(request);
+    const iterable = appengineClient.listDomainMappingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

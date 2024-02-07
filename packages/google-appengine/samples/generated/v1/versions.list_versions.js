@@ -58,7 +58,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await appengineClient.listVersionsAsync(request);
+    const iterable = appengineClient.listVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

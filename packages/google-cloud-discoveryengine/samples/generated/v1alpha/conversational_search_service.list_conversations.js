@@ -76,7 +76,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await discoveryengineClient.listConversationsAsync(request);
+    const iterable = discoveryengineClient.listConversationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

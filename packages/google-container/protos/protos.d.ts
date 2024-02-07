@@ -3399,6 +3399,9 @@ export namespace google {
 
                 /** AddonsConfig gcsFuseCsiDriverConfig */
                 gcsFuseCsiDriverConfig?: (google.container.v1.IGcsFuseCsiDriverConfig|null);
+
+                /** AddonsConfig statefulHaConfig */
+                statefulHaConfig?: (google.container.v1.IStatefulHAConfig|null);
             }
 
             /** Represents an AddonsConfig. */
@@ -3442,6 +3445,9 @@ export namespace google {
 
                 /** AddonsConfig gcsFuseCsiDriverConfig. */
                 public gcsFuseCsiDriverConfig?: (google.container.v1.IGcsFuseCsiDriverConfig|null);
+
+                /** AddonsConfig statefulHaConfig. */
+                public statefulHaConfig?: (google.container.v1.IStatefulHAConfig|null);
 
                 /**
                  * Creates a new AddonsConfig instance using the specified properties.
@@ -4937,6 +4943,103 @@ export namespace google {
 
                 /**
                  * Gets the default type url for GkeBackupAgentConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a StatefulHAConfig. */
+            interface IStatefulHAConfig {
+
+                /** StatefulHAConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a StatefulHAConfig. */
+            class StatefulHAConfig implements IStatefulHAConfig {
+
+                /**
+                 * Constructs a new StatefulHAConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IStatefulHAConfig);
+
+                /** StatefulHAConfig enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new StatefulHAConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns StatefulHAConfig instance
+                 */
+                public static create(properties?: google.container.v1.IStatefulHAConfig): google.container.v1.StatefulHAConfig;
+
+                /**
+                 * Encodes the specified StatefulHAConfig message. Does not implicitly {@link google.container.v1.StatefulHAConfig.verify|verify} messages.
+                 * @param message StatefulHAConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IStatefulHAConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified StatefulHAConfig message, length delimited. Does not implicitly {@link google.container.v1.StatefulHAConfig.verify|verify} messages.
+                 * @param message StatefulHAConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IStatefulHAConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a StatefulHAConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns StatefulHAConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.StatefulHAConfig;
+
+                /**
+                 * Decodes a StatefulHAConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns StatefulHAConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.StatefulHAConfig;
+
+                /**
+                 * Verifies a StatefulHAConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a StatefulHAConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns StatefulHAConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.StatefulHAConfig;
+
+                /**
+                 * Creates a plain object from a StatefulHAConfig message. Also converts values to other types if specified.
+                 * @param message StatefulHAConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.StatefulHAConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this StatefulHAConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for StatefulHAConfig
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

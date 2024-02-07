@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.0.1...admin-v7.1.0) (2024-02-07)
+
+
+### Features
+
+* [analytics-admin] add `GetCalculatedMetric`, `CreateCalculatedMetric`, `ListCalculatedMetrics`, `UpdateCalculatedMetric`, `DeleteCalculatedMetric` methods to the Admin API v1alpha ([#4984](https://github.com/googleapis/google-cloud-node/issues/4984)) ([0a90c23](https://github.com/googleapis/google-cloud-node/commit/0a90c23568b82d79654e6819039178eee97c4499))
+
 ## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/admin-v7.0.0...admin-v7.0.1) (2024-01-05)
 
 

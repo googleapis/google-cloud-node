@@ -62,7 +62,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await servicemanagementClient.listServicesAsync(request);
+    const iterable = servicemanagementClient.listServicesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

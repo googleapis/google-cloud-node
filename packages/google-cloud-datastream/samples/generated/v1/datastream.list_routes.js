@@ -69,7 +69,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datastreamClient.listRoutesAsync(request);
+    const iterable = datastreamClient.listRoutesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -1010,6 +1010,13 @@
           }
         },
         "cloud": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/cloud/extendedops;extendedops",
+            "java_multiple_files": true,
+            "java_outer_classname": "ExtendedOperationsProto",
+            "java_package": "com.google.cloud",
+            "objc_class_prefix": "GAPI"
+          },
           "nested": {
             "compute": {
               "nested": {
@@ -96125,6 +96132,40 @@
                     }
                   }
                 }
+              }
+            },
+            "operationField": {
+              "type": "OperationResponseMapping",
+              "id": 1149,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "operationRequestField": {
+              "type": "string",
+              "id": 1150,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "operationResponseField": {
+              "type": "string",
+              "id": 1151,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "operationService": {
+              "type": "string",
+              "id": 1249,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "operationPollingMethod": {
+              "type": "bool",
+              "id": 1250,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "OperationResponseMapping": {
+              "values": {
+                "UNDEFINED": 0,
+                "NAME": 1,
+                "STATUS": 2,
+                "ERROR_CODE": 3,
+                "ERROR_MESSAGE": 4
               }
             }
           }

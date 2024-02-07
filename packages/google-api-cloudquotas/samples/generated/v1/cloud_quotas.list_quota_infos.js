@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cloudquotasClient.listQuotaInfosAsync(request);
+    const iterable = cloudquotasClient.listQuotaInfosAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

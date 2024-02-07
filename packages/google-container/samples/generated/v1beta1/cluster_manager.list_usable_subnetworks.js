@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await containerClient.listUsableSubnetworksAsync(request);
+    const iterable = containerClient.listUsableSubnetworksAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

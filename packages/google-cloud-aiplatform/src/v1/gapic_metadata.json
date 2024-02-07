@@ -558,6 +558,11 @@
               "methods": [
                 "fetchFeatureValues"
               ]
+            },
+            "SearchNearestEntities": {
+              "methods": [
+                "searchNearestEntities"
+              ]
             }
           }
         },
@@ -567,6 +572,11 @@
             "FetchFeatureValues": {
               "methods": [
                 "fetchFeatureValues"
+              ]
+            },
+            "SearchNearestEntities": {
+              "methods": [
+                "searchNearestEntities"
               ]
             }
           }

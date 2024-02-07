@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datalabelingClient.listAnnotationSpecSetsAsync(request);
+    const iterable = datalabelingClient.listAnnotationSpecSetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

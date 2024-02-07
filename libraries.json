@@ -581,23 +581,6 @@
     "support_documentation": "https://cloud.google.com/datastream/docs/getting-support"
   },
   {
-    "name": "debugger",
-    "name_pretty": "Debugger",
-    "product_documentation": "https://cloud.google.com/debugger",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/debug-agent/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559771",
-    "release_level": "stable",
-    "language": "nodejs",
-    "repo": "googleapis/cloud-debug-nodejs",
-    "distribution_name": "@google-cloud/debug-agent",
-    "api_id": "clouddebugger.googleapis.com",
-    "codeowner_team": "@googleapis/api-debug",
-    "api_shortname": "clouddebugger",
-    "library_type": "AGENT",
-    "linkToRepoHomepage": "https://github.com/googleapis/cloud-debug-nodejs",
-    "support_documentation": "https://cloud.google.com/debugger/docs/getting-support"
-  },
-  {
     "name": "clouddeploy",
     "name_pretty": "Deploy",
     "product_documentation": "https://cloud.google.com/deploy/",

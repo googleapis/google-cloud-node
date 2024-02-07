@@ -76,7 +76,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listTensorboardsAsync(request);
+    const iterable = aiplatformClient.listTensorboardsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

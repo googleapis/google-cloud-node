@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await contentwarehouseClient.listDocumentSchemasAsync(request);
+    const iterable = contentwarehouseClient.listDocumentSchemasAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

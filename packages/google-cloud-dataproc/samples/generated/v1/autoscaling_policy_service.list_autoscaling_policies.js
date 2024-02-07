@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataprocClient.listAutoscalingPoliciesAsync(request);
+    const iterable = dataprocClient.listAutoscalingPoliciesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

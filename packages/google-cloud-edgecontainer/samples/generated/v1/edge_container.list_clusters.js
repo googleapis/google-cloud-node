@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await edgecontainerClient.listClustersAsync(request);
+    const iterable = edgecontainerClient.listClustersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

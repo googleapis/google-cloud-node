@@ -89,7 +89,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listFeatureGroupsAsync(request);
+    const iterable = aiplatformClient.listFeatureGroupsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await baremetalsolutionClient.listNetworksAsync(request);
+    const iterable = baremetalsolutionClient.listNetworksAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

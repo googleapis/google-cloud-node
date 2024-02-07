@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await deployClient.listDeliveryPipelinesAsync(request);
+    const iterable = deployClient.listDeliveryPipelinesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

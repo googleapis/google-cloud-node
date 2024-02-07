@@ -54,7 +54,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await appengineClient.listInstancesAsync(request);
+    const iterable = appengineClient.listInstancesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

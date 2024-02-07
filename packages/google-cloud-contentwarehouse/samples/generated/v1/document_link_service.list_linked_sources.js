@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await contentwarehouseClient.listLinkedSourcesAsync(request);
+    const iterable = contentwarehouseClient.listLinkedSourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

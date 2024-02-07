@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await generativelanguageClient.listChunksAsync(request);
+    const iterable = generativelanguageClient.listChunksAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -55,7 +55,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await tablesClient.listWorkspacesAsync(request);
+    const iterable = tablesClient.listWorkspacesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

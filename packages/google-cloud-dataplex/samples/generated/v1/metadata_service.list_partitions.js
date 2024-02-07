@@ -79,7 +79,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataplexClient.listPartitionsAsync(request);
+    const iterable = dataplexClient.listPartitionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

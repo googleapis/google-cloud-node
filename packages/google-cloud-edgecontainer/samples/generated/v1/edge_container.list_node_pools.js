@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await edgecontainerClient.listNodePoolsAsync(request);
+    const iterable = edgecontainerClient.listNodePoolsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

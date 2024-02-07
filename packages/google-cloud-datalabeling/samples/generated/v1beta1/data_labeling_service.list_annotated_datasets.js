@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datalabelingClient.listAnnotatedDatasetsAsync(request);
+    const iterable = datalabelingClient.listAnnotatedDatasetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
