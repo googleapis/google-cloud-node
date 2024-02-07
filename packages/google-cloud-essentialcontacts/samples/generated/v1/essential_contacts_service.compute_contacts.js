@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await essentialcontactsClient.computeContactsAsync(request);
+    const iterable = essentialcontactsClient.computeContactsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

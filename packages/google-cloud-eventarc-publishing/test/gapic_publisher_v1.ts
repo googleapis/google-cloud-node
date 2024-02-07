@@ -66,14 +66,60 @@ function stubSimpleCallWithCallback<ResponseType>(
 
 describe('v1.PublisherClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = publisherModule.v1.PublisherClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new publisherModule.v1.PublisherClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'eventarcpublishing.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = publisherModule.v1.PublisherClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new publisherModule.v1.PublisherClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = publisherModule.v1.PublisherClient.servicePath;
+        assert.strictEqual(servicePath, 'eventarcpublishing.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = publisherModule.v1.PublisherClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'eventarcpublishing.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new publisherModule.v1.PublisherClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'eventarcpublishing.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new publisherModule.v1.PublisherClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'eventarcpublishing.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new publisherModule.v1.PublisherClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

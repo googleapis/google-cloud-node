@@ -161,18 +161,67 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1beta1.ManagedIdentitiesServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient
-          .servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'managedidentities.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'managedidentities.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'managedidentities.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'managedidentities.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'managedidentities.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new managedidentitiesserviceModule.v1beta1.ManagedIdentitiesServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

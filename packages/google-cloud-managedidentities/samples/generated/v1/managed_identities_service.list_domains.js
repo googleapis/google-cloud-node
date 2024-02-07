@@ -73,7 +73,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await managedidentitiesClient.listDomainsAsync(request);
+    const iterable = managedidentitiesClient.listDomainsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

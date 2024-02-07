@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await edgenetworkClient.listSubnetsAsync(request);
+    const iterable = edgenetworkClient.listSubnetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

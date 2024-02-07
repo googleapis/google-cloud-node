@@ -79,7 +79,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await gkehubClient.listMembershipsAsync(request);
+    const iterable = gkehubClient.listMembershipsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await gkemulticloudClient.listAttachedClustersAsync(request);
+    const iterable = gkemulticloudClient.listAttachedClustersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
