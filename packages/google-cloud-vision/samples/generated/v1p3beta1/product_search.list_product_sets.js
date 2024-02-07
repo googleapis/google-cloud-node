@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await visionClient.listProductSetsAsync(request);
+    const iterable = visionClient.listProductSetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
