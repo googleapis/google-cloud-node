@@ -129,18 +129,67 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.IdentityAwareProxyAdminServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        identityawareproxyadminserviceModule.v1
-          .IdentityAwareProxyAdminServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'iap.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        identityawareproxyadminserviceModule.v1
-          .IdentityAwareProxyAdminServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          identityawareproxyadminserviceModule.v1
+            .IdentityAwareProxyAdminServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'iap.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          identityawareproxyadminserviceModule.v1
+            .IdentityAwareProxyAdminServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'iap.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'iap.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'iap.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new identityawareproxyadminserviceModule.v1.IdentityAwareProxyAdminServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

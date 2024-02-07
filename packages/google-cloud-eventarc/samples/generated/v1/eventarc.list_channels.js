@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await eventarcClient.listChannelsAsync(request);
+    const iterable = eventarcClient.listChannelsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

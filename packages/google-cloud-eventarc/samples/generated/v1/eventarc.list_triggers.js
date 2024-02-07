@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await eventarcClient.listTriggersAsync(request);
+    const iterable = eventarcClient.listTriggersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await gsuiteaddonsClient.listDeploymentsAsync(request);
+    const iterable = gsuiteaddonsClient.listDeploymentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
