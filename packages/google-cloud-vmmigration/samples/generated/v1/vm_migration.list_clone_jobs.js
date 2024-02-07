@@ -69,7 +69,7 @@ function main(parent, pageToken) {
     };
 
     // Run request
-    const iterable = await vmmigrationClient.listCloneJobsAsync(request);
+    const iterable = vmmigrationClient.listCloneJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

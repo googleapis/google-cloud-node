@@ -79,7 +79,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await dataflowClient.getStageExecutionDetailsAsync(request);
+    const iterable = dataflowClient.getStageExecutionDetailsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

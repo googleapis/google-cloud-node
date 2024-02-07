@@ -81,7 +81,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await dataflowClient.listJobMessagesAsync(request);
+    const iterable = dataflowClient.listJobMessagesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

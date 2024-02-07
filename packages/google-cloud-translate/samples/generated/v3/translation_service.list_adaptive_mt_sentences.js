@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await translationClient.listAdaptiveMtSentencesAsync(request);
+    const iterable = translationClient.listAdaptiveMtSentencesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

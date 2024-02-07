@@ -77,7 +77,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await translationClient.listGlossariesAsync(request);
+    const iterable = translationClient.listGlossariesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listPrivateConnectionPeeringRoutesAsync(request);
+    const iterable = vmwareengineClient.listPrivateConnectionPeeringRoutesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

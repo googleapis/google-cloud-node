@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listHcxActivationKeysAsync(request);
+    const iterable = vmwareengineClient.listHcxActivationKeysAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

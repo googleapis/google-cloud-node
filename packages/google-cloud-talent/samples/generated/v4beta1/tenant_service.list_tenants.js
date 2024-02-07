@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await talentClient.listTenantsAsync(request);
+    const iterable = talentClient.listTenantsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

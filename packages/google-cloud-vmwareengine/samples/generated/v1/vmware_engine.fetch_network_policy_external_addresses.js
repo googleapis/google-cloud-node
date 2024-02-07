@@ -66,7 +66,7 @@ function main(networkPolicy) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.fetchNetworkPolicyExternalAddressesAsync(request);
+    const iterable = vmwareengineClient.fetchNetworkPolicyExternalAddressesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

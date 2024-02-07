@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listNpmPackagesAsync(request);
+    const iterable = artifactregistryClient.listNpmPackagesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cloudprofilerClient.listProfilesAsync(request);
+    const iterable = cloudprofilerClient.listProfilesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
