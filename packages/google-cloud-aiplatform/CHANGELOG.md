@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.11.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.10.1...aiplatform-v3.11.0) (2024-02-07)
+
+
+### Features
+
+* Add generateContent Unary API for aiplatform_v1 ([#5003](https://github.com/googleapis/google-cloud-node/issues/5003)) ([8722b31](https://github.com/googleapis/google-cloud-node/commit/8722b3190d0a20ebd19308c9fd8c426c417f5e4e))
+
 ## [3.10.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.10.0...aiplatform-v3.10.1) (2024-01-23)
 
 

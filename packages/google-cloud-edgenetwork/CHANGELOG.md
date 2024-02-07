@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.1.1...edgenetwork-v0.2.0) (2024-02-07)
+
+
+### Features
+
+* [edgenetwork] add MACsec status for internal links ([#4977](https://github.com/googleapis/google-cloud-node/issues/4977)) ([e137447](https://github.com/googleapis/google-cloud-node/commit/e137447885c5516f94f4cc409bbb32bc9cbe4c27))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.1.0...edgenetwork-v0.1.1) (2023-12-05)
 
 

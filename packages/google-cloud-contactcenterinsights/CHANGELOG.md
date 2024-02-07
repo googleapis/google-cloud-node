@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.2.0...contact-center-insights-v3.3.0) (2024-02-07)
+
+
+### Features
+
+* [contactcenterinsights] add Conversation QualityMetadata ([#4985](https://github.com/googleapis/google-cloud-node/issues/4985)) ([95a772b](https://github.com/googleapis/google-cloud-node/commit/95a772b601c50681144717a20042146e6d60a95c))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.1.0...contact-center-insights-v3.2.0) (2023-11-03)
 
 

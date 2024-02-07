@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.3.0...contentwarehouse-v1.4.0) (2024-02-07)
+
+
+### Features
+
+* [contentwarehouse] expose model_type in v1 processor, so that user can see the model_type after get or list processor version ([#5006](https://github.com/googleapis/google-cloud-node/issues/5006)) ([d82cadd](https://github.com/googleapis/google-cloud-node/commit/d82caddf977cc9cb99cae2d1847df252adc708cb))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.2.0...contentwarehouse-v1.3.0) (2023-10-18)
 
 
