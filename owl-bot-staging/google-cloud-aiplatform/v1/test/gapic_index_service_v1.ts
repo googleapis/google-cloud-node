@@ -117,18 +117,12 @@ function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?
 
 describe('v1.IndexServiceClient', () => {
     describe('Common methods', () => {
-        it('has servicePath', () => {
-            const client = new indexserviceModule.v1.IndexServiceClient();
-            const servicePath = client.servicePath;
-            assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
-        });
-
         it('has apiEndpoint', () => {
             const client = new indexserviceModule.v1.IndexServiceClient();
             const apiEndpoint = client.apiEndpoint;
             assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
         });
-        
+
         it('has universeDomain', () => {
             const client = new indexserviceModule.v1.IndexServiceClient();
             const universeDomain = client.universeDomain;
@@ -152,15 +146,15 @@ describe('v1.IndexServiceClient', () => {
                 stub.restore();
             });
         }
-        it('sets servicePath according to universe domain camelCase', () => {
+        it('sets apiEndpoint according to universe domain camelCase', () => {
             const client = new indexserviceModule.v1.IndexServiceClient({universeDomain: 'example.com'});
-            const servicePath = client.servicePath;
+            const servicePath = client.apiEndpoint;
             assert.strictEqual(servicePath, 'aiplatform.example.com');
         });
 
-        it('sets servicePath according to universe domain snakeCase', () => {
+        it('sets apiEndpoint according to universe domain snakeCase', () => {
             const client = new indexserviceModule.v1.IndexServiceClient({universe_domain: 'example.com'});
-            const servicePath = client.servicePath;
+            const servicePath = client.apiEndpoint;
             assert.strictEqual(servicePath, 'aiplatform.example.com');
         });
         it('does not allow setting both universeDomain and universe_domain', () => {
