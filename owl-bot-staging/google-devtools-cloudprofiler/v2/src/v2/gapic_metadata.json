@@ -1,0 +1,81 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.devtools.cloudprofiler.v2",
+  "libraryPackage": "@google-cloud/cloudprofiler",
+  "services": {
+    "ExportService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ExportServiceClient",
+          "rpcs": {
+            "ListProfiles": {
+              "methods": [
+                "listProfiles",
+                "listProfilesStream",
+                "listProfilesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ExportServiceClient",
+          "rpcs": {
+            "ListProfiles": {
+              "methods": [
+                "listProfiles",
+                "listProfilesStream",
+                "listProfilesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProfilerService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProfilerServiceClient",
+          "rpcs": {
+            "CreateProfile": {
+              "methods": [
+                "createProfile"
+              ]
+            },
+            "CreateOfflineProfile": {
+              "methods": [
+                "createOfflineProfile"
+              ]
+            },
+            "UpdateProfile": {
+              "methods": [
+                "updateProfile"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProfilerServiceClient",
+          "rpcs": {
+            "CreateProfile": {
+              "methods": [
+                "createProfile"
+              ]
+            },
+            "CreateOfflineProfile": {
+              "methods": [
+                "createOfflineProfile"
+              ]
+            },
+            "UpdateProfile": {
+              "methods": [
+                "updateProfile"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
