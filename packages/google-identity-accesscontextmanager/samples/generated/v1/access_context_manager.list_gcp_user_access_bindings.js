@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await accesscontextmanagerClient.listGcpUserAccessBindingsAsync(request);
+    const iterable = accesscontextmanagerClient.listGcpUserAccessBindingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

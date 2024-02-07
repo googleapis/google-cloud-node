@@ -129,18 +129,67 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1alpha.MapsPlatformDatasetsV1AlphaClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        mapsplatformdatasetsv1alphaModule.v1alpha
-          .MapsPlatformDatasetsV1AlphaClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new mapsplatformdatasetsv1alphaModule.v1alpha.MapsPlatformDatasetsV1AlphaClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'mapsplatformdatasets.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        mapsplatformdatasetsv1alphaModule.v1alpha
-          .MapsPlatformDatasetsV1AlphaClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new mapsplatformdatasetsv1alphaModule.v1alpha.MapsPlatformDatasetsV1AlphaClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          mapsplatformdatasetsv1alphaModule.v1alpha
+            .MapsPlatformDatasetsV1AlphaClient.servicePath;
+        assert.strictEqual(servicePath, 'mapsplatformdatasets.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          mapsplatformdatasetsv1alphaModule.v1alpha
+            .MapsPlatformDatasetsV1AlphaClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'mapsplatformdatasets.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new mapsplatformdatasetsv1alphaModule.v1alpha.MapsPlatformDatasetsV1AlphaClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'mapsplatformdatasets.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new mapsplatformdatasetsv1alphaModule.v1alpha.MapsPlatformDatasetsV1AlphaClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'mapsplatformdatasets.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new mapsplatformdatasetsv1alphaModule.v1alpha.MapsPlatformDatasetsV1AlphaClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

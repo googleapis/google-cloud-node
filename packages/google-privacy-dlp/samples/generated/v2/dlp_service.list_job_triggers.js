@@ -108,7 +108,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dlpClient.listJobTriggersAsync(request);
+    const iterable = dlpClient.listJobTriggersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
