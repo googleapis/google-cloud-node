@@ -53,7 +53,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await appengineClient.listAuthorizedDomainsAsync(request);
+    const iterable = appengineClient.listAuthorizedDomainsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await apigeeconnectClient.listConnectionsAsync(request);
+    const iterable = apigeeconnectClient.listConnectionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

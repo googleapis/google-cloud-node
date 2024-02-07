@@ -56,7 +56,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await generativelanguageClient.listCorporaAsync(request);
+    const iterable = generativelanguageClient.listCorporaAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await batchClient.listTasksAsync(request);
+    const iterable = batchClient.listTasksAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

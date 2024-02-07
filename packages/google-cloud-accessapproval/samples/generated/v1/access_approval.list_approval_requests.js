@@ -68,7 +68,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await accessapprovalClient.listApprovalRequestsAsync(request);
+    const iterable = accessapprovalClient.listApprovalRequestsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

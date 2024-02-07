@@ -80,7 +80,7 @@ function main(filter) {
     };
 
     // Run request
-    const iterable = await adminClient.listPropertiesAsync(request);
+    const iterable = adminClient.listPropertiesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

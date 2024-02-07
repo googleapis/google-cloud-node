@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await baremetalsolutionClient.listProvisioningQuotasAsync(request);
+    const iterable = baremetalsolutionClient.listProvisioningQuotasAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

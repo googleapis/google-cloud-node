@@ -57,7 +57,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await serviceusageClient.listAdminOverridesAsync(request);
+    const iterable = serviceusageClient.listAdminOverridesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

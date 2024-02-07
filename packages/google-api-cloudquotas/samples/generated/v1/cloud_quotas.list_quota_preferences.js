@@ -80,7 +80,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cloudquotasClient.listQuotaPreferencesAsync(request);
+    const iterable = cloudquotasClient.listQuotaPreferencesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
