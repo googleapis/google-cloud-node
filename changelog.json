@@ -5,6 +5,208 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "e137447885c5516f94f4cc409bbb32bc9cbe4c27",
+          "message": "[edgenetwork] add MACsec status for internal links",
+          "issues": [
+            "4977"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "ad6710ef-3de3-4d64-989e-2afb8568f005",
+      "createTime": "2024-02-07T20:25:12.250Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1bff942214baba585f7adce35f948b71ece1673a",
+          "message": "[container] new AddonsConfig field stateful_ha_config",
+          "issues": [
+            "5002"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "bc15d110-bd5a-4b35-814c-f30b234fd45b",
+      "createTime": "2024-02-07T20:25:12.239Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "785c08bca3e13b39cb9a2448aec758bb64473ec2",
+          "message": "[retail] add analytics service",
+          "issues": [
+            "4975"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "370e3d15-59c1-4332-97ab-6edec63bc9f8",
+      "createTime": "2024-02-07T20:25:12.223Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "48d39189f57fd8a86051da696ae715bbf855d4ff",
+          "message": "[networkservices] remove service resource reference annotation",
+          "issues": []
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "ee086395-0ebb-4b25-ba8e-a96ed99d8fd6",
+      "createTime": "2024-02-07T20:25:12.136Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a65c23883e449f929cbc8c7422e0c325b7f598fe",
+          "message": "[functions] updated description for `docker_registry` to reflect transition to Artifact Registry",
+          "issues": [
+            "4981"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "bfcf3ec9-f10a-42c1-b059-bacdb33f4c92",
+      "createTime": "2024-02-07T20:25:12.115Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "83e2e5cb7fa5c781580cb07d48e00b3908d730c4",
+          "message": "[documentai] expose model_type in v1 processor, so that user can see the model_type after get or list processor version",
+          "issues": [
+            "5004"
+          ]
+        }
+      ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "a7be849c-a868-4152-a8f0-cadd87f93cbb",
+      "createTime": "2024-02-07T20:25:12.044Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1163399752d783bc7831dfd749e73215e8ebab34",
+          "message": "[dataproc] add session and session_template controllers",
+          "issues": [
+            "4994"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "ec4e0508-8622-4cad-beca-e9609ef15946",
+      "createTime": "2024-02-07T20:25:12.028Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d82caddf977cc9cb99cae2d1847df252adc708cb",
+          "message": "[contentwarehouse] expose model_type in v1 processor, so that user can see the model_type after get or list processor version",
+          "issues": [
+            "5006"
+          ]
+        }
+      ],
+      "version": "1.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "075538a8-b232-4c88-8fbb-4e1dd538d8b0",
+      "createTime": "2024-02-07T20:25:12.016Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "95a772b601c50681144717a20042146e6d60a95c",
+          "message": "[contactcenterinsights] add Conversation QualityMetadata",
+          "issues": [
+            "4985"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "260b45ea-1956-4874-8a3d-54ae54e8c25d",
+      "createTime": "2024-02-07T20:25:12.002Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4527adfad0856acc0fe27aec36bc16cb845ccc95",
+          "message": "[batch] Add `run_as_non_root` field to allow user's runnable be executed as non root",
+          "issues": [
+            "4982"
+          ]
+        }
+      ],
+      "version": "1.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "4754e114-a258-4b2a-8258-5b9b27e4048c",
+      "createTime": "2024-02-07T20:25:11.993Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8722b3190d0a20ebd19308c9fd8c426c417f5e4e",
+          "message": "Add generateContent Unary API for aiplatform_v1",
+          "issues": [
+            "5003"
+          ]
+        }
+      ],
+      "version": "3.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "cff4ad85-e678-45bb-bc5c-0611356505e0",
+      "createTime": "2024-02-07T20:25:11.982Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0a90c23568b82d79654e6819039178eee97c4499",
+          "message": "[analytics-admin] add `GetCalculatedMetric`, `CreateCalculatedMetric`, `ListCalculatedMetrics`, `UpdateCalculatedMetric`, `DeleteCalculatedMetric` methods to the Admin API v1alpha",
+          "issues": [
+            "4984"
+          ]
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "952ab690-0184-4f88-84c5-ef1f3ab989f6",
+      "createTime": "2024-02-07T20:25:11.971Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "2aa0e2ef432b5803fda0a5dc775f1ad78ee4a9df",
           "message": "[tasks] publish in ESM and CJS, and remove bufferTask",
           "issues": [
@@ -21725,5 +21927,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-01-29T19:16:23.135Z"
+  "updateTime": "2024-02-07T20:25:12.250Z"
 }

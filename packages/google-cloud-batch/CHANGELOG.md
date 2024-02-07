@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.7.0...batch-v1.8.0) (2024-02-07)
+
+
+### Features
+
+* [batch] Add `run_as_non_root` field to allow user's runnable be executed as non root ([#4982](https://github.com/googleapis/google-cloud-node/issues/4982)) ([4527adf](https://github.com/googleapis/google-cloud-node/commit/4527adfad0856acc0fe27aec36bc16cb845ccc95))
+
 ## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.6.0...batch-v1.7.0) (2024-01-15)
 
 
