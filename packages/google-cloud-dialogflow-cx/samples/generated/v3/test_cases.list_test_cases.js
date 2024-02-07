@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listTestCasesAsync(request);
+    const iterable = cxClient.listTestCasesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

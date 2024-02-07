@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await deployClient.listCustomTargetTypesAsync(request);
+    const iterable = deployClient.listCustomTargetTypesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

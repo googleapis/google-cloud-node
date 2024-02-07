@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataplexClient.listContentAsync(request);
+    const iterable = dataplexClient.listContentAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

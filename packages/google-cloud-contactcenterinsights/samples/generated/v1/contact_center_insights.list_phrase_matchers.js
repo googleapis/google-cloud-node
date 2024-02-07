@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await contactcenterinsightsClient.listPhraseMatchersAsync(request);
+    const iterable = contactcenterinsightsClient.listPhraseMatchersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

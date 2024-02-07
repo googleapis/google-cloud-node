@@ -63,7 +63,7 @@ function main(siteSearchEngine) {
     };
 
     // Run request
-    const iterable = await discoveryengineClient.fetchDomainVerificationStatusAsync(request);
+    const iterable = discoveryengineClient.fetchDomainVerificationStatusAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

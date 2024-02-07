@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await edgecontainerClient.listVpnConnectionsAsync(request);
+    const iterable = edgecontainerClient.listVpnConnectionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

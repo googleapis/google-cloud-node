@@ -60,7 +60,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await dataformClient.queryWorkflowInvocationActionsAsync(request);
+    const iterable = dataformClient.queryWorkflowInvocationActionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

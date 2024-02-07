@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listExperimentsAsync(request);
+    const iterable = cxClient.listExperimentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

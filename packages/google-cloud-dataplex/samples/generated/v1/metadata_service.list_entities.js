@@ -76,7 +76,7 @@ function main(parent, view) {
     };
 
     // Run request
-    const iterable = await dataplexClient.listEntitiesAsync(request);
+    const iterable = dataplexClient.listEntitiesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

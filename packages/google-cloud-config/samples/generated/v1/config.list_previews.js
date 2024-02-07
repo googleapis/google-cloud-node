@@ -84,7 +84,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await configClient.listPreviewsAsync(request);
+    const iterable = configClient.listPreviewsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

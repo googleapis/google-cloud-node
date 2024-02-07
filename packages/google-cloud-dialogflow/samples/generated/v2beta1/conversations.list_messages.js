@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dialogflowClient.listMessagesAsync(request);
+    const iterable = dialogflowClient.listMessagesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

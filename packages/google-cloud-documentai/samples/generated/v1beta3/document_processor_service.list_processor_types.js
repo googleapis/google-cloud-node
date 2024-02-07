@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await documentaiClient.listProcessorTypesAsync(request);
+    const iterable = documentaiClient.listProcessorTypesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

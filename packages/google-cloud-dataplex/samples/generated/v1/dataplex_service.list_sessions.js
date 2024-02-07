@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataplexClient.listSessionsAsync(request);
+    const iterable = dataplexClient.listSessionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

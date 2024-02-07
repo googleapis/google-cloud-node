@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listVersionsAsync(request);
+    const iterable = cxClient.listVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

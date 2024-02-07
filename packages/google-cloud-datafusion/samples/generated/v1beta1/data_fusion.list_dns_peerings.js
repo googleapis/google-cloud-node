@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datafusionClient.listDnsPeeringsAsync(request);
+    const iterable = datafusionClient.listDnsPeeringsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

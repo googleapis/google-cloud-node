@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dialogflowClient.searchAgentsAsync(request);
+    const iterable = dialogflowClient.searchAgentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

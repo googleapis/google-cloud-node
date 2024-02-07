@@ -68,7 +68,7 @@ function main(parent, links) {
     };
 
     // Run request
-    const iterable = await lineageClient.batchSearchLinkProcessesAsync(request);
+    const iterable = lineageClient.batchSearchLinkProcessesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
