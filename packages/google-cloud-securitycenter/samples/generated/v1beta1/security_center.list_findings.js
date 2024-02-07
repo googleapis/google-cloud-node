@@ -104,7 +104,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.listFindingsAsync(request);
+    const iterable = securitycenterClient.listFindingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

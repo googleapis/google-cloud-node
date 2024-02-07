@@ -86,7 +86,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await supportClient.searchCasesAsync(request);
+    const iterable = supportClient.searchCasesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

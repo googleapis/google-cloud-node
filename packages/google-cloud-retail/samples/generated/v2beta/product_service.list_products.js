@@ -118,7 +118,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await retailClient.listProductsAsync(request);
+    const iterable = retailClient.listProductsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

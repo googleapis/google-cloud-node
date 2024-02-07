@@ -295,7 +295,7 @@ function main(placement, visitorId) {
     };
 
     // Run request
-    const iterable = await retailClient.searchAsync(request);
+    const iterable = retailClient.searchAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

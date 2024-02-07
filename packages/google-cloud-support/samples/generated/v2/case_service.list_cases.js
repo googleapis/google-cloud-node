@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await supportClient.listCasesAsync(request);
+    const iterable = supportClient.listCasesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

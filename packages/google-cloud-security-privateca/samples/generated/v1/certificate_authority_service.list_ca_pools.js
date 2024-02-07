@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await privatecaClient.listCaPoolsAsync(request);
+    const iterable = privatecaClient.listCaPoolsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

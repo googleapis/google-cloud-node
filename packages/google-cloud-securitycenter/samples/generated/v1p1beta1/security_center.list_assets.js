@@ -168,7 +168,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.listAssetsAsync(request);
+    const iterable = securitycenterClient.listAssetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await speechClient.listCustomClassesAsync(request);
+    const iterable = speechClient.listCustomClassesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

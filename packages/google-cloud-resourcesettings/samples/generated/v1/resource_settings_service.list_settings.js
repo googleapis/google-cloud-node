@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await resourcesettingsClient.listSettingsAsync(request);
+    const iterable = resourcesettingsClient.listSettingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
