@@ -161,12 +161,6 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.AssetServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const client = new assetserviceModule.v1.AssetServiceClient();
-      const servicePath = client.servicePath;
-      assert.strictEqual(servicePath, 'cloudasset.googleapis.com');
-    });
-
     it('has apiEndpoint', () => {
       const client = new assetserviceModule.v1.AssetServiceClient();
       const apiEndpoint = client.apiEndpoint;
@@ -201,19 +195,19 @@ describe('v1.AssetServiceClient', () => {
         stub.restore();
       });
     }
-    it('sets servicePath according to universe domain camelCase', () => {
+    it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
         universeDomain: 'example.com',
       });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudasset.example.com');
     });
 
-    it('sets servicePath according to universe domain snakeCase', () => {
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
         universe_domain: 'example.com',
       });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudasset.example.com');
     });
     it('does not allow setting both universeDomain and universe_domain', () => {
