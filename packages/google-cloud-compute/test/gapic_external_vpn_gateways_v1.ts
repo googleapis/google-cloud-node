@@ -142,13 +142,6 @@ describe('v1.ExternalVpnGatewaysClient', () => {
     sinon.restore();
   });
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const client =
-        new externalvpngatewaysModule.v1.ExternalVpnGatewaysClient();
-      const servicePath = client.servicePath;
-      assert.strictEqual(servicePath, 'compute.googleapis.com');
-    });
-
     it('has apiEndpoint', () => {
       const client =
         new externalvpngatewaysModule.v1.ExternalVpnGatewaysClient();
@@ -185,19 +178,19 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         stub.restore();
       });
     }
-    it('sets servicePath according to universe domain camelCase', () => {
+    it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new externalvpngatewaysModule.v1.ExternalVpnGatewaysClient(
         {universeDomain: 'example.com'}
       );
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'compute.example.com');
     });
 
-    it('sets servicePath according to universe domain snakeCase', () => {
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new externalvpngatewaysModule.v1.ExternalVpnGatewaysClient(
         {universe_domain: 'example.com'}
       );
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'compute.example.com');
     });
     it('does not allow setting both universeDomain and universe_domain', () => {

@@ -142,13 +142,6 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
     sinon.restore();
   });
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const client =
-        new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient();
-      const servicePath = client.servicePath;
-      assert.strictEqual(servicePath, 'compute.googleapis.com');
-    });
-
     it('has apiEndpoint', () => {
       const client =
         new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient();
@@ -187,21 +180,21 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         stub.restore();
       });
     }
-    it('sets servicePath according to universe domain camelCase', () => {
+    it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient({
           universeDomain: 'example.com',
         });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'compute.example.com');
     });
 
-    it('sets servicePath according to universe domain snakeCase', () => {
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new publicadvertisedprefixesModule.v1.PublicAdvertisedPrefixesClient({
           universe_domain: 'example.com',
         });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'compute.example.com');
     });
     it('does not allow setting both universeDomain and universe_domain', () => {

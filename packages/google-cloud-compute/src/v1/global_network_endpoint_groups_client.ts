@@ -295,7 +295,7 @@ export class GlobalNetworkEndpointGroupsClient {
 
   /**
    * The DNS address for this API service.
-   * @deprecated
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
@@ -312,9 +312,8 @@ export class GlobalNetworkEndpointGroupsClient {
   }
 
   /**
-   * The DNS address for this API service - same as servicePath,
-   * exists for compatibility reasons.
-   * @deprecated
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
@@ -332,14 +331,6 @@ export class GlobalNetworkEndpointGroupsClient {
 
   /**
    * The DNS address for this API service.
-   * @returns {string} The DNS address for this service.
-   */
-  get servicePath() {
-    return this._servicePath;
-  }
-
-  /**
-   * The DNS address for this API service - same as servicePath().
    * @returns {string} The DNS address for this service.
    */
   get apiEndpoint() {

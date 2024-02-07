@@ -142,13 +142,6 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
     sinon.restore();
   });
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const client =
-        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient();
-      const servicePath = client.servicePath;
-      assert.strictEqual(servicePath, 'compute.googleapis.com');
-    });
-
     it('has apiEndpoint', () => {
       const client =
         new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient();
@@ -187,21 +180,21 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         stub.restore();
       });
     }
-    it('sets servicePath according to universe domain camelCase', () => {
+    it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
           universeDomain: 'example.com',
         });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'compute.example.com');
     });
 
-    it('sets servicePath according to universe domain snakeCase', () => {
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
           universe_domain: 'example.com',
         });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'compute.example.com');
     });
     it('does not allow setting both universeDomain and universe_domain', () => {

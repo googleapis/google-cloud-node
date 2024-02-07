@@ -142,13 +142,6 @@ describe('v1.RegionSslCertificatesClient', () => {
     sinon.restore();
   });
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const client =
-        new regionsslcertificatesModule.v1.RegionSslCertificatesClient();
-      const servicePath = client.servicePath;
-      assert.strictEqual(servicePath, 'compute.googleapis.com');
-    });
-
     it('has apiEndpoint', () => {
       const client =
         new regionsslcertificatesModule.v1.RegionSslCertificatesClient();
@@ -187,21 +180,21 @@ describe('v1.RegionSslCertificatesClient', () => {
         stub.restore();
       });
     }
-    it('sets servicePath according to universe domain camelCase', () => {
+    it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new regionsslcertificatesModule.v1.RegionSslCertificatesClient({
           universeDomain: 'example.com',
         });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'compute.example.com');
     });
 
-    it('sets servicePath according to universe domain snakeCase', () => {
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new regionsslcertificatesModule.v1.RegionSslCertificatesClient({
           universe_domain: 'example.com',
         });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'compute.example.com');
     });
     it('does not allow setting both universeDomain and universe_domain', () => {
