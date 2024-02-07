@@ -81,7 +81,7 @@ function main(instanceGroup, project, region, regionInstanceGroupsListInstancesR
     };
 
     // Run request
-    const iterable = await computeClient.listInstancesAsync(request);
+    const iterable = computeClient.listInstancesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -71,7 +71,7 @@ function main(project, projectsListXpnHostsRequestResource) {
     };
 
     // Run request
-    const iterable = await computeClient.listXpnHostsAsync(request);
+    const iterable = computeClient.listXpnHostsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

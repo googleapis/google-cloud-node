@@ -66,7 +66,7 @@ function main(project) {
     };
 
     // Run request
-    const iterable = await computeClient.getXpnResourcesAsync(request);
+    const iterable = computeClient.getXpnResourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
