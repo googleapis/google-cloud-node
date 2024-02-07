@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dashboardClient.listDashboardsAsync(request);
+    const iterable = dashboardClient.listDashboardsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

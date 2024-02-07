@@ -67,7 +67,7 @@ function main(parent, query) {
     };
 
     // Run request
-    const iterable = await reportsClient.searchAsync(request);
+    const iterable = reportsClient.searchAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

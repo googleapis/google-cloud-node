@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await containeranalysisClient.listOccurrencesAsync(request);
+    const iterable = containeranalysisClient.listOccurrencesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

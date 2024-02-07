@@ -56,7 +56,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await mapsplatformdatasetsClient.listDatasetsAsync(request);
+    const iterable = mapsplatformdatasetsClient.listDatasetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
