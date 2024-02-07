@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await osconfigClient.listInstanceOSPoliciesCompliancesAsync(request);
+    const iterable = osconfigClient.listInstanceOSPoliciesCompliancesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

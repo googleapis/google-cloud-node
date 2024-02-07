@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkservicesClient.listGatewaysAsync(request);
+    const iterable = networkservicesClient.listGatewaysAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

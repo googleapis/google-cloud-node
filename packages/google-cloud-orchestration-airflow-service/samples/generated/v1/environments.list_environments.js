@@ -54,7 +54,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await serviceClient.listEnvironmentsAsync(request);
+    const iterable = serviceClient.listEnvironmentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

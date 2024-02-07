@@ -79,7 +79,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await networkconnectivityClient.listHubSpokesAsync(request);
+    const iterable = networkconnectivityClient.listHubSpokesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

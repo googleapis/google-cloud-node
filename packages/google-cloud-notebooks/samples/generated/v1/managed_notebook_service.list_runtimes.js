@@ -56,7 +56,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await notebooksClient.listRuntimesAsync(request);
+    const iterable = notebooksClient.listRuntimesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

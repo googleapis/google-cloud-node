@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await notebooksClient.listSchedulesAsync(request);
+    const iterable = notebooksClient.listSchedulesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

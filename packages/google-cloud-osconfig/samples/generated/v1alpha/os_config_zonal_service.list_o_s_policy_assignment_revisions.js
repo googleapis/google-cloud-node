@@ -56,7 +56,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await osconfigClient.listOSPolicyAssignmentRevisionsAsync(request);
+    const iterable = osconfigClient.listOSPolicyAssignmentRevisionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
