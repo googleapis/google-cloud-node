@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataplexClient.listZonesAsync(request);
+    const iterable = dataplexClient.listZonesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

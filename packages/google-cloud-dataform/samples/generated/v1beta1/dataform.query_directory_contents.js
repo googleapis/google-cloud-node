@@ -65,7 +65,7 @@ function main(workspace) {
     };
 
     // Run request
-    const iterable = await dataformClient.queryDirectoryContentsAsync(request);
+    const iterable = dataformClient.queryDirectoryContentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

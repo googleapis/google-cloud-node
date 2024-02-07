@@ -79,7 +79,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listChangelogsAsync(request);
+    const iterable = cxClient.listChangelogsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

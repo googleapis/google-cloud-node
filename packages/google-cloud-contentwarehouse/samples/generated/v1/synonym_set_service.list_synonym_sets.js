@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await contentwarehouseClient.listSynonymSetsAsync(request);
+    const iterable = contentwarehouseClient.listSynonymSetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

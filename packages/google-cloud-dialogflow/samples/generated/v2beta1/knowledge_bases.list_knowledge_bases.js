@@ -78,7 +78,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dialogflowClient.listKnowledgeBasesAsync(request);
+    const iterable = dialogflowClient.listKnowledgeBasesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

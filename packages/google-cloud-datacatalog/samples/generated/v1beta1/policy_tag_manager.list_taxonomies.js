@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datacatalogClient.listTaxonomiesAsync(request);
+    const iterable = datacatalogClient.listTaxonomiesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

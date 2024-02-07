@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datacatalogClient.listEntriesAsync(request);
+    const iterable = datacatalogClient.listEntriesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

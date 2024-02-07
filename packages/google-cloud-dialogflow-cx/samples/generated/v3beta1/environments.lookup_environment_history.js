@@ -57,7 +57,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await cxClient.lookupEnvironmentHistoryAsync(request);
+    const iterable = cxClient.lookupEnvironmentHistoryAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -65,7 +65,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await dataformClient.queryCompilationResultActionsAsync(request);
+    const iterable = dataformClient.queryCompilationResultActionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

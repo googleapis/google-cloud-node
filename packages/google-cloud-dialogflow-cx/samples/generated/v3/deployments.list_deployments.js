@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listDeploymentsAsync(request);
+    const iterable = cxClient.listDeploymentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

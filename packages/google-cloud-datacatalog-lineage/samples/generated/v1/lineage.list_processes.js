@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await lineageClient.listProcessesAsync(request);
+    const iterable = lineageClient.listProcessesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -75,7 +75,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await discoveryengineClient.listDataStoresAsync(request);
+    const iterable = discoveryengineClient.listDataStoresAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
