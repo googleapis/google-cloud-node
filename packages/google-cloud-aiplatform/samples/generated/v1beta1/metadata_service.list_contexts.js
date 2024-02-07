@@ -105,7 +105,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listContextsAsync(request);
+    const iterable = aiplatformClient.listContextsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

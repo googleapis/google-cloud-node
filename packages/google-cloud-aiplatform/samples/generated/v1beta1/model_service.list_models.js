@@ -81,7 +81,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listModelsAsync(request);
+    const iterable = aiplatformClient.listModelsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

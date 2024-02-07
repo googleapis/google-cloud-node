@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listModelEvaluationsAsync(request);
+    const iterable = aiplatformClient.listModelEvaluationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -69,7 +69,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listAnnotationsAsync(request);
+    const iterable = aiplatformClient.listAnnotationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

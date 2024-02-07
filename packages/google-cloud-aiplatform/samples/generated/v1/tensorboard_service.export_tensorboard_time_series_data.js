@@ -73,7 +73,7 @@ function main(tensorboardTimeSeries) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.exportTensorboardTimeSeriesDataAsync(request);
+    const iterable = aiplatformClient.exportTensorboardTimeSeriesDataAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

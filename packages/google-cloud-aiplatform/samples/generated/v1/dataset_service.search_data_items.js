@@ -128,7 +128,7 @@ function main(dataset) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.searchDataItemsAsync(request);
+    const iterable = aiplatformClient.searchDataItemsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
