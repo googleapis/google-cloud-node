@@ -84,7 +84,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listBatchPredictionJobsAsync(request);
+    const iterable = aiplatformClient.listBatchPredictionJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

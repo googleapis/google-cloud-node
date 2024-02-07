@@ -69,7 +69,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listDatasetVersionsAsync(request);
+    const iterable = aiplatformClient.listDatasetVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

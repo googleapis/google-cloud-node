@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START aiplatform_v1beta1_generated_DatasetService_ListSavedQueries_async]
+function main(featureView, query) {
+  // [START aiplatform_v1_generated_FeatureOnlineStoreService_SearchNearestEntities_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,54 +29,42 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Dataset to list SavedQueries from.
-   *  Format:
-   *  `projects/{project}/locations/{location}/datasets/{dataset}`
+   *  Required. FeatureView resource format
+   *  `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
    */
-  // const parent = 'abc123'
+  // const featureView = 'abc123'
   /**
-   *  The standard list filter.
+   *  Required. The query.
    */
-  // const filter = 'abc123'
+  // const query = {}
   /**
-   *  The standard list page size.
+   *  Optional. If set to true, the full entities (including all vector values
+   *  and metadata) of the nearest neighbors are returned; otherwise only entity
+   *  id of the nearest neighbors will be returned. Note that returning full
+   *  entities will significantly increase the latency and cost of the query.
    */
-  // const pageSize = 1234
-  /**
-   *  The standard list page token.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Mask specifying which fields to read.
-   */
-  // const readMask = {}
-  /**
-   *  A comma-separated list of fields to order by, sorted in ascending order.
-   *  Use "desc" after a field name for descending.
-   */
-  // const orderBy = 'abc123'
+  // const returnFullEntity = true
 
   // Imports the Aiplatform library
-  const {DatasetServiceClient} = require('@google-cloud/aiplatform').v1beta1;
+  const {FeatureOnlineStoreServiceClient} = require('@google-cloud/aiplatform').v1;
 
   // Instantiates a client
-  const aiplatformClient = new DatasetServiceClient();
+  const aiplatformClient = new FeatureOnlineStoreServiceClient();
 
-  async function callListSavedQueries() {
+  async function callSearchNearestEntities() {
     // Construct request
     const request = {
-      parent,
+      featureView,
+      query,
     };
 
     // Run request
-    const iterable = aiplatformClient.listSavedQueriesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await aiplatformClient.searchNearestEntities(request);
+    console.log(response);
   }
 
-  callListSavedQueries();
-  // [END aiplatform_v1beta1_generated_DatasetService_ListSavedQueries_async]
+  callSearchNearestEntities();
+  // [END aiplatform_v1_generated_FeatureOnlineStoreService_SearchNearestEntities_async]
 }
 
 process.on('unhandledRejection', err => {

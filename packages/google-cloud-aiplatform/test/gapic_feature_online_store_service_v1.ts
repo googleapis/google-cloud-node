@@ -89,18 +89,68 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.FeatureOnlineStoreServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient
-          .servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'aiplatform.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
@@ -329,6 +379,147 @@ describe('v1.FeatureOnlineStoreServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchFeatureValues(request), expectedError);
+    });
+  });
+
+  describe('searchNearestEntities', () => {
+    it('invokes searchNearestEntities without error', async () => {
+      const client =
+        new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchNearestEntitiesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.SearchNearestEntitiesRequest',
+        ['featureView']
+      );
+      request.featureView = defaultValue1;
+      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchNearestEntitiesResponse()
+      );
+      client.innerApiCalls.searchNearestEntities =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.searchNearestEntities(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchNearestEntities as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchNearestEntities as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchNearestEntities without error using callback', async () => {
+      const client =
+        new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchNearestEntitiesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.SearchNearestEntitiesRequest',
+        ['featureView']
+      );
+      request.featureView = defaultValue1;
+      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchNearestEntitiesResponse()
+      );
+      client.innerApiCalls.searchNearestEntities =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.searchNearestEntities(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchNearestEntities as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchNearestEntities as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchNearestEntities with error', async () => {
+      const client =
+        new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchNearestEntitiesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.SearchNearestEntitiesRequest',
+        ['featureView']
+      );
+      request.featureView = defaultValue1;
+      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchNearestEntities = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.searchNearestEntities(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.searchNearestEntities as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchNearestEntities as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchNearestEntities with closed client', async () => {
+      const client =
+        new featureonlinestoreserviceModule.v1.FeatureOnlineStoreServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchNearestEntitiesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.SearchNearestEntitiesRequest',
+        ['featureView']
+      );
+      request.featureView = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.searchNearestEntities(request),
+        expectedError
+      );
     });
   });
   describe('getIamPolicy', () => {

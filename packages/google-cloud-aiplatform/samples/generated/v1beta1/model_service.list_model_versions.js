@@ -83,7 +83,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listModelVersionsAsync(request);
+    const iterable = aiplatformClient.listModelVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -91,7 +91,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listFeatureViewsAsync(request);
+    const iterable = aiplatformClient.listFeatureViewsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

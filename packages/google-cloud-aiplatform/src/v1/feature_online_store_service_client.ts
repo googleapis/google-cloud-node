@@ -31,6 +31,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/feature_online_store_service_client_config.json`.
@@ -52,6 +53,8 @@ export class FeatureOnlineStoreServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -112,8 +115,20 @@ export class FeatureOnlineStoreServiceClient {
     // Ensure that options include all the required fields.
     const staticMembers = this
       .constructor as typeof FeatureOnlineStoreServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    this._universeDomain =
+      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+    this._servicePath = 'aiplatform.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -125,7 +140,7 @@ export class FeatureOnlineStoreServiceClient {
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -150,10 +165,10 @@ export class FeatureOnlineStoreServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
@@ -376,7 +391,10 @@ export class FeatureOnlineStoreServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const featureOnlineStoreServiceStubMethods = ['fetchFeatureValues'];
+    const featureOnlineStoreServiceStubMethods = [
+      'fetchFeatureValues',
+      'searchNearestEntities',
+    ];
     for (const methodName of featureOnlineStoreServiceStubMethods) {
       const callPromise = this.featureOnlineStoreServiceStub.then(
         stub =>
@@ -408,19 +426,50 @@ export class FeatureOnlineStoreServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process !== undefined &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'aiplatform.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process !== undefined &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'aiplatform.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -555,6 +604,112 @@ export class FeatureOnlineStoreServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.fetchFeatureValues(request, options, callback);
+  }
+  /**
+   * Search the nearest entities under a FeatureView.
+   * Search only works for indexable feature view; if a feature view isn't
+   * indexable, returns Invalid argument response.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.featureView
+   *   Required. FeatureView resource format
+   *   `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
+   * @param {google.cloud.aiplatform.v1.NearestNeighborQuery} request.query
+   *   Required. The query.
+   * @param {boolean} [request.returnFullEntity]
+   *   Optional. If set to true, the full entities (including all vector values
+   *   and metadata) of the nearest neighbors are returned; otherwise only entity
+   *   id of the nearest neighbors will be returned. Note that returning full
+   *   entities will significantly increase the latency and cost of the query.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.SearchNearestEntitiesResponse|SearchNearestEntitiesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/feature_online_store_service.search_nearest_entities.js</caption>
+   * region_tag:aiplatform_v1_generated_FeatureOnlineStoreService_SearchNearestEntities_async
+   */
+  searchNearestEntities(
+    request?: protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesResponse,
+      (
+        | protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  searchNearestEntities(
+    request: protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesResponse,
+      | protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchNearestEntities(
+    request: protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesResponse,
+      | protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchNearestEntities(
+    request?: protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesResponse,
+          | protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesResponse,
+      | protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesResponse,
+      (
+        | protos.google.cloud.aiplatform.v1.ISearchNearestEntitiesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        feature_view: request.featureView ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.searchNearestEntities(request, options, callback);
   }
 
   /**

@@ -57,6 +57,7 @@
   * [Feature_online_store_admin_service.update_feature_online_store](#feature_online_store_admin_service.update_feature_online_store)
   * [Feature_online_store_admin_service.update_feature_view](#feature_online_store_admin_service.update_feature_view)
   * [Feature_online_store_service.fetch_feature_values](#feature_online_store_service.fetch_feature_values)
+  * [Feature_online_store_service.search_nearest_entities](#feature_online_store_service.search_nearest_entities)
   * [Feature_registry_service.create_feature](#feature_registry_service.create_feature)
   * [Feature_registry_service.create_feature_group](#feature_registry_service.create_feature_group)
   * [Feature_registry_service.delete_feature](#feature_registry_service.delete_feature)
@@ -1327,6 +1328,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.fetch_feature_values.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_service.search_nearest_entities
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.search_nearest_entities.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.search_nearest_entities.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/feature_online_store_service.search_nearest_entities.js`
 
 
 -----
