@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await clusterClient.listClustersAsync(request);
+    const iterable = clusterClient.listClustersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

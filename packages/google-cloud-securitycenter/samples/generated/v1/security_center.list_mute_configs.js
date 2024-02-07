@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.listMuteConfigsAsync(request);
+    const iterable = securitycenterClient.listMuteConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

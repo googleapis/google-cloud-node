@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await resourcemanagerClient.listTagValuesAsync(request);
+    const iterable = resourcemanagerClient.listTagValuesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

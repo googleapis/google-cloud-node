@@ -56,7 +56,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await supportClient.searchCaseClassificationsAsync(request);
+    const iterable = supportClient.searchCaseClassificationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await privatecaClient.listCertificateAuthoritiesAsync(request);
+    const iterable = privatecaClient.listCertificateAuthoritiesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

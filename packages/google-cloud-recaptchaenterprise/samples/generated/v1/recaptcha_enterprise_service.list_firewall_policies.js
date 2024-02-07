@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await recaptchaenterpriseClient.listFirewallPoliciesAsync(request);
+    const iterable = recaptchaenterpriseClient.listFirewallPoliciesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

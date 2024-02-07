@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await speechClient.listRecognizersAsync(request);
+    const iterable = speechClient.listRecognizersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

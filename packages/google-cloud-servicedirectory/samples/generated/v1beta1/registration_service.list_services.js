@@ -97,7 +97,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await servicedirectoryClient.listServicesAsync(request);
+    const iterable = servicedirectoryClient.listServicesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
