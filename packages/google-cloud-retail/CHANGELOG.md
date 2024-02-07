@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.0.1...retail-v3.1.0) (2024-02-07)
+
+
+### Features
+
+* [retail] add analytics service ([#4975](https://github.com/googleapis/google-cloud-node/issues/4975)) ([785c08b](https://github.com/googleapis/google-cloud-node/commit/785c08bca3e13b39cb9a2448aec758bb64473ec2))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/retail-v3.0.0...retail-v3.0.1) (2023-09-06)
 
 

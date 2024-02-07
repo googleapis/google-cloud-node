@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.1.2...documentai-v8.2.0) (2024-02-07)
+
+
+### Features
+
+* [documentai] expose model_type in v1 processor, so that user can see the model_type after get or list processor version ([#5004](https://github.com/googleapis/google-cloud-node/issues/5004)) ([83e2e5c](https://github.com/googleapis/google-cloud-node/commit/83e2e5cb7fa5c781580cb07d48e00b3908d730c4))
+
 ## [8.1.2](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.1.1...documentai-v8.1.2) (2024-01-05)
 
 

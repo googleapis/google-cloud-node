@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.2.0...networkservices-v0.2.1) (2024-02-07)
+
+
+### Bug Fixes
+
+* [networkservices] remove service resource reference annotation ([48d3918](https://github.com/googleapis/google-cloud-node/commit/48d39189f57fd8a86051da696ae715bbf855d4ff))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.1.0...networkservices-v0.2.0) (2023-10-18)
 
 

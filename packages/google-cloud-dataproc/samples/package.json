@@ -14,7 +14,7 @@
     "test": "mocha test --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/dataproc": "^5.3.0",
+    "@google-cloud/dataproc": "^5.4.0",
     "@google-cloud/storage": "^7.0.0"
   },
   "devDependencies": {

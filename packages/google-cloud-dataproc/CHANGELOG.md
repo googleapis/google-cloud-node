@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.3.0...dataproc-v5.4.0) (2024-02-07)
+
+
+### Features
+
+* [dataproc] add session and session_template controllers ([#4994](https://github.com/googleapis/google-cloud-node/issues/4994)) ([1163399](https://github.com/googleapis/google-cloud-node/commit/1163399752d783bc7831dfd749e73215e8ebab34))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.2.0...dataproc-v5.3.0) (2023-11-03)
 
 
