@@ -129,12 +129,6 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1beta1.ClusterManagerClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const client = new clustermanagerModule.v1beta1.ClusterManagerClient();
-      const servicePath = client.servicePath;
-      assert.strictEqual(servicePath, 'container.googleapis.com');
-    });
-
     it('has apiEndpoint', () => {
       const client = new clustermanagerModule.v1beta1.ClusterManagerClient();
       const apiEndpoint = client.apiEndpoint;
@@ -169,19 +163,19 @@ describe('v1beta1.ClusterManagerClient', () => {
         stub.restore();
       });
     }
-    it('sets servicePath according to universe domain camelCase', () => {
+    it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
         universeDomain: 'example.com',
       });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'container.example.com');
     });
 
-    it('sets servicePath according to universe domain snakeCase', () => {
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new clustermanagerModule.v1beta1.ClusterManagerClient({
         universe_domain: 'example.com',
       });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'container.example.com');
     });
     it('does not allow setting both universeDomain and universe_domain', () => {
