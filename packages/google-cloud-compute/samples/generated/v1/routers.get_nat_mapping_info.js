@@ -80,7 +80,7 @@ function main(project, region, router) {
     };
 
     // Run request
-    const iterable = await computeClient.getNatMappingInfoAsync(request);
+    const iterable = computeClient.getNatMappingInfoAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -81,7 +81,7 @@ function main(networkEndpointGroup, networkEndpointGroupsListEndpointsRequestRes
     };
 
     // Run request
-    const iterable = await computeClient.listNetworkEndpointsAsync(request);
+    const iterable = computeClient.listNetworkEndpointsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

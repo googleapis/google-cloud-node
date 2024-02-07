@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.5.0...container-v5.6.0) (2024-02-07)
+
+
+### Features
+
+* [container] new AddonsConfig field stateful_ha_config ([#5002](https://github.com/googleapis/google-cloud-node/issues/5002)) ([1bff942](https://github.com/googleapis/google-cloud-node/commit/1bff942214baba585f7adce35f948b71ece1673a))
+
 ## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.4.1...container-v5.5.0) (2024-01-23)
 
 

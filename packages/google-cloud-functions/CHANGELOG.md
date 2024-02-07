@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/functions-v3.0.1...functions-v3.1.0) (2024-02-07)
+
+
+### Features
+
+* [functions] updated description for `docker_registry` to reflect transition to Artifact Registry ([#4981](https://github.com/googleapis/google-cloud-node/issues/4981)) ([a65c238](https://github.com/googleapis/google-cloud-node/commit/a65c23883e449f929cbc8c7422e0c325b7f598fe))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/functions-v3.0.0...functions-v3.0.1) (2023-09-06)
 
 

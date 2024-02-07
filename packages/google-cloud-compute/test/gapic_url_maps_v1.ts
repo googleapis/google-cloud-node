@@ -142,14 +142,60 @@ describe('v1.UrlMapsClient', () => {
     sinon.restore();
   });
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = urlmapsModule.v1.UrlMapsClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new urlmapsModule.v1.UrlMapsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = urlmapsModule.v1.UrlMapsClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new urlmapsModule.v1.UrlMapsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = urlmapsModule.v1.UrlMapsClient.servicePath;
+        assert.strictEqual(servicePath, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = urlmapsModule.v1.UrlMapsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new urlmapsModule.v1.UrlMapsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new urlmapsModule.v1.UrlMapsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new urlmapsModule.v1.UrlMapsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
