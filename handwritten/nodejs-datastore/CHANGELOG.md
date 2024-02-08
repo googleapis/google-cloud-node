@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [8.5.0](https://github.com/googleapis/nodejs-datastore/compare/v8.4.0...v8.5.0) (2024-02-06)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter ([#1227](https://github.com/googleapis/nodejs-datastore/issues/1227)) ([10480ed](https://github.com/googleapis/nodejs-datastore/commit/10480edfdda99cde5fef470fbf163861528398a0))
+
 ## [8.4.0](https://github.com/googleapis/nodejs-datastore/compare/v8.3.0...v8.4.0) (2024-01-09)
 
 
