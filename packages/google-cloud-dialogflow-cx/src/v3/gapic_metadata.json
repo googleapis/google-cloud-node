@@ -234,6 +234,16 @@
                 "deleteEntityType"
               ]
             },
+            "ExportEntityTypes": {
+              "methods": [
+                "exportEntityTypes"
+              ]
+            },
+            "ImportEntityTypes": {
+              "methods": [
+                "importEntityTypes"
+              ]
+            },
             "ListEntityTypes": {
               "methods": [
                 "listEntityTypes",
@@ -264,6 +274,16 @@
             "DeleteEntityType": {
               "methods": [
                 "deleteEntityType"
+              ]
+            },
+            "ExportEntityTypes": {
+              "methods": [
+                "exportEntityTypes"
+              ]
+            },
+            "ImportEntityTypes": {
+              "methods": [
+                "importEntityTypes"
               ]
             },
             "ListEntityTypes": {
@@ -982,6 +1002,11 @@
             "SubmitAnswerFeedback": {
               "methods": [
                 "submitAnswerFeedback"
+              ]
+            },
+            "ServerStreamingDetectIntent": {
+              "methods": [
+                "serverStreamingDetectIntent"
               ]
             },
             "StreamingDetectIntent": {

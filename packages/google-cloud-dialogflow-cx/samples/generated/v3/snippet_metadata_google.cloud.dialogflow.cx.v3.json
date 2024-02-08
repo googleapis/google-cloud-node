@@ -936,6 +936,122 @@
             }
         },
         {
+            "regionTag": "dialogflow_v3_generated_EntityTypes_ExportEntityTypes_async",
+            "title": "Agents exportEntityTypes Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exports the selected entity types.",
+            "canonical": true,
+            "file": "entity_types.export_entity_types.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 97,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportEntityTypes",
+                "fullName": "google.cloud.dialogflow.cx.v3.EntityTypes.ExportEntityTypes",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "entity_types",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "entity_types_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "entity_types_content_inline",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "data_format",
+                        "type": ".google.cloud.dialogflow.cx.v3.ExportEntityTypesRequest.DataFormat"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "EntityTypesClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3.EntityTypesClient"
+                },
+                "method": {
+                    "shortName": "ExportEntityTypes",
+                    "fullName": "google.cloud.dialogflow.cx.v3.EntityTypes.ExportEntityTypes",
+                    "service": {
+                        "shortName": "EntityTypes",
+                        "fullName": "google.cloud.dialogflow.cx.v3.EntityTypes"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3_generated_EntityTypes_ImportEntityTypes_async",
+            "title": "Agents importEntityTypes Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports the specified entitytypes into the agent.",
+            "canonical": true,
+            "file": "entity_types.import_entity_types.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 86,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportEntityTypes",
+                "fullName": "google.cloud.dialogflow.cx.v3.EntityTypes.ImportEntityTypes",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "entity_types_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "entity_types_content",
+                        "type": ".google.cloud.dialogflow.cx.v3.InlineSource"
+                    },
+                    {
+                        "name": "merge_option",
+                        "type": ".google.cloud.dialogflow.cx.v3.ImportEntityTypesRequest.MergeOption"
+                    },
+                    {
+                        "name": "target_entity_type",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "EntityTypesClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3.EntityTypesClient"
+                },
+                "method": {
+                    "shortName": "ImportEntityTypes",
+                    "fullName": "google.cloud.dialogflow.cx.v3.EntityTypes.ImportEntityTypes",
+                    "service": {
+                        "shortName": "EntityTypes",
+                        "fullName": "google.cloud.dialogflow.cx.v3.EntityTypes"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "dialogflow_v3_generated_Environments_ListEnvironments_async",
             "title": "Agents listEnvironments Sample",
             "origin": "API_DEFINITION",
@@ -3388,6 +3504,58 @@
                 "method": {
                     "shortName": "DetectIntent",
                     "fullName": "google.cloud.dialogflow.cx.v3.Sessions.DetectIntent",
+                    "service": {
+                        "shortName": "Sessions",
+                        "fullName": "google.cloud.dialogflow.cx.v3.Sessions"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3_generated_Sessions_ServerStreamingDetectIntent_async",
+            "title": "Agents serverStreamingDetectIntent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Processes a natural language query and returns structured, actionable data as a result through server-side streaming. Server-side streaming allows Dialogflow to send [partial responses](https://cloud.google.com/dialogflow/cx/docs/concept/fulfillment#partial-response) earlier in a single request.",
+            "canonical": true,
+            "file": "sessions.server_streaming_detect_intent.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 81,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ServerStreamingDetectIntent",
+                "fullName": "google.cloud.dialogflow.cx.v3.Sessions.ServerStreamingDetectIntent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "session",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query_params",
+                        "type": ".google.cloud.dialogflow.cx.v3.QueryParameters"
+                    },
+                    {
+                        "name": "query_input",
+                        "type": ".google.cloud.dialogflow.cx.v3.QueryInput"
+                    },
+                    {
+                        "name": "output_audio_config",
+                        "type": ".google.cloud.dialogflow.cx.v3.OutputAudioConfig"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3.DetectIntentResponse",
+                "client": {
+                    "shortName": "SessionsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3.SessionsClient"
+                },
+                "method": {
+                    "shortName": "ServerStreamingDetectIntent",
+                    "fullName": "google.cloud.dialogflow.cx.v3.Sessions.ServerStreamingDetectIntent",
                     "service": {
                         "shortName": "Sessions",
                         "fullName": "google.cloud.dialogflow.cx.v3.Sessions"

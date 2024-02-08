@@ -902,6 +902,10 @@
                             "bargeInConfig": {
                               "type": "BargeInConfig",
                               "id": 15
+                            },
+                            "optOutConformerModelMigration": {
+                              "type": "bool",
+                              "id": 26
                             }
                           }
                         },
@@ -1708,6 +1712,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 19
                             },
                             "entryFulfillment": {
                               "type": "Fulfillment",
@@ -2570,6 +2578,10 @@
                                 "agentScope": {
                                   "type": "string",
                                   "id": 5
+                                },
+                                "disableDataStoreFallback": {
+                                  "type": "bool",
+                                  "id": 8
                                 }
                               }
                             }
@@ -2730,6 +2742,10 @@
                             "createTime": {
                               "type": "google.protobuf.Timestamp",
                               "id": 4
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 14
                             }
                           }
                         },
@@ -2985,6 +3001,54 @@
                                   "(google.api.method_signature)": "parent"
                                 }
                               ]
+                            },
+                            "ExportEntityTypes": {
+                              "requestType": "ExportEntityTypesRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes:export",
+                                "(google.api.http).body": "*",
+                                "(google.longrunning.operation_info).response_type": "ExportEntityTypesResponse",
+                                "(google.longrunning.operation_info).metadata_type": "ExportEntityTypesMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes:export",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "ExportEntityTypesResponse",
+                                    "metadata_type": "ExportEntityTypesMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "ImportEntityTypes": {
+                              "requestType": "ImportEntityTypesRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes:import",
+                                "(google.api.http).body": "*",
+                                "(google.longrunning.operation_info).response_type": "ImportEntityTypesResponse",
+                                "(google.longrunning.operation_info).metadata_type": "ImportEntityTypesMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{parent=projects/*/locations/*/agents/*}/entityTypes:import",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "ImportEntityTypesResponse",
+                                    "metadata_type": "ImportEntityTypesMetadata"
+                                  }
+                                }
+                              ]
                             }
                           }
                         },
@@ -3081,6 +3145,184 @@
                               }
                             }
                           }
+                        },
+                        "ExportEntityTypesRequest": {
+                          "oneofs": {
+                            "destination": {
+                              "oneof": [
+                                "entityTypesUri",
+                                "entityTypesContentInline"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/EntityType"
+                              }
+                            },
+                            "entityTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "entityTypesUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "entityTypesContentInline": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dataFormat": {
+                              "type": "DataFormat",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DataFormat": {
+                              "values": {
+                                "DATA_FORMAT_UNSPECIFIED": 0,
+                                "BLOB": 1,
+                                "JSON_PACKAGE": 5
+                              }
+                            }
+                          }
+                        },
+                        "ExportEntityTypesResponse": {
+                          "oneofs": {
+                            "exportedEntityTypes": {
+                              "oneof": [
+                                "entityTypesUri",
+                                "entityTypesContent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "entityTypesUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "entityTypesContent": {
+                              "type": "InlineDestination",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ExportEntityTypesMetadata": {
+                          "fields": {}
+                        },
+                        "ImportEntityTypesRequest": {
+                          "oneofs": {
+                            "entityTypes": {
+                              "oneof": [
+                                "entityTypesUri",
+                                "entityTypesContent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/EntityType"
+                              }
+                            },
+                            "entityTypesUri": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "entityTypesContent": {
+                              "type": "InlineSource",
+                              "id": 3
+                            },
+                            "mergeOption": {
+                              "type": "MergeOption",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "targetEntityType": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/EntityType"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MergeOption": {
+                              "values": {
+                                "MERGE_OPTION_UNSPECIFIED": 0,
+                                "REPLACE": 1,
+                                "MERGE": 2,
+                                "RENAME": 3,
+                                "REPORT_CONFLICT": 4,
+                                "KEEP": 5
+                              }
+                            }
+                          }
+                        },
+                        "ImportEntityTypesResponse": {
+                          "fields": {
+                            "entityTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/EntityType"
+                              }
+                            },
+                            "conflictingResources": {
+                              "type": "ConflictingResources",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "ConflictingResources": {
+                              "fields": {
+                                "entityTypeDisplayNames": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "entityDisplayNames": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ImportEntityTypesMetadata": {
+                          "fields": {}
                         },
                         "ListEntityTypesRequest": {
                           "fields": {
@@ -3190,6 +3432,25 @@
                             "force": {
                               "type": "bool",
                               "id": 2
+                            }
+                          }
+                        },
+                        "InlineDestination": {
+                          "fields": {
+                            "content": {
+                              "type": "bytes",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "InlineSource": {
+                          "fields": {
+                            "content": {
+                              "type": "bytes",
+                              "id": 1
                             }
                           }
                         },
@@ -5347,25 +5608,6 @@
                         "ExportIntentsMetadata": {
                           "fields": {}
                         },
-                        "InlineDestination": {
-                          "fields": {
-                            "content": {
-                              "type": "bytes",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          }
-                        },
-                        "InlineSource": {
-                          "fields": {
-                            "content": {
-                              "type": "bytes",
-                              "id": 1
-                            }
-                          }
-                        },
                         "Sessions": {
                           "options": {
                             "(google.api.default_host)": "dialogflow.googleapis.com",
@@ -5388,6 +5630,29 @@
                                     "body": "*",
                                     "additional_bindings": {
                                       "post": "/v3/{session=projects/*/locations/*/agents/*/environments/*/sessions/*}:detectIntent",
+                                      "body": "*"
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            "ServerStreamingDetectIntent": {
+                              "requestType": "DetectIntentRequest",
+                              "responseType": "DetectIntentResponse",
+                              "responseStream": true,
+                              "options": {
+                                "(google.api.http).post": "/v3/{session=projects/*/locations/*/agents/*/sessions/*}:serverStreamingDetectIntent",
+                                "(google.api.http).body": "*",
+                                "(google.api.http).additional_bindings.post": "/v3/{session=projects/*/locations/*/agents/*/environments/*/sessions/*}:serverStreamingDetectIntent",
+                                "(google.api.http).additional_bindings.body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/{session=projects/*/locations/*/agents/*/sessions/*}:serverStreamingDetectIntent",
+                                    "body": "*",
+                                    "additional_bindings": {
+                                      "post": "/v3/{session=projects/*/locations/*/agents/*/environments/*/sessions/*}:serverStreamingDetectIntent",
                                       "body": "*"
                                     }
                                   }
@@ -6058,6 +6323,26 @@
                               "type": "ResponseMessage",
                               "id": 4
                             },
+                            "webhookIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 25
+                            },
+                            "webhookDisplayNames": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 26
+                            },
+                            "webhookLatencies": {
+                              "rule": "repeated",
+                              "type": "google.protobuf.Duration",
+                              "id": 27
+                            },
+                            "webhookTags": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 29
+                            },
                             "webhookStatuses": {
                               "rule": "repeated",
                               "type": "google.rpc.Status",
@@ -6071,6 +6356,10 @@
                             "currentPage": {
                               "type": "Page",
                               "id": 7
+                            },
+                            "currentFlow": {
+                              "type": "Flow",
+                              "id": 31
                             },
                             "intent": {
                               "type": "Intent",

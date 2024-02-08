@@ -29,7 +29,9 @@
   * [Deployments.list_deployments](#deployments.list_deployments)
   * [Entity_types.create_entity_type](#entity_types.create_entity_type)
   * [Entity_types.delete_entity_type](#entity_types.delete_entity_type)
+  * [Entity_types.export_entity_types](#entity_types.export_entity_types)
   * [Entity_types.get_entity_type](#entity_types.get_entity_type)
+  * [Entity_types.import_entity_types](#entity_types.import_entity_types)
   * [Entity_types.list_entity_types](#entity_types.list_entity_types)
   * [Entity_types.update_entity_type](#entity_types.update_entity_type)
   * [Environments.create_environment](#environments.create_environment)
@@ -88,6 +90,7 @@
   * [Sessions.detect_intent](#sessions.detect_intent)
   * [Sessions.fulfill_intent](#sessions.fulfill_intent)
   * [Sessions.match_intent](#sessions.match_intent)
+  * [Sessions.server_streaming_detect_intent](#sessions.server_streaming_detect_intent)
   * [Sessions.streaming_detect_intent](#sessions.streaming_detect_intent)
   * [Sessions.submit_answer_feedback](#sessions.submit_answer_feedback)
   * [Test_cases.batch_delete_test_cases](#test_cases.batch_delete_test_cases)
@@ -555,6 +558,23 @@ __Usage:__
 
 
 
+### Entity_types.export_entity_types
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.export_entity_types.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.export_entity_types.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.export_entity_types.js`
+
+
+-----
+
+
+
+
 ### Entity_types.get_entity_type
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.get_entity_type.js).
@@ -565,6 +585,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.get_entity_type.js`
+
+
+-----
+
+
+
+
+### Entity_types.import_entity_types
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.import_entity_types.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.import_entity_types.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.import_entity_types.js`
 
 
 -----
@@ -1551,6 +1588,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.match_intent.js`
+
+
+-----
+
+
+
+
+### Sessions.server_streaming_detect_intent
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.server_streaming_detect_intent.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.server_streaming_detect_intent.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.server_streaming_detect_intent.js`
 
 
 -----
