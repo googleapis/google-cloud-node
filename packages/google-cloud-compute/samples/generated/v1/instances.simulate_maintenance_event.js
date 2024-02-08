@@ -41,6 +41,10 @@ function main(instance, project, zone) {
    */
   // const requestId = 'abc123'
   /**
+   *  Determines whether the customers receive notifications before migration. Only applicable to SF vms.
+   */
+  // const withExtendedNotifications = true
+  /**
    *  The name of the zone for this request.
    */
   // const zone = 'abc123'

@@ -29,7 +29,7 @@ function main(backendBucket, project, securityPolicyReferenceResource) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the BackendService resource to which the security policy should be set. The name should conform to RFC1035.
+   *  Name of the BackendBucket resource to which the security policy should be set. The name should conform to RFC1035.
    */
   // const backendBucket = 'abc123'
   /**

@@ -730,6 +730,7 @@ export class SslCertificatesClient {
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {number} request.serviceProjectNumber
+   *   The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
