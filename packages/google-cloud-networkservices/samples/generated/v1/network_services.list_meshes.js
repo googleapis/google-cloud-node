@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkservicesClient.listMeshesAsync(request);
+    const iterable = networkservicesClient.listMeshesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

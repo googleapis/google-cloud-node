@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await migrationcenterClient.listImportDataFilesAsync(request);
+    const iterable = migrationcenterClient.listImportDataFilesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

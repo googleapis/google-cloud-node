@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await osconfigClient.listPatchJobInstanceDetailsAsync(request);
+    const iterable = osconfigClient.listPatchJobInstanceDetailsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

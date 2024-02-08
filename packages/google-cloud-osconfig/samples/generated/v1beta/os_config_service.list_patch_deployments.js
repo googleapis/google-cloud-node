@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await osconfigClient.listPatchDeploymentsAsync(request);
+    const iterable = osconfigClient.listPatchDeploymentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

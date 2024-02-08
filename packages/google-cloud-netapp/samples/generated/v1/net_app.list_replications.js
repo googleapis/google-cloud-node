@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await netappClient.listReplicationsAsync(request);
+    const iterable = netappClient.listReplicationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

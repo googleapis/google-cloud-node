@@ -76,7 +76,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await netappClient.listBackupsAsync(request);
+    const iterable = netappClient.listBackupsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

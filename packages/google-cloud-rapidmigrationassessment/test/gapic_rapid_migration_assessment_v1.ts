@@ -166,18 +166,77 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.RapidMigrationAssessmentClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient
-          .servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(
+        apiEndpoint,
+        'rapidmigrationassessment.googleapis.com'
+      );
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient
+            .servicePath;
+        assert.strictEqual(
+          servicePath,
+          'rapidmigrationassessment.googleapis.com'
+        );
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient
+            .apiEndpoint;
+        assert.strictEqual(
+          apiEndpoint,
+          'rapidmigrationassessment.googleapis.com'
+        );
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'rapidmigrationassessment.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'rapidmigrationassessment.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new rapidmigrationassessmentModule.v1.RapidMigrationAssessmentClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

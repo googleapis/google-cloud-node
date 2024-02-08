@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkservicesClient.listGrpcRoutesAsync(request);
+    const iterable = networkservicesClient.listGrpcRoutesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

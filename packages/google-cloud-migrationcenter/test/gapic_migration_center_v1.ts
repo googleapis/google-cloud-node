@@ -166,16 +166,62 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.MigrationCenterClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        migrationcenterModule.v1.MigrationCenterClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new migrationcenterModule.v1.MigrationCenterClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'migrationcenter.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        migrationcenterModule.v1.MigrationCenterClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new migrationcenterModule.v1.MigrationCenterClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          migrationcenterModule.v1.MigrationCenterClient.servicePath;
+        assert.strictEqual(servicePath, 'migrationcenter.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          migrationcenterModule.v1.MigrationCenterClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'migrationcenter.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new migrationcenterModule.v1.MigrationCenterClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'migrationcenter.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new migrationcenterModule.v1.MigrationCenterClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'migrationcenter.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new migrationcenterModule.v1.MigrationCenterClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

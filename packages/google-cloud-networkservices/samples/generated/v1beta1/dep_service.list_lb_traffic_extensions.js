@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkservicesClient.listLbTrafficExtensionsAsync(request);
+    const iterable = networkservicesClient.listLbTrafficExtensionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
