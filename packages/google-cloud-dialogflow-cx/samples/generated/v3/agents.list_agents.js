@@ -56,7 +56,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listAgentsAsync(request);
+    const iterable = cxClient.listAgentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

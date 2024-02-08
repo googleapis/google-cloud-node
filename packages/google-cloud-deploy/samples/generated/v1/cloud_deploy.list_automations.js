@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await deployClient.listAutomationsAsync(request);
+    const iterable = deployClient.listAutomationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

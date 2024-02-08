@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await edgecontainerClient.listMachinesAsync(request);
+    const iterable = edgecontainerClient.listMachinesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

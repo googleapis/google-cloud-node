@@ -129,14 +129,60 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2.CaseServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = caseserviceModule.v2.CaseServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new caseserviceModule.v2.CaseServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = caseserviceModule.v2.CaseServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new caseserviceModule.v2.CaseServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = caseserviceModule.v2.CaseServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudsupport.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = caseserviceModule.v2.CaseServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudsupport.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new caseserviceModule.v2.CaseServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudsupport.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new caseserviceModule.v2.CaseServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudsupport.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new caseserviceModule.v2.CaseServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

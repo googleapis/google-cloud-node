@@ -73,7 +73,7 @@ function main(parent, pageToken) {
     };
 
     // Run request
-    const iterable = await vmmigrationClient.listMigratingVmsAsync(request);
+    const iterable = vmmigrationClient.listMigratingVmsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

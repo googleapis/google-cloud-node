@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listDisplayVideo360AdvertiserLinkProposalsAsync(request);
+    const iterable = adminClient.listDisplayVideo360AdvertiserLinkProposalsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

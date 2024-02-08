@@ -69,7 +69,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await resourcemanagerClient.listFoldersAsync(request);
+    const iterable = resourcemanagerClient.listFoldersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

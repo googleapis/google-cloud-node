@@ -71,7 +71,7 @@ function main(project, zone) {
     };
 
     // Run request
-    const iterable = await computeClient.listAsync(request);
+    const iterable = computeClient.listAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -129,18 +129,68 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.EssentialContactsServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        essentialcontactsserviceModule.v1.EssentialContactsServiceClient
-          .servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'essentialcontacts.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        essentialcontactsserviceModule.v1.EssentialContactsServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          essentialcontactsserviceModule.v1.EssentialContactsServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'essentialcontacts.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          essentialcontactsserviceModule.v1.EssentialContactsServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'essentialcontacts.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'essentialcontacts.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'essentialcontacts.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

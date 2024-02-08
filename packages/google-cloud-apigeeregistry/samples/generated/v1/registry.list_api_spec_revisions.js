@@ -55,7 +55,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await apigeeregistryClient.listApiSpecRevisionsAsync(request);
+    const iterable = apigeeregistryClient.listApiSpecRevisionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

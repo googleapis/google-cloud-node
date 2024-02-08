@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await edgenetworkClient.listInterconnectAttachmentsAsync(request);
+    const iterable = edgenetworkClient.listInterconnectAttachmentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

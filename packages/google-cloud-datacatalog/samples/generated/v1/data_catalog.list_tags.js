@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datacatalogClient.listTagsAsync(request);
+    const iterable = datacatalogClient.listTagsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

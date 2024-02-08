@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await discoveryengineClient.listSchemasAsync(request);
+    const iterable = discoveryengineClient.listSchemasAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

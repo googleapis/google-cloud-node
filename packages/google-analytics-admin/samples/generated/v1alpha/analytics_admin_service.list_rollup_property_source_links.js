@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listRollupPropertySourceLinksAsync(request);
+    const iterable = adminClient.listRollupPropertySourceLinksAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -69,7 +69,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await retailClient.listCatalogsAsync(request);
+    const iterable = retailClient.listCatalogsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

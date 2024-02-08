@@ -3252,6 +3252,9 @@ export namespace google {
 
                     /** BatchAnnotateImagesRequest parent */
                     parent?: (string|null);
+
+                    /** BatchAnnotateImagesRequest labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a BatchAnnotateImagesRequest. */
@@ -3268,6 +3271,9 @@ export namespace google {
 
                     /** BatchAnnotateImagesRequest parent. */
                     public parent: string;
+
+                    /** BatchAnnotateImagesRequest labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new BatchAnnotateImagesRequest instance using the specified properties.
@@ -3682,6 +3688,9 @@ export namespace google {
 
                     /** BatchAnnotateFilesRequest parent */
                     parent?: (string|null);
+
+                    /** BatchAnnotateFilesRequest labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a BatchAnnotateFilesRequest. */
@@ -3698,6 +3707,9 @@ export namespace google {
 
                     /** BatchAnnotateFilesRequest parent. */
                     public parent: string;
+
+                    /** BatchAnnotateFilesRequest labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new BatchAnnotateFilesRequest instance using the specified properties.
@@ -4097,6 +4109,9 @@ export namespace google {
 
                     /** AsyncBatchAnnotateImagesRequest parent */
                     parent?: (string|null);
+
+                    /** AsyncBatchAnnotateImagesRequest labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents an AsyncBatchAnnotateImagesRequest. */
@@ -4116,6 +4131,9 @@ export namespace google {
 
                     /** AsyncBatchAnnotateImagesRequest parent. */
                     public parent: string;
+
+                    /** AsyncBatchAnnotateImagesRequest labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new AsyncBatchAnnotateImagesRequest instance using the specified properties.
@@ -4300,6 +4318,9 @@ export namespace google {
 
                     /** AsyncBatchAnnotateFilesRequest parent */
                     parent?: (string|null);
+
+                    /** AsyncBatchAnnotateFilesRequest labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents an AsyncBatchAnnotateFilesRequest. */
@@ -4316,6 +4337,9 @@ export namespace google {
 
                     /** AsyncBatchAnnotateFilesRequest parent. */
                     public parent: string;
+
+                    /** AsyncBatchAnnotateFilesRequest labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new AsyncBatchAnnotateFilesRequest instance using the specified properties.

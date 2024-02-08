@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await filestoreClient.listInstancesAsync(request);
+    const iterable = filestoreClient.listInstancesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

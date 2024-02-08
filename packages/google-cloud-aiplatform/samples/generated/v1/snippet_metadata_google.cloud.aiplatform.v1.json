@@ -2160,6 +2160,54 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreService_SearchNearestEntities_async",
+            "title": "DatasetService searchNearestEntities Sample",
+            "origin": "API_DEFINITION",
+            "description": " Search the nearest entities under a FeatureView. Search only works for indexable feature view; if a feature view isn't indexable, returns Invalid argument response.",
+            "canonical": true,
+            "file": "feature_online_store_service.search_nearest_entities.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SearchNearestEntities",
+                "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreService.SearchNearestEntities",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "feature_view",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": ".google.cloud.aiplatform.v1.NearestNeighborQuery"
+                    },
+                    {
+                        "name": "return_full_entity",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.SearchNearestEntitiesResponse",
+                "client": {
+                    "shortName": "FeatureOnlineStoreServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreServiceClient"
+                },
+                "method": {
+                    "shortName": "SearchNearestEntities",
+                    "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreService.SearchNearestEntities",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreService",
+                        "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_FeatureRegistryService_CreateFeatureGroup_async",
             "title": "DatasetService createFeatureGroup Sample",
             "origin": "API_DEFINITION",

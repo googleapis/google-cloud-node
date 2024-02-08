@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataformClient.listCompilationResultsAsync(request);
+    const iterable = dataformClient.listCompilationResultsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

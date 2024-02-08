@@ -61,7 +61,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await adminClient.listAccountsAsync(request);
+    const iterable = adminClient.listAccountsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

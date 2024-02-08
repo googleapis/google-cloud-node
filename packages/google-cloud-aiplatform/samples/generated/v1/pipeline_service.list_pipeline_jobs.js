@@ -111,7 +111,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listPipelineJobsAsync(request);
+    const iterable = aiplatformClient.listPipelineJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

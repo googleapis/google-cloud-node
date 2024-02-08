@@ -76,7 +76,7 @@ function main(instanceGroupManager, project, zone) {
     };
 
     // Run request
-    const iterable = await computeClient.listErrorsAsync(request);
+    const iterable = computeClient.listErrorsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

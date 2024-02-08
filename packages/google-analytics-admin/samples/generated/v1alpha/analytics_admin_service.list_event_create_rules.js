@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listEventCreateRulesAsync(request);
+    const iterable = adminClient.listEventCreateRulesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

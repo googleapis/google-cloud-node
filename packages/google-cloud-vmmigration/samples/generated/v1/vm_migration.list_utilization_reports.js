@@ -74,7 +74,7 @@ function main(parent, pageToken) {
     };
 
     // Run request
-    const iterable = await vmmigrationClient.listUtilizationReportsAsync(request);
+    const iterable = vmmigrationClient.listUtilizationReportsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

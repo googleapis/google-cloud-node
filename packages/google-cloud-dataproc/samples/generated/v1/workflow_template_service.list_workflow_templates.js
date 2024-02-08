@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataprocClient.listWorkflowTemplatesAsync(request);
+    const iterable = dataprocClient.listWorkflowTemplatesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -56,7 +56,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await supportClient.listCommentsAsync(request);
+    const iterable = supportClient.listCommentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

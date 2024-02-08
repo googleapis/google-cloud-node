@@ -51,7 +51,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await recommenderClient.listRecommendersAsync(request);
+    const iterable = recommenderClient.listRecommendersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

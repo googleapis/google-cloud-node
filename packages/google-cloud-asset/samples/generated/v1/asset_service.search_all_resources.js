@@ -124,8 +124,8 @@ function main(scope) {
   // const query = 'abc123'
   /**
    *  Optional. A list of asset types that this request searches for. If empty,
-   *  it will search all the searchable asset
-   *  types (https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+   *  it will search all the asset types supported by search
+   *  APIs (https://cloud.google.com/asset-inventory/docs/supported-asset-types).
    *  Regular expressions are also supported. For example:
    *  * "compute.googleapis.com.*" snapshots resources whose asset type starts
    *  with "compute.googleapis.com".
@@ -216,7 +216,7 @@ function main(scope) {
     };
 
     // Run request
-    const iterable = await assetClient.searchAllResourcesAsync(request);
+    const iterable = assetClient.searchAllResourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

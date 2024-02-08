@@ -66,7 +66,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await websecurityscannerClient.listFindingsAsync(request);
+    const iterable = websecurityscannerClient.listFindingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

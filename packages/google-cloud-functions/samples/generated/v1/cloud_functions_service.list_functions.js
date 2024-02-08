@@ -61,7 +61,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await functionsClient.listFunctionsAsync(request);
+    const iterable = functionsClient.listFunctionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

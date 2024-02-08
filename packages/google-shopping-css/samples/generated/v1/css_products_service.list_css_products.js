@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cssClient.listCssProductsAsync(request);
+    const iterable = cssClient.listCssProductsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

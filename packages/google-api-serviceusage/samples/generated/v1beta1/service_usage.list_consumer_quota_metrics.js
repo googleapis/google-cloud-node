@@ -62,7 +62,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await serviceusageClient.listConsumerQuotaMetricsAsync(request);
+    const iterable = serviceusageClient.listConsumerQuotaMetricsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

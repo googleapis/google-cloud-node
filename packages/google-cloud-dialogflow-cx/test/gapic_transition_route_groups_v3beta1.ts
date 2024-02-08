@@ -129,18 +129,68 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v3beta1.TransitionRouteGroupsClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient
-          .servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'dialogflow.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'dialogflow.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

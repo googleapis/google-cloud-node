@@ -74,7 +74,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await privatecaClient.listCertificatesAsync(request);
+    const iterable = privatecaClient.listCertificatesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

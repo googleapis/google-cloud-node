@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataplexClient.listLakeActionsAsync(request);
+    const iterable = dataplexClient.listLakeActionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

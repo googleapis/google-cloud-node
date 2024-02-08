@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listIntentsAsync(request);
+    const iterable = cxClient.listIntentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

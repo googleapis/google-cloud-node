@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await stitcherClient.listVodAdTagDetailsAsync(request);
+    const iterable = stitcherClient.listVodAdTagDetailsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

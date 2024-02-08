@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await resourcemanagerClient.listTagBindingsAsync(request);
+    const iterable = resourcemanagerClient.listTagBindingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

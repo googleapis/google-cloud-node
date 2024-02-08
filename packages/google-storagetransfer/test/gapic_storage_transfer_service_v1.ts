@@ -161,18 +161,68 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.StorageTransferServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        storagetransferserviceModule.v1.StorageTransferServiceClient
-          .servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'storagetransfer.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        storagetransferserviceModule.v1.StorageTransferServiceClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          storagetransferserviceModule.v1.StorageTransferServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'storagetransfer.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          storagetransferserviceModule.v1.StorageTransferServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'storagetransfer.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'storagetransfer.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'storagetransfer.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new storagetransferserviceModule.v1.StorageTransferServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

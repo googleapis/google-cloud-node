@@ -88,7 +88,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await recommenderClient.listInsightsAsync(request);
+    const iterable = recommenderClient.listInsightsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

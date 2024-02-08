@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datalabelingClient.listEvaluationJobsAsync(request);
+    const iterable = datalabelingClient.listEvaluationJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

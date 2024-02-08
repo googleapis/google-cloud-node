@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await secretmanagerClient.listSecretsAsync(request);
+    const iterable = secretmanagerClient.listSecretsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listTransitionRouteGroupsAsync(request);
+    const iterable = cxClient.listTransitionRouteGroupsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

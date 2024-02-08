@@ -72,7 +72,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await domainsClient.listRegistrationsAsync(request);
+    const iterable = domainsClient.listRegistrationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -66,18 +66,67 @@ function stubSimpleCallWithCallback<ResponseType>(
 
 describe('v1beta1.PublicCertificateAuthorityServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        publiccertificateauthorityserviceModule.v1beta1
-          .PublicCertificateAuthorityServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new publiccertificateauthorityserviceModule.v1beta1.PublicCertificateAuthorityServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'publicca.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        publiccertificateauthorityserviceModule.v1beta1
-          .PublicCertificateAuthorityServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new publiccertificateauthorityserviceModule.v1beta1.PublicCertificateAuthorityServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          publiccertificateauthorityserviceModule.v1beta1
+            .PublicCertificateAuthorityServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'publicca.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          publiccertificateauthorityserviceModule.v1beta1
+            .PublicCertificateAuthorityServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'publicca.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new publiccertificateauthorityserviceModule.v1beta1.PublicCertificateAuthorityServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'publicca.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new publiccertificateauthorityserviceModule.v1beta1.PublicCertificateAuthorityServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'publicca.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new publiccertificateauthorityserviceModule.v1beta1.PublicCertificateAuthorityServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dialogflowClient.listVersionsAsync(request);
+    const iterable = dialogflowClient.listVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

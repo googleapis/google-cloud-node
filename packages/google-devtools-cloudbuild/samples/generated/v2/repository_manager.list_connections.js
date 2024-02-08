@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cloudbuildClient.listConnectionsAsync(request);
+    const iterable = cloudbuildClient.listConnectionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

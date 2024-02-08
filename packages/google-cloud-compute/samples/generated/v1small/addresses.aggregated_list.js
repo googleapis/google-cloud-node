@@ -71,7 +71,7 @@ function main(project) {
     };
 
     // Run request
-    const iterable = await computeClient.aggregatedListAsync(request);
+    const iterable = computeClient.aggregatedListAsync(request);
     for await (const [key, value] of iterable) {
         console.log(response);
     }

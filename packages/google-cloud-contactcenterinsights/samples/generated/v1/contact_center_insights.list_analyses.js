@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await contactcenterinsightsClient.listAnalysesAsync(request);
+    const iterable = contactcenterinsightsClient.listAnalysesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

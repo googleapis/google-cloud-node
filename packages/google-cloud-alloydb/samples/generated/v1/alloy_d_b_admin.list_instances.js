@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await alloydbClient.listInstancesAsync(request);
+    const iterable = alloydbClient.listInstancesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

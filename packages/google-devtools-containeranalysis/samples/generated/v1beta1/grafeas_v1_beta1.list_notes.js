@@ -58,7 +58,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await containeranalysisClient.listNotesAsync(request);
+    const iterable = containeranalysisClient.listNotesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

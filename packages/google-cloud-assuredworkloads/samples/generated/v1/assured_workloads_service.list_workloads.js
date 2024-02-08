@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await assuredworkloadsClient.listWorkloadsAsync(request);
+    const iterable = assuredworkloadsClient.listWorkloadsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

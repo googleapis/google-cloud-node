@@ -81,7 +81,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await resourcemanagerClient.searchFoldersAsync(request);
+    const iterable = resourcemanagerClient.searchFoldersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

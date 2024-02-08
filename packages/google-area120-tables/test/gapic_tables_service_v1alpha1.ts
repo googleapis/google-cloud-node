@@ -129,16 +129,62 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1alpha1.TablesServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        tablesserviceModule.v1alpha1.TablesServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'area120tables.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        tablesserviceModule.v1alpha1.TablesServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          tablesserviceModule.v1alpha1.TablesServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'area120tables.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          tablesserviceModule.v1alpha1.TablesServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'area120tables.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'area120tables.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new tablesserviceModule.v1alpha1.TablesServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'area120tables.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new tablesserviceModule.v1alpha1.TablesServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

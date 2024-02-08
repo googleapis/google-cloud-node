@@ -51,7 +51,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await recommenderClient.listInsightTypesAsync(request);
+    const iterable = recommenderClient.listInsightTypesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

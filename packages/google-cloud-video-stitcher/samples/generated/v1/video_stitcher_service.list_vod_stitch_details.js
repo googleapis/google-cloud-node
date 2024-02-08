@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await stitcherClient.listVodStitchDetailsAsync(request);
+    const iterable = stitcherClient.listVodStitchDetailsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

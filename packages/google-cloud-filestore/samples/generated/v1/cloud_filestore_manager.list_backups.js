@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await filestoreClient.listBackupsAsync(request);
+    const iterable = filestoreClient.listBackupsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

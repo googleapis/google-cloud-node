@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await runClient.listServicesAsync(request);
+    const iterable = runClient.listServicesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

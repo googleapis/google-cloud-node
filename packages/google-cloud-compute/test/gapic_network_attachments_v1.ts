@@ -142,16 +142,62 @@ describe('v1.NetworkAttachmentsClient', () => {
     sinon.restore();
   });
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        networkattachmentsModule.v1.NetworkAttachmentsClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new networkattachmentsModule.v1.NetworkAttachmentsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        networkattachmentsModule.v1.NetworkAttachmentsClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new networkattachmentsModule.v1.NetworkAttachmentsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          networkattachmentsModule.v1.NetworkAttachmentsClient.servicePath;
+        assert.strictEqual(servicePath, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          networkattachmentsModule.v1.NetworkAttachmentsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'compute.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new networkattachmentsModule.v1.NetworkAttachmentsClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new networkattachmentsModule.v1.NetworkAttachmentsClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'compute.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new networkattachmentsModule.v1.NetworkAttachmentsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

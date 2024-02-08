@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cssClient.listAccountLabelsAsync(request);
+    const iterable = cssClient.listAccountLabelsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

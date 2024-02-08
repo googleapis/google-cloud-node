@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listSKAdNetworkConversionValueSchemasAsync(request);
+    const iterable = adminClient.listSKAdNetworkConversionValueSchemasAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

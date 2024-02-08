@@ -96,7 +96,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listPrivateConnectionsAsync(request);
+    const iterable = vmwareengineClient.listPrivateConnectionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

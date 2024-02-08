@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await apigatewayClient.listGatewaysAsync(request);
+    const iterable = apigatewayClient.listGatewaysAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/asset_service_client_config.json`.
@@ -52,6 +53,8 @@ export class AssetServiceClient {
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
   private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -110,8 +113,20 @@ export class AssetServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AssetServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.'
+      );
+    }
+    this._universeDomain =
+      opts?.universeDomain ?? opts?.universe_domain ?? 'googleapis.com';
+    this._servicePath = 'cloudasset.' + this._universeDomain;
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
       opts?.servicePath || opts?.apiEndpoint
     );
@@ -126,7 +141,7 @@ export class AssetServiceClient {
     opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
-    if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
     }
 
@@ -151,10 +166,10 @@ export class AssetServiceClient {
     this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
-    this.auth.defaultServicePath = staticMembers.servicePath;
+    this.auth.defaultServicePath = this._servicePath;
 
     // Set the default scopes in auth client if needed.
-    if (servicePath === staticMembers.servicePath) {
+    if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
 
@@ -414,19 +429,50 @@ export class AssetServiceClient {
 
   /**
    * The DNS address for this API service.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
+    if (
+      typeof process !== undefined &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'cloudasset.googleapis.com';
   }
 
   /**
-   * The DNS address for this API service - same as servicePath(),
-   * exists for compatibility reasons.
+   * The DNS address for this API service - same as servicePath.
+   * @deprecated Use the apiEndpoint method of the client instance.
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
+    if (
+      typeof process !== undefined &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning'
+      );
+    }
     return 'cloudasset.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get apiEndpoint() {
+    return this._servicePath;
+  }
+
+  get universeDomain() {
+    return this._universeDomain;
   }
 
   /**
@@ -1785,8 +1831,8 @@ export class AssetServiceClient {
    * @param {string[]} request.names
    *   Required. The names refer to the [full_resource_names]
    *   (https://cloud.google.com/asset-inventory/docs/resource-name-format)
-   *   of [searchable asset
-   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+   *   of the asset types [supported by search
+   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
    *   A maximum of 20 resources' effective policies can be retrieved in a batch.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2683,8 +2729,8 @@ export class AssetServiceClient {
    *     location.
    * @param {string[]} [request.assetTypes]
    *   Optional. A list of asset types that this request searches for. If empty,
-   *   it will search all the [searchable asset
-   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+   *   it will search all the asset types [supported by search
+   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
    *
    *   Regular expressions are also supported. For example:
    *
@@ -2944,8 +2990,8 @@ export class AssetServiceClient {
    *     location.
    * @param {string[]} [request.assetTypes]
    *   Optional. A list of asset types that this request searches for. If empty,
-   *   it will search all the [searchable asset
-   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+   *   it will search all the asset types [supported by search
+   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
    *
    *   Regular expressions are also supported. For example:
    *
@@ -3153,8 +3199,8 @@ export class AssetServiceClient {
    *     location.
    * @param {string[]} [request.assetTypes]
    *   Optional. A list of asset types that this request searches for. If empty,
-   *   it will search all the [searchable asset
-   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+   *   it will search all the asset types [supported by search
+   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
    *
    *   Regular expressions are also supported. For example:
    *
@@ -3337,9 +3383,9 @@ export class AssetServiceClient {
    *   be identical to those in the previous call.
    * @param {string[]} [request.assetTypes]
    *   Optional. A list of asset types that the IAM policies are attached to. If
-   *   empty, it will search the IAM policies that are attached to all the
-   *   [searchable asset
-   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+   *   empty, it will search the IAM policies that are attached to all the asset
+   *   types [supported by search
+   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
    *
    *   Regular expressions are also supported. For example:
    *
@@ -3524,9 +3570,9 @@ export class AssetServiceClient {
    *   be identical to those in the previous call.
    * @param {string[]} [request.assetTypes]
    *   Optional. A list of asset types that the IAM policies are attached to. If
-   *   empty, it will search the IAM policies that are attached to all the
-   *   [searchable asset
-   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+   *   empty, it will search the IAM policies that are attached to all the asset
+   *   types [supported by search
+   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
    *
    *   Regular expressions are also supported. For example:
    *
@@ -3659,9 +3705,9 @@ export class AssetServiceClient {
    *   be identical to those in the previous call.
    * @param {string[]} [request.assetTypes]
    *   Optional. A list of asset types that the IAM policies are attached to. If
-   *   empty, it will search the IAM policies that are attached to all the
-   *   [searchable asset
-   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types).
+   *   empty, it will search the IAM policies that are attached to all the asset
+   *   types [supported by search
+   *   APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
    *
    *   Regular expressions are also supported. For example:
    *
@@ -4477,9 +4523,8 @@ export class AssetServiceClient {
    * * compute.requireOsLogin
    * * compute.disableNestedVirtualization
    *
-   * This RPC only returns either resources of types supported by [searchable
-   * asset
-   * types](https://cloud.google.com/asset-inventory/docs/supported-asset-types),
+   * This RPC only returns either resources of types [supported by search
+   * APIs](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
    * or IAM policies.
    *
    * @param {Object} request

@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await inventoriesClient.listRegionalInventoriesAsync(request);
+    const iterable = inventoriesClient.listRegionalInventoriesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

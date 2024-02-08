@@ -91,7 +91,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listEndpointsAsync(request);
+    const iterable = aiplatformClient.listEndpointsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

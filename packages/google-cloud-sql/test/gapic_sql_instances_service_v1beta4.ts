@@ -89,16 +89,68 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1beta4.SqlInstancesServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'sqladmin.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'sqladmin.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'sqladmin.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'sqladmin.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'sqladmin.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

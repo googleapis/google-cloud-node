@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataplexClient.listAssetsAsync(request);
+    const iterable = dataplexClient.listAssetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

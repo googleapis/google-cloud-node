@@ -96,7 +96,7 @@ function main(dataset) {
     };
 
     // Run request
-    const iterable = await documentaiClient.listDocumentsAsync(request);
+    const iterable = documentaiClient.listDocumentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

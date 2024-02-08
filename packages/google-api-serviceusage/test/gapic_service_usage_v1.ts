@@ -161,14 +161,62 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.ServiceUsageClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = serviceusageModule.v1.ServiceUsageClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new serviceusageModule.v1.ServiceUsageClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'serviceusage.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = serviceusageModule.v1.ServiceUsageClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new serviceusageModule.v1.ServiceUsageClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          serviceusageModule.v1.ServiceUsageClient.servicePath;
+        assert.strictEqual(servicePath, 'serviceusage.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          serviceusageModule.v1.ServiceUsageClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'serviceusage.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new serviceusageModule.v1.ServiceUsageClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'serviceusage.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new serviceusageModule.v1.ServiceUsageClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'serviceusage.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new serviceusageModule.v1.ServiceUsageClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

@@ -69,7 +69,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listEntityTypesAsync(request);
+    const iterable = cxClient.listEntityTypesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

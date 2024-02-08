@@ -70,7 +70,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await resourcemanagerClient.searchOrganizationsAsync(request);
+    const iterable = resourcemanagerClient.searchOrganizationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
