@@ -2799,6 +2799,177 @@ describe('v1.InstancesClient', () => {
     });
   });
 
+  describe('performMaintenance', () => {
+    it('invokes performMaintenance without error', async () => {
+      const client = new instancesModule.v1.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PerformMaintenanceInstanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.performMaintenance =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.performMaintenance(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes performMaintenance without error using callback', async () => {
+      const client = new instancesModule.v1.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PerformMaintenanceInstanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.performMaintenance =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.performMaintenance(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes performMaintenance with error', async () => {
+      const client = new instancesModule.v1.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PerformMaintenanceInstanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.performMaintenance = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.performMaintenance(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.performMaintenance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes performMaintenance with closed client', async () => {
+      const client = new instancesModule.v1.InstancesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PerformMaintenanceInstanceRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PerformMaintenanceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.performMaintenance(request), expectedError);
+    });
+  });
+
   describe('removeResourcePolicies', () => {
     it('invokes removeResourcePolicies without error', async () => {
       const client = new instancesModule.v1.InstancesClient({

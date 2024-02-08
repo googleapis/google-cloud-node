@@ -1183,7 +1183,7 @@ export class BackendBucketsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.backendBucket
-   *   Name of the BackendService resource to which the security policy should be set. The name should conform to RFC1035.
+   *   Name of the BackendBucket resource to which the security policy should be set. The name should conform to RFC1035.
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId

@@ -223,6 +223,7 @@
   * [Instances.insert](#instances.insert)
   * [Instances.list](#instances.list)
   * [Instances.list_referrers](#instances.list_referrers)
+  * [Instances.perform_maintenance](#instances.perform_maintenance)
   * [Instances.remove_resource_policies](#instances.remove_resource_policies)
   * [Instances.reset](#instances.reset)
   * [Instances.resume](#instances.resume)
@@ -555,6 +556,7 @@
   * [Region_url_maps.patch](#region_url_maps.patch)
   * [Region_url_maps.update](#region_url_maps.update)
   * [Region_url_maps.validate](#region_url_maps.validate)
+  * [Region_zones.list](#region_zones.list)
   * [Regions.get](#regions.get)
   * [Regions.list](#regions.list)
   * [Reservations.aggregated_list](#reservations.aggregated_list)
@@ -4341,6 +4343,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/instances.list_referrers.js`
+
+
+-----
+
+
+
+
+### Instances.perform_maintenance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instances.perform_maintenance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instances.perform_maintenance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instances.perform_maintenance.js`
 
 
 -----
@@ -9985,6 +10004,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/region_url_maps.validate.js`
+
+
+-----
+
+
+
+
+### Region_zones.list
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/region_zones.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/region_zones.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/region_zones.list.js`
 
 
 -----

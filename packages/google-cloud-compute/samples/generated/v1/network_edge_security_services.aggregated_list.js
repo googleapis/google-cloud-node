@@ -57,6 +57,7 @@ function main(project) {
    */
   // const returnPartialSuccess = true
   /**
+   *  The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
    */
   // const serviceProjectNumber = 1234
 
