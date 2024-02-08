@@ -28,6 +28,11 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
+        "ServerStreamingDetectIntent": {
+          "timeout_millis": 220000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "StreamingDetectIntent": {
           "timeout_millis": 220000,
           "retry_codes_name": "non_idempotent",

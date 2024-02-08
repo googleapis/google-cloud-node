@@ -936,6 +936,122 @@
             }
         },
         {
+            "regionTag": "dialogflow_v3beta1_generated_EntityTypes_ExportEntityTypes_async",
+            "title": "Agents exportEntityTypes Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exports the selected entity types.",
+            "canonical": true,
+            "file": "entity_types.export_entity_types.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 97,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportEntityTypes",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.EntityTypes.ExportEntityTypes",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "entity_types",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "entity_types_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "entity_types_content_inline",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "data_format",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.ExportEntityTypesRequest.DataFormat"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "EntityTypesClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.EntityTypesClient"
+                },
+                "method": {
+                    "shortName": "ExportEntityTypes",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.EntityTypes.ExportEntityTypes",
+                    "service": {
+                        "shortName": "EntityTypes",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.EntityTypes"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_EntityTypes_ImportEntityTypes_async",
+            "title": "Agents importEntityTypes Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports the specified entitytypes into the agent.",
+            "canonical": true,
+            "file": "entity_types.import_entity_types.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 86,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportEntityTypes",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.EntityTypes.ImportEntityTypes",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "entity_types_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "entity_types_content",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.InlineSource"
+                    },
+                    {
+                        "name": "merge_option",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.ImportEntityTypesRequest.MergeOption"
+                    },
+                    {
+                        "name": "target_entity_type",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "EntityTypesClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.EntityTypesClient"
+                },
+                "method": {
+                    "shortName": "ImportEntityTypes",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.EntityTypes.ImportEntityTypes",
+                    "service": {
+                        "shortName": "EntityTypes",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.EntityTypes"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "dialogflow_v3beta1_generated_Environments_ListEnvironments_async",
             "title": "Agents listEnvironments Sample",
             "origin": "API_DEFINITION",
@@ -1327,6 +1443,226 @@
                     "service": {
                         "shortName": "Environments",
                         "fullName": "google.cloud.dialogflow.cx.v3beta1.Environments"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Examples_CreateExample_async",
+            "title": "Agents createExample Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates an example in the specified playbook.",
+            "canonical": true,
+            "file": "examples.create_example.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateExample",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples.CreateExample",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "example",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.Example"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.Example",
+                "client": {
+                    "shortName": "ExamplesClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ExamplesClient"
+                },
+                "method": {
+                    "shortName": "CreateExample",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples.CreateExample",
+                    "service": {
+                        "shortName": "Examples",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Examples_DeleteExample_async",
+            "title": "Agents deleteExample Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes the specified example.",
+            "canonical": true,
+            "file": "examples.delete_example.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteExample",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples.DeleteExample",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "ExamplesClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ExamplesClient"
+                },
+                "method": {
+                    "shortName": "DeleteExample",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples.DeleteExample",
+                    "service": {
+                        "shortName": "Examples",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Examples_ListExamples_async",
+            "title": "Agents listExamples Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of examples in the specified playbook.",
+            "canonical": true,
+            "file": "examples.list_examples.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 73,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListExamples",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples.ListExamples",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.ListExamplesResponse",
+                "client": {
+                    "shortName": "ExamplesClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ExamplesClient"
+                },
+                "method": {
+                    "shortName": "ListExamples",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples.ListExamples",
+                    "service": {
+                        "shortName": "Examples",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Examples_GetExample_async",
+            "title": "Agents getExample Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the specified example.",
+            "canonical": true,
+            "file": "examples.get_example.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetExample",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples.GetExample",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.Example",
+                "client": {
+                    "shortName": "ExamplesClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ExamplesClient"
+                },
+                "method": {
+                    "shortName": "GetExample",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples.GetExample",
+                    "service": {
+                        "shortName": "Examples",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Examples_UpdateExample_async",
+            "title": "Agents updateExample Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update the specified example.",
+            "canonical": true,
+            "file": "examples.update_example.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateExample",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples.UpdateExample",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "example",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.Example"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.Example",
+                "client": {
+                    "shortName": "ExamplesClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ExamplesClient"
+                },
+                "method": {
+                    "shortName": "UpdateExample",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples.UpdateExample",
+                    "service": {
+                        "shortName": "Examples",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Examples"
                     }
                 }
             }
@@ -2912,6 +3248,394 @@
             }
         },
         {
+            "regionTag": "dialogflow_v3beta1_generated_Playbooks_CreatePlaybook_async",
+            "title": "Agents createPlaybook Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a playbook in a specified agent.",
+            "canonical": true,
+            "file": "playbooks.create_playbook.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreatePlaybook",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.CreatePlaybook",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "playbook",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.Playbook"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.Playbook",
+                "client": {
+                    "shortName": "PlaybooksClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+                },
+                "method": {
+                    "shortName": "CreatePlaybook",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.CreatePlaybook",
+                    "service": {
+                        "shortName": "Playbooks",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Playbooks_DeletePlaybook_async",
+            "title": "Agents deletePlaybook Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a specified playbook.",
+            "canonical": true,
+            "file": "playbooks.delete_playbook.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeletePlaybook",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.DeletePlaybook",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "PlaybooksClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+                },
+                "method": {
+                    "shortName": "DeletePlaybook",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.DeletePlaybook",
+                    "service": {
+                        "shortName": "Playbooks",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Playbooks_ListPlaybooks_async",
+            "title": "Agents listPlaybooks Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of playbooks in the specified agent.",
+            "canonical": true,
+            "file": "playbooks.list_playbooks.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListPlaybooks",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.ListPlaybooks",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.ListPlaybooksResponse",
+                "client": {
+                    "shortName": "PlaybooksClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+                },
+                "method": {
+                    "shortName": "ListPlaybooks",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.ListPlaybooks",
+                    "service": {
+                        "shortName": "Playbooks",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Playbooks_GetPlaybook_async",
+            "title": "Agents getPlaybook Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the specified Playbook.",
+            "canonical": true,
+            "file": "playbooks.get_playbook.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPlaybook",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.GetPlaybook",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.Playbook",
+                "client": {
+                    "shortName": "PlaybooksClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+                },
+                "method": {
+                    "shortName": "GetPlaybook",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.GetPlaybook",
+                    "service": {
+                        "shortName": "Playbooks",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Playbooks_UpdatePlaybook_async",
+            "title": "Agents updatePlaybook Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the specified Playbook.",
+            "canonical": true,
+            "file": "playbooks.update_playbook.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdatePlaybook",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.UpdatePlaybook",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "playbook",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.Playbook"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.Playbook",
+                "client": {
+                    "shortName": "PlaybooksClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+                },
+                "method": {
+                    "shortName": "UpdatePlaybook",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.UpdatePlaybook",
+                    "service": {
+                        "shortName": "Playbooks",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Playbooks_CreatePlaybookVersion_async",
+            "title": "Agents createPlaybookVersion Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a version for the specified Playbook.",
+            "canonical": true,
+            "file": "playbooks.create_playbook_version.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreatePlaybookVersion",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.CreatePlaybookVersion",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "playbook_version",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.PlaybookVersion"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.PlaybookVersion",
+                "client": {
+                    "shortName": "PlaybooksClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+                },
+                "method": {
+                    "shortName": "CreatePlaybookVersion",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.CreatePlaybookVersion",
+                    "service": {
+                        "shortName": "Playbooks",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Playbooks_GetPlaybookVersion_async",
+            "title": "Agents getPlaybookVersion Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the specified version of the Playbook.",
+            "canonical": true,
+            "file": "playbooks.get_playbook_version.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPlaybookVersion",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.GetPlaybookVersion",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.PlaybookVersion",
+                "client": {
+                    "shortName": "PlaybooksClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+                },
+                "method": {
+                    "shortName": "GetPlaybookVersion",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.GetPlaybookVersion",
+                    "service": {
+                        "shortName": "Playbooks",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Playbooks_ListPlaybookVersions_async",
+            "title": "Agents listPlaybookVersions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists versions for the specified Playbook.",
+            "canonical": true,
+            "file": "playbooks.list_playbook_versions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListPlaybookVersions",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.ListPlaybookVersions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.ListPlaybookVersionsResponse",
+                "client": {
+                    "shortName": "PlaybooksClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+                },
+                "method": {
+                    "shortName": "ListPlaybookVersions",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.ListPlaybookVersions",
+                    "service": {
+                        "shortName": "Playbooks",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Playbooks_DeletePlaybookVersion_async",
+            "title": "Agents deletePlaybookVersion Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes the specified version of the Playbook.",
+            "canonical": true,
+            "file": "playbooks.delete_playbook_version.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeletePlaybookVersion",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.DeletePlaybookVersion",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "PlaybooksClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+                },
+                "method": {
+                    "shortName": "DeletePlaybookVersion",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.DeletePlaybookVersion",
+                    "service": {
+                        "shortName": "Playbooks",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "dialogflow_v3beta1_generated_SecuritySettingsService_CreateSecuritySettings_async",
             "title": "Agents createSecuritySettings Sample",
             "origin": "API_DEFINITION",
@@ -3388,6 +4112,58 @@
                 "method": {
                     "shortName": "DetectIntent",
                     "fullName": "google.cloud.dialogflow.cx.v3beta1.Sessions.DetectIntent",
+                    "service": {
+                        "shortName": "Sessions",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Sessions"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Sessions_ServerStreamingDetectIntent_async",
+            "title": "Agents serverStreamingDetectIntent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Processes a natural language query and returns structured, actionable data as a result through server-side streaming. Server-side streaming allows Dialogflow to send [partial responses](https://cloud.google.com/dialogflow/cx/docs/concept/fulfillment#partial-response) earlier in a single request.",
+            "canonical": true,
+            "file": "sessions.server_streaming_detect_intent.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 81,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ServerStreamingDetectIntent",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Sessions.ServerStreamingDetectIntent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "session",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query_params",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.QueryParameters"
+                    },
+                    {
+                        "name": "query_input",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.QueryInput"
+                    },
+                    {
+                        "name": "output_audio_config",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse",
+                "client": {
+                    "shortName": "SessionsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.SessionsClient"
+                },
+                "method": {
+                    "shortName": "ServerStreamingDetectIntent",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Sessions.ServerStreamingDetectIntent",
                     "service": {
                         "shortName": "Sessions",
                         "fullName": "google.cloud.dialogflow.cx.v3beta1.Sessions"
@@ -4155,6 +4931,282 @@
                     "service": {
                         "shortName": "TestCases",
                         "fullName": "google.cloud.dialogflow.cx.v3beta1.TestCases"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Tools_CreateTool_async",
+            "title": "Agents createTool Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a [Tool][google.cloud.dialogflow.cx.v3beta1.Tool] in the specified agent.",
+            "canonical": true,
+            "file": "tools.create_tool.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateTool",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.CreateTool",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tool",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.Tool"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.Tool",
+                "client": {
+                    "shortName": "ToolsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ToolsClient"
+                },
+                "method": {
+                    "shortName": "CreateTool",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.CreateTool",
+                    "service": {
+                        "shortName": "Tools",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Tools_ListTools_async",
+            "title": "Agents listTools Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of [Tools][google.cloud.dialogflow.cx.v3beta1.Tool] in the specified agent.",
+            "canonical": true,
+            "file": "tools.list_tools.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListTools",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.ListTools",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.ListToolsResponse",
+                "client": {
+                    "shortName": "ToolsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ToolsClient"
+                },
+                "method": {
+                    "shortName": "ListTools",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.ListTools",
+                    "service": {
+                        "shortName": "Tools",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Tools_ExportTools_async",
+            "title": "Agents exportTools Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exports the selected tools.",
+            "canonical": true,
+            "file": "tools.export_tools.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 83,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportTools",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.ExportTools",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tools",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "tools_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tools_content_inline",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "data_format",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.ExportToolsRequest.DataFormat"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ToolsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ToolsClient"
+                },
+                "method": {
+                    "shortName": "ExportTools",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.ExportTools",
+                    "service": {
+                        "shortName": "Tools",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Tools_GetTool_async",
+            "title": "Agents getTool Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the specified [Tool][google.cloud.dialogflow.cx.v3beta1.Tool].",
+            "canonical": true,
+            "file": "tools.get_tool.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetTool",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.GetTool",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.Tool",
+                "client": {
+                    "shortName": "ToolsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ToolsClient"
+                },
+                "method": {
+                    "shortName": "GetTool",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.GetTool",
+                    "service": {
+                        "shortName": "Tools",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Tools_UpdateTool_async",
+            "title": "Agents updateTool Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update the specified [Tool][google.cloud.dialogflow.cx.v3beta1.Tool].",
+            "canonical": true,
+            "file": "tools.update_tool.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateTool",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.UpdateTool",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "tool",
+                        "type": ".google.cloud.dialogflow.cx.v3beta1.Tool"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3beta1.Tool",
+                "client": {
+                    "shortName": "ToolsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ToolsClient"
+                },
+                "method": {
+                    "shortName": "UpdateTool",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.UpdateTool",
+                    "service": {
+                        "shortName": "Tools",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3beta1_generated_Tools_DeleteTool_async",
+            "title": "Agents deleteTool Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a specified [Tool][google.cloud.dialogflow.cx.v3beta1.Tool].",
+            "canonical": true,
+            "file": "tools.delete_tool.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteTool",
+                "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.DeleteTool",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "ToolsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.ToolsClient"
+                },
+                "method": {
+                    "shortName": "DeleteTool",
+                    "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools.DeleteTool",
+                    "service": {
+                        "shortName": "Tools",
+                        "fullName": "google.cloud.dialogflow.cx.v3beta1.Tools"
                     }
                 }
             }
