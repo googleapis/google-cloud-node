@@ -86,7 +86,7 @@ function main(conversionWorkspace, tree) {
     };
 
     // Run request
-    const iterable = await clouddmsClient.describeDatabaseEntitiesAsync(request);
+    const iterable = clouddmsClient.describeDatabaseEntitiesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

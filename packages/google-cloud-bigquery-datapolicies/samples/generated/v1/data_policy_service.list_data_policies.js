@@ -69,7 +69,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datapoliciesClient.listDataPoliciesAsync(request);
+    const iterable = datapoliciesClient.listDataPoliciesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

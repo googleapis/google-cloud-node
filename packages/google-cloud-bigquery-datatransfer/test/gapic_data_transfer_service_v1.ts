@@ -129,16 +129,64 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.DataTransferServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        datatransferserviceModule.v1.DataTransferServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new datatransferserviceModule.v1.DataTransferServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'bigquerydatatransfer.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        datatransferserviceModule.v1.DataTransferServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new datatransferserviceModule.v1.DataTransferServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          datatransferserviceModule.v1.DataTransferServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'bigquerydatatransfer.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          datatransferserviceModule.v1.DataTransferServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'bigquerydatatransfer.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {universeDomain: 'example.com'}
+      );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'bigquerydatatransfer.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {universe_domain: 'example.com'}
+      );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'bigquerydatatransfer.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new datatransferserviceModule.v1.DataTransferServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

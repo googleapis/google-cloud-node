@@ -68,7 +68,7 @@ function main(parent, appConnectorId) {
     };
 
     // Run request
-    const iterable = await appconnectionsClient.resolveAppConnectionsAsync(request);
+    const iterable = appconnectionsClient.resolveAppConnectionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

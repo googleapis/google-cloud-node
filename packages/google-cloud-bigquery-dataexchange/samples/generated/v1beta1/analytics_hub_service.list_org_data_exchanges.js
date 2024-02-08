@@ -57,7 +57,7 @@ function main(organization) {
     };
 
     // Run request
-    const iterable = await dataexchangeClient.listOrgDataExchangesAsync(request);
+    const iterable = dataexchangeClient.listOrgDataExchangesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

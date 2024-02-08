@@ -59,7 +59,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await billingClient.listProjectBillingInfoAsync(request);
+    const iterable = billingClient.listProjectBillingInfoAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

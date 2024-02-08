@@ -72,7 +72,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await appconnectorsClient.listAppConnectorsAsync(request);
+    const iterable = appconnectorsClient.listAppConnectorsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

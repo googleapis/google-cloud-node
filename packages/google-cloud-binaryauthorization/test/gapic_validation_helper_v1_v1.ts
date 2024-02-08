@@ -66,16 +66,62 @@ function stubSimpleCallWithCallback<ResponseType>(
 
 describe('v1.ValidationHelperV1Client', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        validationhelperv1Module.v1.ValidationHelperV1Client.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new validationhelperv1Module.v1.ValidationHelperV1Client();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'binaryauthorization.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        validationhelperv1Module.v1.ValidationHelperV1Client.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new validationhelperv1Module.v1.ValidationHelperV1Client();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          validationhelperv1Module.v1.ValidationHelperV1Client.servicePath;
+        assert.strictEqual(servicePath, 'binaryauthorization.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          validationhelperv1Module.v1.ValidationHelperV1Client.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'binaryauthorization.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new validationhelperv1Module.v1.ValidationHelperV1Client({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'binaryauthorization.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new validationhelperv1Module.v1.ValidationHelperV1Client({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'binaryauthorization.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new validationhelperv1Module.v1.ValidationHelperV1Client({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datatransferClient.listDataSourcesAsync(request);
+    const iterable = datatransferClient.listDataSourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -88,7 +88,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await channelClient.listTransferableSkusAsync(request);
+    const iterable = channelClient.listTransferableSkusAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

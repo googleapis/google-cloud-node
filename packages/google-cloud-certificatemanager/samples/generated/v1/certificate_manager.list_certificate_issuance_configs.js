@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await certificatemanagerClient.listCertificateIssuanceConfigsAsync(request);
+    const iterable = certificatemanagerClient.listCertificateIssuanceConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

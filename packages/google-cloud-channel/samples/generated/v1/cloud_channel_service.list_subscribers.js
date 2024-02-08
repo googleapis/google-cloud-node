@@ -60,7 +60,7 @@ function main(account) {
     };
 
     // Run request
-    const iterable = await channelClient.listSubscribersAsync(request);
+    const iterable = channelClient.listSubscribersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

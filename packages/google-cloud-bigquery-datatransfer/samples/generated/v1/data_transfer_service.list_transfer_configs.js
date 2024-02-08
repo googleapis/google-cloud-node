@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await datatransferClient.listTransferConfigsAsync(request);
+    const iterable = datatransferClient.listTransferConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

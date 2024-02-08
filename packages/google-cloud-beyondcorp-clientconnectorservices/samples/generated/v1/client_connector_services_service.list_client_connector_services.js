@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await clientconnectorservicesClient.listClientConnectorServicesAsync(request);
+    const iterable = clientconnectorservicesClient.listClientConnectorServicesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
