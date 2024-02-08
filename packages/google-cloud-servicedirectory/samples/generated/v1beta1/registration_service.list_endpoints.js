@@ -99,7 +99,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await servicedirectoryClient.listEndpointsAsync(request);
+    const iterable = servicedirectoryClient.listEndpointsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

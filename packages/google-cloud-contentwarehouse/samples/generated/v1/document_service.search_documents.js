@@ -147,7 +147,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await contentwarehouseClient.searchDocumentsAsync(request);
+    const iterable = contentwarehouseClient.searchDocumentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

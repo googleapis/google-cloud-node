@@ -69,7 +69,7 @@ function main(parent, pageToken) {
     };
 
     // Run request
-    const iterable = await vmmigrationClient.listReplicationCyclesAsync(request);
+    const iterable = vmmigrationClient.listReplicationCyclesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

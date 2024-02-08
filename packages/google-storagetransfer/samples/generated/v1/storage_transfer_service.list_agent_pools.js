@@ -63,7 +63,7 @@ function main(projectId) {
     };
 
     // Run request
-    const iterable = await storagetransferClient.listAgentPoolsAsync(request);
+    const iterable = storagetransferClient.listAgentPoolsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

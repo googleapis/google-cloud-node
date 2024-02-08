@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataformClient.listWorkflowInvocationsAsync(request);
+    const iterable = dataformClient.listWorkflowInvocationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

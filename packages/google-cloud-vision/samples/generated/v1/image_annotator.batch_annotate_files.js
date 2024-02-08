@@ -29,8 +29,8 @@ function main(requests) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The list of file annotation requests. Right now we support only one
-   *  AnnotateFileRequest in BatchAnnotateFilesRequest.
+   *  Required. The list of file annotation requests. Right now we support only
+   *  one AnnotateFileRequest in BatchAnnotateFilesRequest.
    */
   // const requests = [1,2,3,4]
   /**
@@ -44,6 +44,14 @@ function main(requests) {
    *  Example: `projects/project-A/locations/eu`.
    */
   // const parent = 'abc123'
+  /**
+   *  Optional. The labels with user-defined metadata for the request.
+   *  Label keys and values can be no longer than 63 characters
+   *  (Unicode codepoints), can only contain lowercase letters, numeric
+   *  characters, underscores and dashes. International characters are allowed.
+   *  Label values are optional. Label keys must start with a letter.
+   */
+  // const labels = [1,2,3,4]
 
   // Imports the Vision library
   const {ImageAnnotatorClient} = require('@google-cloud/vision').v1;

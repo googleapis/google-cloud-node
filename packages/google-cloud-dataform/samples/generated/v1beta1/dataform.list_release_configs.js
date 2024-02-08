@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dataformClient.listReleaseConfigsAsync(request);
+    const iterable = dataformClient.listReleaseConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

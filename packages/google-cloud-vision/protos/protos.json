@@ -613,7 +613,10 @@
                       "fields": {
                         "includeGeoResults": {
                           "type": "bool",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       }
                     },
@@ -767,6 +770,14 @@
                         "parent": {
                           "type": "string",
                           "id": 4
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -835,6 +846,14 @@
                         "parent": {
                           "type": "string",
                           "id": 3
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -896,6 +915,14 @@
                         "parent": {
                           "type": "string",
                           "id": 4
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -920,6 +947,14 @@
                         "parent": {
                           "type": "string",
                           "id": 4
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },

@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkservicesClient.listLbRouteExtensionsAsync(request);
+    const iterable = networkservicesClient.listLbRouteExtensionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -74,7 +74,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dlpClient.listDiscoveryConfigsAsync(request);
+    const iterable = dlpClient.listDiscoveryConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

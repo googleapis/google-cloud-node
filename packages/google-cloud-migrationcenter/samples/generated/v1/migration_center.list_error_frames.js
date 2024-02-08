@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await migrationcenterClient.listErrorFramesAsync(request);
+    const iterable = migrationcenterClient.listErrorFramesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -129,14 +129,60 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.GrafeasClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = grafeasModule.v1.GrafeasClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new grafeasModule.v1.GrafeasClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'containeranalysis.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = grafeasModule.v1.GrafeasClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new grafeasModule.v1.GrafeasClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = grafeasModule.v1.GrafeasClient.servicePath;
+        assert.strictEqual(servicePath, 'containeranalysis.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = grafeasModule.v1.GrafeasClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'containeranalysis.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new grafeasModule.v1.GrafeasClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'containeranalysis.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new grafeasModule.v1.GrafeasClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'containeranalysis.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new grafeasModule.v1.GrafeasClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

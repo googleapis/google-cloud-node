@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await baremetalsolutionClient.listSSHKeysAsync(request);
+    const iterable = baremetalsolutionClient.listSSHKeysAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

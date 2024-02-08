@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await assetClient.listSavedQueriesAsync(request);
+    const iterable = assetClient.listSavedQueriesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

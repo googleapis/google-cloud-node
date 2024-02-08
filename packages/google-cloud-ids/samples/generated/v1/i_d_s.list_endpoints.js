@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await idsClient.listEndpointsAsync(request);
+    const iterable = idsClient.listEndpointsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await baremetalsolutionClient.listOSImagesAsync(request);
+    const iterable = baremetalsolutionClient.listOSImagesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

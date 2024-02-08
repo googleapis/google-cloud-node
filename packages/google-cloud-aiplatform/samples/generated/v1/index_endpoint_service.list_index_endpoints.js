@@ -83,7 +83,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listIndexEndpointsAsync(request);
+    const iterable = aiplatformClient.listIndexEndpointsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

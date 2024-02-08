@@ -161,14 +161,60 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2.ApiKeysClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = apikeysModule.v2.ApiKeysClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new apikeysModule.v2.ApiKeysClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'apikeys.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = apikeysModule.v2.ApiKeysClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new apikeysModule.v2.ApiKeysClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = apikeysModule.v2.ApiKeysClient.servicePath;
+        assert.strictEqual(servicePath, 'apikeys.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = apikeysModule.v2.ApiKeysClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'apikeys.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new apikeysModule.v2.ApiKeysClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'apikeys.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new apikeysModule.v2.ApiKeysClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'apikeys.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new apikeysModule.v2.ApiKeysClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

@@ -96,7 +96,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listNetworkPeeringsAsync(request);
+    const iterable = vmwareengineClient.listNetworkPeeringsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await orgpolicyClient.listCustomConstraintsAsync(request);
+    const iterable = orgpolicyClient.listCustomConstraintsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

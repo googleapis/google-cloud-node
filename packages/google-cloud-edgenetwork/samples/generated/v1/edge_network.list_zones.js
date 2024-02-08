@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await edgenetworkClient.listZonesAsync(request);
+    const iterable = edgenetworkClient.listZonesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -59,7 +59,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await grafeasClient.listNoteOccurrencesAsync(request);
+    const iterable = grafeasClient.listNoteOccurrencesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

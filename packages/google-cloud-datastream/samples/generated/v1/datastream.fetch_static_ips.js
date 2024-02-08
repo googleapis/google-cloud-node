@@ -56,7 +56,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await datastreamClient.fetchStaticIpsAsync(request);
+    const iterable = datastreamClient.fetchStaticIpsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

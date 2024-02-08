@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.listSourcesAsync(request);
+    const iterable = securitycenterClient.listSourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

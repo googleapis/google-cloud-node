@@ -83,7 +83,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await resourcemanagerClient.searchProjectsAsync(request);
+    const iterable = resourcemanagerClient.searchProjectsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

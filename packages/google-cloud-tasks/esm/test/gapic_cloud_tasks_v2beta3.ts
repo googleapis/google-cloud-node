@@ -140,14 +140,62 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2beta3.CloudTasksClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = cloudtasksModule.v2beta3.CloudTasksClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudtasks.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = cloudtasksModule.v2beta3.CloudTasksClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          cloudtasksModule.v2beta3.CloudTasksClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudtasks.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          cloudtasksModule.v2beta3.CloudTasksClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudtasks.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudtasks.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new cloudtasksModule.v2beta3.CloudTasksClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudtasks.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new cloudtasksModule.v2beta3.CloudTasksClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

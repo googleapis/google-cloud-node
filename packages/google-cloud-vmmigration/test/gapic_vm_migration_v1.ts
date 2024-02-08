@@ -167,14 +167,60 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.VmMigrationClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = vmmigrationModule.v1.VmMigrationClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'vmmigration.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = vmmigrationModule.v1.VmMigrationClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = vmmigrationModule.v1.VmMigrationClient.servicePath;
+        assert.strictEqual(servicePath, 'vmmigration.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = vmmigrationModule.v1.VmMigrationClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'vmmigration.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'vmmigration.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new vmmigrationModule.v1.VmMigrationClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'vmmigration.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new vmmigrationModule.v1.VmMigrationClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

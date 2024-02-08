@@ -74,7 +74,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await metastoreClient.listFederationsAsync(request);
+    const iterable = metastoreClient.listFederationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

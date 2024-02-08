@@ -129,14 +129,60 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.EkmServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = ekmserviceModule.v1.EkmServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new ekmserviceModule.v1.EkmServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudkms.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = ekmserviceModule.v1.EkmServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new ekmserviceModule.v1.EkmServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = ekmserviceModule.v1.EkmServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudkms.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = ekmserviceModule.v1.EkmServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudkms.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new ekmserviceModule.v1.EkmServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudkms.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new ekmserviceModule.v1.EkmServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudkms.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new ekmserviceModule.v1.EkmServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

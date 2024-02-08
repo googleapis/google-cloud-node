@@ -114,7 +114,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listFeaturesAsync(request);
+    const iterable = aiplatformClient.listFeaturesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

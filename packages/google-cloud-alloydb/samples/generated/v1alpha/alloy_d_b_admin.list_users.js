@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await alloydbClient.listUsersAsync(request);
+    const iterable = alloydbClient.listUsersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await deployClient.listRolloutsAsync(request);
+    const iterable = deployClient.listRolloutsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

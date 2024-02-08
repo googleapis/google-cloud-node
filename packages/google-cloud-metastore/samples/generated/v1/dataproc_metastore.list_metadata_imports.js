@@ -74,7 +74,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await metastoreClient.listMetadataImportsAsync(request);
+    const iterable = metastoreClient.listMetadataImportsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await filestoreClient.listSharesAsync(request);
+    const iterable = filestoreClient.listSharesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

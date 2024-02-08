@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await netappClient.listActiveDirectoriesAsync(request);
+    const iterable = netappClient.listActiveDirectoriesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

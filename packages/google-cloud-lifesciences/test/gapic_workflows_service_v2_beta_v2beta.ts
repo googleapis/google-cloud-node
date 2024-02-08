@@ -117,18 +117,68 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2beta.WorkflowsServiceV2BetaClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient
-          .servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'lifesciences.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient
-          .apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'lifesciences.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'lifesciences.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'lifesciences.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'lifesciences.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

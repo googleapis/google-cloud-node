@@ -73,7 +73,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await gkebackupClient.listBackupsAsync(request);
+    const iterable = gkebackupClient.listBackupsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

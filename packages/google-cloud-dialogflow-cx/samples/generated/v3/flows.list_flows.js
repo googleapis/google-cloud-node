@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cxClient.listFlowsAsync(request);
+    const iterable = cxClient.listFlowsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

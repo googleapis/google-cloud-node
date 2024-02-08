@@ -54,7 +54,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await tpuClient.listQueuedResourcesAsync(request);
+    const iterable = tpuClient.listQueuedResourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

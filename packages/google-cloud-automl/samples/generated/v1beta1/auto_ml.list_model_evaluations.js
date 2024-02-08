@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await automlClient.listModelEvaluationsAsync(request);
+    const iterable = automlClient.listModelEvaluationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

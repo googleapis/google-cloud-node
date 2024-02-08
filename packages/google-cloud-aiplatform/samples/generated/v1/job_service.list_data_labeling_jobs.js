@@ -87,7 +87,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await aiplatformClient.listDataLabelingJobsAsync(request);
+    const iterable = aiplatformClient.listDataLabelingJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -81,7 +81,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dlpClient.listStoredInfoTypesAsync(request);
+    const iterable = dlpClient.listStoredInfoTypesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

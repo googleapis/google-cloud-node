@@ -75,7 +75,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await gkehubClient.listFeaturesAsync(request);
+    const iterable = gkehubClient.listFeaturesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

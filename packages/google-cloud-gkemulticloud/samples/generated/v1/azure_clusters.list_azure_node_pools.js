@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await gkemulticloudClient.listAzureNodePoolsAsync(request);
+    const iterable = gkemulticloudClient.listAzureNodePoolsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

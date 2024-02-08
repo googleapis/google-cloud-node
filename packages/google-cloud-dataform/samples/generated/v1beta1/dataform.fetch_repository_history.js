@@ -59,7 +59,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await dataformClient.fetchRepositoryHistoryAsync(request);
+    const iterable = dataformClient.fetchRepositoryHistoryAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

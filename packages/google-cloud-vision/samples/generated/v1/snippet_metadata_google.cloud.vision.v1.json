@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -38,6 +38,10 @@
                     {
                         "name": "parent",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.cloud.vision.v1.BatchAnnotateImagesResponse",
@@ -66,7 +70,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -82,6 +86,10 @@
                     {
                         "name": "parent",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.cloud.vision.v1.BatchAnnotateFilesResponse",
@@ -110,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],
@@ -130,6 +138,10 @@
                     {
                         "name": "parent",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -158,7 +170,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -174,6 +186,10 @@
                     {
                         "name": "parent",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -642,7 +658,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
@@ -862,7 +878,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],

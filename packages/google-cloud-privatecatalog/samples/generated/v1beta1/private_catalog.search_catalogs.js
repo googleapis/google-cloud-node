@@ -63,7 +63,7 @@ function main(resource) {
     };
 
     // Run request
-    const iterable = await privatecatalogClient.searchCatalogsAsync(request);
+    const iterable = privatecatalogClient.searchCatalogsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

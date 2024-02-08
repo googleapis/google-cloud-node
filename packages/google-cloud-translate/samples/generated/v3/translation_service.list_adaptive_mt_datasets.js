@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await translationClient.listAdaptiveMtDatasetsAsync(request);
+    const iterable = translationClient.listAdaptiveMtDatasetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

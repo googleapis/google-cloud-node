@@ -55,7 +55,7 @@ function main(connection) {
     };
 
     // Run request
-    const iterable = await cloudbuildClient.fetchLinkableRepositoriesAsync(request);
+    const iterable = cloudbuildClient.fetchLinkableRepositoriesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

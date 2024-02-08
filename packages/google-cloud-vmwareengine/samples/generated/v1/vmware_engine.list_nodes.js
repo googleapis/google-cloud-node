@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listNodesAsync(request);
+    const iterable = vmwareengineClient.listNodesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

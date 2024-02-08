@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkconnectivityClient.listHubsAsync(request);
+    const iterable = networkconnectivityClient.listHubsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

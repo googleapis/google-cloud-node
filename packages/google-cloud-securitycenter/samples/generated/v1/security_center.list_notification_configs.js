@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.listNotificationConfigsAsync(request);
+    const iterable = securitycenterClient.listNotificationConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await deployClient.listReleasesAsync(request);
+    const iterable = deployClient.listReleasesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

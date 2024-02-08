@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await adminClient.listAdSenseLinksAsync(request);
+    const iterable = adminClient.listAdSenseLinksAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

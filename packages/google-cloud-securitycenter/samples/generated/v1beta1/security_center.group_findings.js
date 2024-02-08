@@ -101,7 +101,7 @@ function main(parent, groupBy) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.groupFindingsAsync(request);
+    const iterable = securitycenterClient.groupFindingsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

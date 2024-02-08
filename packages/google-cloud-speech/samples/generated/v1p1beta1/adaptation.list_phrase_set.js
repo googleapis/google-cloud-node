@@ -66,7 +66,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await speechClient.listPhraseSetAsync(request);
+    const iterable = speechClient.listPhraseSetAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

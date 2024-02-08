@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await retailClient.listServingConfigsAsync(request);
+    const iterable = retailClient.listServingConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

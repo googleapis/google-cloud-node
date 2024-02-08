@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await talentClient.listCompaniesAsync(request);
+    const iterable = talentClient.listCompaniesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -66,16 +66,62 @@ function stubSimpleCallWithCallback<ResponseType>(
 
 describe('v1.AddressValidationClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        addressvalidationModule.v1.AddressValidationClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new addressvalidationModule.v1.AddressValidationClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'addressvalidation.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        addressvalidationModule.v1.AddressValidationClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new addressvalidationModule.v1.AddressValidationClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          addressvalidationModule.v1.AddressValidationClient.servicePath;
+        assert.strictEqual(servicePath, 'addressvalidation.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          addressvalidationModule.v1.AddressValidationClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'addressvalidation.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new addressvalidationModule.v1.AddressValidationClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'addressvalidation.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new addressvalidationModule.v1.AddressValidationClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'addressvalidation.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new addressvalidationModule.v1.AddressValidationClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

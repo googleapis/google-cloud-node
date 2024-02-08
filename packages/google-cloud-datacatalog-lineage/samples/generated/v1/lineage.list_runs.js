@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await lineageClient.listRunsAsync(request);
+    const iterable = lineageClient.listRunsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

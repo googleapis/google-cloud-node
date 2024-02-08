@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dialogflowClient.getEnvironmentHistoryAsync(request);
+    const iterable = dialogflowClient.getEnvironmentHistoryAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await orgpolicyClient.listPoliciesAsync(request);
+    const iterable = orgpolicyClient.listPoliciesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

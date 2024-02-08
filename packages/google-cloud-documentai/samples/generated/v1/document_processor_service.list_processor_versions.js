@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await documentaiClient.listProcessorVersionsAsync(request);
+    const iterable = documentaiClient.listProcessorVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

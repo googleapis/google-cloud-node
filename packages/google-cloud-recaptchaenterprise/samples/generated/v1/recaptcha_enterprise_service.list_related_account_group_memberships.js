@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await recaptchaenterpriseClient.listRelatedAccountGroupMembershipsAsync(request);
+    const iterable = recaptchaenterpriseClient.listRelatedAccountGroupMembershipsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
