@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await livestreamClient.listChannelsAsync(request);
+    const iterable = livestreamClient.listChannelsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

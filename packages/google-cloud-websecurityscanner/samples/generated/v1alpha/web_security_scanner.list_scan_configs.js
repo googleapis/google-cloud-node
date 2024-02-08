@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await websecurityscannerClient.listScanConfigsAsync(request);
+    const iterable = websecurityscannerClient.listScanConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

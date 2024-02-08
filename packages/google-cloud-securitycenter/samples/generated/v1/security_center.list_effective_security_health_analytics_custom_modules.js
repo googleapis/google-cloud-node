@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.listEffectiveSecurityHealthAnalyticsCustomModulesAsync(request);
+    const iterable = securitycenterClient.listEffectiveSecurityHealthAnalyticsCustomModulesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

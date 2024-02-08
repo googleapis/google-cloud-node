@@ -63,7 +63,7 @@ function main() {
     stream.on('error', (err) => { throw(err) });
     stream.on('end', () => { /* API call completed */ });
     stream.write(request);
-    stream.end(); 
+    stream.end();
   }
 
   callStreamingRecognize();

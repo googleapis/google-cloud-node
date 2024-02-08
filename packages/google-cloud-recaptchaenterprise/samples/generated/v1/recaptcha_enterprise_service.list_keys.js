@@ -57,7 +57,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await recaptchaenterpriseClient.listKeysAsync(request);
+    const iterable = recaptchaenterpriseClient.listKeysAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

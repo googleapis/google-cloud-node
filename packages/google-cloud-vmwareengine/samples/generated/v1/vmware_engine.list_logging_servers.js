@@ -99,7 +99,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await vmwareengineClient.listLoggingServersAsync(request);
+    const iterable = vmwareengineClient.listLoggingServersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

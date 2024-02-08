@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await resourcemanagerClient.listEffectiveTagsAsync(request);
+    const iterable = resourcemanagerClient.listEffectiveTagsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

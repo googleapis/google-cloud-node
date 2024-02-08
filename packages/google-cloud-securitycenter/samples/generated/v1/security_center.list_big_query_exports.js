@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.listBigQueryExportsAsync(request);
+    const iterable = securitycenterClient.listBigQueryExportsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

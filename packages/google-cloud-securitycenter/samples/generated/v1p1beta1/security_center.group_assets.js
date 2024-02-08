@@ -159,7 +159,7 @@ function main(parent, groupBy) {
     };
 
     // Run request
-    const iterable = await securitycenterClient.groupAssetsAsync(request);
+    const iterable = securitycenterClient.groupAssetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

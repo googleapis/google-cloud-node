@@ -68,7 +68,7 @@ function main(projectId) {
     };
 
     // Run request
-    const iterable = await cloudbuildClient.listBuildsAsync(request);
+    const iterable = cloudbuildClient.listBuildsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

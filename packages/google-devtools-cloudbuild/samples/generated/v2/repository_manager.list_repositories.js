@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cloudbuildClient.listRepositoriesAsync(request);
+    const iterable = cloudbuildClient.listRepositoriesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

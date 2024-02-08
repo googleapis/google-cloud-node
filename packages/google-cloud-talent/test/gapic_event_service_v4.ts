@@ -66,14 +66,62 @@ function stubSimpleCallWithCallback<ResponseType>(
 
 describe('v4.EventServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = eventserviceModule.v4.EventServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new eventserviceModule.v4.EventServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'jobs.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = eventserviceModule.v4.EventServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new eventserviceModule.v4.EventServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          eventserviceModule.v4.EventServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'jobs.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          eventserviceModule.v4.EventServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'jobs.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new eventserviceModule.v4.EventServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'jobs.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new eventserviceModule.v4.EventServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'jobs.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new eventserviceModule.v4.EventServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

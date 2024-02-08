@@ -161,18 +161,67 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1beta1.CertificateAuthorityServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        certificateauthorityserviceModule.v1beta1
-          .CertificateAuthorityServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new certificateauthorityserviceModule.v1beta1.CertificateAuthorityServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'privateca.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        certificateauthorityserviceModule.v1beta1
-          .CertificateAuthorityServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new certificateauthorityserviceModule.v1beta1.CertificateAuthorityServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          certificateauthorityserviceModule.v1beta1
+            .CertificateAuthorityServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'privateca.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          certificateauthorityserviceModule.v1beta1
+            .CertificateAuthorityServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'privateca.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new certificateauthorityserviceModule.v1beta1.CertificateAuthorityServiceClient(
+          {universeDomain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'privateca.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new certificateauthorityserviceModule.v1beta1.CertificateAuthorityServiceClient(
+          {universe_domain: 'example.com'}
+        );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'privateca.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new certificateauthorityserviceModule.v1beta1.CertificateAuthorityServiceClient(
+          {universe_domain: 'example.com', universeDomain: 'example.net'}
+        );
+      });
     });
 
     it('has port', () => {

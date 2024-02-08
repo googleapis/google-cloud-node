@@ -70,7 +70,7 @@ function main(project) {
     };
 
     // Run request
-    const iterable = await recaptchaenterpriseClient.searchRelatedAccountGroupMembershipsAsync(request);
+    const iterable = recaptchaenterpriseClient.searchRelatedAccountGroupMembershipsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

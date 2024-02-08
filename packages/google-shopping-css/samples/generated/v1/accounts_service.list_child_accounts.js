@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await cssClient.listChildAccountsAsync(request);
+    const iterable = cssClient.listChildAccountsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

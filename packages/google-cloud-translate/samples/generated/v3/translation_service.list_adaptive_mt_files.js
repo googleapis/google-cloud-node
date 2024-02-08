@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await translationClient.listAdaptiveMtFilesAsync(request);
+    const iterable = translationClient.listAdaptiveMtFilesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

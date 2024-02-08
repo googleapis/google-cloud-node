@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await schedulerClient.listJobsAsync(request);
+    const iterable = schedulerClient.listJobsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

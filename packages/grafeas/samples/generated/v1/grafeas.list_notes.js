@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await grafeasClient.listNotesAsync(request);
+    const iterable = grafeasClient.listNotesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

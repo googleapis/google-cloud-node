@@ -69,7 +69,7 @@ function main(parent, pageToken) {
     };
 
     // Run request
-    const iterable = await vmmigrationClient.listSourcesAsync(request);
+    const iterable = vmmigrationClient.listSourcesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

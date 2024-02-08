@@ -84,7 +84,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await dlpClient.listInspectTemplatesAsync(request);
+    const iterable = dlpClient.listInspectTemplatesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

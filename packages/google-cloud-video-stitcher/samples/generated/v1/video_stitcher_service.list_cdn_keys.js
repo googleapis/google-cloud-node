@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await stitcherClient.listCdnKeysAsync(request);
+    const iterable = stitcherClient.listCdnKeysAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

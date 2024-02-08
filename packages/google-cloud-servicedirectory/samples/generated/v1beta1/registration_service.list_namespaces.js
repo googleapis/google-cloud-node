@@ -94,7 +94,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await servicedirectoryClient.listNamespacesAsync(request);
+    const iterable = servicedirectoryClient.listNamespacesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

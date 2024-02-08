@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await workstationsClient.listWorkstationClustersAsync(request);
+    const iterable = workstationsClient.listWorkstationClustersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

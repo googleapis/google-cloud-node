@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await accesscontextmanagerClient.listServicePerimetersAsync(request);
+    const iterable = accesscontextmanagerClient.listServicePerimetersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

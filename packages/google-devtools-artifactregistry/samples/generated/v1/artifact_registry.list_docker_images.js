@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listDockerImagesAsync(request);
+    const iterable = artifactregistryClient.listDockerImagesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

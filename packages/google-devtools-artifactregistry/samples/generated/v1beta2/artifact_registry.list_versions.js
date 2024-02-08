@@ -61,7 +61,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await artifactregistryClient.listVersionsAsync(request);
+    const iterable = artifactregistryClient.listVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

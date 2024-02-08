@@ -67,7 +67,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await dataflowClient.getJobExecutionDetailsAsync(request);
+    const iterable = dataflowClient.getJobExecutionDetailsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

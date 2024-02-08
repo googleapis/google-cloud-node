@@ -58,7 +58,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await supportClient.listAttachmentsAsync(request);
+    const iterable = supportClient.listAttachmentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
