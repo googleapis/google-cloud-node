@@ -5,6 +5,30 @@
   "protoPackage": "google.cloud.retail.v2",
   "libraryPackage": "@google-cloud/retail",
   "services": {
+    "AnalyticsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AnalyticsServiceClient",
+          "rpcs": {
+            "ExportAnalyticsMetrics": {
+              "methods": [
+                "exportAnalyticsMetrics"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AnalyticsServiceClient",
+          "rpcs": {
+            "ExportAnalyticsMetrics": {
+              "methods": [
+                "exportAnalyticsMetrics"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CatalogService": {
       "clients": {
         "grpc": {
