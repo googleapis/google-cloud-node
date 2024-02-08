@@ -224,6 +224,9 @@ export class SessionsClient {
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}'
       ),
+      examplePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/examples/{example}'
+      ),
       experimentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/experiments/{experiment}'
       ),
@@ -241,6 +244,12 @@ export class SessionsClient {
       ),
       pagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/pages/{page}'
+      ),
+      playbookPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}'
+      ),
+      playbookVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/versions/{version}'
       ),
       projectLocationAgentEnvironmentSessionPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -281,6 +290,9 @@ export class SessionsClient {
       testCaseResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}/results/{result}'
       ),
+      toolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}'
+      ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
       ),
@@ -292,6 +304,11 @@ export class SessionsClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
+      serverStreamingDetectIntent: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        /* gaxStreamingRetries: */ false
+      ),
       streamingDetectIntent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
@@ -350,6 +367,7 @@ export class SessionsClient {
     // and create an API call method for each.
     const sessionsStubMethods = [
       'detectIntent',
+      'serverStreamingDetectIntent',
       'streamingDetectIntent',
       'matchIntent',
       'fulfillIntent',
@@ -927,6 +945,63 @@ export class SessionsClient {
       });
     this.initialize();
     return this.innerApiCalls.submitAnswerFeedback(request, options, callback);
+  }
+
+  /**
+   * Processes a natural language query and returns structured, actionable data
+   * as a result through server-side streaming. Server-side streaming allows
+   * Dialogflow to send [partial
+   * responses](https://cloud.google.com/dialogflow/cx/docs/concept/fulfillment#partial-response)
+   * earlier in a single request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.session
+   *   Required. The name of the session this query is sent to.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment.
+   *   It's up to the API caller to choose an appropriate `Session ID`. It can be
+   *   a random number or some type of session identifiers (preferably hashed).
+   *   The length of the `Session ID` must not exceed 36 characters.
+   *
+   *   For more information, see the [sessions
+   *   guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
+   *
+   *   Note: Always use agent versions for production traffic.
+   *   See [Versions and
+   *   environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
+   * @param {google.cloud.dialogflow.cx.v3beta1.QueryParameters} request.queryParams
+   *   The parameters of this query.
+   * @param {google.cloud.dialogflow.cx.v3beta1.QueryInput} request.queryInput
+   *   Required. The input specification.
+   * @param {google.cloud.dialogflow.cx.v3beta1.OutputAudioConfig} request.outputAudioConfig
+   *   Instructs the speech synthesizer how to generate the output audio.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse|DetectIntentResponse} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/sessions.server_streaming_detect_intent.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Sessions_ServerStreamingDetectIntent_async
+   */
+  serverStreamingDetectIntent(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDetectIntentRequest,
+    options?: CallOptions
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        session: request.session ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.serverStreamingDetectIntent(request, options);
   }
 
   /**
@@ -1601,6 +1676,87 @@ export class SessionsClient {
   }
 
   /**
+   * Return a fully-qualified example resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} playbook
+   * @param {string} example
+   * @returns {string} Resource name string.
+   */
+  examplePath(
+    project: string,
+    location: string,
+    agent: string,
+    playbook: string,
+    example: string
+  ) {
+    return this.pathTemplates.examplePathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      playbook: playbook,
+      example: example,
+    });
+  }
+
+  /**
+   * Parse the project from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).project;
+  }
+
+  /**
+   * Parse the location from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).location;
+  }
+
+  /**
+   * Parse the agent from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).agent;
+  }
+
+  /**
+   * Parse the playbook from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the playbook.
+   */
+  matchPlaybookFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).playbook;
+  }
+
+  /**
+   * Parse the example from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the example.
+   */
+  matchExampleFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).example;
+  }
+
+  /**
    * Return a fully-qualified experiment resource name string.
    *
    * @param {string} project
@@ -2034,6 +2190,164 @@ export class SessionsClient {
    */
   matchPageFromPageName(pageName: string) {
     return this.pathTemplates.pagePathTemplate.match(pageName).page;
+  }
+
+  /**
+   * Return a fully-qualified playbook resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} playbook
+   * @returns {string} Resource name string.
+   */
+  playbookPath(
+    project: string,
+    location: string,
+    agent: string,
+    playbook: string
+  ) {
+    return this.pathTemplates.playbookPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      playbook: playbook,
+    });
+  }
+
+  /**
+   * Parse the project from Playbook resource.
+   *
+   * @param {string} playbookName
+   *   A fully-qualified path representing Playbook resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPlaybookName(playbookName: string) {
+    return this.pathTemplates.playbookPathTemplate.match(playbookName).project;
+  }
+
+  /**
+   * Parse the location from Playbook resource.
+   *
+   * @param {string} playbookName
+   *   A fully-qualified path representing Playbook resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPlaybookName(playbookName: string) {
+    return this.pathTemplates.playbookPathTemplate.match(playbookName).location;
+  }
+
+  /**
+   * Parse the agent from Playbook resource.
+   *
+   * @param {string} playbookName
+   *   A fully-qualified path representing Playbook resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromPlaybookName(playbookName: string) {
+    return this.pathTemplates.playbookPathTemplate.match(playbookName).agent;
+  }
+
+  /**
+   * Parse the playbook from Playbook resource.
+   *
+   * @param {string} playbookName
+   *   A fully-qualified path representing Playbook resource.
+   * @returns {string} A string representing the playbook.
+   */
+  matchPlaybookFromPlaybookName(playbookName: string) {
+    return this.pathTemplates.playbookPathTemplate.match(playbookName).playbook;
+  }
+
+  /**
+   * Return a fully-qualified playbookVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} playbook
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  playbookVersionPath(
+    project: string,
+    location: string,
+    agent: string,
+    playbook: string,
+    version: string
+  ) {
+    return this.pathTemplates.playbookVersionPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      playbook: playbook,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from PlaybookVersion resource.
+   *
+   * @param {string} playbookVersionName
+   *   A fully-qualified path representing PlaybookVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPlaybookVersionName(playbookVersionName: string) {
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from PlaybookVersion resource.
+   *
+   * @param {string} playbookVersionName
+   *   A fully-qualified path representing PlaybookVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPlaybookVersionName(playbookVersionName: string) {
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from PlaybookVersion resource.
+   *
+   * @param {string} playbookVersionName
+   *   A fully-qualified path representing PlaybookVersion resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromPlaybookVersionName(playbookVersionName: string) {
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName
+    ).agent;
+  }
+
+  /**
+   * Parse the playbook from PlaybookVersion resource.
+   *
+   * @param {string} playbookVersionName
+   *   A fully-qualified path representing PlaybookVersion resource.
+   * @returns {string} A string representing the playbook.
+   */
+  matchPlaybookFromPlaybookVersionName(playbookVersionName: string) {
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName
+    ).playbook;
+  }
+
+  /**
+   * Parse the version from PlaybookVersion resource.
+   *
+   * @param {string} playbookVersionName
+   *   A fully-qualified path representing PlaybookVersion resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromPlaybookVersionName(playbookVersionName: string) {
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName
+    ).version;
   }
 
   /**
@@ -3000,6 +3314,68 @@ export class SessionsClient {
     return this.pathTemplates.testCaseResultPathTemplate.match(
       testCaseResultName
     ).result;
+  }
+
+  /**
+   * Return a fully-qualified tool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} tool
+   * @returns {string} Resource name string.
+   */
+  toolPath(project: string, location: string, agent: string, tool: string) {
+    return this.pathTemplates.toolPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      tool: tool,
+    });
+  }
+
+  /**
+   * Parse the project from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).project;
+  }
+
+  /**
+   * Parse the location from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).location;
+  }
+
+  /**
+   * Parse the agent from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).agent;
+  }
+
+  /**
+   * Parse the tool from Tool resource.
+   *
+   * @param {string} toolName
+   *   A fully-qualified path representing Tool resource.
+   * @returns {string} A string representing the tool.
+   */
+  matchToolFromToolName(toolName: string) {
+    return this.pathTemplates.toolPathTemplate.match(toolName).tool;
   }
 
   /**
