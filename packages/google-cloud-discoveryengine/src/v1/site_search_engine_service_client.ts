@@ -36,18 +36,18 @@ import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/schema_service_client_config.json`.
+ * `src/v1/site_search_engine_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './schema_service_client_config.json';
+import * as gapicConfig from './site_search_engine_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s.
+ *  Service for managing site search related resources.
  * @class
  * @memberof v1
  */
-export class SchemaServiceClient {
+export class SiteSearchEngineServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -69,10 +69,10 @@ export class SchemaServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  schemaServiceStub?: Promise<{[name: string]: Function}>;
+  siteSearchEngineServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of SchemaServiceClient.
+   * Construct an instance of SiteSearchEngineServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -107,7 +107,7 @@ export class SchemaServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SchemaServiceClient({fallback: true}, gax);
+   *     const client = new SiteSearchEngineServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -115,7 +115,8 @@ export class SchemaServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof SchemaServiceClient;
+    const staticMembers = this
+      .constructor as typeof SiteSearchEngineServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -262,10 +263,15 @@ export class SchemaServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listSchemas: new this._gaxModule.PageDescriptor(
+      listTargetSites: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'schemas'
+        'targetSites'
+      ),
+      fetchDomainVerificationStatus: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'targetSites'
       ),
     };
 
@@ -369,46 +375,117 @@ export class SchemaServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const createSchemaResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.Schema'
+    const createTargetSiteResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.TargetSite'
     ) as gax.protobuf.Type;
-    const createSchemaMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.CreateSchemaMetadata'
+    const createTargetSiteMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.CreateTargetSiteMetadata'
     ) as gax.protobuf.Type;
-    const updateSchemaResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.Schema'
+    const batchCreateTargetSitesResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.BatchCreateTargetSitesResponse'
     ) as gax.protobuf.Type;
-    const updateSchemaMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.UpdateSchemaMetadata'
+    const batchCreateTargetSitesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.BatchCreateTargetSiteMetadata'
     ) as gax.protobuf.Type;
-    const deleteSchemaResponse = protoFilesRoot.lookup(
+    const updateTargetSiteResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.TargetSite'
+    ) as gax.protobuf.Type;
+    const updateTargetSiteMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.UpdateTargetSiteMetadata'
+    ) as gax.protobuf.Type;
+    const deleteTargetSiteResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const deleteSchemaMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.DeleteSchemaMetadata'
+    const deleteTargetSiteMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.DeleteTargetSiteMetadata'
+    ) as gax.protobuf.Type;
+    const enableAdvancedSiteSearchResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.EnableAdvancedSiteSearchResponse'
+    ) as gax.protobuf.Type;
+    const enableAdvancedSiteSearchMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.EnableAdvancedSiteSearchMetadata'
+    ) as gax.protobuf.Type;
+    const disableAdvancedSiteSearchResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.DisableAdvancedSiteSearchResponse'
+    ) as gax.protobuf.Type;
+    const disableAdvancedSiteSearchMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.DisableAdvancedSiteSearchMetadata'
+    ) as gax.protobuf.Type;
+    const recrawlUrisResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.RecrawlUrisResponse'
+    ) as gax.protobuf.Type;
+    const recrawlUrisMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.RecrawlUrisMetadata'
+    ) as gax.protobuf.Type;
+    const batchVerifyTargetSitesResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.BatchVerifyTargetSitesResponse'
+    ) as gax.protobuf.Type;
+    const batchVerifyTargetSitesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.BatchVerifyTargetSitesMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createSchema: new this._gaxModule.LongrunningDescriptor(
+      createTargetSite: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createSchemaResponse.decode.bind(createSchemaResponse),
-        createSchemaMetadata.decode.bind(createSchemaMetadata)
+        createTargetSiteResponse.decode.bind(createTargetSiteResponse),
+        createTargetSiteMetadata.decode.bind(createTargetSiteMetadata)
       ),
-      updateSchema: new this._gaxModule.LongrunningDescriptor(
+      batchCreateTargetSites: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateSchemaResponse.decode.bind(updateSchemaResponse),
-        updateSchemaMetadata.decode.bind(updateSchemaMetadata)
+        batchCreateTargetSitesResponse.decode.bind(
+          batchCreateTargetSitesResponse
+        ),
+        batchCreateTargetSitesMetadata.decode.bind(
+          batchCreateTargetSitesMetadata
+        )
       ),
-      deleteSchema: new this._gaxModule.LongrunningDescriptor(
+      updateTargetSite: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteSchemaResponse.decode.bind(deleteSchemaResponse),
-        deleteSchemaMetadata.decode.bind(deleteSchemaMetadata)
+        updateTargetSiteResponse.decode.bind(updateTargetSiteResponse),
+        updateTargetSiteMetadata.decode.bind(updateTargetSiteMetadata)
+      ),
+      deleteTargetSite: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteTargetSiteResponse.decode.bind(deleteTargetSiteResponse),
+        deleteTargetSiteMetadata.decode.bind(deleteTargetSiteMetadata)
+      ),
+      enableAdvancedSiteSearch: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        enableAdvancedSiteSearchResponse.decode.bind(
+          enableAdvancedSiteSearchResponse
+        ),
+        enableAdvancedSiteSearchMetadata.decode.bind(
+          enableAdvancedSiteSearchMetadata
+        )
+      ),
+      disableAdvancedSiteSearch: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        disableAdvancedSiteSearchResponse.decode.bind(
+          disableAdvancedSiteSearchResponse
+        ),
+        disableAdvancedSiteSearchMetadata.decode.bind(
+          disableAdvancedSiteSearchMetadata
+        )
+      ),
+      recrawlUris: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        recrawlUrisResponse.decode.bind(recrawlUrisResponse),
+        recrawlUrisMetadata.decode.bind(recrawlUrisMetadata)
+      ),
+      batchVerifyTargetSites: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchVerifyTargetSitesResponse.decode.bind(
+          batchVerifyTargetSitesResponse
+        ),
+        batchVerifyTargetSitesMetadata.decode.bind(
+          batchVerifyTargetSitesMetadata
+        )
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1.SchemaService',
+      'google.cloud.discoveryengine.v1.SiteSearchEngineService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -436,34 +513,42 @@ export class SchemaServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.schemaServiceStub) {
-      return this.schemaServiceStub;
+    if (this.siteSearchEngineServiceStub) {
+      return this.siteSearchEngineServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1.SchemaService.
-    this.schemaServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1.SiteSearchEngineService.
+    this.siteSearchEngineServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1.SchemaService'
+            'google.cloud.discoveryengine.v1.SiteSearchEngineService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1.SchemaService,
+          (this._protos as any).google.cloud.discoveryengine.v1
+            .SiteSearchEngineService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const schemaServiceStubMethods = [
-      'getSchema',
-      'listSchemas',
-      'createSchema',
-      'updateSchema',
-      'deleteSchema',
+    const siteSearchEngineServiceStubMethods = [
+      'getSiteSearchEngine',
+      'createTargetSite',
+      'batchCreateTargetSites',
+      'getTargetSite',
+      'updateTargetSite',
+      'deleteTargetSite',
+      'listTargetSites',
+      'enableAdvancedSiteSearch',
+      'disableAdvancedSiteSearch',
+      'recrawlUris',
+      'batchVerifyTargetSites',
+      'fetchDomainVerificationStatus',
     ];
-    for (const methodName of schemaServiceStubMethods) {
-      const callPromise = this.schemaServiceStub.then(
+    for (const methodName of siteSearchEngineServiceStubMethods) {
+      const callPromise = this.siteSearchEngineServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -491,7 +576,7 @@ export class SchemaServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.schemaServiceStub;
+    return this.siteSearchEngineServiceStub;
   }
 
   /**
@@ -579,75 +664,88 @@ export class SchemaServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets a {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
+   * Gets the
+   * {@link protos.google.cloud.discoveryengine.v1.SiteSearchEngine|SiteSearchEngine}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The full resource name of the schema, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
+   *   Required. Resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1.SiteSearchEngine|SiteSearchEngine}, such
+   *   as
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+   *
+   *   If the caller does not have permission to access the [SiteSearchEngine],
+   *   regardless of whether or not it exists, a PERMISSION_DENIED error is
+   *   returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.SiteSearchEngine|SiteSearchEngine}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.get_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_GetSchema_async
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.get_site_search_engine.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_GetSiteSearchEngine_async
    */
-  getSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
+  getSiteSearchEngine(
+    request?: protos.google.cloud.discoveryengine.v1.IGetSiteSearchEngineRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.ISchema,
-      protos.google.cloud.discoveryengine.v1.IGetSchemaRequest | undefined,
+      protos.google.cloud.discoveryengine.v1.ISiteSearchEngine,
+      (
+        | protos.google.cloud.discoveryengine.v1.IGetSiteSearchEngineRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   >;
-  getSchema(
-    request: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
+  getSiteSearchEngine(
+    request: protos.google.cloud.discoveryengine.v1.IGetSiteSearchEngineRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1.ISchema,
-      | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
+      protos.google.cloud.discoveryengine.v1.ISiteSearchEngine,
+      | protos.google.cloud.discoveryengine.v1.IGetSiteSearchEngineRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getSchema(
-    request: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
+  getSiteSearchEngine(
+    request: protos.google.cloud.discoveryengine.v1.IGetSiteSearchEngineRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1.ISchema,
-      | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
+      protos.google.cloud.discoveryengine.v1.ISiteSearchEngine,
+      | protos.google.cloud.discoveryengine.v1.IGetSiteSearchEngineRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
+  getSiteSearchEngine(
+    request?: protos.google.cloud.discoveryengine.v1.IGetSiteSearchEngineRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1.ISchema,
-          | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
+          protos.google.cloud.discoveryengine.v1.ISiteSearchEngine,
+          | protos.google.cloud.discoveryengine.v1.IGetSiteSearchEngineRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1.ISchema,
-      | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
+      protos.google.cloud.discoveryengine.v1.ISiteSearchEngine,
+      | protos.google.cloud.discoveryengine.v1.IGetSiteSearchEngineRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.ISchema,
-      protos.google.cloud.discoveryengine.v1.IGetSchemaRequest | undefined,
+      protos.google.cloud.discoveryengine.v1.ISiteSearchEngine,
+      (
+        | protos.google.cloud.discoveryengine.v1.IGetSiteSearchEngineRequest
+        | undefined
+      ),
       {} | undefined,
     ]
   > | void {
@@ -667,28 +765,120 @@ export class SchemaServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSchema(request, options, callback);
+    return this.innerApiCalls.getSiteSearchEngine(request, options, callback);
+  }
+  /**
+   * Gets a {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Full resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}`.
+   *
+   *   If the caller does not have permission to access the
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the requested {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}
+   *   does not exist, a NOT_FOUND error is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.get_target_site.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_GetTargetSite_async
+   */
+  getTargetSite(
+    request?: protos.google.cloud.discoveryengine.v1.IGetTargetSiteRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.ITargetSite,
+      protos.google.cloud.discoveryengine.v1.IGetTargetSiteRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getTargetSite(
+    request: protos.google.cloud.discoveryengine.v1.IGetTargetSiteRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.ITargetSite,
+      | protos.google.cloud.discoveryengine.v1.IGetTargetSiteRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTargetSite(
+    request: protos.google.cloud.discoveryengine.v1.IGetTargetSiteRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.ITargetSite,
+      | protos.google.cloud.discoveryengine.v1.IGetTargetSiteRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTargetSite(
+    request?: protos.google.cloud.discoveryengine.v1.IGetTargetSiteRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.ITargetSite,
+          | protos.google.cloud.discoveryengine.v1.IGetTargetSiteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1.ITargetSite,
+      | protos.google.cloud.discoveryengine.v1.IGetTargetSiteRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.ITargetSite,
+      protos.google.cloud.discoveryengine.v1.IGetTargetSiteRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getTargetSite(request, options, callback);
   }
 
   /**
-   * Creates a {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
+   * Creates a {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {google.cloud.discoveryengine.v1.Schema} request.schema
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Schema|Schema} to create.
-   * @param {string} request.schemaId
-   *   Required. The ID to use for the
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}, which will become the
-   *   final component of the
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema.name|Schema.name}.
-   *
-   *   This field should conform to
-   *   [RFC-1034](https://tools.ietf.org/html/rfc1034) standard with a length
-   *   limit of 63 characters.
+   *   Required. Parent resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+   * @param {google.cloud.discoveryengine.v1.TargetSite} request.targetSite
+   *   Required. The {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite} to
+   *   create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -697,61 +887,61 @@ export class SchemaServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.create_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_CreateSchema_async
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.create_target_site.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_CreateTargetSite_async
    */
-  createSchema(
-    request?: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
+  createTargetSite(
+    request?: protos.google.cloud.discoveryengine.v1.ICreateTargetSiteRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.ITargetSite,
+        protos.google.cloud.discoveryengine.v1.ICreateTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  createSchema(
-    request: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
+  createTargetSite(
+    request: protos.google.cloud.discoveryengine.v1.ICreateTargetSiteRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.ITargetSite,
+        protos.google.cloud.discoveryengine.v1.ICreateTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createSchema(
-    request: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
+  createTargetSite(
+    request: protos.google.cloud.discoveryengine.v1.ICreateTargetSiteRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.ITargetSite,
+        protos.google.cloud.discoveryengine.v1.ICreateTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createSchema(
-    request?: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
+  createTargetSite(
+    request?: protos.google.cloud.discoveryengine.v1.ICreateTargetSiteRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.discoveryengine.v1.ISchema,
-            protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+            protos.google.cloud.discoveryengine.v1.ITargetSite,
+            protos.google.cloud.discoveryengine.v1.ICreateTargetSiteMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.ITargetSite,
+        protos.google.cloud.discoveryengine.v1.ICreateTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -759,8 +949,8 @@ export class SchemaServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.ITargetSite,
+        protos.google.cloud.discoveryengine.v1.ICreateTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -782,25 +972,25 @@ export class SchemaServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSchema(request, options, callback);
+    return this.innerApiCalls.createTargetSite(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `createSchema()`.
+   * Check the status of the long running operation returned by `createTargetSite()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.create_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_CreateSchema_async
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.create_target_site.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_CreateTargetSite_async
    */
-  async checkCreateSchemaProgress(
+  async checkCreateTargetSiteProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.discoveryengine.v1.Schema,
-      protos.google.cloud.discoveryengine.v1.CreateSchemaMetadata
+      protos.google.cloud.discoveryengine.v1.TargetSite,
+      protos.google.cloud.discoveryengine.v1.CreateTargetSiteMetadata
     >
   > {
     const request =
@@ -810,25 +1000,28 @@ export class SchemaServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.createSchema,
+      this.descriptors.longrunning.createTargetSite,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1.Schema,
-      protos.google.cloud.discoveryengine.v1.CreateSchemaMetadata
+      protos.google.cloud.discoveryengine.v1.TargetSite,
+      protos.google.cloud.discoveryengine.v1.CreateTargetSiteMetadata
     >;
   }
   /**
-   * Updates a {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
+   * Creates {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite} in a
+   * batch.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1.Schema} request.schema
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Schema|Schema} to update.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the {@link protos.google.cloud.discoveryengine.v1.Schema|Schema} is
-   *   not found, a new {@link protos.google.cloud.discoveryengine.v1.Schema|Schema} will be
-   *   created. In this situation, `update_mask` is ignored.
+   * @param {string} request.parent
+   *   Required. The parent resource shared by all TargetSites being created.
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+   *   The parent field in the CreateBookRequest messages must either be empty or
+   *   match this field.
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the resources to create.
+   *   A maximum of 20 TargetSites can be created in a batch.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -837,61 +1030,61 @@ export class SchemaServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.update_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_UpdateSchema_async
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.batch_create_target_sites.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_BatchCreateTargetSites_async
    */
-  updateSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
+  batchCreateTargetSites(
+    request?: protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSitesRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSitesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  updateSchema(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
+  batchCreateTargetSites(
+    request: protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSitesRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSitesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  updateSchema(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
+  batchCreateTargetSites(
+    request: protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSitesRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSitesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  updateSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
+  batchCreateTargetSites(
+    request?: protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSitesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.discoveryengine.v1.ISchema,
-            protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+            protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSitesResponse,
+            protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSiteMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSitesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -899,8 +1092,8 @@ export class SchemaServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSitesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchCreateTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -919,28 +1112,32 @@ export class SchemaServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'schema.name': request.schema!.name ?? '',
+        parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSchema(request, options, callback);
+    return this.innerApiCalls.batchCreateTargetSites(
+      request,
+      options,
+      callback
+    );
   }
   /**
-   * Check the status of the long running operation returned by `updateSchema()`.
+   * Check the status of the long running operation returned by `batchCreateTargetSites()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.update_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_UpdateSchema_async
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.batch_create_target_sites.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_BatchCreateTargetSites_async
    */
-  async checkUpdateSchemaProgress(
+  async checkBatchCreateTargetSitesProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.discoveryengine.v1.Schema,
-      protos.google.cloud.discoveryengine.v1.UpdateSchemaMetadata
+      protos.google.cloud.discoveryengine.v1.BatchCreateTargetSitesResponse,
+      protos.google.cloud.discoveryengine.v1.BatchCreateTargetSiteMetadata
     >
   > {
     const request =
@@ -950,22 +1147,27 @@ export class SchemaServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.updateSchema,
+      this.descriptors.longrunning.batchCreateTargetSites,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1.Schema,
-      protos.google.cloud.discoveryengine.v1.UpdateSchemaMetadata
+      protos.google.cloud.discoveryengine.v1.BatchCreateTargetSitesResponse,
+      protos.google.cloud.discoveryengine.v1.BatchCreateTargetSiteMetadata
     >;
   }
   /**
-   * Deletes a {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
+   * Updates a {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The full resource name of the schema, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
+   * @param {google.cloud.discoveryengine.v1.TargetSite} request.targetSite
+   *   Required. The target site to update.
+   *   If the caller does not have permission to update the
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite} to update
+   *   does not exist, a NOT_FOUND error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -974,53 +1176,198 @@ export class SchemaServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.delete_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_DeleteSchema_async
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.update_target_site.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_UpdateTargetSite_async
    */
-  deleteSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+  updateTargetSite(
+    request?: protos.google.cloud.discoveryengine.v1.IUpdateTargetSiteRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.ITargetSite,
+        protos.google.cloud.discoveryengine.v1.IUpdateTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  deleteSchema(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+  updateTargetSite(
+    request: protos.google.cloud.discoveryengine.v1.IUpdateTargetSiteRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ITargetSite,
+        protos.google.cloud.discoveryengine.v1.IUpdateTargetSiteMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateTargetSite(
+    request: protos.google.cloud.discoveryengine.v1.IUpdateTargetSiteRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ITargetSite,
+        protos.google.cloud.discoveryengine.v1.IUpdateTargetSiteMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateTargetSite(
+    request?: protos.google.cloud.discoveryengine.v1.IUpdateTargetSiteRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.ITargetSite,
+            protos.google.cloud.discoveryengine.v1.IUpdateTargetSiteMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ITargetSite,
+        protos.google.cloud.discoveryengine.v1.IUpdateTargetSiteMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.ITargetSite,
+        protos.google.cloud.discoveryengine.v1.IUpdateTargetSiteMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'target_site.name': request.targetSite!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateTargetSite(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateTargetSite()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.update_target_site.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_UpdateTargetSite_async
+   */
+  async checkUpdateTargetSiteProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1.TargetSite,
+      protos.google.cloud.discoveryengine.v1.UpdateTargetSiteMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateTargetSite,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1.TargetSite,
+      protos.google.cloud.discoveryengine.v1.UpdateTargetSiteMetadata
+    >;
+  }
+  /**
+   * Deletes a {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Full resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}`.
+   *
+   *   If the caller does not have permission to access the
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the requested {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}
+   *   does not exist, a NOT_FOUND error is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.delete_target_site.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_DeleteTargetSite_async
+   */
+  deleteTargetSite(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteTargetSiteRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.discoveryengine.v1.IDeleteTargetSiteMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteTargetSite(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteTargetSiteRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteSchema(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+  deleteTargetSite(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteTargetSiteRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+  deleteTargetSite(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteTargetSiteRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+            protos.google.cloud.discoveryengine.v1.IDeleteTargetSiteMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -1028,7 +1375,7 @@ export class SchemaServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1037,7 +1384,7 @@ export class SchemaServiceClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteTargetSiteMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -1059,25 +1406,25 @@ export class SchemaServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSchema(request, options, callback);
+    return this.innerApiCalls.deleteTargetSite(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `deleteSchema()`.
+   * Check the status of the long running operation returned by `deleteTargetSite()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.delete_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_DeleteSchema_async
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.delete_target_site.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_DeleteTargetSite_async
    */
-  async checkDeleteSchemaProgress(
+  async checkDeleteTargetSiteProgress(
     name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteSchemaMetadata
+      protos.google.cloud.discoveryengine.v1.DeleteTargetSiteMetadata
     >
   > {
     const request =
@@ -1087,104 +1434,528 @@ export class SchemaServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.deleteSchema,
+      this.descriptors.longrunning.deleteTargetSite,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteSchemaMetadata
+      protos.google.cloud.discoveryengine.v1.DeleteTargetSiteMetadata
     >;
   }
   /**
-   * Gets a list of {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s.
+   * Upgrade from basic site search to advanced site search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.siteSearchEngine
+   *   Required. Full resource name of the
+   *   {@link protos.google.cloud.discoveryengine.v1.SiteSearchEngine|SiteSearchEngine}, such
+   *   as
+   *   `projects/{project}/locations/{location}/dataStores/{data_store_id}/siteSearchEngine`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.enable_advanced_site_search.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_EnableAdvancedSiteSearch_async
+   */
+  enableAdvancedSiteSearch(
+    request?: protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchResponse,
+        protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  enableAdvancedSiteSearch(
+    request: protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchResponse,
+        protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  enableAdvancedSiteSearch(
+    request: protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchResponse,
+        protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  enableAdvancedSiteSearch(
+    request?: protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchResponse,
+            protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchResponse,
+        protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchResponse,
+        protos.google.cloud.discoveryengine.v1.IEnableAdvancedSiteSearchMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        site_search_engine: request.siteSearchEngine ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.enableAdvancedSiteSearch(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `enableAdvancedSiteSearch()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.enable_advanced_site_search.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_EnableAdvancedSiteSearch_async
+   */
+  async checkEnableAdvancedSiteSearchProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1.EnableAdvancedSiteSearchResponse,
+      protos.google.cloud.discoveryengine.v1.EnableAdvancedSiteSearchMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.enableAdvancedSiteSearch,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1.EnableAdvancedSiteSearchResponse,
+      protos.google.cloud.discoveryengine.v1.EnableAdvancedSiteSearchMetadata
+    >;
+  }
+  /**
+   * Downgrade from advanced site search to basic site search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.siteSearchEngine
+   *   Required. Full resource name of the
+   *   {@link protos.google.cloud.discoveryengine.v1.SiteSearchEngine|SiteSearchEngine}, such
+   *   as
+   *   `projects/{project}/locations/{location}/dataStores/{data_store_id}/siteSearchEngine`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.disable_advanced_site_search.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_DisableAdvancedSiteSearch_async
+   */
+  disableAdvancedSiteSearch(
+    request?: protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchResponse,
+        protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  disableAdvancedSiteSearch(
+    request: protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchResponse,
+        protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  disableAdvancedSiteSearch(
+    request: protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchResponse,
+        protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  disableAdvancedSiteSearch(
+    request?: protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchResponse,
+            protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchResponse,
+        protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchResponse,
+        protos.google.cloud.discoveryengine.v1.IDisableAdvancedSiteSearchMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        site_search_engine: request.siteSearchEngine ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.disableAdvancedSiteSearch(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `disableAdvancedSiteSearch()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.disable_advanced_site_search.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_DisableAdvancedSiteSearch_async
+   */
+  async checkDisableAdvancedSiteSearchProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1.DisableAdvancedSiteSearchResponse,
+      protos.google.cloud.discoveryengine.v1.DisableAdvancedSiteSearchMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.disableAdvancedSiteSearch,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1.DisableAdvancedSiteSearchResponse,
+      protos.google.cloud.discoveryengine.v1.DisableAdvancedSiteSearchMetadata
+    >;
+  }
+  /**
+   * Request on-demand recrawl for a list of URIs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.siteSearchEngine
+   *   Required. Full resource name of the
+   *   {@link protos.google.cloud.discoveryengine.v1.SiteSearchEngine|SiteSearchEngine}, such
+   *   as `projects/* /locations/* /collections/* /dataStores/* /siteSearchEngine`.
+   * @param {string[]} request.uris
+   *   Required. List of URIs to crawl. At most 10K URIs are supported, otherwise
+   *   an INVALID_ARGUMENT error is thrown. Each URI should match at least one
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite} in
+   *   `site_search_engine`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.recrawl_uris.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_RecrawlUris_async
+   */
+  recrawlUris(
+    request?: protos.google.cloud.discoveryengine.v1.IRecrawlUrisRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IRecrawlUrisResponse,
+        protos.google.cloud.discoveryengine.v1.IRecrawlUrisMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  recrawlUris(
+    request: protos.google.cloud.discoveryengine.v1.IRecrawlUrisRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IRecrawlUrisResponse,
+        protos.google.cloud.discoveryengine.v1.IRecrawlUrisMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  recrawlUris(
+    request: protos.google.cloud.discoveryengine.v1.IRecrawlUrisRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IRecrawlUrisResponse,
+        protos.google.cloud.discoveryengine.v1.IRecrawlUrisMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  recrawlUris(
+    request?: protos.google.cloud.discoveryengine.v1.IRecrawlUrisRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IRecrawlUrisResponse,
+            protos.google.cloud.discoveryengine.v1.IRecrawlUrisMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IRecrawlUrisResponse,
+        protos.google.cloud.discoveryengine.v1.IRecrawlUrisMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IRecrawlUrisResponse,
+        protos.google.cloud.discoveryengine.v1.IRecrawlUrisMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        site_search_engine: request.siteSearchEngine ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.recrawlUris(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `recrawlUris()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.recrawl_uris.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_RecrawlUris_async
+   */
+  async checkRecrawlUrisProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1.RecrawlUrisResponse,
+      protos.google.cloud.discoveryengine.v1.RecrawlUrisMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.recrawlUris,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1.RecrawlUrisResponse,
+      protos.google.cloud.discoveryengine.v1.RecrawlUrisMetadata
+    >;
+  }
+  /**
+   * Verify target sites' ownership and validity.
+   * This API sends all the target sites under site search engine for
+   * verification.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {number} request.pageSize
-   *   The maximum number of {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s to
-   *   return. The service may return fewer than this value.
-   *
-   *   If unspecified, at most 100
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s will be returned.
-   *
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   call. Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   must match the call that provided the page token.
+   *   Required. The parent resource shared by all TargetSites being verified.
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listSchemasAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.batch_verify_target_sites.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_BatchVerifyTargetSites_async
    */
-  listSchemas(
-    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+  batchVerifyTargetSites(
+    request?: protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.ISchema[],
-      protos.google.cloud.discoveryengine.v1.IListSchemasRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListSchemasResponse,
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
     ]
   >;
-  listSchemas(
-    request: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+  batchVerifyTargetSites(
+    request: protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesRequest,
     options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
-      | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1.ISchema
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
-  listSchemas(
-    request: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
-      | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1.ISchema
+  batchVerifyTargetSites(
+    request: protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): void;
-  listSchemas(
-    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+  batchVerifyTargetSites(
+    request?: protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesRequest,
     optionsOrCallback?:
       | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
-          | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
-          | null
-          | undefined,
-          protos.google.cloud.discoveryengine.v1.ISchema
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesResponse,
+            protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
         >,
-    callback?: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
-      | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
-      | null
-      | undefined,
-      protos.google.cloud.discoveryengine.v1.ISchema
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.ISchema[],
-      protos.google.cloud.discoveryengine.v1.IListSchemasRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListSchemasResponse,
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesResponse,
+        protos.google.cloud.discoveryengine.v1.IBatchVerifyTargetSitesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1203,7 +1974,156 @@ export class SchemaServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSchemas(request, options, callback);
+    return this.innerApiCalls.batchVerifyTargetSites(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `batchVerifyTargetSites()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.batch_verify_target_sites.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_BatchVerifyTargetSites_async
+   */
+  async checkBatchVerifyTargetSitesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1.BatchVerifyTargetSitesResponse,
+      protos.google.cloud.discoveryengine.v1.BatchVerifyTargetSitesMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchVerifyTargetSites,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1.BatchVerifyTargetSitesResponse,
+      protos.google.cloud.discoveryengine.v1.BatchVerifyTargetSitesMetadata
+    >;
+  }
+  /**
+   * Gets a list of {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}s.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent site search engine resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+   *
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}s under this site
+   *   search engine, regardless of whether or not this branch exists, a
+   *   PERMISSION_DENIED error is returned.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested. If
+   *   unspecified, server will pick an appropriate default. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   *
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListTargetSites` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListTargetSites`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTargetSitesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listTargetSites(
+    request?: protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.ITargetSite[],
+      protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListTargetSitesResponse,
+    ]
+  >;
+  listTargetSites(
+    request: protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest,
+      | protos.google.cloud.discoveryengine.v1.IListTargetSitesResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.ITargetSite
+    >
+  ): void;
+  listTargetSites(
+    request: protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest,
+      | protos.google.cloud.discoveryengine.v1.IListTargetSitesResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.ITargetSite
+    >
+  ): void;
+  listTargetSites(
+    request?: protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest,
+          | protos.google.cloud.discoveryengine.v1.IListTargetSitesResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1.ITargetSite
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest,
+      | protos.google.cloud.discoveryengine.v1.IListTargetSitesResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.ITargetSite
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.ITargetSite[],
+      protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListTargetSitesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listTargetSites(request, options, callback);
   }
 
   /**
@@ -1211,37 +2131,38 @@ export class SchemaServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   *   Required. The parent site search engine resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+   *
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}s under this site
+   *   search engine, regardless of whether or not this branch exists, a
+   *   PERMISSION_DENIED error is returned.
    * @param {number} request.pageSize
-   *   The maximum number of {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s to
-   *   return. The service may return fewer than this value.
+   *   Requested page size. Server may return fewer items than requested. If
+   *   unspecified, server will pick an appropriate default. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
    *
-   *   If unspecified, at most 100
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s will be returned.
-   *
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
    * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   call. Provide this to retrieve the subsequent page.
+   *   A page token, received from a previous `ListTargetSites` call.
+   *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   When paginating, all other parameters provided to `ListTargetSites`
    *   must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.Schema|Schema} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSchemasAsync()`
+   *   We recommend using `listTargetSitesAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listSchemasStream(
-    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+  listTargetSitesStream(
+    request?: protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1252,57 +2173,58 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listSchemas'];
+    const defaultCallSettings = this._defaults['listTargetSites'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listSchemas.createStream(
-      this.innerApiCalls.listSchemas as GaxCall,
+    return this.descriptors.page.listTargetSites.createStream(
+      this.innerApiCalls.listTargetSites as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listSchemas`, but returns an iterable object.
+   * Equivalent to `listTargetSites`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   *   Required. The parent site search engine resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+   *
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}s under this site
+   *   search engine, regardless of whether or not this branch exists, a
+   *   PERMISSION_DENIED error is returned.
    * @param {number} request.pageSize
-   *   The maximum number of {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s to
-   *   return. The service may return fewer than this value.
+   *   Requested page size. Server may return fewer items than requested. If
+   *   unspecified, server will pick an appropriate default. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
    *
-   *   If unspecified, at most 100
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s will be returned.
-   *
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
    * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   call. Provide this to retrieve the subsequent page.
+   *   A page token, received from a previous `ListTargetSites` call.
+   *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   When paginating, all other parameters provided to `ListTargetSites`
    *   must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.list_schemas.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_ListSchemas_async
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.list_target_sites.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_ListTargetSites_async
    */
-  listSchemasAsync(
-    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+  listTargetSitesAsync(
+    request?: protos.google.cloud.discoveryengine.v1.IListTargetSitesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.ISchema> {
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.ITargetSite> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1311,14 +2233,239 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listSchemas'];
+    const defaultCallSettings = this._defaults['listTargetSites'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listSchemas.asyncIterate(
-      this.innerApiCalls['listSchemas'] as GaxCall,
+    return this.descriptors.page.listTargetSites.asyncIterate(
+      this.innerApiCalls['listTargetSites'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.ISchema>;
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.ITargetSite>;
+  }
+  /**
+   * Returns list of target sites with its domain verification status.
+   * This method can only be called under data store with BASIC_SITE_SEARCH
+   * state at the moment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.siteSearchEngine
+   *   Required. The site search engine resource under which we fetch all the
+   *   domain verification status.
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested. If
+   *   unspecified, server will pick an appropriate default. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   *
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `FetchDomainVerificationStatus`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `FetchDomainVerificationStatus` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchDomainVerificationStatusAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchDomainVerificationStatus(
+    request?: protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.ITargetSite[],
+      protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest | null,
+      protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusResponse,
+    ]
+  >;
+  fetchDomainVerificationStatus(
+    request: protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest,
+      | protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.ITargetSite
+    >
+  ): void;
+  fetchDomainVerificationStatus(
+    request: protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest,
+      | protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.ITargetSite
+    >
+  ): void;
+  fetchDomainVerificationStatus(
+    request?: protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest,
+          | protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1.ITargetSite
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest,
+      | protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1.ITargetSite
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.ITargetSite[],
+      protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest | null,
+      protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        site_search_engine: request.siteSearchEngine ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.fetchDomainVerificationStatus(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.siteSearchEngine
+   *   Required. The site search engine resource under which we fetch all the
+   *   domain verification status.
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested. If
+   *   unspecified, server will pick an appropriate default. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   *
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `FetchDomainVerificationStatus`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `FetchDomainVerificationStatus` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchDomainVerificationStatusAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchDomainVerificationStatusStream(
+    request?: protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        site_search_engine: request.siteSearchEngine ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchDomainVerificationStatus'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.fetchDomainVerificationStatus.createStream(
+      this.innerApiCalls.fetchDomainVerificationStatus as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `fetchDomainVerificationStatus`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.siteSearchEngine
+   *   Required. The site search engine resource under which we fetch all the
+   *   domain verification status.
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine`.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested. If
+   *   unspecified, server will pick an appropriate default. The maximum value is
+   *   1000; values above 1000 will be coerced to 1000.
+   *
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `FetchDomainVerificationStatus`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `FetchDomainVerificationStatus` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/site_search_engine_service.fetch_domain_verification_status.js</caption>
+   * region_tag:discoveryengine_v1_generated_SiteSearchEngineService_FetchDomainVerificationStatus_async
+   */
+  fetchDomainVerificationStatusAsync(
+    request?: protos.google.cloud.discoveryengine.v1.IFetchDomainVerificationStatusRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.ITargetSite> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        site_search_engine: request.siteSearchEngine ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchDomainVerificationStatus'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.fetchDomainVerificationStatus.asyncIterate(
+      this.innerApiCalls['fetchDomainVerificationStatus'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.ITargetSite>;
   }
   /**
    * Gets information about a location.
@@ -2844,8 +3991,8 @@ export class SchemaServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.schemaServiceStub && !this._terminated) {
-      return this.schemaServiceStub.then(stub => {
+    if (this.siteSearchEngineServiceStub && !this._terminated) {
+      return this.siteSearchEngineServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

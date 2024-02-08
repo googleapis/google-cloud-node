@@ -24,12 +24,18 @@ const CompletionServiceClient = v1.CompletionServiceClient;
 type CompletionServiceClient = v1.CompletionServiceClient;
 const ConversationalSearchServiceClient = v1.ConversationalSearchServiceClient;
 type ConversationalSearchServiceClient = v1.ConversationalSearchServiceClient;
+const DataStoreServiceClient = v1.DataStoreServiceClient;
+type DataStoreServiceClient = v1.DataStoreServiceClient;
 const DocumentServiceClient = v1.DocumentServiceClient;
 type DocumentServiceClient = v1.DocumentServiceClient;
+const EngineServiceClient = v1.EngineServiceClient;
+type EngineServiceClient = v1.EngineServiceClient;
 const SchemaServiceClient = v1.SchemaServiceClient;
 type SchemaServiceClient = v1.SchemaServiceClient;
 const SearchServiceClient = v1.SearchServiceClient;
 type SearchServiceClient = v1.SearchServiceClient;
+const SiteSearchEngineServiceClient = v1.SiteSearchEngineServiceClient;
+type SiteSearchEngineServiceClient = v1.SiteSearchEngineServiceClient;
 const UserEventServiceClient = v1.UserEventServiceClient;
 type UserEventServiceClient = v1.UserEventServiceClient;
 
@@ -39,9 +45,12 @@ export {
   v1beta,
   CompletionServiceClient,
   ConversationalSearchServiceClient,
+  DataStoreServiceClient,
   DocumentServiceClient,
+  EngineServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
+  SiteSearchEngineServiceClient,
   UserEventServiceClient,
 };
 export default {
@@ -50,9 +59,12 @@ export default {
   v1beta,
   CompletionServiceClient,
   ConversationalSearchServiceClient,
+  DataStoreServiceClient,
   DocumentServiceClient,
+  EngineServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
+  SiteSearchEngineServiceClient,
   UserEventServiceClient,
 };
 import * as protos from '../protos/protos';

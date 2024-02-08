@@ -14,6 +14,16 @@
               "methods": [
                 "completeQuery"
               ]
+            },
+            "ImportSuggestionDenyListEntries": {
+              "methods": [
+                "importSuggestionDenyListEntries"
+              ]
+            },
+            "PurgeSuggestionDenyListEntries": {
+              "methods": [
+                "purgeSuggestionDenyListEntries"
+              ]
             }
           }
         },
@@ -23,6 +33,16 @@
             "CompleteQuery": {
               "methods": [
                 "completeQuery"
+              ]
+            },
+            "ImportSuggestionDenyListEntries": {
+              "methods": [
+                "importSuggestionDenyListEntries"
+              ]
+            },
+            "PurgeSuggestionDenyListEntries": {
+              "methods": [
+                "purgeSuggestionDenyListEntries"
               ]
             }
           }
@@ -101,6 +121,74 @@
                 "listConversations",
                 "listConversationsStream",
                 "listConversationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DataStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataStoreServiceClient",
+          "rpcs": {
+            "GetDataStore": {
+              "methods": [
+                "getDataStore"
+              ]
+            },
+            "UpdateDataStore": {
+              "methods": [
+                "updateDataStore"
+              ]
+            },
+            "CreateDataStore": {
+              "methods": [
+                "createDataStore"
+              ]
+            },
+            "DeleteDataStore": {
+              "methods": [
+                "deleteDataStore"
+              ]
+            },
+            "ListDataStores": {
+              "methods": [
+                "listDataStores",
+                "listDataStoresStream",
+                "listDataStoresAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataStoreServiceClient",
+          "rpcs": {
+            "GetDataStore": {
+              "methods": [
+                "getDataStore"
+              ]
+            },
+            "UpdateDataStore": {
+              "methods": [
+                "updateDataStore"
+              ]
+            },
+            "CreateDataStore": {
+              "methods": [
+                "createDataStore"
+              ]
+            },
+            "DeleteDataStore": {
+              "methods": [
+                "deleteDataStore"
+              ]
+            },
+            "ListDataStores": {
+              "methods": [
+                "listDataStores",
+                "listDataStoresStream",
+                "listDataStoresAsync"
               ]
             }
           }
@@ -189,6 +277,74 @@
                 "listDocuments",
                 "listDocumentsStream",
                 "listDocumentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "EngineService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EngineServiceClient",
+          "rpcs": {
+            "UpdateEngine": {
+              "methods": [
+                "updateEngine"
+              ]
+            },
+            "GetEngine": {
+              "methods": [
+                "getEngine"
+              ]
+            },
+            "CreateEngine": {
+              "methods": [
+                "createEngine"
+              ]
+            },
+            "DeleteEngine": {
+              "methods": [
+                "deleteEngine"
+              ]
+            },
+            "ListEngines": {
+              "methods": [
+                "listEngines",
+                "listEnginesStream",
+                "listEnginesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EngineServiceClient",
+          "rpcs": {
+            "UpdateEngine": {
+              "methods": [
+                "updateEngine"
+              ]
+            },
+            "GetEngine": {
+              "methods": [
+                "getEngine"
+              ]
+            },
+            "CreateEngine": {
+              "methods": [
+                "createEngine"
+              ]
+            },
+            "DeleteEngine": {
+              "methods": [
+                "deleteEngine"
+              ]
+            },
+            "ListEngines": {
+              "methods": [
+                "listEngines",
+                "listEnginesStream",
+                "listEnginesAsync"
               ]
             }
           }
@@ -285,6 +441,148 @@
                 "search",
                 "searchStream",
                 "searchAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SiteSearchEngineService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SiteSearchEngineServiceClient",
+          "rpcs": {
+            "GetSiteSearchEngine": {
+              "methods": [
+                "getSiteSearchEngine"
+              ]
+            },
+            "GetTargetSite": {
+              "methods": [
+                "getTargetSite"
+              ]
+            },
+            "CreateTargetSite": {
+              "methods": [
+                "createTargetSite"
+              ]
+            },
+            "BatchCreateTargetSites": {
+              "methods": [
+                "batchCreateTargetSites"
+              ]
+            },
+            "UpdateTargetSite": {
+              "methods": [
+                "updateTargetSite"
+              ]
+            },
+            "DeleteTargetSite": {
+              "methods": [
+                "deleteTargetSite"
+              ]
+            },
+            "EnableAdvancedSiteSearch": {
+              "methods": [
+                "enableAdvancedSiteSearch"
+              ]
+            },
+            "DisableAdvancedSiteSearch": {
+              "methods": [
+                "disableAdvancedSiteSearch"
+              ]
+            },
+            "RecrawlUris": {
+              "methods": [
+                "recrawlUris"
+              ]
+            },
+            "BatchVerifyTargetSites": {
+              "methods": [
+                "batchVerifyTargetSites"
+              ]
+            },
+            "ListTargetSites": {
+              "methods": [
+                "listTargetSites",
+                "listTargetSitesStream",
+                "listTargetSitesAsync"
+              ]
+            },
+            "FetchDomainVerificationStatus": {
+              "methods": [
+                "fetchDomainVerificationStatus",
+                "fetchDomainVerificationStatusStream",
+                "fetchDomainVerificationStatusAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SiteSearchEngineServiceClient",
+          "rpcs": {
+            "GetSiteSearchEngine": {
+              "methods": [
+                "getSiteSearchEngine"
+              ]
+            },
+            "GetTargetSite": {
+              "methods": [
+                "getTargetSite"
+              ]
+            },
+            "CreateTargetSite": {
+              "methods": [
+                "createTargetSite"
+              ]
+            },
+            "BatchCreateTargetSites": {
+              "methods": [
+                "batchCreateTargetSites"
+              ]
+            },
+            "UpdateTargetSite": {
+              "methods": [
+                "updateTargetSite"
+              ]
+            },
+            "DeleteTargetSite": {
+              "methods": [
+                "deleteTargetSite"
+              ]
+            },
+            "EnableAdvancedSiteSearch": {
+              "methods": [
+                "enableAdvancedSiteSearch"
+              ]
+            },
+            "DisableAdvancedSiteSearch": {
+              "methods": [
+                "disableAdvancedSiteSearch"
+              ]
+            },
+            "RecrawlUris": {
+              "methods": [
+                "recrawlUris"
+              ]
+            },
+            "BatchVerifyTargetSites": {
+              "methods": [
+                "batchVerifyTargetSites"
+              ]
+            },
+            "ListTargetSites": {
+              "methods": [
+                "listTargetSites",
+                "listTargetSitesStream",
+                "listTargetSitesAsync"
+              ]
+            },
+            "FetchDomainVerificationStatus": {
+              "methods": [
+                "fetchDomainVerificationStatus",
+                "fetchDomainVerificationStatusStream",
+                "fetchDomainVerificationStatusAsync"
               ]
             }
           }

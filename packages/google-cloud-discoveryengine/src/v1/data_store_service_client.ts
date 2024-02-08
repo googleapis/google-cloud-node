@@ -36,18 +36,19 @@ import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/schema_service_client_config.json`.
+ * `src/v1/data_store_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './schema_service_client_config.json';
+import * as gapicConfig from './data_store_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s.
+ *  Service for managing {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}
+ *  configuration.
  * @class
  * @memberof v1
  */
-export class SchemaServiceClient {
+export class DataStoreServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -69,10 +70,10 @@ export class SchemaServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  schemaServiceStub?: Promise<{[name: string]: Function}>;
+  dataStoreServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of SchemaServiceClient.
+   * Construct an instance of DataStoreServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -107,7 +108,7 @@ export class SchemaServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SchemaServiceClient({fallback: true}, gax);
+   *     const client = new DataStoreServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -115,7 +116,7 @@ export class SchemaServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof SchemaServiceClient;
+    const staticMembers = this.constructor as typeof DataStoreServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -202,6 +203,9 @@ export class SchemaServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      collectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}'
+      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
@@ -262,10 +266,10 @@ export class SchemaServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listSchemas: new this._gaxModule.PageDescriptor(
+      listDataStores: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'schemas'
+        'dataStores'
       ),
     };
 
@@ -369,46 +373,35 @@ export class SchemaServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const createSchemaResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.Schema'
+    const createDataStoreResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.DataStore'
     ) as gax.protobuf.Type;
-    const createSchemaMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.CreateSchemaMetadata'
+    const createDataStoreMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.CreateDataStoreMetadata'
     ) as gax.protobuf.Type;
-    const updateSchemaResponse = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.Schema'
-    ) as gax.protobuf.Type;
-    const updateSchemaMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.UpdateSchemaMetadata'
-    ) as gax.protobuf.Type;
-    const deleteSchemaResponse = protoFilesRoot.lookup(
+    const deleteDataStoreResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const deleteSchemaMetadata = protoFilesRoot.lookup(
-      '.google.cloud.discoveryengine.v1.DeleteSchemaMetadata'
+    const deleteDataStoreMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.DeleteDataStoreMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createSchema: new this._gaxModule.LongrunningDescriptor(
+      createDataStore: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createSchemaResponse.decode.bind(createSchemaResponse),
-        createSchemaMetadata.decode.bind(createSchemaMetadata)
+        createDataStoreResponse.decode.bind(createDataStoreResponse),
+        createDataStoreMetadata.decode.bind(createDataStoreMetadata)
       ),
-      updateSchema: new this._gaxModule.LongrunningDescriptor(
+      deleteDataStore: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateSchemaResponse.decode.bind(updateSchemaResponse),
-        updateSchemaMetadata.decode.bind(updateSchemaMetadata)
-      ),
-      deleteSchema: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteSchemaResponse.decode.bind(deleteSchemaResponse),
-        deleteSchemaMetadata.decode.bind(deleteSchemaMetadata)
+        deleteDataStoreResponse.decode.bind(deleteDataStoreResponse),
+        deleteDataStoreMetadata.decode.bind(deleteDataStoreMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1.SchemaService',
+      'google.cloud.discoveryengine.v1.DataStoreService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -436,34 +429,35 @@ export class SchemaServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.schemaServiceStub) {
-      return this.schemaServiceStub;
+    if (this.dataStoreServiceStub) {
+      return this.dataStoreServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1.SchemaService.
-    this.schemaServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1.DataStoreService.
+    this.dataStoreServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1.SchemaService'
+            'google.cloud.discoveryengine.v1.DataStoreService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.discoveryengine.v1.SchemaService,
+          (this._protos as any).google.cloud.discoveryengine.v1
+            .DataStoreService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const schemaServiceStubMethods = [
-      'getSchema',
-      'listSchemas',
-      'createSchema',
-      'updateSchema',
-      'deleteSchema',
+    const dataStoreServiceStubMethods = [
+      'createDataStore',
+      'getDataStore',
+      'listDataStores',
+      'deleteDataStore',
+      'updateDataStore',
     ];
-    for (const methodName of schemaServiceStubMethods) {
-      const callPromise = this.schemaServiceStub.then(
+    for (const methodName of dataStoreServiceStubMethods) {
+      const callPromise = this.dataStoreServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -491,7 +485,7 @@ export class SchemaServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.schemaServiceStub;
+    return this.dataStoreServiceStub;
   }
 
   /**
@@ -579,75 +573,83 @@ export class SchemaServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets a {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
+   * Gets a {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The full resource name of the schema, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
+   *   Required. Full resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}, such as
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`.
+   *
+   *   If the caller does not have permission to access the
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the requested {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}
+   *   does not exist, a NOT_FOUND error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.get_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_GetSchema_async
+   * @example <caption>include:samples/generated/v1/data_store_service.get_data_store.js</caption>
+   * region_tag:discoveryengine_v1_generated_DataStoreService_GetDataStore_async
    */
-  getSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
+  getDataStore(
+    request?: protos.google.cloud.discoveryengine.v1.IGetDataStoreRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.ISchema,
-      protos.google.cloud.discoveryengine.v1.IGetSchemaRequest | undefined,
+      protos.google.cloud.discoveryengine.v1.IDataStore,
+      protos.google.cloud.discoveryengine.v1.IGetDataStoreRequest | undefined,
       {} | undefined,
     ]
   >;
-  getSchema(
-    request: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
+  getDataStore(
+    request: protos.google.cloud.discoveryengine.v1.IGetDataStoreRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1.ISchema,
-      | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
+      protos.google.cloud.discoveryengine.v1.IDataStore,
+      | protos.google.cloud.discoveryengine.v1.IGetDataStoreRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getSchema(
-    request: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
+  getDataStore(
+    request: protos.google.cloud.discoveryengine.v1.IGetDataStoreRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1.ISchema,
-      | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
+      protos.google.cloud.discoveryengine.v1.IDataStore,
+      | protos.google.cloud.discoveryengine.v1.IGetDataStoreRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IGetSchemaRequest,
+  getDataStore(
+    request?: protos.google.cloud.discoveryengine.v1.IGetDataStoreRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1.ISchema,
-          | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
+          protos.google.cloud.discoveryengine.v1.IDataStore,
+          | protos.google.cloud.discoveryengine.v1.IGetDataStoreRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1.ISchema,
-      | protos.google.cloud.discoveryengine.v1.IGetSchemaRequest
+      protos.google.cloud.discoveryengine.v1.IDataStore,
+      | protos.google.cloud.discoveryengine.v1.IGetDataStoreRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.ISchema,
-      protos.google.cloud.discoveryengine.v1.IGetSchemaRequest | undefined,
+      protos.google.cloud.discoveryengine.v1.IDataStore,
+      protos.google.cloud.discoveryengine.v1.IGetDataStoreRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -667,28 +669,151 @@ export class SchemaServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSchema(request, options, callback);
+    return this.innerApiCalls.getDataStore(request, options, callback);
+  }
+  /**
+   * Updates a {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.discoveryengine.v1.DataStore} request.dataStore
+   *   Required. The {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore} to
+   *   update.
+   *
+   *   If the caller does not have permission to update the
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore} to update
+   *   does not exist, a NOT_FOUND error is returned.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Indicates which fields in the provided
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore} to update.
+   *
+   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
+   *   is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_store_service.update_data_store.js</caption>
+   * region_tag:discoveryengine_v1_generated_DataStoreService_UpdateDataStore_async
+   */
+  updateDataStore(
+    request?: protos.google.cloud.discoveryengine.v1.IUpdateDataStoreRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IDataStore,
+      (
+        | protos.google.cloud.discoveryengine.v1.IUpdateDataStoreRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateDataStore(
+    request: protos.google.cloud.discoveryengine.v1.IUpdateDataStoreRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IDataStore,
+      | protos.google.cloud.discoveryengine.v1.IUpdateDataStoreRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDataStore(
+    request: protos.google.cloud.discoveryengine.v1.IUpdateDataStoreRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IDataStore,
+      | protos.google.cloud.discoveryengine.v1.IUpdateDataStoreRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDataStore(
+    request?: protos.google.cloud.discoveryengine.v1.IUpdateDataStoreRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IDataStore,
+          | protos.google.cloud.discoveryengine.v1.IUpdateDataStoreRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1.IDataStore,
+      | protos.google.cloud.discoveryengine.v1.IUpdateDataStoreRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IDataStore,
+      (
+        | protos.google.cloud.discoveryengine.v1.IUpdateDataStoreRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'data_store.name': request.dataStore!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateDataStore(request, options, callback);
   }
 
   /**
-   * Creates a {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
+   * Creates a {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}.
+   *
+   * DataStore is for storing
+   * {@link protos.google.cloud.discoveryengine.v1.Document|Documents}. To serve these
+   * documents for Search, or Recommendation use case, an
+   * {@link protos.google.cloud.discoveryengine.v1.Engine|Engine} needs to be created
+   * separately.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-   * @param {google.cloud.discoveryengine.v1.Schema} request.schema
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Schema|Schema} to create.
-   * @param {string} request.schemaId
+   *   Required. The parent resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}`.
+   * @param {google.cloud.discoveryengine.v1.DataStore} request.dataStore
+   *   Required. The {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore} to
+   *   create.
+   * @param {string} request.dataStoreId
    *   Required. The ID to use for the
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}, which will become the
-   *   final component of the
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema.name|Schema.name}.
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}, which will become
+   *   the final component of the
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}'s resource name.
    *
-   *   This field should conform to
-   *   [RFC-1034](https://tools.ietf.org/html/rfc1034) standard with a length
-   *   limit of 63 characters.
+   *   This field must conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
+   *   standard with a length limit of 63 characters. Otherwise, an
+   *   INVALID_ARGUMENT error is returned.
+   * @param {boolean} request.createAdvancedSiteSearch
+   *   A boolean flag indicating whether user want to directly create an advanced
+   *   data store for site search.
+   *   If the data store is not configured as site
+   *   search (GENERIC vertical and PUBLIC_WEBSITE content_config), this flag will
+   *   be ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -697,61 +822,61 @@ export class SchemaServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.create_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_CreateSchema_async
+   * @example <caption>include:samples/generated/v1/data_store_service.create_data_store.js</caption>
+   * region_tag:discoveryengine_v1_generated_DataStoreService_CreateDataStore_async
    */
-  createSchema(
-    request?: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
+  createDataStore(
+    request?: protos.google.cloud.discoveryengine.v1.ICreateDataStoreRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDataStore,
+        protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  createSchema(
-    request: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
+  createDataStore(
+    request: protos.google.cloud.discoveryengine.v1.ICreateDataStoreRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDataStore,
+        protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createSchema(
-    request: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
+  createDataStore(
+    request: protos.google.cloud.discoveryengine.v1.ICreateDataStoreRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDataStore,
+        protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createSchema(
-    request?: protos.google.cloud.discoveryengine.v1.ICreateSchemaRequest,
+  createDataStore(
+    request?: protos.google.cloud.discoveryengine.v1.ICreateDataStoreRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.discoveryengine.v1.ISchema,
-            protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+            protos.google.cloud.discoveryengine.v1.IDataStore,
+            protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDataStore,
+        protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -759,8 +884,8 @@ export class SchemaServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.ICreateSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDataStore,
+        protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -782,25 +907,25 @@ export class SchemaServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSchema(request, options, callback);
+    return this.innerApiCalls.createDataStore(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `createSchema()`.
+   * Check the status of the long running operation returned by `createDataStore()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.create_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_CreateSchema_async
+   * @example <caption>include:samples/generated/v1/data_store_service.create_data_store.js</caption>
+   * region_tag:discoveryengine_v1_generated_DataStoreService_CreateDataStore_async
    */
-  async checkCreateSchemaProgress(
+  async checkCreateDataStoreProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.discoveryengine.v1.Schema,
-      protos.google.cloud.discoveryengine.v1.CreateSchemaMetadata
+      protos.google.cloud.discoveryengine.v1.DataStore,
+      protos.google.cloud.discoveryengine.v1.CreateDataStoreMetadata
     >
   > {
     const request =
@@ -810,162 +935,30 @@ export class SchemaServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.createSchema,
+      this.descriptors.longrunning.createDataStore,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1.Schema,
-      protos.google.cloud.discoveryengine.v1.CreateSchemaMetadata
+      protos.google.cloud.discoveryengine.v1.DataStore,
+      protos.google.cloud.discoveryengine.v1.CreateDataStoreMetadata
     >;
   }
   /**
-   * Updates a {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1.Schema} request.schema
-   *   Required. The {@link protos.google.cloud.discoveryengine.v1.Schema|Schema} to update.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and the {@link protos.google.cloud.discoveryengine.v1.Schema|Schema} is
-   *   not found, a new {@link protos.google.cloud.discoveryengine.v1.Schema|Schema} will be
-   *   created. In this situation, `update_mask` is ignored.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.update_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_UpdateSchema_async
-   */
-  updateSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateSchema(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSchema(
-    request: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IUpdateSchemaRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.discoveryengine.v1.ISchema,
-            protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.discoveryengine.v1.ISchema,
-        protos.google.cloud.discoveryengine.v1.IUpdateSchemaMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'schema.name': request.schema!.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateSchema(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `updateSchema()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.update_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_UpdateSchema_async
-   */
-  async checkUpdateSchemaProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.discoveryengine.v1.Schema,
-      protos.google.cloud.discoveryengine.v1.UpdateSchemaMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.updateSchema,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.discoveryengine.v1.Schema,
-      protos.google.cloud.discoveryengine.v1.UpdateSchemaMetadata
-    >;
-  }
-  /**
-   * Deletes a {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
+   * Deletes a {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The full resource name of the schema, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}`.
+   *   Required. Full resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}, such as
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`.
+   *
+   *   If the caller does not have permission to delete the
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore} to delete
+   *   does not exist, a NOT_FOUND error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -974,53 +967,53 @@ export class SchemaServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.delete_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_DeleteSchema_async
+   * @example <caption>include:samples/generated/v1/data_store_service.delete_data_store.js</caption>
+   * region_tag:discoveryengine_v1_generated_DataStoreService_DeleteDataStore_async
    */
-  deleteSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+  deleteDataStore(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteDataStoreRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  deleteSchema(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+  deleteDataStore(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteDataStoreRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteSchema(
-    request: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+  deleteDataStore(
+    request: protos.google.cloud.discoveryengine.v1.IDeleteDataStoreRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  deleteSchema(
-    request?: protos.google.cloud.discoveryengine.v1.IDeleteSchemaRequest,
+  deleteDataStore(
+    request?: protos.google.cloud.discoveryengine.v1.IDeleteDataStoreRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+            protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -1028,7 +1021,7 @@ export class SchemaServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1037,7 +1030,7 @@ export class SchemaServiceClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteSchemaMetadata
+        protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -1059,25 +1052,25 @@ export class SchemaServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSchema(request, options, callback);
+    return this.innerApiCalls.deleteDataStore(request, options, callback);
   }
   /**
-   * Check the status of the long running operation returned by `deleteSchema()`.
+   * Check the status of the long running operation returned by `deleteDataStore()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.delete_schema.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_DeleteSchema_async
+   * @example <caption>include:samples/generated/v1/data_store_service.delete_data_store.js</caption>
+   * region_tag:discoveryengine_v1_generated_DataStoreService_DeleteDataStore_async
    */
-  async checkDeleteSchemaProgress(
+  async checkDeleteDataStoreProgress(
     name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteSchemaMetadata
+      protos.google.cloud.discoveryengine.v1.DeleteDataStoreMetadata
     >
   > {
     const request =
@@ -1087,104 +1080,114 @@ export class SchemaServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.deleteSchema,
+      this.descriptors.longrunning.deleteDataStore,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.discoveryengine.v1.DeleteSchemaMetadata
+      protos.google.cloud.discoveryengine.v1.DeleteDataStoreMetadata
     >;
   }
   /**
-   * Gets a list of {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s.
+   * Lists all the {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s
+   * associated with the project.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   *   Required. The parent branch resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
+   *
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s under this
+   *   location, regardless of whether or not this data store exists, a
+   *   PERMISSION_DENIED error is returned.
    * @param {number} request.pageSize
-   *   The maximum number of {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s to
-   *   return. The service may return fewer than this value.
+   *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s
+   *   to return. If unspecified, defaults to 10. The maximum allowed value is 50.
+   *   Values above 50 will be coerced to 50.
    *
-   *   If unspecified, at most 100
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s will be returned.
-   *
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If this field is negative, an INVALID_ARGUMENT is returned.
    * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1.ListDataStoresResponse.next_page_token|ListDataStoresResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStoreService.ListDataStores|DataStoreService.ListDataStores}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   must match the call that provided the page token.
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStoreService.ListDataStores|DataStoreService.ListDataStores}
+   *   must match the call that provided the page token. Otherwise, an
+   *   INVALID_ARGUMENT error is returned.
+   * @param {string} request.filter
+   *   Filter by solution type. For example: filter =
+   *   'solution_type:SOLUTION_TYPE_SEARCH'
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listSchemasAsync()`
+   *   We recommend using `listDataStoresAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listSchemas(
-    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+  listDataStores(
+    request?: protos.google.cloud.discoveryengine.v1.IListDataStoresRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.ISchema[],
-      protos.google.cloud.discoveryengine.v1.IListSchemasRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListSchemasResponse,
+      protos.google.cloud.discoveryengine.v1.IDataStore[],
+      protos.google.cloud.discoveryengine.v1.IListDataStoresRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListDataStoresResponse,
     ]
   >;
-  listSchemas(
-    request: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+  listDataStores(
+    request: protos.google.cloud.discoveryengine.v1.IListDataStoresRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
-      | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+      protos.google.cloud.discoveryengine.v1.IListDataStoresRequest,
+      | protos.google.cloud.discoveryengine.v1.IListDataStoresResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1.ISchema
+      protos.google.cloud.discoveryengine.v1.IDataStore
     >
   ): void;
-  listSchemas(
-    request: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+  listDataStores(
+    request: protos.google.cloud.discoveryengine.v1.IListDataStoresRequest,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
-      | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+      protos.google.cloud.discoveryengine.v1.IListDataStoresRequest,
+      | protos.google.cloud.discoveryengine.v1.IListDataStoresResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1.ISchema
+      protos.google.cloud.discoveryengine.v1.IDataStore
     >
   ): void;
-  listSchemas(
-    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+  listDataStores(
+    request?: protos.google.cloud.discoveryengine.v1.IListDataStoresRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
-          | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+          protos.google.cloud.discoveryengine.v1.IListDataStoresRequest,
+          | protos.google.cloud.discoveryengine.v1.IListDataStoresResponse
           | null
           | undefined,
-          protos.google.cloud.discoveryengine.v1.ISchema
+          protos.google.cloud.discoveryengine.v1.IDataStore
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
-      | protos.google.cloud.discoveryengine.v1.IListSchemasResponse
+      protos.google.cloud.discoveryengine.v1.IListDataStoresRequest,
+      | protos.google.cloud.discoveryengine.v1.IListDataStoresResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1.ISchema
+      protos.google.cloud.discoveryengine.v1.IDataStore
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1.ISchema[],
-      protos.google.cloud.discoveryengine.v1.IListSchemasRequest | null,
-      protos.google.cloud.discoveryengine.v1.IListSchemasResponse,
+      protos.google.cloud.discoveryengine.v1.IDataStore[],
+      protos.google.cloud.discoveryengine.v1.IListDataStoresRequest | null,
+      protos.google.cloud.discoveryengine.v1.IListDataStoresResponse,
     ]
   > | void {
     request = request || {};
@@ -1203,7 +1206,7 @@ export class SchemaServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSchemas(request, options, callback);
+    return this.innerApiCalls.listDataStores(request, options, callback);
   }
 
   /**
@@ -1211,37 +1214,46 @@ export class SchemaServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   *   Required. The parent branch resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
+   *
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s under this
+   *   location, regardless of whether or not this data store exists, a
+   *   PERMISSION_DENIED error is returned.
    * @param {number} request.pageSize
-   *   The maximum number of {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s to
-   *   return. The service may return fewer than this value.
+   *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s
+   *   to return. If unspecified, defaults to 10. The maximum allowed value is 50.
+   *   Values above 50 will be coerced to 50.
    *
-   *   If unspecified, at most 100
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s will be returned.
-   *
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If this field is negative, an INVALID_ARGUMENT is returned.
    * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1.ListDataStoresResponse.next_page_token|ListDataStoresResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStoreService.ListDataStores|DataStoreService.ListDataStores}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   must match the call that provided the page token.
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStoreService.ListDataStores|DataStoreService.ListDataStores}
+   *   must match the call that provided the page token. Otherwise, an
+   *   INVALID_ARGUMENT error is returned.
+   * @param {string} request.filter
+   *   Filter by solution type. For example: filter =
+   *   'solution_type:SOLUTION_TYPE_SEARCH'
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.Schema|Schema} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSchemasAsync()`
+   *   We recommend using `listDataStoresAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listSchemasStream(
-    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+  listDataStoresStream(
+    request?: protos.google.cloud.discoveryengine.v1.IListDataStoresRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1252,57 +1264,66 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listSchemas'];
+    const defaultCallSettings = this._defaults['listDataStores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listSchemas.createStream(
-      this.innerApiCalls.listSchemas as GaxCall,
+    return this.descriptors.page.listDataStores.createStream(
+      this.innerApiCalls.listDataStores as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listSchemas`, but returns an iterable object.
+   * Equivalent to `listDataStores`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent data store resource name, in the format of
-   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+   *   Required. The parent branch resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection_id}`.
+   *
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s under this
+   *   location, regardless of whether or not this data store exists, a
+   *   PERMISSION_DENIED error is returned.
    * @param {number} request.pageSize
-   *   The maximum number of {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s to
-   *   return. The service may return fewer than this value.
+   *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s
+   *   to return. If unspecified, defaults to 10. The maximum allowed value is 50.
+   *   Values above 50 will be coerced to 50.
    *
-   *   If unspecified, at most 100
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}s will be returned.
-   *
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *   If this field is negative, an INVALID_ARGUMENT is returned.
    * @param {string} request.pageToken
-   *   A page token, received from a previous
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1.ListDataStoresResponse.next_page_token|ListDataStoresResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStoreService.ListDataStores|DataStoreService.ListDataStores}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link protos.google.cloud.discoveryengine.v1.SchemaService.ListSchemas|SchemaService.ListSchemas}
-   *   must match the call that provided the page token.
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStoreService.ListDataStores|DataStoreService.ListDataStores}
+   *   must match the call that provided the page token. Otherwise, an
+   *   INVALID_ARGUMENT error is returned.
+   * @param {string} request.filter
+   *   Filter by solution type. For example: filter =
+   *   'solution_type:SOLUTION_TYPE_SEARCH'
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.discoveryengine.v1.Schema|Schema}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/schema_service.list_schemas.js</caption>
-   * region_tag:discoveryengine_v1_generated_SchemaService_ListSchemas_async
+   * @example <caption>include:samples/generated/v1/data_store_service.list_data_stores.js</caption>
+   * region_tag:discoveryengine_v1_generated_DataStoreService_ListDataStores_async
    */
-  listSchemasAsync(
-    request?: protos.google.cloud.discoveryengine.v1.IListSchemasRequest,
+  listDataStoresAsync(
+    request?: protos.google.cloud.discoveryengine.v1.IListDataStoresRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.ISchema> {
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1.IDataStore> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1311,14 +1332,14 @@ export class SchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listSchemas'];
+    const defaultCallSettings = this._defaults['listDataStores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listSchemas.asyncIterate(
-      this.innerApiCalls['listSchemas'] as GaxCall,
+    return this.descriptors.page.listDataStores.asyncIterate(
+      this.innerApiCalls['listDataStores'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.ISchema>;
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.IDataStore>;
   }
   /**
    * Gets information about a location.
@@ -1576,6 +1597,58 @@ export class SchemaServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified collection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @returns {string} Resource name string.
+   */
+  collectionPath(project: string, location: string, collection: string) {
+    return this.pathTemplates.collectionPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+    });
+  }
+
+  /**
+   * Parse the project from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from Collection resource.
+   *
+   * @param {string} collectionName
+   *   A fully-qualified path representing Collection resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromCollectionName(collectionName: string) {
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .collection;
+  }
 
   /**
    * Return a fully-qualified engine resource name string.
@@ -2844,8 +2917,8 @@ export class SchemaServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.schemaServiceStub && !this._terminated) {
-      return this.schemaServiceStub.then(stub => {
+    if (this.dataStoreServiceStub && !this._terminated) {
+      return this.dataStoreServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

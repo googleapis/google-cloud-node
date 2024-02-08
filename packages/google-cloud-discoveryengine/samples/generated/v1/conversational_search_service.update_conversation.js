@@ -36,7 +36,7 @@ function main(conversation) {
    *  Indicates which fields in the provided
    *  Conversation google.cloud.discoveryengine.v1.Conversation  to update. The
    *  following are NOT supported:
-   *  * conversation.name  
+   *  * Conversation.name google.cloud.discoveryengine.v1.Conversation.name 
    *  If not set or empty, all supported fields are updated.
    */
   // const updateMask = {}
