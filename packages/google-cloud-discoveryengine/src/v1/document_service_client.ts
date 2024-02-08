@@ -203,6 +203,13 @@ export class DocumentServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      enginePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
+      ),
+      projectLocationCollectionDataStorePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
+        ),
       projectLocationCollectionDataStoreBranchPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}'
@@ -219,6 +226,21 @@ export class DocumentServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
         ),
+      projectLocationCollectionDataStoreSiteSearchEnginePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
+        ),
+      projectLocationCollectionEngineConversationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/conversations/{conversation}'
+        ),
+      projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataStores/{data_store}'
+      ),
       projectLocationDataStoreBranchPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}'
@@ -234,6 +256,14 @@ export class DocumentServiceClient {
       projectLocationDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
+        ),
+      projectLocationDataStoreSiteSearchEnginePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
         ),
     };
 
@@ -263,6 +293,9 @@ export class DocumentServiceClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/operations/*}',
           additional_bindings: [
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataConnector/operations/*}',
+            },
             {
               get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',
             },
@@ -304,6 +337,9 @@ export class DocumentServiceClient {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*}/operations',
           additional_bindings: [
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataConnector}/operations',
+            },
             {
               get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',
             },
@@ -1827,6 +1863,158 @@ export class DocumentServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified engine resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @returns {string} Resource name string.
+   */
+  enginePath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string
+  ) {
+    return this.pathTemplates.enginePathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+    });
+  }
+
+  /**
+   * Parse the project from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).project;
+  }
+
+  /**
+   * Parse the location from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).location;
+  }
+
+  /**
+   * Parse the collection from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).collection;
+  }
+
+  /**
+   * Parse the engine from Engine resource.
+   *
+   * @param {string} engineName
+   *   A fully-qualified path representing Engine resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromEngineName(engineName: string) {
+    return this.pathTemplates.enginePathTemplate.match(engineName).engine;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStorePath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStore resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreName
+   *   A fully-qualified path representing project_location_collection_data_store resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreName(
+    projectLocationCollectionDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStorePathTemplate.match(
+      projectLocationCollectionDataStoreName
+    ).data_store;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionDataStoreBranch resource name string.
    *
    * @param {string} project
@@ -2257,6 +2445,362 @@ export class DocumentServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngine resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSiteSearchEnginePath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSiteSearchEngine resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineName(
+    projectLocationCollectionDataStoreSiteSearchEngineName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSiteSearchEngine resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineName(
+    projectLocationCollectionDataStoreSiteSearchEngineName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSiteSearchEngine resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineName(
+    projectLocationCollectionDataStoreSiteSearchEngineName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSiteSearchEngine resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineName(
+    projectLocationCollectionDataStoreSiteSearchEngineName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineName
+    ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngineTargetSite resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} target_site
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSiteSearchEngineTargetSitePath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    targetSite: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        target_site: targetSite,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSiteSearchEngineTargetSite resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
+    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSiteSearchEngineTargetSite resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
+    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSiteSearchEngineTargetSite resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
+    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSiteSearchEngineTargetSite resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
+    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
+    ).data_store;
+  }
+
+  /**
+   * Parse the target_site from ProjectLocationCollectionDataStoreSiteSearchEngineTargetSite resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_target_site resource.
+   * @returns {string} A string representing the target_site.
+   */
+  matchTargetSiteFromProjectLocationCollectionDataStoreSiteSearchEngineTargetSiteName(
+    projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName
+    ).target_site;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineConversationPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+        conversation: conversation,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineConversation resource.
+   *
+   * @param {string} projectLocationCollectionEngineConversationName
+   *   A fully-qualified path representing project_location_collection_engine_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineConversationName(
+    projectLocationCollectionEngineConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
+      projectLocationCollectionEngineConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineConversation resource.
+   *
+   * @param {string} projectLocationCollectionEngineConversationName
+   *   A fully-qualified path representing project_location_collection_engine_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineConversationName(
+    projectLocationCollectionEngineConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
+      projectLocationCollectionEngineConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineConversation resource.
+   *
+   * @param {string} projectLocationCollectionEngineConversationName
+   *   A fully-qualified path representing project_location_collection_engine_conversation resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineConversationName(
+    projectLocationCollectionEngineConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
+      projectLocationCollectionEngineConversationName
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineConversation resource.
+   *
+   * @param {string} projectLocationCollectionEngineConversationName
+   *   A fully-qualified path representing project_location_collection_engine_conversation resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineConversationName(
+    projectLocationCollectionEngineConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
+      projectLocationCollectionEngineConversationName
+    ).engine;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationCollectionEngineConversation resource.
+   *
+   * @param {string} projectLocationCollectionEngineConversationName
+   *   A fully-qualified path representing project_location_collection_engine_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationCollectionEngineConversationName(
+    projectLocationCollectionEngineConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.match(
+      projectLocationCollectionEngineConversationName
+    ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStorePath(
+    project: string,
+    location: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.render({
+      project: project,
+      location: location,
+      data_store: dataStore,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStore resource.
+   *
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStore resource.
+   *
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStore resource.
+   *
+   * @param {string} projectLocationDataStoreName
+   *   A fully-qualified path representing project_location_data_store resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreName(
+    projectLocationDataStoreName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStorePathTemplate.match(
+      projectLocationDataStoreName
+    ).data_store;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreBranch resource name string.
    *
    * @param {string} project
@@ -2612,6 +3156,158 @@ export class DocumentServiceClient {
     return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
       projectLocationDataStoreSchemaName
     ).schema;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreSiteSearchEngine resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSiteSearchEnginePath(
+    project: string,
+    location: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSiteSearchEngine resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineName(
+    projectLocationDataStoreSiteSearchEngineName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSiteSearchEngine resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineName(
+    projectLocationDataStoreSiteSearchEngineName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSiteSearchEngine resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineName(
+    projectLocationDataStoreSiteSearchEngineName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineName
+    ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreSiteSearchEngineTargetSite resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} target_site
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSiteSearchEngineTargetSitePath(
+    project: string,
+    location: string,
+    dataStore: string,
+    targetSite: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        target_site: targetSite,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSiteSearchEngineTargetSite resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineTargetSiteName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
+    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineTargetSiteName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSiteSearchEngineTargetSite resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineTargetSiteName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
+    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineTargetSiteName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSiteSearchEngineTargetSite resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineTargetSiteName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
+    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineTargetSiteName
+    ).data_store;
+  }
+
+  /**
+   * Parse the target_site from ProjectLocationDataStoreSiteSearchEngineTargetSite resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineTargetSiteName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_target_site resource.
+   * @returns {string} A string representing the target_site.
+   */
+  matchTargetSiteFromProjectLocationDataStoreSiteSearchEngineTargetSiteName(
+    projectLocationDataStoreSiteSearchEngineTargetSiteName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineTargetSiteName
+    ).target_site;
   }
 
   /**

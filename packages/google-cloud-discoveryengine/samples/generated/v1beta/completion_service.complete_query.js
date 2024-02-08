@@ -40,8 +40,9 @@ function main(dataStore, query) {
    */
   // const query = 'abc123'
   /**
-   *  Selects data model of query suggestions for serving. Currently supported
-   *  values:
+   *  Specifies the autocomplete data model. This overrides any model specified
+   *  in the Configuration > Autocomplete section of the Cloud console. Currently
+   *  supported values:
    *  * `document` - Using suggestions generated from user-imported documents.
    *  * `search-history` - Using suggestions generated from the past history of
    *  SearchService.Search google.cloud.discoveryengine.v1beta.SearchService.Search 
@@ -52,8 +53,7 @@ function main(dataStore, query) {
    *  user-imported document fields marked as completable.
    *  Default values:
    *  * `document` is the default model for regular dataStores.
-   *  * `search-history` is the default model for
-   *  IndustryVertical.SITE_SEARCH   dataStores.
+   *  * `search-history` is the default model for site search dataStores.
    */
   // const queryModel = 'abc123'
   /**

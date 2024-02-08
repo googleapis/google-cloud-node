@@ -19,9 +19,12 @@
 import {
   CompletionServiceClient,
   ConversationalSearchServiceClient,
+  DataStoreServiceClient,
   DocumentServiceClient,
+  EngineServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
+  SiteSearchEngineServiceClient,
   UserEventServiceClient,
 } from '@google-cloud/discoveryengine';
 
@@ -34,13 +37,24 @@ function doStuffWithConversationalSearchServiceClient(
 ) {
   client.close();
 }
+function doStuffWithDataStoreServiceClient(client: DataStoreServiceClient) {
+  client.close();
+}
 function doStuffWithDocumentServiceClient(client: DocumentServiceClient) {
+  client.close();
+}
+function doStuffWithEngineServiceClient(client: EngineServiceClient) {
   client.close();
 }
 function doStuffWithSchemaServiceClient(client: SchemaServiceClient) {
   client.close();
 }
 function doStuffWithSearchServiceClient(client: SearchServiceClient) {
+  client.close();
+}
+function doStuffWithSiteSearchEngineServiceClient(
+  client: SiteSearchEngineServiceClient
+) {
   client.close();
 }
 function doStuffWithUserEventServiceClient(client: UserEventServiceClient) {
@@ -58,14 +72,23 @@ function main() {
     conversationalSearchServiceClient
   );
   // check that the client instance can be created
+  const dataStoreServiceClient = new DataStoreServiceClient();
+  doStuffWithDataStoreServiceClient(dataStoreServiceClient);
+  // check that the client instance can be created
   const documentServiceClient = new DocumentServiceClient();
   doStuffWithDocumentServiceClient(documentServiceClient);
+  // check that the client instance can be created
+  const engineServiceClient = new EngineServiceClient();
+  doStuffWithEngineServiceClient(engineServiceClient);
   // check that the client instance can be created
   const schemaServiceClient = new SchemaServiceClient();
   doStuffWithSchemaServiceClient(schemaServiceClient);
   // check that the client instance can be created
   const searchServiceClient = new SearchServiceClient();
   doStuffWithSearchServiceClient(searchServiceClient);
+  // check that the client instance can be created
+  const siteSearchEngineServiceClient = new SiteSearchEngineServiceClient();
+  doStuffWithSiteSearchEngineServiceClient(siteSearchEngineServiceClient);
   // check that the client instance can be created
   const userEventServiceClient = new UserEventServiceClient();
   doStuffWithUserEventServiceClient(userEventServiceClient);

@@ -23,9 +23,13 @@ function main() {
   const completionServiceClient = new discoveryengine.CompletionServiceClient();
   const conversationalSearchServiceClient =
     new discoveryengine.ConversationalSearchServiceClient();
+  const dataStoreServiceClient = new discoveryengine.DataStoreServiceClient();
   const documentServiceClient = new discoveryengine.DocumentServiceClient();
+  const engineServiceClient = new discoveryengine.EngineServiceClient();
   const schemaServiceClient = new discoveryengine.SchemaServiceClient();
   const searchServiceClient = new discoveryengine.SearchServiceClient();
+  const siteSearchEngineServiceClient =
+    new discoveryengine.SiteSearchEngineServiceClient();
   const userEventServiceClient = new discoveryengine.UserEventServiceClient();
 }
 
