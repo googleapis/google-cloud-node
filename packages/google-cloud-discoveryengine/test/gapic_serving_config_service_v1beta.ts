@@ -21,7 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as recommendationserviceModule from '../src';
+import * as servingconfigserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {protobuf, LocationProtos} from 'google-gax';
 
@@ -64,6 +66,44 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -87,18 +127,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta.RecommendationServiceClient', () => {
+describe('v1beta.ServingConfigServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient();
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient();
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -110,7 +150,7 @@ describe('v1beta.RecommendationServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          recommendationserviceModule.v1beta.RecommendationServiceClient
+          servingconfigserviceModule.v1beta.ServingConfigServiceClient
             .servicePath;
         assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
         assert(stub.called);
@@ -120,7 +160,7 @@ describe('v1beta.RecommendationServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          recommendationserviceModule.v1beta.RecommendationServiceClient
+          servingconfigserviceModule.v1beta.ServingConfigServiceClient
             .apiEndpoint;
         assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         assert(stub.called);
@@ -129,7 +169,7 @@ describe('v1beta.RecommendationServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           universeDomain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -138,7 +178,7 @@ describe('v1beta.RecommendationServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           universe_domain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -146,7 +186,7 @@ describe('v1beta.RecommendationServiceClient', () => {
     });
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -155,20 +195,20 @@ describe('v1beta.RecommendationServiceClient', () => {
 
     it('has port', () => {
       const port =
-        recommendationserviceModule.v1beta.RecommendationServiceClient.port;
+        servingconfigserviceModule.v1beta.ServingConfigServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient();
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           fallback: true,
         });
       assert(client);
@@ -176,23 +216,23 @@ describe('v1beta.RecommendationServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.recommendationServiceStub, undefined);
+      assert.strictEqual(client.servingConfigServiceStub, undefined);
       await client.initialize();
-      assert(client.recommendationServiceStub);
+      assert(client.servingConfigServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
-      assert(client.recommendationServiceStub);
+      assert(client.servingConfigServiceStub);
       client.close().then(() => {
         done();
       });
@@ -200,11 +240,11 @@ describe('v1beta.RecommendationServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.recommendationServiceStub, undefined);
+      assert.strictEqual(client.servingConfigServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -213,7 +253,7 @@ describe('v1beta.RecommendationServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -226,7 +266,7 @@ describe('v1beta.RecommendationServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -247,66 +287,69 @@ describe('v1beta.RecommendationServiceClient', () => {
     });
   });
 
-  describe('recommend', () => {
-    it('invokes recommend without error', async () => {
+  describe('updateServingConfig', () => {
+    it('invokes updateServingConfig without error', async () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendRequest()
+        new protos.google.cloud.discoveryengine.v1beta.UpdateServingConfigRequest()
       );
+      request.servingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RecommendRequest',
-        ['servingConfig']
+        '.google.cloud.discoveryengine.v1beta.UpdateServingConfigRequest',
+        ['servingConfig', 'name']
       );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      request.servingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendResponse()
+        new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
       );
-      client.innerApiCalls.recommend = stubSimpleCall(expectedResponse);
-      const [response] = await client.recommend(request);
+      client.innerApiCalls.updateServingConfig =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateServingConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.recommend as SinonStub
+        client.innerApiCalls.updateServingConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.recommend as SinonStub
+        client.innerApiCalls.updateServingConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes recommend without error using callback', async () => {
+    it('invokes updateServingConfig without error using callback', async () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendRequest()
+        new protos.google.cloud.discoveryengine.v1beta.UpdateServingConfigRequest()
       );
+      request.servingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RecommendRequest',
-        ['servingConfig']
+        '.google.cloud.discoveryengine.v1beta.UpdateServingConfigRequest',
+        ['servingConfig', 'name']
       );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      request.servingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendResponse()
+        new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
       );
-      client.innerApiCalls.recommend =
+      client.innerApiCalls.updateServingConfig =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.recommend(
+        client.updateServingConfig(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1beta.IRecommendResponse | null
+            result?: protos.google.cloud.discoveryengine.v1beta.IServingConfig | null
           ) => {
             if (err) {
               reject(err);
@@ -319,68 +362,550 @@ describe('v1beta.RecommendationServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.recommend as SinonStub
+        client.innerApiCalls.updateServingConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.recommend as SinonStub
+        client.innerApiCalls.updateServingConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes recommend with error', async () => {
+    it('invokes updateServingConfig with error', async () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendRequest()
+        new protos.google.cloud.discoveryengine.v1beta.UpdateServingConfigRequest()
       );
+      request.servingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RecommendRequest',
-        ['servingConfig']
+        '.google.cloud.discoveryengine.v1beta.UpdateServingConfigRequest',
+        ['servingConfig', 'name']
       );
-      request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      request.servingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.recommend = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.recommend(request), expectedError);
+      client.innerApiCalls.updateServingConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateServingConfig(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.recommend as SinonStub
+        client.innerApiCalls.updateServingConfig as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.recommend as SinonStub
+        client.innerApiCalls.updateServingConfig as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes recommend with closed client', async () => {
+    it('invokes updateServingConfig with closed client', async () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.RecommendRequest()
+        new protos.google.cloud.discoveryengine.v1beta.UpdateServingConfigRequest()
       );
+      request.servingConfig ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.RecommendRequest',
-        ['servingConfig']
+        '.google.cloud.discoveryengine.v1beta.UpdateServingConfigRequest',
+        ['servingConfig', 'name']
       );
-      request.servingConfig = defaultValue1;
+      request.servingConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.recommend(request), expectedError);
+      await assert.rejects(client.updateServingConfig(request), expectedError);
+    });
+  });
+
+  describe('getServingConfig', () => {
+    it('invokes getServingConfig without error', async () => {
+      const client =
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GetServingConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GetServingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+      );
+      client.innerApiCalls.getServingConfig = stubSimpleCall(expectedResponse);
+      const [response] = await client.getServingConfig(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getServingConfig without error using callback', async () => {
+      const client =
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GetServingConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GetServingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+      );
+      client.innerApiCalls.getServingConfig =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getServingConfig(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1beta.IServingConfig | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getServingConfig with error', async () => {
+      const client =
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GetServingConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GetServingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getServingConfig = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getServingConfig(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getServingConfig with closed client', async () => {
+      const client =
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.GetServingConfigRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.GetServingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getServingConfig(request), expectedError);
+    });
+  });
+
+  describe('listServingConfigs', () => {
+    it('invokes listServingConfigs without error', async () => {
+      const client =
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+      ];
+      client.innerApiCalls.listServingConfigs =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listServingConfigs(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listServingConfigs without error using callback', async () => {
+      const client =
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+      ];
+      client.innerApiCalls.listServingConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listServingConfigs(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.discoveryengine.v1beta.IServingConfig[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listServingConfigs with error', async () => {
+      const client =
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listServingConfigs = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listServingConfigs(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listServingConfigsStream without error', async () => {
+      const client =
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+      ];
+      client.descriptors.page.listServingConfigs.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listServingConfigsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.ServingConfig[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1beta.ServingConfig
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listServingConfigs.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listServingConfigs, request)
+      );
+      assert(
+        (client.descriptors.page.listServingConfigs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listServingConfigsStream with error', async () => {
+      const client =
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listServingConfigs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listServingConfigsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.ServingConfig[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1beta.ServingConfig
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listServingConfigs.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listServingConfigs, request)
+      );
+      assert(
+        (client.descriptors.page.listServingConfigs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listServingConfigs without error', async () => {
+      const client =
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.ServingConfig()
+        ),
+      ];
+      client.descriptors.page.listServingConfigs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.discoveryengine.v1beta.IServingConfig[] =
+        [];
+      const iterable = client.listServingConfigsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listServingConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listServingConfigs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listServingConfigs with error', async () => {
+      const client =
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListServingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listServingConfigs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listServingConfigsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.IServingConfig[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listServingConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listServingConfigs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -411,7 +936,7 @@ describe('v1beta.RecommendationServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -456,7 +981,7 @@ describe('v1beta.RecommendationServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -492,7 +1017,7 @@ describe('v1beta.RecommendationServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -541,7 +1066,7 @@ describe('v1beta.RecommendationServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -591,7 +1116,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         engine: 'engineValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -668,7 +1193,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -773,7 +1298,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         document: 'documentValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -919,7 +1444,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1047,7 +1572,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         schema: 'schemaValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1174,7 +1699,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1301,7 +1826,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1411,7 +1936,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1539,7 +2064,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1666,7 +2191,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1790,7 +2315,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1872,7 +2397,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         document: 'documentValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1997,7 +2522,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2104,7 +2629,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         schema: 'schemaValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2198,7 +2723,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2305,7 +2830,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2395,7 +2920,7 @@ describe('v1beta.RecommendationServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client =
-        new recommendationserviceModule.v1beta.RecommendationServiceClient({
+        new servingconfigserviceModule.v1beta.ServingConfigServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
