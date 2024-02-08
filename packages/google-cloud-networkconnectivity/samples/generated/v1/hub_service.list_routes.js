@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkconnectivityClient.listRoutesAsync(request);
+    const iterable = networkconnectivityClient.listRoutesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -129,14 +129,60 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2.OrgPolicyClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath = orgpolicyModule.v2.OrgPolicyClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'orgpolicy.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint = orgpolicyModule.v2.OrgPolicyClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = orgpolicyModule.v2.OrgPolicyClient.servicePath;
+        assert.strictEqual(servicePath, 'orgpolicy.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = orgpolicyModule.v2.OrgPolicyClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'orgpolicy.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'orgpolicy.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new orgpolicyModule.v2.OrgPolicyClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'orgpolicy.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new orgpolicyModule.v2.OrgPolicyClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

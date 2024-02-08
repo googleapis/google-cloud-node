@@ -56,7 +56,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await osconfigClient.listGuestPoliciesAsync(request);
+    const iterable = osconfigClient.listGuestPoliciesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkconnectivityClient.listGroupsAsync(request);
+    const iterable = networkconnectivityClient.listGroupsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

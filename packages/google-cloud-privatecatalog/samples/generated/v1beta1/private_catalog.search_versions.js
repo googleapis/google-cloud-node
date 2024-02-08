@@ -66,7 +66,7 @@ function main(resource, query) {
     };
 
     // Run request
-    const iterable = await privatecatalogClient.searchVersionsAsync(request);
+    const iterable = privatecatalogClient.searchVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

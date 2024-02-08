@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await migrationcenterClient.listReportConfigsAsync(request);
+    const iterable = migrationcenterClient.listReportConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

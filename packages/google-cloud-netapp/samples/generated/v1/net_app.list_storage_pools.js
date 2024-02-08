@@ -63,7 +63,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await netappClient.listStoragePoolsAsync(request);
+    const iterable = netappClient.listStoragePoolsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

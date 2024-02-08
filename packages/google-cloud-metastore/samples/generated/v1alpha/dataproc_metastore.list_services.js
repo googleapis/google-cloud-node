@@ -75,7 +75,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await metastoreClient.listServicesAsync(request);
+    const iterable = metastoreClient.listServicesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

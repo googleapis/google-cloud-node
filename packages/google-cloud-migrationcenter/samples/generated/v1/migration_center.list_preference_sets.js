@@ -60,7 +60,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await migrationcenterClient.listPreferenceSetsAsync(request);
+    const iterable = migrationcenterClient.listPreferenceSetsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

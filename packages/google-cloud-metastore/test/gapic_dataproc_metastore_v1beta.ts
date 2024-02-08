@@ -167,16 +167,64 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1beta.DataprocMetastoreClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        dataprocmetastoreModule.v1beta.DataprocMetastoreClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new dataprocmetastoreModule.v1beta.DataprocMetastoreClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'metastore.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        dataprocmetastoreModule.v1beta.DataprocMetastoreClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new dataprocmetastoreModule.v1beta.DataprocMetastoreClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          dataprocmetastoreModule.v1beta.DataprocMetastoreClient.servicePath;
+        assert.strictEqual(servicePath, 'metastore.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          dataprocmetastoreModule.v1beta.DataprocMetastoreClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'metastore.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
+        {universeDomain: 'example.com'}
+      );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'metastore.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new dataprocmetastoreModule.v1beta.DataprocMetastoreClient(
+        {universe_domain: 'example.com'}
+      );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'metastore.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new dataprocmetastoreModule.v1beta.DataprocMetastoreClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

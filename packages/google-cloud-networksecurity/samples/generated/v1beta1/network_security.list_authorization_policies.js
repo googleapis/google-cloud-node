@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networksecurityClient.listAuthorizationPoliciesAsync(request);
+    const iterable = networksecurityClient.listAuthorizationPoliciesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

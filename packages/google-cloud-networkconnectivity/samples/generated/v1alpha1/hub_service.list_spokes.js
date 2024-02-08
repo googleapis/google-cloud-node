@@ -62,7 +62,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await networkconnectivityClient.listSpokesAsync(request);
+    const iterable = networkconnectivityClient.listSpokesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

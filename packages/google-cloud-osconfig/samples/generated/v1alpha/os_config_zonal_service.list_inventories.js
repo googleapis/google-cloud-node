@@ -68,7 +68,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await osconfigClient.listInventoriesAsync(request);
+    const iterable = osconfigClient.listInventoriesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

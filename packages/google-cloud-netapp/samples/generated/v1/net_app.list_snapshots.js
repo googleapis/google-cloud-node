@@ -65,7 +65,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await netappClient.listSnapshotsAsync(request);
+    const iterable = netappClient.listSnapshotsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await notebooksClient.listEnvironmentsAsync(request);
+    const iterable = notebooksClient.listEnvironmentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
