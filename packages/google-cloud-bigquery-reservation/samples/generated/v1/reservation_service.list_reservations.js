@@ -55,7 +55,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await reservationClient.listReservationsAsync(request);
+    const iterable = reservationClient.listReservationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

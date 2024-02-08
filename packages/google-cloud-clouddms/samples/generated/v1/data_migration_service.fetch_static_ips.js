@@ -55,7 +55,7 @@ function main(name) {
     };
 
     // Run request
-    const iterable = await clouddmsClient.fetchStaticIpsAsync(request);
+    const iterable = clouddmsClient.fetchStaticIpsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

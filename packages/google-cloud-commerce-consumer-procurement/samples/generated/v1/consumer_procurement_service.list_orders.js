@@ -71,7 +71,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await procurementClient.listOrdersAsync(request);
+    const iterable = procurementClient.listOrdersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

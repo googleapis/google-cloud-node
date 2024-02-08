@@ -73,7 +73,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await clouddmsClient.listPrivateConnectionsAsync(request);
+    const iterable = clouddmsClient.listPrivateConnectionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

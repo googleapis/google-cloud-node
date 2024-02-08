@@ -70,7 +70,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await channelClient.listEntitlementChangesAsync(request);
+    const iterable = channelClient.listEntitlementChangesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

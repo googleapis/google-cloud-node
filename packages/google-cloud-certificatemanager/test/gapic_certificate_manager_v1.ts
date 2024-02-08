@@ -166,16 +166,62 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.CertificateManagerClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        certificatemanagerModule.v1.CertificateManagerClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new certificatemanagerModule.v1.CertificateManagerClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'certificatemanager.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        certificatemanagerModule.v1.CertificateManagerClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new certificatemanagerModule.v1.CertificateManagerClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          certificatemanagerModule.v1.CertificateManagerClient.servicePath;
+        assert.strictEqual(servicePath, 'certificatemanager.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          certificatemanagerModule.v1.CertificateManagerClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'certificatemanager.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new certificatemanagerModule.v1.CertificateManagerClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'certificatemanager.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new certificatemanagerModule.v1.CertificateManagerClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'certificatemanager.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new certificatemanagerModule.v1.CertificateManagerClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

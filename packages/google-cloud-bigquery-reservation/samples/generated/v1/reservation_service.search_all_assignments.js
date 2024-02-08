@@ -64,7 +64,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await reservationClient.searchAllAssignmentsAsync(request);
+    const iterable = reservationClient.searchAllAssignmentsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

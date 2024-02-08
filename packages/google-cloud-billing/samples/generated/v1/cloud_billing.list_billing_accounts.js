@@ -71,7 +71,7 @@ function main() {
     };
 
     // Run request
-    const iterable = await billingClient.listBillingAccountsAsync(request);
+    const iterable = billingClient.listBillingAccountsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

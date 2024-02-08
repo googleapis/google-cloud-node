@@ -71,7 +71,7 @@ function main(reportJob) {
     };
 
     // Run request
-    const iterable = await channelClient.fetchReportResultsAsync(request);
+    const iterable = channelClient.fetchReportResultsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

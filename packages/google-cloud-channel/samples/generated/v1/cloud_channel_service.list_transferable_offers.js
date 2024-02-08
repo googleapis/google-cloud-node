@@ -88,7 +88,7 @@ function main(parent, sku) {
     };
 
     // Run request
-    const iterable = await channelClient.listTransferableOffersAsync(request);
+    const iterable = channelClient.listTransferableOffersAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

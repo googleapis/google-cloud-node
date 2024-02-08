@@ -81,7 +81,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await billingClient.listSkusAsync(request);
+    const iterable = billingClient.listSkusAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

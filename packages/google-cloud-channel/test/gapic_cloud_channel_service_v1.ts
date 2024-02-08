@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -161,16 +161,64 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1.CloudChannelServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        cloudchannelserviceModule.v1.CloudChannelServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client =
+        new cloudchannelserviceModule.v1.CloudChannelServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'cloudchannel.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        cloudchannelserviceModule.v1.CloudChannelServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client =
+        new cloudchannelserviceModule.v1.CloudChannelServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          cloudchannelserviceModule.v1.CloudChannelServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'cloudchannel.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          cloudchannelserviceModule.v1.CloudChannelServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'cloudchannel.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {universeDomain: 'example.com'}
+      );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudchannel.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {universe_domain: 'example.com'}
+      );
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'cloudchannel.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new cloudchannelserviceModule.v1.CloudChannelServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {

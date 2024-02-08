@@ -71,7 +71,7 @@ function main(parent, account) {
     };
 
     // Run request
-    const iterable = await channelClient.listSkusAsync(request);
+    const iterable = channelClient.listSkusAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
