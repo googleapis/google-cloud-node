@@ -47,6 +47,16 @@
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
+        },
+        "ExportEntityTypes": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
+        "ImportEntityTypes": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
         }
       }
     }
