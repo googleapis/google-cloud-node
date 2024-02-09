@@ -76,7 +76,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await clouddmsClient.listConnectionProfilesAsync(request);
+    const iterable = clouddmsClient.listConnectionProfilesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -67,7 +67,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await certificatemanagerClient.listDnsAuthorizationsAsync(request);
+    const iterable = certificatemanagerClient.listDnsAuthorizationsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

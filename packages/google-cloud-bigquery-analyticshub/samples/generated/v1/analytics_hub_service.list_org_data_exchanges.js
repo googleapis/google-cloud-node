@@ -57,7 +57,7 @@ function main(organization) {
     };
 
     // Run request
-    const iterable = await analyticshubClient.listOrgDataExchangesAsync(request);
+    const iterable = analyticshubClient.listOrgDataExchangesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

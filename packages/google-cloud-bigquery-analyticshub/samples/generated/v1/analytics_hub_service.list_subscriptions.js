@@ -59,7 +59,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await analyticshubClient.listSubscriptionsAsync(request);
+    const iterable = analyticshubClient.listSubscriptionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

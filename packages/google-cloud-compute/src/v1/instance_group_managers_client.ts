@@ -2272,6 +2272,7 @@ export class InstanceGroupManagersClient {
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {number} request.serviceProjectNumber
+   *   The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2745,7 +2746,7 @@ export class InstanceGroupManagersClient {
     ) as AsyncIterable<protos.google.cloud.compute.v1.IInstanceManagedByIgmError>;
   }
   /**
-   * Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action. The orderBy query parameter is not supported. The `pageToken` query parameter is supported only in the alpha and beta API and only if the group's `listManagedInstancesResults` field is set to `PAGINATED`.
+   * Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action. The orderBy query parameter is not supported. The `pageToken` query parameter is supported only if the group's `listManagedInstancesResults` field is set to `PAGINATED`.
    *
    * @param {Object} request
    *   The request object that will be sent.

@@ -12,8 +12,56 @@
     },
     "snippets": [
         {
+            "regionTag": "retail_v2_generated_AnalyticsService_ExportAnalyticsMetrics_async",
+            "title": "AnalyticsService exportAnalyticsMetrics Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exports analytics metrics. `Operation.response` is of type `ExportAnalyticsMetricsResponse`. `Operation.metadata` is of type `ExportMetadata`.",
+            "canonical": true,
+            "file": "analytics_service.export_analytics_metrics.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 76,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportAnalyticsMetrics",
+                "fullName": "google.cloud.retail.v2.AnalyticsService.ExportAnalyticsMetrics",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "catalog",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "output_config",
+                        "type": ".google.cloud.retail.v2.OutputConfig"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AnalyticsServiceClient",
+                    "fullName": "google.cloud.retail.v2.AnalyticsServiceClient"
+                },
+                "method": {
+                    "shortName": "ExportAnalyticsMetrics",
+                    "fullName": "google.cloud.retail.v2.AnalyticsService.ExportAnalyticsMetrics",
+                    "service": {
+                        "shortName": "AnalyticsService",
+                        "fullName": "google.cloud.retail.v2.AnalyticsService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "retail_v2_generated_CatalogService_ListCatalogs_async",
-            "title": "CatalogService listCatalogs Sample",
+            "title": "AnalyticsService listCatalogs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all the [Catalog][google.cloud.retail.v2.Catalog]s associated with the project.",
             "canonical": true,
@@ -61,7 +109,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CatalogService_UpdateCatalog_async",
-            "title": "CatalogService updateCatalog Sample",
+            "title": "AnalyticsService updateCatalog Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the [Catalog][google.cloud.retail.v2.Catalog]s.",
             "canonical": true,
@@ -105,7 +153,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CatalogService_SetDefaultBranch_async",
-            "title": "CatalogService setDefaultBranch Sample",
+            "title": "AnalyticsService setDefaultBranch Sample",
             "origin": "API_DEFINITION",
             "description": " Set a specified branch id as default branch. API methods such as [SearchService.Search][google.cloud.retail.v2.SearchService.Search], [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct], [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts] will treat requests using \"default_branch\" to the actual branch id set as default. For example, if `projects/*/locations/*/catalogs/*/branches/1` is set as default, setting [SearchRequest.branch][google.cloud.retail.v2.SearchRequest.branch] to `projects/*/locations/*/catalogs/*/branches/default_branch` is equivalent to setting [SearchRequest.branch][google.cloud.retail.v2.SearchRequest.branch] to `projects/*/locations/*/catalogs/*/branches/1`. Using multiple branches can be useful when developers would like to have a staging branch to test and verify for future usage. When it becomes ready, developers switch on the staging branch using this API while keeping using `projects/*/locations/*/catalogs/*/branches/default_branch` as [SearchRequest.branch][google.cloud.retail.v2.SearchRequest.branch] to route the traffic to this staging branch. CAUTION: If you have live predict/search traffic, switching the default branch could potentially cause outages if the ID space of the new branch is very different from the old one. More specifically: * PredictionService will only return product IDs from branch {newBranch}. * SearchService will only return product IDs from branch {newBranch}   (if branch is not explicitly set). * UserEventService will only join events with products from branch   {newBranch}.",
             "canonical": true,
@@ -157,7 +205,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CatalogService_GetDefaultBranch_async",
-            "title": "CatalogService getDefaultBranch Sample",
+            "title": "AnalyticsService getDefaultBranch Sample",
             "origin": "API_DEFINITION",
             "description": " Get which branch is currently default branch set by [CatalogService.SetDefaultBranch][google.cloud.retail.v2.CatalogService.SetDefaultBranch] method under a specified parent catalog.",
             "canonical": true,
@@ -197,7 +245,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CatalogService_GetCompletionConfig_async",
-            "title": "CatalogService getCompletionConfig Sample",
+            "title": "AnalyticsService getCompletionConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a [CompletionConfig][google.cloud.retail.v2.CompletionConfig].",
             "canonical": true,
@@ -237,7 +285,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CatalogService_UpdateCompletionConfig_async",
-            "title": "CatalogService updateCompletionConfig Sample",
+            "title": "AnalyticsService updateCompletionConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the [CompletionConfig][google.cloud.retail.v2.CompletionConfig]s.",
             "canonical": true,
@@ -281,7 +329,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CatalogService_GetAttributesConfig_async",
-            "title": "CatalogService getAttributesConfig Sample",
+            "title": "AnalyticsService getAttributesConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Gets an [AttributesConfig][google.cloud.retail.v2.AttributesConfig].",
             "canonical": true,
@@ -321,7 +369,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CatalogService_UpdateAttributesConfig_async",
-            "title": "CatalogService updateAttributesConfig Sample",
+            "title": "AnalyticsService updateAttributesConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Updates the [AttributesConfig][google.cloud.retail.v2.AttributesConfig]. The catalog attributes in the request will be updated in the catalog, or inserted if they do not exist. Existing catalog attributes not included in the request will remain unchanged. Attributes that are assigned to products, but do not exist at the catalog level, are always included in the response. The product attribute is assigned default values for missing catalog attribute fields, e.g., searchable and dynamic facetable options.",
             "canonical": true,
@@ -365,7 +413,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CatalogService_AddCatalogAttribute_async",
-            "title": "CatalogService addCatalogAttribute Sample",
+            "title": "AnalyticsService addCatalogAttribute Sample",
             "origin": "API_DEFINITION",
             "description": " Adds the specified [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] to the [AttributesConfig][google.cloud.retail.v2.AttributesConfig]. If the [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] to add already exists, an ALREADY_EXISTS error is returned.",
             "canonical": true,
@@ -409,7 +457,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CatalogService_RemoveCatalogAttribute_async",
-            "title": "CatalogService removeCatalogAttribute Sample",
+            "title": "AnalyticsService removeCatalogAttribute Sample",
             "origin": "API_DEFINITION",
             "description": " Removes the specified [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] from the [AttributesConfig][google.cloud.retail.v2.AttributesConfig]. If the [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] to remove does not exist, a NOT_FOUND error is returned.",
             "canonical": true,
@@ -453,7 +501,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CatalogService_ReplaceCatalogAttribute_async",
-            "title": "CatalogService replaceCatalogAttribute Sample",
+            "title": "AnalyticsService replaceCatalogAttribute Sample",
             "origin": "API_DEFINITION",
             "description": " Replaces the specified [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] in the [AttributesConfig][google.cloud.retail.v2.AttributesConfig] by updating the catalog attribute with the same [CatalogAttribute.key][google.cloud.retail.v2.CatalogAttribute.key]. If the [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] to replace does not exist, a NOT_FOUND error is returned.",
             "canonical": true,
@@ -501,7 +549,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CompletionService_CompleteQuery_async",
-            "title": "CatalogService completeQuery Sample",
+            "title": "AnalyticsService completeQuery Sample",
             "origin": "API_DEFINITION",
             "description": " Completes the specified prefix with keyword suggestions. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
             "canonical": true,
@@ -569,7 +617,7 @@
         },
         {
             "regionTag": "retail_v2_generated_CompletionService_ImportCompletionData_async",
-            "title": "CatalogService importCompletionData Sample",
+            "title": "AnalyticsService importCompletionData Sample",
             "origin": "API_DEFINITION",
             "description": " Bulk import of processed completion dataset. Request processing is asynchronous. Partial updating is not supported. The operation is successfully finished only after the imported suggestions are indexed successfully and ready for serving. The process takes hours. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
             "canonical": true,
@@ -617,7 +665,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ControlService_CreateControl_async",
-            "title": "CatalogService createControl Sample",
+            "title": "AnalyticsService createControl Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Control. If the [Control][google.cloud.retail.v2.Control] to create already exists, an ALREADY_EXISTS error is returned.",
             "canonical": true,
@@ -665,7 +713,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ControlService_DeleteControl_async",
-            "title": "CatalogService deleteControl Sample",
+            "title": "AnalyticsService deleteControl Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Control. If the [Control][google.cloud.retail.v2.Control] to delete does not exist, a NOT_FOUND error is returned.",
             "canonical": true,
@@ -705,7 +753,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ControlService_UpdateControl_async",
-            "title": "CatalogService updateControl Sample",
+            "title": "AnalyticsService updateControl Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a Control. [Control][google.cloud.retail.v2.Control] cannot be set to a different oneof field, if so an INVALID_ARGUMENT is returned. If the [Control][google.cloud.retail.v2.Control] to update does not exist, a NOT_FOUND error is returned.",
             "canonical": true,
@@ -749,7 +797,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ControlService_GetControl_async",
-            "title": "CatalogService getControl Sample",
+            "title": "AnalyticsService getControl Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a Control.",
             "canonical": true,
@@ -789,7 +837,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ControlService_ListControls_async",
-            "title": "CatalogService listControls Sample",
+            "title": "AnalyticsService listControls Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all Controls by their parent [Catalog][google.cloud.retail.v2.Catalog].",
             "canonical": true,
@@ -841,7 +889,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ModelService_CreateModel_async",
-            "title": "CatalogService createModel Sample",
+            "title": "AnalyticsService createModel Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new model.",
             "canonical": true,
@@ -889,7 +937,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ModelService_GetModel_async",
-            "title": "CatalogService getModel Sample",
+            "title": "AnalyticsService getModel Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a model.",
             "canonical": true,
@@ -929,7 +977,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ModelService_PauseModel_async",
-            "title": "CatalogService pauseModel Sample",
+            "title": "AnalyticsService pauseModel Sample",
             "origin": "API_DEFINITION",
             "description": " Pauses the training of an existing model.",
             "canonical": true,
@@ -969,7 +1017,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ModelService_ResumeModel_async",
-            "title": "CatalogService resumeModel Sample",
+            "title": "AnalyticsService resumeModel Sample",
             "origin": "API_DEFINITION",
             "description": " Resumes the training of an existing model.",
             "canonical": true,
@@ -1009,7 +1057,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ModelService_DeleteModel_async",
-            "title": "CatalogService deleteModel Sample",
+            "title": "AnalyticsService deleteModel Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an existing model.",
             "canonical": true,
@@ -1049,7 +1097,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ModelService_ListModels_async",
-            "title": "CatalogService listModels Sample",
+            "title": "AnalyticsService listModels Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all the models linked to this event store.",
             "canonical": true,
@@ -1097,7 +1145,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ModelService_UpdateModel_async",
-            "title": "CatalogService updateModel Sample",
+            "title": "AnalyticsService updateModel Sample",
             "origin": "API_DEFINITION",
             "description": " Update of model metadata. Only fields that currently can be updated are: `filtering_option` and `periodic_tuning_state`. If other values are provided, this API method ignores them.",
             "canonical": true,
@@ -1141,7 +1189,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ModelService_TuneModel_async",
-            "title": "CatalogService tuneModel Sample",
+            "title": "AnalyticsService tuneModel Sample",
             "origin": "API_DEFINITION",
             "description": " Tunes an existing model.",
             "canonical": true,
@@ -1181,7 +1229,7 @@
         },
         {
             "regionTag": "retail_v2_generated_PredictionService_Predict_async",
-            "title": "CatalogService predict Sample",
+            "title": "AnalyticsService predict Sample",
             "origin": "API_DEFINITION",
             "description": " Makes a recommendation prediction.",
             "canonical": true,
@@ -1249,7 +1297,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ProductService_CreateProduct_async",
-            "title": "CatalogService createProduct Sample",
+            "title": "AnalyticsService createProduct Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a [Product][google.cloud.retail.v2.Product].",
             "canonical": true,
@@ -1297,7 +1345,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ProductService_GetProduct_async",
-            "title": "CatalogService getProduct Sample",
+            "title": "AnalyticsService getProduct Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a [Product][google.cloud.retail.v2.Product].",
             "canonical": true,
@@ -1337,7 +1385,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ProductService_ListProducts_async",
-            "title": "CatalogService listProducts Sample",
+            "title": "AnalyticsService listProducts Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a list of [Product][google.cloud.retail.v2.Product]s.",
             "canonical": true,
@@ -1393,7 +1441,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ProductService_UpdateProduct_async",
-            "title": "CatalogService updateProduct Sample",
+            "title": "AnalyticsService updateProduct Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a [Product][google.cloud.retail.v2.Product].",
             "canonical": true,
@@ -1441,7 +1489,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ProductService_DeleteProduct_async",
-            "title": "CatalogService deleteProduct Sample",
+            "title": "AnalyticsService deleteProduct Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a [Product][google.cloud.retail.v2.Product].",
             "canonical": true,
@@ -1481,7 +1529,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ProductService_ImportProducts_async",
-            "title": "CatalogService importProducts Sample",
+            "title": "AnalyticsService importProducts Sample",
             "origin": "API_DEFINITION",
             "description": " Bulk import of multiple [Product][google.cloud.retail.v2.Product]s. Request processing may be synchronous. Non-existing items are created. Note that it is possible for a subset of the [Product][google.cloud.retail.v2.Product]s to be successfully updated.",
             "canonical": true,
@@ -1545,7 +1593,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ProductService_SetInventory_async",
-            "title": "CatalogService setInventory Sample",
+            "title": "AnalyticsService setInventory Sample",
             "origin": "API_DEFINITION",
             "description": " Updates inventory information for a [Product][google.cloud.retail.v2.Product] while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update is enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. When inventory is updated with [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct], the specified inventory field value(s) overwrite any existing value(s) while ignoring the last update time for this field. Furthermore, the last update times for the specified inventory fields are overwritten by the times of the [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] or [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct] request. If no inventory fields are set in [CreateProductRequest.product][google.cloud.retail.v2.CreateProductRequest.product], then any pre-existing inventory information for this product is used. If no inventory fields are set in [SetInventoryRequest.set_mask][google.cloud.retail.v2.SetInventoryRequest.set_mask], then any existing inventory information is preserved. Pre-existing inventory information can only be updated with [ProductService.SetInventory][google.cloud.retail.v2.ProductService.SetInventory], [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces], and [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces]. The returned [Operation][google.longrunning.Operation]s is obsolete after one day, and the [GetOperation][google.longrunning.Operations.GetOperation] API returns `NOT_FOUND` afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates are not marked as [done][google.longrunning.Operation.done] until they are obsolete.",
             "canonical": true,
@@ -1597,7 +1645,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ProductService_AddFulfillmentPlaces_async",
-            "title": "CatalogService addFulfillmentPlaces Sample",
+            "title": "AnalyticsService addFulfillmentPlaces Sample",
             "origin": "API_DEFINITION",
             "description": " It is recommended to use the [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories] method instead of [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces]. [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally adds place IDs to [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the added place IDs are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
@@ -1653,7 +1701,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ProductService_RemoveFulfillmentPlaces_async",
-            "title": "CatalogService removeFulfillmentPlaces Sample",
+            "title": "AnalyticsService removeFulfillmentPlaces Sample",
             "origin": "API_DEFINITION",
             "description": " It is recommended to use the [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories] method instead of [ProductService.RemoveFulfillmentPlaces][google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces]. [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories] achieves the same results but provides more fine-grained control over ingesting local inventory data. Incrementally removes place IDs from a [Product.fulfillment_info.place_ids][google.cloud.retail.v2.FulfillmentInfo.place_ids]. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating fulfillment information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, the removed place IDs are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
@@ -1709,7 +1757,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ProductService_AddLocalInventories_async",
-            "title": "CatalogService addLocalInventories Sample",
+            "title": "AnalyticsService addLocalInventories Sample",
             "origin": "API_DEFINITION",
             "description": " Updates local inventory information for a [Product][google.cloud.retail.v2.Product] at a list of places, while respecting the last update timestamps of each inventory field. This process is asynchronous and does not require the [Product][google.cloud.retail.v2.Product] to exist before updating inventory information. If the request is valid, the update will be enqueued and processed downstream. As a consequence, when a response is returned, updates are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. Local inventory information can only be modified using this method. [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct] has no effect on local inventories. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
@@ -1765,7 +1813,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ProductService_RemoveLocalInventories_async",
-            "title": "CatalogService removeLocalInventories Sample",
+            "title": "AnalyticsService removeLocalInventories Sample",
             "origin": "API_DEFINITION",
             "description": " Remove local inventory information for a [Product][google.cloud.retail.v2.Product] at a list of places at a removal timestamp. This process is asynchronous. If the request is valid, the removal will be enqueued and processed downstream. As a consequence, when a response is returned, removals are not immediately manifested in the [Product][google.cloud.retail.v2.Product] queried by [ProductService.GetProduct][google.cloud.retail.v2.ProductService.GetProduct] or [ProductService.ListProducts][google.cloud.retail.v2.ProductService.ListProducts]. Local inventory information can only be removed using this method. [ProductService.CreateProduct][google.cloud.retail.v2.ProductService.CreateProduct] and [ProductService.UpdateProduct][google.cloud.retail.v2.ProductService.UpdateProduct] has no effect on local inventories. The returned [Operation][google.longrunning.Operation]s will be obsolete after 1 day, and [GetOperation][google.longrunning.Operations.GetOperation] API will return NOT_FOUND afterwards. If conflicting updates are issued, the [Operation][google.longrunning.Operation]s associated with the stale updates will not be marked as [done][google.longrunning.Operation.done] until being obsolete.",
             "canonical": true,
@@ -1817,7 +1865,7 @@
         },
         {
             "regionTag": "retail_v2_generated_SearchService_Search_async",
-            "title": "CatalogService search Sample",
+            "title": "AnalyticsService search Sample",
             "origin": "API_DEFINITION",
             "description": " Performs a search. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.",
             "canonical": true,
@@ -1941,7 +1989,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ServingConfigService_CreateServingConfig_async",
-            "title": "CatalogService createServingConfig Sample",
+            "title": "AnalyticsService createServingConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a ServingConfig. A maximum of 100 [ServingConfig][google.cloud.retail.v2.ServingConfig]s are allowed in a [Catalog][google.cloud.retail.v2.Catalog], otherwise a FAILED_PRECONDITION error is returned.",
             "canonical": true,
@@ -1989,7 +2037,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ServingConfigService_DeleteServingConfig_async",
-            "title": "CatalogService deleteServingConfig Sample",
+            "title": "AnalyticsService deleteServingConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a ServingConfig. Returns a NotFound error if the ServingConfig does not exist.",
             "canonical": true,
@@ -2029,7 +2077,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ServingConfigService_UpdateServingConfig_async",
-            "title": "CatalogService updateServingConfig Sample",
+            "title": "AnalyticsService updateServingConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a ServingConfig.",
             "canonical": true,
@@ -2073,7 +2121,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ServingConfigService_GetServingConfig_async",
-            "title": "CatalogService getServingConfig Sample",
+            "title": "AnalyticsService getServingConfig Sample",
             "origin": "API_DEFINITION",
             "description": " Gets a ServingConfig. Returns a NotFound error if the ServingConfig does not exist.",
             "canonical": true,
@@ -2113,7 +2161,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ServingConfigService_ListServingConfigs_async",
-            "title": "CatalogService listServingConfigs Sample",
+            "title": "AnalyticsService listServingConfigs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists all ServingConfigs linked to this catalog.",
             "canonical": true,
@@ -2161,7 +2209,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ServingConfigService_AddControl_async",
-            "title": "CatalogService addControl Sample",
+            "title": "AnalyticsService addControl Sample",
             "origin": "API_DEFINITION",
             "description": " Enables a Control on the specified ServingConfig. The control is added in the last position of the list of controls it belongs to (e.g. if it's a facet spec control it will be applied in the last position of servingConfig.facetSpecIds) Returns a ALREADY_EXISTS error if the control has already been applied. Returns a FAILED_PRECONDITION error if the addition could exceed maximum number of control allowed for that type of control.",
             "canonical": true,
@@ -2205,7 +2253,7 @@
         },
         {
             "regionTag": "retail_v2_generated_ServingConfigService_RemoveControl_async",
-            "title": "CatalogService removeControl Sample",
+            "title": "AnalyticsService removeControl Sample",
             "origin": "API_DEFINITION",
             "description": " Disables a Control on the specified ServingConfig. The control is removed from the ServingConfig. Returns a NOT_FOUND error if the Control is not enabled for the ServingConfig.",
             "canonical": true,
@@ -2249,7 +2297,7 @@
         },
         {
             "regionTag": "retail_v2_generated_UserEventService_WriteUserEvent_async",
-            "title": "CatalogService writeUserEvent Sample",
+            "title": "AnalyticsService writeUserEvent Sample",
             "origin": "API_DEFINITION",
             "description": " Writes a single user event.",
             "canonical": true,
@@ -2297,7 +2345,7 @@
         },
         {
             "regionTag": "retail_v2_generated_UserEventService_CollectUserEvent_async",
-            "title": "CatalogService collectUserEvent Sample",
+            "title": "AnalyticsService collectUserEvent Sample",
             "origin": "API_DEFINITION",
             "description": " Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a 3rd party domain. This method is used only by the Retail API JavaScript pixel and Google Tag Manager. Users should not call this method directly.",
             "canonical": true,
@@ -2357,7 +2405,7 @@
         },
         {
             "regionTag": "retail_v2_generated_UserEventService_PurgeUserEvents_async",
-            "title": "CatalogService purgeUserEvents Sample",
+            "title": "AnalyticsService purgeUserEvents Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes permanently all user events specified by the filter provided. Depending on the number of events specified by the filter, this operation could take hours or days to complete. To test a filter, use the list command first.",
             "canonical": true,
@@ -2405,7 +2453,7 @@
         },
         {
             "regionTag": "retail_v2_generated_UserEventService_ImportUserEvents_async",
-            "title": "CatalogService importUserEvents Sample",
+            "title": "AnalyticsService importUserEvents Sample",
             "origin": "API_DEFINITION",
             "description": " Bulk import of User events. Request processing might be synchronous. Events that already exist are skipped. Use this method for backfilling historical user events. `Operation.response` is of type `ImportResponse`. Note that it is possible for a subset of the items to be successfully inserted. `Operation.metadata` is of type `ImportMetadata`.",
             "canonical": true,
@@ -2453,7 +2501,7 @@
         },
         {
             "regionTag": "retail_v2_generated_UserEventService_RejoinUserEvents_async",
-            "title": "CatalogService rejoinUserEvents Sample",
+            "title": "AnalyticsService rejoinUserEvents Sample",
             "origin": "API_DEFINITION",
             "description": " Starts a user-event rejoin operation with latest product catalog. Events are not annotated with detailed product information for products that are missing from the catalog when the user event is ingested. These events are stored as unjoined events with limited usage on training and serving. You can use this method to start a join operation on specified events with the latest version of product catalog. You can also use this method to correct events joined with the wrong product catalog. A rejoin operation can take hours or days to complete.",
             "canonical": true,

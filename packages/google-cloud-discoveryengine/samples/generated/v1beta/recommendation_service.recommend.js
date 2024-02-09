@@ -29,10 +29,18 @@ function main(servingConfig, userEvent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Full resource name of the format:
+   *  Required. Full resource name of a
+   *  ServingConfig google.cloud.discoveryengine.v1beta.ServingConfig:
+   *  `projects/* /locations/global/collections/* /engines/* /servingConfigs/*`, or
    *  `projects/* /locations/global/collections/* /dataStores/* /servingConfigs/*`
-   *  Before you can request recommendations from your model, you must create at
-   *  least one serving config  for it.
+   *  One default serving config is created along with your recommendation engine
+   *  creation. The engine ID will be used as the ID of the default serving
+   *  config. For example, for Engine
+   *  `projects/* /locations/global/collections/* /engines/my-engine`, you can use
+   *  `projects/* /locations/global/collections/* /engines/my-engine/servingConfigs/my-engine`
+   *  for your
+   *  RecommendationService.Recommend google.cloud.discoveryengine.v1beta.RecommendationService.Recommend 
+   *  requests.
    */
   // const servingConfig = 'abc123'
   /**
@@ -67,6 +75,12 @@ function main(servingConfig, userEvent) {
    *  Examples:
    *   * `(filter_tags: ANY("Red", "Blue") OR filter_tags: ANY("Hot", "Cold"))`
    *   * `(filter_tags: ANY("Red", "Blue")) AND NOT (filter_tags: ANY("Green"))`
+   *  If `attributeFilteringSyntax` is set to true under the `params` field, then
+   *  attribute-based expressions are expected instead of the above described
+   *  tag-based syntax. Examples:
+   *   * (launguage: ANY("en", "es")) AND NOT (categories: ANY("Movie"))
+   *   * (available: true) AND
+   *     (launguage: ANY("en", "es")) OR (categories: ANY("Movie"))
    *  If your filter blocks all results, the API will return generic
    *  (unfiltered) popular Documents. If you only want results strictly matching
    *  the filters, set `strictFiltering` to True in
@@ -107,6 +121,9 @@ function main(servingConfig, userEvent) {
    *      *  `auto-diversity`
    *     This gives request-level control and adjusts recommendation results
    *     based on Document category.
+   *  * `attributeFilteringSyntax`: Boolean. False by default. If set to true,
+   *     the `filter` field is interpreted according to the new,
+   *     attribute-based syntax.
    */
   // const params = [1,2,3,4]
   /**

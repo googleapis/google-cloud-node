@@ -61,7 +61,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await clouddmsClient.listMappingRulesAsync(request);
+    const iterable = clouddmsClient.listMappingRulesAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

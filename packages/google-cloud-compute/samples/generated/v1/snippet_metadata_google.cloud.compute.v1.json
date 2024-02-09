@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -202,7 +202,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -598,7 +598,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -1650,7 +1650,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -2486,7 +2486,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -3434,7 +3434,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -5058,7 +5058,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -6530,7 +6530,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -7190,7 +7190,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -8210,7 +8210,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -8771,7 +8771,7 @@
             "regionTag": "compute_v1_generated_InstanceGroupManagers_ListManagedInstances_async",
             "title": "AcceleratorTypes listManagedInstances Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action. The orderBy query parameter is not supported. The `pageToken` query parameter is supported only in the alpha and beta API and only if the group's `listManagedInstancesResults` field is set to `PAGINATED`.",
+            "description": " Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action. The orderBy query parameter is not supported. The `pageToken` query parameter is supported only if the group's `listManagedInstancesResults` field is set to `PAGINATED`.",
             "canonical": true,
             "file": "instance_group_managers.list_managed_instances.js",
             "language": "JAVASCRIPT",
@@ -9362,7 +9362,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -9946,7 +9946,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -10828,6 +10828,58 @@
                 "method": {
                     "shortName": "ListReferrers",
                     "fullName": "google.cloud.compute.v1.Instances.ListReferrers",
+                    "service": {
+                        "shortName": "Instances",
+                        "fullName": "google.cloud.compute.v1.Instances"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_Instances_PerformMaintenance_async",
+            "title": "AcceleratorTypes performMaintenance Sample",
+            "origin": "API_DEFINITION",
+            "description": " Perform a manual maintenance on the instance.",
+            "canonical": true,
+            "file": "instances.perform_maintenance.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PerformMaintenance",
+                "fullName": "google.cloud.compute.v1.Instances.PerformMaintenance",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "InstancesClient",
+                    "fullName": "google.cloud.compute.v1.InstancesClient"
+                },
+                "method": {
+                    "shortName": "PerformMaintenance",
+                    "fullName": "google.cloud.compute.v1.Instances.PerformMaintenance",
                     "service": {
                         "shortName": "Instances",
                         "fullName": "google.cloud.compute.v1.Instances"
@@ -11838,7 +11890,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -11858,6 +11910,10 @@
                     {
                         "name": "request_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "with_extended_notifications",
+                        "type": "TYPE_BOOL"
                     },
                     {
                         "name": "zone",
@@ -12458,7 +12514,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -12870,7 +12926,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -14650,7 +14706,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -14830,7 +14886,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -15326,7 +15382,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -15614,7 +15670,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -17586,7 +17642,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -18322,7 +18378,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -18762,7 +18818,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -18942,7 +18998,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -20310,7 +20366,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -21738,7 +21794,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -24227,7 +24283,7 @@
             "regionTag": "compute_v1_generated_RegionInstanceGroupManagers_ListManagedInstances_async",
             "title": "AcceleratorTypes listManagedInstances Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances. The orderBy query parameter is not supported. The `pageToken` query parameter is supported only in the alpha and beta API and only if the group's `listManagedInstancesResults` field is set to `PAGINATED`.",
+            "description": " Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances. The orderBy query parameter is not supported. The `pageToken` query parameter is supported only if the group's `listManagedInstancesResults` field is set to `PAGINATED`.",
             "canonical": true,
             "file": "region_instance_group_managers.list_managed_instances.js",
             "language": "JAVASCRIPT",
@@ -29424,6 +29480,70 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_RegionZones_List_async",
+            "title": "AcceleratorTypes list Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the list of Zone resources under the specific region available to the specified project.",
+            "canonical": true,
+            "file": "region_zones.list.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "List",
+                "fullName": "google.cloud.compute.v1.RegionZones.List",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.ZoneList",
+                "client": {
+                    "shortName": "RegionZonesClient",
+                    "fullName": "google.cloud.compute.v1.RegionZonesClient"
+                },
+                "method": {
+                    "shortName": "List",
+                    "fullName": "google.cloud.compute.v1.RegionZones.List",
+                    "service": {
+                        "shortName": "RegionZones",
+                        "fullName": "google.cloud.compute.v1.RegionZones"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_Reservations_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
@@ -29434,7 +29554,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -29994,7 +30114,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -30494,7 +30614,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -31366,7 +31486,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -31958,7 +32078,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -32938,7 +33058,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -33206,7 +33326,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -33586,7 +33706,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -34510,7 +34630,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -34882,7 +35002,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -35462,7 +35582,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -35914,7 +36034,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -36879,7 +36999,7 @@
             "regionTag": "compute_v1_generated_TargetSslProxies_SetSslPolicy_async",
             "title": "AcceleratorTypes setSslPolicy Sample",
             "origin": "API_DEFINITION",
-            "description": " Sets the SSL policy for TargetSslProxy. The SSL policy specifies the server-side support for SSL features. This affects connections between clients and the SSL proxy load balancer. They do not affect the connection between the load balancer and the backends.",
+            "description": " Sets the SSL policy for TargetSslProxy. The SSL policy specifies the server-side support for SSL features. This affects connections between clients and the load balancer. They do not affect the connection between the load balancer and the backends.",
             "canonical": true,
             "file": "target_ssl_proxies.set_ssl_policy.js",
             "language": "JAVASCRIPT",
@@ -36938,7 +37058,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -37310,7 +37430,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -37650,7 +37770,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -38122,7 +38242,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -38562,7 +38682,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],

@@ -29,7 +29,9 @@
   * [Deployments.list_deployments](#deployments.list_deployments)
   * [Entity_types.create_entity_type](#entity_types.create_entity_type)
   * [Entity_types.delete_entity_type](#entity_types.delete_entity_type)
+  * [Entity_types.export_entity_types](#entity_types.export_entity_types)
   * [Entity_types.get_entity_type](#entity_types.get_entity_type)
+  * [Entity_types.import_entity_types](#entity_types.import_entity_types)
   * [Entity_types.list_entity_types](#entity_types.list_entity_types)
   * [Entity_types.update_entity_type](#entity_types.update_entity_type)
   * [Environments.create_environment](#environments.create_environment)
@@ -88,6 +90,7 @@
   * [Sessions.detect_intent](#sessions.detect_intent)
   * [Sessions.fulfill_intent](#sessions.fulfill_intent)
   * [Sessions.match_intent](#sessions.match_intent)
+  * [Sessions.server_streaming_detect_intent](#sessions.server_streaming_detect_intent)
   * [Sessions.streaming_detect_intent](#sessions.streaming_detect_intent)
   * [Sessions.submit_answer_feedback](#sessions.submit_answer_feedback)
   * [Test_cases.batch_delete_test_cases](#test_cases.batch_delete_test_cases)
@@ -136,7 +139,9 @@
   * [Deployments.list_deployments](#deployments.list_deployments)
   * [Entity_types.create_entity_type](#entity_types.create_entity_type)
   * [Entity_types.delete_entity_type](#entity_types.delete_entity_type)
+  * [Entity_types.export_entity_types](#entity_types.export_entity_types)
   * [Entity_types.get_entity_type](#entity_types.get_entity_type)
+  * [Entity_types.import_entity_types](#entity_types.import_entity_types)
   * [Entity_types.list_entity_types](#entity_types.list_entity_types)
   * [Entity_types.update_entity_type](#entity_types.update_entity_type)
   * [Environments.create_environment](#environments.create_environment)
@@ -148,6 +153,11 @@
   * [Environments.lookup_environment_history](#environments.lookup_environment_history)
   * [Environments.run_continuous_test](#environments.run_continuous_test)
   * [Environments.update_environment](#environments.update_environment)
+  * [Examples.create_example](#examples.create_example)
+  * [Examples.delete_example](#examples.delete_example)
+  * [Examples.get_example](#examples.get_example)
+  * [Examples.list_examples](#examples.list_examples)
+  * [Examples.update_example](#examples.update_example)
   * [Experiments.create_experiment](#experiments.create_experiment)
   * [Experiments.delete_experiment](#experiments.delete_experiment)
   * [Experiments.get_experiment](#experiments.get_experiment)
@@ -182,6 +192,15 @@
   * [Pages.get_page](#pages.get_page)
   * [Pages.list_pages](#pages.list_pages)
   * [Pages.update_page](#pages.update_page)
+  * [Playbooks.create_playbook](#playbooks.create_playbook)
+  * [Playbooks.create_playbook_version](#playbooks.create_playbook_version)
+  * [Playbooks.delete_playbook](#playbooks.delete_playbook)
+  * [Playbooks.delete_playbook_version](#playbooks.delete_playbook_version)
+  * [Playbooks.get_playbook](#playbooks.get_playbook)
+  * [Playbooks.get_playbook_version](#playbooks.get_playbook_version)
+  * [Playbooks.list_playbook_versions](#playbooks.list_playbook_versions)
+  * [Playbooks.list_playbooks](#playbooks.list_playbooks)
+  * [Playbooks.update_playbook](#playbooks.update_playbook)
   * [Security_settings_service.create_security_settings](#security_settings_service.create_security_settings)
   * [Security_settings_service.delete_security_settings](#security_settings_service.delete_security_settings)
   * [Security_settings_service.get_security_settings](#security_settings_service.get_security_settings)
@@ -195,6 +214,7 @@
   * [Sessions.detect_intent](#sessions.detect_intent)
   * [Sessions.fulfill_intent](#sessions.fulfill_intent)
   * [Sessions.match_intent](#sessions.match_intent)
+  * [Sessions.server_streaming_detect_intent](#sessions.server_streaming_detect_intent)
   * [Sessions.streaming_detect_intent](#sessions.streaming_detect_intent)
   * [Sessions.submit_answer_feedback](#sessions.submit_answer_feedback)
   * [Test_cases.batch_delete_test_cases](#test_cases.batch_delete_test_cases)
@@ -209,6 +229,12 @@
   * [Test_cases.list_test_cases](#test_cases.list_test_cases)
   * [Test_cases.run_test_case](#test_cases.run_test_case)
   * [Test_cases.update_test_case](#test_cases.update_test_case)
+  * [Tools.create_tool](#tools.create_tool)
+  * [Tools.delete_tool](#tools.delete_tool)
+  * [Tools.export_tools](#tools.export_tools)
+  * [Tools.get_tool](#tools.get_tool)
+  * [Tools.list_tools](#tools.list_tools)
+  * [Tools.update_tool](#tools.update_tool)
   * [Transition_route_groups.create_transition_route_group](#transition_route_groups.create_transition_route_group)
   * [Transition_route_groups.delete_transition_route_group](#transition_route_groups.delete_transition_route_group)
   * [Transition_route_groups.get_transition_route_group](#transition_route_groups.get_transition_route_group)
@@ -532,6 +558,23 @@ __Usage:__
 
 
 
+### Entity_types.export_entity_types
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.export_entity_types.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.export_entity_types.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.export_entity_types.js`
+
+
+-----
+
+
+
+
 ### Entity_types.get_entity_type
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.get_entity_type.js).
@@ -542,6 +585,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.get_entity_type.js`
+
+
+-----
+
+
+
+
+### Entity_types.import_entity_types
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.import_entity_types.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.import_entity_types.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/entity_types.import_entity_types.js`
 
 
 -----
@@ -1535,6 +1595,23 @@ __Usage:__
 
 
 
+### Sessions.server_streaming_detect_intent
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.server_streaming_detect_intent.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.server_streaming_detect_intent.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.server_streaming_detect_intent.js`
+
+
+-----
+
+
+
+
 ### Sessions.streaming_detect_intent
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/sessions.streaming_detect_intent.js).
@@ -2351,6 +2428,23 @@ __Usage:__
 
 
 
+### Entity_types.export_entity_types
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/entity_types.export_entity_types.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/entity_types.export_entity_types.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/entity_types.export_entity_types.js`
+
+
+-----
+
+
+
+
 ### Entity_types.get_entity_type
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/entity_types.get_entity_type.js).
@@ -2361,6 +2455,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/entity_types.get_entity_type.js`
+
+
+-----
+
+
+
+
+### Entity_types.import_entity_types
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/entity_types.import_entity_types.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/entity_types.import_entity_types.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/entity_types.import_entity_types.js`
 
 
 -----
@@ -2548,6 +2659,91 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/environments.update_environment.js`
+
+
+-----
+
+
+
+
+### Examples.create_example
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.create_example.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.create_example.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.create_example.js`
+
+
+-----
+
+
+
+
+### Examples.delete_example
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.delete_example.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.delete_example.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.delete_example.js`
+
+
+-----
+
+
+
+
+### Examples.get_example
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.get_example.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.get_example.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.get_example.js`
+
+
+-----
+
+
+
+
+### Examples.list_examples
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.list_examples.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.list_examples.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.list_examples.js`
+
+
+-----
+
+
+
+
+### Examples.update_example
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.update_example.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.update_example.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/examples.update_example.js`
 
 
 -----
@@ -3133,6 +3329,159 @@ __Usage:__
 
 
 
+### Playbooks.create_playbook
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.create_playbook.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.create_playbook.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.create_playbook.js`
+
+
+-----
+
+
+
+
+### Playbooks.create_playbook_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.create_playbook_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.create_playbook_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.create_playbook_version.js`
+
+
+-----
+
+
+
+
+### Playbooks.delete_playbook
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.delete_playbook.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.delete_playbook.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.delete_playbook.js`
+
+
+-----
+
+
+
+
+### Playbooks.delete_playbook_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.delete_playbook_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.delete_playbook_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.delete_playbook_version.js`
+
+
+-----
+
+
+
+
+### Playbooks.get_playbook
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.get_playbook.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.get_playbook.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.get_playbook.js`
+
+
+-----
+
+
+
+
+### Playbooks.get_playbook_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.get_playbook_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.get_playbook_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.get_playbook_version.js`
+
+
+-----
+
+
+
+
+### Playbooks.list_playbook_versions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.list_playbook_versions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.list_playbook_versions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.list_playbook_versions.js`
+
+
+-----
+
+
+
+
+### Playbooks.list_playbooks
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.list_playbooks.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.list_playbooks.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.list_playbooks.js`
+
+
+-----
+
+
+
+
+### Playbooks.update_playbook
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.update_playbook.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.update_playbook.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.update_playbook.js`
+
+
+-----
+
+
+
+
 ### Security_settings_service.create_security_settings
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/security_settings_service.create_security_settings.js).
@@ -3347,6 +3696,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/sessions.match_intent.js`
+
+
+-----
+
+
+
+
+### Sessions.server_streaming_detect_intent
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/sessions.server_streaming_detect_intent.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/sessions.server_streaming_detect_intent.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/sessions.server_streaming_detect_intent.js`
 
 
 -----
@@ -3585,6 +3951,108 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/test_cases.update_test_case.js`
+
+
+-----
+
+
+
+
+### Tools.create_tool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.create_tool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.create_tool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.create_tool.js`
+
+
+-----
+
+
+
+
+### Tools.delete_tool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.delete_tool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.delete_tool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.delete_tool.js`
+
+
+-----
+
+
+
+
+### Tools.export_tools
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.export_tools.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.export_tools.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.export_tools.js`
+
+
+-----
+
+
+
+
+### Tools.get_tool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.get_tool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.get_tool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.get_tool.js`
+
+
+-----
+
+
+
+
+### Tools.list_tools
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.list_tools.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.list_tools.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.list_tools.js`
+
+
+-----
+
+
+
+
+### Tools.update_tool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.update_tool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.update_tool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/tools.update_tool.js`
 
 
 -----

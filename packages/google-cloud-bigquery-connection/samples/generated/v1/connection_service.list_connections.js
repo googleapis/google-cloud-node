@@ -56,7 +56,7 @@ function main(parent, pageSize) {
     };
 
     // Run request
-    const iterable = await connectionClient.listConnectionsAsync(request);
+    const iterable = connectionClient.listConnectionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

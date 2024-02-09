@@ -39,9 +39,10 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  If this field is not empty then it must contain the `nextPageToken` value
-   *  returned by a previous call to this method.  Using this field causes the
-   *  method to return additional results from the previous method call.
+   *  Optional. If this field is not empty then it must contain the
+   *  `nextPageToken` value returned by a previous call to this method.  Using
+   *  this field causes the method to return additional results from the previous
+   *  method call.
    */
   // const pageToken = 'abc123'
 

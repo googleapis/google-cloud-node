@@ -294,6 +294,11 @@ export class SessionsClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
+      serverStreamingDetectIntent: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        /* gaxStreamingRetries: */ false
+      ),
       streamingDetectIntent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
@@ -400,6 +405,7 @@ export class SessionsClient {
     // and create an API call method for each.
     const sessionsStubMethods = [
       'detectIntent',
+      'serverStreamingDetectIntent',
       'streamingDetectIntent',
       'matchIntent',
       'fulfillIntent',
@@ -965,6 +971,63 @@ export class SessionsClient {
       });
     this.initialize();
     return this.innerApiCalls.submitAnswerFeedback(request, options, callback);
+  }
+
+  /**
+   * Processes a natural language query and returns structured, actionable data
+   * as a result through server-side streaming. Server-side streaming allows
+   * Dialogflow to send [partial
+   * responses](https://cloud.google.com/dialogflow/cx/docs/concept/fulfillment#partial-response)
+   * earlier in a single request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.session
+   *   Required. The name of the session this query is sent to.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+   *   If `Environment ID` is not specified, we assume default 'draft'
+   *   environment.
+   *   It's up to the API caller to choose an appropriate `Session ID`. It can be
+   *   a random number or some type of session identifiers (preferably hashed).
+   *   The length of the `Session ID` must not exceed 36 characters.
+   *
+   *   For more information, see the [sessions
+   *   guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).
+   *
+   *   Note: Always use agent versions for production traffic.
+   *   See [Versions and
+   *   environments](https://cloud.google.com/dialogflow/cx/docs/concept/version).
+   * @param {google.cloud.dialogflow.cx.v3.QueryParameters} request.queryParams
+   *   The parameters of this query.
+   * @param {google.cloud.dialogflow.cx.v3.QueryInput} request.queryInput
+   *   Required. The input specification.
+   * @param {google.cloud.dialogflow.cx.v3.OutputAudioConfig} request.outputAudioConfig
+   *   Instructs the speech synthesizer how to generate the output audio.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.cloud.dialogflow.cx.v3.DetectIntentResponse|DetectIntentResponse} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/sessions.server_streaming_detect_intent.js</caption>
+   * region_tag:dialogflow_v3_generated_Sessions_ServerStreamingDetectIntent_async
+   */
+  serverStreamingDetectIntent(
+    request?: protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest,
+    options?: CallOptions
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        session: request.session ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.serverStreamingDetectIntent(request, options);
   }
 
   /**

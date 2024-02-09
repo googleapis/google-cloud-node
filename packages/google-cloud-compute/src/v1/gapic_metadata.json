@@ -2395,6 +2395,11 @@
                 "insert"
               ]
             },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
+              ]
+            },
             "RemoveResourcePolicies": {
               "methods": [
                 "removeResourcePolicies"
@@ -2639,6 +2644,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "PerformMaintenance": {
+              "methods": [
+                "performMaintenance"
               ]
             },
             "RemoveResourcePolicies": {
@@ -6798,6 +6808,34 @@
                 "validate"
               ]
             },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionZones": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionZonesClient",
+          "rpcs": {
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionZonesClient",
+          "rpcs": {
             "List": {
               "methods": [
                 "list",

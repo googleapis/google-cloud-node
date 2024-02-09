@@ -69,7 +69,7 @@ function main(parent) {
     };
 
     // Run request
-    const iterable = await channelClient.listReportsAsync(request);
+    const iterable = channelClient.listReportsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }

@@ -129,16 +129,62 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v1beta1.BudgetServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const servicePath =
-        budgetserviceModule.v1beta1.BudgetServiceClient.servicePath;
-      assert(servicePath);
+    it('has apiEndpoint', () => {
+      const client = new budgetserviceModule.v1beta1.BudgetServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'billingbudgets.googleapis.com');
     });
 
-    it('has apiEndpoint', () => {
-      const apiEndpoint =
-        budgetserviceModule.v1beta1.BudgetServiceClient.apiEndpoint;
-      assert(apiEndpoint);
+    it('has universeDomain', () => {
+      const client = new budgetserviceModule.v1beta1.BudgetServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process !== 'undefined' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          budgetserviceModule.v1beta1.BudgetServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'billingbudgets.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          budgetserviceModule.v1beta1.BudgetServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'billingbudgets.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new budgetserviceModule.v1beta1.BudgetServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'billingbudgets.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new budgetserviceModule.v1beta1.BudgetServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'billingbudgets.example.com');
+    });
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new budgetserviceModule.v1beta1.BudgetServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
     });
 
     it('has port', () => {
