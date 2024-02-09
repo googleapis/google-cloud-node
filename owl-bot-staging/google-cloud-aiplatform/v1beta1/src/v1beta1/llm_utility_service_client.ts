@@ -362,7 +362,7 @@ export class LlmUtilityServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const llmUtilityServiceStubMethods =
-        ['countTokens', 'computeTokens'];
+        ['computeTokens'];
     for (const methodName of llmUtilityServiceStubMethods) {
       const callPromise = this.llmUtilityServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -464,87 +464,6 @@ export class LlmUtilityServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Perform a token counting.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.endpoint
- *   Required. The name of the Endpoint requested to perform token counting.
- *   Format:
- *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
- * @param {string} request.model
- *   Required. The name of the publisher model requested to serve the
- *   prediction. Format:
- *   `projects/{project}/locations/{location}/publishers/* /models/*`
- * @param {number[]} request.instances
- *   Required. The instances that are the input to token counting call.
- *   Schema is identical to the prediction schema of the underlying model.
- * @param {number[]} request.contents
- *   Required. Input content.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.CountTokensResponse|CountTokensResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/llm_utility_service.count_tokens.js</caption>
- * region_tag:aiplatform_v1beta1_generated_LlmUtilityService_CountTokens_async
- */
-  countTokens(
-      request?: protos.google.cloud.aiplatform.v1beta1.ICountTokensRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.ICountTokensResponse,
-        protos.google.cloud.aiplatform.v1beta1.ICountTokensRequest|undefined, {}|undefined
-      ]>;
-  countTokens(
-      request: protos.google.cloud.aiplatform.v1beta1.ICountTokensRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1beta1.ICountTokensResponse,
-          protos.google.cloud.aiplatform.v1beta1.ICountTokensRequest|null|undefined,
-          {}|null|undefined>): void;
-  countTokens(
-      request: protos.google.cloud.aiplatform.v1beta1.ICountTokensRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1beta1.ICountTokensResponse,
-          protos.google.cloud.aiplatform.v1beta1.ICountTokensRequest|null|undefined,
-          {}|null|undefined>): void;
-  countTokens(
-      request?: protos.google.cloud.aiplatform.v1beta1.ICountTokensRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          protos.google.cloud.aiplatform.v1beta1.ICountTokensResponse,
-          protos.google.cloud.aiplatform.v1beta1.ICountTokensRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1beta1.ICountTokensResponse,
-          protos.google.cloud.aiplatform.v1beta1.ICountTokensRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1beta1.ICountTokensResponse,
-        protos.google.cloud.aiplatform.v1beta1.ICountTokensRequest|undefined, {}|undefined
-      ]>|void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    }
-    else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'endpoint': request.endpoint ?? '',
-    });
-    this.initialize();
-    return this.innerApiCalls.countTokens(request, options, callback);
-  }
 /**
  * Return a list of tokens based on the input text.
  *

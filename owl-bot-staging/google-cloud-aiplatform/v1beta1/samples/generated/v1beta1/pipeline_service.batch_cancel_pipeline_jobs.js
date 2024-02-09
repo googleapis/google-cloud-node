@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(endpoint, model, instances, contents) {
-  // [START aiplatform_v1beta1_generated_LlmUtilityService_CountTokens_async]
+function main(parent, names) {
+  // [START aiplatform_v1beta1_generated_PipelineService_BatchCancelPipelineJobs_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,39 @@ function main(endpoint, model, instances, contents) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the Endpoint requested to perform token counting.
+   *  Required. The name of the PipelineJobs' parent resource.
+   *  Format: `projects/{project}/locations/{location}`
+   */
+  // const parent = 'abc123'
+  /**
+   *  Required. The names of the PipelineJobs to cancel.
+   *  A maximum of 32 PipelineJobs can be cancelled in a batch.
    *  Format:
-   *  `projects/{project}/locations/{location}/endpoints/{endpoint}`
+   *  `projects/{project}/locations/{location}/pipelineJobs/{pipelineJob}`
    */
-  // const endpoint = 'abc123'
-  /**
-   *  Required. The name of the publisher model requested to serve the
-   *  prediction. Format:
-   *  `projects/{project}/locations/{location}/publishers/* /models/*`
-   */
-  // const model = 'abc123'
-  /**
-   *  Required. The instances that are the input to token counting call.
-   *  Schema is identical to the prediction schema of the underlying model.
-   */
-  // const instances = [1,2,3,4]
-  /**
-   *  Required. Input content.
-   */
-  // const contents = [1,2,3,4]
+  // const names = ['abc','def']
 
   // Imports the Aiplatform library
-  const {LlmUtilityServiceClient} = require('@google-cloud/aiplatform').v1beta1;
+  const {PipelineServiceClient} = require('@google-cloud/aiplatform').v1beta1;
 
   // Instantiates a client
-  const aiplatformClient = new LlmUtilityServiceClient();
+  const aiplatformClient = new PipelineServiceClient();
 
-  async function callCountTokens() {
+  async function callBatchCancelPipelineJobs() {
     // Construct request
     const request = {
-      endpoint,
-      model,
-      instances,
-      contents,
+      parent,
+      names,
     };
 
     // Run request
-    const response = await aiplatformClient.countTokens(request);
+    const [operation] = await aiplatformClient.batchCancelPipelineJobs(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCountTokens();
-  // [END aiplatform_v1beta1_generated_LlmUtilityService_CountTokens_async]
+  callBatchCancelPipelineJobs();
+  // [END aiplatform_v1beta1_generated_PipelineService_BatchCancelPipelineJobs_async]
 }
 
 process.on('unhandledRejection', err => {
