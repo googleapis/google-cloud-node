@@ -388,6 +388,9 @@ export class IndexServiceClient {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
             {
+              post: '/v1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
               post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
             },
             {
@@ -417,6 +420,10 @@ export class IndexServiceClient {
           additional_bindings: [
             {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
               body: '*',
             },
             {
@@ -451,6 +458,9 @@ export class IndexServiceClient {
           additional_bindings: [
             {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
             },
             {
               post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
@@ -1983,6 +1993,14 @@ export class IndexServiceClient {
    *   `projects/{project}/locations/{location}/indexes/{index}`
    * @param {number[]} request.datapoints
    *   A list of datapoints to be created/updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Update mask is used to specify the fields to be overwritten in
+   *   the datapoints by the update. The fields specified in the update_mask are
+   *   relative to each IndexDatapoint inside datapoints, not the full request.
+   *
+   *   Updatable fields:
+   *
+   *     * Use `all_restricts` to update both restricts and numeric_restricts.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

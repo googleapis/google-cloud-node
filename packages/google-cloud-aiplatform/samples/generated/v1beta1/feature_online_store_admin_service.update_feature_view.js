@@ -44,6 +44,7 @@ function main(featureView) {
    *  fields.
    *  Updatable fields:
    *    * `labels`
+   *    * `serviceAgentType`
    */
   // const updateMask = {}
 

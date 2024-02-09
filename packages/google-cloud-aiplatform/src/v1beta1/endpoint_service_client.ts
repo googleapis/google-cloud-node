@@ -965,6 +965,10 @@ export class EndpointServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1241,6 +1245,9 @@ export class EndpointServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1489,6 +1496,9 @@ export class EndpointServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
@@ -1755,6 +1765,9 @@ export class EndpointServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
@@ -3072,6 +3085,7 @@ export class EndpointServiceClient {
    *       * A key including a space must be quoted. `labels."a key"`.
    *
    *   Some examples:
+   *
    *     * `endpoint=1`
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
@@ -3194,6 +3208,7 @@ export class EndpointServiceClient {
    *       * A key including a space must be quoted. `labels."a key"`.
    *
    *   Some examples:
+   *
    *     * `endpoint=1`
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
@@ -3264,6 +3279,7 @@ export class EndpointServiceClient {
    *       * A key including a space must be quoted. `labels."a key"`.
    *
    *   Some examples:
+   *
    *     * `endpoint=1`
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
