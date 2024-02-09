@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/video-stitcher-v2.0.1...video-stitcher-v2.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5028](https://github.com/googleapis/google-cloud-node/issues/5028)) ([852f3eb](https://github.com/googleapis/google-cloud-node/commit/852f3ebf065ee24e910580b9a1fc365acb3a744a))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/video-stitcher-v2.0.0...video-stitcher-v2.0.1) (2024-01-23)
 
 

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.0.0...tasks-v5.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5028](https://github.com/googleapis/google-cloud-node/issues/5028)) ([852f3eb](https://github.com/googleapis/google-cloud-node/commit/852f3ebf065ee24e910580b9a1fc365acb3a744a))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v4.1.0...tasks-v5.0.0) (2024-01-29)
 
 

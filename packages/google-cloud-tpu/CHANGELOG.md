@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.2.1...tpu-v3.3.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5028](https://github.com/googleapis/google-cloud-node/issues/5028)) ([852f3eb](https://github.com/googleapis/google-cloud-node/commit/852f3ebf065ee24e910580b9a1fc365acb3a744a))
+
 ## [3.2.1](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.2.0...tpu-v3.2.1) (2024-01-23)
 
 
