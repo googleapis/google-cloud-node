@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/language-v6.1.1...language-v6.2.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5025](https://github.com/googleapis/google-cloud-node/issues/5025)) ([7244cab](https://github.com/googleapis/google-cloud-node/commit/7244cab107973bef57c5ea84ae77c51718126822))
+
 ## [6.1.1](https://github.com/googleapis/google-cloud-node/compare/language-v6.1.0...language-v6.1.1) (2023-11-03)
 
 

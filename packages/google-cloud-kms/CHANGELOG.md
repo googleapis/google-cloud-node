@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/kms-v4.0.1...kms-v4.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5025](https://github.com/googleapis/google-cloud-node/issues/5025)) ([7244cab](https://github.com/googleapis/google-cloud-node/commit/7244cab107973bef57c5ea84ae77c51718126822))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/kms-v4.0.0...kms-v4.0.1) (2023-09-06)
 
 

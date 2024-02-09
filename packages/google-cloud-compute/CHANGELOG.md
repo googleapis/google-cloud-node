@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.1.0...compute-v4.2.0) (2024-02-09)
+
+
+### Features
+
+* [compute] Trusted Private Cloud support, use the universeDomain parameter ([#5016](https://github.com/googleapis/google-cloud-node/issues/5016)) ([5a79fd0](https://github.com/googleapis/google-cloud-node/commit/5a79fd0e0631be19230d5ff2abae7d5ed847ab55))
+* [compute] Update Compute Engine API to revision 20240130 ([#881](https://github.com/googleapis/google-cloud-node/issues/881)) ([#5031](https://github.com/googleapis/google-cloud-node/issues/5031)) ([bf847d0](https://github.com/googleapis/google-cloud-node/commit/bf847d019292cce75292ff8d06d1897858462c97))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.0.1...compute-v4.1.0) (2023-12-11)
 
 
