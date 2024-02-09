@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-connection-v3.0.1...bigquery-connection-v3.1.0) (2024-02-09)
+
+
+### Features
+
+* Support for Trusted Private Cloud ([895830a](https://github.com/googleapis/google-cloud-node/commit/895830a3ef91666c30a96a7f68bd4cd1f582d58d))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-connection-v3.0.0...bigquery-connection-v3.0.1) (2023-09-06)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.11.0...aiplatform-v3.12.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5021](https://github.com/googleapis/google-cloud-node/issues/5021)) ([ca9af37](https://github.com/googleapis/google-cloud-node/commit/ca9af375a2a62ce3e3f5ad09db43028591a0b571))
+
 ## [3.11.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.10.1...aiplatform-v3.11.0) (2024-02-07)
 
 

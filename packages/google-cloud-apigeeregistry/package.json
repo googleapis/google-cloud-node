@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/apigee-registry",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "apigeeregistry client for Node.js",
   "repository": {
     "type": "git",

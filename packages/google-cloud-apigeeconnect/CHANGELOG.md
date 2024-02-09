@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/apigee-connect-v3.0.2...apigee-connect-v3.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5022](https://github.com/googleapis/google-cloud-node/issues/5022)) ([b6498d8](https://github.com/googleapis/google-cloud-node/commit/b6498d8580d056817981dedbaa0ea5d82e9dccc2))
+
 ## [3.0.2](https://github.com/googleapis/google-cloud-node/compare/apigee-connect-v3.0.1...apigee-connect-v3.0.2) (2024-01-23)
 
 

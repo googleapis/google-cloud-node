@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.3.0...asset-v5.4.0) (2024-02-09)
+
+
+### Features
+
+* [asset ]Trusted Private Cloud support, use the universeDomain parameter ([#5019](https://github.com/googleapis/google-cloud-node/issues/5019)) ([1982935](https://github.com/googleapis/google-cloud-node/commit/19829355db55d4fed00536f8f5822d084a51c6cd))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.2.0...asset-v5.3.0) (2024-01-15)
 
 
