@@ -1,0 +1,7 @@
+[
+  "../../protos/google/cloud/securityposture/v1/org_policy_config.proto",
+  "../../protos/google/cloud/securityposture/v1/org_policy_constraints.proto",
+  "../../protos/google/cloud/securityposture/v1/securityposture.proto",
+  "../../protos/google/cloud/securityposture/v1/sha_constraints.proto",
+  "../../protos/google/cloud/securityposture/v1/sha_custom_config.proto"
+]

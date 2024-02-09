@@ -1,0 +1,179 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.securityposture.v1",
+  "libraryPackage": "@google-cloud/securityposture",
+  "services": {
+    "SecurityPosture": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SecurityPostureClient",
+          "rpcs": {
+            "GetPosture": {
+              "methods": [
+                "getPosture"
+              ]
+            },
+            "GetPostureDeployment": {
+              "methods": [
+                "getPostureDeployment"
+              ]
+            },
+            "GetPostureTemplate": {
+              "methods": [
+                "getPostureTemplate"
+              ]
+            },
+            "CreatePosture": {
+              "methods": [
+                "createPosture"
+              ]
+            },
+            "UpdatePosture": {
+              "methods": [
+                "updatePosture"
+              ]
+            },
+            "DeletePosture": {
+              "methods": [
+                "deletePosture"
+              ]
+            },
+            "ExtractPosture": {
+              "methods": [
+                "extractPosture"
+              ]
+            },
+            "CreatePostureDeployment": {
+              "methods": [
+                "createPostureDeployment"
+              ]
+            },
+            "UpdatePostureDeployment": {
+              "methods": [
+                "updatePostureDeployment"
+              ]
+            },
+            "DeletePostureDeployment": {
+              "methods": [
+                "deletePostureDeployment"
+              ]
+            },
+            "ListPostures": {
+              "methods": [
+                "listPostures",
+                "listPosturesStream",
+                "listPosturesAsync"
+              ]
+            },
+            "ListPostureRevisions": {
+              "methods": [
+                "listPostureRevisions",
+                "listPostureRevisionsStream",
+                "listPostureRevisionsAsync"
+              ]
+            },
+            "ListPostureDeployments": {
+              "methods": [
+                "listPostureDeployments",
+                "listPostureDeploymentsStream",
+                "listPostureDeploymentsAsync"
+              ]
+            },
+            "ListPostureTemplates": {
+              "methods": [
+                "listPostureTemplates",
+                "listPostureTemplatesStream",
+                "listPostureTemplatesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SecurityPostureClient",
+          "rpcs": {
+            "GetPosture": {
+              "methods": [
+                "getPosture"
+              ]
+            },
+            "GetPostureDeployment": {
+              "methods": [
+                "getPostureDeployment"
+              ]
+            },
+            "GetPostureTemplate": {
+              "methods": [
+                "getPostureTemplate"
+              ]
+            },
+            "CreatePosture": {
+              "methods": [
+                "createPosture"
+              ]
+            },
+            "UpdatePosture": {
+              "methods": [
+                "updatePosture"
+              ]
+            },
+            "DeletePosture": {
+              "methods": [
+                "deletePosture"
+              ]
+            },
+            "ExtractPosture": {
+              "methods": [
+                "extractPosture"
+              ]
+            },
+            "CreatePostureDeployment": {
+              "methods": [
+                "createPostureDeployment"
+              ]
+            },
+            "UpdatePostureDeployment": {
+              "methods": [
+                "updatePostureDeployment"
+              ]
+            },
+            "DeletePostureDeployment": {
+              "methods": [
+                "deletePostureDeployment"
+              ]
+            },
+            "ListPostures": {
+              "methods": [
+                "listPostures",
+                "listPosturesStream",
+                "listPosturesAsync"
+              ]
+            },
+            "ListPostureRevisions": {
+              "methods": [
+                "listPostureRevisions",
+                "listPostureRevisionsStream",
+                "listPostureRevisionsAsync"
+              ]
+            },
+            "ListPostureDeployments": {
+              "methods": [
+                "listPostureDeployments",
+                "listPostureDeploymentsStream",
+                "listPostureDeploymentsAsync"
+              ]
+            },
+            "ListPostureTemplates": {
+              "methods": [
+                "listPostureTemplates",
+                "listPostureTemplatesStream",
+                "listPostureTemplatesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

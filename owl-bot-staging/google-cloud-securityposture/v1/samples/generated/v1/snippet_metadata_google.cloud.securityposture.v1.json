@@ -1,0 +1,667 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-securityposture",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.securityposture.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_ListPostures_async",
+      "title": "SecurityPosture listPostures Sample",
+      "origin": "API_DEFINITION",
+      "description": " (-- This option restricts the visibility of the API to only projects that will (-- be labeled as `PREVIEW` or `GOOGLE_INTERNAL` by the service. (-- option (google.api.api_visibility).restriction = \"PREVIEW,GOOGLE_INTERNAL\"; Postures Lists Postures in a given organization and location. In case a posture has multiple revisions, the latest revision as per UpdateTime will be returned.",
+      "canonical": true,
+      "file": "security_posture.list_postures.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPostures",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.ListPostures",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securityposture.v1.ListPosturesResponse",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "ListPostures",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.ListPostures",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_ListPostureRevisions_async",
+      "title": "SecurityPosture listPostureRevisions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists revisions of a Posture in a given organization and location.",
+      "canonical": true,
+      "file": "security_posture.list_posture_revisions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPostureRevisions",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.ListPostureRevisions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securityposture.v1.ListPostureRevisionsResponse",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "ListPostureRevisions",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.ListPostureRevisions",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_GetPosture_async",
+      "title": "SecurityPosture getPosture Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a posture in a given organization and location. User must provide revision_id to retrieve a specific revision of the resource. NOT_FOUND error is returned if the revision_id or the Posture name does not exist. In case revision_id is not provided then the latest Posture revision by UpdateTime is returned.",
+      "canonical": true,
+      "file": "security_posture.get_posture.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPosture",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.GetPosture",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "revision_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securityposture.v1.Posture",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "GetPosture",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.GetPosture",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_CreatePosture_async",
+      "title": "SecurityPosture createPosture Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Posture resource. If a Posture with the specified name already exists in the specified organization and location, the long running operation returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.",
+      "canonical": true,
+      "file": "security_posture.create_posture.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePosture",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.CreatePosture",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "posture_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "posture",
+            "type": ".google.cloud.securityposture.v1.Posture"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "CreatePosture",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.CreatePosture",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_UpdatePosture_async",
+      "title": "SecurityPosture updatePosture Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing Posture. A new revision of the posture will be created if the revision to be updated is currently deployed on a workload. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the Posture does not exist. Returns a `google.rpc.Status` with `google.rpc.Code.ABORTED` if the etag supplied in the request does not match the persisted etag of the Posture. Updatable fields are state, description and policy_sets. State update operation cannot be clubbed with update of description and policy_sets. An ACTIVE posture can be updated to both DRAFT or DEPRECATED states. Postures in DRAFT or DEPRECATED states can only be updated to ACTIVE state.",
+      "canonical": true,
+      "file": "security_posture.update_posture.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdatePosture",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.UpdatePosture",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "posture",
+            "type": ".google.cloud.securityposture.v1.Posture"
+          },
+          {
+            "name": "revision_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "UpdatePosture",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.UpdatePosture",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_DeletePosture_async",
+      "title": "SecurityPosture deletePosture Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes all the revisions of a resource. A posture can only be deleted when none of the revisions are deployed to any workload.",
+      "canonical": true,
+      "file": "security_posture.delete_posture.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePosture",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.DeletePosture",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "DeletePosture",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.DeletePosture",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_ExtractPosture_async",
+      "title": "SecurityPosture extractPosture Sample",
+      "origin": "API_DEFINITION",
+      "description": " Extracts existing policies on a workload as a posture. If a Posture on the given workload already exists, the long running operation returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.",
+      "canonical": true,
+      "file": "security_posture.extract_posture.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExtractPosture",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.ExtractPosture",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "posture_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "workload",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "ExtractPosture",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.ExtractPosture",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_ListPostureDeployments_async",
+      "title": "SecurityPosture listPostureDeployments Sample",
+      "origin": "API_DEFINITION",
+      "description": " PostureDeployments Lists PostureDeployments in a given project and location.",
+      "canonical": true,
+      "file": "security_posture.list_posture_deployments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPostureDeployments",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.ListPostureDeployments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securityposture.v1.ListPostureDeploymentsResponse",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "ListPostureDeployments",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.ListPostureDeployments",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_GetPostureDeployment_async",
+      "title": "SecurityPosture getPostureDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single PostureDeployment.",
+      "canonical": true,
+      "file": "security_posture.get_posture_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPostureDeployment",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.GetPostureDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securityposture.v1.PostureDeployment",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "GetPostureDeployment",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.GetPostureDeployment",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_CreatePostureDeployment_async",
+      "title": "SecurityPosture createPostureDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new PostureDeployment in a given project and location.",
+      "canonical": true,
+      "file": "security_posture.create_posture_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePostureDeployment",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.CreatePostureDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "posture_deployment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "posture_deployment",
+            "type": ".google.cloud.securityposture.v1.PostureDeployment"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "CreatePostureDeployment",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.CreatePostureDeployment",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_UpdatePostureDeployment_async",
+      "title": "SecurityPosture updatePostureDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single PostureDeployment.",
+      "canonical": true,
+      "file": "security_posture.update_posture_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdatePostureDeployment",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.UpdatePostureDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "posture_deployment",
+            "type": ".google.cloud.securityposture.v1.PostureDeployment"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "UpdatePostureDeployment",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.UpdatePostureDeployment",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_DeletePostureDeployment_async",
+      "title": "SecurityPosture deletePostureDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single PostureDeployment.",
+      "canonical": true,
+      "file": "security_posture.delete_posture_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePostureDeployment",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.DeletePostureDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "DeletePostureDeployment",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.DeletePostureDeployment",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_ListPostureTemplates_async",
+      "title": "SecurityPosture listPostureTemplates Sample",
+      "origin": "API_DEFINITION",
+      "description": " PostureTemplates Lists all the PostureTemplates available to the user.",
+      "canonical": true,
+      "file": "security_posture.list_posture_templates.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPostureTemplates",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.ListPostureTemplates",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securityposture.v1.ListPostureTemplatesResponse",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "ListPostureTemplates",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.ListPostureTemplates",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securityposture_v1_generated_SecurityPosture_GetPostureTemplate_async",
+      "title": "SecurityPosture getPostureTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a PostureTemplate. User must provide revision_id to retrieve a specific revision of the resource. NOT_FOUND error is returned if the revision_id or the PostureTemplate name does not exist. In case revision_id is not provided then the PostureTemplate with latest revision_id is returned.",
+      "canonical": true,
+      "file": "security_posture.get_posture_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPostureTemplate",
+        "fullName": "google.cloud.securityposture.v1.SecurityPosture.GetPostureTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "revision_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securityposture.v1.PostureTemplate",
+        "client": {
+          "shortName": "SecurityPostureClient",
+          "fullName": "google.cloud.securityposture.v1.SecurityPostureClient"
+        },
+        "method": {
+          "shortName": "GetPostureTemplate",
+          "fullName": "google.cloud.securityposture.v1.SecurityPosture.GetPostureTemplate",
+          "service": {
+            "shortName": "SecurityPosture",
+            "fullName": "google.cloud.securityposture.v1.SecurityPosture"
+          }
+        }
+      }
+    }
+  ]
+}
