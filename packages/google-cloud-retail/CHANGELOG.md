@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.1.0...retail-v3.2.0) (2024-02-09)
+
+
+### Features
+
+* [retail] add analytics service ([#5033](https://github.com/googleapis/google-cloud-node/issues/5033)) ([76548b0](https://github.com/googleapis/google-cloud-node/commit/76548b0c0715dbb505ba14ed30b75fab6a36d081))
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5027](https://github.com/googleapis/google-cloud-node/issues/5027)) ([88763bb](https://github.com/googleapis/google-cloud-node/commit/88763bb1b7ce9ff884b9e3f476230d38985b2ff2))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.0.1...retail-v3.1.0) (2024-02-07)
 
 
