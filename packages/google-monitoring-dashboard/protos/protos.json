@@ -117,6 +117,10 @@
                         "direction": {
                           "type": "Direction",
                           "id": 3
+                        },
+                        "interval": {
+                          "type": "google.type.Interval",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -179,7 +183,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "displayName": {
@@ -374,7 +378,12 @@
                             "alertChart",
                             "timeSeriesTable",
                             "collapsibleGroup",
-                            "logsPanel"
+                            "logsPanel",
+                            "incidentList",
+                            "pieChart",
+                            "errorReportingPanel",
+                            "sectionHeader",
+                            "singleViewGroup"
                           ]
                         }
                       },
@@ -417,6 +426,72 @@
                         "logsPanel": {
                           "type": "LogsPanel",
                           "id": 10
+                        },
+                        "incidentList": {
+                          "type": "IncidentList",
+                          "id": 12
+                        },
+                        "pieChart": {
+                          "type": "PieChart",
+                          "id": 14
+                        },
+                        "errorReportingPanel": {
+                          "type": "ErrorReportingPanel",
+                          "id": 19
+                        },
+                        "sectionHeader": {
+                          "type": "SectionHeader",
+                          "id": 21
+                        },
+                        "singleViewGroup": {
+                          "type": "SingleViewGroup",
+                          "id": 22
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ErrorReportingPanel": {
+                      "fields": {
+                        "projectNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "services": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "versions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "IncidentList": {
+                      "fields": {
+                        "monitoredResources": {
+                          "rule": "repeated",
+                          "type": "google.api.MonitoredResource",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "policyNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -433,63 +508,62 @@
                         }
                       }
                     },
-                    "Scorecard": {
-                      "oneofs": {
-                        "dataView": {
-                          "oneof": [
-                            "gaugeView",
-                            "sparkChartView"
-                          ]
-                        }
-                      },
+                    "PieChart": {
                       "fields": {
-                        "timeSeriesQuery": {
-                          "type": "TimeSeriesQuery",
+                        "dataSets": {
+                          "rule": "repeated",
+                          "type": "PieChartDataSet",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
-                        "gaugeView": {
-                          "type": "GaugeView",
-                          "id": 4
+                        "chartType": {
+                          "type": "PieChartType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
-                        "sparkChartView": {
-                          "type": "SparkChartView",
-                          "id": 5
-                        },
-                        "thresholds": {
-                          "rule": "repeated",
-                          "type": "Threshold",
-                          "id": 6
+                        "showLabels": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
-                        "GaugeView": {
+                        "PieChartDataSet": {
                           "fields": {
-                            "lowerBound": {
-                              "type": "double",
-                              "id": 1
-                            },
-                            "upperBound": {
-                              "type": "double",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "SparkChartView": {
-                          "fields": {
-                            "sparkChartType": {
-                              "type": "SparkChartType",
+                            "timeSeriesQuery": {
+                              "type": "TimeSeriesQuery",
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
                             },
+                            "sliceNameTemplate": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "minAlignmentPeriod": {
                               "type": "google.protobuf.Duration",
-                              "id": 2
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
+                          }
+                        },
+                        "PieChartType": {
+                          "values": {
+                            "PIE_CHART_TYPE_UNSPECIFIED": 0,
+                            "PIE": 1,
+                            "DONUT": 2
                           }
                         }
                       }
@@ -525,6 +599,13 @@
                         "unitOverride": {
                           "type": "string",
                           "id": 5
+                        },
+                        "outputFullDuration": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -672,6 +753,87 @@
                         "SPARK_BAR": 2
                       }
                     },
+                    "Scorecard": {
+                      "oneofs": {
+                        "dataView": {
+                          "oneof": [
+                            "gaugeView",
+                            "sparkChartView",
+                            "blankView"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "timeSeriesQuery": {
+                          "type": "TimeSeriesQuery",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "gaugeView": {
+                          "type": "GaugeView",
+                          "id": 4
+                        },
+                        "sparkChartView": {
+                          "type": "SparkChartView",
+                          "id": 5
+                        },
+                        "blankView": {
+                          "type": "google.protobuf.Empty",
+                          "id": 7
+                        },
+                        "thresholds": {
+                          "rule": "repeated",
+                          "type": "Threshold",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "GaugeView": {
+                          "fields": {
+                            "lowerBound": {
+                              "type": "double",
+                              "id": 1
+                            },
+                            "upperBound": {
+                              "type": "double",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SparkChartView": {
+                          "fields": {
+                            "sparkChartType": {
+                              "type": "SparkChartType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "minAlignmentPeriod": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SectionHeader": {
+                      "fields": {
+                        "subtitle": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dividerBelow": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SingleViewGroup": {
+                      "fields": {}
+                    },
                     "TimeSeriesTable": {
                       "fields": {
                         "dataSets": {
@@ -780,6 +942,10 @@
                         "format": {
                           "type": "Format",
                           "id": 2
+                        },
+                        "style": {
+                          "type": "TextStyle",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -788,6 +954,93 @@
                             "FORMAT_UNSPECIFIED": 0,
                             "MARKDOWN": 1,
                             "RAW": 2
+                          }
+                        },
+                        "TextStyle": {
+                          "fields": {
+                            "backgroundColor": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "textColor": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "horizontalAlignment": {
+                              "type": "HorizontalAlignment",
+                              "id": 3
+                            },
+                            "verticalAlignment": {
+                              "type": "VerticalAlignment",
+                              "id": 4
+                            },
+                            "padding": {
+                              "type": "PaddingSize",
+                              "id": 5
+                            },
+                            "fontSize": {
+                              "type": "FontSize",
+                              "id": 6
+                            },
+                            "pointerLocation": {
+                              "type": "PointerLocation",
+                              "id": 7
+                            }
+                          },
+                          "nested": {
+                            "HorizontalAlignment": {
+                              "values": {
+                                "HORIZONTAL_ALIGNMENT_UNSPECIFIED": 0,
+                                "H_LEFT": 1,
+                                "H_CENTER": 2,
+                                "H_RIGHT": 3
+                              }
+                            },
+                            "VerticalAlignment": {
+                              "values": {
+                                "VERTICAL_ALIGNMENT_UNSPECIFIED": 0,
+                                "V_TOP": 1,
+                                "V_CENTER": 2,
+                                "V_BOTTOM": 3
+                              }
+                            },
+                            "PaddingSize": {
+                              "values": {
+                                "PADDING_SIZE_UNSPECIFIED": 0,
+                                "P_EXTRA_SMALL": 1,
+                                "P_SMALL": 2,
+                                "P_MEDIUM": 3,
+                                "P_LARGE": 4,
+                                "P_EXTRA_LARGE": 5
+                              }
+                            },
+                            "FontSize": {
+                              "values": {
+                                "FONT_SIZE_UNSPECIFIED": 0,
+                                "FS_EXTRA_SMALL": 1,
+                                "FS_SMALL": 2,
+                                "FS_MEDIUM": 3,
+                                "FS_LARGE": 4,
+                                "FS_EXTRA_LARGE": 5
+                              }
+                            },
+                            "PointerLocation": {
+                              "values": {
+                                "POINTER_LOCATION_UNSPECIFIED": 0,
+                                "PL_TOP": 1,
+                                "PL_RIGHT": 2,
+                                "PL_BOTTOM": 3,
+                                "PL_LEFT": 4,
+                                "PL_TOP_LEFT": 5,
+                                "PL_TOP_RIGHT": 6,
+                                "PL_RIGHT_TOP": 7,
+                                "PL_RIGHT_BOTTOM": 8,
+                                "PL_BOTTOM_RIGHT": 9,
+                                "PL_BOTTOM_LEFT": 10,
+                                "PL_LEFT_BOTTOM": 11,
+                                "PL_LEFT_TOP": 12
+                              }
+                            }
                           }
                         }
                       }
@@ -932,7 +1185,8 @@
                           "responseType": "Dashboard",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*}/dashboards",
-                            "(google.api.http).body": "dashboard"
+                            "(google.api.http).body": "dashboard",
+                            "(google.api.method_signature)": "parent,dashboard"
                           },
                           "parsedOptions": [
                             {
@@ -940,6 +1194,9 @@
                                 "post": "/v1/{parent=projects/*}/dashboards",
                                 "body": "dashboard"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,dashboard"
                             }
                           ]
                         },
@@ -947,13 +1204,17 @@
                           "requestType": "ListDashboardsRequest",
                           "responseType": "ListDashboardsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*}/dashboards"
+                            "(google.api.http).get": "/v1/{parent=projects/*}/dashboards",
+                            "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{parent=projects/*}/dashboards"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         },
@@ -961,13 +1222,17 @@
                           "requestType": "GetDashboardRequest",
                           "responseType": "Dashboard",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/dashboards/*}"
+                            "(google.api.http).get": "/v1/{name=projects/*/dashboards/*}",
+                            "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=projects/*/dashboards/*}"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -975,13 +1240,17 @@
                           "requestType": "DeleteDashboardRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1/{name=projects/*/dashboards/*}"
+                            "(google.api.http).delete": "/v1/{name=projects/*/dashboards/*}",
+                            "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "delete": "/v1/{name=projects/*/dashboards/*}"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -1009,7 +1278,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "dashboard": {
@@ -1041,7 +1311,10 @@
                         },
                         "pageToken": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1105,9 +1378,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "LaunchStageProto",
+            "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -1206,6 +1479,98 @@
                   "type": "string",
                   "id": 2
                 }
+              }
+            },
+            "MonitoredResourceDescriptor": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 5
+                },
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "displayName": {
+                  "type": "string",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                },
+                "labels": {
+                  "rule": "repeated",
+                  "type": "LabelDescriptor",
+                  "id": 4
+                },
+                "launchStage": {
+                  "type": "LaunchStage",
+                  "id": 7
+                }
+              }
+            },
+            "MonitoredResource": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "labels": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "MonitoredResourceMetadata": {
+              "fields": {
+                "systemLabels": {
+                  "type": "google.protobuf.Struct",
+                  "id": 1
+                },
+                "userLabels": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "LabelDescriptor": {
+              "fields": {
+                "key": {
+                  "type": "string",
+                  "id": 1
+                },
+                "valueType": {
+                  "type": "ValueType",
+                  "id": 2
+                },
+                "description": {
+                  "type": "string",
+                  "id": 3
+                }
+              },
+              "nested": {
+                "ValueType": {
+                  "values": {
+                    "STRING": 0,
+                    "BOOL": 1,
+                    "INT64": 2
+                  }
+                }
+              }
+            },
+            "LaunchStage": {
+              "values": {
+                "LAUNCH_STAGE_UNSPECIFIED": 0,
+                "UNIMPLEMENTED": 6,
+                "PRELAUNCH": 7,
+                "EARLY_ACCESS": 1,
+                "ALPHA": 2,
+                "BETA": 3,
+                "GA": 4,
+                "DEPRECATED": 5
               }
             },
             "http": {
@@ -1539,18 +1904,6 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
-              }
-            },
-            "LaunchStage": {
-              "values": {
-                "LAUNCH_STAGE_UNSPECIFIED": 0,
-                "UNIMPLEMENTED": 6,
-                "PRELAUNCH": 7,
-                "EARLY_ACCESS": 1,
-                "ALPHA": 2,
-                "BETA": 3,
-                "GA": 4,
-                "DEPRECATED": 5
               }
             }
           }
@@ -2548,8 +2901,107 @@
                 }
               }
             },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
             "Empty": {
               "fields": {}
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/interval;interval",
+            "java_multiple_files": true,
+            "java_outer_classname": "IntervalProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Interval": {
+              "fields": {
+                "startTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 1
+                },
+                "endTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 2
+                }
+              }
             }
           }
         }

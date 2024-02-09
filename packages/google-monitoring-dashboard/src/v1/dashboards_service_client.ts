@@ -802,10 +802,11 @@ export class DashboardsServiceClient {
    * @param {number} request.pageSize
    *   A positive number that is the maximum number of results to return.
    *   If unspecified, a default of 1000 is used.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
+   * @param {string} [request.pageToken]
+   *   Optional. If this field is not empty then it must contain the
+   *   `nextPageToken` value returned by a previous call to this method.  Using
+   *   this field causes the method to return additional results from the previous
+   *   method call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -904,10 +905,11 @@ export class DashboardsServiceClient {
    * @param {number} request.pageSize
    *   A positive number that is the maximum number of results to return.
    *   If unspecified, a default of 1000 is used.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
+   * @param {string} [request.pageToken]
+   *   Optional. If this field is not empty then it must contain the
+   *   `nextPageToken` value returned by a previous call to this method.  Using
+   *   this field causes the method to return additional results from the previous
+   *   method call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -954,10 +956,11 @@ export class DashboardsServiceClient {
    * @param {number} request.pageSize
    *   A positive number that is the maximum number of results to return.
    *   If unspecified, a default of 1000 is used.
-   * @param {string} request.pageToken
-   *   If this field is not empty then it must contain the `nextPageToken` value
-   *   returned by a previous call to this method.  Using this field causes the
-   *   method to return additional results from the previous method call.
+   * @param {string} [request.pageToken]
+   *   Optional. If this field is not empty then it must contain the
+   *   `nextPageToken` value returned by a previous call to this method.  Using
+   *   this field causes the method to return additional results from the previous
+   *   method call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
