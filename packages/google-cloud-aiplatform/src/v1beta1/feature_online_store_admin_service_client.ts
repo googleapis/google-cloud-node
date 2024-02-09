@@ -980,6 +980,10 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1256,6 +1260,9 @@ export class FeatureOnlineStoreAdminServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1504,6 +1511,9 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
@@ -1770,6 +1780,9 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
@@ -2709,6 +2722,7 @@ export class FeatureOnlineStoreAdminServiceClient {
    *   Updatable fields:
    *
    *     * `big_query_source`
+   *     * `bigtable`
    *     * `labels`
    *     * `sync_config`
    * @param {object} [options]
@@ -3165,6 +3179,7 @@ export class FeatureOnlineStoreAdminServiceClient {
    *   Updatable fields:
    *
    *     * `labels`
+   *     * `serviceAgentType`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

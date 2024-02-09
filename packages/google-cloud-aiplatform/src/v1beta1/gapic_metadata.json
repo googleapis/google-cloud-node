@@ -1571,11 +1571,6 @@
         "grpc": {
           "libraryClient": "LlmUtilityServiceClient",
           "rpcs": {
-            "CountTokens": {
-              "methods": [
-                "countTokens"
-              ]
-            },
             "ComputeTokens": {
               "methods": [
                 "computeTokens"
@@ -1586,11 +1581,6 @@
         "grpc-fallback": {
           "libraryClient": "LlmUtilityServiceClient",
           "rpcs": {
-            "CountTokens": {
-              "methods": [
-                "countTokens"
-              ]
-            },
             "ComputeTokens": {
               "methods": [
                 "computeTokens"
@@ -2392,6 +2382,11 @@
                 "batchDeletePipelineJobs"
               ]
             },
+            "BatchCancelPipelineJobs": {
+              "methods": [
+                "batchCancelPipelineJobs"
+              ]
+            },
             "ListTrainingPipelines": {
               "methods": [
                 "listTrainingPipelines",
@@ -2454,6 +2449,11 @@
             "BatchDeletePipelineJobs": {
               "methods": [
                 "batchDeletePipelineJobs"
+              ]
+            },
+            "BatchCancelPipelineJobs": {
+              "methods": [
+                "batchCancelPipelineJobs"
               ]
             },
             "ListTrainingPipelines": {
