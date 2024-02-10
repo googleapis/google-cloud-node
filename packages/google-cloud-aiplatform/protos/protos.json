@@ -27643,6 +27643,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "groundingMetadata": {
+                          "type": "GroundingMetadata",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -27658,12 +27665,129 @@
                         }
                       }
                     },
+                    "Segment": {
+                      "fields": {
+                        "partIndex": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startIndex": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endIndex": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GroundingAttribution": {
+                      "oneofs": {
+                        "reference": {
+                          "oneof": [
+                            "web"
+                          ]
+                        },
+                        "_confidenceScore": {
+                          "oneof": [
+                            "confidenceScore"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "web": {
+                          "type": "Web",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "segment": {
+                          "type": "Segment",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "confidenceScore": {
+                          "type": "float",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Web": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GroundingMetadata": {
+                      "fields": {
+                        "webSearchQueries": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "groundingAttributions": {
+                          "rule": "repeated",
+                          "type": "GroundingAttribution",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "Tool": {
                       "fields": {
                         "functionDeclarations": {
                           "rule": "repeated",
                           "type": "FunctionDeclaration",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "retrieval": {
+                          "type": "Retrieval",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "googleSearchRetrieval": {
+                          "type": "GoogleSearchRetrieval",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -27727,6 +27851,50 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Retrieval": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "vertexAiSearch"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "vertexAiSearch": {
+                          "type": "VertexAISearch",
+                          "id": 2
+                        },
+                        "disableAttribution": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "VertexAISearch": {
+                      "fields": {
+                        "datastore": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GoogleSearchRetrieval": {
+                      "fields": {
+                        "disableAttribution": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
