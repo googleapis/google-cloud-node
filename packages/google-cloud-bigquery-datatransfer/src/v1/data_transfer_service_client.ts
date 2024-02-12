@@ -316,6 +316,7 @@ export class DataTransferServiceClient {
       'listTransferLogs',
       'checkValidCreds',
       'enrollDataSources',
+      'unenrollDataSources',
     ];
     for (const methodName of dataTransferServiceStubMethods) {
       const callPromise = this.dataTransferServiceStub.then(
@@ -1637,6 +1638,108 @@ export class DataTransferServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.enrollDataSources(request, options, callback);
+  }
+  /**
+   * Unenroll data sources in a user project. This allows users to remove
+   * transfer configurations for these data sources. They will no longer appear
+   * in the ListDataSources RPC and will also no longer appear in the [BigQuery
+   * UI](https://console.cloud.google.com/bigquery).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the project resource in the form: `projects/{project_id}`
+   * @param {string[]} request.dataSourceIds
+   *   Data sources that are unenrolled. It is required to provide at least one
+   *   data source id.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_transfer_service.unenroll_data_sources.js</caption>
+   * region_tag:bigquerydatatransfer_v1_generated_DataTransferService_UnenrollDataSources_async
+   */
+  unenrollDataSources(
+    request?: protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  unenrollDataSources(
+    request: protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  unenrollDataSources(
+    request: protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  unenrollDataSources(
+    request?: protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.unenrollDataSources(request, options, callback);
   }
 
   /**

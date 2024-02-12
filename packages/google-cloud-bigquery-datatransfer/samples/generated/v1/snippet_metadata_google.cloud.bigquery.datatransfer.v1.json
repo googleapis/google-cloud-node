@@ -710,6 +710,50 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_UnenrollDataSources_async",
+            "title": "DataTransferService unenrollDataSources Sample",
+            "origin": "API_DEFINITION",
+            "description": " Unenroll data sources in a user project. This allows users to remove transfer configurations for these data sources. They will no longer appear in the ListDataSources RPC and will also no longer appear in the [BigQuery UI](https://console.cloud.google.com/bigquery).",
+            "canonical": true,
+            "file": "data_transfer_service.unenroll_data_sources.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UnenrollDataSources",
+                "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.UnenrollDataSources",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "data_source_ids",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "DataTransferServiceClient",
+                    "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient"
+                },
+                "method": {
+                    "shortName": "UnenrollDataSources",
+                    "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService.UnenrollDataSources",
+                    "service": {
+                        "shortName": "DataTransferService",
+                        "fullName": "google.cloud.bigquery.datatransfer.v1.DataTransferService"
+                    }
+                }
+            }
         }
     ]
 }

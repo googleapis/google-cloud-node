@@ -1829,6 +1829,145 @@ describe('v1.DataTransferServiceClient', () => {
     });
   });
 
+  describe('unenrollDataSources', () => {
+    it('invokes unenrollDataSources without error', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.unenrollDataSources =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.unenrollDataSources(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes unenrollDataSources without error using callback', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.unenrollDataSources =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.unenrollDataSources(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes unenrollDataSources with error', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.unenrollDataSources = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.unenrollDataSources(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unenrollDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes unenrollDataSources with closed client', async () => {
+      const client = new datatransferserviceModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.unenrollDataSources(request), expectedError);
+    });
+  });
+
   describe('listDataSources', () => {
     it('invokes listDataSources without error', async () => {
       const client = new datatransferserviceModule.v1.DataTransferServiceClient(
