@@ -444,6 +444,14 @@ describe('Storage', () => {
       );
     });
 
+    it('should accept and use a `universeDomain`', () => {
+      const universeDomain = 'my-universe.com';
+
+      const storage = new Storage({universeDomain});
+
+      assert.equal(storage.apiEndpoint, `https://storage.${universeDomain}`);
+    });
+
     describe('STORAGE_EMULATOR_HOST', () => {
       // Note: EMULATOR_HOST is an experimental configuration variable. Use apiEndpoint instead.
       const EMULATOR_HOST = 'https://internal.benchmark.com/path';
@@ -500,8 +508,7 @@ describe('Storage', () => {
           projectId: PROJECT_ID,
         });
 
-        const calledWith = storage.calledWith_[0];
-        assert.strictEqual(calledWith.customEndpoint, true);
+        assert.strictEqual(storage.customEndpoint, true);
       });
     });
   });

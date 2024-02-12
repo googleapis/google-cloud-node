@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
+import {
+  AuthClient,
+  DEFAULT_UNIVERSE,
+  GoogleAuth,
+  GoogleAuthOptions,
+} from 'google-auth-library';
 import * as r from 'teeny-request';
 import * as uuid from 'uuid';
 
@@ -62,6 +67,11 @@ export interface ServiceConfig {
    * Reuse an existing `AuthClient` or `GoogleAuth` client instead of creating a new one.
    */
   authClient?: AuthClient | GoogleAuth;
+
+  /**
+   * Set to true if the endpoint is a custom URL
+   */
+  customEndpoint?: boolean;
 }
 
 export interface ServiceOptions extends Omit<GoogleAuthOptions, 'authClient'> {
@@ -84,9 +94,10 @@ export class Service {
   providedUserAgent?: string;
   makeAuthenticatedRequest: MakeAuthenticatedRequest;
   authClient: GoogleAuth<AuthClient>;
-  private getCredentials: {};
-  readonly apiEndpoint: string;
+  apiEndpoint: string;
   timeout?: number;
+  universeDomain: string;
+  customEndpoint: boolean;
 
   /**
    * Service is a base class, meant to be inherited from by a "service," like
@@ -115,8 +126,10 @@ export class Service {
     this.projectId = options.projectId || DEFAULT_PROJECT_ID_TOKEN;
     this.projectIdRequired = config.projectIdRequired !== false;
     this.providedUserAgent = options.userAgent;
+    this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;
+    this.customEndpoint = config.customEndpoint || false;
 
-    const reqCfg = {
+    this.makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory({
       ...config,
       projectIdRequired: this.projectIdRequired,
       projectId: this.projectId,
@@ -124,13 +137,12 @@ export class Service {
       credentials: options.credentials,
       keyFile: options.keyFilename,
       email: options.email,
-      token: options.token,
-    };
-
-    this.makeAuthenticatedRequest =
-      util.makeAuthenticatedRequestFactory(reqCfg);
+      clientOptions: {
+        universeDomain: options.universeDomain,
+        ...options.clientOptions,
+      },
+    });
     this.authClient = this.makeAuthenticatedRequest.authClient;
-    this.getCredentials = this.makeAuthenticatedRequest.getCredentials;
 
     const isCloudFunctionEnv = !!process.env.FUNCTION_NAME;
 

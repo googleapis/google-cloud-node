@@ -15,16 +15,20 @@
 import * as crypto from 'crypto';
 import * as http from 'http';
 import * as url from 'url';
-import {ExceptionMessages} from './storage.js';
+import {ExceptionMessages, Storage} from './storage.js';
 import {encodeURI, qsStringify, objectEntries, formatAsUTCISO} from './util.js';
+import {GoogleAuth} from 'google-auth-library';
 
-interface GetCredentialsResponse {
-  client_email?: string;
-}
+type GoogleAuthLike = Pick<GoogleAuth, 'getCredentials' | 'sign'>;
 
+/**
+ * @deprecated Use {@link GoogleAuth} instead
+ */
 export interface AuthClient {
   sign(blobToSign: string): Promise<string>;
-  getCredentials(): Promise<GetCredentialsResponse>;
+  getCredentials(): Promise<{
+    client_email?: string;
+  }>;
 }
 
 export interface BucketI {
@@ -50,6 +54,20 @@ export interface GetSignedUrlConfigInternal {
   contentType?: string;
   bucket: string;
   file?: string;
+  /**
+   * The host for the generated signed URL
+   *
+   * @example
+   * 'https://localhost:8080/'
+   */
+  host?: string | URL;
+  /**
+   * An endpoint for generating the signed URL
+   *
+   * @example
+   * 'https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/'
+   */
+  signingEndpoint?: string | URL;
 }
 
 interface SignedUrlQuery {
@@ -75,6 +93,20 @@ export interface SignerGetSignedUrlConfig {
   queryParams?: Query;
   contentMd5?: string;
   contentType?: string;
+  /**
+   * The host for the generated signed URL
+   *
+   * @example
+   * 'https://localhost:8080/'
+   */
+  host?: string | URL;
+  /**
+   * An endpoint for generating the signed URL
+   *
+   * @example
+   * 'https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/'
+   */
+  signingEndpoint?: string | URL;
 }
 
 export type SignerGetSignedUrlResponse = string;
@@ -102,20 +134,26 @@ const SEVEN_DAYS = 7 * 24 * 60 * 60;
 
 /**
  * @const {string}
- * @private
+ * @deprecated - unused
  */
 export const PATH_STYLED_HOST = 'https://storage.googleapis.com';
 
 export class URLSigner {
-  private authClient: AuthClient;
-  private bucket: BucketI;
-  private file?: FileI;
-
-  constructor(authClient: AuthClient, bucket: BucketI, file?: FileI) {
-    this.bucket = bucket;
-    this.file = file;
-    this.authClient = authClient;
-  }
+  constructor(
+    private auth: AuthClient | GoogleAuthLike,
+    private bucket: BucketI,
+    private file?: FileI,
+    /**
+     * A {@link Storage} object.
+     *
+     * @privateRemarks
+     *
+     * Technically this is a required field, however it would be a breaking change to
+     * move it before optional properties. In the next major we should refactor the
+     * constructor of this class to only accept a config object.
+     */
+    private storage: Storage = new Storage()
+  ) {}
 
   getSignedUrl(
     cfg: SignerGetSignedUrlConfig
@@ -137,7 +175,7 @@ export class URLSigner {
     if (cfg.cname) {
       customHost = cfg.cname;
     } else if (isVirtualHostedStyle) {
-      customHost = `https://${this.bucket.name}.storage.googleapis.com`;
+      customHost = `https://${this.bucket.name}.storage.${this.storage.universeDomain}`;
     }
 
     const secondsToMilliseconds = 1000;
@@ -169,7 +207,10 @@ export class URLSigner {
     return promise.then(query => {
       query = Object.assign(query, cfg.queryParams);
 
-      const signedUrl = new url.URL(config.cname || PATH_STYLED_HOST);
+      const signedUrl = new url.URL(
+        cfg.host?.toString() || config.cname || this.storage.apiEndpoint
+      );
+
       signedUrl.pathname = this.getResourcePath(
         !!config.cname,
         this.bucket.name,
@@ -202,10 +243,13 @@ export class URLSigner {
     ].join('\n');
 
     const sign = async () => {
-      const authClient = this.authClient;
+      const auth = this.auth;
       try {
-        const signature = await authClient.sign(blobToSign);
-        const credentials = await authClient.getCredentials();
+        const signature = await auth.sign(
+          blobToSign,
+          config.signingEndpoint?.toString()
+        );
+        const credentials = await auth.getCredentials();
 
         return {
           GoogleAccessId: credentials.client_email!,
@@ -240,8 +284,10 @@ export class URLSigner {
     }
 
     const extensionHeaders = Object.assign({}, config.extensionHeaders);
-    const fqdn = new url.URL(config.cname || PATH_STYLED_HOST);
-    extensionHeaders.host = fqdn.host;
+    const fqdn = new url.URL(
+      config.host?.toString() || config.cname || this.storage.apiEndpoint
+    );
+    extensionHeaders.host = fqdn.hostname;
     if (config.contentMd5) {
       extensionHeaders['content-md5'] = config.contentMd5;
     }
@@ -272,7 +318,7 @@ export class URLSigner {
     const credentialScope = `${datestamp}/auto/storage/goog4_request`;
 
     const sign = async () => {
-      const credentials = await this.authClient.getCredentials();
+      const credentials = await this.auth.getCredentials();
       const credential = `${credentials.client_email}/${credentialScope}`;
       const dateISO = formatAsUTCISO(
         config.accessibleAt ? config.accessibleAt : new Date(),
@@ -312,7 +358,10 @@ export class URLSigner {
       ].join('\n');
 
       try {
-        const signature = await this.authClient.sign(blobToSign);
+        const signature = await this.auth.sign(
+          blobToSign,
+          config.signingEndpoint?.toString()
+        );
         const signatureHex = Buffer.from(signature, 'base64').toString('hex');
         const signedQuery: Query = Object.assign({}, queryParams, {
           'X-Goog-Signature': signatureHex,

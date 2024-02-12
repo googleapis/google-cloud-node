@@ -243,6 +243,7 @@ describe('File', () => {
         },
         idempotencyStrategy: IdempotencyStrategy.RetryConditional,
       },
+      customEndpoint: false,
     };
 
     BUCKET = new Bucket(STORAGE, 'bucket-name');
@@ -3387,6 +3388,25 @@ describe('File', () => {
       );
     });
 
+    it('should prefer a customEndpoint > virtualHostedStyle, cname', done => {
+      const customEndpoint = 'https://my-custom-endpoint.com';
+
+      STORAGE.apiEndpoint = customEndpoint;
+      STORAGE.customEndpoint = true;
+
+      CONFIG.virtualHostedStyle = true;
+      CONFIG.bucketBoundHostname = 'http://domain.tld';
+
+      file.generateSignedPostPolicyV4(
+        CONFIG,
+        (err: Error, res: SignedPostPolicyV4Output) => {
+          assert.ifError(err);
+          assert(res.url, `https://${BUCKET.name}.storage.googleapis.com/`);
+          done();
+        }
+      );
+    });
+
     describe('expires', () => {
       it('should accept Date objects', done => {
         const expires = new Date(Date.now() + 1000 * 60);
@@ -3561,6 +3581,7 @@ describe('File', () => {
           expires: config.expires,
           accessibleAt: accessibleAtDate,
           extensionHeaders: {},
+          host: undefined,
           queryParams: {},
           contentMd5: config.contentMd5,
           contentType: config.contentType,

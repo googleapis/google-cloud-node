@@ -111,7 +111,9 @@ describe('Service', () => {
           email: OPTIONS.email,
           projectIdRequired: CONFIG.projectIdRequired,
           projectId: OPTIONS.projectId,
-          token: OPTIONS.token,
+          clientOptions: {
+            universeDomain: undefined,
+          },
         };
 
         assert.deepStrictEqual(config, expectedConfig);
@@ -191,21 +193,6 @@ describe('Service', () => {
       const options = {...OPTIONS, timeout};
       const service = new Service(fakeCfg, options);
       assert.strictEqual(service.timeout, timeout);
-    });
-
-    it('should localize the getCredentials method', () => {
-      function getCredentials() {}
-
-      makeAuthenticatedRequestFactoryOverride = () => {
-        return {
-          authClient: {},
-          getCredentials,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any;
-      };
-
-      const service = new Service(CONFIG, OPTIONS);
-      assert.strictEqual(service.getCredentials, getCredentials);
     });
 
     it('should default globalInterceptors to an empty array', () => {

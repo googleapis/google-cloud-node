@@ -21,7 +21,11 @@ import {
   GaxiosError,
 } from 'gaxios';
 import * as gaxios from 'gaxios';
-import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
+import {
+  DEFAULT_UNIVERSE,
+  GoogleAuth,
+  GoogleAuthOptions,
+} from 'google-auth-library';
 import {Readable, Writable, WritableOptions} from 'stream';
 import AsyncRetry from 'async-retry';
 import {RetryOptions, PreconditionOptions} from './storage.js';
@@ -39,7 +43,6 @@ import {getPackageJSON} from './package-json-helper.cjs';
 
 const NOT_FOUND_STATUS_CODE = 404;
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
-const DEFAULT_API_ENDPOINT_REGEX = /.*\.googleapis\.com/;
 const packageJson = getPackageJSON();
 
 export const PROTOCOL_REGEX = /^(\w*):\/\//;
@@ -75,9 +78,10 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
   /**
    * The API endpoint used for the request.
    * Defaults to `storage.googleapis.com`.
+   *
    * **Warning**:
-   * If this value does not match the pattern *.googleapis.com,
-   * an emulator context will be assumed and authentication will be bypassed.
+   * If this value does not match the current GCP universe an emulator context
+   * will be assumed and authentication will be bypassed.
    */
   apiEndpoint?: string;
 
@@ -208,6 +212,11 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
    * 'publicRead')
    */
   public?: boolean;
+
+  /**
+   * The service domain for a given Cloud universe.
+   */
+  universeDomain?: string;
 
   /**
    * If you already have a resumable URI from a previously-created resumable
@@ -356,10 +365,34 @@ export class Upload extends Writable {
     ];
     this.authClient = cfg.authClient || new GoogleAuth(cfg.authConfig);
 
-    this.apiEndpoint = 'https://storage.googleapis.com';
-    if (cfg.apiEndpoint) {
+    const universe = cfg.universeDomain || DEFAULT_UNIVERSE;
+
+    this.apiEndpoint = `https://storage.${universe}`;
+    if (cfg.apiEndpoint && cfg.apiEndpoint !== this.apiEndpoint) {
       this.apiEndpoint = this.sanitizeEndpoint(cfg.apiEndpoint);
-      if (!DEFAULT_API_ENDPOINT_REGEX.test(cfg.apiEndpoint)) {
+
+      const hostname = new URL(this.apiEndpoint).hostname;
+
+      // check if it is a domain of a known universe
+      const isDomain = hostname === universe;
+      const isDefaultUniverseDomain = hostname === DEFAULT_UNIVERSE;
+
+      // check if it is a subdomain of a known universe
+      // by checking a last (universe's length + 1) of a hostname
+      const isSubDomainOfUniverse =
+        hostname.slice(-(universe.length + 1)) === `.${universe}`;
+      const isSubDomainOfDefaultUniverse =
+        hostname.slice(-(DEFAULT_UNIVERSE.length + 1)) ===
+        `.${DEFAULT_UNIVERSE}`;
+
+      if (
+        !isDomain &&
+        !isDefaultUniverseDomain &&
+        !isSubDomainOfUniverse &&
+        !isSubDomainOfDefaultUniverse
+      ) {
+        // a custom, non-universe domain,
+        // use gaxios
         this.authClient = gaxios;
       }
     }

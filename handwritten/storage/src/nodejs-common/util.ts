@@ -179,7 +179,7 @@ export interface MakeAuthenticatedRequestFactoryConfig
 
   /**
    * A pre-instantiated `AuthClient` or `GoogleAuth` client that should be used.
-   * A new will be created if this is not set.
+   * A new client will be created if this is not set.
    */
   authClient?: AuthClient | GoogleAuth;
 
@@ -638,13 +638,12 @@ export class Util {
       // Use an existing `GoogleAuth`
       authClient = googleAutoAuthConfig.authClient;
     } else {
-      // Pass an `AuthClient` to `GoogleAuth`, if available
-      const config = {
+      // Pass an `AuthClient` & `clientOptions` to `GoogleAuth`, if available
+      authClient = new GoogleAuth({
         ...googleAutoAuthConfig,
         authClient: googleAutoAuthConfig.authClient,
-      };
-
-      authClient = new GoogleAuth(config);
+        clientOptions: googleAutoAuthConfig.clientOptions,
+      });
     }
 
     /**

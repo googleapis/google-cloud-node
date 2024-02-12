@@ -29,6 +29,7 @@ import {
   CRC32CValidatorGenerator,
   CRC32C_DEFAULT_VALIDATOR_GENERATOR,
 } from './crc32c.js';
+import {DEFAULT_UNIVERSE} from 'google-auth-library';
 
 export interface GetServiceAccountOptions {
   userProject?: string;
@@ -692,7 +693,9 @@ export class Storage extends Service {
    * @param {StorageOptions} [options] Configuration options.
    */
   constructor(options: StorageOptions = {}) {
-    let apiEndpoint = 'https://storage.googleapis.com';
+    const universe = options.universeDomain || DEFAULT_UNIVERSE;
+
+    let apiEndpoint = `https://storage.${universe}`;
     let customEndpoint = false;
 
     // Note: EMULATOR_HOST is an experimental configuration variable. Use apiEndpoint instead.

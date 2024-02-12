@@ -54,6 +54,7 @@ import sinon from 'sinon';
 import {Transform} from 'stream';
 import {IdempotencyStrategy} from '../src/storage.js';
 import {convertObjKeysToSnakeCase, getDirName} from '../src/util.js';
+import {DEFAULT_UNIVERSE} from 'google-auth-library';
 
 class FakeFile {
   calledWith_: IArguments;
@@ -204,6 +205,7 @@ describe('Bucket', () => {
       idempotencyStrategy: IdempotencyStrategy.RetryConditional,
     },
     crc32cGenerator: () => new CRC32C(),
+    universeDomain: DEFAULT_UNIVERSE,
   };
   const BUCKET_NAME = 'test-bucket';
 
@@ -2123,8 +2125,10 @@ describe('Bucket', () => {
             version: 'v4',
             expires: SIGNED_URL_CONFIG.expires,
             extensionHeaders: {},
+            host: undefined,
             queryParams: {},
             cname: CNAME,
+            signingEndpoint: undefined,
           });
           done();
         }
