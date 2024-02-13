@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.1.0...admin-v7.2.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5022](https://github.com/googleapis/google-cloud-node/issues/5022)) ([b6498d8](https://github.com/googleapis/google-cloud-node/commit/b6498d8580d056817981dedbaa0ea5d82e9dccc2))
+
 ## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.0.1...admin-v7.1.0) (2024-02-07)
 
 

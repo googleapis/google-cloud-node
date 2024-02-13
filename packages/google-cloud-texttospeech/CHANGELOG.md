@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.0.2...text-to-speech-v5.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5028](https://github.com/googleapis/google-cloud-node/issues/5028)) ([852f3eb](https://github.com/googleapis/google-cloud-node/commit/852f3ebf065ee24e910580b9a1fc365acb3a744a))
+
 ## [5.0.2](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.0.1...text-to-speech-v5.0.2) (2024-01-15)
 
 

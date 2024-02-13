@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v5.0.1...security-private-ca-v5.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5027](https://github.com/googleapis/google-cloud-node/issues/5027)) ([88763bb](https://github.com/googleapis/google-cloud-node/commit/88763bb1b7ce9ff884b9e3f476230d38985b2ff2))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v5.0.0...security-private-ca-v5.0.1) (2023-09-06)
 
 

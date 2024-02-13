@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/phishing-protection-v4.0.1...phishing-protection-v4.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5026](https://github.com/googleapis/google-cloud-node/issues/5026)) ([43acd89](https://github.com/googleapis/google-cloud-node/commit/43acd893e6c428f219d62f0c4264e4db78b99f99))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/phishing-protection-v4.0.0...phishing-protection-v4.0.1) (2023-09-06)
 
 

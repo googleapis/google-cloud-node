@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.1.1...containeranalysis-v5.2.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5029](https://github.com/googleapis/google-cloud-node/issues/5029)) ([09e59ad](https://github.com/googleapis/google-cloud-node/commit/09e59ad6e34001a33d01894ccd5a0643f1a84883))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.1.0...containeranalysis-v5.1.1) (2023-09-11)
 
 

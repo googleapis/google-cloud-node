@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/billing-v4.2.0...billing-v4.3.0) (2024-02-09)
+
+
+### Features
+
+* Support for Trusted Private Cloud ([895830a](https://github.com/googleapis/google-cloud-node/commit/895830a3ef91666c30a96a7f68bd4cd1f582d58d))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/billing-v4.1.0...billing-v4.2.0) (2024-01-15)
 
 

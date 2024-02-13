@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/vision-v4.0.3...vision-v4.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter ([#5018](https://github.com/googleapis/google-cloud-node/issues/5018)) ([3180809](https://github.com/googleapis/google-cloud-node/commit/31808095791eeee24ebdedbddf72b075ee3fd6bf))
+
 ## [4.0.3](https://github.com/googleapis/google-cloud-node/compare/vision-v4.0.2...vision-v4.0.3) (2024-01-23)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.3.1...dialogflow-cx-v4.4.0) (2024-02-09)
+
+
+### Features
+
+* [dialogflow-cx] A new field `opt_out_conformer_model_migration` is added to message `.google.cloud.dialogflow.cx.v3.InputAudioConfig` ([#5034](https://github.com/googleapis/google-cloud-node/issues/5034)) ([47fb485](https://github.com/googleapis/google-cloud-node/commit/47fb485d4b157863ec68efdbc9e6e53dad903ac9))
+
 ## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.3.0...dialogflow-cx-v4.3.1) (2024-01-23)
 
 
