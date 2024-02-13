@@ -383,6 +383,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an Application. */
+                interface IApplication {
+
+                    /** Application baseUri */
+                    baseUri?: (string|null);
+
+                    /** Application fullUri */
+                    fullUri?: (string|null);
+                }
+
+                /** Represents an Application. */
+                class Application implements IApplication {
+
+                    /**
+                     * Constructs a new Application.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IApplication);
+
+                    /** Application baseUri. */
+                    public baseUri: string;
+
+                    /** Application fullUri. */
+                    public fullUri: string;
+
+                    /**
+                     * Creates a new Application instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Application instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IApplication): google.cloud.securitycenter.v1.Application;
+
+                    /**
+                     * Encodes the specified Application message. Does not implicitly {@link google.cloud.securitycenter.v1.Application.verify|verify} messages.
+                     * @param message Application message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IApplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Application message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Application.verify|verify} messages.
+                     * @param message Application message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IApplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Application message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Application
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Application;
+
+                    /**
+                     * Decodes an Application message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Application
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Application;
+
+                    /**
+                     * Verifies an Application message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Application message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Application
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Application;
+
+                    /**
+                     * Creates a plain object from an Application message. Also converts values to other types if specified.
+                     * @param message Application
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Application, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Application to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Application
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an Asset. */
                 interface IAsset {
 
@@ -3256,6 +3359,9 @@ export namespace google {
 
                     /** Finding kernelRootkit */
                     kernelRootkit?: (google.cloud.securitycenter.v1.IKernelRootkit|null);
+
+                    /** Finding application */
+                    application?: (google.cloud.securitycenter.v1.IApplication|null);
                 }
 
                 /** Represents a Finding. */
@@ -3380,6 +3486,9 @@ export namespace google {
 
                     /** Finding kernelRootkit. */
                     public kernelRootkit?: (google.cloud.securitycenter.v1.IKernelRootkit|null);
+
+                    /** Finding application. */
+                    public application?: (google.cloud.securitycenter.v1.IApplication|null);
 
                     /**
                      * Creates a new Finding instance using the specified properties.

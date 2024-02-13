@@ -88,6 +88,18 @@
                         }
                       }
                     },
+                    "Application": {
+                      "fields": {
+                        "baseUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fullUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Asset": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/Asset",
@@ -822,6 +834,10 @@
                         "kernelRootkit": {
                           "type": "KernelRootkit",
                           "id": 50
+                        },
+                        "application": {
+                          "type": "Application",
+                          "id": 53
                         }
                       },
                       "nested": {
