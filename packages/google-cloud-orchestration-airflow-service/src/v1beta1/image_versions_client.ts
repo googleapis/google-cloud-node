@@ -195,6 +195,12 @@ export class ImageVersionsClient {
       environmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/environments/{environment}'
       ),
+      userWorkloadsConfigMapPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/environments/{environment}/userWorkloadsConfigMaps/{user_workloads_config_map}'
+      ),
+      userWorkloadsSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/environments/{environment}/userWorkloadsSecrets/{user_workloads_secret}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -622,6 +628,166 @@ export class ImageVersionsClient {
   matchEnvironmentFromEnvironmentName(environmentName: string) {
     return this.pathTemplates.environmentPathTemplate.match(environmentName)
       .environment;
+  }
+
+  /**
+   * Return a fully-qualified userWorkloadsConfigMap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @param {string} user_workloads_config_map
+   * @returns {string} Resource name string.
+   */
+  userWorkloadsConfigMapPath(
+    project: string,
+    location: string,
+    environment: string,
+    userWorkloadsConfigMap: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.render({
+      project: project,
+      location: location,
+      environment: environment,
+      user_workloads_config_map: userWorkloadsConfigMap,
+    });
+  }
+
+  /**
+   * Parse the project from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).environment;
+  }
+
+  /**
+   * Parse the user_workloads_config_map from UserWorkloadsConfigMap resource.
+   *
+   * @param {string} userWorkloadsConfigMapName
+   *   A fully-qualified path representing UserWorkloadsConfigMap resource.
+   * @returns {string} A string representing the user_workloads_config_map.
+   */
+  matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(
+    userWorkloadsConfigMapName: string
+  ) {
+    return this.pathTemplates.userWorkloadsConfigMapPathTemplate.match(
+      userWorkloadsConfigMapName
+    ).user_workloads_config_map;
+  }
+
+  /**
+   * Return a fully-qualified userWorkloadsSecret resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @param {string} user_workloads_secret
+   * @returns {string} Resource name string.
+   */
+  userWorkloadsSecretPath(
+    project: string,
+    location: string,
+    environment: string,
+    userWorkloadsSecret: string
+  ) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.render({
+      project: project,
+      location: location,
+      environment: environment,
+      user_workloads_secret: userWorkloadsSecret,
+    });
+  }
+
+  /**
+   * Parse the project from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).project;
+  }
+
+  /**
+   * Parse the location from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromUserWorkloadsSecretName(userWorkloadsSecretName: string) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).environment;
+  }
+
+  /**
+   * Parse the user_workloads_secret from UserWorkloadsSecret resource.
+   *
+   * @param {string} userWorkloadsSecretName
+   *   A fully-qualified path representing UserWorkloadsSecret resource.
+   * @returns {string} A string representing the user_workloads_secret.
+   */
+  matchUserWorkloadsSecretFromUserWorkloadsSecretName(
+    userWorkloadsSecretName: string
+  ) {
+    return this.pathTemplates.userWorkloadsSecretPathTemplate.match(
+      userWorkloadsSecretName
+    ).user_workloads_secret;
   }
 
   /**

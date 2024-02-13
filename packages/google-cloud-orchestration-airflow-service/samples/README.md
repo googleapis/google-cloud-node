@@ -27,18 +27,29 @@
   * [Image_versions.list_image_versions](#image_versions.list_image_versions)
   * [Environments.check_upgrade](#environments.check_upgrade)
   * [Environments.create_environment](#environments.create_environment)
+  * [Environments.create_user_workloads_config_map](#environments.create_user_workloads_config_map)
+  * [Environments.create_user_workloads_secret](#environments.create_user_workloads_secret)
   * [Environments.database_failover](#environments.database_failover)
   * [Environments.delete_environment](#environments.delete_environment)
+  * [Environments.delete_user_workloads_config_map](#environments.delete_user_workloads_config_map)
+  * [Environments.delete_user_workloads_secret](#environments.delete_user_workloads_secret)
   * [Environments.execute_airflow_command](#environments.execute_airflow_command)
   * [Environments.fetch_database_properties](#environments.fetch_database_properties)
   * [Environments.get_environment](#environments.get_environment)
+  * [Environments.get_user_workloads_config_map](#environments.get_user_workloads_config_map)
+  * [Environments.get_user_workloads_secret](#environments.get_user_workloads_secret)
   * [Environments.list_environments](#environments.list_environments)
+  * [Environments.list_user_workloads_config_maps](#environments.list_user_workloads_config_maps)
+  * [Environments.list_user_workloads_secrets](#environments.list_user_workloads_secrets)
+  * [Environments.list_workloads](#environments.list_workloads)
   * [Environments.load_snapshot](#environments.load_snapshot)
   * [Environments.poll_airflow_command](#environments.poll_airflow_command)
   * [Environments.restart_web_server](#environments.restart_web_server)
   * [Environments.save_snapshot](#environments.save_snapshot)
   * [Environments.stop_airflow_command](#environments.stop_airflow_command)
   * [Environments.update_environment](#environments.update_environment)
+  * [Environments.update_user_workloads_config_map](#environments.update_user_workloads_config_map)
+  * [Environments.update_user_workloads_secret](#environments.update_user_workloads_secret)
   * [Image_versions.list_image_versions](#image_versions.list_image_versions)
   * [Quickstart](#quickstart)
 
@@ -312,6 +323,40 @@ __Usage:__
 
 
 
+### Environments.create_user_workloads_config_map
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.create_user_workloads_config_map.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.create_user_workloads_config_map.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.create_user_workloads_config_map.js`
+
+
+-----
+
+
+
+
+### Environments.create_user_workloads_secret
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.create_user_workloads_secret.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.create_user_workloads_secret.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.create_user_workloads_secret.js`
+
+
+-----
+
+
+
+
 ### Environments.database_failover
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.database_failover.js).
@@ -339,6 +384,40 @@ __Usage:__
 
 
 `node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.delete_environment.js`
+
+
+-----
+
+
+
+
+### Environments.delete_user_workloads_config_map
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.delete_user_workloads_config_map.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.delete_user_workloads_config_map.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.delete_user_workloads_config_map.js`
+
+
+-----
+
+
+
+
+### Environments.delete_user_workloads_secret
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.delete_user_workloads_secret.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.delete_user_workloads_secret.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.delete_user_workloads_secret.js`
 
 
 -----
@@ -397,6 +476,40 @@ __Usage:__
 
 
 
+### Environments.get_user_workloads_config_map
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.get_user_workloads_config_map.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.get_user_workloads_config_map.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.get_user_workloads_config_map.js`
+
+
+-----
+
+
+
+
+### Environments.get_user_workloads_secret
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.get_user_workloads_secret.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.get_user_workloads_secret.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.get_user_workloads_secret.js`
+
+
+-----
+
+
+
+
 ### Environments.list_environments
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_environments.js).
@@ -407,6 +520,57 @@ __Usage:__
 
 
 `node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_environments.js`
+
+
+-----
+
+
+
+
+### Environments.list_user_workloads_config_maps
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_user_workloads_config_maps.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_user_workloads_config_maps.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_user_workloads_config_maps.js`
+
+
+-----
+
+
+
+
+### Environments.list_user_workloads_secrets
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_user_workloads_secrets.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_user_workloads_secrets.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_user_workloads_secrets.js`
+
+
+-----
+
+
+
+
+### Environments.list_workloads
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_workloads.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_workloads.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.list_workloads.js`
 
 
 -----
@@ -509,6 +673,40 @@ __Usage:__
 
 
 `node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.update_environment.js`
+
+
+-----
+
+
+
+
+### Environments.update_user_workloads_config_map
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.update_user_workloads_config_map.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.update_user_workloads_config_map.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.update_user_workloads_config_map.js`
+
+
+-----
+
+
+
+
+### Environments.update_user_workloads_secret
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.update_user_workloads_secret.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.update_user_workloads_secret.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1beta1/environments.update_user_workloads_secret.js`
 
 
 -----
