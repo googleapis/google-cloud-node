@@ -52,6 +52,50 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListWorkloads": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateUserWorkloadsSecret": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetUserWorkloadsSecret": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListUserWorkloadsSecrets": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateUserWorkloadsSecret": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteUserWorkloadsSecret": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateUserWorkloadsConfigMap": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetUserWorkloadsConfigMap": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListUserWorkloadsConfigMaps": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateUserWorkloadsConfigMap": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteUserWorkloadsConfigMap": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "SaveSnapshot": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
