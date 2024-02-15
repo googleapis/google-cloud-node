@@ -706,6 +706,13 @@ export class DocumentProcessorServiceClient {
    *   the form of `{document_field_name}` or `pages.{page_field_name}`.
    * @param {google.cloud.documentai.v1beta3.ProcessOptions} request.processOptions
    *   Inference-time options for the process API
+   * @param {number[]} [request.labels]
+   *   Optional. The labels with user-defined metadata for the request.
+   *
+   *   Label keys and values can be no longer than 63 characters
+   *   (Unicode codepoints) and can only contain lowercase letters, numeric
+   *   characters, underscores, and dashes. International characters are allowed.
+   *   Label values are optional. Label keys must start with a letter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1177,7 +1184,8 @@ export class DocumentProcessorServiceClient {
    * @param {google.cloud.documentai.v1beta3.Processor} request.processor
    *   Required. The processor to be created, requires
    *   {@link protos.google.cloud.documentai.v1beta3.Processor.type|Processor.type} and
-   *   {@link protos.|Processor.display_name]} to be set. Also, the
+   *   {@link protos.google.cloud.documentai.v1beta3.Processor.display_name|Processor.display_name}
+   *   to be set. Also, the
    *   {@link protos.google.cloud.documentai.v1beta3.Processor.kms_key_name|Processor.kms_key_name}
    *   field must be set if the processor is under CMEK.
    * @param {object} [options]
@@ -1392,6 +1400,13 @@ export class DocumentProcessorServiceClient {
    *   `false`.
    * @param {google.cloud.documentai.v1beta3.ProcessOptions} request.processOptions
    *   Inference-time options for the process API
+   * @param {number[]} [request.labels]
+   *   Optional. The labels with user-defined metadata for the request.
+   *
+   *   Label keys and values can be no longer than 63 characters
+   *   (Unicode codepoints) and can only contain lowercase letters, numeric
+   *   characters, underscores, and dashes. International characters are allowed.
+   *   Label values are optional. Label keys must start with a letter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1530,6 +1545,8 @@ export class DocumentProcessorServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.CustomDocumentExtractionOptions} request.customDocumentExtractionOptions
    *   Options to control Custom Document Extraction (CDE) Processor.
+   * @param {google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions} request.foundationModelTuningOptions
+   *   Options to control foundation model tuning of a processor.
    * @param {string} request.parent
    *   Required. The parent (project, location and processor) to create the new
    *   version for. Format:

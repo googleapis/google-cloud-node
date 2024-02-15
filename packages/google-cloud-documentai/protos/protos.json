@@ -5670,6 +5670,7 @@
                           "type": "DocumentWarehouseConfig",
                           "id": 5,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -7304,6 +7305,10 @@
                                   "type": "string",
                                   "id": 1
                                 },
+                                "displayName": {
+                                  "type": "string",
+                                  "id": 6
+                                },
                                 "valueType": {
                                   "type": "string",
                                   "id": 2
@@ -7994,6 +7999,14 @@
                         "processOptions": {
                           "type": "ProcessOptions",
                           "id": 7
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8083,6 +8096,14 @@
                         "processOptions": {
                           "type": "ProcessOptions",
                           "id": 7
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -8524,7 +8545,8 @@
                       "oneofs": {
                         "processorFlags": {
                           "oneof": [
-                            "customDocumentExtractionOptions"
+                            "customDocumentExtractionOptions",
+                            "foundationModelTuningOptions"
                           ]
                         }
                       },
@@ -8532,6 +8554,10 @@
                         "customDocumentExtractionOptions": {
                           "type": "CustomDocumentExtractionOptions",
                           "id": 5
+                        },
+                        "foundationModelTuningOptions": {
+                          "type": "FoundationModelTuningOptions",
+                          "id": 12
                         },
                         "parent": {
                           "type": "string",
@@ -8596,6 +8622,24 @@
                                 "TRAINING_METHOD_UNSPECIFIED": 0,
                                 "MODEL_BASED": 1,
                                 "TEMPLATE_BASED": 2
+                              }
+                            }
+                          }
+                        },
+                        "FoundationModelTuningOptions": {
+                          "fields": {
+                            "trainSteps": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "learningRateMultiplier": {
+                              "type": "float",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }

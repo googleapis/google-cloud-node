@@ -1259,8 +1259,9 @@ export class DocumentServiceClient {
    *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
    *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
    * @param {boolean} [request.returnTotalSize]
-   *   Optional. Controls if the ListDocuments request requires a total size
-   *   of matched documents. See ListDocumentsResponse.total_size.
+   *   Optional. Controls if the request requires a total size of matched
+   *   documents. See
+   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.total_size|ListDocumentsResponse.total_size}.
    *
    *   Enabling this flag may adversely impact performance.
    *
@@ -1268,10 +1269,13 @@ export class DocumentServiceClient {
    * @param {number} [request.skip]
    *   Optional. Number of results to skip beginning from the `page_token` if
    *   provided. https://google.aip.dev/158#skipping-results. It must be a
-   *   non-negative integer. Negative values wil be rejected. Note that this is
+   *   non-negative integer. Negative values will be rejected. Note that this is
    *   not the number of pages to skip. If this value causes the cursor to move
-   *   past the end of results, `ListDocumentsResponse.document_metadata` and
-   *   `ListDocumentsResponse.next_page_token` will be empty.
+   *   past the end of results,
+   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.document_metadata|ListDocumentsResponse.document_metadata}
+   *   and
+   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token}
+   *   will be empty.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1397,8 +1401,9 @@ export class DocumentServiceClient {
    *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
    *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
    * @param {boolean} [request.returnTotalSize]
-   *   Optional. Controls if the ListDocuments request requires a total size
-   *   of matched documents. See ListDocumentsResponse.total_size.
+   *   Optional. Controls if the request requires a total size of matched
+   *   documents. See
+   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.total_size|ListDocumentsResponse.total_size}.
    *
    *   Enabling this flag may adversely impact performance.
    *
@@ -1406,10 +1411,13 @@ export class DocumentServiceClient {
    * @param {number} [request.skip]
    *   Optional. Number of results to skip beginning from the `page_token` if
    *   provided. https://google.aip.dev/158#skipping-results. It must be a
-   *   non-negative integer. Negative values wil be rejected. Note that this is
+   *   non-negative integer. Negative values will be rejected. Note that this is
    *   not the number of pages to skip. If this value causes the cursor to move
-   *   past the end of results, `ListDocumentsResponse.document_metadata` and
-   *   `ListDocumentsResponse.next_page_token` will be empty.
+   *   past the end of results,
+   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.document_metadata|ListDocumentsResponse.document_metadata}
+   *   and
+   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token}
+   *   will be empty.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1483,8 +1491,9 @@ export class DocumentServiceClient {
    *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
    *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
    * @param {boolean} [request.returnTotalSize]
-   *   Optional. Controls if the ListDocuments request requires a total size
-   *   of matched documents. See ListDocumentsResponse.total_size.
+   *   Optional. Controls if the request requires a total size of matched
+   *   documents. See
+   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.total_size|ListDocumentsResponse.total_size}.
    *
    *   Enabling this flag may adversely impact performance.
    *
@@ -1492,10 +1501,13 @@ export class DocumentServiceClient {
    * @param {number} [request.skip]
    *   Optional. Number of results to skip beginning from the `page_token` if
    *   provided. https://google.aip.dev/158#skipping-results. It must be a
-   *   non-negative integer. Negative values wil be rejected. Note that this is
+   *   non-negative integer. Negative values will be rejected. Note that this is
    *   not the number of pages to skip. If this value causes the cursor to move
-   *   past the end of results, `ListDocumentsResponse.document_metadata` and
-   *   `ListDocumentsResponse.next_page_token` will be empty.
+   *   past the end of results,
+   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.document_metadata|ListDocumentsResponse.document_metadata}
+   *   and
+   *   {@link protos.google.cloud.documentai.v1beta3.ListDocumentsResponse.next_page_token|ListDocumentsResponse.next_page_token}
+   *   will be empty.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
