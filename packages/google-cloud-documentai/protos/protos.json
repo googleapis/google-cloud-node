@@ -1860,6 +1860,13 @@
                         "ocrConfig": {
                           "type": "OcrConfig",
                           "id": 1
+                        },
+                        "schemaOverride": {
+                          "type": "DocumentSchema",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1919,6 +1926,14 @@
                         "processOptions": {
                           "type": "ProcessOptions",
                           "id": 7
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1986,6 +2001,14 @@
                         "processOptions": {
                           "type": "ProcessOptions",
                           "id": 7
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2746,6 +2769,10 @@
                                 "name": {
                                   "type": "string",
                                   "id": 1
+                                },
+                                "displayName": {
+                                  "type": "string",
+                                  "id": 6
                                 },
                                 "valueType": {
                                   "type": "string",

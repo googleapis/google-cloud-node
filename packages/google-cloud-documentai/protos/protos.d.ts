@@ -6595,6 +6595,9 @@ export namespace google {
 
                     /** ProcessOptions ocrConfig */
                     ocrConfig?: (google.cloud.documentai.v1.IOcrConfig|null);
+
+                    /** ProcessOptions schemaOverride */
+                    schemaOverride?: (google.cloud.documentai.v1.IDocumentSchema|null);
                 }
 
                 /** Represents a ProcessOptions. */
@@ -6617,6 +6620,9 @@ export namespace google {
 
                     /** ProcessOptions ocrConfig. */
                     public ocrConfig?: (google.cloud.documentai.v1.IOcrConfig|null);
+
+                    /** ProcessOptions schemaOverride. */
+                    public schemaOverride?: (google.cloud.documentai.v1.IDocumentSchema|null);
 
                     /** ProcessOptions pageRange. */
                     public pageRange?: ("individualPageSelector"|"fromStart"|"fromEnd");
@@ -6822,6 +6828,9 @@ export namespace google {
 
                     /** ProcessRequest processOptions */
                     processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
+
+                    /** ProcessRequest labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a ProcessRequest. */
@@ -6853,6 +6862,9 @@ export namespace google {
 
                     /** ProcessRequest processOptions. */
                     public processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
+
+                    /** ProcessRequest labels. */
+                    public labels: { [k: string]: string };
 
                     /** ProcessRequest source. */
                     public source?: ("inlineDocument"|"rawDocument"|"gcsDocument");
@@ -7176,6 +7188,9 @@ export namespace google {
 
                     /** BatchProcessRequest processOptions */
                     processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
+
+                    /** BatchProcessRequest labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a BatchProcessRequest. */
@@ -7201,6 +7216,9 @@ export namespace google {
 
                     /** BatchProcessRequest processOptions. */
                     public processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
+
+                    /** BatchProcessRequest labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new BatchProcessRequest instance using the specified properties.
@@ -12638,6 +12656,9 @@ export namespace google {
                             /** Property name */
                             name?: (string|null);
 
+                            /** Property displayName */
+                            displayName?: (string|null);
+
                             /** Property valueType */
                             valueType?: (string|null);
 
@@ -12656,6 +12677,9 @@ export namespace google {
 
                             /** Property name. */
                             public name: string;
+
+                            /** Property displayName. */
+                            public displayName: string;
 
                             /** Property valueType. */
                             public valueType: string;
