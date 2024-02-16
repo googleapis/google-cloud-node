@@ -12,12 +12,12 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Text_to_speech.list_voices](#text_to_speech.list_voices)
-  * [Text_to_speech.synthesize_speech](#text_to_speech.synthesize_speech)
-  * [Text_to_speech_long_audio_synthesize.synthesize_long_audio](#text_to_speech_long_audio_synthesize.synthesize_long_audio)
-  * [Text_to_speech.list_voices](#text_to_speech.list_voices)
-  * [Text_to_speech.synthesize_speech](#text_to_speech.synthesize_speech)
-  * [Text_to_speech_long_audio_synthesize.synthesize_long_audio](#text_to_speech_long_audio_synthesize.synthesize_long_audio)
+  * [Text_to_speech.list_voices](#text_to_speechlist_voices)
+  * [Text_to_speech.synthesize_speech](#text_to_speechsynthesize_speech)
+  * [Text_to_speech_long_audio_synthesize.synthesize_long_audio](#text_to_speech_long_audio_synthesizesynthesize_long_audio)
+  * [Text_to_speech.list_voices](#text_to_speechlist_voices)
+  * [Text_to_speech.synthesize_speech](#text_to_speechsynthesize_speech)
+  * [Text_to_speech_long_audio_synthesize.synthesize_long_audio](#text_to_speech_long_audio_synthesizesynthesize_long_audio)
   * [Quickstart](#quickstart)
 
 ## Before you begin
