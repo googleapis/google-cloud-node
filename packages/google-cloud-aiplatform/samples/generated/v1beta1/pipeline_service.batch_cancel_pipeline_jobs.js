@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(featureView) {
-  // [START aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_UpdateFeatureView_async]
+function main(parent, names) {
+  // [START aiplatform_v1beta1_generated_PipelineService_BatchCancelPipelineJobs_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,45 +29,39 @@ function main(featureView) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The FeatureView's `name` field is used to identify the
-   *  FeatureView to be updated. Format:
-   *  `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}`
+   *  Required. The name of the PipelineJobs' parent resource.
+   *  Format: `projects/{project}/locations/{location}`
    */
-  // const featureView = {}
+  // const parent = 'abc123'
   /**
-   *  Field mask is used to specify the fields to be overwritten in the
-   *  FeatureView resource by the update.
-   *  The fields specified in the update_mask are relative to the resource, not
-   *  the full request. A field will be overwritten if it is in the mask. If the
-   *  user does not provide a mask then only the non-empty fields present in the
-   *  request will be overwritten. Set the update_mask to `*` to override all
-   *  fields.
-   *  Updatable fields:
-   *    * `labels`
-   *    * `serviceAgentType`
+   *  Required. The names of the PipelineJobs to cancel.
+   *  A maximum of 32 PipelineJobs can be cancelled in a batch.
+   *  Format:
+   *  `projects/{project}/locations/{location}/pipelineJobs/{pipelineJob}`
    */
-  // const updateMask = {}
+  // const names = ['abc','def']
 
   // Imports the Aiplatform library
-  const {FeatureOnlineStoreAdminServiceClient} = require('@google-cloud/aiplatform').v1beta1;
+  const {PipelineServiceClient} = require('@google-cloud/aiplatform').v1beta1;
 
   // Instantiates a client
-  const aiplatformClient = new FeatureOnlineStoreAdminServiceClient();
+  const aiplatformClient = new PipelineServiceClient();
 
-  async function callUpdateFeatureView() {
+  async function callBatchCancelPipelineJobs() {
     // Construct request
     const request = {
-      featureView,
+      parent,
+      names,
     };
 
     // Run request
-    const [operation] = await aiplatformClient.updateFeatureView(request);
+    const [operation] = await aiplatformClient.batchCancelPipelineJobs(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callUpdateFeatureView();
-  // [END aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_UpdateFeatureView_async]
+  callBatchCancelPipelineJobs();
+  // [END aiplatform_v1beta1_generated_PipelineService_BatchCancelPipelineJobs_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -975,6 +975,10 @@ export class PipelineServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1251,6 +1255,9 @@ export class PipelineServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1499,6 +1506,9 @@ export class PipelineServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
@@ -1767,6 +1777,9 @@ export class PipelineServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
             },
             {
@@ -1902,6 +1915,12 @@ export class PipelineServiceClient {
     const batchDeletePipelineJobsMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
+    const batchCancelPipelineJobsResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsResponse'
+    ) as gax.protobuf.Type;
+    const batchCancelPipelineJobsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       deleteTrainingPipeline: new this._gaxModule.LongrunningDescriptor(
@@ -1925,6 +1944,15 @@ export class PipelineServiceClient {
         ),
         batchDeletePipelineJobsMetadata.decode.bind(
           batchDeletePipelineJobsMetadata
+        )
+      ),
+      batchCancelPipelineJobs: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchCancelPipelineJobsResponse.decode.bind(
+          batchCancelPipelineJobsResponse
+        ),
+        batchCancelPipelineJobsMetadata.decode.bind(
+          batchCancelPipelineJobsMetadata
         )
       ),
     };
@@ -1990,6 +2018,7 @@ export class PipelineServiceClient {
       'deletePipelineJob',
       'batchDeletePipelineJobs',
       'cancelPipelineJob',
+      'batchCancelPipelineJobs',
     ];
     for (const methodName of pipelineServiceStubMethods) {
       const callPromise = this.pipelineServiceStub.then(
@@ -2441,6 +2470,9 @@ export class PipelineServiceClient {
    *
    *   This value should be less than 128 characters, and valid characters
    *   are `/{@link protos.0-9|a-z}-/`.
+   * @param {boolean} [request.preflightValidations]
+   *   Optional. Whether to do component level validations before job creation.
+   *   Currently we only support Google First Party Component/Pipelines.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3159,6 +3191,158 @@ export class PipelineServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.BatchDeletePipelineJobsResponse,
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
+  }
+  /**
+   * Batch cancel PipelineJobs.
+   * Firstly the server will check if all the jobs are in non-terminal states,
+   * and skip the jobs that are already terminated.
+   * If the operation failed, none of the pipeline jobs are cancelled.
+   * The server will poll the states of all the pipeline jobs periodically
+   * to check the cancellation status.
+   * This operation will return an LRO.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the PipelineJobs' parent resource.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string[]} request.names
+   *   Required. The names of the PipelineJobs to cancel.
+   *   A maximum of 32 PipelineJobs can be cancelled in a batch.
+   *   Format:
+   *   `projects/{project}/locations/{location}/pipelineJobs/{pipelineJob}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/pipeline_service.batch_cancel_pipeline_jobs.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PipelineService_BatchCancelPipelineJobs_async
+   */
+  batchCancelPipelineJobs(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchCancelPipelineJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCancelPipelineJobs(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCancelPipelineJobs(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
+            protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IBatchCancelPipelineJobsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchCancelPipelineJobs(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `batchCancelPipelineJobs()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/pipeline_service.batch_cancel_pipeline_jobs.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PipelineService_BatchCancelPipelineJobs_async
+   */
+  async checkBatchCancelPipelineJobsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsResponse,
+      protos.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchCancelPipelineJobs,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsResponse,
+      protos.google.cloud.aiplatform.v1beta1.BatchCancelPipelineJobsOperationMetadata
     >;
   }
   /**

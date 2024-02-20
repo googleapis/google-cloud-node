@@ -983,6 +983,10 @@ export class FeaturestoreServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1259,6 +1263,9 @@ export class FeaturestoreServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1507,6 +1514,9 @@ export class FeaturestoreServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
@@ -1773,6 +1783,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
