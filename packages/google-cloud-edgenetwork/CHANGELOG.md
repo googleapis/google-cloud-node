@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.2.0...edgenetwork-v0.3.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5025](https://github.com/googleapis/google-cloud-node/issues/5025)) ([7244cab](https://github.com/googleapis/google-cloud-node/commit/7244cab107973bef57c5ea84ae77c51718126822))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.1.1...edgenetwork-v0.2.0) (2024-02-07)
 
 

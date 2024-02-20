@@ -1978,7 +1978,8 @@
                             "BQML": 3,
                             "MODEL_GARDEN": 4,
                             "GENIE": 5,
-                            "CUSTOM_TEXT_EMBEDDING": 6
+                            "CUSTOM_TEXT_EMBEDDING": 6,
+                            "MARKETPLACE": 7
                           }
                         }
                       }
@@ -2988,13 +2989,6 @@
                         "disableRetries": {
                           "type": "bool",
                           "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "maxWaitDuration": {
-                          "type": "google.protobuf.Duration",
-                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -11224,6 +11218,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "pscAutomatedEndpoints": {
+                          "rule": "repeated",
+                          "type": "PscAutomatedEndpoints",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -11240,6 +11242,22 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "PscAutomatedEndpoints": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "matchAddress": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -11970,6 +11988,13 @@
                           "rule": "repeated",
                           "type": "IndexDatapoint",
                           "id": 2
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -12042,7 +12067,13 @@
                                 "INVALID_AVRO_SYNTAX": 4,
                                 "INVALID_EMBEDDING_ID": 5,
                                 "EMBEDDING_SIZE_MISMATCH": 6,
-                                "NAMESPACE_MISSING": 7
+                                "NAMESPACE_MISSING": 7,
+                                "PARSING_ERROR": 8,
+                                "DUPLICATE_NAMESPACE": 9,
+                                "OP_IN_DATAPOINT": 10,
+                                "MULTIPLE_VALUES": 11,
+                                "INVALID_NUMERIC_VALUE": 12,
+                                "INVALID_ENCODING": 13
                               }
                             }
                           }
@@ -13721,6 +13752,13 @@
                         "bigqueryTablePath": {
                           "type": "string",
                           "id": 3
+                        },
+                        "requestResponseLoggingSchemaVersion": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -17868,11 +17906,17 @@
                             },
                             "useCase": {
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "description": {
                               "type": "string",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "deprecated": true
+                              }
                             }
                           }
                         },
@@ -17895,6 +17939,18 @@
                           }
                         },
                         "CallToAction": {
+                          "oneofs": {
+                            "_openNotebooks": {
+                              "oneof": [
+                                "openNotebooks"
+                              ]
+                            },
+                            "_openFineTuningPipelines": {
+                              "oneof": [
+                                "openFineTuningPipelines"
+                              ]
+                            }
+                          },
                           "fields": {
                             "viewRestApi": {
                               "type": "ViewRestApi",
@@ -17910,6 +17966,14 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "openNotebooks": {
+                              "type": "OpenNotebooks",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
                             "createApplication": {
                               "type": "RegionalResourceReferences",
                               "id": 3,
@@ -17922,6 +17986,14 @@
                               "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "openFineTuningPipelines": {
+                              "type": "OpenFineTuningPipelines",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             },
                             "openPromptTuningPipeline": {
@@ -17941,6 +18013,13 @@
                             "deploy": {
                               "type": "Deploy",
                               "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "deployGke": {
+                              "type": "DeployGke",
+                              "id": 14,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -17969,6 +18048,23 @@
                           },
                           "nested": {
                             "RegionalResourceReferences": {
+                              "oneofs": {
+                                "_resourceTitle": {
+                                  "oneof": [
+                                    "resourceTitle"
+                                  ]
+                                },
+                                "_resourceUseCase": {
+                                  "oneof": [
+                                    "resourceUseCase"
+                                  ]
+                                },
+                                "_resourceDescription": {
+                                  "oneof": [
+                                    "resourceDescription"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "references": {
                                   "keyType": "string",
@@ -17983,6 +18079,30 @@
                                   "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "resourceTitle": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "resourceUseCase": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "resourceDescription": {
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
                                   }
                                 }
                               }
@@ -18000,6 +18120,30 @@
                                 "title": {
                                   "type": "string",
                                   "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "OpenNotebooks": {
+                              "fields": {
+                                "notebooks": {
+                                  "rule": "repeated",
+                                  "type": "RegionalResourceReferences",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "OpenFineTuningPipelines": {
+                              "fields": {
+                                "fineTuningPipelines": {
+                                  "rule": "repeated",
+                                  "type": "RegionalResourceReferences",
+                                  "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
@@ -18067,6 +18211,18 @@
                                 "publicArtifactUri": {
                                   "type": "string",
                                   "id": 9,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "DeployGke": {
+                              "fields": {
+                                "gkeYamlConfigs": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -26235,6 +26391,13 @@
                         "bigqueryTablePath": {
                           "type": "string",
                           "id": 3
+                        },
+                        "requestResponseLoggingSchemaVersion": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -27005,7 +27168,8 @@
                             "BQML": 3,
                             "MODEL_GARDEN": 4,
                             "GENIE": 5,
-                            "CUSTOM_TEXT_EMBEDDING": 6
+                            "CUSTOM_TEXT_EMBEDDING": 6,
+                            "MARKETPLACE": 7
                           }
                         }
                       }
@@ -27479,6 +27643,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "groundingMetadata": {
+                          "type": "GroundingMetadata",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -27494,12 +27665,129 @@
                         }
                       }
                     },
+                    "Segment": {
+                      "fields": {
+                        "partIndex": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startIndex": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endIndex": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GroundingAttribution": {
+                      "oneofs": {
+                        "reference": {
+                          "oneof": [
+                            "web"
+                          ]
+                        },
+                        "_confidenceScore": {
+                          "oneof": [
+                            "confidenceScore"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "web": {
+                          "type": "Web",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "segment": {
+                          "type": "Segment",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "confidenceScore": {
+                          "type": "float",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Web": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GroundingMetadata": {
+                      "fields": {
+                        "webSearchQueries": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "groundingAttributions": {
+                          "rule": "repeated",
+                          "type": "GroundingAttribution",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "Tool": {
                       "fields": {
                         "functionDeclarations": {
                           "rule": "repeated",
                           "type": "FunctionDeclaration",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "retrieval": {
+                          "type": "Retrieval",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "googleSearchRetrieval": {
+                          "type": "GoogleSearchRetrieval",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -27563,6 +27851,50 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Retrieval": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "vertexAiSearch"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "vertexAiSearch": {
+                          "type": "VertexAISearch",
+                          "id": 2
+                        },
+                        "disableAttribution": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "VertexAISearch": {
+                      "fields": {
+                        "datastore": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GoogleSearchRetrieval": {
+                      "fields": {
+                        "disableAttribution": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -28023,13 +28355,6 @@
                         "disableRetries": {
                           "type": "bool",
                           "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "maxWaitDuration": {
-                          "type": "google.protobuf.Duration",
-                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -31395,6 +31720,22 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "PscAutomatedEndpoints": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "matchAddress": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -36465,6 +36806,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "pscAutomatedEndpoints": {
+                          "rule": "repeated",
+                          "type": "PscAutomatedEndpoints",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -37195,6 +37544,13 @@
                           "rule": "repeated",
                           "type": "IndexDatapoint",
                           "id": 2
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -37267,7 +37623,13 @@
                                 "INVALID_AVRO_SYNTAX": 4,
                                 "INVALID_EMBEDDING_ID": 5,
                                 "EMBEDDING_SIZE_MISMATCH": 6,
-                                "NAMESPACE_MISSING": 7
+                                "NAMESPACE_MISSING": 7,
+                                "PARSING_ERROR": 8,
+                                "DUPLICATE_NAMESPACE": 9,
+                                "OP_IN_DATAPOINT": 10,
+                                "MULTIPLE_VALUES": 11,
+                                "INVALID_NUMERIC_VALUE": 12,
+                                "INVALID_ENCODING": 13
                               }
                             }
                           }
@@ -39132,32 +39494,6 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
-                        "CountTokens": {
-                          "requestType": "CountTokensRequest",
-                          "responseType": "CountTokensResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:countTokens",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:countTokens",
-                            "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "endpoint,instances"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:countTokens",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:countTokens",
-                                  "body": "*"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "endpoint,instances"
-                            }
-                          ]
-                        },
                         "ComputeTokens": {
                           "requestType": "ComputeTokensRequest",
                           "responseType": "ComputeTokensResponse",
@@ -39226,763 +39562,6 @@
                           "rule": "repeated",
                           "type": "TokensInfo",
                           "id": 1
-                        }
-                      }
-                    },
-                    "PredictionService": {
-                      "options": {
-                        "(google.api.default_host)": "aiplatform.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "Predict": {
-                          "requestType": "PredictRequest",
-                          "responseType": "PredictResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:predict",
-                            "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "endpoint,instances,parameters"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:predict",
-                                  "body": "*"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "endpoint,instances,parameters"
-                            }
-                          ]
-                        },
-                        "RawPredict": {
-                          "requestType": "RawPredictRequest",
-                          "responseType": "google.api.HttpBody",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:rawPredict",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:rawPredict",
-                            "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "endpoint,http_body"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:rawPredict",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:rawPredict",
-                                  "body": "*"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "endpoint,http_body"
-                            }
-                          ]
-                        },
-                        "DirectPredict": {
-                          "requestType": "DirectPredictRequest",
-                          "responseType": "DirectPredictResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directPredict",
-                            "(google.api.http).body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directPredict",
-                                "body": "*"
-                              }
-                            }
-                          ]
-                        },
-                        "DirectRawPredict": {
-                          "requestType": "DirectRawPredictRequest",
-                          "responseType": "DirectRawPredictResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directRawPredict",
-                            "(google.api.http).body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directRawPredict",
-                                "body": "*"
-                              }
-                            }
-                          ]
-                        },
-                        "StreamDirectPredict": {
-                          "requestType": "StreamDirectPredictRequest",
-                          "requestStream": true,
-                          "responseType": "StreamDirectPredictResponse",
-                          "responseStream": true
-                        },
-                        "StreamDirectRawPredict": {
-                          "requestType": "StreamDirectRawPredictRequest",
-                          "requestStream": true,
-                          "responseType": "StreamDirectRawPredictResponse",
-                          "responseStream": true
-                        },
-                        "StreamingPredict": {
-                          "requestType": "StreamingPredictRequest",
-                          "requestStream": true,
-                          "responseType": "StreamingPredictResponse",
-                          "responseStream": true
-                        },
-                        "ServerStreamingPredict": {
-                          "requestType": "StreamingPredictRequest",
-                          "responseType": "StreamingPredictResponse",
-                          "responseStream": true,
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
-                            "(google.api.http).additional_bindings.body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
-                                  "body": "*"
-                                }
-                              }
-                            }
-                          ]
-                        },
-                        "StreamingRawPredict": {
-                          "requestType": "StreamingRawPredictRequest",
-                          "requestStream": true,
-                          "responseType": "StreamingRawPredictResponse",
-                          "responseStream": true
-                        },
-                        "Explain": {
-                          "requestType": "ExplainRequest",
-                          "responseType": "ExplainResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:explain",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "endpoint,instances,parameters,deployed_model_id"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:explain",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "endpoint,instances,parameters,deployed_model_id"
-                            }
-                          ]
-                        },
-                        "CountTokens": {
-                          "requestType": "CountTokensRequest",
-                          "responseType": "CountTokensResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:countTokens",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:countTokens",
-                            "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "endpoint,instances"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:countTokens",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:countTokens",
-                                  "body": "*"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "endpoint,instances"
-                            }
-                          ]
-                        },
-                        "GenerateContent": {
-                          "requestType": "GenerateContentRequest",
-                          "responseType": "GenerateContentResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:generateContent",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:generateContent",
-                            "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "model,contents"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:generateContent",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:generateContent",
-                                  "body": "*"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "model,contents"
-                            }
-                          ]
-                        },
-                        "StreamGenerateContent": {
-                          "requestType": "GenerateContentRequest",
-                          "responseType": "GenerateContentResponse",
-                          "responseStream": true,
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:streamGenerateContent",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:streamGenerateContent",
-                            "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "model,contents"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:streamGenerateContent",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:streamGenerateContent",
-                                  "body": "*"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "model,contents"
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "PredictRequest": {
-                      "fields": {
-                        "endpoint": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
-                          }
-                        },
-                        "instances": {
-                          "rule": "repeated",
-                          "type": "google.protobuf.Value",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "parameters": {
-                          "type": "google.protobuf.Value",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "PredictResponse": {
-                      "fields": {
-                        "predictions": {
-                          "rule": "repeated",
-                          "type": "google.protobuf.Value",
-                          "id": 1
-                        },
-                        "deployedModelId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "model": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
-                          }
-                        },
-                        "modelVersionId": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "modelDisplayName": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "metadata": {
-                          "type": "google.protobuf.Value",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "RawPredictRequest": {
-                      "fields": {
-                        "endpoint": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
-                          }
-                        },
-                        "httpBody": {
-                          "type": "google.api.HttpBody",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DirectPredictRequest": {
-                      "fields": {
-                        "endpoint": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
-                          }
-                        },
-                        "inputs": {
-                          "rule": "repeated",
-                          "type": "Tensor",
-                          "id": 2
-                        },
-                        "parameters": {
-                          "type": "Tensor",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "DirectPredictResponse": {
-                      "fields": {
-                        "outputs": {
-                          "rule": "repeated",
-                          "type": "Tensor",
-                          "id": 1
-                        },
-                        "parameters": {
-                          "type": "Tensor",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DirectRawPredictRequest": {
-                      "fields": {
-                        "endpoint": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
-                          }
-                        },
-                        "methodName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "input": {
-                          "type": "bytes",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "DirectRawPredictResponse": {
-                      "fields": {
-                        "output": {
-                          "type": "bytes",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "StreamDirectPredictRequest": {
-                      "fields": {
-                        "endpoint": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
-                          }
-                        },
-                        "inputs": {
-                          "rule": "repeated",
-                          "type": "Tensor",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "parameters": {
-                          "type": "Tensor",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "StreamDirectPredictResponse": {
-                      "fields": {
-                        "outputs": {
-                          "rule": "repeated",
-                          "type": "Tensor",
-                          "id": 1
-                        },
-                        "parameters": {
-                          "type": "Tensor",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "StreamDirectRawPredictRequest": {
-                      "fields": {
-                        "endpoint": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
-                          }
-                        },
-                        "methodName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "input": {
-                          "type": "bytes",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "StreamDirectRawPredictResponse": {
-                      "fields": {
-                        "output": {
-                          "type": "bytes",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "StreamingPredictRequest": {
-                      "fields": {
-                        "endpoint": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
-                          }
-                        },
-                        "inputs": {
-                          "rule": "repeated",
-                          "type": "Tensor",
-                          "id": 2
-                        },
-                        "parameters": {
-                          "type": "Tensor",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "StreamingPredictResponse": {
-                      "fields": {
-                        "outputs": {
-                          "rule": "repeated",
-                          "type": "Tensor",
-                          "id": 1
-                        },
-                        "parameters": {
-                          "type": "Tensor",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "StreamingRawPredictRequest": {
-                      "fields": {
-                        "endpoint": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
-                          }
-                        },
-                        "methodName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "input": {
-                          "type": "bytes",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "StreamingRawPredictResponse": {
-                      "fields": {
-                        "output": {
-                          "type": "bytes",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ExplainRequest": {
-                      "fields": {
-                        "endpoint": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
-                          }
-                        },
-                        "instances": {
-                          "rule": "repeated",
-                          "type": "google.protobuf.Value",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "parameters": {
-                          "type": "google.protobuf.Value",
-                          "id": 4
-                        },
-                        "explanationSpecOverride": {
-                          "type": "ExplanationSpecOverride",
-                          "id": 5
-                        },
-                        "concurrentExplanationSpecOverride": {
-                          "keyType": "string",
-                          "type": "ExplanationSpecOverride",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "deployedModelId": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ExplainResponse": {
-                      "fields": {
-                        "explanations": {
-                          "rule": "repeated",
-                          "type": "Explanation",
-                          "id": 1
-                        },
-                        "concurrentExplanations": {
-                          "keyType": "string",
-                          "type": "ConcurrentExplanation",
-                          "id": 4
-                        },
-                        "deployedModelId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "predictions": {
-                          "rule": "repeated",
-                          "type": "google.protobuf.Value",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "ConcurrentExplanation": {
-                          "fields": {
-                            "explanations": {
-                              "rule": "repeated",
-                              "type": "Explanation",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "CountTokensRequest": {
-                      "fields": {
-                        "endpoint": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
-                          }
-                        },
-                        "model": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "instances": {
-                          "rule": "repeated",
-                          "type": "google.protobuf.Value",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "contents": {
-                          "rule": "repeated",
-                          "type": "Content",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "CountTokensResponse": {
-                      "fields": {
-                        "totalTokens": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "totalBillableCharacters": {
-                          "type": "int32",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GenerateContentRequest": {
-                      "fields": {
-                        "model": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "contents": {
-                          "rule": "repeated",
-                          "type": "Content",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "tools": {
-                          "rule": "repeated",
-                          "type": "Tool",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "safetySettings": {
-                          "rule": "repeated",
-                          "type": "SafetySetting",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "generationConfig": {
-                          "type": "GenerationConfig",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "GenerateContentResponse": {
-                      "fields": {
-                        "candidates": {
-                          "rule": "repeated",
-                          "type": "Candidate",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "promptFeedback": {
-                          "type": "PromptFeedback",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "usageMetadata": {
-                          "type": "UsageMetadata",
-                          "id": 4
-                        }
-                      },
-                      "nested": {
-                        "PromptFeedback": {
-                          "fields": {
-                            "blockReason": {
-                              "type": "BlockedReason",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "safetyRatings": {
-                              "rule": "repeated",
-                              "type": "SafetyRating",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            },
-                            "blockReasonMessage": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "BlockedReason": {
-                              "values": {
-                                "BLOCKED_REASON_UNSPECIFIED": 0,
-                                "SAFETY": 1,
-                                "OTHER": 2
-                              }
-                            }
-                          }
-                        },
-                        "UsageMetadata": {
-                          "fields": {
-                            "promptTokenCount": {
-                              "type": "int32",
-                              "id": 1
-                            },
-                            "candidatesTokenCount": {
-                              "type": "int32",
-                              "id": 2
-                            },
-                            "totalTokenCount": {
-                              "type": "int32",
-                              "id": 3
-                            }
-                          }
                         }
                       }
                     },
@@ -42704,11 +42283,17 @@
                             },
                             "useCase": {
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "description": {
                               "type": "string",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "deprecated": true
+                              }
                             }
                           }
                         },
@@ -42749,6 +42334,18 @@
                           }
                         },
                         "CallToAction": {
+                          "oneofs": {
+                            "_openNotebooks": {
+                              "oneof": [
+                                "openNotebooks"
+                              ]
+                            },
+                            "_openFineTuningPipelines": {
+                              "oneof": [
+                                "openFineTuningPipelines"
+                              ]
+                            }
+                          },
                           "fields": {
                             "viewRestApi": {
                               "type": "ViewRestApi",
@@ -42764,6 +42361,14 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "openNotebooks": {
+                              "type": "OpenNotebooks",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
                             "createApplication": {
                               "type": "RegionalResourceReferences",
                               "id": 3,
@@ -42776,6 +42381,14 @@
                               "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "openFineTuningPipelines": {
+                              "type": "OpenFineTuningPipelines",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             },
                             "openPromptTuningPipeline": {
@@ -42795,6 +42408,13 @@
                             "deploy": {
                               "type": "Deploy",
                               "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "deployGke": {
+                              "type": "DeployGke",
+                              "id": 14,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -42823,6 +42443,23 @@
                           },
                           "nested": {
                             "RegionalResourceReferences": {
+                              "oneofs": {
+                                "_resourceTitle": {
+                                  "oneof": [
+                                    "resourceTitle"
+                                  ]
+                                },
+                                "_resourceUseCase": {
+                                  "oneof": [
+                                    "resourceUseCase"
+                                  ]
+                                },
+                                "_resourceDescription": {
+                                  "oneof": [
+                                    "resourceDescription"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "references": {
                                   "keyType": "string",
@@ -42837,6 +42474,30 @@
                                   "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "resourceTitle": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "resourceUseCase": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "resourceDescription": {
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
                                   }
                                 }
                               }
@@ -42854,6 +42515,30 @@
                                 "title": {
                                   "type": "string",
                                   "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "OpenNotebooks": {
+                              "fields": {
+                                "notebooks": {
+                                  "rule": "repeated",
+                                  "type": "RegionalResourceReferences",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "OpenFineTuningPipelines": {
+                              "fields": {
+                                "fineTuningPipelines": {
+                                  "rule": "repeated",
+                                  "type": "RegionalResourceReferences",
+                                  "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
@@ -42921,6 +42606,18 @@
                                 "publicArtifactUri": {
                                   "type": "string",
                                   "id": 9,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "DeployGke": {
+                              "fields": {
+                                "gkeYamlConfigs": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -45198,6 +44895,42 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "BatchCancelPipelineJobs": {
+                          "requestType": "BatchCancelPipelineJobsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/pipelineJobs:batchCancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,names",
+                            "(google.longrunning.operation_info).response_type": "BatchCancelPipelineJobsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BatchCancelPipelineJobsOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/pipelineJobs:batchCancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchCancelPipelineJobsResponse",
+                                "metadata_type": "BatchCancelPipelineJobsOperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "BatchCancelPipelineJobsOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
                         }
                       }
                     },
@@ -45317,6 +45050,13 @@
                         "pipelineJobId": {
                           "type": "string",
                           "id": 3
+                        },
+                        "preflightValidations": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -45428,6 +45168,36 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
                           }
+                        }
+                      }
+                    },
+                    "BatchCancelPipelineJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "aiplatform.googleapis.com/PipelineJob"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCancelPipelineJobsResponse": {
+                      "fields": {
+                        "pipelineJobs": {
+                          "rule": "repeated",
+                          "type": "PipelineJob",
+                          "id": 1
                         }
                       }
                     },
@@ -45713,6 +45483,763 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PredictionService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Predict": {
+                          "requestType": "PredictRequest",
+                          "responseType": "PredictResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:predict",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "endpoint,instances,parameters"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:predict",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint,instances,parameters"
+                            }
+                          ]
+                        },
+                        "RawPredict": {
+                          "requestType": "RawPredictRequest",
+                          "responseType": "google.api.HttpBody",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:rawPredict",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:rawPredict",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "endpoint,http_body"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:rawPredict",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:rawPredict",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint,http_body"
+                            }
+                          ]
+                        },
+                        "DirectPredict": {
+                          "requestType": "DirectPredictRequest",
+                          "responseType": "DirectPredictResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directPredict",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directPredict",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "DirectRawPredict": {
+                          "requestType": "DirectRawPredictRequest",
+                          "responseType": "DirectRawPredictResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directRawPredict",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:directRawPredict",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "StreamDirectPredict": {
+                          "requestType": "StreamDirectPredictRequest",
+                          "requestStream": true,
+                          "responseType": "StreamDirectPredictResponse",
+                          "responseStream": true
+                        },
+                        "StreamDirectRawPredict": {
+                          "requestType": "StreamDirectRawPredictRequest",
+                          "requestStream": true,
+                          "responseType": "StreamDirectRawPredictResponse",
+                          "responseStream": true
+                        },
+                        "StreamingPredict": {
+                          "requestType": "StreamingPredictRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingPredictResponse",
+                          "responseStream": true
+                        },
+                        "ServerStreamingPredict": {
+                          "requestType": "StreamingPredictRequest",
+                          "responseType": "StreamingPredictResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:serverStreamingPredict",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:serverStreamingPredict",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "StreamingRawPredict": {
+                          "requestType": "StreamingRawPredictRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingRawPredictResponse",
+                          "responseStream": true
+                        },
+                        "Explain": {
+                          "requestType": "ExplainRequest",
+                          "responseType": "ExplainResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:explain",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "endpoint,instances,parameters,deployed_model_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:explain",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint,instances,parameters,deployed_model_id"
+                            }
+                          ]
+                        },
+                        "CountTokens": {
+                          "requestType": "CountTokensRequest",
+                          "responseType": "CountTokensResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:countTokens",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:countTokens",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "endpoint,instances"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:countTokens",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:countTokens",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "endpoint,instances"
+                            }
+                          ]
+                        },
+                        "GenerateContent": {
+                          "requestType": "GenerateContentRequest",
+                          "responseType": "GenerateContentResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:generateContent",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:generateContent",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "model,contents"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:generateContent",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:generateContent",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "model,contents"
+                            }
+                          ]
+                        },
+                        "StreamGenerateContent": {
+                          "requestType": "GenerateContentRequest",
+                          "responseType": "GenerateContentResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:streamGenerateContent",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:streamGenerateContent",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "model,contents"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:streamGenerateContent",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:streamGenerateContent",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "model,contents"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "PredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parameters": {
+                          "type": "google.protobuf.Value",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PredictResponse": {
+                      "fields": {
+                        "predictions": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 1
+                        },
+                        "deployedModelId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "modelVersionId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "modelDisplayName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "RawPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "httpBody": {
+                          "type": "google.api.HttpBody",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DirectPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "inputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 2
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DirectPredictResponse": {
+                      "fields": {
+                        "outputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DirectRawPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "methodName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "input": {
+                          "type": "bytes",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DirectRawPredictResponse": {
+                      "fields": {
+                        "output": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StreamDirectPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "inputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StreamDirectPredictResponse": {
+                      "fields": {
+                        "outputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamDirectRawPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "methodName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "input": {
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StreamDirectRawPredictResponse": {
+                      "fields": {
+                        "output": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StreamingPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "inputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 2
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StreamingPredictResponse": {
+                      "fields": {
+                        "outputs": {
+                          "rule": "repeated",
+                          "type": "Tensor",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "type": "Tensor",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamingRawPredictRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "methodName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "input": {
+                          "type": "bytes",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StreamingRawPredictResponse": {
+                      "fields": {
+                        "output": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ExplainRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parameters": {
+                          "type": "google.protobuf.Value",
+                          "id": 4
+                        },
+                        "explanationSpecOverride": {
+                          "type": "ExplanationSpecOverride",
+                          "id": 5
+                        },
+                        "concurrentExplanationSpecOverride": {
+                          "keyType": "string",
+                          "type": "ExplanationSpecOverride",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deployedModelId": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExplainResponse": {
+                      "fields": {
+                        "explanations": {
+                          "rule": "repeated",
+                          "type": "Explanation",
+                          "id": 1
+                        },
+                        "concurrentExplanations": {
+                          "keyType": "string",
+                          "type": "ConcurrentExplanation",
+                          "id": 4
+                        },
+                        "deployedModelId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "predictions": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ConcurrentExplanation": {
+                          "fields": {
+                            "explanations": {
+                              "rule": "repeated",
+                              "type": "Explanation",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CountTokensRequest": {
+                      "fields": {
+                        "endpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint"
+                          }
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "contents": {
+                          "rule": "repeated",
+                          "type": "Content",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CountTokensResponse": {
+                      "fields": {
+                        "totalTokens": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "totalBillableCharacters": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GenerateContentRequest": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "contents": {
+                          "rule": "repeated",
+                          "type": "Content",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tools": {
+                          "rule": "repeated",
+                          "type": "Tool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "safetySettings": {
+                          "rule": "repeated",
+                          "type": "SafetySetting",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generationConfig": {
+                          "type": "GenerationConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateContentResponse": {
+                      "fields": {
+                        "candidates": {
+                          "rule": "repeated",
+                          "type": "Candidate",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "promptFeedback": {
+                          "type": "PromptFeedback",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "usageMetadata": {
+                          "type": "UsageMetadata",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "PromptFeedback": {
+                          "fields": {
+                            "blockReason": {
+                              "type": "BlockedReason",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "safetyRatings": {
+                              "rule": "repeated",
+                              "type": "SafetyRating",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "blockReasonMessage": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "BlockedReason": {
+                              "values": {
+                                "BLOCKED_REASON_UNSPECIFIED": 0,
+                                "SAFETY": 1,
+                                "OTHER": 2
+                              }
+                            }
+                          }
+                        },
+                        "UsageMetadata": {
+                          "fields": {
+                            "promptTokenCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "candidatesTokenCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "totalTokenCount": {
+                              "type": "int32",
+                              "id": 3
+                            }
                           }
                         }
                       }

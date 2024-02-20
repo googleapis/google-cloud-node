@@ -403,6 +403,9 @@ export class FeatureOnlineStoreAdminServiceClient {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
             {
+              post: '/v1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
               post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
             },
             {
@@ -432,6 +435,10 @@ export class FeatureOnlineStoreAdminServiceClient {
           additional_bindings: [
             {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
               body: '*',
             },
             {
@@ -466,6 +473,9 @@ export class FeatureOnlineStoreAdminServiceClient {
           additional_bindings: [
             {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
             },
             {
               post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
@@ -2500,6 +2510,7 @@ export class FeatureOnlineStoreAdminServiceClient {
    *   Updatable fields:
    *
    *     * `big_query_source`
+   *     * `bigtable`
    *     * `labels`
    *     * `sync_config`
    * @param {object} [options]
@@ -2956,6 +2967,7 @@ export class FeatureOnlineStoreAdminServiceClient {
    *   Updatable fields:
    *
    *     * `labels`
+   *     * `serviceAgentType`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

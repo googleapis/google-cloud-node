@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/automl-v4.0.3...automl-v4.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5022](https://github.com/googleapis/google-cloud-node/issues/5022)) ([b6498d8](https://github.com/googleapis/google-cloud-node/commit/b6498d8580d056817981dedbaa0ea5d82e9dccc2))
+
 ## [4.0.3](https://github.com/googleapis/google-cloud-node/compare/automl-v4.0.2...automl-v4.0.3) (2023-11-03)
 
 

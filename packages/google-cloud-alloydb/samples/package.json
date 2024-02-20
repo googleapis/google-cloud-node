@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/alloydb": "^1.4.1"
+    "@google-cloud/alloydb": "^1.5.0"
   },
   "devDependencies": {
     "c8": "^7.1.0",

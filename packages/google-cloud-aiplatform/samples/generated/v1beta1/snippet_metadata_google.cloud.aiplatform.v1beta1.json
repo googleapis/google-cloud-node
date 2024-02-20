@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.11.0",
+        "version": "3.12.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1662,7 +1662,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -1898,7 +1898,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
@@ -4466,7 +4466,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 59,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -4482,6 +4482,10 @@
                     {
                         "name": "datapoints",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1beta1.UpsertDatapointsResponse",
@@ -6103,58 +6107,6 @@
                     "service": {
                         "shortName": "JobService",
                         "fullName": "google.cloud.aiplatform.v1beta1.JobService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "aiplatform_v1beta1_generated_LlmUtilityService_CountTokens_async",
-            "title": "DatasetService countTokens Sample",
-            "origin": "API_DEFINITION",
-            "description": " Perform a token counting.",
-            "canonical": true,
-            "file": "llm_utility_service.count_tokens.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CountTokens",
-                "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService.CountTokens",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "endpoint",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "model",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instances",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "contents",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.cloud.aiplatform.v1beta1.CountTokensResponse",
-                "client": {
-                    "shortName": "LlmUtilityServiceClient",
-                    "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityServiceClient"
-                },
-                "method": {
-                    "shortName": "CountTokens",
-                    "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService.CountTokens",
-                    "service": {
-                        "shortName": "LlmUtilityService",
-                        "fullName": "google.cloud.aiplatform.v1beta1.LlmUtilityService"
                     }
                 }
             }
@@ -9294,7 +9246,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -9314,6 +9266,10 @@
                     {
                         "name": "pipeline_job_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "preflight_validations",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1beta1.PipelineJob",
@@ -9548,6 +9504,50 @@
                 "method": {
                     "shortName": "CancelPipelineJob",
                     "fullName": "google.cloud.aiplatform.v1beta1.PipelineService.CancelPipelineJob",
+                    "service": {
+                        "shortName": "PipelineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PipelineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_PipelineService_BatchCancelPipelineJobs_async",
+            "title": "DatasetService batchCancelPipelineJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Batch cancel PipelineJobs. Firstly the server will check if all the jobs are in non-terminal states, and skip the jobs that are already terminated. If the operation failed, none of the pipeline jobs are cancelled. The server will poll the states of all the pipeline jobs periodically to check the cancellation status. This operation will return an LRO.",
+            "canonical": true,
+            "file": "pipeline_service.batch_cancel_pipeline_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchCancelPipelineJobs",
+                "fullName": "google.cloud.aiplatform.v1beta1.PipelineService.BatchCancelPipelineJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "names",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PipelineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PipelineServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchCancelPipelineJobs",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PipelineService.BatchCancelPipelineJobs",
                     "service": {
                         "shortName": "PipelineService",
                         "fullName": "google.cloud.aiplatform.v1beta1.PipelineService"
@@ -10106,7 +10106,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 80,
                     "type": "FULL"
                 }
             ],
@@ -10162,7 +10162,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 83,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],

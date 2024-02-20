@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v1.1.0...bigquery-datapolicies-v1.2.0) (2024-02-09)
+
+
+### Features
+
+* Support for Trusted Private Cloud ([895830a](https://github.com/googleapis/google-cloud-node/commit/895830a3ef91666c30a96a7f68bd4cd1f582d58d))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v1.0.0...bigquery-datapolicies-v1.1.0) (2023-09-06)
 
 

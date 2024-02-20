@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v3.0.3...video-transcoder-v3.1.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5028](https://github.com/googleapis/google-cloud-node/issues/5028)) ([852f3eb](https://github.com/googleapis/google-cloud-node/commit/852f3ebf065ee24e910580b9a1fc365acb3a744a))
+
 ## [3.0.3](https://github.com/googleapis/google-cloud-node/compare/video-transcoder-v3.0.2...video-transcoder-v3.0.3) (2024-01-23)
 
 

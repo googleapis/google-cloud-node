@@ -5,6 +5,2404 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/servicehealth",
+      "id": "3815cfdf-668c-436c-b6b8-4d5bf1dfbb78",
+      "createTime": "2024-02-09T18:22:14.501Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "10d275eb-68df-43bb-b316-1f4b0dd05451",
+      "createTime": "2024-02-09T18:22:14.489Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "d9cd78c8-2e1f-41b2-8285-0ccd45424e08",
+      "createTime": "2024-02-09T18:22:14.479Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "1795aa11-ed4a-461f-acde-abac07fc5ae4",
+      "createTime": "2024-02-09T18:22:14.468Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "3a28384d-c465-48e0-a760-9eb70af48b92",
+      "createTime": "2024-02-09T18:22:14.458Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "84c0a10e-68ef-4784-9443-6cf29898cd9c",
+      "createTime": "2024-02-09T18:22:14.448Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "e9616bd0-6ee0-4355-88eb-94f043317dd3",
+      "createTime": "2024-02-09T18:22:14.435Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "d5e30fec-691e-4c53-b754-8e0226b78b71",
+      "createTime": "2024-02-09T18:22:14.426Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "3559735d-0c4d-41c8-8b71-4fe3640edaae",
+      "createTime": "2024-02-09T18:22:14.327Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "16aacba7-ea9a-4200-9a8a-f246e5b85867",
+      "createTime": "2024-02-09T18:22:14.246Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dbaf31ebc7f167b9d6323c90854b8e7d482633aa",
+          "message": "[dashboard] Add support for pie charts, incident lists, dropdown groups, error reporting panels, section headers, and styling options on text widgets",
+          "issues": [
+            "5035"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "d3c6f58d-7261-45be-9773-a5e160294ca9",
+      "createTime": "2024-02-09T18:22:14.224Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "cb3dc19e-2546-415d-8d3f-bd01ac4ab401",
+      "createTime": "2024-02-09T18:22:14.214Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "f70849a5-12b4-4fdd-9dd0-ce2133b1ea09",
+      "createTime": "2024-02-09T18:22:14.204Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "d87486e7-e8c0-4f1d-ab7e-dc1d94831183",
+      "createTime": "2024-02-09T18:22:14.194Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/addressvalidation",
+      "id": "91d3e66e-a19e-4f13-b68d-5f3838b8f3b4",
+      "createTime": "2024-02-09T18:22:14.183Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "0748feb2-896b-4ef5-bdff-2a1ec05771cd",
+      "createTime": "2024-02-09T18:22:14.173Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam-credentials",
+      "id": "b7ef46cb-6126-4aff-8a73-d484df047a6f",
+      "createTime": "2024-02-09T18:22:14.161Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "85f410a0-c7a9-48a5-89b9-039bfc981a06",
+      "createTime": "2024-02-09T18:22:14.149Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "09e59ad6e34001a33d01894ccd5a0643f1a84883",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5029"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "c54a73b8-743d-4274-9b80-b431f414216d",
+      "createTime": "2024-02-09T18:22:14.138Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "35fa4c18-6f3d-4484-bfe9-5b13260e83ce",
+      "createTime": "2024-02-09T18:22:14.124Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "53743026-0339-4f49-92b5-a27ade7bf817",
+      "createTime": "2024-02-09T18:22:14.114Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "4effcd5b-30fe-47a8-930b-057be1556829",
+      "createTime": "2024-02-09T18:22:14.103Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "4926a9e1-5398-4193-81ab-e9ef64f9e8a9",
+      "createTime": "2024-02-09T18:22:14.093Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "423e385e3b62077bc381c698e320769ccf6045b1",
+          "message": "[container] Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5020"
+          ]
+        }
+      ],
+      "version": "5.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "c82af860-b09c-4b79-8ed4-f5f9404b31cd",
+      "createTime": "2024-02-09T18:22:14.082Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "84c6ccfb-86b0-4cc0-b429-9a9f3c3db0b5",
+      "createTime": "2024-02-09T18:22:14.072Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "8c183755-73c7-472b-911d-37fd525bb0f8",
+      "createTime": "2024-02-09T18:22:14.057Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "d88d8964-c286-4c6e-9690-218c2db2b26c",
+      "createTime": "2024-02-09T18:22:14.047Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "3ed99ce4-2bca-481b-8f85-cead8f1e4c3b",
+      "createTime": "2024-02-09T18:22:14.036Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "9a46cf7c-dcb4-41ec-8727-c471bf7b2553",
+      "createTime": "2024-02-09T18:22:14.025Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "eaf9222d-40cc-43a2-9f30-2098a962e721",
+      "createTime": "2024-02-09T18:22:13.993Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "38be1ff7-837a-47bf-ae47-4e714a0fdbf1",
+      "createTime": "2024-02-09T18:22:13.983Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "31808095791eeee24ebdedbddf72b075ee3fd6bf",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter",
+          "issues": [
+            "5018"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "a44de60c-6a04-4882-9002-09209577e1f1",
+      "createTime": "2024-02-09T18:22:13.973Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "c48a84a2-e4be-4aaa-b3f6-2c1a588e779d",
+      "createTime": "2024-02-09T18:22:13.963Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "56771128-1c3e-49af-8d8d-a1801dbcaa06",
+      "createTime": "2024-02-09T18:22:13.953Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "7e6aab43-5a27-488b-9e0a-bcba1d9470a4",
+      "createTime": "2024-02-09T18:22:13.940Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "e60688ca-199e-4c9d-af61-09a9835abba2",
+      "createTime": "2024-02-09T18:22:13.925Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "c1384895-91bb-4628-b158-b46d89477913",
+      "createTime": "2024-02-09T18:22:13.835Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "9dbff464-06a7-479f-9df4-dfa429a58802",
+      "createTime": "2024-02-09T18:22:13.744Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "0d8c52da-f335-4283-9f5e-17024da76ab1",
+      "createTime": "2024-02-09T18:22:13.729Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "e341f7ce-148f-4c4c-a4d4-4ac51c10a7ab",
+      "createTime": "2024-02-09T18:22:13.713Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "852f3ebf065ee24e910580b9a1fc365acb3a744a",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5028"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "dd12158e-5662-4314-a89a-2747af536ebb",
+      "createTime": "2024-02-09T18:22:13.703Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "e09d88fa-cb2f-4ae1-a83b-d11982d8ef49",
+      "createTime": "2024-02-09T18:22:13.693Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "464493cb-690c-4f95-ae9a-1921ef18672b",
+      "createTime": "2024-02-09T18:22:13.684Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "8730aa2f-696e-49be-93d7-a59d8f2cec0e",
+      "createTime": "2024-02-09T18:22:13.674Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "60c74626-f4ae-4fbf-9b95-210f9ba5c65b",
+      "createTime": "2024-02-09T18:22:13.664Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "51c087c4-c594-4764-a629-0c35ec639b50",
+      "createTime": "2024-02-09T18:22:13.654Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "ef663d16-ea75-46dd-8ea3-cf735b17b81d",
+      "createTime": "2024-02-09T18:22:13.644Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "8.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "3bc9c1c9-3343-4722-bdaa-b1aa1672dc02",
+      "createTime": "2024-02-09T18:22:13.635Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/publicca",
+      "id": "987a9ee4-87f9-42ad-88eb-4e3163fc87a9",
+      "createTime": "2024-02-09T18:22:13.625Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "c78bb5db-9e4b-4781-9a7b-bfbb9ada5a7b",
+      "createTime": "2024-02-09T18:22:13.611Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "7dcb846b-80cd-45ab-9969-e5eedd9947da",
+      "createTime": "2024-02-09T18:22:13.602Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "ca858d7c-c114-404e-94cb-641aac409308",
+      "createTime": "2024-02-09T18:22:13.592Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "4fd8ae89-b282-42f3-9484-6ffa6d884ee3",
+      "createTime": "2024-02-09T18:22:13.583Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "76548b0c0715dbb505ba14ed30b75fab6a36d081",
+          "message": "[retail] add analytics service",
+          "issues": [
+            "5033"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "b8cc5937-3d20-416b-9dd2-75031c7bcc22",
+      "createTime": "2024-02-09T18:22:13.574Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-settings",
+      "id": "888bdd21-306f-4e56-8fa0-d966f1c766b2",
+      "createTime": "2024-02-09T18:22:13.564Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "dd893c3d-2ecf-4790-9ddb-90e3f564980c",
+      "createTime": "2024-02-09T18:22:13.554Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "5cddabc9-e94b-40b1-a5ff-7e3279d57692",
+      "createTime": "2024-02-09T18:22:13.544Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "55450fa7-7276-4984-b763-7b317e08fd90",
+      "createTime": "2024-02-09T18:22:13.529Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5027"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "76567350-4730-411e-a6bc-ac21a659507e",
+      "createTime": "2024-02-09T18:22:13.497Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "284a97d2-5176-4e37-909d-ca07a8cffd4d",
+      "createTime": "2024-02-09T18:22:13.486Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "6617510e-991b-4a8e-ba6d-495d136ad3ae",
+      "createTime": "2024-02-09T18:22:13.475Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "16048e88-15b4-4675-93ba-48baac4e479c",
+      "createTime": "2024-02-09T18:22:13.463Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "3b596e38-85ea-4bf2-a085-d7e4c7de3cd0",
+      "createTime": "2024-02-09T18:22:13.454Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "3d878dd9-2dee-46cb-8015-5c407243b6ab",
+      "createTime": "2024-02-09T18:22:13.434Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "777dd7d2-fc33-482a-ac72-fa7cc7ade6a4",
+      "createTime": "2024-02-09T18:22:13.346Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "e4fa8003-487a-4e7a-867d-398c56b6d405",
+      "createTime": "2024-02-09T18:22:13.325Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "6f036fdd-c5c9-4df3-9e6d-62ab64f29522",
+      "createTime": "2024-02-09T18:22:13.259Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "a7b98ce1-b840-4b7c-89ae-58d9bb0765e0",
+      "createTime": "2024-02-09T18:22:13.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "7e5a28f0-5c76-4655-8e2f-2735143595eb",
+      "createTime": "2024-02-09T18:22:13.238Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/optimization",
+      "id": "e0c82910-e248-45f5-b11b-a7193053b68c",
+      "createTime": "2024-02-09T18:22:13.224Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "c77881c7-d07a-45bc-9a4c-c03fe3437b72",
+      "createTime": "2024-02-09T18:22:13.212Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "bad3b84c-1ef2-465e-91e8-fa188eb1fad8",
+      "createTime": "2024-02-09T18:22:13.203Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "eeb75ba2-d737-41fa-961e-1c86e2127689",
+      "createTime": "2024-02-09T18:22:13.192Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "fad05c3d-7a6b-4bd4-b01f-f8cbf526cf20",
+      "createTime": "2024-02-09T18:22:13.183Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "dbc68ee9-ab30-4dc9-9215-ddc0c3c7d52e",
+      "createTime": "2024-02-09T18:22:13.172Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "d985390d-584a-47df-b73b-c9835435bd47",
+      "createTime": "2024-02-09T18:22:13.159Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "c588c5a2-dba5-41e1-93f0-68841adad2b2",
+      "createTime": "2024-02-09T18:22:13.148Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "05aba010-91d1-4a44-a311-e450b0d915fc",
+      "createTime": "2024-02-09T18:22:13.137Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "43acd893e6c428f219d62f0c4264e4db78b99f99",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5026"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "e3ebd650-95de-4f44-83a1-abd9f2e45f20",
+      "createTime": "2024-02-09T18:22:13.127Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "18c926df-29e6-44b8-bb53-09dc350d17b1",
+      "createTime": "2024-02-09T18:22:13.109Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "6fbd6e0c-a29a-47ad-8c9d-ad9d3f3fe946",
+      "createTime": "2024-02-09T18:22:13.099Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "dc61ef08-9553-4c64-be0f-5bb6c132ca54",
+      "createTime": "2024-02-09T18:22:13.090Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "ac523b95-7beb-447d-8fd0-a45d747147c0",
+      "createTime": "2024-02-09T18:22:13.080Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "7c89afbb-d99c-4aee-bffb-b38a60ab9f20",
+      "createTime": "2024-02-09T18:22:13.070Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "75cdea0f-053e-404f-840c-21f7be7325a6",
+      "createTime": "2024-02-09T18:22:13.061Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "0f7decb2-c6a7-440e-9ac3-062fd74d2188",
+      "createTime": "2024-02-09T18:22:13.051Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "c2652aed-842b-4e6d-babb-fe51ca250515",
+      "createTime": "2024-02-09T18:22:13.040Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "26efc740-86d1-4c40-88c3-b4759d9c72df",
+      "createTime": "2024-02-09T18:22:13.031Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "65baf794-82c7-476b-9dca-27592e50d67d",
+      "createTime": "2024-02-09T18:22:12.981Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "0c94160a-507f-4123-a444-eec1d44c9707",
+      "createTime": "2024-02-09T18:22:12.971Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "d30636c4-1428-4a63-8209-1852b6ebeb3a",
+      "createTime": "2024-02-09T18:22:12.961Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "da8fe166-ab56-40f9-99dd-0faacf778185",
+      "createTime": "2024-02-09T18:22:12.948Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "58b3e156-aa8b-4a34-830a-04d51c4e11ab",
+      "createTime": "2024-02-09T18:22:12.939Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "e98850d6-2d58-4a90-96fa-4d6031668733",
+      "createTime": "2024-02-09T18:22:12.837Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "93a3b613-cd29-41e8-b2cb-ad18db812149",
+      "createTime": "2024-02-09T18:22:12.781Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "abef4493-1cdd-412a-b06b-b5c896cc8c5b",
+      "createTime": "2024-02-09T18:22:12.768Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "8b89a0d8-631f-4ebc-99cc-894021f969b1",
+      "createTime": "2024-02-09T18:22:12.759Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7244cab107973bef57c5ea84ae77c51718126822",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5025"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "7bce4e98-a2fb-47c3-867b-6a387461e950",
+      "createTime": "2024-02-09T18:22:12.749Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c7f32309224d2bb4d8933eb4071bbe081d80d171",
+          "message": "[discoveryengine] add data store, engine, serving config and site search engine services",
+          "issues": [
+            "5032"
+          ]
+        }
+      ],
+      "version": "1.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "d28b4fd1-69e2-4f15-9a45-e066d2788c61",
+      "createTime": "2024-02-09T18:22:12.739Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "47fb485d4b157863ec68efdbc9e6e53dad903ac9",
+          "message": "[dialogflow-cx] A new field `opt_out_conformer_model_migration` is added to message `.google.cloud.dialogflow.cx.v3.InputAudioConfig`",
+          "issues": [
+            "5034"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "cc1b2844-6128-4bda-ad82-6ee1db5d466b",
+      "createTime": "2024-02-09T18:22:12.716Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "1.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "324a5137-ce4a-4090-9aa6-8b97f496f7b2",
+      "createTime": "2024-02-09T18:22:12.706Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bf847d019292cce75292ff8d06d1897858462c97",
+          "message": "[compute] Update Compute Engine API to revision 20240130 (#881)",
+          "issues": [
+            "5031"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "5a79fd0e0631be19230d5ff2abae7d5ed847ab55",
+          "message": "[compute] Trusted Private Cloud support, use the universeDomain parameter",
+          "issues": [
+            "5016"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "45d11c26-3124-4e3a-8554-77cafb82c6dd",
+      "createTime": "2024-02-09T18:22:12.697Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "c9544e48-c586-49d8-958c-47f02614c7f2",
+      "createTime": "2024-02-09T18:22:12.687Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "2a331cfa-e713-440b-9c45-8bad5e12dffa",
+      "createTime": "2024-02-09T18:22:12.675Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "19894287-1fd1-4e32-85d0-7408d3f46244",
+      "createTime": "2024-02-09T18:22:12.661Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "dba597ee-f6b7-45ba-8bf8-a351f76af107",
+      "createTime": "2024-02-09T18:22:12.650Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "a7f20cd2-6ab6-4e62-a6e4-bb44c5737463",
+      "createTime": "2024-02-09T18:22:12.641Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "6bb4d610-7928-4ab8-a854-b0fe635aad90",
+      "createTime": "2024-02-09T18:22:12.632Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "6abeeca2-e844-4479-9b5c-5af0333933a5",
+      "createTime": "2024-02-09T18:22:12.614Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "8e8890fc-5cf9-4c9a-b9c8-8dfb66f2b655",
+      "createTime": "2024-02-09T18:22:12.604Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-migration",
+      "id": "02fae054-6a86-426b-84a2-c9444844fe53",
+      "createTime": "2024-02-09T18:22:12.594Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "24139b09-916f-459b-8e0a-157f25e39239",
+      "createTime": "2024-02-09T18:22:12.585Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "b3c1ff52-4120-43d8-8521-9a2136f53f92",
+      "createTime": "2024-02-09T18:22:12.575Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-exchange",
+      "id": "e07d77ae-3169-4701-b121-0b547bb0a324",
+      "createTime": "2024-02-09T18:22:12.566Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "bc7e5058-da43-4dec-80da-1baca9c6571c",
+      "createTime": "2024-02-09T18:22:12.557Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "0d246e4b-f041-49b7-b391-c7c11e9d414c",
+      "createTime": "2024-02-09T18:22:12.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "f89eb3e7-42ff-46e4-b3ff-254b6c15f6cf",
+      "createTime": "2024-02-09T18:22:12.538Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "829640d2-1ea1-45d4-ab9a-0d72256fedc4",
+      "createTime": "2024-02-09T18:22:12.528Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "285fc8db-513b-44e8-8e94-79bfc1179de5",
+      "createTime": "2024-02-09T18:22:12.483Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "763b0514-d318-40ce-a716-ade058dc54b6",
+      "createTime": "2024-02-09T18:22:12.473Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "895830a3ef91666c30a96a7f68bd4cd1f582d58d",
+          "message": "Support for Trusted Private Cloud",
+          "issues": []
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "65843c2b-069f-42ed-94c3-f988874782bf",
+      "createTime": "2024-02-09T18:22:12.462Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "1.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "0965ba81-4ac6-4a6c-99aa-d46066152cf5",
+      "createTime": "2024-02-09T18:22:12.449Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "18ea6904-e9ae-48fa-8f67-3fa79233e103",
+      "createTime": "2024-02-09T18:22:12.441Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/automl",
+      "id": "9bc43268-5fa2-43e8-9ec7-476d410f6205",
+      "createTime": "2024-02-09T18:22:12.347Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "e51c8a98-22d4-47b6-9575-e54535c96955",
+      "createTime": "2024-02-09T18:22:12.327Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "19829355db55d4fed00536f8f5822d084a51c6cd",
+          "message": "[asset ]Trusted Private Cloud support, use the universeDomain parameter",
+          "issues": [
+            "5019"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "4d98cbbf-c3e1-4d42-9709-858503d8d4c6",
+      "createTime": "2024-02-09T18:22:12.270Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-registry",
+      "id": "8f2b086b-0d42-4a5e-add1-43e17e54071a",
+      "createTime": "2024-02-09T18:22:12.257Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "fe316b77-bf99-4529-98ff-07e1afa8ebc6",
+      "createTime": "2024-02-09T18:22:12.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "e4166525-2184-4827-8c5b-606ce42a21ea",
+      "createTime": "2024-02-09T18:22:12.239Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "1.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "09393573-6944-4aab-9d28-6dd32715a048",
+      "createTime": "2024-02-09T18:22:12.230Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ca9af375a2a62ce3e3f5ad09db43028591a0b571",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5021"
+          ]
+        }
+      ],
+      "version": "3.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "a6193e60-2296-4366-9e18-eb3d2b18be36",
+      "createTime": "2024-02-09T18:22:12.220Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "72b5e235-5ede-435d-be99-4f36f0ed86ab",
+      "createTime": "2024-02-09T18:22:12.211Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "16f05480-30d4-43a4-aeba-88faaf79a197",
+      "createTime": "2024-02-09T18:22:12.201Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "1db82662-5654-43f8-be72-229e2208ded7",
+      "createTime": "2024-02-09T18:22:12.191Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "976e9aa2-20f4-4607-b04f-91748b85f9ee",
+      "createTime": "2024-02-09T18:22:12.179Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "a33441d3-eea8-408a-bc85-fe446beb091a",
+      "createTime": "2024-02-09T18:22:12.170Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "45c43cae-8de0-45a9-ad80-52259789ecc3",
+      "createTime": "2024-02-09T18:22:12.161Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "27f419ab-fbc3-4ca3-a9a1-818245cfcd5f",
+      "createTime": "2024-02-09T18:22:12.152Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "f5debe59-bb5c-4e55-95f5-4407ee5b9dc5",
+      "createTime": "2024-02-09T18:22:12.142Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "b77c7123-11dd-4c8f-a672-154bd5fa66c2",
+      "createTime": "2024-02-09T18:22:12.134Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "7.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "77f8466b-a658-4a85-8b54-df5dfdbbf97b",
+      "createTime": "2024-02-09T18:22:12.124Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b6498d8580d056817981dedbaa0ea5d82e9dccc2",
+          "message": "Trusted Private Cloud support, use the universeDomain parameter ",
+          "issues": [
+            "5022"
+          ]
+        }
+      ],
+      "version": "2.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "9f81d478-0c02-4d46-9088-b9833c9386ba",
+      "createTime": "2024-02-09T18:22:12.114Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "e137447885c5516f94f4cc409bbb32bc9cbe4c27",
           "message": "[edgenetwork] add MACsec status for internal links",
           "issues": [
@@ -21927,5 +24325,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-02-07T20:25:12.250Z"
+  "updateTime": "2024-02-09T18:22:14.501Z"
 }
