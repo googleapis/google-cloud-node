@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v3.0.1...monitoring-dashboards-v3.1.0) (2024-02-09)
+
+
+### Features
+
+* [dashboard] Add support for pie charts, incident lists, dropdown groups, error reporting panels, section headers, and styling options on text widgets ([#5035](https://github.com/googleapis/google-cloud-node/issues/5035)) ([dbaf31e](https://github.com/googleapis/google-cloud-node/commit/dbaf31ebc7f167b9d6323c90854b8e7d482633aa))
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5029](https://github.com/googleapis/google-cloud-node/issues/5029)) ([09e59ad](https://github.com/googleapis/google-cloud-node/commit/09e59ad6e34001a33d01894ccd5a0643f1a84883))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v3.0.0...monitoring-dashboards-v3.0.1) (2023-09-06)
 
 

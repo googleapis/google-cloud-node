@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.2.0...binary-authorization-v3.3.0) (2024-02-09)
+
+
+### Features
+
+* Support for Trusted Private Cloud ([895830a](https://github.com/googleapis/google-cloud-node/commit/895830a3ef91666c30a96a7f68bd4cd1f582d58d))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.1.0...binary-authorization-v3.2.0) (2023-11-30)
 
 

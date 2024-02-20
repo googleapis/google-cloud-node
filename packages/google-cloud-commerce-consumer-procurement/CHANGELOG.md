@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/procurement-v0.1.1...procurement-v0.2.0) (2024-02-09)
+
+
+### Features
+
+* Support for Trusted Private Cloud ([895830a](https://github.com/googleapis/google-cloud-node/commit/895830a3ef91666c30a96a7f68bd4cd1f582d58d))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/procurement-v0.1.0...procurement-v0.1.1) (2023-09-06)
 
 

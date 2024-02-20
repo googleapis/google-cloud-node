@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.2.0...confidentialcomputing-v1.3.0) (2024-02-09)
+
+
+### Features
+
+* Support for Trusted Private Cloud ([895830a](https://github.com/googleapis/google-cloud-node/commit/895830a3ef91666c30a96a7f68bd4cd1f582d58d))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.1.0...confidentialcomputing-v1.2.0) (2023-11-16)
 
 

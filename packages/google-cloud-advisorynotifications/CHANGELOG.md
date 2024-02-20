@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/advisorynotifications-v1.1.0...advisorynotifications-v1.2.0) (2024-02-09)
+
+
+### Features
+
+* Trusted Private Cloud support, use the universeDomain parameter  ([#5022](https://github.com/googleapis/google-cloud-node/issues/5022)) ([b6498d8](https://github.com/googleapis/google-cloud-node/commit/b6498d8580d056817981dedbaa0ea5d82e9dccc2))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/advisorynotifications-v1.0.1...advisorynotifications-v1.1.0) (2023-12-11)
 
 

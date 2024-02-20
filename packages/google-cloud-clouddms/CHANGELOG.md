@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/dms-v3.1.0...dms-v3.2.0) (2024-02-09)
+
+
+### Features
+
+* Support for Trusted Private Cloud ([895830a](https://github.com/googleapis/google-cloud-node/commit/895830a3ef91666c30a96a7f68bd4cd1f582d58d))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/dms-v3.0.0...dms-v3.1.0) (2023-09-06)
 
 

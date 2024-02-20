@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.6.0...container-v5.7.0) (2024-02-09)
+
+
+### Features
+
+* [container] Trusted Private Cloud support, use the universeDomain parameter  ([#5020](https://github.com/googleapis/google-cloud-node/issues/5020)) ([423e385](https://github.com/googleapis/google-cloud-node/commit/423e385e3b62077bc381c698e320769ccf6045b1))
+
 ## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.5.0...container-v5.6.0) (2024-02-07)
 
 

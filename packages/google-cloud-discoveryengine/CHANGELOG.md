@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.3.1...discoveryengine-v1.4.0) (2024-02-09)
+
+
+### Features
+
+* [discoveryengine] add data store, engine, serving config and site search engine services ([#5032](https://github.com/googleapis/google-cloud-node/issues/5032)) ([c7f3230](https://github.com/googleapis/google-cloud-node/commit/c7f32309224d2bb4d8933eb4071bbe081d80d171))
+
 ## [1.3.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.3.0...discoveryengine-v1.3.1) (2024-01-05)
 
 
