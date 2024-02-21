@@ -715,7 +715,7 @@
             "regionTag": "bigquerydatatransfer_v1_generated_DataTransferService_UnenrollDataSources_async",
             "title": "DataTransferService unenrollDataSources Sample",
             "origin": "API_DEFINITION",
-            "description": " Unenroll data sources in a user project. This allows users to remove transfer configurations for these data sources. They will no longer appear in the ListDataSources RPC and will also no longer appear in the [BigQuery UI](https://console.cloud.google.com/bigquery).",
+            "description": " Unenroll data sources in a user project. This allows users to remove transfer configurations for these data sources. They will no longer appear in the ListDataSources RPC and will also no longer appear in the [BigQuery UI](https://console.cloud.google.com/bigquery). Data transfers configurations of unenrolled data sources will not be scheduled.",
             "canonical": true,
             "file": "data_transfer_service.unenroll_data_sources.js",
             "language": "JAVASCRIPT",
