@@ -1107,6 +1107,13 @@
                     "resourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 45
+                    },
+                    "enableConfidentialStorage": {
+                      "type": "bool",
+                      "id": 46,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -2999,6 +3006,10 @@
                     "resourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 39
+                    },
+                    "queuedProvisioning": {
+                      "type": "NodePool.QueuedProvisioning",
+                      "id": 42
                     }
                   }
                 },
