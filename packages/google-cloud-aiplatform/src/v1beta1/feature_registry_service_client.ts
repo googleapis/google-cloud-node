@@ -975,6 +975,10 @@ export class FeatureRegistryServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1251,6 +1255,9 @@ export class FeatureRegistryServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1499,6 +1506,9 @@ export class FeatureRegistryServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
@@ -1765,6 +1775,9 @@ export class FeatureRegistryServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',

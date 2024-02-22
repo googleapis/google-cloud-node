@@ -2794,6 +2794,12 @@ export namespace google {
 
                         /** SqlExportOptions mysqlExportOptions */
                         mysqlExportOptions?: (google.cloud.sql.v1.ExportContext.SqlExportOptions.IMysqlExportOptions|null);
+
+                        /** SqlExportOptions threads */
+                        threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlExportOptions parallel */
+                        parallel?: (google.protobuf.IBoolValue|null);
                     }
 
                     /** Represents a SqlExportOptions. */
@@ -2813,6 +2819,12 @@ export namespace google {
 
                         /** SqlExportOptions mysqlExportOptions. */
                         public mysqlExportOptions?: (google.cloud.sql.v1.ExportContext.SqlExportOptions.IMysqlExportOptions|null);
+
+                        /** SqlExportOptions threads. */
+                        public threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlExportOptions parallel. */
+                        public parallel?: (google.protobuf.IBoolValue|null);
 
                         /**
                          * Creates a new SqlExportOptions instance using the specified properties.
@@ -16189,7 +16201,8 @@ export namespace google {
                         TURN_ON_PITR_AFTER_PROMOTE = 36,
                         INCOMPATIBLE_DATABASE_MINOR_VERSION = 37,
                         SOURCE_MAX_SUBSCRIPTIONS = 38,
-                        UNABLE_TO_VERIFY_DEFINERS = 39
+                        UNABLE_TO_VERIFY_DEFINERS = 39,
+                        SUBSCRIPTION_CALCULATION_STATUS = 40
                     }
                 }
 
@@ -29646,6 +29659,12 @@ export namespace google {
 
                         /** SqlExportOptions mysqlExportOptions */
                         mysqlExportOptions?: (google.cloud.sql.v1beta4.ExportContext.SqlExportOptions.IMysqlExportOptions|null);
+
+                        /** SqlExportOptions threads */
+                        threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlExportOptions parallel */
+                        parallel?: (google.protobuf.IBoolValue|null);
                     }
 
                     /** Represents a SqlExportOptions. */
@@ -29665,6 +29684,12 @@ export namespace google {
 
                         /** SqlExportOptions mysqlExportOptions. */
                         public mysqlExportOptions?: (google.cloud.sql.v1beta4.ExportContext.SqlExportOptions.IMysqlExportOptions|null);
+
+                        /** SqlExportOptions threads. */
+                        public threads?: (google.protobuf.IInt32Value|null);
+
+                        /** SqlExportOptions parallel. */
+                        public parallel?: (google.protobuf.IBoolValue|null);
 
                         /**
                          * Creates a new SqlExportOptions instance using the specified properties.
@@ -32500,7 +32525,8 @@ export namespace google {
                         TURN_ON_PITR_AFTER_PROMOTE = 36,
                         INCOMPATIBLE_DATABASE_MINOR_VERSION = 37,
                         SOURCE_MAX_SUBSCRIPTIONS = 38,
-                        UNABLE_TO_VERIFY_DEFINERS = 39
+                        UNABLE_TO_VERIFY_DEFINERS = 39,
+                        SUBSCRIPTION_CALCULATION_STATUS = 40
                     }
                 }
 

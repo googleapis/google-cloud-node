@@ -375,6 +375,22 @@
                                   }
                                 }
                               ]
+                            },
+                            "UnenrollDataSources": {
+                              "requestType": "UnenrollDataSourcesRequest",
+                              "responseType": "google.protobuf.Empty",
+                              "options": {
+                                "(google.api.http).post": "/v1/{name=projects/*/locations/*}:unenrollDataSources",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{name=projects/*/locations/*}:unenrollDataSources",
+                                    "body": "*"
+                                  }
+                                }
+                              ]
                             }
                           }
                         },
@@ -977,6 +993,19 @@
                           }
                         },
                         "EnrollDataSourcesRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "dataSourceIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "UnenrollDataSourcesRequest": {
                           "fields": {
                             "name": {
                               "type": "string",

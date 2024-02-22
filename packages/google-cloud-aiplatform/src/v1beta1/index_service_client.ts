@@ -965,6 +965,10 @@ export class IndexServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1241,6 +1245,9 @@ export class IndexServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
             },
             {
@@ -1489,6 +1496,9 @@ export class IndexServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
@@ -1755,6 +1765,9 @@ export class IndexServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
@@ -2188,6 +2201,14 @@ export class IndexServiceClient {
    *   `projects/{project}/locations/{location}/indexes/{index}`
    * @param {number[]} request.datapoints
    *   A list of datapoints to be created/updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Update mask is used to specify the fields to be overwritten in
+   *   the datapoints by the update. The fields specified in the update_mask are
+   *   relative to each IndexDatapoint inside datapoints, not the full request.
+   *
+   *   Updatable fields:
+   *
+   *     * Use `all_restricts` to update both restricts and numeric_restricts.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

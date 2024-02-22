@@ -2160,6 +2160,7 @@
                          * @property {google.type.IPostalAddress|null} [address] ValidateAddressRequest address
                          * @property {string|null} [previousResponseId] ValidateAddressRequest previousResponseId
                          * @property {boolean|null} [enableUspsCass] ValidateAddressRequest enableUspsCass
+                         * @property {string|null} [sessionToken] ValidateAddressRequest sessionToken
                          */
     
                         /**
@@ -2202,6 +2203,14 @@
                         ValidateAddressRequest.prototype.enableUspsCass = false;
     
                         /**
+                         * ValidateAddressRequest sessionToken.
+                         * @member {string} sessionToken
+                         * @memberof google.maps.addressvalidation.v1.ValidateAddressRequest
+                         * @instance
+                         */
+                        ValidateAddressRequest.prototype.sessionToken = "";
+    
+                        /**
                          * Creates a new ValidateAddressRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.addressvalidation.v1.ValidateAddressRequest
@@ -2231,6 +2240,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.previousResponseId);
                             if (message.enableUspsCass != null && Object.hasOwnProperty.call(message, "enableUspsCass"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enableUspsCass);
+                            if (message.sessionToken != null && Object.hasOwnProperty.call(message, "sessionToken"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.sessionToken);
                             return writer;
                         };
     
@@ -2275,6 +2286,10 @@
                                     }
                                 case 3: {
                                         message.enableUspsCass = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.sessionToken = reader.string();
                                         break;
                                     }
                                 default:
@@ -2323,6 +2338,9 @@
                             if (message.enableUspsCass != null && message.hasOwnProperty("enableUspsCass"))
                                 if (typeof message.enableUspsCass !== "boolean")
                                     return "enableUspsCass: boolean expected";
+                            if (message.sessionToken != null && message.hasOwnProperty("sessionToken"))
+                                if (!$util.isString(message.sessionToken))
+                                    return "sessionToken: string expected";
                             return null;
                         };
     
@@ -2347,6 +2365,8 @@
                                 message.previousResponseId = String(object.previousResponseId);
                             if (object.enableUspsCass != null)
                                 message.enableUspsCass = Boolean(object.enableUspsCass);
+                            if (object.sessionToken != null)
+                                message.sessionToken = String(object.sessionToken);
                             return message;
                         };
     
@@ -2367,6 +2387,7 @@
                                 object.address = null;
                                 object.previousResponseId = "";
                                 object.enableUspsCass = false;
+                                object.sessionToken = "";
                             }
                             if (message.address != null && message.hasOwnProperty("address"))
                                 object.address = $root.google.type.PostalAddress.toObject(message.address, options);
@@ -2374,6 +2395,8 @@
                                 object.previousResponseId = message.previousResponseId;
                             if (message.enableUspsCass != null && message.hasOwnProperty("enableUspsCass"))
                                 object.enableUspsCass = message.enableUspsCass;
+                            if (message.sessionToken != null && message.hasOwnProperty("sessionToken"))
+                                object.sessionToken = message.sessionToken;
                             return object;
                         };
     
@@ -5190,6 +5213,15 @@
                          * @property {string|null} [dpvCmra] UspsData dpvCmra
                          * @property {string|null} [dpvVacant] UspsData dpvVacant
                          * @property {string|null} [dpvNoStat] UspsData dpvNoStat
+                         * @property {number|null} [dpvNoStatReasonCode] UspsData dpvNoStatReasonCode
+                         * @property {string|null} [dpvDrop] UspsData dpvDrop
+                         * @property {string|null} [dpvThrowback] UspsData dpvThrowback
+                         * @property {string|null} [dpvNonDeliveryDays] UspsData dpvNonDeliveryDays
+                         * @property {number|null} [dpvNonDeliveryDaysValues] UspsData dpvNonDeliveryDaysValues
+                         * @property {string|null} [dpvNoSecureLocation] UspsData dpvNoSecureLocation
+                         * @property {string|null} [dpvPbsa] UspsData dpvPbsa
+                         * @property {string|null} [dpvDoorNotAccessible] UspsData dpvDoorNotAccessible
+                         * @property {string|null} [dpvEnhancedDeliveryCode] UspsData dpvEnhancedDeliveryCode
                          * @property {string|null} [carrierRoute] UspsData carrierRoute
                          * @property {string|null} [carrierRouteIndicator] UspsData carrierRouteIndicator
                          * @property {boolean|null} [ewsNoMatch] UspsData ewsNoMatch
@@ -5290,6 +5322,78 @@
                          * @instance
                          */
                         UspsData.prototype.dpvNoStat = "";
+    
+                        /**
+                         * UspsData dpvNoStatReasonCode.
+                         * @member {number} dpvNoStatReasonCode
+                         * @memberof google.maps.addressvalidation.v1.UspsData
+                         * @instance
+                         */
+                        UspsData.prototype.dpvNoStatReasonCode = 0;
+    
+                        /**
+                         * UspsData dpvDrop.
+                         * @member {string} dpvDrop
+                         * @memberof google.maps.addressvalidation.v1.UspsData
+                         * @instance
+                         */
+                        UspsData.prototype.dpvDrop = "";
+    
+                        /**
+                         * UspsData dpvThrowback.
+                         * @member {string} dpvThrowback
+                         * @memberof google.maps.addressvalidation.v1.UspsData
+                         * @instance
+                         */
+                        UspsData.prototype.dpvThrowback = "";
+    
+                        /**
+                         * UspsData dpvNonDeliveryDays.
+                         * @member {string} dpvNonDeliveryDays
+                         * @memberof google.maps.addressvalidation.v1.UspsData
+                         * @instance
+                         */
+                        UspsData.prototype.dpvNonDeliveryDays = "";
+    
+                        /**
+                         * UspsData dpvNonDeliveryDaysValues.
+                         * @member {number} dpvNonDeliveryDaysValues
+                         * @memberof google.maps.addressvalidation.v1.UspsData
+                         * @instance
+                         */
+                        UspsData.prototype.dpvNonDeliveryDaysValues = 0;
+    
+                        /**
+                         * UspsData dpvNoSecureLocation.
+                         * @member {string} dpvNoSecureLocation
+                         * @memberof google.maps.addressvalidation.v1.UspsData
+                         * @instance
+                         */
+                        UspsData.prototype.dpvNoSecureLocation = "";
+    
+                        /**
+                         * UspsData dpvPbsa.
+                         * @member {string} dpvPbsa
+                         * @memberof google.maps.addressvalidation.v1.UspsData
+                         * @instance
+                         */
+                        UspsData.prototype.dpvPbsa = "";
+    
+                        /**
+                         * UspsData dpvDoorNotAccessible.
+                         * @member {string} dpvDoorNotAccessible
+                         * @memberof google.maps.addressvalidation.v1.UspsData
+                         * @instance
+                         */
+                        UspsData.prototype.dpvDoorNotAccessible = "";
+    
+                        /**
+                         * UspsData dpvEnhancedDeliveryCode.
+                         * @member {string} dpvEnhancedDeliveryCode
+                         * @memberof google.maps.addressvalidation.v1.UspsData
+                         * @instance
+                         */
+                        UspsData.prototype.dpvEnhancedDeliveryCode = "";
     
                         /**
                          * UspsData carrierRoute.
@@ -5531,6 +5635,24 @@
                                 writer.uint32(/* id 27, wireType 2 =*/218).string(message.errorMessage);
                             if (message.cassProcessed != null && Object.hasOwnProperty.call(message, "cassProcessed"))
                                 writer.uint32(/* id 28, wireType 0 =*/224).bool(message.cassProcessed);
+                            if (message.dpvNoStatReasonCode != null && Object.hasOwnProperty.call(message, "dpvNoStatReasonCode"))
+                                writer.uint32(/* id 29, wireType 0 =*/232).int32(message.dpvNoStatReasonCode);
+                            if (message.dpvDrop != null && Object.hasOwnProperty.call(message, "dpvDrop"))
+                                writer.uint32(/* id 30, wireType 2 =*/242).string(message.dpvDrop);
+                            if (message.dpvThrowback != null && Object.hasOwnProperty.call(message, "dpvThrowback"))
+                                writer.uint32(/* id 31, wireType 2 =*/250).string(message.dpvThrowback);
+                            if (message.dpvNonDeliveryDays != null && Object.hasOwnProperty.call(message, "dpvNonDeliveryDays"))
+                                writer.uint32(/* id 32, wireType 2 =*/258).string(message.dpvNonDeliveryDays);
+                            if (message.dpvNonDeliveryDaysValues != null && Object.hasOwnProperty.call(message, "dpvNonDeliveryDaysValues"))
+                                writer.uint32(/* id 33, wireType 0 =*/264).int32(message.dpvNonDeliveryDaysValues);
+                            if (message.dpvNoSecureLocation != null && Object.hasOwnProperty.call(message, "dpvNoSecureLocation"))
+                                writer.uint32(/* id 34, wireType 2 =*/274).string(message.dpvNoSecureLocation);
+                            if (message.dpvPbsa != null && Object.hasOwnProperty.call(message, "dpvPbsa"))
+                                writer.uint32(/* id 35, wireType 2 =*/282).string(message.dpvPbsa);
+                            if (message.dpvDoorNotAccessible != null && Object.hasOwnProperty.call(message, "dpvDoorNotAccessible"))
+                                writer.uint32(/* id 36, wireType 2 =*/290).string(message.dpvDoorNotAccessible);
+                            if (message.dpvEnhancedDeliveryCode != null && Object.hasOwnProperty.call(message, "dpvEnhancedDeliveryCode"))
+                                writer.uint32(/* id 37, wireType 2 =*/298).string(message.dpvEnhancedDeliveryCode);
                             return writer;
                         };
     
@@ -5595,6 +5717,42 @@
                                     }
                                 case 8: {
                                         message.dpvNoStat = reader.string();
+                                        break;
+                                    }
+                                case 29: {
+                                        message.dpvNoStatReasonCode = reader.int32();
+                                        break;
+                                    }
+                                case 30: {
+                                        message.dpvDrop = reader.string();
+                                        break;
+                                    }
+                                case 31: {
+                                        message.dpvThrowback = reader.string();
+                                        break;
+                                    }
+                                case 32: {
+                                        message.dpvNonDeliveryDays = reader.string();
+                                        break;
+                                    }
+                                case 33: {
+                                        message.dpvNonDeliveryDaysValues = reader.int32();
+                                        break;
+                                    }
+                                case 34: {
+                                        message.dpvNoSecureLocation = reader.string();
+                                        break;
+                                    }
+                                case 35: {
+                                        message.dpvPbsa = reader.string();
+                                        break;
+                                    }
+                                case 36: {
+                                        message.dpvDoorNotAccessible = reader.string();
+                                        break;
+                                    }
+                                case 37: {
+                                        message.dpvEnhancedDeliveryCode = reader.string();
                                         break;
                                     }
                                 case 9: {
@@ -5738,6 +5896,33 @@
                             if (message.dpvNoStat != null && message.hasOwnProperty("dpvNoStat"))
                                 if (!$util.isString(message.dpvNoStat))
                                     return "dpvNoStat: string expected";
+                            if (message.dpvNoStatReasonCode != null && message.hasOwnProperty("dpvNoStatReasonCode"))
+                                if (!$util.isInteger(message.dpvNoStatReasonCode))
+                                    return "dpvNoStatReasonCode: integer expected";
+                            if (message.dpvDrop != null && message.hasOwnProperty("dpvDrop"))
+                                if (!$util.isString(message.dpvDrop))
+                                    return "dpvDrop: string expected";
+                            if (message.dpvThrowback != null && message.hasOwnProperty("dpvThrowback"))
+                                if (!$util.isString(message.dpvThrowback))
+                                    return "dpvThrowback: string expected";
+                            if (message.dpvNonDeliveryDays != null && message.hasOwnProperty("dpvNonDeliveryDays"))
+                                if (!$util.isString(message.dpvNonDeliveryDays))
+                                    return "dpvNonDeliveryDays: string expected";
+                            if (message.dpvNonDeliveryDaysValues != null && message.hasOwnProperty("dpvNonDeliveryDaysValues"))
+                                if (!$util.isInteger(message.dpvNonDeliveryDaysValues))
+                                    return "dpvNonDeliveryDaysValues: integer expected";
+                            if (message.dpvNoSecureLocation != null && message.hasOwnProperty("dpvNoSecureLocation"))
+                                if (!$util.isString(message.dpvNoSecureLocation))
+                                    return "dpvNoSecureLocation: string expected";
+                            if (message.dpvPbsa != null && message.hasOwnProperty("dpvPbsa"))
+                                if (!$util.isString(message.dpvPbsa))
+                                    return "dpvPbsa: string expected";
+                            if (message.dpvDoorNotAccessible != null && message.hasOwnProperty("dpvDoorNotAccessible"))
+                                if (!$util.isString(message.dpvDoorNotAccessible))
+                                    return "dpvDoorNotAccessible: string expected";
+                            if (message.dpvEnhancedDeliveryCode != null && message.hasOwnProperty("dpvEnhancedDeliveryCode"))
+                                if (!$util.isString(message.dpvEnhancedDeliveryCode))
+                                    return "dpvEnhancedDeliveryCode: string expected";
                             if (message.carrierRoute != null && message.hasOwnProperty("carrierRoute"))
                                 if (!$util.isString(message.carrierRoute))
                                     return "carrierRoute: string expected";
@@ -5832,6 +6017,24 @@
                                 message.dpvVacant = String(object.dpvVacant);
                             if (object.dpvNoStat != null)
                                 message.dpvNoStat = String(object.dpvNoStat);
+                            if (object.dpvNoStatReasonCode != null)
+                                message.dpvNoStatReasonCode = object.dpvNoStatReasonCode | 0;
+                            if (object.dpvDrop != null)
+                                message.dpvDrop = String(object.dpvDrop);
+                            if (object.dpvThrowback != null)
+                                message.dpvThrowback = String(object.dpvThrowback);
+                            if (object.dpvNonDeliveryDays != null)
+                                message.dpvNonDeliveryDays = String(object.dpvNonDeliveryDays);
+                            if (object.dpvNonDeliveryDaysValues != null)
+                                message.dpvNonDeliveryDaysValues = object.dpvNonDeliveryDaysValues | 0;
+                            if (object.dpvNoSecureLocation != null)
+                                message.dpvNoSecureLocation = String(object.dpvNoSecureLocation);
+                            if (object.dpvPbsa != null)
+                                message.dpvPbsa = String(object.dpvPbsa);
+                            if (object.dpvDoorNotAccessible != null)
+                                message.dpvDoorNotAccessible = String(object.dpvDoorNotAccessible);
+                            if (object.dpvEnhancedDeliveryCode != null)
+                                message.dpvEnhancedDeliveryCode = String(object.dpvEnhancedDeliveryCode);
                             if (object.carrierRoute != null)
                                 message.carrierRoute = String(object.carrierRoute);
                             if (object.carrierRouteIndicator != null)
@@ -5917,6 +6120,15 @@
                                 object.defaultAddress = false;
                                 object.errorMessage = "";
                                 object.cassProcessed = false;
+                                object.dpvNoStatReasonCode = 0;
+                                object.dpvDrop = "";
+                                object.dpvThrowback = "";
+                                object.dpvNonDeliveryDays = "";
+                                object.dpvNonDeliveryDaysValues = 0;
+                                object.dpvNoSecureLocation = "";
+                                object.dpvPbsa = "";
+                                object.dpvDoorNotAccessible = "";
+                                object.dpvEnhancedDeliveryCode = "";
                             }
                             if (message.standardizedAddress != null && message.hasOwnProperty("standardizedAddress"))
                                 object.standardizedAddress = $root.google.maps.addressvalidation.v1.UspsAddress.toObject(message.standardizedAddress, options);
@@ -5974,6 +6186,24 @@
                                 object.errorMessage = message.errorMessage;
                             if (message.cassProcessed != null && message.hasOwnProperty("cassProcessed"))
                                 object.cassProcessed = message.cassProcessed;
+                            if (message.dpvNoStatReasonCode != null && message.hasOwnProperty("dpvNoStatReasonCode"))
+                                object.dpvNoStatReasonCode = message.dpvNoStatReasonCode;
+                            if (message.dpvDrop != null && message.hasOwnProperty("dpvDrop"))
+                                object.dpvDrop = message.dpvDrop;
+                            if (message.dpvThrowback != null && message.hasOwnProperty("dpvThrowback"))
+                                object.dpvThrowback = message.dpvThrowback;
+                            if (message.dpvNonDeliveryDays != null && message.hasOwnProperty("dpvNonDeliveryDays"))
+                                object.dpvNonDeliveryDays = message.dpvNonDeliveryDays;
+                            if (message.dpvNonDeliveryDaysValues != null && message.hasOwnProperty("dpvNonDeliveryDaysValues"))
+                                object.dpvNonDeliveryDaysValues = message.dpvNonDeliveryDaysValues;
+                            if (message.dpvNoSecureLocation != null && message.hasOwnProperty("dpvNoSecureLocation"))
+                                object.dpvNoSecureLocation = message.dpvNoSecureLocation;
+                            if (message.dpvPbsa != null && message.hasOwnProperty("dpvPbsa"))
+                                object.dpvPbsa = message.dpvPbsa;
+                            if (message.dpvDoorNotAccessible != null && message.hasOwnProperty("dpvDoorNotAccessible"))
+                                object.dpvDoorNotAccessible = message.dpvDoorNotAccessible;
+                            if (message.dpvEnhancedDeliveryCode != null && message.hasOwnProperty("dpvEnhancedDeliveryCode"))
+                                object.dpvEnhancedDeliveryCode = message.dpvEnhancedDeliveryCode;
                             return object;
                         };
     

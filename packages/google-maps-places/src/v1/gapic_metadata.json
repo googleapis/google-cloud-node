@@ -29,6 +29,11 @@
               "methods": [
                 "getPlace"
               ]
+            },
+            "AutocompletePlaces": {
+              "methods": [
+                "autocompletePlaces"
+              ]
             }
           }
         },
@@ -53,6 +58,11 @@
             "GetPlace": {
               "methods": [
                 "getPlace"
+              ]
+            },
+            "AutocompletePlaces": {
+              "methods": [
+                "autocompletePlaces"
               ]
             }
           }

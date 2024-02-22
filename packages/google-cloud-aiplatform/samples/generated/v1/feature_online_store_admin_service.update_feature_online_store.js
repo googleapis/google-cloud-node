@@ -44,6 +44,7 @@ function main(featureOnlineStore) {
    *  fields.
    *  Updatable fields:
    *    * `big_query_source`
+   *    * `bigtable`
    *    * `labels`
    *    * `sync_config`
    */

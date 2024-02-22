@@ -17883,6 +17883,7 @@
                              * @interface ICheckInfo
                              * @property {Array.<string>|null} [unusedArguments] CheckInfo unusedArguments
                              * @property {google.api.servicecontrol.v1.CheckResponse.IConsumerInfo|null} [consumerInfo] CheckInfo consumerInfo
+                             * @property {string|null} [apiKeyUid] CheckInfo apiKeyUid
                              */
     
                             /**
@@ -17918,6 +17919,14 @@
                             CheckInfo.prototype.consumerInfo = null;
     
                             /**
+                             * CheckInfo apiKeyUid.
+                             * @member {string} apiKeyUid
+                             * @memberof google.api.servicecontrol.v1.CheckResponse.CheckInfo
+                             * @instance
+                             */
+                            CheckInfo.prototype.apiKeyUid = "";
+    
+                            /**
                              * Creates a new CheckInfo instance using the specified properties.
                              * @function create
                              * @memberof google.api.servicecontrol.v1.CheckResponse.CheckInfo
@@ -17946,6 +17955,8 @@
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.unusedArguments[i]);
                                 if (message.consumerInfo != null && Object.hasOwnProperty.call(message, "consumerInfo"))
                                     $root.google.api.servicecontrol.v1.CheckResponse.ConsumerInfo.encode(message.consumerInfo, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.apiKeyUid != null && Object.hasOwnProperty.call(message, "apiKeyUid"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.apiKeyUid);
                                 return writer;
                             };
     
@@ -17988,6 +17999,10 @@
                                         }
                                     case 2: {
                                             message.consumerInfo = $root.google.api.servicecontrol.v1.CheckResponse.ConsumerInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.apiKeyUid = reader.string();
                                             break;
                                         }
                                     default:
@@ -18037,6 +18052,9 @@
                                     if (error)
                                         return "consumerInfo." + error;
                                 }
+                                if (message.apiKeyUid != null && message.hasOwnProperty("apiKeyUid"))
+                                    if (!$util.isString(message.apiKeyUid))
+                                        return "apiKeyUid: string expected";
                                 return null;
                             };
     
@@ -18064,6 +18082,8 @@
                                         throw TypeError(".google.api.servicecontrol.v1.CheckResponse.CheckInfo.consumerInfo: object expected");
                                     message.consumerInfo = $root.google.api.servicecontrol.v1.CheckResponse.ConsumerInfo.fromObject(object.consumerInfo);
                                 }
+                                if (object.apiKeyUid != null)
+                                    message.apiKeyUid = String(object.apiKeyUid);
                                 return message;
                             };
     
@@ -18082,8 +18102,10 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.unusedArguments = [];
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.consumerInfo = null;
+                                    object.apiKeyUid = "";
+                                }
                                 if (message.unusedArguments && message.unusedArguments.length) {
                                     object.unusedArguments = [];
                                     for (var j = 0; j < message.unusedArguments.length; ++j)
@@ -18091,6 +18113,8 @@
                                 }
                                 if (message.consumerInfo != null && message.hasOwnProperty("consumerInfo"))
                                     object.consumerInfo = $root.google.api.servicecontrol.v1.CheckResponse.ConsumerInfo.toObject(message.consumerInfo, options);
+                                if (message.apiKeyUid != null && message.hasOwnProperty("apiKeyUid"))
+                                    object.apiKeyUid = message.apiKeyUid;
                                 return object;
                             };
     

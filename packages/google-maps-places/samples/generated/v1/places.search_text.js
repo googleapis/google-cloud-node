@@ -104,6 +104,10 @@ function main(textQuery) {
    *  with location_bias.
    */
   // const locationRestriction = {}
+  /**
+   *  Optional. Set the searchable EV options of a place search request.
+   */
+  // const evOptions = {}
 
   // Imports the Places library
   const {PlacesClient} = require('@googlemaps/places').v1;

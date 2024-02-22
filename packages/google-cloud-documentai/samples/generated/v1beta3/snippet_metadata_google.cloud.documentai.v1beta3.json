@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 97,
+                    "end": 105,
                     "type": "FULL"
                 }
             ],
@@ -62,6 +62,10 @@
                     {
                         "name": "process_options",
                         "type": ".google.cloud.documentai.v1beta3.ProcessOptions"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.cloud.documentai.v1beta3.ProcessResponse",
@@ -90,7 +94,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 88,
+                    "end": 96,
                     "type": "FULL"
                 }
             ],
@@ -126,6 +130,10 @@
                     {
                         "name": "process_options",
                         "type": ".google.cloud.documentai.v1beta3.ProcessOptions"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -370,7 +378,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -382,6 +390,10 @@
                     {
                         "name": "custom_document_extraction_options",
                         "type": ".google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.CustomDocumentExtractionOptions"
+                    },
+                    {
+                        "name": "foundation_model_tuning_options",
+                        "type": ".google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions"
                     },
                     {
                         "name": "parent",
@@ -638,7 +650,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -1226,7 +1238,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 105,
+                    "end": 109,
                     "type": "FULL"
                 }
             ],
