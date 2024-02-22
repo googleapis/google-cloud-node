@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 98,
                     "type": "FULL"
                 }
             ],
@@ -58,6 +58,10 @@
                     {
                         "name": "process_options",
                         "type": ".google.cloud.documentai.v1.ProcessOptions"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.cloud.documentai.v1.ProcessResponse",
@@ -86,7 +90,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 88,
                     "type": "FULL"
                 }
             ],
@@ -114,6 +118,10 @@
                     {
                         "name": "process_options",
                         "type": ".google.cloud.documentai.v1.ProcessOptions"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -626,7 +634,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
