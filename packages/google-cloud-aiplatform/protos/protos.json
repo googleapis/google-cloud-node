@@ -32449,6 +32449,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "serviceAgentType": {
+                          "type": "ServiceAgentType",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -32610,6 +32624,13 @@
                                 }
                               }
                             }
+                          }
+                        },
+                        "ServiceAgentType": {
+                          "values": {
+                            "SERVICE_AGENT_TYPE_UNSPECIFIED": 0,
+                            "SERVICE_AGENT_TYPE_PROJECT": 1,
+                            "SERVICE_AGENT_TYPE_FEATURE_VIEW": 2
                           }
                         }
                       }
