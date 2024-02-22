@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,53 +53,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/telcoautomation
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The name of the deployment to list revisions for.
- */
-// const name = 'abc123'
-/**
- *  Optional. The maximum number of revisions to return per page.
- */
-// const pageSize = 1234
-/**
- *  Optional. The page token, received from a previous ListDeploymentRevisions
- *  call Provide this to retrieve the subsequent page.
- */
-// const pageToken = 'abc123'
-
-// Imports the Telcoautomation library
-const {TelcoAutomationClient} = require('@google-cloud/telcoautomation').v1;
-
-// Instantiates a client
-const telcoautomationClient = new TelcoAutomationClient();
-
-async function callListDeploymentRevisions() {
-  // Construct request
-  const request = {
-    name,
-  };
-
-  // Run request
-  const iterable =
-    telcoautomationClient.listDeploymentRevisionsAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListDeploymentRevisions();
-
-```
 
 
 
