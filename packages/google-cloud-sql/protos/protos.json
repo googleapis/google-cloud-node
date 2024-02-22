@@ -632,6 +632,20 @@
                             "mysqlExportOptions": {
                               "type": "MysqlExportOptions",
                               "id": 3
+                            },
+                            "threads": {
+                              "type": "google.protobuf.Int32Value",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "parallel": {
+                              "type": "google.protobuf.BoolValue",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -3980,7 +3994,8 @@
                             "TURN_ON_PITR_AFTER_PROMOTE": 36,
                             "INCOMPATIBLE_DATABASE_MINOR_VERSION": 37,
                             "SOURCE_MAX_SUBSCRIPTIONS": 38,
-                            "UNABLE_TO_VERIFY_DEFINERS": 39
+                            "UNABLE_TO_VERIFY_DEFINERS": 39,
+                            "SUBSCRIPTION_CALCULATION_STATUS": 40
                           }
                         }
                       }
@@ -7332,6 +7347,20 @@
                             "mysqlExportOptions": {
                               "type": "MysqlExportOptions",
                               "id": 3
+                            },
+                            "threads": {
+                              "type": "google.protobuf.Int32Value",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "parallel": {
+                              "type": "google.protobuf.BoolValue",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -7795,7 +7824,8 @@
                             "TURN_ON_PITR_AFTER_PROMOTE": 36,
                             "INCOMPATIBLE_DATABASE_MINOR_VERSION": 37,
                             "SOURCE_MAX_SUBSCRIPTIONS": 38,
-                            "UNABLE_TO_VERIFY_DEFINERS": 39
+                            "UNABLE_TO_VERIFY_DEFINERS": 39,
+                            "SUBSCRIPTION_CALCULATION_STATUS": 40
                           }
                         }
                       }
