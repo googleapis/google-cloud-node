@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.7.0...container-v5.8.0) (2024-02-22)
+
+
+### Features
+
+* [container] add API to enable Provisioning Request API on existing nodepools ([#5065](https://github.com/googleapis/google-cloud-node/issues/5065)) ([af0e580](https://github.com/googleapis/google-cloud-node/commit/af0e580dbdca83f5e9cebe0df1d9e752c88f4357))
+
 ## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.6.0...container-v5.7.0) (2024-02-09)
 
 

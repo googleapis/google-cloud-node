@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v3.1.0...orchestration-airflow-v3.2.0) (2024-02-22)
+
+
+### Features
+
+* [orchestration] added ListWorkloads RPC ([#5044](https://github.com/googleapis/google-cloud-node/issues/5044)) ([8dcf23c](https://github.com/googleapis/google-cloud-node/commit/8dcf23c3f9d4ec94d4effd46eb2551568c029598))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v3.0.1...orchestration-airflow-v3.1.0) (2024-02-09)
 
 
