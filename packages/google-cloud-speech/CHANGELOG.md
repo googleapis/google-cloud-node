@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.2.0...speech-v6.3.0) (2024-02-22)
+
+
+### Features
+
+* Add API for writing BatchRecognize transcripts in SRT and VTT formats ([#5062](https://github.com/googleapis/google-cloud-node/issues/5062)) ([6f3ab04](https://github.com/googleapis/google-cloud-node/commit/6f3ab0415304dd270cca99ce18949a2a1fc0e1a9))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.1.1...speech-v6.2.0) (2024-02-09)
 
 
