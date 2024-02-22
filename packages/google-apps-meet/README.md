@@ -90,7 +90,7 @@ npm install @google-apps/meet
 // const filter = 'abc123'
 
 // Imports the Meet library
-const {ConferenceRecordsServiceClient} = require('@google-apps/meet').v2beta;
+const {ConferenceRecordsServiceClient} = require('@google-apps/meet').v2;
 
 // Instantiates a client
 const meetClient = new ConferenceRecordsServiceClient();
