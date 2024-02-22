@@ -88,6 +88,18 @@
                         }
                       }
                     },
+                    "Application": {
+                      "fields": {
+                        "baseUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fullUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Asset": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/Asset",
@@ -211,6 +223,53 @@
                         "canonicalName": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "BackupDisasterRecovery": {
+                      "fields": {
+                        "backupTemplate": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "policies": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "host": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "applications": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "storagePool": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "policyOptions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "profile": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "appliance": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "backupType": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "backupCreateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
                         }
                       }
                     },
@@ -822,6 +881,14 @@
                         "kernelRootkit": {
                           "type": "KernelRootkit",
                           "id": 50
+                        },
+                        "application": {
+                          "type": "Application",
+                          "id": 53
+                        },
+                        "backupDisasterRecovery": {
+                          "type": "BackupDisasterRecovery",
+                          "id": 55
                         }
                       },
                       "nested": {

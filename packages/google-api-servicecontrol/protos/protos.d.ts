@@ -6484,6 +6484,9 @@ export namespace google {
 
                         /** CheckInfo consumerInfo */
                         consumerInfo?: (google.api.servicecontrol.v1.CheckResponse.IConsumerInfo|null);
+
+                        /** CheckInfo apiKeyUid */
+                        apiKeyUid?: (string|null);
                     }
 
                     /** Represents a CheckInfo. */
@@ -6500,6 +6503,9 @@ export namespace google {
 
                         /** CheckInfo consumerInfo. */
                         public consumerInfo?: (google.api.servicecontrol.v1.CheckResponse.IConsumerInfo|null);
+
+                        /** CheckInfo apiKeyUid. */
+                        public apiKeyUid: string;
 
                         /**
                          * Creates a new CheckInfo instance using the specified properties.

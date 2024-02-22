@@ -19744,6 +19744,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.maps.places.v1.Places|autocompletePlaces}.
+                         * @memberof google.maps.places.v1.Places
+                         * @typedef AutocompletePlacesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.maps.places.v1.AutocompletePlacesResponse} [response] AutocompletePlacesResponse
+                         */
+    
+                        /**
+                         * Calls AutocompletePlaces.
+                         * @function autocompletePlaces
+                         * @memberof google.maps.places.v1.Places
+                         * @instance
+                         * @param {google.maps.places.v1.IAutocompletePlacesRequest} request AutocompletePlacesRequest message or plain object
+                         * @param {google.maps.places.v1.Places.AutocompletePlacesCallback} callback Node-style callback called with the error, if any, and AutocompletePlacesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Places.prototype.autocompletePlaces = function autocompletePlaces(request, callback) {
+                            return this.rpcCall(autocompletePlaces, $root.google.maps.places.v1.AutocompletePlacesRequest, $root.google.maps.places.v1.AutocompletePlacesResponse, request, callback);
+                        }, "name", { value: "AutocompletePlaces" });
+    
+                        /**
+                         * Calls AutocompletePlaces.
+                         * @function autocompletePlaces
+                         * @memberof google.maps.places.v1.Places
+                         * @instance
+                         * @param {google.maps.places.v1.IAutocompletePlacesRequest} request AutocompletePlacesRequest message or plain object
+                         * @returns {Promise<google.maps.places.v1.AutocompletePlacesResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return Places;
                     })();
     
@@ -20715,6 +20748,7 @@
                          * @property {boolean|null} [strictTypeFiltering] SearchTextRequest strictTypeFiltering
                          * @property {google.maps.places.v1.SearchTextRequest.ILocationBias|null} [locationBias] SearchTextRequest locationBias
                          * @property {google.maps.places.v1.SearchTextRequest.ILocationRestriction|null} [locationRestriction] SearchTextRequest locationRestriction
+                         * @property {google.maps.places.v1.SearchTextRequest.IEVOptions|null} [evOptions] SearchTextRequest evOptions
                          */
     
                         /**
@@ -20830,6 +20864,14 @@
                         SearchTextRequest.prototype.locationRestriction = null;
     
                         /**
+                         * SearchTextRequest evOptions.
+                         * @member {google.maps.places.v1.SearchTextRequest.IEVOptions|null|undefined} evOptions
+                         * @memberof google.maps.places.v1.SearchTextRequest
+                         * @instance
+                         */
+                        SearchTextRequest.prototype.evOptions = null;
+    
+                        /**
                          * Creates a new SearchTextRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.SearchTextRequest
@@ -20881,6 +20923,8 @@
                                 $root.google.maps.places.v1.SearchTextRequest.LocationBias.encode(message.locationBias, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             if (message.locationRestriction != null && Object.hasOwnProperty.call(message, "locationRestriction"))
                                 $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.encode(message.locationRestriction, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.evOptions != null && Object.hasOwnProperty.call(message, "evOptions"))
+                                $root.google.maps.places.v1.SearchTextRequest.EVOptions.encode(message.evOptions, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             return writer;
                         };
     
@@ -20968,6 +21012,10 @@
                                     }
                                 case 14: {
                                         message.locationRestriction = $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.evOptions = $root.google.maps.places.v1.SearchTextRequest.EVOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -21063,6 +21111,11 @@
                                 var error = $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.verify(message.locationRestriction);
                                 if (error)
                                     return "locationRestriction." + error;
+                            }
+                            if (message.evOptions != null && message.hasOwnProperty("evOptions")) {
+                                var error = $root.google.maps.places.v1.SearchTextRequest.EVOptions.verify(message.evOptions);
+                                if (error)
+                                    return "evOptions." + error;
                             }
                             return null;
                         };
@@ -21162,6 +21215,11 @@
                                     throw TypeError(".google.maps.places.v1.SearchTextRequest.locationRestriction: object expected");
                                 message.locationRestriction = $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.fromObject(object.locationRestriction);
                             }
+                            if (object.evOptions != null) {
+                                if (typeof object.evOptions !== "object")
+                                    throw TypeError(".google.maps.places.v1.SearchTextRequest.evOptions: object expected");
+                                message.evOptions = $root.google.maps.places.v1.SearchTextRequest.EVOptions.fromObject(object.evOptions);
+                            }
                             return message;
                         };
     
@@ -21192,6 +21250,7 @@
                                 object.strictTypeFiltering = false;
                                 object.locationBias = null;
                                 object.locationRestriction = null;
+                                object.evOptions = null;
                             }
                             if (message.textQuery != null && message.hasOwnProperty("textQuery"))
                                 object.textQuery = message.textQuery;
@@ -21220,6 +21279,8 @@
                                 object.locationBias = $root.google.maps.places.v1.SearchTextRequest.LocationBias.toObject(message.locationBias, options);
                             if (message.locationRestriction != null && message.hasOwnProperty("locationRestriction"))
                                 object.locationRestriction = $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.toObject(message.locationRestriction, options);
+                            if (message.evOptions != null && message.hasOwnProperty("evOptions"))
+                                object.evOptions = $root.google.maps.places.v1.SearchTextRequest.EVOptions.toObject(message.evOptions, options);
                             return object;
                         };
     
@@ -21752,6 +21813,316 @@
                             };
     
                             return LocationRestriction;
+                        })();
+    
+                        SearchTextRequest.EVOptions = (function() {
+    
+                            /**
+                             * Properties of a EVOptions.
+                             * @memberof google.maps.places.v1.SearchTextRequest
+                             * @interface IEVOptions
+                             * @property {number|null} [minimumChargingRateKw] EVOptions minimumChargingRateKw
+                             * @property {Array.<google.maps.places.v1.EVConnectorType>|null} [connectorTypes] EVOptions connectorTypes
+                             */
+    
+                            /**
+                             * Constructs a new EVOptions.
+                             * @memberof google.maps.places.v1.SearchTextRequest
+                             * @classdesc Represents a EVOptions.
+                             * @implements IEVOptions
+                             * @constructor
+                             * @param {google.maps.places.v1.SearchTextRequest.IEVOptions=} [properties] Properties to set
+                             */
+                            function EVOptions(properties) {
+                                this.connectorTypes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EVOptions minimumChargingRateKw.
+                             * @member {number} minimumChargingRateKw
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @instance
+                             */
+                            EVOptions.prototype.minimumChargingRateKw = 0;
+    
+                            /**
+                             * EVOptions connectorTypes.
+                             * @member {Array.<google.maps.places.v1.EVConnectorType>} connectorTypes
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @instance
+                             */
+                            EVOptions.prototype.connectorTypes = $util.emptyArray;
+    
+                            /**
+                             * Creates a new EVOptions instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @static
+                             * @param {google.maps.places.v1.SearchTextRequest.IEVOptions=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.SearchTextRequest.EVOptions} EVOptions instance
+                             */
+                            EVOptions.create = function create(properties) {
+                                return new EVOptions(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EVOptions message. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.EVOptions.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @static
+                             * @param {google.maps.places.v1.SearchTextRequest.IEVOptions} message EVOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EVOptions.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.minimumChargingRateKw != null && Object.hasOwnProperty.call(message, "minimumChargingRateKw"))
+                                    writer.uint32(/* id 1, wireType 1 =*/9).double(message.minimumChargingRateKw);
+                                if (message.connectorTypes != null && message.connectorTypes.length) {
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                    for (var i = 0; i < message.connectorTypes.length; ++i)
+                                        writer.int32(message.connectorTypes[i]);
+                                    writer.ldelim();
+                                }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EVOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.EVOptions.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @static
+                             * @param {google.maps.places.v1.SearchTextRequest.IEVOptions} message EVOptions message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EVOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a EVOptions message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.SearchTextRequest.EVOptions} EVOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EVOptions.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchTextRequest.EVOptions();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.minimumChargingRateKw = reader.double();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.connectorTypes && message.connectorTypes.length))
+                                                message.connectorTypes = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.connectorTypes.push(reader.int32());
+                                            } else
+                                                message.connectorTypes.push(reader.int32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a EVOptions message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.SearchTextRequest.EVOptions} EVOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EVOptions.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a EVOptions message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EVOptions.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.minimumChargingRateKw != null && message.hasOwnProperty("minimumChargingRateKw"))
+                                    if (typeof message.minimumChargingRateKw !== "number")
+                                        return "minimumChargingRateKw: number expected";
+                                if (message.connectorTypes != null && message.hasOwnProperty("connectorTypes")) {
+                                    if (!Array.isArray(message.connectorTypes))
+                                        return "connectorTypes: array expected";
+                                    for (var i = 0; i < message.connectorTypes.length; ++i)
+                                        switch (message.connectorTypes[i]) {
+                                        default:
+                                            return "connectorTypes: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                            break;
+                                        }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a EVOptions message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.SearchTextRequest.EVOptions} EVOptions
+                             */
+                            EVOptions.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.SearchTextRequest.EVOptions)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.SearchTextRequest.EVOptions();
+                                if (object.minimumChargingRateKw != null)
+                                    message.minimumChargingRateKw = Number(object.minimumChargingRateKw);
+                                if (object.connectorTypes) {
+                                    if (!Array.isArray(object.connectorTypes))
+                                        throw TypeError(".google.maps.places.v1.SearchTextRequest.EVOptions.connectorTypes: array expected");
+                                    message.connectorTypes = [];
+                                    for (var i = 0; i < object.connectorTypes.length; ++i)
+                                        switch (object.connectorTypes[i]) {
+                                        default:
+                                            if (typeof object.connectorTypes[i] === "number") {
+                                                message.connectorTypes[i] = object.connectorTypes[i];
+                                                break;
+                                            }
+                                        case "EV_CONNECTOR_TYPE_UNSPECIFIED":
+                                        case 0:
+                                            message.connectorTypes[i] = 0;
+                                            break;
+                                        case "EV_CONNECTOR_TYPE_OTHER":
+                                        case 1:
+                                            message.connectorTypes[i] = 1;
+                                            break;
+                                        case "EV_CONNECTOR_TYPE_J1772":
+                                        case 2:
+                                            message.connectorTypes[i] = 2;
+                                            break;
+                                        case "EV_CONNECTOR_TYPE_TYPE_2":
+                                        case 3:
+                                            message.connectorTypes[i] = 3;
+                                            break;
+                                        case "EV_CONNECTOR_TYPE_CHADEMO":
+                                        case 4:
+                                            message.connectorTypes[i] = 4;
+                                            break;
+                                        case "EV_CONNECTOR_TYPE_CCS_COMBO_1":
+                                        case 5:
+                                            message.connectorTypes[i] = 5;
+                                            break;
+                                        case "EV_CONNECTOR_TYPE_CCS_COMBO_2":
+                                        case 6:
+                                            message.connectorTypes[i] = 6;
+                                            break;
+                                        case "EV_CONNECTOR_TYPE_TESLA":
+                                        case 7:
+                                            message.connectorTypes[i] = 7;
+                                            break;
+                                        case "EV_CONNECTOR_TYPE_UNSPECIFIED_GB_T":
+                                        case 8:
+                                            message.connectorTypes[i] = 8;
+                                            break;
+                                        case "EV_CONNECTOR_TYPE_UNSPECIFIED_WALL_OUTLET":
+                                        case 9:
+                                            message.connectorTypes[i] = 9;
+                                            break;
+                                        }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a EVOptions message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @static
+                             * @param {google.maps.places.v1.SearchTextRequest.EVOptions} message EVOptions
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EVOptions.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.connectorTypes = [];
+                                if (options.defaults)
+                                    object.minimumChargingRateKw = 0;
+                                if (message.minimumChargingRateKw != null && message.hasOwnProperty("minimumChargingRateKw"))
+                                    object.minimumChargingRateKw = options.json && !isFinite(message.minimumChargingRateKw) ? String(message.minimumChargingRateKw) : message.minimumChargingRateKw;
+                                if (message.connectorTypes && message.connectorTypes.length) {
+                                    object.connectorTypes = [];
+                                    for (var j = 0; j < message.connectorTypes.length; ++j)
+                                        object.connectorTypes[j] = options.enums === String ? $root.google.maps.places.v1.EVConnectorType[message.connectorTypes[j]] === undefined ? message.connectorTypes[j] : $root.google.maps.places.v1.EVConnectorType[message.connectorTypes[j]] : message.connectorTypes[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EVOptions to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EVOptions.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for EVOptions
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.SearchTextRequest.EVOptions
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            EVOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.SearchTextRequest.EVOptions";
+                            };
+    
+                            return EVOptions;
                         })();
     
                         return SearchTextRequest;
@@ -22490,6 +22861,7 @@
                          * @property {string|null} [name] GetPlaceRequest name
                          * @property {string|null} [languageCode] GetPlaceRequest languageCode
                          * @property {string|null} [regionCode] GetPlaceRequest regionCode
+                         * @property {string|null} [sessionToken] GetPlaceRequest sessionToken
                          */
     
                         /**
@@ -22532,6 +22904,14 @@
                         GetPlaceRequest.prototype.regionCode = "";
     
                         /**
+                         * GetPlaceRequest sessionToken.
+                         * @member {string} sessionToken
+                         * @memberof google.maps.places.v1.GetPlaceRequest
+                         * @instance
+                         */
+                        GetPlaceRequest.prototype.sessionToken = "";
+    
+                        /**
                          * Creates a new GetPlaceRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.GetPlaceRequest
@@ -22561,6 +22941,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
                             if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.regionCode);
+                            if (message.sessionToken != null && Object.hasOwnProperty.call(message, "sessionToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.sessionToken);
                             return writer;
                         };
     
@@ -22607,6 +22989,10 @@
                                         message.regionCode = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.sessionToken = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -22651,6 +23037,9 @@
                             if (message.regionCode != null && message.hasOwnProperty("regionCode"))
                                 if (!$util.isString(message.regionCode))
                                     return "regionCode: string expected";
+                            if (message.sessionToken != null && message.hasOwnProperty("sessionToken"))
+                                if (!$util.isString(message.sessionToken))
+                                    return "sessionToken: string expected";
                             return null;
                         };
     
@@ -22672,6 +23061,8 @@
                                 message.languageCode = String(object.languageCode);
                             if (object.regionCode != null)
                                 message.regionCode = String(object.regionCode);
+                            if (object.sessionToken != null)
+                                message.sessionToken = String(object.sessionToken);
                             return message;
                         };
     
@@ -22692,6 +23083,7 @@
                                 object.name = "";
                                 object.languageCode = "";
                                 object.regionCode = "";
+                                object.sessionToken = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -22699,6 +23091,8 @@
                                 object.languageCode = message.languageCode;
                             if (message.regionCode != null && message.hasOwnProperty("regionCode"))
                                 object.regionCode = message.regionCode;
+                            if (message.sessionToken != null && message.hasOwnProperty("sessionToken"))
+                                object.sessionToken = message.sessionToken;
                             return object;
                         };
     
@@ -22729,6 +23123,2794 @@
                         };
     
                         return GetPlaceRequest;
+                    })();
+    
+                    v1.AutocompletePlacesRequest = (function() {
+    
+                        /**
+                         * Properties of an AutocompletePlacesRequest.
+                         * @memberof google.maps.places.v1
+                         * @interface IAutocompletePlacesRequest
+                         * @property {string|null} [input] AutocompletePlacesRequest input
+                         * @property {google.maps.places.v1.AutocompletePlacesRequest.ILocationBias|null} [locationBias] AutocompletePlacesRequest locationBias
+                         * @property {google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction|null} [locationRestriction] AutocompletePlacesRequest locationRestriction
+                         * @property {Array.<string>|null} [includedPrimaryTypes] AutocompletePlacesRequest includedPrimaryTypes
+                         * @property {Array.<string>|null} [includedRegionCodes] AutocompletePlacesRequest includedRegionCodes
+                         * @property {string|null} [languageCode] AutocompletePlacesRequest languageCode
+                         * @property {string|null} [regionCode] AutocompletePlacesRequest regionCode
+                         * @property {google.type.ILatLng|null} [origin] AutocompletePlacesRequest origin
+                         * @property {number|null} [inputOffset] AutocompletePlacesRequest inputOffset
+                         * @property {boolean|null} [includeQueryPredictions] AutocompletePlacesRequest includeQueryPredictions
+                         * @property {string|null} [sessionToken] AutocompletePlacesRequest sessionToken
+                         */
+    
+                        /**
+                         * Constructs a new AutocompletePlacesRequest.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents an AutocompletePlacesRequest.
+                         * @implements IAutocompletePlacesRequest
+                         * @constructor
+                         * @param {google.maps.places.v1.IAutocompletePlacesRequest=} [properties] Properties to set
+                         */
+                        function AutocompletePlacesRequest(properties) {
+                            this.includedPrimaryTypes = [];
+                            this.includedRegionCodes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutocompletePlacesRequest input.
+                         * @member {string} input
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.input = "";
+    
+                        /**
+                         * AutocompletePlacesRequest locationBias.
+                         * @member {google.maps.places.v1.AutocompletePlacesRequest.ILocationBias|null|undefined} locationBias
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.locationBias = null;
+    
+                        /**
+                         * AutocompletePlacesRequest locationRestriction.
+                         * @member {google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction|null|undefined} locationRestriction
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.locationRestriction = null;
+    
+                        /**
+                         * AutocompletePlacesRequest includedPrimaryTypes.
+                         * @member {Array.<string>} includedPrimaryTypes
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.includedPrimaryTypes = $util.emptyArray;
+    
+                        /**
+                         * AutocompletePlacesRequest includedRegionCodes.
+                         * @member {Array.<string>} includedRegionCodes
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.includedRegionCodes = $util.emptyArray;
+    
+                        /**
+                         * AutocompletePlacesRequest languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.languageCode = "";
+    
+                        /**
+                         * AutocompletePlacesRequest regionCode.
+                         * @member {string} regionCode
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.regionCode = "";
+    
+                        /**
+                         * AutocompletePlacesRequest origin.
+                         * @member {google.type.ILatLng|null|undefined} origin
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.origin = null;
+    
+                        /**
+                         * AutocompletePlacesRequest inputOffset.
+                         * @member {number} inputOffset
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.inputOffset = 0;
+    
+                        /**
+                         * AutocompletePlacesRequest includeQueryPredictions.
+                         * @member {boolean} includeQueryPredictions
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.includeQueryPredictions = false;
+    
+                        /**
+                         * AutocompletePlacesRequest sessionToken.
+                         * @member {string} sessionToken
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         */
+                        AutocompletePlacesRequest.prototype.sessionToken = "";
+    
+                        /**
+                         * Creates a new AutocompletePlacesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @static
+                         * @param {google.maps.places.v1.IAutocompletePlacesRequest=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.AutocompletePlacesRequest} AutocompletePlacesRequest instance
+                         */
+                        AutocompletePlacesRequest.create = function create(properties) {
+                            return new AutocompletePlacesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutocompletePlacesRequest message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @static
+                         * @param {google.maps.places.v1.IAutocompletePlacesRequest} message AutocompletePlacesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutocompletePlacesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.input != null && Object.hasOwnProperty.call(message, "input"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.input);
+                            if (message.locationBias != null && Object.hasOwnProperty.call(message, "locationBias"))
+                                $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias.encode(message.locationBias, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.locationRestriction != null && Object.hasOwnProperty.call(message, "locationRestriction"))
+                                $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.encode(message.locationRestriction, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.includedPrimaryTypes != null && message.includedPrimaryTypes.length)
+                                for (var i = 0; i < message.includedPrimaryTypes.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.includedPrimaryTypes[i]);
+                            if (message.includedRegionCodes != null && message.includedRegionCodes.length)
+                                for (var i = 0; i < message.includedRegionCodes.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.includedRegionCodes[i]);
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.languageCode);
+                            if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.regionCode);
+                            if (message.origin != null && Object.hasOwnProperty.call(message, "origin"))
+                                $root.google.type.LatLng.encode(message.origin, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.inputOffset != null && Object.hasOwnProperty.call(message, "inputOffset"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.inputOffset);
+                            if (message.includeQueryPredictions != null && Object.hasOwnProperty.call(message, "includeQueryPredictions"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.includeQueryPredictions);
+                            if (message.sessionToken != null && Object.hasOwnProperty.call(message, "sessionToken"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.sessionToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutocompletePlacesRequest message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @static
+                         * @param {google.maps.places.v1.IAutocompletePlacesRequest} message AutocompletePlacesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutocompletePlacesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutocompletePlacesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.AutocompletePlacesRequest} AutocompletePlacesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutocompletePlacesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.input = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.locationBias = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.locationRestriction = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.includedPrimaryTypes && message.includedPrimaryTypes.length))
+                                            message.includedPrimaryTypes = [];
+                                        message.includedPrimaryTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.includedRegionCodes && message.includedRegionCodes.length))
+                                            message.includedRegionCodes = [];
+                                        message.includedRegionCodes.push(reader.string());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.languageCode = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.regionCode = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.origin = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.inputOffset = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.includeQueryPredictions = reader.bool();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.sessionToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutocompletePlacesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.AutocompletePlacesRequest} AutocompletePlacesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutocompletePlacesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutocompletePlacesRequest message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutocompletePlacesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.input != null && message.hasOwnProperty("input"))
+                                if (!$util.isString(message.input))
+                                    return "input: string expected";
+                            if (message.locationBias != null && message.hasOwnProperty("locationBias")) {
+                                var error = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias.verify(message.locationBias);
+                                if (error)
+                                    return "locationBias." + error;
+                            }
+                            if (message.locationRestriction != null && message.hasOwnProperty("locationRestriction")) {
+                                var error = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.verify(message.locationRestriction);
+                                if (error)
+                                    return "locationRestriction." + error;
+                            }
+                            if (message.includedPrimaryTypes != null && message.hasOwnProperty("includedPrimaryTypes")) {
+                                if (!Array.isArray(message.includedPrimaryTypes))
+                                    return "includedPrimaryTypes: array expected";
+                                for (var i = 0; i < message.includedPrimaryTypes.length; ++i)
+                                    if (!$util.isString(message.includedPrimaryTypes[i]))
+                                        return "includedPrimaryTypes: string[] expected";
+                            }
+                            if (message.includedRegionCodes != null && message.hasOwnProperty("includedRegionCodes")) {
+                                if (!Array.isArray(message.includedRegionCodes))
+                                    return "includedRegionCodes: array expected";
+                                for (var i = 0; i < message.includedRegionCodes.length; ++i)
+                                    if (!$util.isString(message.includedRegionCodes[i]))
+                                        return "includedRegionCodes: string[] expected";
+                            }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                if (!$util.isString(message.regionCode))
+                                    return "regionCode: string expected";
+                            if (message.origin != null && message.hasOwnProperty("origin")) {
+                                var error = $root.google.type.LatLng.verify(message.origin);
+                                if (error)
+                                    return "origin." + error;
+                            }
+                            if (message.inputOffset != null && message.hasOwnProperty("inputOffset"))
+                                if (!$util.isInteger(message.inputOffset))
+                                    return "inputOffset: integer expected";
+                            if (message.includeQueryPredictions != null && message.hasOwnProperty("includeQueryPredictions"))
+                                if (typeof message.includeQueryPredictions !== "boolean")
+                                    return "includeQueryPredictions: boolean expected";
+                            if (message.sessionToken != null && message.hasOwnProperty("sessionToken"))
+                                if (!$util.isString(message.sessionToken))
+                                    return "sessionToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutocompletePlacesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.AutocompletePlacesRequest} AutocompletePlacesRequest
+                         */
+                        AutocompletePlacesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.AutocompletePlacesRequest)
+                                return object;
+                            var message = new $root.google.maps.places.v1.AutocompletePlacesRequest();
+                            if (object.input != null)
+                                message.input = String(object.input);
+                            if (object.locationBias != null) {
+                                if (typeof object.locationBias !== "object")
+                                    throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.locationBias: object expected");
+                                message.locationBias = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias.fromObject(object.locationBias);
+                            }
+                            if (object.locationRestriction != null) {
+                                if (typeof object.locationRestriction !== "object")
+                                    throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.locationRestriction: object expected");
+                                message.locationRestriction = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.fromObject(object.locationRestriction);
+                            }
+                            if (object.includedPrimaryTypes) {
+                                if (!Array.isArray(object.includedPrimaryTypes))
+                                    throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.includedPrimaryTypes: array expected");
+                                message.includedPrimaryTypes = [];
+                                for (var i = 0; i < object.includedPrimaryTypes.length; ++i)
+                                    message.includedPrimaryTypes[i] = String(object.includedPrimaryTypes[i]);
+                            }
+                            if (object.includedRegionCodes) {
+                                if (!Array.isArray(object.includedRegionCodes))
+                                    throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.includedRegionCodes: array expected");
+                                message.includedRegionCodes = [];
+                                for (var i = 0; i < object.includedRegionCodes.length; ++i)
+                                    message.includedRegionCodes[i] = String(object.includedRegionCodes[i]);
+                            }
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
+                            if (object.regionCode != null)
+                                message.regionCode = String(object.regionCode);
+                            if (object.origin != null) {
+                                if (typeof object.origin !== "object")
+                                    throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.origin: object expected");
+                                message.origin = $root.google.type.LatLng.fromObject(object.origin);
+                            }
+                            if (object.inputOffset != null)
+                                message.inputOffset = object.inputOffset | 0;
+                            if (object.includeQueryPredictions != null)
+                                message.includeQueryPredictions = Boolean(object.includeQueryPredictions);
+                            if (object.sessionToken != null)
+                                message.sessionToken = String(object.sessionToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutocompletePlacesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @static
+                         * @param {google.maps.places.v1.AutocompletePlacesRequest} message AutocompletePlacesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutocompletePlacesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.includedPrimaryTypes = [];
+                                object.includedRegionCodes = [];
+                            }
+                            if (options.defaults) {
+                                object.input = "";
+                                object.locationBias = null;
+                                object.locationRestriction = null;
+                                object.languageCode = "";
+                                object.regionCode = "";
+                                object.origin = null;
+                                object.inputOffset = 0;
+                                object.includeQueryPredictions = false;
+                                object.sessionToken = "";
+                            }
+                            if (message.input != null && message.hasOwnProperty("input"))
+                                object.input = message.input;
+                            if (message.locationBias != null && message.hasOwnProperty("locationBias"))
+                                object.locationBias = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias.toObject(message.locationBias, options);
+                            if (message.locationRestriction != null && message.hasOwnProperty("locationRestriction"))
+                                object.locationRestriction = $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.toObject(message.locationRestriction, options);
+                            if (message.includedPrimaryTypes && message.includedPrimaryTypes.length) {
+                                object.includedPrimaryTypes = [];
+                                for (var j = 0; j < message.includedPrimaryTypes.length; ++j)
+                                    object.includedPrimaryTypes[j] = message.includedPrimaryTypes[j];
+                            }
+                            if (message.includedRegionCodes && message.includedRegionCodes.length) {
+                                object.includedRegionCodes = [];
+                                for (var j = 0; j < message.includedRegionCodes.length; ++j)
+                                    object.includedRegionCodes[j] = message.includedRegionCodes[j];
+                            }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                object.regionCode = message.regionCode;
+                            if (message.origin != null && message.hasOwnProperty("origin"))
+                                object.origin = $root.google.type.LatLng.toObject(message.origin, options);
+                            if (message.inputOffset != null && message.hasOwnProperty("inputOffset"))
+                                object.inputOffset = message.inputOffset;
+                            if (message.includeQueryPredictions != null && message.hasOwnProperty("includeQueryPredictions"))
+                                object.includeQueryPredictions = message.includeQueryPredictions;
+                            if (message.sessionToken != null && message.hasOwnProperty("sessionToken"))
+                                object.sessionToken = message.sessionToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutocompletePlacesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutocompletePlacesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutocompletePlacesRequest
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutocompletePlacesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.AutocompletePlacesRequest";
+                        };
+    
+                        AutocompletePlacesRequest.LocationBias = (function() {
+    
+                            /**
+                             * Properties of a LocationBias.
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                             * @interface ILocationBias
+                             * @property {google.geo.type.IViewport|null} [rectangle] LocationBias rectangle
+                             * @property {google.maps.places.v1.ICircle|null} [circle] LocationBias circle
+                             */
+    
+                            /**
+                             * Constructs a new LocationBias.
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                             * @classdesc Represents a LocationBias.
+                             * @implements ILocationBias
+                             * @constructor
+                             * @param {google.maps.places.v1.AutocompletePlacesRequest.ILocationBias=} [properties] Properties to set
+                             */
+                            function LocationBias(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LocationBias rectangle.
+                             * @member {google.geo.type.IViewport|null|undefined} rectangle
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @instance
+                             */
+                            LocationBias.prototype.rectangle = null;
+    
+                            /**
+                             * LocationBias circle.
+                             * @member {google.maps.places.v1.ICircle|null|undefined} circle
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @instance
+                             */
+                            LocationBias.prototype.circle = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * LocationBias type.
+                             * @member {"rectangle"|"circle"|undefined} type
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @instance
+                             */
+                            Object.defineProperty(LocationBias.prototype, "type", {
+                                get: $util.oneOfGetter($oneOfFields = ["rectangle", "circle"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new LocationBias instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesRequest.ILocationBias=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.AutocompletePlacesRequest.LocationBias} LocationBias instance
+                             */
+                            LocationBias.create = function create(properties) {
+                                return new LocationBias(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LocationBias message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationBias.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesRequest.ILocationBias} message LocationBias message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocationBias.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.rectangle != null && Object.hasOwnProperty.call(message, "rectangle"))
+                                    $root.google.geo.type.Viewport.encode(message.rectangle, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.circle != null && Object.hasOwnProperty.call(message, "circle"))
+                                    $root.google.maps.places.v1.Circle.encode(message.circle, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LocationBias message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationBias.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesRequest.ILocationBias} message LocationBias message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocationBias.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LocationBias message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.AutocompletePlacesRequest.LocationBias} LocationBias
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocationBias.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.rectangle = $root.google.geo.type.Viewport.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.circle = $root.google.maps.places.v1.Circle.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LocationBias message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.AutocompletePlacesRequest.LocationBias} LocationBias
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocationBias.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LocationBias message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LocationBias.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.rectangle != null && message.hasOwnProperty("rectangle")) {
+                                    properties.type = 1;
+                                    {
+                                        var error = $root.google.geo.type.Viewport.verify(message.rectangle);
+                                        if (error)
+                                            return "rectangle." + error;
+                                    }
+                                }
+                                if (message.circle != null && message.hasOwnProperty("circle")) {
+                                    if (properties.type === 1)
+                                        return "type: multiple values";
+                                    properties.type = 1;
+                                    {
+                                        var error = $root.google.maps.places.v1.Circle.verify(message.circle);
+                                        if (error)
+                                            return "circle." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LocationBias message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.AutocompletePlacesRequest.LocationBias} LocationBias
+                             */
+                            LocationBias.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.AutocompletePlacesRequest.LocationBias();
+                                if (object.rectangle != null) {
+                                    if (typeof object.rectangle !== "object")
+                                        throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.LocationBias.rectangle: object expected");
+                                    message.rectangle = $root.google.geo.type.Viewport.fromObject(object.rectangle);
+                                }
+                                if (object.circle != null) {
+                                    if (typeof object.circle !== "object")
+                                        throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.LocationBias.circle: object expected");
+                                    message.circle = $root.google.maps.places.v1.Circle.fromObject(object.circle);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LocationBias message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesRequest.LocationBias} message LocationBias
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LocationBias.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.rectangle != null && message.hasOwnProperty("rectangle")) {
+                                    object.rectangle = $root.google.geo.type.Viewport.toObject(message.rectangle, options);
+                                    if (options.oneofs)
+                                        object.type = "rectangle";
+                                }
+                                if (message.circle != null && message.hasOwnProperty("circle")) {
+                                    object.circle = $root.google.maps.places.v1.Circle.toObject(message.circle, options);
+                                    if (options.oneofs)
+                                        object.type = "circle";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LocationBias to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LocationBias.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LocationBias
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationBias
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LocationBias.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.AutocompletePlacesRequest.LocationBias";
+                            };
+    
+                            return LocationBias;
+                        })();
+    
+                        AutocompletePlacesRequest.LocationRestriction = (function() {
+    
+                            /**
+                             * Properties of a LocationRestriction.
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                             * @interface ILocationRestriction
+                             * @property {google.geo.type.IViewport|null} [rectangle] LocationRestriction rectangle
+                             * @property {google.maps.places.v1.ICircle|null} [circle] LocationRestriction circle
+                             */
+    
+                            /**
+                             * Constructs a new LocationRestriction.
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest
+                             * @classdesc Represents a LocationRestriction.
+                             * @implements ILocationRestriction
+                             * @constructor
+                             * @param {google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction=} [properties] Properties to set
+                             */
+                            function LocationRestriction(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LocationRestriction rectangle.
+                             * @member {google.geo.type.IViewport|null|undefined} rectangle
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @instance
+                             */
+                            LocationRestriction.prototype.rectangle = null;
+    
+                            /**
+                             * LocationRestriction circle.
+                             * @member {google.maps.places.v1.ICircle|null|undefined} circle
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @instance
+                             */
+                            LocationRestriction.prototype.circle = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * LocationRestriction type.
+                             * @member {"rectangle"|"circle"|undefined} type
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @instance
+                             */
+                            Object.defineProperty(LocationRestriction.prototype, "type", {
+                                get: $util.oneOfGetter($oneOfFields = ["rectangle", "circle"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new LocationRestriction instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction} LocationRestriction instance
+                             */
+                            LocationRestriction.create = function create(properties) {
+                                return new LocationRestriction(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LocationRestriction message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction} message LocationRestriction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocationRestriction.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.rectangle != null && Object.hasOwnProperty.call(message, "rectangle"))
+                                    $root.google.geo.type.Viewport.encode(message.rectangle, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.circle != null && Object.hasOwnProperty.call(message, "circle"))
+                                    $root.google.maps.places.v1.Circle.encode(message.circle, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LocationRestriction message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction} message LocationRestriction message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LocationRestriction.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LocationRestriction message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction} LocationRestriction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocationRestriction.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.rectangle = $root.google.geo.type.Viewport.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.circle = $root.google.maps.places.v1.Circle.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LocationRestriction message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction} LocationRestriction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LocationRestriction.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LocationRestriction message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LocationRestriction.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.rectangle != null && message.hasOwnProperty("rectangle")) {
+                                    properties.type = 1;
+                                    {
+                                        var error = $root.google.geo.type.Viewport.verify(message.rectangle);
+                                        if (error)
+                                            return "rectangle." + error;
+                                    }
+                                }
+                                if (message.circle != null && message.hasOwnProperty("circle")) {
+                                    if (properties.type === 1)
+                                        return "type: multiple values";
+                                    properties.type = 1;
+                                    {
+                                        var error = $root.google.maps.places.v1.Circle.verify(message.circle);
+                                        if (error)
+                                            return "circle." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LocationRestriction message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction} LocationRestriction
+                             */
+                            LocationRestriction.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction();
+                                if (object.rectangle != null) {
+                                    if (typeof object.rectangle !== "object")
+                                        throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.rectangle: object expected");
+                                    message.rectangle = $root.google.geo.type.Viewport.fromObject(object.rectangle);
+                                }
+                                if (object.circle != null) {
+                                    if (typeof object.circle !== "object")
+                                        throw TypeError(".google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.circle: object expected");
+                                    message.circle = $root.google.maps.places.v1.Circle.fromObject(object.circle);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LocationRestriction message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction} message LocationRestriction
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LocationRestriction.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.rectangle != null && message.hasOwnProperty("rectangle")) {
+                                    object.rectangle = $root.google.geo.type.Viewport.toObject(message.rectangle, options);
+                                    if (options.oneofs)
+                                        object.type = "rectangle";
+                                }
+                                if (message.circle != null && message.hasOwnProperty("circle")) {
+                                    object.circle = $root.google.maps.places.v1.Circle.toObject(message.circle, options);
+                                    if (options.oneofs)
+                                        object.type = "circle";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LocationRestriction to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LocationRestriction.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LocationRestriction
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LocationRestriction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction";
+                            };
+    
+                            return LocationRestriction;
+                        })();
+    
+                        return AutocompletePlacesRequest;
+                    })();
+    
+                    v1.AutocompletePlacesResponse = (function() {
+    
+                        /**
+                         * Properties of an AutocompletePlacesResponse.
+                         * @memberof google.maps.places.v1
+                         * @interface IAutocompletePlacesResponse
+                         * @property {Array.<google.maps.places.v1.AutocompletePlacesResponse.ISuggestion>|null} [suggestions] AutocompletePlacesResponse suggestions
+                         */
+    
+                        /**
+                         * Constructs a new AutocompletePlacesResponse.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents an AutocompletePlacesResponse.
+                         * @implements IAutocompletePlacesResponse
+                         * @constructor
+                         * @param {google.maps.places.v1.IAutocompletePlacesResponse=} [properties] Properties to set
+                         */
+                        function AutocompletePlacesResponse(properties) {
+                            this.suggestions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AutocompletePlacesResponse suggestions.
+                         * @member {Array.<google.maps.places.v1.AutocompletePlacesResponse.ISuggestion>} suggestions
+                         * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                         * @instance
+                         */
+                        AutocompletePlacesResponse.prototype.suggestions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AutocompletePlacesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                         * @static
+                         * @param {google.maps.places.v1.IAutocompletePlacesResponse=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.AutocompletePlacesResponse} AutocompletePlacesResponse instance
+                         */
+                        AutocompletePlacesResponse.create = function create(properties) {
+                            return new AutocompletePlacesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AutocompletePlacesResponse message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                         * @static
+                         * @param {google.maps.places.v1.IAutocompletePlacesResponse} message AutocompletePlacesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutocompletePlacesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.suggestions != null && message.suggestions.length)
+                                for (var i = 0; i < message.suggestions.length; ++i)
+                                    $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.encode(message.suggestions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AutocompletePlacesResponse message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                         * @static
+                         * @param {google.maps.places.v1.IAutocompletePlacesResponse} message AutocompletePlacesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AutocompletePlacesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AutocompletePlacesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.AutocompletePlacesResponse} AutocompletePlacesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutocompletePlacesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.suggestions && message.suggestions.length))
+                                            message.suggestions = [];
+                                        message.suggestions.push($root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AutocompletePlacesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.AutocompletePlacesResponse} AutocompletePlacesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AutocompletePlacesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AutocompletePlacesResponse message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AutocompletePlacesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.suggestions != null && message.hasOwnProperty("suggestions")) {
+                                if (!Array.isArray(message.suggestions))
+                                    return "suggestions: array expected";
+                                for (var i = 0; i < message.suggestions.length; ++i) {
+                                    var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.verify(message.suggestions[i]);
+                                    if (error)
+                                        return "suggestions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AutocompletePlacesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.AutocompletePlacesResponse} AutocompletePlacesResponse
+                         */
+                        AutocompletePlacesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse)
+                                return object;
+                            var message = new $root.google.maps.places.v1.AutocompletePlacesResponse();
+                            if (object.suggestions) {
+                                if (!Array.isArray(object.suggestions))
+                                    throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.suggestions: array expected");
+                                message.suggestions = [];
+                                for (var i = 0; i < object.suggestions.length; ++i) {
+                                    if (typeof object.suggestions[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.suggestions: object expected");
+                                    message.suggestions[i] = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.fromObject(object.suggestions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AutocompletePlacesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                         * @static
+                         * @param {google.maps.places.v1.AutocompletePlacesResponse} message AutocompletePlacesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AutocompletePlacesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.suggestions = [];
+                            if (message.suggestions && message.suggestions.length) {
+                                object.suggestions = [];
+                                for (var j = 0; j < message.suggestions.length; ++j)
+                                    object.suggestions[j] = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.toObject(message.suggestions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AutocompletePlacesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AutocompletePlacesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AutocompletePlacesResponse
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AutocompletePlacesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.AutocompletePlacesResponse";
+                        };
+    
+                        AutocompletePlacesResponse.Suggestion = (function() {
+    
+                            /**
+                             * Properties of a Suggestion.
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                             * @interface ISuggestion
+                             * @property {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction|null} [placePrediction] Suggestion placePrediction
+                             * @property {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction|null} [queryPrediction] Suggestion queryPrediction
+                             */
+    
+                            /**
+                             * Constructs a new Suggestion.
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse
+                             * @classdesc Represents a Suggestion.
+                             * @implements ISuggestion
+                             * @constructor
+                             * @param {google.maps.places.v1.AutocompletePlacesResponse.ISuggestion=} [properties] Properties to set
+                             */
+                            function Suggestion(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Suggestion placePrediction.
+                             * @member {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction|null|undefined} placePrediction
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @instance
+                             */
+                            Suggestion.prototype.placePrediction = null;
+    
+                            /**
+                             * Suggestion queryPrediction.
+                             * @member {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction|null|undefined} queryPrediction
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @instance
+                             */
+                            Suggestion.prototype.queryPrediction = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * Suggestion kind.
+                             * @member {"placePrediction"|"queryPrediction"|undefined} kind
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @instance
+                             */
+                            Object.defineProperty(Suggestion.prototype, "kind", {
+                                get: $util.oneOfGetter($oneOfFields = ["placePrediction", "queryPrediction"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new Suggestion instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesResponse.ISuggestion=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion} Suggestion instance
+                             */
+                            Suggestion.create = function create(properties) {
+                                return new Suggestion(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Suggestion message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesResponse.ISuggestion} message Suggestion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Suggestion.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.placePrediction != null && Object.hasOwnProperty.call(message, "placePrediction"))
+                                    $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.encode(message.placePrediction, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.queryPrediction != null && Object.hasOwnProperty.call(message, "queryPrediction"))
+                                    $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.encode(message.queryPrediction, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Suggestion message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesResponse.ISuggestion} message Suggestion message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Suggestion.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Suggestion message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion} Suggestion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Suggestion.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.placePrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.queryPrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Suggestion message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion} Suggestion
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Suggestion.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Suggestion message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Suggestion.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.placePrediction != null && message.hasOwnProperty("placePrediction")) {
+                                    properties.kind = 1;
+                                    {
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.verify(message.placePrediction);
+                                        if (error)
+                                            return "placePrediction." + error;
+                                    }
+                                }
+                                if (message.queryPrediction != null && message.hasOwnProperty("queryPrediction")) {
+                                    if (properties.kind === 1)
+                                        return "kind: multiple values";
+                                    properties.kind = 1;
+                                    {
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.verify(message.queryPrediction);
+                                        if (error)
+                                            return "queryPrediction." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Suggestion message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion} Suggestion
+                             */
+                            Suggestion.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion();
+                                if (object.placePrediction != null) {
+                                    if (typeof object.placePrediction !== "object")
+                                        throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.placePrediction: object expected");
+                                    message.placePrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.fromObject(object.placePrediction);
+                                }
+                                if (object.queryPrediction != null) {
+                                    if (typeof object.queryPrediction !== "object")
+                                        throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.queryPrediction: object expected");
+                                    message.queryPrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.fromObject(object.queryPrediction);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Suggestion message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @static
+                             * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion} message Suggestion
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Suggestion.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.placePrediction != null && message.hasOwnProperty("placePrediction")) {
+                                    object.placePrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.toObject(message.placePrediction, options);
+                                    if (options.oneofs)
+                                        object.kind = "placePrediction";
+                                }
+                                if (message.queryPrediction != null && message.hasOwnProperty("queryPrediction")) {
+                                    object.queryPrediction = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.toObject(message.queryPrediction, options);
+                                    if (options.oneofs)
+                                        object.kind = "queryPrediction";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Suggestion to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Suggestion.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Suggestion
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Suggestion.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.AutocompletePlacesResponse.Suggestion";
+                            };
+    
+                            Suggestion.StringRange = (function() {
+    
+                                /**
+                                 * Properties of a StringRange.
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                                 * @interface IStringRange
+                                 * @property {number|null} [startOffset] StringRange startOffset
+                                 * @property {number|null} [endOffset] StringRange endOffset
+                                 */
+    
+                                /**
+                                 * Constructs a new StringRange.
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                                 * @classdesc Represents a StringRange.
+                                 * @implements IStringRange
+                                 * @constructor
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange=} [properties] Properties to set
+                                 */
+                                function StringRange(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * StringRange startOffset.
+                                 * @member {number} startOffset
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @instance
+                                 */
+                                StringRange.prototype.startOffset = 0;
+    
+                                /**
+                                 * StringRange endOffset.
+                                 * @member {number} endOffset
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @instance
+                                 */
+                                StringRange.prototype.endOffset = 0;
+    
+                                /**
+                                 * Creates a new StringRange instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange=} [properties] Properties to set
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange} StringRange instance
+                                 */
+                                StringRange.create = function create(properties) {
+                                    return new StringRange(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified StringRange message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange} message StringRange message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StringRange.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.startOffset != null && Object.hasOwnProperty.call(message, "startOffset"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.startOffset);
+                                    if (message.endOffset != null && Object.hasOwnProperty.call(message, "endOffset"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.endOffset);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified StringRange message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange} message StringRange message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StringRange.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a StringRange message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange} StringRange
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StringRange.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.startOffset = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.endOffset = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a StringRange message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange} StringRange
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StringRange.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a StringRange message.
+                                 * @function verify
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                StringRange.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.startOffset != null && message.hasOwnProperty("startOffset"))
+                                        if (!$util.isInteger(message.startOffset))
+                                            return "startOffset: integer expected";
+                                    if (message.endOffset != null && message.hasOwnProperty("endOffset"))
+                                        if (!$util.isInteger(message.endOffset))
+                                            return "endOffset: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a StringRange message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange} StringRange
+                                 */
+                                StringRange.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange)
+                                        return object;
+                                    var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange();
+                                    if (object.startOffset != null)
+                                        message.startOffset = object.startOffset | 0;
+                                    if (object.endOffset != null)
+                                        message.endOffset = object.endOffset | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a StringRange message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange} message StringRange
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                StringRange.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.startOffset = 0;
+                                        object.endOffset = 0;
+                                    }
+                                    if (message.startOffset != null && message.hasOwnProperty("startOffset"))
+                                        object.startOffset = message.startOffset;
+                                    if (message.endOffset != null && message.hasOwnProperty("endOffset"))
+                                        object.endOffset = message.endOffset;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this StringRange to JSON.
+                                 * @function toJSON
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                StringRange.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for StringRange
+                                 * @function getTypeUrl
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                StringRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange";
+                                };
+    
+                                return StringRange;
+                            })();
+    
+                            Suggestion.FormattableText = (function() {
+    
+                                /**
+                                 * Properties of a FormattableText.
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                                 * @interface IFormattableText
+                                 * @property {string|null} [text] FormattableText text
+                                 * @property {Array.<google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange>|null} [matches] FormattableText matches
+                                 */
+    
+                                /**
+                                 * Constructs a new FormattableText.
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                                 * @classdesc Represents a FormattableText.
+                                 * @implements IFormattableText
+                                 * @constructor
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText=} [properties] Properties to set
+                                 */
+                                function FormattableText(properties) {
+                                    this.matches = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * FormattableText text.
+                                 * @member {string} text
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @instance
+                                 */
+                                FormattableText.prototype.text = "";
+    
+                                /**
+                                 * FormattableText matches.
+                                 * @member {Array.<google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange>} matches
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @instance
+                                 */
+                                FormattableText.prototype.matches = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new FormattableText instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText=} [properties] Properties to set
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText} FormattableText instance
+                                 */
+                                FormattableText.create = function create(properties) {
+                                    return new FormattableText(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified FormattableText message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText} message FormattableText message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FormattableText.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                                    if (message.matches != null && message.matches.length)
+                                        for (var i = 0; i < message.matches.length; ++i)
+                                            $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.encode(message.matches[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified FormattableText message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText} message FormattableText message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FormattableText.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a FormattableText message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText} FormattableText
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FormattableText.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.text = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.matches && message.matches.length))
+                                                    message.matches = [];
+                                                message.matches.push($root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a FormattableText message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText} FormattableText
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FormattableText.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a FormattableText message.
+                                 * @function verify
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                FormattableText.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.text != null && message.hasOwnProperty("text"))
+                                        if (!$util.isString(message.text))
+                                            return "text: string expected";
+                                    if (message.matches != null && message.hasOwnProperty("matches")) {
+                                        if (!Array.isArray(message.matches))
+                                            return "matches: array expected";
+                                        for (var i = 0; i < message.matches.length; ++i) {
+                                            var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.verify(message.matches[i]);
+                                            if (error)
+                                                return "matches." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a FormattableText message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText} FormattableText
+                                 */
+                                FormattableText.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText)
+                                        return object;
+                                    var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText();
+                                    if (object.text != null)
+                                        message.text = String(object.text);
+                                    if (object.matches) {
+                                        if (!Array.isArray(object.matches))
+                                            throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.matches: array expected");
+                                        message.matches = [];
+                                        for (var i = 0; i < object.matches.length; ++i) {
+                                            if (typeof object.matches[i] !== "object")
+                                                throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.matches: object expected");
+                                            message.matches[i] = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.fromObject(object.matches[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a FormattableText message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText} message FormattableText
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                FormattableText.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.matches = [];
+                                    if (options.defaults)
+                                        object.text = "";
+                                    if (message.text != null && message.hasOwnProperty("text"))
+                                        object.text = message.text;
+                                    if (message.matches && message.matches.length) {
+                                        object.matches = [];
+                                        for (var j = 0; j < message.matches.length; ++j)
+                                            object.matches[j] = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.toObject(message.matches[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this FormattableText to JSON.
+                                 * @function toJSON
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                FormattableText.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for FormattableText
+                                 * @function getTypeUrl
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                FormattableText.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText";
+                                };
+    
+                                return FormattableText;
+                            })();
+    
+                            Suggestion.StructuredFormat = (function() {
+    
+                                /**
+                                 * Properties of a StructuredFormat.
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                                 * @interface IStructuredFormat
+                                 * @property {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null} [mainText] StructuredFormat mainText
+                                 * @property {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null} [secondaryText] StructuredFormat secondaryText
+                                 */
+    
+                                /**
+                                 * Constructs a new StructuredFormat.
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                                 * @classdesc Represents a StructuredFormat.
+                                 * @implements IStructuredFormat
+                                 * @constructor
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat=} [properties] Properties to set
+                                 */
+                                function StructuredFormat(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * StructuredFormat mainText.
+                                 * @member {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null|undefined} mainText
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @instance
+                                 */
+                                StructuredFormat.prototype.mainText = null;
+    
+                                /**
+                                 * StructuredFormat secondaryText.
+                                 * @member {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null|undefined} secondaryText
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @instance
+                                 */
+                                StructuredFormat.prototype.secondaryText = null;
+    
+                                /**
+                                 * Creates a new StructuredFormat instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat=} [properties] Properties to set
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat} StructuredFormat instance
+                                 */
+                                StructuredFormat.create = function create(properties) {
+                                    return new StructuredFormat(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified StructuredFormat message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat} message StructuredFormat message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StructuredFormat.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.mainText != null && Object.hasOwnProperty.call(message, "mainText"))
+                                        $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.encode(message.mainText, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.secondaryText != null && Object.hasOwnProperty.call(message, "secondaryText"))
+                                        $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.encode(message.secondaryText, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified StructuredFormat message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat} message StructuredFormat message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StructuredFormat.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a StructuredFormat message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat} StructuredFormat
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StructuredFormat.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.mainText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.secondaryText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a StructuredFormat message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat} StructuredFormat
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StructuredFormat.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a StructuredFormat message.
+                                 * @function verify
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                StructuredFormat.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.mainText != null && message.hasOwnProperty("mainText")) {
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.mainText);
+                                        if (error)
+                                            return "mainText." + error;
+                                    }
+                                    if (message.secondaryText != null && message.hasOwnProperty("secondaryText")) {
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.secondaryText);
+                                        if (error)
+                                            return "secondaryText." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a StructuredFormat message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat} StructuredFormat
+                                 */
+                                StructuredFormat.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat)
+                                        return object;
+                                    var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat();
+                                    if (object.mainText != null) {
+                                        if (typeof object.mainText !== "object")
+                                            throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.mainText: object expected");
+                                        message.mainText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.mainText);
+                                    }
+                                    if (object.secondaryText != null) {
+                                        if (typeof object.secondaryText !== "object")
+                                            throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.secondaryText: object expected");
+                                        message.secondaryText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.secondaryText);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a StructuredFormat message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat} message StructuredFormat
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                StructuredFormat.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.mainText = null;
+                                        object.secondaryText = null;
+                                    }
+                                    if (message.mainText != null && message.hasOwnProperty("mainText"))
+                                        object.mainText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.toObject(message.mainText, options);
+                                    if (message.secondaryText != null && message.hasOwnProperty("secondaryText"))
+                                        object.secondaryText = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.toObject(message.secondaryText, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this StructuredFormat to JSON.
+                                 * @function toJSON
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                StructuredFormat.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for StructuredFormat
+                                 * @function getTypeUrl
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                StructuredFormat.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat";
+                                };
+    
+                                return StructuredFormat;
+                            })();
+    
+                            Suggestion.PlacePrediction = (function() {
+    
+                                /**
+                                 * Properties of a PlacePrediction.
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                                 * @interface IPlacePrediction
+                                 * @property {string|null} [place] PlacePrediction place
+                                 * @property {string|null} [placeId] PlacePrediction placeId
+                                 * @property {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null} [text] PlacePrediction text
+                                 * @property {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null} [structuredFormat] PlacePrediction structuredFormat
+                                 * @property {Array.<string>|null} [types] PlacePrediction types
+                                 * @property {number|null} [distanceMeters] PlacePrediction distanceMeters
+                                 */
+    
+                                /**
+                                 * Constructs a new PlacePrediction.
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                                 * @classdesc Represents a PlacePrediction.
+                                 * @implements IPlacePrediction
+                                 * @constructor
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction=} [properties] Properties to set
+                                 */
+                                function PlacePrediction(properties) {
+                                    this.types = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * PlacePrediction place.
+                                 * @member {string} place
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @instance
+                                 */
+                                PlacePrediction.prototype.place = "";
+    
+                                /**
+                                 * PlacePrediction placeId.
+                                 * @member {string} placeId
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @instance
+                                 */
+                                PlacePrediction.prototype.placeId = "";
+    
+                                /**
+                                 * PlacePrediction text.
+                                 * @member {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null|undefined} text
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @instance
+                                 */
+                                PlacePrediction.prototype.text = null;
+    
+                                /**
+                                 * PlacePrediction structuredFormat.
+                                 * @member {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null|undefined} structuredFormat
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @instance
+                                 */
+                                PlacePrediction.prototype.structuredFormat = null;
+    
+                                /**
+                                 * PlacePrediction types.
+                                 * @member {Array.<string>} types
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @instance
+                                 */
+                                PlacePrediction.prototype.types = $util.emptyArray;
+    
+                                /**
+                                 * PlacePrediction distanceMeters.
+                                 * @member {number} distanceMeters
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @instance
+                                 */
+                                PlacePrediction.prototype.distanceMeters = 0;
+    
+                                /**
+                                 * Creates a new PlacePrediction instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction=} [properties] Properties to set
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction} PlacePrediction instance
+                                 */
+                                PlacePrediction.create = function create(properties) {
+                                    return new PlacePrediction(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified PlacePrediction message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction} message PlacePrediction message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PlacePrediction.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.place != null && Object.hasOwnProperty.call(message, "place"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.place);
+                                    if (message.placeId != null && Object.hasOwnProperty.call(message, "placeId"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.placeId);
+                                    if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                        $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.encode(message.text, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.structuredFormat != null && Object.hasOwnProperty.call(message, "structuredFormat"))
+                                        $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.encode(message.structuredFormat, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    if (message.types != null && message.types.length)
+                                        for (var i = 0; i < message.types.length; ++i)
+                                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.types[i]);
+                                    if (message.distanceMeters != null && Object.hasOwnProperty.call(message, "distanceMeters"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.distanceMeters);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified PlacePrediction message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction} message PlacePrediction message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PlacePrediction.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a PlacePrediction message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction} PlacePrediction
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PlacePrediction.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.place = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.placeId = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 5: {
+                                                if (!(message.types && message.types.length))
+                                                    message.types = [];
+                                                message.types.push(reader.string());
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.distanceMeters = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a PlacePrediction message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction} PlacePrediction
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PlacePrediction.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a PlacePrediction message.
+                                 * @function verify
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                PlacePrediction.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.place != null && message.hasOwnProperty("place"))
+                                        if (!$util.isString(message.place))
+                                            return "place: string expected";
+                                    if (message.placeId != null && message.hasOwnProperty("placeId"))
+                                        if (!$util.isString(message.placeId))
+                                            return "placeId: string expected";
+                                    if (message.text != null && message.hasOwnProperty("text")) {
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.text);
+                                        if (error)
+                                            return "text." + error;
+                                    }
+                                    if (message.structuredFormat != null && message.hasOwnProperty("structuredFormat")) {
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify(message.structuredFormat);
+                                        if (error)
+                                            return "structuredFormat." + error;
+                                    }
+                                    if (message.types != null && message.hasOwnProperty("types")) {
+                                        if (!Array.isArray(message.types))
+                                            return "types: array expected";
+                                        for (var i = 0; i < message.types.length; ++i)
+                                            if (!$util.isString(message.types[i]))
+                                                return "types: string[] expected";
+                                    }
+                                    if (message.distanceMeters != null && message.hasOwnProperty("distanceMeters"))
+                                        if (!$util.isInteger(message.distanceMeters))
+                                            return "distanceMeters: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a PlacePrediction message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction} PlacePrediction
+                                 */
+                                PlacePrediction.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction)
+                                        return object;
+                                    var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction();
+                                    if (object.place != null)
+                                        message.place = String(object.place);
+                                    if (object.placeId != null)
+                                        message.placeId = String(object.placeId);
+                                    if (object.text != null) {
+                                        if (typeof object.text !== "object")
+                                            throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.text: object expected");
+                                        message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.text);
+                                    }
+                                    if (object.structuredFormat != null) {
+                                        if (typeof object.structuredFormat !== "object")
+                                            throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.structuredFormat: object expected");
+                                        message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.fromObject(object.structuredFormat);
+                                    }
+                                    if (object.types) {
+                                        if (!Array.isArray(object.types))
+                                            throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.types: array expected");
+                                        message.types = [];
+                                        for (var i = 0; i < object.types.length; ++i)
+                                            message.types[i] = String(object.types[i]);
+                                    }
+                                    if (object.distanceMeters != null)
+                                        message.distanceMeters = object.distanceMeters | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a PlacePrediction message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction} message PlacePrediction
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                PlacePrediction.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.types = [];
+                                    if (options.defaults) {
+                                        object.place = "";
+                                        object.placeId = "";
+                                        object.text = null;
+                                        object.structuredFormat = null;
+                                        object.distanceMeters = 0;
+                                    }
+                                    if (message.place != null && message.hasOwnProperty("place"))
+                                        object.place = message.place;
+                                    if (message.placeId != null && message.hasOwnProperty("placeId"))
+                                        object.placeId = message.placeId;
+                                    if (message.text != null && message.hasOwnProperty("text"))
+                                        object.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.toObject(message.text, options);
+                                    if (message.structuredFormat != null && message.hasOwnProperty("structuredFormat"))
+                                        object.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.toObject(message.structuredFormat, options);
+                                    if (message.types && message.types.length) {
+                                        object.types = [];
+                                        for (var j = 0; j < message.types.length; ++j)
+                                            object.types[j] = message.types[j];
+                                    }
+                                    if (message.distanceMeters != null && message.hasOwnProperty("distanceMeters"))
+                                        object.distanceMeters = message.distanceMeters;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this PlacePrediction to JSON.
+                                 * @function toJSON
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                PlacePrediction.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for PlacePrediction
+                                 * @function getTypeUrl
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                PlacePrediction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction";
+                                };
+    
+                                return PlacePrediction;
+                            })();
+    
+                            Suggestion.QueryPrediction = (function() {
+    
+                                /**
+                                 * Properties of a QueryPrediction.
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                                 * @interface IQueryPrediction
+                                 * @property {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null} [text] QueryPrediction text
+                                 * @property {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null} [structuredFormat] QueryPrediction structuredFormat
+                                 */
+    
+                                /**
+                                 * Constructs a new QueryPrediction.
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion
+                                 * @classdesc Represents a QueryPrediction.
+                                 * @implements IQueryPrediction
+                                 * @constructor
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction=} [properties] Properties to set
+                                 */
+                                function QueryPrediction(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * QueryPrediction text.
+                                 * @member {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null|undefined} text
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @instance
+                                 */
+                                QueryPrediction.prototype.text = null;
+    
+                                /**
+                                 * QueryPrediction structuredFormat.
+                                 * @member {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null|undefined} structuredFormat
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @instance
+                                 */
+                                QueryPrediction.prototype.structuredFormat = null;
+    
+                                /**
+                                 * Creates a new QueryPrediction instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction=} [properties] Properties to set
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction} QueryPrediction instance
+                                 */
+                                QueryPrediction.create = function create(properties) {
+                                    return new QueryPrediction(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified QueryPrediction message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction} message QueryPrediction message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                QueryPrediction.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                        $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.encode(message.text, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.structuredFormat != null && Object.hasOwnProperty.call(message, "structuredFormat"))
+                                        $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.encode(message.structuredFormat, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified QueryPrediction message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction} message QueryPrediction message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                QueryPrediction.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a QueryPrediction message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction} QueryPrediction
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                QueryPrediction.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a QueryPrediction message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction} QueryPrediction
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                QueryPrediction.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a QueryPrediction message.
+                                 * @function verify
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                QueryPrediction.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.text != null && message.hasOwnProperty("text")) {
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify(message.text);
+                                        if (error)
+                                            return "text." + error;
+                                    }
+                                    if (message.structuredFormat != null && message.hasOwnProperty("structuredFormat")) {
+                                        var error = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify(message.structuredFormat);
+                                        if (error)
+                                            return "structuredFormat." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a QueryPrediction message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction} QueryPrediction
+                                 */
+                                QueryPrediction.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction)
+                                        return object;
+                                    var message = new $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction();
+                                    if (object.text != null) {
+                                        if (typeof object.text !== "object")
+                                            throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.text: object expected");
+                                        message.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.fromObject(object.text);
+                                    }
+                                    if (object.structuredFormat != null) {
+                                        if (typeof object.structuredFormat !== "object")
+                                            throw TypeError(".google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.structuredFormat: object expected");
+                                        message.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.fromObject(object.structuredFormat);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a QueryPrediction message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @static
+                                 * @param {google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction} message QueryPrediction
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                QueryPrediction.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.text = null;
+                                        object.structuredFormat = null;
+                                    }
+                                    if (message.text != null && message.hasOwnProperty("text"))
+                                        object.text = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.toObject(message.text, options);
+                                    if (message.structuredFormat != null && message.hasOwnProperty("structuredFormat"))
+                                        object.structuredFormat = $root.google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.toObject(message.structuredFormat, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this QueryPrediction to JSON.
+                                 * @function toJSON
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                QueryPrediction.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for QueryPrediction
+                                 * @function getTypeUrl
+                                 * @memberof google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                QueryPrediction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction";
+                                };
+    
+                                return QueryPrediction;
+                            })();
+    
+                            return Suggestion;
+                        })();
+    
+                        return AutocompletePlacesResponse;
                     })();
     
                     return v1;

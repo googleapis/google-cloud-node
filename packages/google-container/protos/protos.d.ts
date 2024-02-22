@@ -1212,6 +1212,9 @@ export namespace google {
 
                 /** NodeConfig resourceManagerTags */
                 resourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
+
+                /** NodeConfig enableConfidentialStorage */
+                enableConfidentialStorage?: (boolean|null);
             }
 
             /** Represents a NodeConfig. */
@@ -1327,6 +1330,9 @@ export namespace google {
 
                 /** NodeConfig resourceManagerTags. */
                 public resourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
+
+                /** NodeConfig enableConfidentialStorage. */
+                public enableConfidentialStorage: boolean;
 
                 /** NodeConfig _fastSocket. */
                 public _fastSocket?: "fastSocket";
@@ -8432,6 +8438,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest resourceManagerTags */
                 resourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
+
+                /** UpdateNodePoolRequest queuedProvisioning */
+                queuedProvisioning?: (google.container.v1.NodePool.IQueuedProvisioning|null);
             }
 
             /** Represents an UpdateNodePoolRequest. */
@@ -8526,6 +8535,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest resourceManagerTags. */
                 public resourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
+
+                /** UpdateNodePoolRequest queuedProvisioning. */
+                public queuedProvisioning?: (google.container.v1.NodePool.IQueuedProvisioning|null);
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.

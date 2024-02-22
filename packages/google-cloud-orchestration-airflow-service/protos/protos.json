@@ -190,6 +190,212 @@
                                     }
                                   ]
                                 },
+                                "ListWorkloads": {
+                                  "requestType": "ListWorkloadsRequest",
+                                  "responseType": "ListWorkloadsResponse",
+                                  "options": {
+                                    "(google.api.http).get": "/v1/{parent=projects/*/locations/*/environments/*}/workloads",
+                                    "(google.api.method_signature)": "parent"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1/{parent=projects/*/locations/*/environments/*}/workloads"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent"
+                                    }
+                                  ]
+                                },
+                                "CreateUserWorkloadsSecret": {
+                                  "requestType": "CreateUserWorkloadsSecretRequest",
+                                  "responseType": "UserWorkloadsSecret",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{parent=projects/*/locations/*/environments/*}/userWorkloadsSecrets",
+                                    "(google.api.http).body": "user_workloads_secret",
+                                    "(google.api.method_signature)": "parent,user_workloads_secret"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{parent=projects/*/locations/*/environments/*}/userWorkloadsSecrets",
+                                        "body": "user_workloads_secret"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent,user_workloads_secret"
+                                    }
+                                  ]
+                                },
+                                "GetUserWorkloadsSecret": {
+                                  "requestType": "GetUserWorkloadsSecretRequest",
+                                  "responseType": "UserWorkloadsSecret",
+                                  "options": {
+                                    "(google.api.http).get": "/v1/{name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}",
+                                    "(google.api.method_signature)": "name"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1/{name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "name"
+                                    }
+                                  ]
+                                },
+                                "ListUserWorkloadsSecrets": {
+                                  "requestType": "ListUserWorkloadsSecretsRequest",
+                                  "responseType": "ListUserWorkloadsSecretsResponse",
+                                  "options": {
+                                    "(google.api.http).get": "/v1/{parent=projects/*/locations/*/environments/*}/userWorkloadsSecrets",
+                                    "(google.api.method_signature)": "parent"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1/{parent=projects/*/locations/*/environments/*}/userWorkloadsSecrets"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent"
+                                    }
+                                  ]
+                                },
+                                "UpdateUserWorkloadsSecret": {
+                                  "requestType": "UpdateUserWorkloadsSecretRequest",
+                                  "responseType": "UserWorkloadsSecret",
+                                  "options": {
+                                    "(google.api.http).put": "/v1/{user_workloads_secret.name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}",
+                                    "(google.api.http).body": "user_workloads_secret",
+                                    "(google.api.method_signature)": "user_workloads_secret"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "put": "/v1/{user_workloads_secret.name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}",
+                                        "body": "user_workloads_secret"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "user_workloads_secret"
+                                    }
+                                  ]
+                                },
+                                "DeleteUserWorkloadsSecret": {
+                                  "requestType": "DeleteUserWorkloadsSecretRequest",
+                                  "responseType": "google.protobuf.Empty",
+                                  "options": {
+                                    "(google.api.http).delete": "/v1/{name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}",
+                                    "(google.api.method_signature)": "name"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "delete": "/v1/{name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "name"
+                                    }
+                                  ]
+                                },
+                                "CreateUserWorkloadsConfigMap": {
+                                  "requestType": "CreateUserWorkloadsConfigMapRequest",
+                                  "responseType": "UserWorkloadsConfigMap",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{parent=projects/*/locations/*/environments/*}/userWorkloadsConfigMaps",
+                                    "(google.api.http).body": "user_workloads_config_map",
+                                    "(google.api.method_signature)": "parent,user_workloads_config_map"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{parent=projects/*/locations/*/environments/*}/userWorkloadsConfigMaps",
+                                        "body": "user_workloads_config_map"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent,user_workloads_config_map"
+                                    }
+                                  ]
+                                },
+                                "GetUserWorkloadsConfigMap": {
+                                  "requestType": "GetUserWorkloadsConfigMapRequest",
+                                  "responseType": "UserWorkloadsConfigMap",
+                                  "options": {
+                                    "(google.api.http).get": "/v1/{name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}",
+                                    "(google.api.method_signature)": "name"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1/{name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "name"
+                                    }
+                                  ]
+                                },
+                                "ListUserWorkloadsConfigMaps": {
+                                  "requestType": "ListUserWorkloadsConfigMapsRequest",
+                                  "responseType": "ListUserWorkloadsConfigMapsResponse",
+                                  "options": {
+                                    "(google.api.http).get": "/v1/{parent=projects/*/locations/*/environments/*}/userWorkloadsConfigMaps",
+                                    "(google.api.method_signature)": "parent"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1/{parent=projects/*/locations/*/environments/*}/userWorkloadsConfigMaps"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent"
+                                    }
+                                  ]
+                                },
+                                "UpdateUserWorkloadsConfigMap": {
+                                  "requestType": "UpdateUserWorkloadsConfigMapRequest",
+                                  "responseType": "UserWorkloadsConfigMap",
+                                  "options": {
+                                    "(google.api.http).put": "/v1/{user_workloads_config_map.name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}",
+                                    "(google.api.http).body": "user_workloads_config_map",
+                                    "(google.api.method_signature)": "user_workloads_config_map"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "put": "/v1/{user_workloads_config_map.name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}",
+                                        "body": "user_workloads_config_map"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "user_workloads_config_map"
+                                    }
+                                  ]
+                                },
+                                "DeleteUserWorkloadsConfigMap": {
+                                  "requestType": "DeleteUserWorkloadsConfigMapRequest",
+                                  "responseType": "google.protobuf.Empty",
+                                  "options": {
+                                    "(google.api.http).delete": "/v1/{name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}",
+                                    "(google.api.method_signature)": "name"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "delete": "/v1/{name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "name"
+                                    }
+                                  ]
+                                },
                                 "SaveSnapshot": {
                                   "requestType": "SaveSnapshotRequest",
                                   "responseType": "google.longrunning.Operation",
@@ -496,6 +702,358 @@
                                 }
                               }
                             },
+                            "CreateUserWorkloadsSecretRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/Environment"
+                                  }
+                                },
+                                "userWorkloadsSecret": {
+                                  "type": "UserWorkloadsSecret",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "GetUserWorkloadsSecretRequest": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/UserWorkloadsSecret"
+                                  }
+                                }
+                              }
+                            },
+                            "ListUserWorkloadsSecretsRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/Environment"
+                                  }
+                                },
+                                "pageSize": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "pageToken": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "UpdateUserWorkloadsSecretRequest": {
+                              "fields": {
+                                "userWorkloadsSecret": {
+                                  "type": "UserWorkloadsSecret",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "DeleteUserWorkloadsSecretRequest": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/UserWorkloadsSecret"
+                                  }
+                                }
+                              }
+                            },
+                            "CreateUserWorkloadsConfigMapRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/Environment"
+                                  }
+                                },
+                                "userWorkloadsConfigMap": {
+                                  "type": "UserWorkloadsConfigMap",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "GetUserWorkloadsConfigMapRequest": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/UserWorkloadsConfigMap"
+                                  }
+                                }
+                              }
+                            },
+                            "ListUserWorkloadsConfigMapsRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/Environment"
+                                  }
+                                },
+                                "pageSize": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "pageToken": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "UpdateUserWorkloadsConfigMapRequest": {
+                              "fields": {
+                                "userWorkloadsConfigMap": {
+                                  "type": "UserWorkloadsConfigMap",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "DeleteUserWorkloadsConfigMapRequest": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/UserWorkloadsConfigMap"
+                                  }
+                                }
+                              }
+                            },
+                            "UserWorkloadsSecret": {
+                              "options": {
+                                "(google.api.resource).type": "composer.googleapis.com/UserWorkloadsSecret",
+                                "(google.api.resource).pattern": "projects/{project}/locations/{location}/environments/{environment}/userWorkloadsSecrets/{user_workloads_secret}",
+                                "(google.api.resource).plural": "userWorkloadsSecrets",
+                                "(google.api.resource).singular": "userWorkloadsSecret"
+                              },
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "IDENTIFIER"
+                                  }
+                                },
+                                "data": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ListUserWorkloadsSecretsResponse": {
+                              "fields": {
+                                "userWorkloadsSecrets": {
+                                  "rule": "repeated",
+                                  "type": "UserWorkloadsSecret",
+                                  "id": 1
+                                },
+                                "nextPageToken": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "UserWorkloadsConfigMap": {
+                              "options": {
+                                "(google.api.resource).type": "composer.googleapis.com/UserWorkloadsConfigMap",
+                                "(google.api.resource).pattern": "projects/{project}/locations/{location}/environments/{environment}/userWorkloadsConfigMaps/{user_workloads_config_map}",
+                                "(google.api.resource).plural": "userWorkloadsConfigMaps",
+                                "(google.api.resource).singular": "userWorkloadsConfigMap"
+                              },
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "IDENTIFIER"
+                                  }
+                                },
+                                "data": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ListUserWorkloadsConfigMapsResponse": {
+                              "fields": {
+                                "userWorkloadsConfigMaps": {
+                                  "rule": "repeated",
+                                  "type": "UserWorkloadsConfigMap",
+                                  "id": 1
+                                },
+                                "nextPageToken": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "ListWorkloadsRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/Environment"
+                                  }
+                                },
+                                "pageSize": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "pageToken": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "filter": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ListWorkloadsResponse": {
+                              "fields": {
+                                "workloads": {
+                                  "rule": "repeated",
+                                  "type": "ComposerWorkload",
+                                  "id": 1
+                                },
+                                "nextPageToken": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "ComposerWorkload": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "type": {
+                                      "type": "ComposerWorkloadType",
+                                      "id": 2
+                                    },
+                                    "status": {
+                                      "type": "ComposerWorkloadStatus",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    }
+                                  }
+                                },
+                                "ComposerWorkloadType": {
+                                  "values": {
+                                    "COMPOSER_WORKLOAD_TYPE_UNSPECIFIED": 0,
+                                    "CELERY_WORKER": 1,
+                                    "KUBERNETES_WORKER": 2,
+                                    "KUBERNETES_OPERATOR_POD": 3,
+                                    "SCHEDULER": 4,
+                                    "DAG_PROCESSOR": 5,
+                                    "TRIGGERER": 6,
+                                    "WEB_SERVER": 7,
+                                    "REDIS": 8
+                                  }
+                                },
+                                "ComposerWorkloadStatus": {
+                                  "fields": {
+                                    "state": {
+                                      "type": "ComposerWorkloadState",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    },
+                                    "statusMessage": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    },
+                                    "detailedStatusMessage": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    }
+                                  }
+                                },
+                                "ComposerWorkloadState": {
+                                  "values": {
+                                    "COMPOSER_WORKLOAD_STATE_UNSPECIFIED": 0,
+                                    "PENDING": 1,
+                                    "OK": 2,
+                                    "WARNING": 3,
+                                    "ERROR": 4,
+                                    "SUCCEEDED": 5,
+                                    "FAILED": 6
+                                  }
+                                }
+                              }
+                            },
                             "SaveSnapshotRequest": {
                               "fields": {
                                 "environment": {
@@ -583,6 +1141,17 @@
                                 "isFailoverReplicaAvailable": {
                                   "type": "bool",
                                   "id": 3
+                                }
+                              }
+                            },
+                            "StorageConfig": {
+                              "fields": {
+                                "bucket": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },
@@ -692,6 +1261,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "dataRetentionConfig": {
+                                  "type": "DataRetentionConfig",
+                                  "id": 21,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               },
                               "nested": {
@@ -742,6 +1318,13 @@
                                 "machineType": {
                                   "type": "string",
                                   "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "zone": {
+                                  "type": "string",
+                                  "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -825,6 +1408,29 @@
                                   "id": 7,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "cloudDataLineageIntegration": {
+                                  "type": "CloudDataLineageIntegration",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "webServerPluginsMode": {
+                                  "type": "WebServerPluginsMode",
+                                  "id": 10,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "WebServerPluginsMode": {
+                                  "values": {
+                                    "WEB_SERVER_PLUGINS_MODE_UNSPECIFIED": 0,
+                                    "PLUGINS_DISABLED": 1,
+                                    "PLUGINS_ENABLED": 2
                                   }
                                 }
                               }
@@ -931,6 +1537,20 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "composerNetworkAttachment": {
+                                  "type": "string",
+                                  "id": 12,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "composerInternalIpv4CidrBlock": {
+                                  "type": "string",
+                                  "id": 13,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },
@@ -984,6 +1604,13 @@
                                 "enablePrivateEnvironment": {
                                   "type": "bool",
                                   "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "enablePrivateBuildsOnly": {
+                                  "type": "bool",
+                                  "id": 11,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -1072,6 +1699,20 @@
                                 "worker": {
                                   "type": "WorkerResource",
                                   "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "triggerer": {
+                                  "type": "TriggererResource",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "dagProcessor": {
+                                  "type": "DagProcessorResource",
+                                  "id": 5,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -1173,6 +1814,63 @@
                                       }
                                     }
                                   }
+                                },
+                                "TriggererResource": {
+                                  "fields": {
+                                    "count": {
+                                      "type": "int32",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "cpu": {
+                                      "type": "float",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "memoryGb": {
+                                      "type": "float",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                },
+                                "DagProcessorResource": {
+                                  "fields": {
+                                    "cpu": {
+                                      "type": "float",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "memoryGb": {
+                                      "type": "float",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "storageGb": {
+                                      "type": "float",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "count": {
+                                      "type": "int32",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
                                 }
                               }
                             },
@@ -1246,6 +1944,17 @@
                                 }
                               }
                             },
+                            "CloudDataLineageIntegration": {
+                              "fields": {
+                                "enabled": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
                             "Environment": {
                               "options": {
                                 "(google.api.resource).type": "composer.googleapis.com/Environment",
@@ -1280,6 +1989,20 @@
                                   "keyType": "string",
                                   "type": "string",
                                   "id": 7
+                                },
+                                "satisfiesPzs": {
+                                  "type": "bool",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "storageConfig": {
+                                  "type": "StorageConfig",
+                                  "id": 9,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               },
                               "nested": {
@@ -1334,6 +2057,37 @@
                                     "CONFLICT_RESULT_UNSPECIFIED": 0,
                                     "CONFLICT": 1,
                                     "NO_CONFLICT": 2
+                                  }
+                                }
+                              }
+                            },
+                            "DataRetentionConfig": {
+                              "fields": {
+                                "taskLogsRetentionConfig": {
+                                  "type": "TaskLogsRetentionConfig",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "TaskLogsRetentionConfig": {
+                              "fields": {
+                                "storageMode": {
+                                  "type": "TaskLogsStorageMode",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "TaskLogsStorageMode": {
+                                  "values": {
+                                    "TASK_LOGS_STORAGE_MODE_UNSPECIFIED": 0,
+                                    "CLOUD_LOGGING_AND_CLOUD_STORAGE": 1,
+                                    "CLOUD_LOGGING_ONLY": 2
                                   }
                                 }
                               }
@@ -1711,6 +2465,212 @@
                                     }
                                   ]
                                 },
+                                "ListWorkloads": {
+                                  "requestType": "ListWorkloadsRequest",
+                                  "responseType": "ListWorkloadsResponse",
+                                  "options": {
+                                    "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/environments/*}/workloads",
+                                    "(google.api.method_signature)": "parent"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1beta1/{parent=projects/*/locations/*/environments/*}/workloads"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent"
+                                    }
+                                  ]
+                                },
+                                "CreateUserWorkloadsSecret": {
+                                  "requestType": "CreateUserWorkloadsSecretRequest",
+                                  "responseType": "UserWorkloadsSecret",
+                                  "options": {
+                                    "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/environments/*}/userWorkloadsSecrets",
+                                    "(google.api.http).body": "user_workloads_secret",
+                                    "(google.api.method_signature)": "parent,user_workloads_secret"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1beta1/{parent=projects/*/locations/*/environments/*}/userWorkloadsSecrets",
+                                        "body": "user_workloads_secret"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent,user_workloads_secret"
+                                    }
+                                  ]
+                                },
+                                "GetUserWorkloadsSecret": {
+                                  "requestType": "GetUserWorkloadsSecretRequest",
+                                  "responseType": "UserWorkloadsSecret",
+                                  "options": {
+                                    "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}",
+                                    "(google.api.method_signature)": "name"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1beta1/{name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "name"
+                                    }
+                                  ]
+                                },
+                                "ListUserWorkloadsSecrets": {
+                                  "requestType": "ListUserWorkloadsSecretsRequest",
+                                  "responseType": "ListUserWorkloadsSecretsResponse",
+                                  "options": {
+                                    "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/environments/*}/userWorkloadsSecrets",
+                                    "(google.api.method_signature)": "parent"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1beta1/{parent=projects/*/locations/*/environments/*}/userWorkloadsSecrets"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent"
+                                    }
+                                  ]
+                                },
+                                "UpdateUserWorkloadsSecret": {
+                                  "requestType": "UpdateUserWorkloadsSecretRequest",
+                                  "responseType": "UserWorkloadsSecret",
+                                  "options": {
+                                    "(google.api.http).put": "/v1beta1/{user_workloads_secret.name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}",
+                                    "(google.api.http).body": "user_workloads_secret",
+                                    "(google.api.method_signature)": "user_workloads_secret"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "put": "/v1beta1/{user_workloads_secret.name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}",
+                                        "body": "user_workloads_secret"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "user_workloads_secret"
+                                    }
+                                  ]
+                                },
+                                "DeleteUserWorkloadsSecret": {
+                                  "requestType": "DeleteUserWorkloadsSecretRequest",
+                                  "responseType": "google.protobuf.Empty",
+                                  "options": {
+                                    "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}",
+                                    "(google.api.method_signature)": "name"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "delete": "/v1beta1/{name=projects/*/locations/*/environments/*/userWorkloadsSecrets/*}"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "name"
+                                    }
+                                  ]
+                                },
+                                "CreateUserWorkloadsConfigMap": {
+                                  "requestType": "CreateUserWorkloadsConfigMapRequest",
+                                  "responseType": "UserWorkloadsConfigMap",
+                                  "options": {
+                                    "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/environments/*}/userWorkloadsConfigMaps",
+                                    "(google.api.http).body": "user_workloads_config_map",
+                                    "(google.api.method_signature)": "parent,user_workloads_config_map"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1beta1/{parent=projects/*/locations/*/environments/*}/userWorkloadsConfigMaps",
+                                        "body": "user_workloads_config_map"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent,user_workloads_config_map"
+                                    }
+                                  ]
+                                },
+                                "GetUserWorkloadsConfigMap": {
+                                  "requestType": "GetUserWorkloadsConfigMapRequest",
+                                  "responseType": "UserWorkloadsConfigMap",
+                                  "options": {
+                                    "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}",
+                                    "(google.api.method_signature)": "name"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1beta1/{name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "name"
+                                    }
+                                  ]
+                                },
+                                "ListUserWorkloadsConfigMaps": {
+                                  "requestType": "ListUserWorkloadsConfigMapsRequest",
+                                  "responseType": "ListUserWorkloadsConfigMapsResponse",
+                                  "options": {
+                                    "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/environments/*}/userWorkloadsConfigMaps",
+                                    "(google.api.method_signature)": "parent"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1beta1/{parent=projects/*/locations/*/environments/*}/userWorkloadsConfigMaps"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent"
+                                    }
+                                  ]
+                                },
+                                "UpdateUserWorkloadsConfigMap": {
+                                  "requestType": "UpdateUserWorkloadsConfigMapRequest",
+                                  "responseType": "UserWorkloadsConfigMap",
+                                  "options": {
+                                    "(google.api.http).put": "/v1beta1/{user_workloads_config_map.name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}",
+                                    "(google.api.http).body": "user_workloads_config_map",
+                                    "(google.api.method_signature)": "user_workloads_config_map"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "put": "/v1beta1/{user_workloads_config_map.name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}",
+                                        "body": "user_workloads_config_map"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "user_workloads_config_map"
+                                    }
+                                  ]
+                                },
+                                "DeleteUserWorkloadsConfigMap": {
+                                  "requestType": "DeleteUserWorkloadsConfigMapRequest",
+                                  "responseType": "google.protobuf.Empty",
+                                  "options": {
+                                    "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}",
+                                    "(google.api.method_signature)": "name"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "delete": "/v1beta1/{name=projects/*/locations/*/environments/*/userWorkloadsConfigMaps/*}"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "name"
+                                    }
+                                  ]
+                                },
                                 "SaveSnapshot": {
                                   "requestType": "SaveSnapshotRequest",
                                   "responseType": "google.longrunning.Operation",
@@ -2028,6 +2988,358 @@
                                 }
                               }
                             },
+                            "CreateUserWorkloadsSecretRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/Environment"
+                                  }
+                                },
+                                "userWorkloadsSecret": {
+                                  "type": "UserWorkloadsSecret",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "GetUserWorkloadsSecretRequest": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/UserWorkloadsSecret"
+                                  }
+                                }
+                              }
+                            },
+                            "ListUserWorkloadsSecretsRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/Environment"
+                                  }
+                                },
+                                "pageSize": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "pageToken": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "UpdateUserWorkloadsSecretRequest": {
+                              "fields": {
+                                "userWorkloadsSecret": {
+                                  "type": "UserWorkloadsSecret",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "DeleteUserWorkloadsSecretRequest": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/UserWorkloadsSecret"
+                                  }
+                                }
+                              }
+                            },
+                            "CreateUserWorkloadsConfigMapRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/Environment"
+                                  }
+                                },
+                                "userWorkloadsConfigMap": {
+                                  "type": "UserWorkloadsConfigMap",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "GetUserWorkloadsConfigMapRequest": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/UserWorkloadsConfigMap"
+                                  }
+                                }
+                              }
+                            },
+                            "ListUserWorkloadsConfigMapsRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/Environment"
+                                  }
+                                },
+                                "pageSize": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "pageToken": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "UpdateUserWorkloadsConfigMapRequest": {
+                              "fields": {
+                                "userWorkloadsConfigMap": {
+                                  "type": "UserWorkloadsConfigMap",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "DeleteUserWorkloadsConfigMapRequest": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/UserWorkloadsConfigMap"
+                                  }
+                                }
+                              }
+                            },
+                            "UserWorkloadsSecret": {
+                              "options": {
+                                "(google.api.resource).type": "composer.googleapis.com/UserWorkloadsSecret",
+                                "(google.api.resource).pattern": "projects/{project}/locations/{location}/environments/{environment}/userWorkloadsSecrets/{user_workloads_secret}",
+                                "(google.api.resource).plural": "userWorkloadsSecrets",
+                                "(google.api.resource).singular": "userWorkloadsSecret"
+                              },
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "IDENTIFIER"
+                                  }
+                                },
+                                "data": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ListUserWorkloadsSecretsResponse": {
+                              "fields": {
+                                "userWorkloadsSecrets": {
+                                  "rule": "repeated",
+                                  "type": "UserWorkloadsSecret",
+                                  "id": 1
+                                },
+                                "nextPageToken": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "UserWorkloadsConfigMap": {
+                              "options": {
+                                "(google.api.resource).type": "composer.googleapis.com/UserWorkloadsConfigMap",
+                                "(google.api.resource).pattern": "projects/{project}/locations/{location}/environments/{environment}/userWorkloadsConfigMaps/{user_workloads_config_map}",
+                                "(google.api.resource).plural": "userWorkloadsConfigMaps",
+                                "(google.api.resource).singular": "userWorkloadsConfigMap"
+                              },
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "IDENTIFIER"
+                                  }
+                                },
+                                "data": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ListUserWorkloadsConfigMapsResponse": {
+                              "fields": {
+                                "userWorkloadsConfigMaps": {
+                                  "rule": "repeated",
+                                  "type": "UserWorkloadsConfigMap",
+                                  "id": 1
+                                },
+                                "nextPageToken": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "ListWorkloadsRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "composer.googleapis.com/Environment"
+                                  }
+                                },
+                                "pageSize": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "pageToken": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "filter": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ListWorkloadsResponse": {
+                              "fields": {
+                                "workloads": {
+                                  "rule": "repeated",
+                                  "type": "ComposerWorkload",
+                                  "id": 1
+                                },
+                                "nextPageToken": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "ComposerWorkload": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "type": {
+                                      "type": "ComposerWorkloadType",
+                                      "id": 2
+                                    },
+                                    "status": {
+                                      "type": "ComposerWorkloadStatus",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    }
+                                  }
+                                },
+                                "ComposerWorkloadType": {
+                                  "values": {
+                                    "COMPOSER_WORKLOAD_TYPE_UNSPECIFIED": 0,
+                                    "CELERY_WORKER": 1,
+                                    "KUBERNETES_WORKER": 2,
+                                    "KUBERNETES_OPERATOR_POD": 3,
+                                    "SCHEDULER": 4,
+                                    "DAG_PROCESSOR": 5,
+                                    "TRIGGERER": 6,
+                                    "WEB_SERVER": 7,
+                                    "REDIS": 8
+                                  }
+                                },
+                                "ComposerWorkloadStatus": {
+                                  "fields": {
+                                    "state": {
+                                      "type": "ComposerWorkloadState",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    },
+                                    "statusMessage": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    },
+                                    "detailedStatusMessage": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                      }
+                                    }
+                                  }
+                                },
+                                "ComposerWorkloadState": {
+                                  "values": {
+                                    "COMPOSER_WORKLOAD_STATE_UNSPECIFIED": 0,
+                                    "PENDING": 1,
+                                    "OK": 2,
+                                    "WARNING": 3,
+                                    "ERROR": 4,
+                                    "SUCCEEDED": 5,
+                                    "FAILED": 6
+                                  }
+                                }
+                              }
+                            },
                             "SaveSnapshotRequest": {
                               "fields": {
                                 "environment": {
@@ -2227,6 +3539,13 @@
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 },
+                                "dataRetentionConfig": {
+                                  "type": "DataRetentionConfig",
+                                  "id": 19,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
                                 "resilienceMode": {
                                   "type": "ResilienceMode",
                                   "id": 20,
@@ -2327,6 +3646,22 @@
                                   "id": 8,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "webServerPluginsMode": {
+                                  "type": "WebServerPluginsMode",
+                                  "id": 10,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "WebServerPluginsMode": {
+                                  "values": {
+                                    "WEB_SERVER_PLUGINS_MODE_UNSPECIFIED": 0,
+                                    "PLUGINS_DISABLED": 1,
+                                    "PLUGINS_ENABLED": 2
                                   }
                                 }
                               }
@@ -2450,6 +3785,20 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                },
+                                "composerNetworkAttachment": {
+                                  "type": "string",
+                                  "id": 12,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "composerInternalIpv4CidrBlock": {
+                                  "type": "string",
+                                  "id": 13,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },
@@ -2503,6 +3852,13 @@
                                 "enablePrivateEnvironment": {
                                   "type": "bool",
                                   "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "enablePrivateBuildsOnly": {
+                                  "type": "bool",
+                                  "id": 11,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -2577,6 +3933,13 @@
                                 "machineType": {
                                   "type": "string",
                                   "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "zone": {
+                                  "type": "string",
+                                  "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -2656,6 +4019,13 @@
                                 "triggerer": {
                                   "type": "TriggererResource",
                                   "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "dagProcessor": {
+                                  "type": "DagProcessorResource",
+                                  "id": 5,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -2781,6 +4151,80 @@
                                         "(google.api.field_behavior)": "OPTIONAL"
                                       }
                                     }
+                                  }
+                                },
+                                "DagProcessorResource": {
+                                  "fields": {
+                                    "cpu": {
+                                      "type": "float",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "memoryGb": {
+                                      "type": "float",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "storageGb": {
+                                      "type": "float",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "count": {
+                                      "type": "int32",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "DataRetentionConfig": {
+                              "fields": {
+                                "taskLogsRetentionConfig": {
+                                  "type": "TaskLogsRetentionConfig",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "TaskLogsRetentionConfig": {
+                              "fields": {
+                                "storageMode": {
+                                  "type": "TaskLogsStorageMode",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "TaskLogsStorageMode": {
+                                  "values": {
+                                    "TASK_LOGS_STORAGE_MODE_UNSPECIFIED": 0,
+                                    "CLOUD_LOGGING_AND_CLOUD_STORAGE": 1,
+                                    "CLOUD_LOGGING_ONLY": 2
+                                  }
+                                }
+                              }
+                            },
+                            "StorageConfig": {
+                              "fields": {
+                                "bucket": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -2909,6 +4353,20 @@
                                   "keyType": "string",
                                   "type": "string",
                                   "id": 7,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "satisfiesPzs": {
+                                  "type": "bool",
+                                  "id": 8,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "storageConfig": {
+                                  "type": "StorageConfig",
+                                  "id": 9,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }

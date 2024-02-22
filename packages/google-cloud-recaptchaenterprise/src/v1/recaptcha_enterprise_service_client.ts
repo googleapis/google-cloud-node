@@ -314,6 +314,7 @@ export class RecaptchaEnterpriseServiceClient {
       'getFirewallPolicy',
       'updateFirewallPolicy',
       'deleteFirewallPolicy',
+      'reorderFirewallPolicies',
       'listRelatedAccountGroups',
       'listRelatedAccountGroupMemberships',
       'searchRelatedAccountGroupMemberships',
@@ -1707,6 +1708,110 @@ export class RecaptchaEnterpriseServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.deleteFirewallPolicy(request, options, callback);
+  }
+  /**
+   * Reorders all firewall policies.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project to list the policies for, in the format
+   *   `projects/{project}`.
+   * @param {string[]} request.names
+   *   Required. A list containing all policy names, in the new order. Each name
+   *   is in the format `projects/{project}/firewallpolicies/{firewallpolicy}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse|ReorderFirewallPoliciesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.reorder_firewall_policies.js</caption>
+   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ReorderFirewallPolicies_async
+   */
+  reorderFirewallPolicies(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  reorderFirewallPolicies(
+    request: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  reorderFirewallPolicies(
+    request: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  reorderFirewallPolicies(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+          | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.reorderFirewallPolicies(
+      request,
+      options,
+      callback
+    );
   }
 
   /**

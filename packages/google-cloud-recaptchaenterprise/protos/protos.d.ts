@@ -257,6 +257,20 @@ export namespace google {
                     public deleteFirewallPolicy(request: google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest): Promise<google.protobuf.Empty>;
 
                     /**
+                     * Calls ReorderFirewallPolicies.
+                     * @param request ReorderFirewallPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ReorderFirewallPoliciesResponse
+                     */
+                    public reorderFirewallPolicies(request: google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ReorderFirewallPoliciesCallback): void;
+
+                    /**
+                     * Calls ReorderFirewallPolicies.
+                     * @param request ReorderFirewallPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public reorderFirewallPolicies(request: google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest): Promise<google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse>;
+
+                    /**
                      * Calls ListRelatedAccountGroups.
                      * @param request ListRelatedAccountGroupsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListRelatedAccountGroupsResponse
@@ -405,6 +419,13 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteFirewallPolicyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|reorderFirewallPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ReorderFirewallPoliciesResponse
+                     */
+                    type ReorderFirewallPoliciesCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|listRelatedAccountGroups}.
@@ -4913,6 +4934,200 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteFirewallPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReorderFirewallPoliciesRequest. */
+                interface IReorderFirewallPoliciesRequest {
+
+                    /** ReorderFirewallPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ReorderFirewallPoliciesRequest names */
+                    names?: (string[]|null);
+                }
+
+                /** Represents a ReorderFirewallPoliciesRequest. */
+                class ReorderFirewallPoliciesRequest implements IReorderFirewallPoliciesRequest {
+
+                    /**
+                     * Constructs a new ReorderFirewallPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest);
+
+                    /** ReorderFirewallPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ReorderFirewallPoliciesRequest names. */
+                    public names: string[];
+
+                    /**
+                     * Creates a new ReorderFirewallPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReorderFirewallPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest): google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ReorderFirewallPoliciesRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest.verify|verify} messages.
+                     * @param message ReorderFirewallPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReorderFirewallPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest.verify|verify} messages.
+                     * @param message ReorderFirewallPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReorderFirewallPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReorderFirewallPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest;
+
+                    /**
+                     * Decodes a ReorderFirewallPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReorderFirewallPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest;
+
+                    /**
+                     * Verifies a ReorderFirewallPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReorderFirewallPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReorderFirewallPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ReorderFirewallPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ReorderFirewallPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReorderFirewallPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReorderFirewallPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReorderFirewallPoliciesResponse. */
+                interface IReorderFirewallPoliciesResponse {
+                }
+
+                /** Represents a ReorderFirewallPoliciesResponse. */
+                class ReorderFirewallPoliciesResponse implements IReorderFirewallPoliciesResponse {
+
+                    /**
+                     * Constructs a new ReorderFirewallPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse);
+
+                    /**
+                     * Creates a new ReorderFirewallPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReorderFirewallPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse): google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ReorderFirewallPoliciesResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse.verify|verify} messages.
+                     * @param message ReorderFirewallPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReorderFirewallPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse.verify|verify} messages.
+                     * @param message ReorderFirewallPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IReorderFirewallPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReorderFirewallPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReorderFirewallPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse;
+
+                    /**
+                     * Decodes a ReorderFirewallPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReorderFirewallPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse;
+
+                    /**
+                     * Verifies a ReorderFirewallPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReorderFirewallPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReorderFirewallPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ReorderFirewallPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ReorderFirewallPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReorderFirewallPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReorderFirewallPoliciesResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
