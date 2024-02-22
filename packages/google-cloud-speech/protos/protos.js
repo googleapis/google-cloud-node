@@ -34124,6 +34124,796 @@
                         return InlineOutputConfig;
                     })();
     
+                    v2.NativeOutputFileFormatConfig = (function() {
+    
+                        /**
+                         * Properties of a NativeOutputFileFormatConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @interface INativeOutputFileFormatConfig
+                         */
+    
+                        /**
+                         * Constructs a new NativeOutputFileFormatConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a NativeOutputFileFormatConfig.
+                         * @implements INativeOutputFileFormatConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v2.INativeOutputFileFormatConfig=} [properties] Properties to set
+                         */
+                        function NativeOutputFileFormatConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new NativeOutputFileFormatConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.NativeOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.INativeOutputFileFormatConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.NativeOutputFileFormatConfig} NativeOutputFileFormatConfig instance
+                         */
+                        NativeOutputFileFormatConfig.create = function create(properties) {
+                            return new NativeOutputFileFormatConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NativeOutputFileFormatConfig message. Does not implicitly {@link google.cloud.speech.v2.NativeOutputFileFormatConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.NativeOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.INativeOutputFileFormatConfig} message NativeOutputFileFormatConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NativeOutputFileFormatConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NativeOutputFileFormatConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.NativeOutputFileFormatConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.NativeOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.INativeOutputFileFormatConfig} message NativeOutputFileFormatConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NativeOutputFileFormatConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NativeOutputFileFormatConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.NativeOutputFileFormatConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.NativeOutputFileFormatConfig} NativeOutputFileFormatConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NativeOutputFileFormatConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.NativeOutputFileFormatConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NativeOutputFileFormatConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.NativeOutputFileFormatConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.NativeOutputFileFormatConfig} NativeOutputFileFormatConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NativeOutputFileFormatConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NativeOutputFileFormatConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.NativeOutputFileFormatConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NativeOutputFileFormatConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NativeOutputFileFormatConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.NativeOutputFileFormatConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.NativeOutputFileFormatConfig} NativeOutputFileFormatConfig
+                         */
+                        NativeOutputFileFormatConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.NativeOutputFileFormatConfig)
+                                return object;
+                            return new $root.google.cloud.speech.v2.NativeOutputFileFormatConfig();
+                        };
+    
+                        /**
+                         * Creates a plain object from a NativeOutputFileFormatConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.NativeOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.NativeOutputFileFormatConfig} message NativeOutputFileFormatConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NativeOutputFileFormatConfig.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this NativeOutputFileFormatConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.NativeOutputFileFormatConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NativeOutputFileFormatConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NativeOutputFileFormatConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.NativeOutputFileFormatConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NativeOutputFileFormatConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.NativeOutputFileFormatConfig";
+                        };
+    
+                        return NativeOutputFileFormatConfig;
+                    })();
+    
+                    v2.VttOutputFileFormatConfig = (function() {
+    
+                        /**
+                         * Properties of a VttOutputFileFormatConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IVttOutputFileFormatConfig
+                         */
+    
+                        /**
+                         * Constructs a new VttOutputFileFormatConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a VttOutputFileFormatConfig.
+                         * @implements IVttOutputFileFormatConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IVttOutputFileFormatConfig=} [properties] Properties to set
+                         */
+                        function VttOutputFileFormatConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new VttOutputFileFormatConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.VttOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IVttOutputFileFormatConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.VttOutputFileFormatConfig} VttOutputFileFormatConfig instance
+                         */
+                        VttOutputFileFormatConfig.create = function create(properties) {
+                            return new VttOutputFileFormatConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VttOutputFileFormatConfig message. Does not implicitly {@link google.cloud.speech.v2.VttOutputFileFormatConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.VttOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IVttOutputFileFormatConfig} message VttOutputFileFormatConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VttOutputFileFormatConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VttOutputFileFormatConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.VttOutputFileFormatConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.VttOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IVttOutputFileFormatConfig} message VttOutputFileFormatConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VttOutputFileFormatConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VttOutputFileFormatConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.VttOutputFileFormatConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.VttOutputFileFormatConfig} VttOutputFileFormatConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VttOutputFileFormatConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.VttOutputFileFormatConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VttOutputFileFormatConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.VttOutputFileFormatConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.VttOutputFileFormatConfig} VttOutputFileFormatConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VttOutputFileFormatConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VttOutputFileFormatConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.VttOutputFileFormatConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VttOutputFileFormatConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VttOutputFileFormatConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.VttOutputFileFormatConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.VttOutputFileFormatConfig} VttOutputFileFormatConfig
+                         */
+                        VttOutputFileFormatConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.VttOutputFileFormatConfig)
+                                return object;
+                            return new $root.google.cloud.speech.v2.VttOutputFileFormatConfig();
+                        };
+    
+                        /**
+                         * Creates a plain object from a VttOutputFileFormatConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.VttOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.VttOutputFileFormatConfig} message VttOutputFileFormatConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VttOutputFileFormatConfig.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this VttOutputFileFormatConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.VttOutputFileFormatConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VttOutputFileFormatConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VttOutputFileFormatConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.VttOutputFileFormatConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VttOutputFileFormatConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.VttOutputFileFormatConfig";
+                        };
+    
+                        return VttOutputFileFormatConfig;
+                    })();
+    
+                    v2.SrtOutputFileFormatConfig = (function() {
+    
+                        /**
+                         * Properties of a SrtOutputFileFormatConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @interface ISrtOutputFileFormatConfig
+                         */
+    
+                        /**
+                         * Constructs a new SrtOutputFileFormatConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a SrtOutputFileFormatConfig.
+                         * @implements ISrtOutputFileFormatConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v2.ISrtOutputFileFormatConfig=} [properties] Properties to set
+                         */
+                        function SrtOutputFileFormatConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new SrtOutputFileFormatConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.SrtOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.ISrtOutputFileFormatConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.SrtOutputFileFormatConfig} SrtOutputFileFormatConfig instance
+                         */
+                        SrtOutputFileFormatConfig.create = function create(properties) {
+                            return new SrtOutputFileFormatConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SrtOutputFileFormatConfig message. Does not implicitly {@link google.cloud.speech.v2.SrtOutputFileFormatConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.SrtOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.ISrtOutputFileFormatConfig} message SrtOutputFileFormatConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SrtOutputFileFormatConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SrtOutputFileFormatConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.SrtOutputFileFormatConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.SrtOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.ISrtOutputFileFormatConfig} message SrtOutputFileFormatConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SrtOutputFileFormatConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SrtOutputFileFormatConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.SrtOutputFileFormatConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.SrtOutputFileFormatConfig} SrtOutputFileFormatConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SrtOutputFileFormatConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.SrtOutputFileFormatConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SrtOutputFileFormatConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.SrtOutputFileFormatConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.SrtOutputFileFormatConfig} SrtOutputFileFormatConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SrtOutputFileFormatConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SrtOutputFileFormatConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.SrtOutputFileFormatConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SrtOutputFileFormatConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SrtOutputFileFormatConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.SrtOutputFileFormatConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.SrtOutputFileFormatConfig} SrtOutputFileFormatConfig
+                         */
+                        SrtOutputFileFormatConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.SrtOutputFileFormatConfig)
+                                return object;
+                            return new $root.google.cloud.speech.v2.SrtOutputFileFormatConfig();
+                        };
+    
+                        /**
+                         * Creates a plain object from a SrtOutputFileFormatConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.SrtOutputFileFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.SrtOutputFileFormatConfig} message SrtOutputFileFormatConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SrtOutputFileFormatConfig.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this SrtOutputFileFormatConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.SrtOutputFileFormatConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SrtOutputFileFormatConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SrtOutputFileFormatConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.SrtOutputFileFormatConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SrtOutputFileFormatConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.SrtOutputFileFormatConfig";
+                        };
+    
+                        return SrtOutputFileFormatConfig;
+                    })();
+    
+                    v2.OutputFormatConfig = (function() {
+    
+                        /**
+                         * Properties of an OutputFormatConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IOutputFormatConfig
+                         * @property {google.cloud.speech.v2.INativeOutputFileFormatConfig|null} [native] OutputFormatConfig native
+                         * @property {google.cloud.speech.v2.IVttOutputFileFormatConfig|null} [vtt] OutputFormatConfig vtt
+                         * @property {google.cloud.speech.v2.ISrtOutputFileFormatConfig|null} [srt] OutputFormatConfig srt
+                         */
+    
+                        /**
+                         * Constructs a new OutputFormatConfig.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents an OutputFormatConfig.
+                         * @implements IOutputFormatConfig
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IOutputFormatConfig=} [properties] Properties to set
+                         */
+                        function OutputFormatConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OutputFormatConfig native.
+                         * @member {google.cloud.speech.v2.INativeOutputFileFormatConfig|null|undefined} native
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @instance
+                         */
+                        OutputFormatConfig.prototype.native = null;
+    
+                        /**
+                         * OutputFormatConfig vtt.
+                         * @member {google.cloud.speech.v2.IVttOutputFileFormatConfig|null|undefined} vtt
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @instance
+                         */
+                        OutputFormatConfig.prototype.vtt = null;
+    
+                        /**
+                         * OutputFormatConfig srt.
+                         * @member {google.cloud.speech.v2.ISrtOutputFileFormatConfig|null|undefined} srt
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @instance
+                         */
+                        OutputFormatConfig.prototype.srt = null;
+    
+                        /**
+                         * Creates a new OutputFormatConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IOutputFormatConfig=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.OutputFormatConfig} OutputFormatConfig instance
+                         */
+                        OutputFormatConfig.create = function create(properties) {
+                            return new OutputFormatConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OutputFormatConfig message. Does not implicitly {@link google.cloud.speech.v2.OutputFormatConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IOutputFormatConfig} message OutputFormatConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OutputFormatConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.native != null && Object.hasOwnProperty.call(message, "native"))
+                                $root.google.cloud.speech.v2.NativeOutputFileFormatConfig.encode(message.native, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.vtt != null && Object.hasOwnProperty.call(message, "vtt"))
+                                $root.google.cloud.speech.v2.VttOutputFileFormatConfig.encode(message.vtt, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.srt != null && Object.hasOwnProperty.call(message, "srt"))
+                                $root.google.cloud.speech.v2.SrtOutputFileFormatConfig.encode(message.srt, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OutputFormatConfig message, length delimited. Does not implicitly {@link google.cloud.speech.v2.OutputFormatConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.IOutputFormatConfig} message OutputFormatConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OutputFormatConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OutputFormatConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.OutputFormatConfig} OutputFormatConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OutputFormatConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.OutputFormatConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.native = $root.google.cloud.speech.v2.NativeOutputFileFormatConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vtt = $root.google.cloud.speech.v2.VttOutputFileFormatConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.srt = $root.google.cloud.speech.v2.SrtOutputFileFormatConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OutputFormatConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.OutputFormatConfig} OutputFormatConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OutputFormatConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OutputFormatConfig message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OutputFormatConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.native != null && message.hasOwnProperty("native")) {
+                                var error = $root.google.cloud.speech.v2.NativeOutputFileFormatConfig.verify(message.native);
+                                if (error)
+                                    return "native." + error;
+                            }
+                            if (message.vtt != null && message.hasOwnProperty("vtt")) {
+                                var error = $root.google.cloud.speech.v2.VttOutputFileFormatConfig.verify(message.vtt);
+                                if (error)
+                                    return "vtt." + error;
+                            }
+                            if (message.srt != null && message.hasOwnProperty("srt")) {
+                                var error = $root.google.cloud.speech.v2.SrtOutputFileFormatConfig.verify(message.srt);
+                                if (error)
+                                    return "srt." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OutputFormatConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.OutputFormatConfig} OutputFormatConfig
+                         */
+                        OutputFormatConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.OutputFormatConfig)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.OutputFormatConfig();
+                            if (object.native != null) {
+                                if (typeof object.native !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.OutputFormatConfig.native: object expected");
+                                message.native = $root.google.cloud.speech.v2.NativeOutputFileFormatConfig.fromObject(object.native);
+                            }
+                            if (object.vtt != null) {
+                                if (typeof object.vtt !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.OutputFormatConfig.vtt: object expected");
+                                message.vtt = $root.google.cloud.speech.v2.VttOutputFileFormatConfig.fromObject(object.vtt);
+                            }
+                            if (object.srt != null) {
+                                if (typeof object.srt !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.OutputFormatConfig.srt: object expected");
+                                message.srt = $root.google.cloud.speech.v2.SrtOutputFileFormatConfig.fromObject(object.srt);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OutputFormatConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @static
+                         * @param {google.cloud.speech.v2.OutputFormatConfig} message OutputFormatConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OutputFormatConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.native = null;
+                                object.vtt = null;
+                                object.srt = null;
+                            }
+                            if (message.native != null && message.hasOwnProperty("native"))
+                                object.native = $root.google.cloud.speech.v2.NativeOutputFileFormatConfig.toObject(message.native, options);
+                            if (message.vtt != null && message.hasOwnProperty("vtt"))
+                                object.vtt = $root.google.cloud.speech.v2.VttOutputFileFormatConfig.toObject(message.vtt, options);
+                            if (message.srt != null && message.hasOwnProperty("srt"))
+                                object.srt = $root.google.cloud.speech.v2.SrtOutputFileFormatConfig.toObject(message.srt, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OutputFormatConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OutputFormatConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OutputFormatConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.OutputFormatConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OutputFormatConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.OutputFormatConfig";
+                        };
+    
+                        return OutputFormatConfig;
+                    })();
+    
                     v2.RecognitionOutputConfig = (function() {
     
                         /**
@@ -34132,6 +34922,7 @@
                          * @interface IRecognitionOutputConfig
                          * @property {google.cloud.speech.v2.IGcsOutputConfig|null} [gcsOutputConfig] RecognitionOutputConfig gcsOutputConfig
                          * @property {google.cloud.speech.v2.IInlineOutputConfig|null} [inlineResponseConfig] RecognitionOutputConfig inlineResponseConfig
+                         * @property {google.cloud.speech.v2.IOutputFormatConfig|null} [outputFormatConfig] RecognitionOutputConfig outputFormatConfig
                          */
     
                         /**
@@ -34164,6 +34955,14 @@
                          * @instance
                          */
                         RecognitionOutputConfig.prototype.inlineResponseConfig = null;
+    
+                        /**
+                         * RecognitionOutputConfig outputFormatConfig.
+                         * @member {google.cloud.speech.v2.IOutputFormatConfig|null|undefined} outputFormatConfig
+                         * @memberof google.cloud.speech.v2.RecognitionOutputConfig
+                         * @instance
+                         */
+                        RecognitionOutputConfig.prototype.outputFormatConfig = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -34207,6 +35006,8 @@
                                 $root.google.cloud.speech.v2.GcsOutputConfig.encode(message.gcsOutputConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.inlineResponseConfig != null && Object.hasOwnProperty.call(message, "inlineResponseConfig"))
                                 $root.google.cloud.speech.v2.InlineOutputConfig.encode(message.inlineResponseConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.outputFormatConfig != null && Object.hasOwnProperty.call(message, "outputFormatConfig"))
+                                $root.google.cloud.speech.v2.OutputFormatConfig.encode(message.outputFormatConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -34247,6 +35048,10 @@
                                     }
                                 case 2: {
                                         message.inlineResponseConfig = $root.google.cloud.speech.v2.InlineOutputConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.outputFormatConfig = $root.google.cloud.speech.v2.OutputFormatConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -34303,6 +35108,11 @@
                                         return "inlineResponseConfig." + error;
                                 }
                             }
+                            if (message.outputFormatConfig != null && message.hasOwnProperty("outputFormatConfig")) {
+                                var error = $root.google.cloud.speech.v2.OutputFormatConfig.verify(message.outputFormatConfig);
+                                if (error)
+                                    return "outputFormatConfig." + error;
+                            }
                             return null;
                         };
     
@@ -34328,6 +35138,11 @@
                                     throw TypeError(".google.cloud.speech.v2.RecognitionOutputConfig.inlineResponseConfig: object expected");
                                 message.inlineResponseConfig = $root.google.cloud.speech.v2.InlineOutputConfig.fromObject(object.inlineResponseConfig);
                             }
+                            if (object.outputFormatConfig != null) {
+                                if (typeof object.outputFormatConfig !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.RecognitionOutputConfig.outputFormatConfig: object expected");
+                                message.outputFormatConfig = $root.google.cloud.speech.v2.OutputFormatConfig.fromObject(object.outputFormatConfig);
+                            }
                             return message;
                         };
     
@@ -34344,6 +35159,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.outputFormatConfig = null;
                             if (message.gcsOutputConfig != null && message.hasOwnProperty("gcsOutputConfig")) {
                                 object.gcsOutputConfig = $root.google.cloud.speech.v2.GcsOutputConfig.toObject(message.gcsOutputConfig, options);
                                 if (options.oneofs)
@@ -34354,6 +35171,8 @@
                                 if (options.oneofs)
                                     object.output = "inlineResponseConfig";
                             }
+                            if (message.outputFormatConfig != null && message.hasOwnProperty("outputFormatConfig"))
+                                object.outputFormatConfig = $root.google.cloud.speech.v2.OutputFormatConfig.toObject(message.outputFormatConfig, options);
                             return object;
                         };
     
@@ -34920,6 +35739,8 @@
                          * @memberof google.cloud.speech.v2
                          * @interface ICloudStorageResult
                          * @property {string|null} [uri] CloudStorageResult uri
+                         * @property {string|null} [vttFormatUri] CloudStorageResult vttFormatUri
+                         * @property {string|null} [srtFormatUri] CloudStorageResult srtFormatUri
                          */
     
                         /**
@@ -34944,6 +35765,22 @@
                          * @instance
                          */
                         CloudStorageResult.prototype.uri = "";
+    
+                        /**
+                         * CloudStorageResult vttFormatUri.
+                         * @member {string} vttFormatUri
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @instance
+                         */
+                        CloudStorageResult.prototype.vttFormatUri = "";
+    
+                        /**
+                         * CloudStorageResult srtFormatUri.
+                         * @member {string} srtFormatUri
+                         * @memberof google.cloud.speech.v2.CloudStorageResult
+                         * @instance
+                         */
+                        CloudStorageResult.prototype.srtFormatUri = "";
     
                         /**
                          * Creates a new CloudStorageResult instance using the specified properties.
@@ -34971,6 +35808,10 @@
                                 writer = $Writer.create();
                             if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.vttFormatUri != null && Object.hasOwnProperty.call(message, "vttFormatUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.vttFormatUri);
+                            if (message.srtFormatUri != null && Object.hasOwnProperty.call(message, "srtFormatUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.srtFormatUri);
                             return writer;
                         };
     
@@ -35007,6 +35848,14 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.uri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vttFormatUri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.srtFormatUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -35047,6 +35896,12 @@
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 if (!$util.isString(message.uri))
                                     return "uri: string expected";
+                            if (message.vttFormatUri != null && message.hasOwnProperty("vttFormatUri"))
+                                if (!$util.isString(message.vttFormatUri))
+                                    return "vttFormatUri: string expected";
+                            if (message.srtFormatUri != null && message.hasOwnProperty("srtFormatUri"))
+                                if (!$util.isString(message.srtFormatUri))
+                                    return "srtFormatUri: string expected";
                             return null;
                         };
     
@@ -35064,6 +35919,10 @@
                             var message = new $root.google.cloud.speech.v2.CloudStorageResult();
                             if (object.uri != null)
                                 message.uri = String(object.uri);
+                            if (object.vttFormatUri != null)
+                                message.vttFormatUri = String(object.vttFormatUri);
+                            if (object.srtFormatUri != null)
+                                message.srtFormatUri = String(object.srtFormatUri);
                             return message;
                         };
     
@@ -35080,10 +35939,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.uri = "";
+                                object.vttFormatUri = "";
+                                object.srtFormatUri = "";
+                            }
                             if (message.uri != null && message.hasOwnProperty("uri"))
                                 object.uri = message.uri;
+                            if (message.vttFormatUri != null && message.hasOwnProperty("vttFormatUri"))
+                                object.vttFormatUri = message.vttFormatUri;
+                            if (message.srtFormatUri != null && message.hasOwnProperty("srtFormatUri"))
+                                object.srtFormatUri = message.srtFormatUri;
                             return object;
                         };
     
@@ -35123,6 +35989,8 @@
                          * @memberof google.cloud.speech.v2
                          * @interface IInlineResult
                          * @property {google.cloud.speech.v2.IBatchRecognizeResults|null} [transcript] InlineResult transcript
+                         * @property {string|null} [vttCaptions] InlineResult vttCaptions
+                         * @property {string|null} [srtCaptions] InlineResult srtCaptions
                          */
     
                         /**
@@ -35147,6 +36015,22 @@
                          * @instance
                          */
                         InlineResult.prototype.transcript = null;
+    
+                        /**
+                         * InlineResult vttCaptions.
+                         * @member {string} vttCaptions
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @instance
+                         */
+                        InlineResult.prototype.vttCaptions = "";
+    
+                        /**
+                         * InlineResult srtCaptions.
+                         * @member {string} srtCaptions
+                         * @memberof google.cloud.speech.v2.InlineResult
+                         * @instance
+                         */
+                        InlineResult.prototype.srtCaptions = "";
     
                         /**
                          * Creates a new InlineResult instance using the specified properties.
@@ -35174,6 +36058,10 @@
                                 writer = $Writer.create();
                             if (message.transcript != null && Object.hasOwnProperty.call(message, "transcript"))
                                 $root.google.cloud.speech.v2.BatchRecognizeResults.encode(message.transcript, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.vttCaptions != null && Object.hasOwnProperty.call(message, "vttCaptions"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.vttCaptions);
+                            if (message.srtCaptions != null && Object.hasOwnProperty.call(message, "srtCaptions"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.srtCaptions);
                             return writer;
                         };
     
@@ -35210,6 +36098,14 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.transcript = $root.google.cloud.speech.v2.BatchRecognizeResults.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vttCaptions = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.srtCaptions = reader.string();
                                         break;
                                     }
                                 default:
@@ -35252,6 +36148,12 @@
                                 if (error)
                                     return "transcript." + error;
                             }
+                            if (message.vttCaptions != null && message.hasOwnProperty("vttCaptions"))
+                                if (!$util.isString(message.vttCaptions))
+                                    return "vttCaptions: string expected";
+                            if (message.srtCaptions != null && message.hasOwnProperty("srtCaptions"))
+                                if (!$util.isString(message.srtCaptions))
+                                    return "srtCaptions: string expected";
                             return null;
                         };
     
@@ -35272,6 +36174,10 @@
                                     throw TypeError(".google.cloud.speech.v2.InlineResult.transcript: object expected");
                                 message.transcript = $root.google.cloud.speech.v2.BatchRecognizeResults.fromObject(object.transcript);
                             }
+                            if (object.vttCaptions != null)
+                                message.vttCaptions = String(object.vttCaptions);
+                            if (object.srtCaptions != null)
+                                message.srtCaptions = String(object.srtCaptions);
                             return message;
                         };
     
@@ -35288,10 +36194,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.transcript = null;
+                                object.vttCaptions = "";
+                                object.srtCaptions = "";
+                            }
                             if (message.transcript != null && message.hasOwnProperty("transcript"))
                                 object.transcript = $root.google.cloud.speech.v2.BatchRecognizeResults.toObject(message.transcript, options);
+                            if (message.vttCaptions != null && message.hasOwnProperty("vttCaptions"))
+                                object.vttCaptions = message.vttCaptions;
+                            if (message.srtCaptions != null && message.hasOwnProperty("srtCaptions"))
+                                object.srtCaptions = message.srtCaptions;
                             return object;
                         };
     
