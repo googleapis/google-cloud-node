@@ -1760,6 +1760,10 @@
                             "consumerInfo": {
                               "type": "ConsumerInfo",
                               "id": 2
+                            },
+                            "apiKeyUid": {
+                              "type": "string",
+                              "id": 5
                             }
                           }
                         },
