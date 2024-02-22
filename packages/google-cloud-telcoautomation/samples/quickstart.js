@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+/ Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
+
 'use strict';
 
-function main(name) {
-  // [START telcoautomation_quickstart]
+function main(parent) {
+  // [START telcoautomation_v1_generated_TelcoAutomation_ListPublicBlueprints_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -27,16 +29,18 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the deployment to list revisions for.
+   *  Required. Parent value of public blueprint.
+   *  Format should be -
+   *  "projects/{project_id}/locations/{location_name}".
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of revisions to return per page.
+   *  Optional. Requested page size. Server may return fewer items than
+   *  requested. If unspecified, server will pick an appropriate default.
    */
   // const pageSize = 1234
   /**
-   *  Optional. The page token, received from a previous ListDeploymentRevisions
-   *  call Provide this to retrieve the subsequent page.
+   *  Optional. A token identifying a page of results the server should return.
    */
   // const pageToken = 'abc123'
 
@@ -46,22 +50,21 @@ function main(name) {
   // Instantiates a client
   const telcoautomationClient = new TelcoAutomationClient();
 
-  async function callListDeploymentRevisions() {
+  async function callListPublicBlueprints() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const iterable =
-      telcoautomationClient.listDeploymentRevisionsAsync(request);
+    const iterable = telcoautomationClient.listPublicBlueprintsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
-  callListDeploymentRevisions();
-  // [END telcoautomation_quickstart]
+  callListPublicBlueprints();
+  // [END telcoautomation_v1_generated_TelcoAutomation_ListPublicBlueprints_async]
 }
 
 process.on('unhandledRejection', err => {
