@@ -95,7 +95,8 @@ npm install @google-cloud/cloudcontrolspartner
 // const interval = {}
 
 // Imports the Cloudcontrolspartner library
-const {CloudControlsPartnerMonitoringClient} = require('@google-cloud/cloudcontrolspartner').v1beta;
+const {CloudControlsPartnerMonitoringClient} =
+  require('@google-cloud/cloudcontrolspartner').v1beta;
 
 // Instantiates a client
 const cloudcontrolspartnerClient = new CloudControlsPartnerMonitoringClient();
@@ -109,7 +110,7 @@ async function callListViolations() {
   // Run request
   const iterable = cloudcontrolspartnerClient.listViolationsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
