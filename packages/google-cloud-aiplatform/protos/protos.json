@@ -6074,6 +6074,10 @@
                         "versionColumnName": {
                           "type": "string",
                           "id": 106
+                        },
+                        "pointOfContact": {
+                          "type": "string",
+                          "id": 107
                         }
                       },
                       "nested": {
@@ -31409,6 +31413,10 @@
                         "versionColumnName": {
                           "type": "string",
                           "id": 106
+                        },
+                        "pointOfContact": {
+                          "type": "string",
+                          "id": 107
                         }
                       },
                       "nested": {
@@ -43891,6 +43899,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "rayMetricSpec": {
+                          "type": "RayMetricSpec",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -43918,6 +43933,17 @@
                         "serviceAccount": {
                           "type": "string",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RayMetricSpec": {
+                      "fields": {
+                        "disabled": {
+                          "type": "bool",
+                          "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
