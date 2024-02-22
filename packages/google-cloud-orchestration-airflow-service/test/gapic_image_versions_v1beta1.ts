@@ -672,5 +672,196 @@ describe('v1beta1.ImageVersionsClient', () => {
         );
       });
     });
+
+    describe('userWorkloadsConfigMap', () => {
+      const fakePath = '/rendered/path/userWorkloadsConfigMap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        environment: 'environmentValue',
+        user_workloads_config_map: 'userWorkloadsConfigMapValue',
+      };
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.userWorkloadsConfigMapPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userWorkloadsConfigMapPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userWorkloadsConfigMapPath', () => {
+        const result = client.userWorkloadsConfigMapPath(
+          'projectValue',
+          'locationValue',
+          'environmentValue',
+          'userWorkloadsConfigMapValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchProjectFromUserWorkloadsConfigMapName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchLocationFromUserWorkloadsConfigMapName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchEnvironmentFromUserWorkloadsConfigMapName(fakePath);
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName', () => {
+        const result =
+          client.matchUserWorkloadsConfigMapFromUserWorkloadsConfigMapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'userWorkloadsConfigMapValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsConfigMapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('userWorkloadsSecret', () => {
+      const fakePath = '/rendered/path/userWorkloadsSecret';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        environment: 'environmentValue',
+        user_workloads_secret: 'userWorkloadsSecretValue',
+      };
+      const client = new imageversionsModule.v1beta1.ImageVersionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.userWorkloadsSecretPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userWorkloadsSecretPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userWorkloadsSecretPath', () => {
+        const result = client.userWorkloadsSecretPath(
+          'projectValue',
+          'locationValue',
+          'environmentValue',
+          'userWorkloadsSecretValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromUserWorkloadsSecretName', () => {
+        const result = client.matchProjectFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromUserWorkloadsSecretName', () => {
+        const result =
+          client.matchLocationFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromUserWorkloadsSecretName', () => {
+        const result =
+          client.matchEnvironmentFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchUserWorkloadsSecretFromUserWorkloadsSecretName', () => {
+        const result =
+          client.matchUserWorkloadsSecretFromUserWorkloadsSecretName(fakePath);
+        assert.strictEqual(result, 'userWorkloadsSecretValue');
+        assert(
+          (
+            client.pathTemplates.userWorkloadsSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
   });
 });
