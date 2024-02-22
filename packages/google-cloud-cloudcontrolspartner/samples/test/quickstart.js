@@ -18,8 +18,9 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/cloudcontrolspartner').v1beta;
-const cloudcontrolspartnerClient = new Client();
+const {CloudControlsPartnerMonitoringClient} =
+    require('@google-cloud/cloudcontrolspartner').v1beta;
+const cloudcontrolspartnerClient = new CloudControlsPartnerMonitoringClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
