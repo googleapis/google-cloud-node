@@ -602,6 +602,39 @@
                              * @variation 2
                              */
     
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.datatransfer.v1.DataTransferService|unenrollDataSources}.
+                             * @memberof google.cloud.bigquery.datatransfer.v1.DataTransferService
+                             * @typedef UnenrollDataSourcesCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls UnenrollDataSources.
+                             * @function unenrollDataSources
+                             * @memberof google.cloud.bigquery.datatransfer.v1.DataTransferService
+                             * @instance
+                             * @param {google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest} request UnenrollDataSourcesRequest message or plain object
+                             * @param {google.cloud.bigquery.datatransfer.v1.DataTransferService.UnenrollDataSourcesCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(DataTransferService.prototype.unenrollDataSources = function unenrollDataSources(request, callback) {
+                                return this.rpcCall(unenrollDataSources, $root.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "UnenrollDataSources" });
+    
+                            /**
+                             * Calls UnenrollDataSources.
+                             * @function unenrollDataSources
+                             * @memberof google.cloud.bigquery.datatransfer.v1.DataTransferService
+                             * @instance
+                             * @param {google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest} request UnenrollDataSourcesRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
                             return DataTransferService;
                         })();
     
@@ -7780,6 +7813,249 @@
                             };
     
                             return EnrollDataSourcesRequest;
+                        })();
+    
+                        v1.UnenrollDataSourcesRequest = (function() {
+    
+                            /**
+                             * Properties of an UnenrollDataSourcesRequest.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @interface IUnenrollDataSourcesRequest
+                             * @property {string|null} [name] UnenrollDataSourcesRequest name
+                             * @property {Array.<string>|null} [dataSourceIds] UnenrollDataSourcesRequest dataSourceIds
+                             */
+    
+                            /**
+                             * Constructs a new UnenrollDataSourcesRequest.
+                             * @memberof google.cloud.bigquery.datatransfer.v1
+                             * @classdesc Represents an UnenrollDataSourcesRequest.
+                             * @implements IUnenrollDataSourcesRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest=} [properties] Properties to set
+                             */
+                            function UnenrollDataSourcesRequest(properties) {
+                                this.dataSourceIds = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UnenrollDataSourcesRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @instance
+                             */
+                            UnenrollDataSourcesRequest.prototype.name = "";
+    
+                            /**
+                             * UnenrollDataSourcesRequest dataSourceIds.
+                             * @member {Array.<string>} dataSourceIds
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @instance
+                             */
+                            UnenrollDataSourcesRequest.prototype.dataSourceIds = $util.emptyArray;
+    
+                            /**
+                             * Creates a new UnenrollDataSourcesRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest} UnenrollDataSourcesRequest instance
+                             */
+                            UnenrollDataSourcesRequest.create = function create(properties) {
+                                return new UnenrollDataSourcesRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UnenrollDataSourcesRequest message. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest} message UnenrollDataSourcesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UnenrollDataSourcesRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.dataSourceIds != null && message.dataSourceIds.length)
+                                    for (var i = 0; i < message.dataSourceIds.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataSourceIds[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UnenrollDataSourcesRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.IUnenrollDataSourcesRequest} message UnenrollDataSourcesRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UnenrollDataSourcesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UnenrollDataSourcesRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest} UnenrollDataSourcesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UnenrollDataSourcesRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.dataSourceIds && message.dataSourceIds.length))
+                                                message.dataSourceIds = [];
+                                            message.dataSourceIds.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UnenrollDataSourcesRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest} UnenrollDataSourcesRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UnenrollDataSourcesRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UnenrollDataSourcesRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UnenrollDataSourcesRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.dataSourceIds != null && message.hasOwnProperty("dataSourceIds")) {
+                                    if (!Array.isArray(message.dataSourceIds))
+                                        return "dataSourceIds: array expected";
+                                    for (var i = 0; i < message.dataSourceIds.length; ++i)
+                                        if (!$util.isString(message.dataSourceIds[i]))
+                                            return "dataSourceIds: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UnenrollDataSourcesRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest} UnenrollDataSourcesRequest
+                             */
+                            UnenrollDataSourcesRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.dataSourceIds) {
+                                    if (!Array.isArray(object.dataSourceIds))
+                                        throw TypeError(".google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest.dataSourceIds: array expected");
+                                    message.dataSourceIds = [];
+                                    for (var i = 0; i < object.dataSourceIds.length; ++i)
+                                        message.dataSourceIds[i] = String(object.dataSourceIds[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UnenrollDataSourcesRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @static
+                             * @param {google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest} message UnenrollDataSourcesRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UnenrollDataSourcesRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.dataSourceIds = [];
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.dataSourceIds && message.dataSourceIds.length) {
+                                    object.dataSourceIds = [];
+                                    for (var j = 0; j < message.dataSourceIds.length; ++j)
+                                        object.dataSourceIds[j] = message.dataSourceIds[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UnenrollDataSourcesRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UnenrollDataSourcesRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UnenrollDataSourcesRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UnenrollDataSourcesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest";
+                            };
+    
+                            return UnenrollDataSourcesRequest;
                         })();
     
                         /**

@@ -65,6 +65,11 @@
                 "enrollDataSources"
               ]
             },
+            "UnenrollDataSources": {
+              "methods": [
+                "unenrollDataSources"
+              ]
+            },
             "ListDataSources": {
               "methods": [
                 "listDataSources",
@@ -151,6 +156,11 @@
             "EnrollDataSources": {
               "methods": [
                 "enrollDataSources"
+              ]
+            },
+            "UnenrollDataSources": {
+              "methods": [
+                "unenrollDataSources"
               ]
             },
             "ListDataSources": {
