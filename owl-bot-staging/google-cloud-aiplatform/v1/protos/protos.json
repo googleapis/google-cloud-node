@@ -6074,6 +6074,10 @@
                         "versionColumnName": {
                           "type": "string",
                           "id": 106
+                        },
+                        "pointOfContact": {
+                          "type": "string",
+                          "id": 107
                         }
                       },
                       "nested": {
