@@ -16,7 +16,7 @@
     "@google-cloud/data-fusion": "^3.0.1"
   },
   "devDependencies": {
-    "c8": "^7.1.0",
+    "c9": "^9.0.0",
     "chai": "^4.2.0",
     "mocha": "^9.0.0"
   }

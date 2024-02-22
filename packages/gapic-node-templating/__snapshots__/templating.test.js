@@ -61,7 +61,7 @@ exports['tests for templates it should create the templates in the directory 3']
     "@google-cloud/kms": "0.0.0"
   },
   "devDependencies": {
-    "c8": "^8.0.0",
+    "c9": "^9.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0"
   }
