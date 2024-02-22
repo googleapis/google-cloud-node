@@ -18,7 +18,7 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {ConferenceRecordsServiceClient} = require('@google-apps/meet').v2beta;
+const {ConferenceRecordsServiceClient} = require('@google-apps/meet').v2;
 const meetClient = new ConferenceRecordsServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
