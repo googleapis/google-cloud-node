@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 111,
                     "type": "FULL"
                 }
             ],
@@ -42,6 +42,10 @@
                     {
                         "name": "enable_usps_cass",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "session_token",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.maps.addressvalidation.v1.ValidateAddressResponse",

@@ -264,6 +264,13 @@
                         "enableUspsCass": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "sessionToken": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -536,6 +543,42 @@
                         "dpvNoStat": {
                           "type": "string",
                           "id": 8
+                        },
+                        "dpvNoStatReasonCode": {
+                          "type": "int32",
+                          "id": 29
+                        },
+                        "dpvDrop": {
+                          "type": "string",
+                          "id": 30
+                        },
+                        "dpvThrowback": {
+                          "type": "string",
+                          "id": 31
+                        },
+                        "dpvNonDeliveryDays": {
+                          "type": "string",
+                          "id": 32
+                        },
+                        "dpvNonDeliveryDaysValues": {
+                          "type": "int32",
+                          "id": 33
+                        },
+                        "dpvNoSecureLocation": {
+                          "type": "string",
+                          "id": 34
+                        },
+                        "dpvPbsa": {
+                          "type": "string",
+                          "id": 35
+                        },
+                        "dpvDoorNotAccessible": {
+                          "type": "string",
+                          "id": 36
+                        },
+                        "dpvEnhancedDeliveryCode": {
+                          "type": "string",
+                          "id": 37
                         },
                         "carrierRoute": {
                           "type": "string",
