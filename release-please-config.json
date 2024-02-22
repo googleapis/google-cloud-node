@@ -163,7 +163,8 @@
     "packages/google-shopping-css": {},
     "packages/google-api-cloudquotas": {},
     "packages/google-cloud-redis-cluster": {},
-    "packages/google-cloud-servicehealth": {}
+    "packages/google-cloud-servicehealth": {},
+    "packages/google-apps-events-subscriptions": {}
   },
   "plugins": [
     {

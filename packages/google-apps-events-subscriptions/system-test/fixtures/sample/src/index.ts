@@ -16,10 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const SubscriptionsServiceClient = v1.SubscriptionsServiceClient;
-type SubscriptionsServiceClient = v1.SubscriptionsServiceClient;
-export {v1, SubscriptionsServiceClient};
-export default {v1, SubscriptionsServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+import {SubscriptionsServiceClient} from '@google-cloud/subscriptions';
+
+// check that the client class type name can be used
+function doStuffWithSubscriptionsServiceClient(
+  client: SubscriptionsServiceClient
+) {
+  client.close();
+}
+
+function main() {
+  // check that the client instance can be created
+  const subscriptionsServiceClient = new SubscriptionsServiceClient();
+  doStuffWithSubscriptionsServiceClient(subscriptionsServiceClient);
+}
+
+main();
