@@ -29,7 +29,7 @@ describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
-    projectId = await workspaceeventsClient.getProjectId();
+    projectId = await subscriptionsClient.getProjectId();
   });
 
   it('should run quickstart', async () => {
