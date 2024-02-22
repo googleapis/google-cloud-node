@@ -75,6 +75,11 @@
                 "deleteFirewallPolicy"
               ]
             },
+            "ReorderFirewallPolicies": {
+              "methods": [
+                "reorderFirewallPolicies"
+              ]
+            },
             "ListKeys": {
               "methods": [
                 "listKeys",
@@ -178,6 +183,11 @@
             "DeleteFirewallPolicy": {
               "methods": [
                 "deleteFirewallPolicy"
+              ]
+            },
+            "ReorderFirewallPolicies": {
+              "methods": [
+                "reorderFirewallPolicies"
               ]
             },
             "ListKeys": {

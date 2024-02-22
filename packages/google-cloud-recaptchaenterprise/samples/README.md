@@ -26,6 +26,7 @@
   * [Recaptcha_enterprise_service.list_related_account_group_memberships](#recaptcha_enterprise_service.list_related_account_group_memberships)
   * [Recaptcha_enterprise_service.list_related_account_groups](#recaptcha_enterprise_service.list_related_account_groups)
   * [Recaptcha_enterprise_service.migrate_key](#recaptcha_enterprise_service.migrate_key)
+  * [Recaptcha_enterprise_service.reorder_firewall_policies](#recaptcha_enterprise_service.reorder_firewall_policies)
   * [Recaptcha_enterprise_service.retrieve_legacy_secret_key](#recaptcha_enterprise_service.retrieve_legacy_secret_key)
   * [Recaptcha_enterprise_service.search_related_account_group_memberships](#recaptcha_enterprise_service.search_related_account_group_memberships)
   * [Recaptcha_enterprise_service.update_firewall_policy](#recaptcha_enterprise_service.update_firewall_policy)
@@ -285,6 +286,23 @@ __Usage:__
 
 
 `node packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.migrate_key.js`
+
+
+-----
+
+
+
+
+### Recaptcha_enterprise_service.reorder_firewall_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.reorder_firewall_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.reorder_firewall_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.reorder_firewall_policies.js`
 
 
 -----

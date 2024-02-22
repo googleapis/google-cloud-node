@@ -304,6 +304,26 @@
                             }
                           ]
                         },
+                        "ReorderFirewallPolicies": {
+                          "requestType": "ReorderFirewallPoliciesRequest",
+                          "responseType": "ReorderFirewallPoliciesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/firewallpolicies:reorder",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,names"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/firewallpolicies:reorder",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
+                            }
+                          ]
+                        },
                         "ListRelatedAccountGroups": {
                           "requestType": "ListRelatedAccountGroupsRequest",
                           "responseType": "ListRelatedAccountGroupsResponse",
@@ -1616,6 +1636,30 @@
                           }
                         }
                       }
+                    },
+                    "ReorderFirewallPoliciesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/FirewallPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "ReorderFirewallPoliciesResponse": {
+                      "fields": {}
                     },
                     "MigrateKeyRequest": {
                       "fields": {
