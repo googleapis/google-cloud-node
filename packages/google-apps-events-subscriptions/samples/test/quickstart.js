@@ -34,7 +34,7 @@ describe('Quickstart', () => {
 
   it('should run quickstart', async () => {
     const output = execSync(
-      `node ./quickstart.js event_types:"google.workspace.chat.membership.v1.updated"`,
+      'node ./quickstart.js event_types:"google.workspace.chat.membership.v1.updated"',
       {cwd}
     );
     assert(output !== null);
