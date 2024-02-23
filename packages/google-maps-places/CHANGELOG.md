@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.2.0...places-v1.3.0) (2024-02-22)
+
+
+### Features
+
+* [places] add AutoComplete API ([#5056](https://github.com/googleapis/google-cloud-node/issues/5056)) ([c53c6ea](https://github.com/googleapis/google-cloud-node/commit/c53c6ea8311a921b16a4e3b3c4d3d941afd82245))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.1.0...places-v1.2.0) (2024-02-09)
 
 

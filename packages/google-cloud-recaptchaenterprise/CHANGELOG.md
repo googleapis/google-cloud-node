@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.3.0...recaptcha-enterprise-v5.4.0) (2024-02-22)
+
+
+### Features
+
+* [recaptchaenterprise] Add an API method for reordering firewall policies ([#5050](https://github.com/googleapis/google-cloud-node/issues/5050)) ([5c58e55](https://github.com/googleapis/google-cloud-node/commit/5c58e553b1d0411715e160754787ded4b33d099c))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.2.0...recaptcha-enterprise-v5.3.0) (2024-02-09)
 
 
