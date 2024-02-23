@@ -105,7 +105,7 @@ async function callListInstances() {
   // Run request
   const iterable = parallelstoreClient.listInstancesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
