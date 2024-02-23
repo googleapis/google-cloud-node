@@ -7201,7 +7201,8 @@
                       "oneofs": {
                         "keyOneof": {
                           "oneof": [
-                            "key"
+                            "key",
+                            "compositeKey"
                           ]
                         }
                       },
@@ -7209,6 +7210,21 @@
                         "key": {
                           "type": "string",
                           "id": 1
+                        },
+                        "compositeKey": {
+                          "type": "CompositeKey",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "CompositeKey": {
+                          "fields": {
+                            "parts": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
@@ -32726,7 +32742,8 @@
                       "oneofs": {
                         "keyOneof": {
                           "oneof": [
-                            "key"
+                            "key",
+                            "compositeKey"
                           ]
                         }
                       },
@@ -32734,6 +32751,21 @@
                         "key": {
                           "type": "string",
                           "id": 1
+                        },
+                        "compositeKey": {
+                          "type": "CompositeKey",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "CompositeKey": {
+                          "fields": {
+                            "parts": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
