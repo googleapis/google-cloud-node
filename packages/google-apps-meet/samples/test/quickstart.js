@@ -26,13 +26,10 @@ const cwd = path.join(__dirname, '..');
 describe('Quickstart', () => {
   let projectId;
 
-  before(async () => {
-  });
+  before(async () => {});
 
   it('should run quickstart', async () => {
-    const output = execSync(
-      `node ./quickstart.js`, {cwd}
-    );
+    const output = execSync('node ./quickstart.js', {cwd});
     assert(output !== null);
   });
 });
