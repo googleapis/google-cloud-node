@@ -18,8 +18,6 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {ConferenceRecordsServiceClient} = require('@google-apps/meet').v2;
-const meetClient = new ConferenceRecordsServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -29,13 +27,11 @@ describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
-    projectId = await meetClient.getProjectId();
   });
 
   it('should run quickstart', async () => {
     const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
-      {cwd}
+      `node ./quickstart.js`, {cwd}
     );
     assert(output !== null);
   });
