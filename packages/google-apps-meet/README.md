@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,64 +53,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-apps/meet
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. Format: `conferenceRecords/{conference_record}`
- */
-// const parent = 'abc123'
-/**
- *  Maximum number of participants to return. The service might return fewer
- *  than this value.
- *  If unspecified, at most 100 participants are returned.
- *  The maximum value is 250; values above 250 are coerced to 250.
- *  Maximum might change in the future.
- */
-// const pageSize = 1234
-/**
- *  Page token returned from previous List Call.
- */
-// const pageToken = 'abc123'
-/**
- *  Optional. User specified filtering condition in EBNF format. The following
- *  are the filterable fields:
- *  * `earliest_start_time`
- *  * `latest_end_time`
- *  For example, `latest_end_time IS NULL` returns active participants in
- *  the conference.
- */
-// const filter = 'abc123'
-
-// Imports the Meet library
-const {ConferenceRecordsServiceClient} = require('@google-apps/meet').v2;
-
-// Instantiates a client
-const meetClient = new ConferenceRecordsServiceClient();
-
-async function callListParticipants() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = meetClient.listParticipantsAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListParticipants();
-
-```
 
 
 
