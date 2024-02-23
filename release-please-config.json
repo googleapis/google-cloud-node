@@ -164,7 +164,8 @@
     "packages/google-api-cloudquotas": {},
     "packages/google-cloud-redis-cluster": {},
     "packages/google-cloud-servicehealth": {},
-    "packages/google-apps-meet": {}
+    "packages/google-apps-meet": {},
+    "packages/google-cloud-parallelstore": {}
   },
   "plugins": [
     {
