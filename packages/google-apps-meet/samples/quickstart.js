@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
+
 'use strict';
 
-function main(parent) {
-  // [START meet_quickstart]
+function main() {
+  // [START meet_v2_generated_ConferenceRecordsService_ListConferenceRecords_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -27,28 +29,25 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Format: `conferenceRecords/{conference_record}`
-   */
-  // const parent = 'abc123'
-  /**
-   *  Maximum number of participants to return. The service might return fewer
-   *  than this value.
-   *  If unspecified, at most 100 participants are returned.
-   *  The maximum value is 250; values above 250 are coerced to 250.
-   *  Maximum might change in the future.
+   *  Optional. Maximum number of conference records to return. The service might
+   *  return fewer than this value. If unspecified, at most 25 conference records
+   *  are returned. The maximum value is 100; values above 100 are coerced to
+   *  100. Maximum might change in the future.
    */
   // const pageSize = 1234
   /**
-   *  Page token returned from previous List Call.
+   *  Optional. Page token returned from previous List Call.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. User specified filtering condition in EBNF format. The following
-   *  are the filterable fields:
-   *  * `earliest_start_time`
-   *  * `latest_end_time`
-   *  For example, `latest_end_time IS NULL` returns active participants in
-   *  the conference.
+   *  Optional. User specified filtering condition in EBNF
+   *  format (https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+   *  The following are the filterable fields:
+   *  * `space.meeting_code`
+   *  * `space.name`
+   *  * `start_time`
+   *  * `end_time`
+   *  For example, `space.meeting_code = "abc-mnop-xyz"`.
    */
   // const filter = 'abc123'
 
@@ -58,21 +57,20 @@ function main(parent) {
   // Instantiates a client
   const meetClient = new ConferenceRecordsServiceClient();
 
-  async function callListParticipants() {
+  async function callListConferenceRecords() {
     // Construct request
     const request = {
-      parent,
     };
 
     // Run request
-    const iterable = meetClient.listParticipantsAsync(request);
+    const iterable = meetClient.listConferenceRecordsAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
-  callListParticipants();
-  // [END meet_quickstart]
+  callListConferenceRecords();
+  // [END meet_v2_generated_ConferenceRecordsService_ListConferenceRecords_async]
 }
 
 process.on('unhandledRejection', err => {
