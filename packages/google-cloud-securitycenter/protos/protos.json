@@ -497,6 +497,10 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 5
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -627,6 +631,10 @@
                           "rule": "repeated",
                           "type": "ExfilResource",
                           "id": 2
+                        },
+                        "totalExfiltratedBytes": {
+                          "type": "int64",
+                          "id": 3
                         }
                       }
                     },
@@ -697,6 +705,24 @@
                         "contents": {
                           "type": "string",
                           "id": 6
+                        },
+                        "diskPath": {
+                          "type": "DiskPath",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "DiskPath": {
+                          "fields": {
+                            "partitionUuid": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "relativePath": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -882,6 +908,11 @@
                           "type": "KernelRootkit",
                           "id": 50
                         },
+                        "orgPolicies": {
+                          "rule": "repeated",
+                          "type": "OrgPolicy",
+                          "id": 51
+                        },
                         "application": {
                           "type": "Application",
                           "id": 53
@@ -889,6 +920,16 @@
                         "backupDisasterRecovery": {
                           "type": "BackupDisasterRecovery",
                           "id": 55
+                        },
+                        "logEntries": {
+                          "rule": "repeated",
+                          "type": "LogEntry",
+                          "id": 57
+                        },
+                        "loadBalancers": {
+                          "rule": "repeated",
+                          "type": "LoadBalancer",
+                          "id": 58
                         }
                       },
                       "nested": {
@@ -994,6 +1035,10 @@
                             "yaraRuleSignature": {
                               "type": "YaraRuleSignature",
                               "id": 7
+                            },
+                            "signatureType": {
+                              "type": "SignatureType",
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -1030,6 +1075,13 @@
                                   "type": "string",
                                   "id": 5
                                 }
+                              }
+                            },
+                            "SignatureType": {
+                              "values": {
+                                "SIGNATURE_TYPE_UNSPECIFIED": 0,
+                                "SIGNATURE_TYPE_PROCESS": 1,
+                                "SIGNATURE_TYPE_FILE": 2
                               }
                             }
                           }
@@ -1107,6 +1159,11 @@
                           "rule": "repeated",
                           "type": "AccessReview",
                           "id": 6
+                        },
+                        "objects": {
+                          "rule": "repeated",
+                          "type": "Object",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -1256,6 +1313,74 @@
                               "id": 7
                             }
                           }
+                        },
+                        "Object": {
+                          "fields": {
+                            "group": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "kind": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "ns": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "containers": {
+                              "rule": "repeated",
+                              "type": "Container",
+                              "id": 5
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "LoadBalancer": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LogEntry": {
+                      "oneofs": {
+                        "logEntry": {
+                          "oneof": [
+                            "cloudLoggingEntry"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "cloudLoggingEntry": {
+                          "type": "CloudLoggingEntry",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CloudLoggingEntry": {
+                      "fields": {
+                        "insertId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "logId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "resourceContainer": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "timestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
                         }
                       }
                     },
@@ -1308,42 +1433,77 @@
                         "Technique": {
                           "values": {
                             "TECHNIQUE_UNSPECIFIED": 0,
-                            "ACTIVE_SCANNING": 1,
-                            "SCANNING_IP_BLOCKS": 2,
-                            "INGRESS_TOOL_TRANSFER": 3,
-                            "NATIVE_API": 4,
-                            "SHARED_MODULES": 5,
+                            "MASQUERADING": 49,
+                            "MATCH_LEGITIMATE_NAME_OR_LOCATION": 50,
+                            "BOOT_OR_LOGON_INITIALIZATION_SCRIPTS": 37,
+                            "STARTUP_ITEMS": 38,
+                            "NETWORK_SERVICE_DISCOVERY": 32,
+                            "PROCESS_DISCOVERY": 56,
                             "COMMAND_AND_SCRIPTING_INTERPRETER": 6,
                             "UNIX_SHELL": 7,
-                            "RESOURCE_HIJACKING": 8,
+                            "PERMISSION_GROUPS_DISCOVERY": 18,
+                            "CLOUD_GROUPS": 19,
+                            "APPLICATION_LAYER_PROTOCOL": 45,
+                            "DNS": 46,
+                            "SOFTWARE_DEPLOYMENT_TOOLS": 47,
+                            "VALID_ACCOUNTS": 14,
+                            "DEFAULT_ACCOUNTS": 35,
+                            "LOCAL_ACCOUNTS": 15,
+                            "CLOUD_ACCOUNTS": 16,
                             "PROXY": 9,
                             "EXTERNAL_PROXY": 10,
                             "MULTI_HOP_PROXY": 11,
-                            "DYNAMIC_RESOLUTION": 12,
-                            "UNSECURED_CREDENTIALS": 13,
-                            "VALID_ACCOUNTS": 14,
-                            "LOCAL_ACCOUNTS": 15,
-                            "CLOUD_ACCOUNTS": 16,
+                            "ACCOUNT_MANIPULATION": 22,
+                            "ADDITIONAL_CLOUD_CREDENTIALS": 40,
+                            "SSH_AUTHORIZED_KEYS": 23,
+                            "ADDITIONAL_CONTAINER_CLUSTER_ROLES": 58,
+                            "INGRESS_TOOL_TRANSFER": 3,
+                            "NATIVE_API": 4,
+                            "BRUTE_FORCE": 44,
+                            "SHARED_MODULES": 5,
+                            "ACCESS_TOKEN_MANIPULATION": 33,
+                            "TOKEN_IMPERSONATION_OR_THEFT": 39,
+                            "EXPLOIT_PUBLIC_FACING_APPLICATION": 27,
+                            "DOMAIN_POLICY_MODIFICATION": 30,
+                            "DATA_DESTRUCTION": 29,
+                            "SERVICE_STOP": 52,
+                            "INHIBIT_SYSTEM_RECOVERY": 36,
+                            "RESOURCE_HIJACKING": 8,
                             "NETWORK_DENIAL_OF_SERVICE": 17,
-                            "PERMISSION_GROUPS_DISCOVERY": 18,
-                            "CLOUD_GROUPS": 19,
+                            "CLOUD_SERVICE_DISCOVERY": 48,
+                            "STEAL_APPLICATION_ACCESS_TOKEN": 42,
+                            "ACCOUNT_ACCESS_REMOVAL": 51,
+                            "STEAL_WEB_SESSION_COOKIE": 25,
+                            "CREATE_OR_MODIFY_SYSTEM_PROCESS": 24,
+                            "ABUSE_ELEVATION_CONTROL_MECHANISM": 34,
+                            "UNSECURED_CREDENTIALS": 13,
+                            "MODIFY_AUTHENTICATION_PROCESS": 28,
+                            "IMPAIR_DEFENSES": 31,
+                            "DISABLE_OR_MODIFY_TOOLS": 55,
                             "EXFILTRATION_OVER_WEB_SERVICE": 20,
                             "EXFILTRATION_TO_CLOUD_STORAGE": 21,
-                            "ACCOUNT_MANIPULATION": 22,
-                            "SSH_AUTHORIZED_KEYS": 23,
-                            "CREATE_OR_MODIFY_SYSTEM_PROCESS": 24,
-                            "STEAL_WEB_SESSION_COOKIE": 25,
+                            "DYNAMIC_RESOLUTION": 12,
+                            "LATERAL_TOOL_TRANSFER": 41,
                             "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE": 26,
-                            "EXPLOIT_PUBLIC_FACING_APPLICATION": 27,
-                            "MODIFY_AUTHENTICATION_PROCESS": 28,
-                            "DATA_DESTRUCTION": 29,
-                            "DOMAIN_POLICY_MODIFICATION": 30,
-                            "IMPAIR_DEFENSES": 31,
-                            "NETWORK_SERVICE_DISCOVERY": 32,
-                            "ACCESS_TOKEN_MANIPULATION": 33,
-                            "ABUSE_ELEVATION_CONTROL_MECHANISM": 34,
-                            "DEFAULT_ACCOUNTS": 35
+                            "CREATE_SNAPSHOT": 54,
+                            "CLOUD_INFRASTRUCTURE_DISCOVERY": 53,
+                            "OBTAIN_CAPABILITIES": 43,
+                            "ACTIVE_SCANNING": 1,
+                            "SCANNING_IP_BLOCKS": 2,
+                            "CONTAINER_AND_RESOURCE_DISCOVERY": 57
                           }
+                        }
+                      }
+                    },
+                    "OrgPolicy": {
+                      "options": {
+                        "(google.api.resource).type": "orgpolicy.googleapis.com/Policy",
+                        "(google.api.resource).pattern": "projects/{project}/policies/{constraint_name}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },

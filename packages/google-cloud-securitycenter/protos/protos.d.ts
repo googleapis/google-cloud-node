@@ -2272,6 +2272,9 @@ export namespace google {
 
                     /** Database grantees */
                     grantees?: (string[]|null);
+
+                    /** Database version */
+                    version?: (string|null);
                 }
 
                 /** Represents a Database. */
@@ -2297,6 +2300,9 @@ export namespace google {
 
                     /** Database grantees. */
                     public grantees: string[];
+
+                    /** Database version. */
+                    public version: string;
 
                     /**
                      * Creates a new Database instance using the specified properties.
@@ -2948,6 +2954,9 @@ export namespace google {
 
                     /** Exfiltration targets */
                     targets?: (google.cloud.securitycenter.v1.IExfilResource[]|null);
+
+                    /** Exfiltration totalExfiltratedBytes */
+                    totalExfiltratedBytes?: (number|Long|string|null);
                 }
 
                 /** Represents an Exfiltration. */
@@ -2964,6 +2973,9 @@ export namespace google {
 
                     /** Exfiltration targets. */
                     public targets: google.cloud.securitycenter.v1.IExfilResource[];
+
+                    /** Exfiltration totalExfiltratedBytes. */
+                    public totalExfiltratedBytes: (number|Long|string);
 
                     /**
                      * Creates a new Exfiltration instance using the specified properties.
@@ -3287,6 +3299,9 @@ export namespace google {
 
                     /** File contents */
                     contents?: (string|null);
+
+                    /** File diskPath */
+                    diskPath?: (google.cloud.securitycenter.v1.File.IDiskPath|null);
                 }
 
                 /** Represents a File. */
@@ -3315,6 +3330,9 @@ export namespace google {
 
                     /** File contents. */
                     public contents: string;
+
+                    /** File diskPath. */
+                    public diskPath?: (google.cloud.securitycenter.v1.File.IDiskPath|null);
 
                     /**
                      * Creates a new File instance using the specified properties.
@@ -3392,6 +3410,112 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace File {
+
+                    /** Properties of a DiskPath. */
+                    interface IDiskPath {
+
+                        /** DiskPath partitionUuid */
+                        partitionUuid?: (string|null);
+
+                        /** DiskPath relativePath */
+                        relativePath?: (string|null);
+                    }
+
+                    /** Represents a DiskPath. */
+                    class DiskPath implements IDiskPath {
+
+                        /**
+                         * Constructs a new DiskPath.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.File.IDiskPath);
+
+                        /** DiskPath partitionUuid. */
+                        public partitionUuid: string;
+
+                        /** DiskPath relativePath. */
+                        public relativePath: string;
+
+                        /**
+                         * Creates a new DiskPath instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DiskPath instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.File.IDiskPath): google.cloud.securitycenter.v1.File.DiskPath;
+
+                        /**
+                         * Encodes the specified DiskPath message. Does not implicitly {@link google.cloud.securitycenter.v1.File.DiskPath.verify|verify} messages.
+                         * @param message DiskPath message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.File.IDiskPath, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DiskPath message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.File.DiskPath.verify|verify} messages.
+                         * @param message DiskPath message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.File.IDiskPath, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DiskPath message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DiskPath
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.File.DiskPath;
+
+                        /**
+                         * Decodes a DiskPath message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DiskPath
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.File.DiskPath;
+
+                        /**
+                         * Verifies a DiskPath message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DiskPath message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DiskPath
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.File.DiskPath;
+
+                        /**
+                         * Creates a plain object from a DiskPath message. Also converts values to other types if specified.
+                         * @param message DiskPath
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.File.DiskPath, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DiskPath to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DiskPath
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a Finding. */
@@ -3511,11 +3635,20 @@ export namespace google {
                     /** Finding kernelRootkit */
                     kernelRootkit?: (google.cloud.securitycenter.v1.IKernelRootkit|null);
 
+                    /** Finding orgPolicies */
+                    orgPolicies?: (google.cloud.securitycenter.v1.IOrgPolicy[]|null);
+
                     /** Finding application */
                     application?: (google.cloud.securitycenter.v1.IApplication|null);
 
                     /** Finding backupDisasterRecovery */
                     backupDisasterRecovery?: (google.cloud.securitycenter.v1.IBackupDisasterRecovery|null);
+
+                    /** Finding logEntries */
+                    logEntries?: (google.cloud.securitycenter.v1.ILogEntry[]|null);
+
+                    /** Finding loadBalancers */
+                    loadBalancers?: (google.cloud.securitycenter.v1.ILoadBalancer[]|null);
                 }
 
                 /** Represents a Finding. */
@@ -3641,11 +3774,20 @@ export namespace google {
                     /** Finding kernelRootkit. */
                     public kernelRootkit?: (google.cloud.securitycenter.v1.IKernelRootkit|null);
 
+                    /** Finding orgPolicies. */
+                    public orgPolicies: google.cloud.securitycenter.v1.IOrgPolicy[];
+
                     /** Finding application. */
                     public application?: (google.cloud.securitycenter.v1.IApplication|null);
 
                     /** Finding backupDisasterRecovery. */
                     public backupDisasterRecovery?: (google.cloud.securitycenter.v1.IBackupDisasterRecovery|null);
+
+                    /** Finding logEntries. */
+                    public logEntries: google.cloud.securitycenter.v1.ILogEntry[];
+
+                    /** Finding loadBalancers. */
+                    public loadBalancers: google.cloud.securitycenter.v1.ILoadBalancer[];
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -4006,6 +4148,9 @@ export namespace google {
 
                         /** ProcessSignature yaraRuleSignature */
                         yaraRuleSignature?: (google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature|null);
+
+                        /** ProcessSignature signatureType */
+                        signatureType?: (google.cloud.securitycenter.v1.Indicator.ProcessSignature.SignatureType|keyof typeof google.cloud.securitycenter.v1.Indicator.ProcessSignature.SignatureType|null);
                     }
 
                     /** Represents a ProcessSignature. */
@@ -4022,6 +4167,9 @@ export namespace google {
 
                         /** ProcessSignature yaraRuleSignature. */
                         public yaraRuleSignature?: (google.cloud.securitycenter.v1.Indicator.ProcessSignature.IYaraRuleSignature|null);
+
+                        /** ProcessSignature signatureType. */
+                        public signatureType: (google.cloud.securitycenter.v1.Indicator.ProcessSignature.SignatureType|keyof typeof google.cloud.securitycenter.v1.Indicator.ProcessSignature.SignatureType);
 
                         /** ProcessSignature signature. */
                         public signature?: ("memoryHashSignature"|"yaraRuleSignature");
@@ -4411,6 +4559,13 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+
+                        /** SignatureType enum. */
+                        enum SignatureType {
+                            SIGNATURE_TYPE_UNSPECIFIED = 0,
+                            SIGNATURE_TYPE_PROCESS = 1,
+                            SIGNATURE_TYPE_FILE = 2
+                        }
                     }
                 }
 
@@ -4579,6 +4734,9 @@ export namespace google {
 
                     /** Kubernetes accessReviews */
                     accessReviews?: (google.cloud.securitycenter.v1.Kubernetes.IAccessReview[]|null);
+
+                    /** Kubernetes objects */
+                    objects?: (google.cloud.securitycenter.v1.Kubernetes.IObject[]|null);
                 }
 
                 /** Represents a Kubernetes. */
@@ -4607,6 +4765,9 @@ export namespace google {
 
                     /** Kubernetes accessReviews. */
                     public accessReviews: google.cloud.securitycenter.v1.Kubernetes.IAccessReview[];
+
+                    /** Kubernetes objects. */
+                    public objects: google.cloud.securitycenter.v1.Kubernetes.IObject[];
 
                     /**
                      * Creates a new Kubernetes instance using the specified properties.
@@ -5489,6 +5650,439 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of an Object. */
+                    interface IObject {
+
+                        /** Object group */
+                        group?: (string|null);
+
+                        /** Object kind */
+                        kind?: (string|null);
+
+                        /** Object ns */
+                        ns?: (string|null);
+
+                        /** Object name */
+                        name?: (string|null);
+
+                        /** Object containers */
+                        containers?: (google.cloud.securitycenter.v1.IContainer[]|null);
+                    }
+
+                    /** Represents an Object. */
+                    class Object implements IObject {
+
+                        /**
+                         * Constructs a new Object.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.Kubernetes.IObject);
+
+                        /** Object group. */
+                        public group: string;
+
+                        /** Object kind. */
+                        public kind: string;
+
+                        /** Object ns. */
+                        public ns: string;
+
+                        /** Object name. */
+                        public name: string;
+
+                        /** Object containers. */
+                        public containers: google.cloud.securitycenter.v1.IContainer[];
+
+                        /**
+                         * Creates a new Object instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Object instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.Kubernetes.IObject): google.cloud.securitycenter.v1.Kubernetes.object;
+
+                        /**
+                         * Encodes the specified Object message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Object.verify|verify} messages.
+                         * @param message Object message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.Kubernetes.IObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Object message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Object.verify|verify} messages.
+                         * @param message Object message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.Kubernetes.IObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Object message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Object
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Kubernetes.object;
+
+                        /**
+                         * Decodes an Object message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Object
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Kubernetes.object;
+
+                        /**
+                         * Verifies an Object message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Object message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Object
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Kubernetes.object;
+
+                        /**
+                         * Creates a plain object from an Object message. Also converts values to other types if specified.
+                         * @param message Object
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.Kubernetes.object, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Object to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Object
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a LoadBalancer. */
+                interface ILoadBalancer {
+
+                    /** LoadBalancer name */
+                    name?: (string|null);
+                }
+
+                /** Represents a LoadBalancer. */
+                class LoadBalancer implements ILoadBalancer {
+
+                    /**
+                     * Constructs a new LoadBalancer.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ILoadBalancer);
+
+                    /** LoadBalancer name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new LoadBalancer instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LoadBalancer instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ILoadBalancer): google.cloud.securitycenter.v1.LoadBalancer;
+
+                    /**
+                     * Encodes the specified LoadBalancer message. Does not implicitly {@link google.cloud.securitycenter.v1.LoadBalancer.verify|verify} messages.
+                     * @param message LoadBalancer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ILoadBalancer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LoadBalancer message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.LoadBalancer.verify|verify} messages.
+                     * @param message LoadBalancer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ILoadBalancer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LoadBalancer message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LoadBalancer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.LoadBalancer;
+
+                    /**
+                     * Decodes a LoadBalancer message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LoadBalancer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.LoadBalancer;
+
+                    /**
+                     * Verifies a LoadBalancer message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LoadBalancer message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LoadBalancer
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.LoadBalancer;
+
+                    /**
+                     * Creates a plain object from a LoadBalancer message. Also converts values to other types if specified.
+                     * @param message LoadBalancer
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.LoadBalancer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LoadBalancer to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LoadBalancer
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LogEntry. */
+                interface ILogEntry {
+
+                    /** LogEntry cloudLoggingEntry */
+                    cloudLoggingEntry?: (google.cloud.securitycenter.v1.ICloudLoggingEntry|null);
+                }
+
+                /** Represents a LogEntry. */
+                class LogEntry implements ILogEntry {
+
+                    /**
+                     * Constructs a new LogEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ILogEntry);
+
+                    /** LogEntry cloudLoggingEntry. */
+                    public cloudLoggingEntry?: (google.cloud.securitycenter.v1.ICloudLoggingEntry|null);
+
+                    /** LogEntry logEntry. */
+                    public logEntry?: "cloudLoggingEntry";
+
+                    /**
+                     * Creates a new LogEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LogEntry instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ILogEntry): google.cloud.securitycenter.v1.LogEntry;
+
+                    /**
+                     * Encodes the specified LogEntry message. Does not implicitly {@link google.cloud.securitycenter.v1.LogEntry.verify|verify} messages.
+                     * @param message LogEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ILogEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LogEntry message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.LogEntry.verify|verify} messages.
+                     * @param message LogEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ILogEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LogEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LogEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.LogEntry;
+
+                    /**
+                     * Decodes a LogEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LogEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.LogEntry;
+
+                    /**
+                     * Verifies a LogEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LogEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LogEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.LogEntry;
+
+                    /**
+                     * Creates a plain object from a LogEntry message. Also converts values to other types if specified.
+                     * @param message LogEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.LogEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LogEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LogEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudLoggingEntry. */
+                interface ICloudLoggingEntry {
+
+                    /** CloudLoggingEntry insertId */
+                    insertId?: (string|null);
+
+                    /** CloudLoggingEntry logId */
+                    logId?: (string|null);
+
+                    /** CloudLoggingEntry resourceContainer */
+                    resourceContainer?: (string|null);
+
+                    /** CloudLoggingEntry timestamp */
+                    timestamp?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a CloudLoggingEntry. */
+                class CloudLoggingEntry implements ICloudLoggingEntry {
+
+                    /**
+                     * Constructs a new CloudLoggingEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ICloudLoggingEntry);
+
+                    /** CloudLoggingEntry insertId. */
+                    public insertId: string;
+
+                    /** CloudLoggingEntry logId. */
+                    public logId: string;
+
+                    /** CloudLoggingEntry resourceContainer. */
+                    public resourceContainer: string;
+
+                    /** CloudLoggingEntry timestamp. */
+                    public timestamp?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new CloudLoggingEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudLoggingEntry instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ICloudLoggingEntry): google.cloud.securitycenter.v1.CloudLoggingEntry;
+
+                    /**
+                     * Encodes the specified CloudLoggingEntry message. Does not implicitly {@link google.cloud.securitycenter.v1.CloudLoggingEntry.verify|verify} messages.
+                     * @param message CloudLoggingEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ICloudLoggingEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudLoggingEntry message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.CloudLoggingEntry.verify|verify} messages.
+                     * @param message CloudLoggingEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ICloudLoggingEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudLoggingEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudLoggingEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.CloudLoggingEntry;
+
+                    /**
+                     * Decodes a CloudLoggingEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudLoggingEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.CloudLoggingEntry;
+
+                    /**
+                     * Verifies a CloudLoggingEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudLoggingEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudLoggingEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.CloudLoggingEntry;
+
+                    /**
+                     * Creates a plain object from a CloudLoggingEntry message. Also converts values to other types if specified.
+                     * @param message CloudLoggingEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.CloudLoggingEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudLoggingEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudLoggingEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a MitreAttack. */
@@ -5636,42 +6230,162 @@ export namespace google {
                     /** Technique enum. */
                     enum Technique {
                         TECHNIQUE_UNSPECIFIED = 0,
-                        ACTIVE_SCANNING = 1,
-                        SCANNING_IP_BLOCKS = 2,
-                        INGRESS_TOOL_TRANSFER = 3,
-                        NATIVE_API = 4,
-                        SHARED_MODULES = 5,
+                        MASQUERADING = 49,
+                        MATCH_LEGITIMATE_NAME_OR_LOCATION = 50,
+                        BOOT_OR_LOGON_INITIALIZATION_SCRIPTS = 37,
+                        STARTUP_ITEMS = 38,
+                        NETWORK_SERVICE_DISCOVERY = 32,
+                        PROCESS_DISCOVERY = 56,
                         COMMAND_AND_SCRIPTING_INTERPRETER = 6,
                         UNIX_SHELL = 7,
-                        RESOURCE_HIJACKING = 8,
+                        PERMISSION_GROUPS_DISCOVERY = 18,
+                        CLOUD_GROUPS = 19,
+                        APPLICATION_LAYER_PROTOCOL = 45,
+                        DNS = 46,
+                        SOFTWARE_DEPLOYMENT_TOOLS = 47,
+                        VALID_ACCOUNTS = 14,
+                        DEFAULT_ACCOUNTS = 35,
+                        LOCAL_ACCOUNTS = 15,
+                        CLOUD_ACCOUNTS = 16,
                         PROXY = 9,
                         EXTERNAL_PROXY = 10,
                         MULTI_HOP_PROXY = 11,
-                        DYNAMIC_RESOLUTION = 12,
-                        UNSECURED_CREDENTIALS = 13,
-                        VALID_ACCOUNTS = 14,
-                        LOCAL_ACCOUNTS = 15,
-                        CLOUD_ACCOUNTS = 16,
+                        ACCOUNT_MANIPULATION = 22,
+                        ADDITIONAL_CLOUD_CREDENTIALS = 40,
+                        SSH_AUTHORIZED_KEYS = 23,
+                        ADDITIONAL_CONTAINER_CLUSTER_ROLES = 58,
+                        INGRESS_TOOL_TRANSFER = 3,
+                        NATIVE_API = 4,
+                        BRUTE_FORCE = 44,
+                        SHARED_MODULES = 5,
+                        ACCESS_TOKEN_MANIPULATION = 33,
+                        TOKEN_IMPERSONATION_OR_THEFT = 39,
+                        EXPLOIT_PUBLIC_FACING_APPLICATION = 27,
+                        DOMAIN_POLICY_MODIFICATION = 30,
+                        DATA_DESTRUCTION = 29,
+                        SERVICE_STOP = 52,
+                        INHIBIT_SYSTEM_RECOVERY = 36,
+                        RESOURCE_HIJACKING = 8,
                         NETWORK_DENIAL_OF_SERVICE = 17,
-                        PERMISSION_GROUPS_DISCOVERY = 18,
-                        CLOUD_GROUPS = 19,
+                        CLOUD_SERVICE_DISCOVERY = 48,
+                        STEAL_APPLICATION_ACCESS_TOKEN = 42,
+                        ACCOUNT_ACCESS_REMOVAL = 51,
+                        STEAL_WEB_SESSION_COOKIE = 25,
+                        CREATE_OR_MODIFY_SYSTEM_PROCESS = 24,
+                        ABUSE_ELEVATION_CONTROL_MECHANISM = 34,
+                        UNSECURED_CREDENTIALS = 13,
+                        MODIFY_AUTHENTICATION_PROCESS = 28,
+                        IMPAIR_DEFENSES = 31,
+                        DISABLE_OR_MODIFY_TOOLS = 55,
                         EXFILTRATION_OVER_WEB_SERVICE = 20,
                         EXFILTRATION_TO_CLOUD_STORAGE = 21,
-                        ACCOUNT_MANIPULATION = 22,
-                        SSH_AUTHORIZED_KEYS = 23,
-                        CREATE_OR_MODIFY_SYSTEM_PROCESS = 24,
-                        STEAL_WEB_SESSION_COOKIE = 25,
+                        DYNAMIC_RESOLUTION = 12,
+                        LATERAL_TOOL_TRANSFER = 41,
                         MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE = 26,
-                        EXPLOIT_PUBLIC_FACING_APPLICATION = 27,
-                        MODIFY_AUTHENTICATION_PROCESS = 28,
-                        DATA_DESTRUCTION = 29,
-                        DOMAIN_POLICY_MODIFICATION = 30,
-                        IMPAIR_DEFENSES = 31,
-                        NETWORK_SERVICE_DISCOVERY = 32,
-                        ACCESS_TOKEN_MANIPULATION = 33,
-                        ABUSE_ELEVATION_CONTROL_MECHANISM = 34,
-                        DEFAULT_ACCOUNTS = 35
+                        CREATE_SNAPSHOT = 54,
+                        CLOUD_INFRASTRUCTURE_DISCOVERY = 53,
+                        OBTAIN_CAPABILITIES = 43,
+                        ACTIVE_SCANNING = 1,
+                        SCANNING_IP_BLOCKS = 2,
+                        CONTAINER_AND_RESOURCE_DISCOVERY = 57
                     }
+                }
+
+                /** Properties of an OrgPolicy. */
+                interface IOrgPolicy {
+
+                    /** OrgPolicy name */
+                    name?: (string|null);
+                }
+
+                /** Represents an OrgPolicy. */
+                class OrgPolicy implements IOrgPolicy {
+
+                    /**
+                     * Constructs a new OrgPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IOrgPolicy);
+
+                    /** OrgPolicy name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new OrgPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OrgPolicy instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IOrgPolicy): google.cloud.securitycenter.v1.OrgPolicy;
+
+                    /**
+                     * Encodes the specified OrgPolicy message. Does not implicitly {@link google.cloud.securitycenter.v1.OrgPolicy.verify|verify} messages.
+                     * @param message OrgPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IOrgPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OrgPolicy message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.OrgPolicy.verify|verify} messages.
+                     * @param message OrgPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IOrgPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OrgPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OrgPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.OrgPolicy;
+
+                    /**
+                     * Decodes an OrgPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OrgPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.OrgPolicy;
+
+                    /**
+                     * Verifies an OrgPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OrgPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OrgPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.OrgPolicy;
+
+                    /**
+                     * Creates a plain object from an OrgPolicy message. Also converts values to other types if specified.
+                     * @param message OrgPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.OrgPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OrgPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OrgPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Process. */
