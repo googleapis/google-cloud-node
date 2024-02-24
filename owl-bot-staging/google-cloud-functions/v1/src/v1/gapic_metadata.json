@@ -1,0 +1,137 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.functions.v1",
+  "libraryPackage": "@google-cloud/functions",
+  "services": {
+    "CloudFunctionsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudFunctionsServiceClient",
+          "rpcs": {
+            "GetFunction": {
+              "methods": [
+                "getFunction"
+              ]
+            },
+            "CallFunction": {
+              "methods": [
+                "callFunction"
+              ]
+            },
+            "GenerateUploadUrl": {
+              "methods": [
+                "generateUploadUrl"
+              ]
+            },
+            "GenerateDownloadUrl": {
+              "methods": [
+                "generateDownloadUrl"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "CreateFunction": {
+              "methods": [
+                "createFunction"
+              ]
+            },
+            "UpdateFunction": {
+              "methods": [
+                "updateFunction"
+              ]
+            },
+            "DeleteFunction": {
+              "methods": [
+                "deleteFunction"
+              ]
+            },
+            "ListFunctions": {
+              "methods": [
+                "listFunctions",
+                "listFunctionsStream",
+                "listFunctionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudFunctionsServiceClient",
+          "rpcs": {
+            "GetFunction": {
+              "methods": [
+                "getFunction"
+              ]
+            },
+            "CallFunction": {
+              "methods": [
+                "callFunction"
+              ]
+            },
+            "GenerateUploadUrl": {
+              "methods": [
+                "generateUploadUrl"
+              ]
+            },
+            "GenerateDownloadUrl": {
+              "methods": [
+                "generateDownloadUrl"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "CreateFunction": {
+              "methods": [
+                "createFunction"
+              ]
+            },
+            "UpdateFunction": {
+              "methods": [
+                "updateFunction"
+              ]
+            },
+            "DeleteFunction": {
+              "methods": [
+                "deleteFunction"
+              ]
+            },
+            "ListFunctions": {
+              "methods": [
+                "listFunctions",
+                "listFunctionsStream",
+                "listFunctionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+[
+  "../../protos/google/cloud/gkehub/v1/configmanagement/configmanagement.proto",
+  "../../protos/google/cloud/gkehub/v1/feature.proto",
+  "../../protos/google/cloud/gkehub/v1/membership.proto",
+  "../../protos/google/cloud/gkehub/v1/multiclusteringress/multiclusteringress.proto",
+  "../../protos/google/cloud/gkehub/v1/service.proto"
+]
