@@ -392,7 +392,7 @@ export class ExportServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    *   Default page_size is 1000.
-   *   Max limit is 10000.
+   *   Max limit is 1000.
    * @param {string} request.pageToken
    *   The token to continue pagination and get profiles from a particular page.
    *   When paginating, all other parameters provided to `ListProfiles` must match
@@ -494,7 +494,7 @@ export class ExportServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    *   Default page_size is 1000.
-   *   Max limit is 10000.
+   *   Max limit is 1000.
    * @param {string} request.pageToken
    *   The token to continue pagination and get profiles from a particular page.
    *   When paginating, all other parameters provided to `ListProfiles` must match
@@ -544,7 +544,7 @@ export class ExportServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of items to return.
    *   Default page_size is 1000.
-   *   Max limit is 10000.
+   *   Max limit is 1000.
    * @param {string} request.pageToken
    *   The token to continue pagination and get profiles from a particular page.
    *   When paginating, all other parameters provided to `ListProfiles` must match
