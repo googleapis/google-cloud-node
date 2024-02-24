@@ -1,0 +1,6 @@
+[
+  "../../protos/google/cloud/networkservices/v1beta1/common.proto",
+  "../../protos/google/cloud/networkservices/v1beta1/dep.proto",
+  "../../protos/google/cloud/networkservices/v1beta1/endpoint_policy.proto",
+  "../../protos/google/cloud/networkservices/v1beta1/network_services.proto"
+]
