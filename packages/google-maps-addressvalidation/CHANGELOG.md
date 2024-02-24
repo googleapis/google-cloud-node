@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v2.1.0...addressvalidation-v2.2.0) (2024-02-22)
+
+
+### Features
+
+* [addressvalidation] add session token support for Autocomplete (New) sessions that end with a call to Address Validation ([#5059](https://github.com/googleapis/google-cloud-node/issues/5059)) ([da1c96f](https://github.com/googleapis/google-cloud-node/commit/da1c96fcf441e412b3657b6b433c4a07c5afca1d))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v2.0.1...addressvalidation-v2.1.0) (2024-02-09)
 
 

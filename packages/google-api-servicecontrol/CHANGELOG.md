@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v3.1.0...service-control-v3.2.0) (2024-02-22)
+
+
+### Features
+
+* [servicecontrol] include api_key_uid in service control check response ([#5061](https://github.com/googleapis/google-cloud-node/issues/5061)) ([f442912](https://github.com/googleapis/google-cloud-node/commit/f44291270aba5581520205feeed2dfe169eca790))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/service-control-v3.0.1...service-control-v3.1.0) (2024-02-09)
 
 

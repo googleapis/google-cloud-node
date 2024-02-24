@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.13.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.12.0...aiplatform-v3.13.0) (2024-02-22)
+
+
+### Features
+
+* Add `point_of_contact` to `Feature` message ([#5064](https://github.com/googleapis/google-cloud-node/issues/5064)) ([d158bfb](https://github.com/googleapis/google-cloud-node/commit/d158bfb432f1c54ae9cb121607c33508e79accf0))
+* Add Grounding feature to PredictionService.GenerateContent ([#5036](https://github.com/googleapis/google-cloud-node/issues/5036)) ([6b73cce](https://github.com/googleapis/google-cloud-node/commit/6b73cce2fc4b29290b51878ba07aa4b9bca4e573))
+
 ## [3.12.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.11.0...aiplatform-v3.12.0) (2024-02-09)
 
 

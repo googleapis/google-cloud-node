@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.2.0...security-center-v8.3.0) (2024-02-22)
+
+
+### Features
+
+* [securitycenter] Add Backup DR field to finding's list of attributes ([#5047](https://github.com/googleapis/google-cloud-node/issues/5047)) ([934c300](https://github.com/googleapis/google-cloud-node/commit/934c300105e20afb8d8ed750e79e9935b7d42a79))
+
 ## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.1.0...security-center-v8.2.0) (2024-02-09)
 
 
