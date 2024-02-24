@@ -1,1 +1,0 @@
-Videointelligence: Nodejs Client
