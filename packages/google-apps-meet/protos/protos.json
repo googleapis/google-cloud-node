@@ -479,7 +479,8 @@
                     },
                     "SpacesService": {
                       "options": {
-                        "(google.api.default_host)": "meet.googleapis.com"
+                        "(google.api.default_host)": "meet.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/meetings.space.created,https://www.googleapis.com/auth/meetings.space.readonly"
                       },
                       "methods": {
                         "CreateSpace": {
@@ -564,7 +565,8 @@
                     },
                     "ConferenceRecordsService": {
                       "options": {
-                        "(google.api.default_host)": "meet.googleapis.com"
+                        "(google.api.default_host)": "meet.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/meetings.space.created,https://www.googleapis.com/auth/meetings.space.readonly"
                       },
                       "methods": {
                         "GetConferenceRecord": {

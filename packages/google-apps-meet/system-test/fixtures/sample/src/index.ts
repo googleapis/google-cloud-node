@@ -19,7 +19,7 @@
 import {
   ConferenceRecordsServiceClient,
   SpacesServiceClient,
-} from '@google-apps/meet';
+} from '@google-cloud/meet';
 
 // check that the client class type name can be used
 function doStuffWithConferenceRecordsServiceClient(

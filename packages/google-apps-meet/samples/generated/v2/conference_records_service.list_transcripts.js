@@ -46,7 +46,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Meet library
-  const {ConferenceRecordsServiceClient} = require('@google-apps/meet').v2;
+  const {ConferenceRecordsServiceClient} = require('@google-cloud/meet').v2;
 
   // Instantiates a client
   const meetClient = new ConferenceRecordsServiceClient();

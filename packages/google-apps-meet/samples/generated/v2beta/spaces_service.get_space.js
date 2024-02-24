@@ -34,7 +34,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Meet library
-  const {SpacesServiceClient} = require('@google-apps/meet').v2beta;
+  const {SpacesServiceClient} = require('@google-cloud/meet').v2beta;
 
   // Instantiates a client
   const meetClient = new SpacesServiceClient();
