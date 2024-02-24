@@ -1,0 +1,8 @@
+[
+  "../../protos/google/shopping/css/v1/accounts.proto",
+  "../../protos/google/shopping/css/v1/accounts_labels.proto",
+  "../../protos/google/shopping/css/v1/css_product_common.proto",
+  "../../protos/google/shopping/css/v1/css_product_inputs.proto",
+  "../../protos/google/shopping/css/v1/css_products.proto",
+  "../../protos/google/shopping/type/types.proto"
+]
