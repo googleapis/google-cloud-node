@@ -11447,6 +11447,9 @@ export namespace google {
                     /** Instance ipAddress */
                     ipAddress?: (string|null);
 
+                    /** Instance publicIpAddress */
+                    publicIpAddress?: (string|null);
+
                     /** Instance reconciling */
                     reconciling?: (boolean|null);
 
@@ -11537,6 +11540,9 @@ export namespace google {
 
                     /** Instance ipAddress. */
                     public ipAddress: string;
+
+                    /** Instance publicIpAddress. */
+                    public publicIpAddress: string;
 
                     /** Instance reconciling. */
                     public reconciling: boolean;
@@ -12767,6 +12773,9 @@ export namespace google {
 
                     /** ConnectionInfo instanceUid */
                     instanceUid?: (string|null);
+
+                    /** ConnectionInfo pscDnsName */
+                    pscDnsName?: (string|null);
                 }
 
                 /** Represents a ConnectionInfo. */
@@ -12792,6 +12801,9 @@ export namespace google {
 
                     /** ConnectionInfo instanceUid. */
                     public instanceUid: string;
+
+                    /** ConnectionInfo pscDnsName. */
+                    public pscDnsName: string;
 
                     /**
                      * Creates a new ConnectionInfo instance using the specified properties.
