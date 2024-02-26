@@ -79,7 +79,7 @@ const CONSISTENCY_PROTO_CODE: ConsistencyProtoCode = {
  * @class
  */
 class DatastoreRequest {
-  id: string | undefined;
+  id: string | undefined | Uint8Array | null;
   requests_:
     | Entity
     | {
@@ -546,6 +546,19 @@ class DatastoreRequest {
       );
   }
 
+  /**
+   * Datastore allows you to run aggregate queries by supplying aggregate fields
+   * which will determine the type of aggregation that is performed.
+   *
+   * The query is run, and the results are returned in the second argument of
+   * the callback provided.
+   *
+   * @param {AggregateQuery} query AggregateQuery object.
+   * @param {RunQueryOptions} options Optional configuration
+   * @param {function} [callback] The callback function. If omitted, a promise is
+   * returned.
+   *
+   **/
   runAggregationQuery(
     query: AggregateQuery,
     options?: RunQueryOptions
@@ -1157,7 +1170,7 @@ export interface SharedQueryOptions {
   partitionId?: google.datastore.v1.IPartitionId | null;
   readOptions?: {
     readConsistency?: number;
-    transaction?: string;
+    transaction?: string | Uint8Array | null;
     readTime?: ITimestamp;
   };
 }
@@ -1166,9 +1179,9 @@ export interface RequestOptions extends SharedQueryOptions {
   keys?: Entity;
   transactionOptions?: {
     readOnly?: {};
-    readWrite?: {previousTransaction?: string};
+    readWrite?: {previousTransaction?: string | Uint8Array | null};
   } | null;
-  transaction?: string | null;
+  transaction?: string | null | Uint8Array;
   mode?: string;
   query?: QueryProto;
   filter?: string;
