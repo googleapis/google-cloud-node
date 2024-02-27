@@ -91,13 +91,17 @@
                           "requestType": "ListProfilesRequest",
                           "responseType": "ListProfilesResponse",
                           "options": {
-                            "(google.api.http).get": "/v2/{parent=projects/*}/profiles"
+                            "(google.api.http).get": "/v2/{parent=projects/*}/profiles",
+                            "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{parent=projects/*}/profiles"
                               }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
                             }
                           ]
                         }
@@ -188,6 +192,13 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -1715,6 +1726,18 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
                 }
               }
             }
