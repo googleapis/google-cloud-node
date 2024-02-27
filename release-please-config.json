@@ -166,7 +166,6 @@
     "packages/google-cloud-servicehealth": {},
     "packages/google-cloud-telcoautomation": {},
     "packages/google-apps-meet": {},
-    "packages/google-apps-meet": {},
     "packages/google-cloud-parallelstore": {}
   },
   "plugins": [
