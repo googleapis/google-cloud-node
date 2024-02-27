@@ -3013,7 +3013,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    */
   /**
    * @typedef {object} GetBucketSignedUrlConfig
-   * @property {string} action Currently only supports "list" (HTTP: GET).
+   * @property {string} action Only listing objects within a bucket (HTTP: GET) is supported for bucket-level signed URLs.
    * @property {*} expires A timestamp when this link will expire. Any value
    *     given is passed to `new Date()`.
    *     Note: 'v4' supports maximum duration of 7 days (604800 seconds) from now.
