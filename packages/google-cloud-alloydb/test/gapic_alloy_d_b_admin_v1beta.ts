@@ -4949,9 +4949,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5000,9 +5000,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5043,9 +5043,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5083,9 +5083,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -5270,9 +5270,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5319,9 +5319,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5368,9 +5368,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5408,9 +5408,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -5577,9 +5577,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5628,9 +5628,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5671,9 +5671,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5713,9 +5713,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6238,9 +6238,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6289,9 +6289,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6331,9 +6331,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6372,9 +6372,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listUsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6559,9 +6559,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6608,9 +6608,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6657,9 +6657,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6697,9 +6697,9 @@ describe('v1beta.AlloyDBAdminClient', () => {
       assert(
         (client.descriptors.page.listDatabases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
