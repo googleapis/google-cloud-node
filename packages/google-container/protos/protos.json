@@ -9168,6 +9168,10 @@
                     "resourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 39
+                    },
+                    "queuedProvisioning": {
+                      "type": "NodePool.QueuedProvisioning",
+                      "id": 42
                     }
                   }
                 },
