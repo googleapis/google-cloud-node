@@ -31493,6 +31493,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest resourceManagerTags */
                 resourceManagerTags?: (google.container.v1beta1.IResourceManagerTags|null);
+
+                /** UpdateNodePoolRequest queuedProvisioning */
+                queuedProvisioning?: (google.container.v1beta1.NodePool.IQueuedProvisioning|null);
             }
 
             /** Represents an UpdateNodePoolRequest. */
@@ -31587,6 +31590,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest resourceManagerTags. */
                 public resourceManagerTags?: (google.container.v1beta1.IResourceManagerTags|null);
+
+                /** UpdateNodePoolRequest queuedProvisioning. */
+                public queuedProvisioning?: (google.container.v1beta1.NodePool.IQueuedProvisioning|null);
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.

@@ -35,6 +35,7 @@ import * as cloud_tasks_client_config from './cloud_tasks_client_config.json';
 import fs from 'fs';
 import path from 'path';
 import {fileURLToPath} from 'url';
+import {getJSON} from '../json-helper.cjs';
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -43,20 +44,16 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
  * `src/v2beta3/cloud_tasks_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-const gapicConfig = JSON.parse(
-  fs.readFileSync(path.join(dirname, 'cloud_tasks_client_config.json'), 'utf8')
+const gapicConfig = getJSON(
+  path.join(dirname, 'cloud_tasks_client_config.json')
 );
-const jsonProtos = JSON.parse(
-  fs.readFileSync(
-    path.join(dirname, '..', '..', '..', 'protos/protos.json'),
-    'utf8'
-  )
+
+const jsonProtos = getJSON(
+  path.join(dirname, '..', '..', '..', 'protos/protos.json')
 );
-const version = JSON.parse(
-  fs.readFileSync(
-    path.join(dirname, '..', '..', '..', '..', 'package.json'),
-    'utf8'
-  )
+
+const version = getJSON(
+  path.join(dirname, '..', '..', '..', '..', 'package.json')
 ).version;
 
 /**
@@ -215,10 +212,8 @@ export class CloudTasksClient {
     }
     // Add ESM headers
     const isEsm = true;
-    if (opts.libVersion && isEsm) {
-      clientHeader.push(`${opts.libVersion}-esm`);
-    } else if (opts.libVersion && !isEsm) {
-      clientHeader.push(`${opts.libVersion}-cjs`);
+    if ((opts.libVersion || version) && isEsm) {
+      clientHeader.push(`${opts.libVersion ?? version}-esm`);
     }
 
     // Load the applicable protos.
