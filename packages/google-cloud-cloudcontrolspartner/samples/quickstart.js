@@ -19,7 +19,7 @@
 'use strict';
 
 function main(parent) {
-  // [START cloudcontrolspartner_quickstart]
+  // [START cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListCustomers_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -28,18 +28,16 @@ function main(parent) {
    */
   /**
    *  Required. Parent resource
-   *  Format
-   *  organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}
+   *  Format: organizations/{organization}/locations/{location}
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of customers row to return. The service may
-   *  return fewer than this value. If unspecified, at most 10 customers will be
-   *  returned.
+   *  The maximum number of Customers to return. The service may return fewer
+   *  than this value. If unspecified, at most 500 Customers will be returned.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from a previous `ListViolations` call.
+   *  A page token, received from a previous `ListCustomers` call.
    *  Provide this to retrieve the subsequent page.
    */
   // const pageToken = 'abc123'
@@ -51,34 +49,29 @@ function main(parent) {
    *  Optional. Hint for how to order the results
    */
   // const orderBy = 'abc123'
-  /**
-   *  Optional. Specifies the interval for retrieving violations.
-   *  if unspecified, all violations will be returned.
-   */
-  // const interval = {}
 
   // Imports the Cloudcontrolspartner library
-  const {CloudControlsPartnerMonitoringClient} =
+  const {CloudControlsPartnerCoreClient} =
     require('@google-cloud/cloudcontrolspartner').v1beta;
 
   // Instantiates a client
-  const cloudcontrolspartnerClient = new CloudControlsPartnerMonitoringClient();
+  const cloudcontrolspartnerClient = new CloudControlsPartnerCoreClient();
 
-  async function callListViolations() {
+  async function callListCustomers() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = cloudcontrolspartnerClient.listViolationsAsync(request);
+    const iterable = cloudcontrolspartnerClient.listCustomersAsync(request);
     for await (const response of iterable) {
       console.log(response);
     }
   }
 
-  callListViolations();
-  // [END cloudcontrolspartner_quickstart]
+  callListCustomers();
+  // [END cloudcontrolspartner_v1beta_generated_CloudControlsPartnerCore_ListCustomers_async]
 }
 
 process.on('unhandledRejection', err => {
