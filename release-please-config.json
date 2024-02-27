@@ -165,7 +165,8 @@
     "packages/google-cloud-redis-cluster": {},
     "packages/google-cloud-servicehealth": {},
     "packages/google-apps-meet": {},
-    "packages/google-cloud-parallelstore": {}
+    "packages/google-cloud-parallelstore": {},
+    "packages/google-chat": {}
   },
   "plugins": [
     {
