@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.3.0...networkservices-v0.3.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* [networkservices] Add client library version to headers ([#5070](https://github.com/googleapis/google-cloud-node/issues/5070)) ([5e386b6](https://github.com/googleapis/google-cloud-node/commit/5e386b6ec6ce8301f7563106da94852661cf1af6))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.2.1...networkservices-v0.3.0) (2024-02-09)
 
 

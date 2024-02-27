@@ -5,6 +5,108 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "86b0c1f491041ba8a2fbc9ad31551076dde7e4c0",
+          "message": "Add initial files for google.cloud.parallelstore.v1beta",
+          "issues": [
+            "5068"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "2f25cc11-35bf-49ce-9045-58b6fbd0d1b7",
+      "createTime": "2024-02-27T18:32:19.600Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1e7df2f4831fc28b371cdb465b5e11861cad94c9",
+          "message": "Add initial files for google.apps.meet.v2",
+          "issues": [
+            "5005"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "b5660003-3946-4083-a878-0866c3e82d03",
+      "createTime": "2024-02-27T18:32:19.587Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "a1b39d399119d815282239638cde4903de4b2a76",
+          "message": "[container] Add client library version to headers",
+          "issues": [
+            "5076"
+          ]
+        }
+      ],
+      "version": "5.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "cefa9e6f-baa8-4e03-8861-ff746d3fb1b1",
+      "createTime": "2024-02-27T18:32:19.575Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "411e8eb9d577c92505a1b0e6845b9ece277280e7",
+          "message": "[tasks] Add client library version to headers",
+          "issues": [
+            "5083"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "5a9e6f2e-2413-44e1-9166-dcaa45da2dca",
+      "createTime": "2024-02-27T18:32:19.562Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5e386b6ec6ce8301f7563106da94852661cf1af6",
+          "message": "[networkservices] Add client library version to headers",
+          "issues": [
+            "5070"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "8d722d4f-9f4a-418f-b13c-108f4325222a",
+      "createTime": "2024-02-27T18:32:19.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b643f040b35dd180ad0264935373e44056283249",
+          "message": "Add CompositeKey message and composite_key field to FeatureViewDataKey",
+          "issues": [
+            "5072"
+          ]
+        }
+      ],
+      "version": "3.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "e7ab9bfd-d246-4b5f-a644-21364605551d",
+      "createTime": "2024-02-27T18:32:19.536Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "c53c6ea8311a921b16a4e3b3c4d3d941afd82245",
           "message": "[places] add AutoComplete API",
           "issues": [
@@ -24520,5 +24622,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-02-22T03:34:14.624Z"
+  "updateTime": "2024-02-27T18:32:19.600Z"
 }
