@@ -11,6 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-docker:
-  image: gcr.io/cloud-devrel-public-resources/owlbot-nodejs-mono-repo:latest
-  digest: sha256:539f0ca1aeccd4a00388af6bc60ef586f1f6d566883dd8d71383dff04dc86eb2
+
+deep-copy-regex:
+    - source: /google/cloud/parallelstore/(.*)/.*-nodejs
+      dest: /owl-bot-staging/google-cloud-parallelstore/$1
+
+api-name: parallelstore
