@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.6.0...sql-v0.7.0) (2024-02-22)
+
+
+### Features
+
+* [sql] A new field `threads` is added to message `.google.cloud.sql.v1beta4.ExportContext` ([#5048](https://github.com/googleapis/google-cloud-node/issues/5048)) ([ff8ef66](https://github.com/googleapis/google-cloud-node/commit/ff8ef66a10c3c78c941299eddb3ce79b09b91d14))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.5.0...sql-v0.6.0) (2024-02-09)
 
 

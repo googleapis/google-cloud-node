@@ -364,8 +364,8 @@ export class AddressValidationClient {
    *   The total length of the fields in this input must not exceed 280
    *   characters.
    *
-   *   Supported regions can be found in the
-   *   [FAQ](https://developers.google.com/maps/documentation/address-validation/faq#which_regions_are_currently_supported).
+   *   Supported regions can be found
+   *   [here](https://developers.google.com/maps/documentation/address-validation/coverage).
    *
    *   The {@link protos.google.type.PostalAddress.language_code|language_code} value in the
    *   input address is reserved for future uses and is ignored today. The
@@ -397,6 +397,27 @@ export class AddressValidationClient {
    *   at least two [google.type.PostalAddress.address_lines] where the first line
    *   contains the street number and name and the second line contains the city,
    *   state, and zip code.
+   * @param {string} [request.sessionToken]
+   *   Optional. A string which identifies an Autocomplete session for billing
+   *   purposes. Must be a URL and filename safe base64 string with at most 36
+   *   ASCII characters in length. Otherwise an INVALID_ARGUMENT error is
+   *   returned.
+   *
+   *   The session begins when the user starts typing a query, and concludes when
+   *   they select a place and a call to Place Details or Address Validation is
+   *   made. Each session can have multiple autocomplete queries, followed by one
+   *   Place Details or Address Validation request. The credentials used for each
+   *   request within a session must belong to the same Google Cloud Console
+   *   project. Once a session has concluded, the token is no longer valid; your
+   *   app must generate a fresh token for each session. If the `session_token`
+   *   parameter is omitted, or if you reuse a session token, the session is
+   *   charged as if no session token was provided (each request is billed
+   *   separately).
+   *
+   *   Note: Address Validation can only be used in sessions with the
+   *   Autocomplete (New) API, not the old Autocomplete API. See
+   *   https://developers.google.com/maps/documentation/places/web-service/session-pricing
+   *   for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

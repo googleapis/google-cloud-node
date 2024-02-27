@@ -2300,6 +2300,22 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "AutocompletePlaces": {
+                          "requestType": "AutocompletePlacesRequest",
+                          "responseType": "AutocompletePlacesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/places:autocomplete",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/places:autocomplete",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2436,6 +2452,13 @@
                         "locationRestriction": {
                           "type": "LocationRestriction",
                           "id": 14
+                        },
+                        "evOptions": {
+                          "type": "EVOptions",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2478,6 +2501,25 @@
                             "rectangle": {
                               "type": "google.geo.type.Viewport",
                               "id": 1
+                            }
+                          }
+                        },
+                        "EVOptions": {
+                          "fields": {
+                            "minimumChargingRateKw": {
+                              "type": "double",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "connectorTypes": {
+                              "rule": "repeated",
+                              "type": "EVConnectorType",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -2565,6 +2607,252 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sessionToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AutocompletePlacesRequest": {
+                      "fields": {
+                        "input": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "locationBias": {
+                          "type": "LocationBias",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "locationRestriction": {
+                          "type": "LocationRestriction",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includedPrimaryTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includedRegionCodes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "origin": {
+                          "type": "google.type.LatLng",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inputOffset": {
+                          "type": "int32",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeQueryPredictions": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sessionToken": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "LocationBias": {
+                          "oneofs": {
+                            "type": {
+                              "oneof": [
+                                "rectangle",
+                                "circle"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "rectangle": {
+                              "type": "google.geo.type.Viewport",
+                              "id": 1
+                            },
+                            "circle": {
+                              "type": "Circle",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "LocationRestriction": {
+                          "oneofs": {
+                            "type": {
+                              "oneof": [
+                                "rectangle",
+                                "circle"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "rectangle": {
+                              "type": "google.geo.type.Viewport",
+                              "id": 1
+                            },
+                            "circle": {
+                              "type": "Circle",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AutocompletePlacesResponse": {
+                      "fields": {
+                        "suggestions": {
+                          "rule": "repeated",
+                          "type": "Suggestion",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Suggestion": {
+                          "oneofs": {
+                            "kind": {
+                              "oneof": [
+                                "placePrediction",
+                                "queryPrediction"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "placePrediction": {
+                              "type": "PlacePrediction",
+                              "id": 1
+                            },
+                            "queryPrediction": {
+                              "type": "QueryPrediction",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "StringRange": {
+                              "fields": {
+                                "startOffset": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "endOffset": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "FormattableText": {
+                              "fields": {
+                                "text": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "matches": {
+                                  "rule": "repeated",
+                                  "type": "StringRange",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "StructuredFormat": {
+                              "fields": {
+                                "mainText": {
+                                  "type": "FormattableText",
+                                  "id": 1
+                                },
+                                "secondaryText": {
+                                  "type": "FormattableText",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "PlacePrediction": {
+                              "fields": {
+                                "place": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.resource_reference).type": "places.googleapis.com/Place"
+                                  }
+                                },
+                                "placeId": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "text": {
+                                  "type": "FormattableText",
+                                  "id": 3
+                                },
+                                "structuredFormat": {
+                                  "type": "StructuredFormat",
+                                  "id": 4
+                                },
+                                "types": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "distanceMeters": {
+                                  "type": "int32",
+                                  "id": 6
+                                }
+                              }
+                            },
+                            "QueryPrediction": {
+                              "fields": {
+                                "text": {
+                                  "type": "FormattableText",
+                                  "id": 1
+                                },
+                                "structuredFormat": {
+                                  "type": "StructuredFormat",
+                                  "id": 2
+                                }
+                              }
+                            }
                           }
                         }
                       }

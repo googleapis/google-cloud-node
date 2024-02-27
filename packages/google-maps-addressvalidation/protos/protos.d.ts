@@ -852,6 +852,9 @@ export namespace google {
 
                     /** ValidateAddressRequest enableUspsCass */
                     enableUspsCass?: (boolean|null);
+
+                    /** ValidateAddressRequest sessionToken */
+                    sessionToken?: (string|null);
                 }
 
                 /** Represents a ValidateAddressRequest. */
@@ -871,6 +874,9 @@ export namespace google {
 
                     /** ValidateAddressRequest enableUspsCass. */
                     public enableUspsCass: boolean;
+
+                    /** ValidateAddressRequest sessionToken. */
+                    public sessionToken: string;
 
                     /**
                      * Creates a new ValidateAddressRequest instance using the specified properties.
@@ -2047,6 +2053,33 @@ export namespace google {
                     /** UspsData dpvNoStat */
                     dpvNoStat?: (string|null);
 
+                    /** UspsData dpvNoStatReasonCode */
+                    dpvNoStatReasonCode?: (number|null);
+
+                    /** UspsData dpvDrop */
+                    dpvDrop?: (string|null);
+
+                    /** UspsData dpvThrowback */
+                    dpvThrowback?: (string|null);
+
+                    /** UspsData dpvNonDeliveryDays */
+                    dpvNonDeliveryDays?: (string|null);
+
+                    /** UspsData dpvNonDeliveryDaysValues */
+                    dpvNonDeliveryDaysValues?: (number|null);
+
+                    /** UspsData dpvNoSecureLocation */
+                    dpvNoSecureLocation?: (string|null);
+
+                    /** UspsData dpvPbsa */
+                    dpvPbsa?: (string|null);
+
+                    /** UspsData dpvDoorNotAccessible */
+                    dpvDoorNotAccessible?: (string|null);
+
+                    /** UspsData dpvEnhancedDeliveryCode */
+                    dpvEnhancedDeliveryCode?: (string|null);
+
                     /** UspsData carrierRoute */
                     carrierRoute?: (string|null);
 
@@ -2140,6 +2173,33 @@ export namespace google {
 
                     /** UspsData dpvNoStat. */
                     public dpvNoStat: string;
+
+                    /** UspsData dpvNoStatReasonCode. */
+                    public dpvNoStatReasonCode: number;
+
+                    /** UspsData dpvDrop. */
+                    public dpvDrop: string;
+
+                    /** UspsData dpvThrowback. */
+                    public dpvThrowback: string;
+
+                    /** UspsData dpvNonDeliveryDays. */
+                    public dpvNonDeliveryDays: string;
+
+                    /** UspsData dpvNonDeliveryDaysValues. */
+                    public dpvNonDeliveryDaysValues: number;
+
+                    /** UspsData dpvNoSecureLocation. */
+                    public dpvNoSecureLocation: string;
+
+                    /** UspsData dpvPbsa. */
+                    public dpvPbsa: string;
+
+                    /** UspsData dpvDoorNotAccessible. */
+                    public dpvDoorNotAccessible: string;
+
+                    /** UspsData dpvEnhancedDeliveryCode. */
+                    public dpvEnhancedDeliveryCode: string;
 
                     /** UspsData carrierRoute. */
                     public carrierRoute: string;

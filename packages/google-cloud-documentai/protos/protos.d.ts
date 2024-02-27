@@ -6595,6 +6595,9 @@ export namespace google {
 
                     /** ProcessOptions ocrConfig */
                     ocrConfig?: (google.cloud.documentai.v1.IOcrConfig|null);
+
+                    /** ProcessOptions schemaOverride */
+                    schemaOverride?: (google.cloud.documentai.v1.IDocumentSchema|null);
                 }
 
                 /** Represents a ProcessOptions. */
@@ -6617,6 +6620,9 @@ export namespace google {
 
                     /** ProcessOptions ocrConfig. */
                     public ocrConfig?: (google.cloud.documentai.v1.IOcrConfig|null);
+
+                    /** ProcessOptions schemaOverride. */
+                    public schemaOverride?: (google.cloud.documentai.v1.IDocumentSchema|null);
 
                     /** ProcessOptions pageRange. */
                     public pageRange?: ("individualPageSelector"|"fromStart"|"fromEnd");
@@ -6822,6 +6828,9 @@ export namespace google {
 
                     /** ProcessRequest processOptions */
                     processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
+
+                    /** ProcessRequest labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a ProcessRequest. */
@@ -6853,6 +6862,9 @@ export namespace google {
 
                     /** ProcessRequest processOptions. */
                     public processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
+
+                    /** ProcessRequest labels. */
+                    public labels: { [k: string]: string };
 
                     /** ProcessRequest source. */
                     public source?: ("inlineDocument"|"rawDocument"|"gcsDocument");
@@ -7176,6 +7188,9 @@ export namespace google {
 
                     /** BatchProcessRequest processOptions */
                     processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
+
+                    /** BatchProcessRequest labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a BatchProcessRequest. */
@@ -7201,6 +7216,9 @@ export namespace google {
 
                     /** BatchProcessRequest processOptions. */
                     public processOptions?: (google.cloud.documentai.v1.IProcessOptions|null);
+
+                    /** BatchProcessRequest labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new BatchProcessRequest instance using the specified properties.
@@ -12638,6 +12656,9 @@ export namespace google {
                             /** Property name */
                             name?: (string|null);
 
+                            /** Property displayName */
+                            displayName?: (string|null);
+
                             /** Property valueType */
                             valueType?: (string|null);
 
@@ -12656,6 +12677,9 @@ export namespace google {
 
                             /** Property name. */
                             public name: string;
+
+                            /** Property displayName. */
+                            public displayName: string;
 
                             /** Property valueType. */
                             public valueType: string;
@@ -33935,6 +33959,9 @@ export namespace google {
                             /** Property name */
                             name?: (string|null);
 
+                            /** Property displayName */
+                            displayName?: (string|null);
+
                             /** Property valueType */
                             valueType?: (string|null);
 
@@ -33956,6 +33983,9 @@ export namespace google {
 
                             /** Property name. */
                             public name: string;
+
+                            /** Property displayName. */
+                            public displayName: string;
 
                             /** Property valueType. */
                             public valueType: string;
@@ -34930,6 +34960,9 @@ export namespace google {
 
                     /** ProcessRequest processOptions */
                     processOptions?: (google.cloud.documentai.v1beta3.IProcessOptions|null);
+
+                    /** ProcessRequest labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a ProcessRequest. */
@@ -34964,6 +34997,9 @@ export namespace google {
 
                     /** ProcessRequest processOptions. */
                     public processOptions?: (google.cloud.documentai.v1beta3.IProcessOptions|null);
+
+                    /** ProcessRequest labels. */
+                    public labels: { [k: string]: string };
 
                     /** ProcessRequest source. */
                     public source?: ("inlineDocument"|"rawDocument"|"gcsDocument");
@@ -35299,6 +35335,9 @@ export namespace google {
 
                     /** BatchProcessRequest processOptions */
                     processOptions?: (google.cloud.documentai.v1beta3.IProcessOptions|null);
+
+                    /** BatchProcessRequest labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a BatchProcessRequest. */
@@ -35330,6 +35369,9 @@ export namespace google {
 
                     /** BatchProcessRequest processOptions. */
                     public processOptions?: (google.cloud.documentai.v1beta3.IProcessOptions|null);
+
+                    /** BatchProcessRequest labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new BatchProcessRequest instance using the specified properties.
@@ -39008,6 +39050,9 @@ export namespace google {
                     /** TrainProcessorVersionRequest customDocumentExtractionOptions */
                     customDocumentExtractionOptions?: (google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.ICustomDocumentExtractionOptions|null);
 
+                    /** TrainProcessorVersionRequest foundationModelTuningOptions */
+                    foundationModelTuningOptions?: (google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.IFoundationModelTuningOptions|null);
+
                     /** TrainProcessorVersionRequest parent */
                     parent?: (string|null);
 
@@ -39036,6 +39081,9 @@ export namespace google {
                     /** TrainProcessorVersionRequest customDocumentExtractionOptions. */
                     public customDocumentExtractionOptions?: (google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.ICustomDocumentExtractionOptions|null);
 
+                    /** TrainProcessorVersionRequest foundationModelTuningOptions. */
+                    public foundationModelTuningOptions?: (google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.IFoundationModelTuningOptions|null);
+
                     /** TrainProcessorVersionRequest parent. */
                     public parent: string;
 
@@ -39052,7 +39100,7 @@ export namespace google {
                     public baseProcessorVersion: string;
 
                     /** TrainProcessorVersionRequest processorFlags. */
-                    public processorFlags?: "customDocumentExtractionOptions";
+                    public processorFlags?: ("customDocumentExtractionOptions"|"foundationModelTuningOptions");
 
                     /**
                      * Creates a new TrainProcessorVersionRequest instance using the specified properties.
@@ -39342,6 +39390,109 @@ export namespace google {
                             MODEL_BASED = 1,
                             TEMPLATE_BASED = 2
                         }
+                    }
+
+                    /** Properties of a FoundationModelTuningOptions. */
+                    interface IFoundationModelTuningOptions {
+
+                        /** FoundationModelTuningOptions trainSteps */
+                        trainSteps?: (number|null);
+
+                        /** FoundationModelTuningOptions learningRateMultiplier */
+                        learningRateMultiplier?: (number|null);
+                    }
+
+                    /** Represents a FoundationModelTuningOptions. */
+                    class FoundationModelTuningOptions implements IFoundationModelTuningOptions {
+
+                        /**
+                         * Constructs a new FoundationModelTuningOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.IFoundationModelTuningOptions);
+
+                        /** FoundationModelTuningOptions trainSteps. */
+                        public trainSteps: number;
+
+                        /** FoundationModelTuningOptions learningRateMultiplier. */
+                        public learningRateMultiplier: number;
+
+                        /**
+                         * Creates a new FoundationModelTuningOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FoundationModelTuningOptions instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.IFoundationModelTuningOptions): google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions;
+
+                        /**
+                         * Encodes the specified FoundationModelTuningOptions message. Does not implicitly {@link google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions.verify|verify} messages.
+                         * @param message FoundationModelTuningOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.IFoundationModelTuningOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FoundationModelTuningOptions message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions.verify|verify} messages.
+                         * @param message FoundationModelTuningOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.IFoundationModelTuningOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FoundationModelTuningOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FoundationModelTuningOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions;
+
+                        /**
+                         * Decodes a FoundationModelTuningOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FoundationModelTuningOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions;
+
+                        /**
+                         * Verifies a FoundationModelTuningOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FoundationModelTuningOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FoundationModelTuningOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions;
+
+                        /**
+                         * Creates a plain object from a FoundationModelTuningOptions message. Also converts values to other types if specified.
+                         * @param message FoundationModelTuningOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.TrainProcessorVersionRequest.FoundationModelTuningOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FoundationModelTuningOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FoundationModelTuningOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 

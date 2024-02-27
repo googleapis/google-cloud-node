@@ -7058,6 +7058,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public getPlace(request: google.maps.places.v1.IGetPlaceRequest): Promise<google.maps.places.v1.Place>;
+
+                    /**
+                     * Calls AutocompletePlaces.
+                     * @param request AutocompletePlacesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AutocompletePlacesResponse
+                     */
+                    public autocompletePlaces(request: google.maps.places.v1.IAutocompletePlacesRequest, callback: google.maps.places.v1.Places.AutocompletePlacesCallback): void;
+
+                    /**
+                     * Calls AutocompletePlaces.
+                     * @param request AutocompletePlacesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public autocompletePlaces(request: google.maps.places.v1.IAutocompletePlacesRequest): Promise<google.maps.places.v1.AutocompletePlacesResponse>;
                 }
 
                 namespace Places {
@@ -7089,6 +7103,13 @@ export namespace google {
                      * @param [response] Place
                      */
                     type GetPlaceCallback = (error: (Error|null), response?: google.maps.places.v1.Place) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.places.v1.Places|autocompletePlaces}.
+                     * @param error Error, if any
+                     * @param [response] AutocompletePlacesResponse
+                     */
+                    type AutocompletePlacesCallback = (error: (Error|null), response?: google.maps.places.v1.AutocompletePlacesResponse) => void;
                 }
 
                 /** Properties of a SearchNearbyRequest. */
@@ -7481,6 +7502,9 @@ export namespace google {
 
                     /** SearchTextRequest locationRestriction */
                     locationRestriction?: (google.maps.places.v1.SearchTextRequest.ILocationRestriction|null);
+
+                    /** SearchTextRequest evOptions */
+                    evOptions?: (google.maps.places.v1.SearchTextRequest.IEVOptions|null);
                 }
 
                 /** Represents a SearchTextRequest. */
@@ -7527,6 +7551,9 @@ export namespace google {
 
                     /** SearchTextRequest locationRestriction. */
                     public locationRestriction?: (google.maps.places.v1.SearchTextRequest.ILocationRestriction|null);
+
+                    /** SearchTextRequest evOptions. */
+                    public evOptions?: (google.maps.places.v1.SearchTextRequest.IEVOptions|null);
 
                     /**
                      * Creates a new SearchTextRequest instance using the specified properties.
@@ -7815,6 +7842,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for LocationRestriction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a EVOptions. */
+                    interface IEVOptions {
+
+                        /** EVOptions minimumChargingRateKw */
+                        minimumChargingRateKw?: (number|null);
+
+                        /** EVOptions connectorTypes */
+                        connectorTypes?: (google.maps.places.v1.EVConnectorType[]|null);
+                    }
+
+                    /** Represents a EVOptions. */
+                    class EVOptions implements IEVOptions {
+
+                        /**
+                         * Constructs a new EVOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.SearchTextRequest.IEVOptions);
+
+                        /** EVOptions minimumChargingRateKw. */
+                        public minimumChargingRateKw: number;
+
+                        /** EVOptions connectorTypes. */
+                        public connectorTypes: google.maps.places.v1.EVConnectorType[];
+
+                        /**
+                         * Creates a new EVOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EVOptions instance
+                         */
+                        public static create(properties?: google.maps.places.v1.SearchTextRequest.IEVOptions): google.maps.places.v1.SearchTextRequest.EVOptions;
+
+                        /**
+                         * Encodes the specified EVOptions message. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.EVOptions.verify|verify} messages.
+                         * @param message EVOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.SearchTextRequest.IEVOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EVOptions message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.EVOptions.verify|verify} messages.
+                         * @param message EVOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.SearchTextRequest.IEVOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a EVOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EVOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.SearchTextRequest.EVOptions;
+
+                        /**
+                         * Decodes a EVOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EVOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.SearchTextRequest.EVOptions;
+
+                        /**
+                         * Verifies a EVOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a EVOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EVOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.SearchTextRequest.EVOptions;
+
+                        /**
+                         * Creates a plain object from a EVOptions message. Also converts values to other types if specified.
+                         * @param message EVOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.SearchTextRequest.EVOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EVOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EVOptions
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -8148,6 +8278,9 @@ export namespace google {
 
                     /** GetPlaceRequest regionCode */
                     regionCode?: (string|null);
+
+                    /** GetPlaceRequest sessionToken */
+                    sessionToken?: (string|null);
                 }
 
                 /** Represents a GetPlaceRequest. */
@@ -8167,6 +8300,9 @@ export namespace google {
 
                     /** GetPlaceRequest regionCode. */
                     public regionCode: string;
+
+                    /** GetPlaceRequest sessionToken. */
+                    public sessionToken: string;
 
                     /**
                      * Creates a new GetPlaceRequest instance using the specified properties.
@@ -8244,6 +8380,1126 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AutocompletePlacesRequest. */
+                interface IAutocompletePlacesRequest {
+
+                    /** AutocompletePlacesRequest input */
+                    input?: (string|null);
+
+                    /** AutocompletePlacesRequest locationBias */
+                    locationBias?: (google.maps.places.v1.AutocompletePlacesRequest.ILocationBias|null);
+
+                    /** AutocompletePlacesRequest locationRestriction */
+                    locationRestriction?: (google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction|null);
+
+                    /** AutocompletePlacesRequest includedPrimaryTypes */
+                    includedPrimaryTypes?: (string[]|null);
+
+                    /** AutocompletePlacesRequest includedRegionCodes */
+                    includedRegionCodes?: (string[]|null);
+
+                    /** AutocompletePlacesRequest languageCode */
+                    languageCode?: (string|null);
+
+                    /** AutocompletePlacesRequest regionCode */
+                    regionCode?: (string|null);
+
+                    /** AutocompletePlacesRequest origin */
+                    origin?: (google.type.ILatLng|null);
+
+                    /** AutocompletePlacesRequest inputOffset */
+                    inputOffset?: (number|null);
+
+                    /** AutocompletePlacesRequest includeQueryPredictions */
+                    includeQueryPredictions?: (boolean|null);
+
+                    /** AutocompletePlacesRequest sessionToken */
+                    sessionToken?: (string|null);
+                }
+
+                /** Represents an AutocompletePlacesRequest. */
+                class AutocompletePlacesRequest implements IAutocompletePlacesRequest {
+
+                    /**
+                     * Constructs a new AutocompletePlacesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IAutocompletePlacesRequest);
+
+                    /** AutocompletePlacesRequest input. */
+                    public input: string;
+
+                    /** AutocompletePlacesRequest locationBias. */
+                    public locationBias?: (google.maps.places.v1.AutocompletePlacesRequest.ILocationBias|null);
+
+                    /** AutocompletePlacesRequest locationRestriction. */
+                    public locationRestriction?: (google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction|null);
+
+                    /** AutocompletePlacesRequest includedPrimaryTypes. */
+                    public includedPrimaryTypes: string[];
+
+                    /** AutocompletePlacesRequest includedRegionCodes. */
+                    public includedRegionCodes: string[];
+
+                    /** AutocompletePlacesRequest languageCode. */
+                    public languageCode: string;
+
+                    /** AutocompletePlacesRequest regionCode. */
+                    public regionCode: string;
+
+                    /** AutocompletePlacesRequest origin. */
+                    public origin?: (google.type.ILatLng|null);
+
+                    /** AutocompletePlacesRequest inputOffset. */
+                    public inputOffset: number;
+
+                    /** AutocompletePlacesRequest includeQueryPredictions. */
+                    public includeQueryPredictions: boolean;
+
+                    /** AutocompletePlacesRequest sessionToken. */
+                    public sessionToken: string;
+
+                    /**
+                     * Creates a new AutocompletePlacesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutocompletePlacesRequest instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IAutocompletePlacesRequest): google.maps.places.v1.AutocompletePlacesRequest;
+
+                    /**
+                     * Encodes the specified AutocompletePlacesRequest message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.verify|verify} messages.
+                     * @param message AutocompletePlacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IAutocompletePlacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutocompletePlacesRequest message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.verify|verify} messages.
+                     * @param message AutocompletePlacesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IAutocompletePlacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutocompletePlacesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutocompletePlacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesRequest;
+
+                    /**
+                     * Decodes an AutocompletePlacesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutocompletePlacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesRequest;
+
+                    /**
+                     * Verifies an AutocompletePlacesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutocompletePlacesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutocompletePlacesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesRequest;
+
+                    /**
+                     * Creates a plain object from an AutocompletePlacesRequest message. Also converts values to other types if specified.
+                     * @param message AutocompletePlacesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.AutocompletePlacesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutocompletePlacesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutocompletePlacesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutocompletePlacesRequest {
+
+                    /** Properties of a LocationBias. */
+                    interface ILocationBias {
+
+                        /** LocationBias rectangle */
+                        rectangle?: (google.geo.type.IViewport|null);
+
+                        /** LocationBias circle */
+                        circle?: (google.maps.places.v1.ICircle|null);
+                    }
+
+                    /** Represents a LocationBias. */
+                    class LocationBias implements ILocationBias {
+
+                        /**
+                         * Constructs a new LocationBias.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.AutocompletePlacesRequest.ILocationBias);
+
+                        /** LocationBias rectangle. */
+                        public rectangle?: (google.geo.type.IViewport|null);
+
+                        /** LocationBias circle. */
+                        public circle?: (google.maps.places.v1.ICircle|null);
+
+                        /** LocationBias type. */
+                        public type?: ("rectangle"|"circle");
+
+                        /**
+                         * Creates a new LocationBias instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LocationBias instance
+                         */
+                        public static create(properties?: google.maps.places.v1.AutocompletePlacesRequest.ILocationBias): google.maps.places.v1.AutocompletePlacesRequest.LocationBias;
+
+                        /**
+                         * Encodes the specified LocationBias message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationBias.verify|verify} messages.
+                         * @param message LocationBias message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.AutocompletePlacesRequest.ILocationBias, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LocationBias message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationBias.verify|verify} messages.
+                         * @param message LocationBias message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesRequest.ILocationBias, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LocationBias message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LocationBias
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesRequest.LocationBias;
+
+                        /**
+                         * Decodes a LocationBias message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LocationBias
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesRequest.LocationBias;
+
+                        /**
+                         * Verifies a LocationBias message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LocationBias message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LocationBias
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesRequest.LocationBias;
+
+                        /**
+                         * Creates a plain object from a LocationBias message. Also converts values to other types if specified.
+                         * @param message LocationBias
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.AutocompletePlacesRequest.LocationBias, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LocationBias to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LocationBias
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a LocationRestriction. */
+                    interface ILocationRestriction {
+
+                        /** LocationRestriction rectangle */
+                        rectangle?: (google.geo.type.IViewport|null);
+
+                        /** LocationRestriction circle */
+                        circle?: (google.maps.places.v1.ICircle|null);
+                    }
+
+                    /** Represents a LocationRestriction. */
+                    class LocationRestriction implements ILocationRestriction {
+
+                        /**
+                         * Constructs a new LocationRestriction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction);
+
+                        /** LocationRestriction rectangle. */
+                        public rectangle?: (google.geo.type.IViewport|null);
+
+                        /** LocationRestriction circle. */
+                        public circle?: (google.maps.places.v1.ICircle|null);
+
+                        /** LocationRestriction type. */
+                        public type?: ("rectangle"|"circle");
+
+                        /**
+                         * Creates a new LocationRestriction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LocationRestriction instance
+                         */
+                        public static create(properties?: google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction): google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction;
+
+                        /**
+                         * Encodes the specified LocationRestriction message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.verify|verify} messages.
+                         * @param message LocationRestriction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LocationRestriction message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction.verify|verify} messages.
+                         * @param message LocationRestriction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesRequest.ILocationRestriction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LocationRestriction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LocationRestriction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction;
+
+                        /**
+                         * Decodes a LocationRestriction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LocationRestriction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction;
+
+                        /**
+                         * Verifies a LocationRestriction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LocationRestriction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LocationRestriction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction;
+
+                        /**
+                         * Creates a plain object from a LocationRestriction message. Also converts values to other types if specified.
+                         * @param message LocationRestriction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.AutocompletePlacesRequest.LocationRestriction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LocationRestriction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LocationRestriction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an AutocompletePlacesResponse. */
+                interface IAutocompletePlacesResponse {
+
+                    /** AutocompletePlacesResponse suggestions */
+                    suggestions?: (google.maps.places.v1.AutocompletePlacesResponse.ISuggestion[]|null);
+                }
+
+                /** Represents an AutocompletePlacesResponse. */
+                class AutocompletePlacesResponse implements IAutocompletePlacesResponse {
+
+                    /**
+                     * Constructs a new AutocompletePlacesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.places.v1.IAutocompletePlacesResponse);
+
+                    /** AutocompletePlacesResponse suggestions. */
+                    public suggestions: google.maps.places.v1.AutocompletePlacesResponse.ISuggestion[];
+
+                    /**
+                     * Creates a new AutocompletePlacesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AutocompletePlacesResponse instance
+                     */
+                    public static create(properties?: google.maps.places.v1.IAutocompletePlacesResponse): google.maps.places.v1.AutocompletePlacesResponse;
+
+                    /**
+                     * Encodes the specified AutocompletePlacesResponse message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.verify|verify} messages.
+                     * @param message AutocompletePlacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.places.v1.IAutocompletePlacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AutocompletePlacesResponse message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.verify|verify} messages.
+                     * @param message AutocompletePlacesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.places.v1.IAutocompletePlacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AutocompletePlacesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AutocompletePlacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse;
+
+                    /**
+                     * Decodes an AutocompletePlacesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AutocompletePlacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse;
+
+                    /**
+                     * Verifies an AutocompletePlacesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AutocompletePlacesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AutocompletePlacesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse;
+
+                    /**
+                     * Creates a plain object from an AutocompletePlacesResponse message. Also converts values to other types if specified.
+                     * @param message AutocompletePlacesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AutocompletePlacesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AutocompletePlacesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutocompletePlacesResponse {
+
+                    /** Properties of a Suggestion. */
+                    interface ISuggestion {
+
+                        /** Suggestion placePrediction */
+                        placePrediction?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction|null);
+
+                        /** Suggestion queryPrediction */
+                        queryPrediction?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction|null);
+                    }
+
+                    /** Represents a Suggestion. */
+                    class Suggestion implements ISuggestion {
+
+                        /**
+                         * Constructs a new Suggestion.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.ISuggestion);
+
+                        /** Suggestion placePrediction. */
+                        public placePrediction?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction|null);
+
+                        /** Suggestion queryPrediction. */
+                        public queryPrediction?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction|null);
+
+                        /** Suggestion kind. */
+                        public kind?: ("placePrediction"|"queryPrediction");
+
+                        /**
+                         * Creates a new Suggestion instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Suggestion instance
+                         */
+                        public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.ISuggestion): google.maps.places.v1.AutocompletePlacesResponse.Suggestion;
+
+                        /**
+                         * Encodes the specified Suggestion message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.verify|verify} messages.
+                         * @param message Suggestion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.ISuggestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Suggestion message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.verify|verify} messages.
+                         * @param message Suggestion message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.ISuggestion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Suggestion message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Suggestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion;
+
+                        /**
+                         * Decodes a Suggestion message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Suggestion
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion;
+
+                        /**
+                         * Verifies a Suggestion message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Suggestion message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Suggestion
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion;
+
+                        /**
+                         * Creates a plain object from a Suggestion message. Also converts values to other types if specified.
+                         * @param message Suggestion
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Suggestion to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Suggestion
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Suggestion {
+
+                        /** Properties of a StringRange. */
+                        interface IStringRange {
+
+                            /** StringRange startOffset */
+                            startOffset?: (number|null);
+
+                            /** StringRange endOffset */
+                            endOffset?: (number|null);
+                        }
+
+                        /** Represents a StringRange. */
+                        class StringRange implements IStringRange {
+
+                            /**
+                             * Constructs a new StringRange.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange);
+
+                            /** StringRange startOffset. */
+                            public startOffset: number;
+
+                            /** StringRange endOffset. */
+                            public endOffset: number;
+
+                            /**
+                             * Creates a new StringRange instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StringRange instance
+                             */
+                            public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange;
+
+                            /**
+                             * Encodes the specified StringRange message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.verify|verify} messages.
+                             * @param message StringRange message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StringRange message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange.verify|verify} messages.
+                             * @param message StringRange message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StringRange message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StringRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange;
+
+                            /**
+                             * Decodes a StringRange message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StringRange
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange;
+
+                            /**
+                             * Verifies a StringRange message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StringRange message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StringRange
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange;
+
+                            /**
+                             * Creates a plain object from a StringRange message. Also converts values to other types if specified.
+                             * @param message StringRange
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StringRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StringRange to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StringRange
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a FormattableText. */
+                        interface IFormattableText {
+
+                            /** FormattableText text */
+                            text?: (string|null);
+
+                            /** FormattableText matches */
+                            matches?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange[]|null);
+                        }
+
+                        /** Represents a FormattableText. */
+                        class FormattableText implements IFormattableText {
+
+                            /**
+                             * Constructs a new FormattableText.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText);
+
+                            /** FormattableText text. */
+                            public text: string;
+
+                            /** FormattableText matches. */
+                            public matches: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStringRange[];
+
+                            /**
+                             * Creates a new FormattableText instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FormattableText instance
+                             */
+                            public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText;
+
+                            /**
+                             * Encodes the specified FormattableText message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify|verify} messages.
+                             * @param message FormattableText message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FormattableText message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText.verify|verify} messages.
+                             * @param message FormattableText message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FormattableText message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FormattableText
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText;
+
+                            /**
+                             * Decodes a FormattableText message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FormattableText
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText;
+
+                            /**
+                             * Verifies a FormattableText message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FormattableText message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FormattableText
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText;
+
+                            /**
+                             * Creates a plain object from a FormattableText message. Also converts values to other types if specified.
+                             * @param message FormattableText
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.FormattableText, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FormattableText to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FormattableText
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a StructuredFormat. */
+                        interface IStructuredFormat {
+
+                            /** StructuredFormat mainText */
+                            mainText?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** StructuredFormat secondaryText */
+                            secondaryText?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+                        }
+
+                        /** Represents a StructuredFormat. */
+                        class StructuredFormat implements IStructuredFormat {
+
+                            /**
+                             * Constructs a new StructuredFormat.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat);
+
+                            /** StructuredFormat mainText. */
+                            public mainText?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** StructuredFormat secondaryText. */
+                            public secondaryText?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /**
+                             * Creates a new StructuredFormat instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StructuredFormat instance
+                             */
+                            public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat;
+
+                            /**
+                             * Encodes the specified StructuredFormat message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify|verify} messages.
+                             * @param message StructuredFormat message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StructuredFormat message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat.verify|verify} messages.
+                             * @param message StructuredFormat message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StructuredFormat message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StructuredFormat
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat;
+
+                            /**
+                             * Decodes a StructuredFormat message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StructuredFormat
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat;
+
+                            /**
+                             * Verifies a StructuredFormat message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StructuredFormat message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StructuredFormat
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat;
+
+                            /**
+                             * Creates a plain object from a StructuredFormat message. Also converts values to other types if specified.
+                             * @param message StructuredFormat
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.StructuredFormat, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StructuredFormat to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StructuredFormat
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a PlacePrediction. */
+                        interface IPlacePrediction {
+
+                            /** PlacePrediction place */
+                            place?: (string|null);
+
+                            /** PlacePrediction placeId */
+                            placeId?: (string|null);
+
+                            /** PlacePrediction text */
+                            text?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** PlacePrediction structuredFormat */
+                            structuredFormat?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null);
+
+                            /** PlacePrediction types */
+                            types?: (string[]|null);
+
+                            /** PlacePrediction distanceMeters */
+                            distanceMeters?: (number|null);
+                        }
+
+                        /** Represents a PlacePrediction. */
+                        class PlacePrediction implements IPlacePrediction {
+
+                            /**
+                             * Constructs a new PlacePrediction.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction);
+
+                            /** PlacePrediction place. */
+                            public place: string;
+
+                            /** PlacePrediction placeId. */
+                            public placeId: string;
+
+                            /** PlacePrediction text. */
+                            public text?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** PlacePrediction structuredFormat. */
+                            public structuredFormat?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null);
+
+                            /** PlacePrediction types. */
+                            public types: string[];
+
+                            /** PlacePrediction distanceMeters. */
+                            public distanceMeters: number;
+
+                            /**
+                             * Creates a new PlacePrediction instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PlacePrediction instance
+                             */
+                            public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction;
+
+                            /**
+                             * Encodes the specified PlacePrediction message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.verify|verify} messages.
+                             * @param message PlacePrediction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PlacePrediction message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction.verify|verify} messages.
+                             * @param message PlacePrediction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IPlacePrediction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PlacePrediction message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PlacePrediction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction;
+
+                            /**
+                             * Decodes a PlacePrediction message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PlacePrediction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction;
+
+                            /**
+                             * Verifies a PlacePrediction message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PlacePrediction message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PlacePrediction
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction;
+
+                            /**
+                             * Creates a plain object from a PlacePrediction message. Also converts values to other types if specified.
+                             * @param message PlacePrediction
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.PlacePrediction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PlacePrediction to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PlacePrediction
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a QueryPrediction. */
+                        interface IQueryPrediction {
+
+                            /** QueryPrediction text */
+                            text?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** QueryPrediction structuredFormat */
+                            structuredFormat?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null);
+                        }
+
+                        /** Represents a QueryPrediction. */
+                        class QueryPrediction implements IQueryPrediction {
+
+                            /**
+                             * Constructs a new QueryPrediction.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction);
+
+                            /** QueryPrediction text. */
+                            public text?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IFormattableText|null);
+
+                            /** QueryPrediction structuredFormat. */
+                            public structuredFormat?: (google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IStructuredFormat|null);
+
+                            /**
+                             * Creates a new QueryPrediction instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns QueryPrediction instance
+                             */
+                            public static create(properties?: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction;
+
+                            /**
+                             * Encodes the specified QueryPrediction message. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.verify|verify} messages.
+                             * @param message QueryPrediction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified QueryPrediction message, length delimited. Does not implicitly {@link google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction.verify|verify} messages.
+                             * @param message QueryPrediction message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.IQueryPrediction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a QueryPrediction message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns QueryPrediction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction;
+
+                            /**
+                             * Decodes a QueryPrediction message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns QueryPrediction
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction;
+
+                            /**
+                             * Verifies a QueryPrediction message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a QueryPrediction message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns QueryPrediction
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction;
+
+                            /**
+                             * Creates a plain object from a QueryPrediction message. Also converts values to other types if specified.
+                             * @param message QueryPrediction
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.AutocompletePlacesResponse.Suggestion.QueryPrediction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this QueryPrediction to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for QueryPrediction
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
                 }
             }
         }
