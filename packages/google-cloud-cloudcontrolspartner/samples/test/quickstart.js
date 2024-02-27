@@ -17,11 +17,7 @@
 const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
-const {describe, it, before} = require('mocha');
-const {CloudControlsPartnerMonitoringClient} =
-  require('@google-cloud/cloudcontrolspartner').v1beta;
-const cloudcontrolspartnerClient = new CloudControlsPartnerMonitoringClient();
-
+const {describe, it} = require('mocha');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
@@ -29,13 +25,9 @@ const cwd = path.join(__dirname, '..');
 describe('Quickstart', () => {
   let projectId;
 
-  before(async () => {
-    projectId = await cloudcontrolspartnerClient.getProjectId();
-  });
-
   it('should run quickstart', async () => {
     const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
+      `node ./quickstart.js organizations/google.com/locations/us-central1`,
       {cwd}
     );
     assert(output !== null);
