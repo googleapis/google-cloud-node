@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent) {
@@ -53,7 +51,8 @@ function main(parent) {
   // const orderBy = 'abc123'
 
   // Imports the Cloudcontrolspartner library
-  const {CloudControlsPartnerCoreClient} = require('@google-cloud/cloudcontrolspartner').v1beta;
+  const {CloudControlsPartnerCoreClient} =
+    require('@google-cloud/cloudcontrolspartner').v1beta;
 
   // Instantiates a client
   const cloudcontrolspartnerClient = new CloudControlsPartnerCoreClient();
@@ -67,7 +66,7 @@ function main(parent) {
     // Run request
     const iterable = cloudcontrolspartnerClient.listCustomersAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 

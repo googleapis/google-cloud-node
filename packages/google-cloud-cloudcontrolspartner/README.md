@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,70 +53,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/cloudcontrolspartner
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. Parent resource
- *  Format
- *  organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}
- */
-// const parent = 'abc123'
-/**
- *  Optional. The maximum number of customers row to return. The service may
- *  return fewer than this value. If unspecified, at most 10 customers will be
- *  returned.
- */
-// const pageSize = 1234
-/**
- *  Optional. A page token, received from a previous `ListViolations` call.
- *  Provide this to retrieve the subsequent page.
- */
-// const pageToken = 'abc123'
-/**
- *  Optional. Filtering results
- */
-// const filter = 'abc123'
-/**
- *  Optional. Hint for how to order the results
- */
-// const orderBy = 'abc123'
-/**
- *  Optional. Specifies the interval for retrieving violations.
- *  if unspecified, all violations will be returned.
- */
-// const interval = {}
-
-// Imports the Cloudcontrolspartner library
-const {CloudControlsPartnerMonitoringClient} =
-  require('@google-cloud/cloudcontrolspartner').v1beta;
-
-// Instantiates a client
-const cloudcontrolspartnerClient = new CloudControlsPartnerMonitoringClient();
-
-async function callListViolations() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = cloudcontrolspartnerClient.listViolationsAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListViolations();
-
-```
 
 
 
