@@ -5,6 +5,40 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "1fb1181f966a376c4e9f08dd779ec90aff059e80",
+          "message": "[cloudprofiler] add `start_time` to Profile proto",
+          "issues": [
+            "5086"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "91f93369-a04f-4831-aeca-cd3ccfab1390",
+      "createTime": "2024-02-27T19:24:14.911Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "639c7076472d2e77845e2e5fdda954608566f852",
+          "message": "[alloydb] support for obtaining the public IP address of an Instance",
+          "issues": [
+            "5088"
+          ]
+        }
+      ],
+      "version": "1.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "c68c680c-8a6e-4b29-b95f-3abd321c3b32",
+      "createTime": "2024-02-27T19:24:14.900Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "86b0c1f491041ba8a2fbc9ad31551076dde7e4c0",
           "message": "Add initial files for google.cloud.parallelstore.v1beta",
           "issues": [
@@ -24622,5 +24656,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-02-27T18:32:19.600Z"
+  "updateTime": "2024-02-27T19:24:14.911Z"
 }
