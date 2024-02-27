@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.8.1](https://github.com/googleapis/google-cloud-node/compare/container-v5.8.0...container-v5.8.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* [container] Add client library version to headers ([#5076](https://github.com/googleapis/google-cloud-node/issues/5076)) ([a1b39d3](https://github.com/googleapis/google-cloud-node/commit/a1b39d399119d815282239638cde4903de4b2a76))
+
 ## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.7.0...container-v5.8.0) (2024-02-22)
 
 

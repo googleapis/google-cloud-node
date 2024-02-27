@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-container",
-        "version": "5.8.0",
+        "version": "5.8.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 184,
+                    "end": 188,
                     "type": "FULL"
                 }
             ],
@@ -350,6 +350,10 @@
                     {
                         "name": "resource_manager_tags",
                         "type": ".google.container.v1beta1.ResourceManagerTags"
+                    },
+                    {
+                        "name": "queued_provisioning",
+                        "type": ".google.container.v1beta1.NodePool.QueuedProvisioning"
                     }
                 ],
                 "resultType": ".google.container.v1beta1.Operation",

@@ -1491,9 +1491,9 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       assert(
         (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1543,9 +1543,9 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       assert(
         (client.descriptors.page.queryDeployedModels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1595,9 +1595,9 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       assert(
         (client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1639,9 +1639,9 @@ describe('v1.DeploymentResourcePoolServiceClient', () => {
       assert(
         (client.descriptors.page.queryDeployedModels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
