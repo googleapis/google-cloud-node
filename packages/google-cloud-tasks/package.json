@@ -22,6 +22,16 @@
         "types": "./build/cjs/src/index.d.ts",
         "default": "./build/cjs/src/index.cjs"
       }
+    },
+    "./build/protos/protos": {
+      "import": {
+        "types": "./build/protos/protos/protos.d.ts",
+        "default": "./build/protos/protos/protos.js"
+      },
+      "require": {
+        "types": "./build/protos/protos/protos.d.ts",
+        "default": "./build/protos/protos/protos.cjs"
+      }
     }
   },
   "files": [
@@ -62,7 +72,7 @@
     "prelint": "cd samples; npm link ../; npm i",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
     "test": "npm run test:esm && npm run test:cjs",
-    "compile:esm": "tsc -p ./tsconfig.esm.json",
+    "compile:esm": "tsc -p ./tsconfig.esm.json && cp -r esm/src/json-helper.cjs build/esm/src/json-helper.cjs",
     "babel": "babel esm --out-dir build/cjs --ignore \"esm/**/*.d.ts\" --extensions \".ts\" --out-file-extension .cjs --copy-files",
     "compile:cjs": "tsc -p ./tsconfig.json && npm run babel",
     "compile": "npm run compile:esm && npm run compile:cjs && cp -r protos build/protos"
