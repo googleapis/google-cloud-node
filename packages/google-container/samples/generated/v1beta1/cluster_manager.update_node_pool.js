@@ -158,6 +158,10 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    *  Existing tags will be replaced with new values.
    */
   // const resourceManagerTags = {}
+  /**
+   *  Specifies the configuration of queued provisioning.
+   */
+  // const queuedProvisioning = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1beta1;
