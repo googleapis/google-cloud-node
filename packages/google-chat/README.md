@@ -105,13 +105,12 @@ const chatClient = new ChatServiceClient();
 
 async function callListSpaces() {
   // Construct request
-  const request = {
-  };
+  const request = {};
 
   // Run request
   const iterable = chatClient.listSpacesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
