@@ -6846,6 +6846,11 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "secondaryBootDisks": {
+                      "rule": "repeated",
+                      "type": "SecondaryBootDisk",
+                      "id": 48
                     }
                   }
                 },
@@ -12193,6 +12198,26 @@
                         "CLUSTER_TIER_UNSPECIFIED": 0,
                         "STANDARD": 1,
                         "ENTERPRISE": 2
+                      }
+                    }
+                  }
+                },
+                "SecondaryBootDisk": {
+                  "fields": {
+                    "mode": {
+                      "type": "Mode",
+                      "id": 1
+                    },
+                    "diskImage": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Mode": {
+                      "values": {
+                        "MODE_UNSPECIFIED": 0,
+                        "CONTAINER_IMAGE_CACHE": 1
                       }
                     }
                   }
