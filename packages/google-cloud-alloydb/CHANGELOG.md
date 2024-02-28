@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.5.0...alloydb-v1.6.0) (2024-02-27)
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.5.0...alloydb-v1.6.0) (2024-02-28)
 
 
 ### Features
