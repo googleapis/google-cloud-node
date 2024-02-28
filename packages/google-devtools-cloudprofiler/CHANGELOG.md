@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudprofiler-v0.3.0...cloudprofiler-v0.4.0) (2024-02-27)
+
+
+### Features
+
+* [cloudprofiler] add `start_time` to Profile proto ([#5086](https://github.com/googleapis/google-cloud-node/issues/5086)) ([1fb1181](https://github.com/googleapis/google-cloud-node/commit/1fb1181f966a376c4e9f08dd779ec90aff059e80))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/cloudprofiler-v0.2.0...cloudprofiler-v0.3.0) (2024-02-09)
 
 
