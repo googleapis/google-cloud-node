@@ -460,6 +460,10 @@
                           "rule": "repeated",
                           "type": "Label",
                           "id": 4
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
                         }
                       }
                     },
@@ -1571,6 +1575,18 @@
                         "cve": {
                           "type": "Cve",
                           "id": 1
+                        },
+                        "offendingPackage": {
+                          "type": "Package",
+                          "id": 2
+                        },
+                        "fixedPackage": {
+                          "type": "Package",
+                          "id": 3
+                        },
+                        "securityBulletin": {
+                          "type": "SecurityBulletin",
+                          "id": 4
                         }
                       }
                     },
@@ -1592,6 +1608,43 @@
                         "upstreamFixAvailable": {
                           "type": "bool",
                           "id": 4
+                        },
+                        "impact": {
+                          "type": "RiskRating",
+                          "id": 5
+                        },
+                        "exploitationActivity": {
+                          "type": "ExploitationActivity",
+                          "id": 6
+                        },
+                        "observedInTheWild": {
+                          "type": "bool",
+                          "id": 7
+                        },
+                        "zeroDay": {
+                          "type": "bool",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "RiskRating": {
+                          "values": {
+                            "RISK_RATING_UNSPECIFIED": 0,
+                            "LOW": 1,
+                            "MEDIUM": 2,
+                            "HIGH": 3,
+                            "CRITICAL": 4
+                          }
+                        },
+                        "ExploitationActivity": {
+                          "values": {
+                            "EXPLOITATION_ACTIVITY_UNSPECIFIED": 0,
+                            "WIDE": 1,
+                            "CONFIRMED": 2,
+                            "AVAILABLE": 3,
+                            "ANTICIPATED": 4,
+                            "NO_KNOWN": 5
+                          }
                         }
                       }
                     },
@@ -1692,6 +1745,42 @@
                             "IMPACT_LOW": 2,
                             "IMPACT_NONE": 3
                           }
+                        }
+                      }
+                    },
+                    "Package": {
+                      "fields": {
+                        "packageName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "cpeUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "packageType": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "packageVersion": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SecurityBulletin": {
+                      "fields": {
+                        "bulletinId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "submissionTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "suggestedUpgradeVersion": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },

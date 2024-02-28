@@ -2051,6 +2051,9 @@ export namespace google {
 
                     /** Container labels */
                     labels?: (google.cloud.securitycenter.v1.ILabel[]|null);
+
+                    /** Container createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a Container. */
@@ -2073,6 +2076,9 @@ export namespace google {
 
                     /** Container labels. */
                     public labels: google.cloud.securitycenter.v1.ILabel[];
+
+                    /** Container createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new Container instance using the specified properties.
@@ -6647,6 +6653,15 @@ export namespace google {
 
                     /** Vulnerability cve */
                     cve?: (google.cloud.securitycenter.v1.ICve|null);
+
+                    /** Vulnerability offendingPackage */
+                    offendingPackage?: (google.cloud.securitycenter.v1.IPackage|null);
+
+                    /** Vulnerability fixedPackage */
+                    fixedPackage?: (google.cloud.securitycenter.v1.IPackage|null);
+
+                    /** Vulnerability securityBulletin */
+                    securityBulletin?: (google.cloud.securitycenter.v1.ISecurityBulletin|null);
                 }
 
                 /** Represents a Vulnerability. */
@@ -6660,6 +6675,15 @@ export namespace google {
 
                     /** Vulnerability cve. */
                     public cve?: (google.cloud.securitycenter.v1.ICve|null);
+
+                    /** Vulnerability offendingPackage. */
+                    public offendingPackage?: (google.cloud.securitycenter.v1.IPackage|null);
+
+                    /** Vulnerability fixedPackage. */
+                    public fixedPackage?: (google.cloud.securitycenter.v1.IPackage|null);
+
+                    /** Vulnerability securityBulletin. */
+                    public securityBulletin?: (google.cloud.securitycenter.v1.ISecurityBulletin|null);
 
                     /**
                      * Creates a new Vulnerability instance using the specified properties.
@@ -6753,6 +6777,18 @@ export namespace google {
 
                     /** Cve upstreamFixAvailable */
                     upstreamFixAvailable?: (boolean|null);
+
+                    /** Cve impact */
+                    impact?: (google.cloud.securitycenter.v1.Cve.RiskRating|keyof typeof google.cloud.securitycenter.v1.Cve.RiskRating|null);
+
+                    /** Cve exploitationActivity */
+                    exploitationActivity?: (google.cloud.securitycenter.v1.Cve.ExploitationActivity|keyof typeof google.cloud.securitycenter.v1.Cve.ExploitationActivity|null);
+
+                    /** Cve observedInTheWild */
+                    observedInTheWild?: (boolean|null);
+
+                    /** Cve zeroDay */
+                    zeroDay?: (boolean|null);
                 }
 
                 /** Represents a Cve. */
@@ -6775,6 +6811,18 @@ export namespace google {
 
                     /** Cve upstreamFixAvailable. */
                     public upstreamFixAvailable: boolean;
+
+                    /** Cve impact. */
+                    public impact: (google.cloud.securitycenter.v1.Cve.RiskRating|keyof typeof google.cloud.securitycenter.v1.Cve.RiskRating);
+
+                    /** Cve exploitationActivity. */
+                    public exploitationActivity: (google.cloud.securitycenter.v1.Cve.ExploitationActivity|keyof typeof google.cloud.securitycenter.v1.Cve.ExploitationActivity);
+
+                    /** Cve observedInTheWild. */
+                    public observedInTheWild: boolean;
+
+                    /** Cve zeroDay. */
+                    public zeroDay: boolean;
 
                     /**
                      * Creates a new Cve instance using the specified properties.
@@ -6852,6 +6900,28 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Cve {
+
+                    /** RiskRating enum. */
+                    enum RiskRating {
+                        RISK_RATING_UNSPECIFIED = 0,
+                        LOW = 1,
+                        MEDIUM = 2,
+                        HIGH = 3,
+                        CRITICAL = 4
+                    }
+
+                    /** ExploitationActivity enum. */
+                    enum ExploitationActivity {
+                        EXPLOITATION_ACTIVITY_UNSPECIFIED = 0,
+                        WIDE = 1,
+                        CONFIRMED = 2,
+                        AVAILABLE = 3,
+                        ANTICIPATED = 4,
+                        NO_KNOWN = 5
+                    }
                 }
 
                 /** Properties of a Reference. */
@@ -7149,6 +7219,230 @@ export namespace google {
                         IMPACT_LOW = 2,
                         IMPACT_NONE = 3
                     }
+                }
+
+                /** Properties of a Package. */
+                interface IPackage {
+
+                    /** Package packageName */
+                    packageName?: (string|null);
+
+                    /** Package cpeUri */
+                    cpeUri?: (string|null);
+
+                    /** Package packageType */
+                    packageType?: (string|null);
+
+                    /** Package packageVersion */
+                    packageVersion?: (string|null);
+                }
+
+                /** Represents a Package. */
+                class Package implements IPackage {
+
+                    /**
+                     * Constructs a new Package.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IPackage);
+
+                    /** Package packageName. */
+                    public packageName: string;
+
+                    /** Package cpeUri. */
+                    public cpeUri: string;
+
+                    /** Package packageType. */
+                    public packageType: string;
+
+                    /** Package packageVersion. */
+                    public packageVersion: string;
+
+                    /**
+                     * Creates a new Package instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Package instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IPackage): google.cloud.securitycenter.v1.Package;
+
+                    /**
+                     * Encodes the specified Package message. Does not implicitly {@link google.cloud.securitycenter.v1.Package.verify|verify} messages.
+                     * @param message Package message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Package message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Package.verify|verify} messages.
+                     * @param message Package message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IPackage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Package message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Package
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Package;
+
+                    /**
+                     * Decodes a Package message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Package
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Package;
+
+                    /**
+                     * Verifies a Package message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Package message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Package
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Package;
+
+                    /**
+                     * Creates a plain object from a Package message. Also converts values to other types if specified.
+                     * @param message Package
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Package, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Package to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Package
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SecurityBulletin. */
+                interface ISecurityBulletin {
+
+                    /** SecurityBulletin bulletinId */
+                    bulletinId?: (string|null);
+
+                    /** SecurityBulletin submissionTime */
+                    submissionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecurityBulletin suggestedUpgradeVersion */
+                    suggestedUpgradeVersion?: (string|null);
+                }
+
+                /** Represents a SecurityBulletin. */
+                class SecurityBulletin implements ISecurityBulletin {
+
+                    /**
+                     * Constructs a new SecurityBulletin.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ISecurityBulletin);
+
+                    /** SecurityBulletin bulletinId. */
+                    public bulletinId: string;
+
+                    /** SecurityBulletin submissionTime. */
+                    public submissionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecurityBulletin suggestedUpgradeVersion. */
+                    public suggestedUpgradeVersion: string;
+
+                    /**
+                     * Creates a new SecurityBulletin instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecurityBulletin instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ISecurityBulletin): google.cloud.securitycenter.v1.SecurityBulletin;
+
+                    /**
+                     * Encodes the specified SecurityBulletin message. Does not implicitly {@link google.cloud.securitycenter.v1.SecurityBulletin.verify|verify} messages.
+                     * @param message SecurityBulletin message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ISecurityBulletin, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecurityBulletin message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SecurityBulletin.verify|verify} messages.
+                     * @param message SecurityBulletin message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ISecurityBulletin, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecurityBulletin message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecurityBulletin
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.SecurityBulletin;
+
+                    /**
+                     * Decodes a SecurityBulletin message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecurityBulletin
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.SecurityBulletin;
+
+                    /**
+                     * Verifies a SecurityBulletin message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecurityBulletin message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecurityBulletin
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.SecurityBulletin;
+
+                    /**
+                     * Creates a plain object from a SecurityBulletin message. Also converts values to other types if specified.
+                     * @param message SecurityBulletin
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.SecurityBulletin, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecurityBulletin to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecurityBulletin
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a MuteConfig. */
