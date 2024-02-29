@@ -1988,9 +1988,9 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2039,9 +2039,9 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2090,9 +2090,9 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2132,9 +2132,9 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2323,9 +2323,9 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2375,9 +2375,9 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2425,9 +2425,9 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2466,9 +2466,9 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

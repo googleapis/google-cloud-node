@@ -36,7 +36,7 @@ function main(parent) {
   /**
    *  The maximum number of items to return.
    *  Default page_size is 1000.
-   *  Max limit is 10000.
+   *  Max limit is 1000.
    */
   // const pageSize = 1234
   /**

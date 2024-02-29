@@ -3691,9 +3691,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeaturestores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3742,9 +3742,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeaturestores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3793,9 +3793,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeaturestores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3835,9 +3835,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeaturestores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4030,9 +4030,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4081,9 +4081,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4132,9 +4132,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4174,9 +4174,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4351,9 +4351,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4404,9 +4404,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4449,9 +4449,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4491,9 +4491,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4668,9 +4668,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.searchFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4719,9 +4719,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.searchFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4764,9 +4764,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.searchFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4806,9 +4806,9 @@ describe('v1.FeaturestoreServiceClient', () => {
       assert(
         (client.descriptors.page.searchFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
