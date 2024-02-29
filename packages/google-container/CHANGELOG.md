@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.8.1...container-v5.9.0) (2024-02-28)
+
+
+### Features
+
+* [container] add secondary boot disks field to NodePool API ([#5094](https://github.com/googleapis/google-cloud-node/issues/5094)) ([208250e](https://github.com/googleapis/google-cloud-node/commit/208250ebe1508e4f2190e7233d8fb5ea5bfc7911))
+
 ## [5.8.1](https://github.com/googleapis/google-cloud-node/compare/container-v5.8.0...container-v5.8.1) (2024-02-27)
 
 

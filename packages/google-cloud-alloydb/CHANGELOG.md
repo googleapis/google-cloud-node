@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.5.0...alloydb-v1.6.0) (2024-02-28)
+
+
+### Features
+
+* [alloydb] support for obtaining the public IP address of an Instance ([#5088](https://github.com/googleapis/google-cloud-node/issues/5088)) ([639c707](https://github.com/googleapis/google-cloud-node/commit/639c7076472d2e77845e2e5fdda954608566f852))
+
 ## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.4.1...alloydb-v1.5.0) (2024-02-09)
 
 

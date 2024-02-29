@@ -5,6 +5,57 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "1fb1181f966a376c4e9f08dd779ec90aff059e80",
+          "message": "[cloudprofiler] add `start_time` to Profile proto",
+          "issues": [
+            "5086"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "9038fee3-a6cd-43a1-9e05-55d95d11dbc3",
+      "createTime": "2024-02-28T15:00:12.175Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "208250ebe1508e4f2190e7233d8fb5ea5bfc7911",
+          "message": "[container] add secondary boot disks field to NodePool API",
+          "issues": [
+            "5094"
+          ]
+        }
+      ],
+      "version": "5.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "470a2bc9-52dc-450c-b336-9374e7ebc1ec",
+      "createTime": "2024-02-28T15:00:12.164Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "639c7076472d2e77845e2e5fdda954608566f852",
+          "message": "[alloydb] support for obtaining the public IP address of an Instance",
+          "issues": [
+            "5088"
+          ]
+        }
+      ],
+      "version": "1.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "98b66235-1783-4376-a39e-dde339faed4a",
+      "createTime": "2024-02-28T15:00:12.153Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "86b0c1f491041ba8a2fbc9ad31551076dde7e4c0",
           "message": "Add initial files for google.cloud.parallelstore.v1beta",
           "issues": [
@@ -24622,5 +24673,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-02-27T18:32:19.600Z"
+  "updateTime": "2024-02-28T15:00:12.175Z"
 }
