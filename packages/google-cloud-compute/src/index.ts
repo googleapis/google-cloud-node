@@ -70,6 +70,8 @@ const InstancesClient = v1.InstancesClient;
 type InstancesClient = v1.InstancesClient;
 const InstanceTemplatesClient = v1.InstanceTemplatesClient;
 type InstanceTemplatesClient = v1.InstanceTemplatesClient;
+const InstantSnapshotsClient = v1.InstantSnapshotsClient;
+type InstantSnapshotsClient = v1.InstantSnapshotsClient;
 const InterconnectAttachmentsClient = v1.InterconnectAttachmentsClient;
 type InterconnectAttachmentsClient = v1.InterconnectAttachmentsClient;
 const InterconnectLocationsClient = v1.InterconnectLocationsClient;
@@ -132,6 +134,8 @@ const RegionInstancesClient = v1.RegionInstancesClient;
 type RegionInstancesClient = v1.RegionInstancesClient;
 const RegionInstanceTemplatesClient = v1.RegionInstanceTemplatesClient;
 type RegionInstanceTemplatesClient = v1.RegionInstanceTemplatesClient;
+const RegionInstantSnapshotsClient = v1.RegionInstantSnapshotsClient;
+type RegionInstantSnapshotsClient = v1.RegionInstantSnapshotsClient;
 const RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
 type RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
 const RegionNetworkFirewallPoliciesClient =
@@ -236,6 +240,7 @@ export {
   InstanceGroupsClient,
   InstancesClient,
   InstanceTemplatesClient,
+  InstantSnapshotsClient,
   InterconnectAttachmentsClient,
   InterconnectLocationsClient,
   InterconnectRemoteLocationsClient,
@@ -267,6 +272,7 @@ export {
   RegionInstanceGroupsClient,
   RegionInstancesClient,
   RegionInstanceTemplatesClient,
+  RegionInstantSnapshotsClient,
   RegionNetworkEndpointGroupsClient,
   RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,
@@ -332,6 +338,7 @@ export default {
   InstanceGroupsClient,
   InstancesClient,
   InstanceTemplatesClient,
+  InstantSnapshotsClient,
   InterconnectAttachmentsClient,
   InterconnectLocationsClient,
   InterconnectRemoteLocationsClient,
@@ -363,6 +370,7 @@ export default {
   RegionInstanceGroupsClient,
   RegionInstancesClient,
   RegionInstanceTemplatesClient,
+  RegionInstantSnapshotsClient,
   RegionNetworkEndpointGroupsClient,
   RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,
