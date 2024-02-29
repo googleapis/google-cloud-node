@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.13.0...aiplatform-v3.14.0) (2024-02-27)
+
+
+### Features
+
+* Add CompositeKey message and composite_key field to FeatureViewDataKey ([#5072](https://github.com/googleapis/google-cloud-node/issues/5072)) ([b643f04](https://github.com/googleapis/google-cloud-node/commit/b643f040b35dd180ad0264935373e44056283249))
+
 ## [3.13.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.12.0...aiplatform-v3.13.0) (2024-02-22)
 
 
