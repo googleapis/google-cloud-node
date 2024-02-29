@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudprofiler-v0.3.0...cloudprofiler-v0.4.0) (2024-02-27)
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/cloudprofiler-v0.3.0...cloudprofiler-v0.4.0) (2024-02-28)
 
 
 ### Features

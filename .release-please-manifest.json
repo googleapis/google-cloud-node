@@ -138,7 +138,7 @@
   "packages/google-cloud-websecurityscanner": "3.1.0",
   "packages/google-cloud-workflows-executions": "3.2.0",
   "packages/google-cloud-workstations": "1.2.0",
-  "packages/google-container": "5.8.1",
+  "packages/google-container": "5.9.0",
   "packages/google-dataflow": "3.1.0",
   "packages/google-devtools-artifactregistry": "3.2.0",
   "packages/google-devtools-cloudbuild": "4.2.0",
