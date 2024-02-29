@@ -18,3 +18,5 @@ node.owlbot_main(relative_dir="packages/google-cloud-securitycenter",
     staging_excludes=['package.json', 'README.md'],
     templates_excludes=['.kokoro/samples-test.sh', '.kokoro/samples-test.sh']
 )
+
+s.replace("packages/google-cloud-sql/build/protos/protos.d.ts", r"""Kubernetes\.object""", "Kubernetes.Object")
