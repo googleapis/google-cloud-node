@@ -5705,7 +5705,7 @@ export namespace google {
                          * @param [properties] Properties to set
                          * @returns Object instance
                          */
-                        public static create(properties?: google.cloud.securitycenter.v1.Kubernetes.IObject): google.cloud.securitycenter.v1.Kubernetes.object;
+                        public static create(properties?: google.cloud.securitycenter.v1.Kubernetes.IObject): google.cloud.securitycenter.v1.Kubernetes.Object;
 
                         /**
                          * Encodes the specified Object message. Does not implicitly {@link google.cloud.securitycenter.v1.Kubernetes.Object.verify|verify} messages.
@@ -5731,7 +5731,7 @@ export namespace google {
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Kubernetes.object;
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Kubernetes.Object;
 
                         /**
                          * Decodes an Object message from the specified reader or buffer, length delimited.
@@ -5740,7 +5740,7 @@ export namespace google {
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Kubernetes.object;
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Kubernetes.Object;
 
                         /**
                          * Verifies an Object message.
@@ -5754,7 +5754,7 @@ export namespace google {
                          * @param object Plain object
                          * @returns Object
                          */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Kubernetes.object;
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Kubernetes.Object;
 
                         /**
                          * Creates a plain object from an Object message. Also converts values to other types if specified.
@@ -5762,7 +5762,7 @@ export namespace google {
                          * @param [options] Conversion options
                          * @returns Plain object
                          */
-                        public static toObject(message: google.cloud.securitycenter.v1.Kubernetes.object, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                        public static toObject(message: google.cloud.securitycenter.v1.Kubernetes.Object, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                         /**
                          * Converts this Object to JSON.
@@ -30981,7 +30981,7 @@ export namespace google {
                          * @param [properties] Properties to set
                          * @returns Object instance
                          */
-                        public static create(properties?: google.cloud.securitycenter.v2.Kubernetes.IObject): google.cloud.securitycenter.v2.Kubernetes.object;
+                        public static create(properties?: google.cloud.securitycenter.v2.Kubernetes.IObject): google.cloud.securitycenter.v2.Kubernetes.Object;
 
                         /**
                          * Encodes the specified Object message. Does not implicitly {@link google.cloud.securitycenter.v2.Kubernetes.Object.verify|verify} messages.
@@ -31007,7 +31007,7 @@ export namespace google {
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.Kubernetes.object;
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.Kubernetes.Object;
 
                         /**
                          * Decodes an Object message from the specified reader or buffer, length delimited.
@@ -31016,7 +31016,7 @@ export namespace google {
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.Kubernetes.object;
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.Kubernetes.Object;
 
                         /**
                          * Verifies an Object message.
@@ -31030,7 +31030,7 @@ export namespace google {
                          * @param object Plain object
                          * @returns Object
                          */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.Kubernetes.object;
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.Kubernetes.Object;
 
                         /**
                          * Creates a plain object from an Object message. Also converts values to other types if specified.
@@ -31038,7 +31038,7 @@ export namespace google {
                          * @param [options] Conversion options
                          * @returns Plain object
                          */
-                        public static toObject(message: google.cloud.securitycenter.v2.Kubernetes.object, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                        public static toObject(message: google.cloud.securitycenter.v2.Kubernetes.Object, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                         /**
                          * Converts this Object to JSON.
