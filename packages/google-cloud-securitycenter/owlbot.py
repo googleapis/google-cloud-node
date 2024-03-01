@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import synthtool.languages.node_mono_repo as node
+import synthtool as s
 
 node.owlbot_main(relative_dir="packages/google-cloud-securitycenter",
     staging_excludes=['package.json', 'README.md'],
