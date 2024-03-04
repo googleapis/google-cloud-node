@@ -33,10 +33,10 @@ function main(
   // const bucketName = 'your-unique-bucket-name';
 
   // The ID of the first GCS file to download
-  // const firstFileName = 'your-first-file-name';
+  // const firstFilePath = 'your-first-file-name';
 
   // The ID of the second GCS file to download
-  // const secondFileName = 'your-second-file-name;
+  // const secondFilePath = 'your-second-file-name';
 
   // Imports the Google Cloud client library
   const {Storage, TransferManager} = require('@google-cloud/storage');
