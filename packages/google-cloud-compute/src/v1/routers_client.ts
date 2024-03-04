@@ -1232,7 +1232,7 @@ export class RoutersClient {
   }
 
   /**
-   * Retrieves an aggregated list of routers.
+   * Retrieves an aggregated list of routers. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
@@ -1250,7 +1250,7 @@ export class RoutersClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {number} request.serviceProjectNumber
    *   The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
    * @param {object} [options]
@@ -1310,7 +1310,7 @@ export class RoutersClient {
    * @param {string} request.region
    *   Name of the region for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {string} request.router
    *   Name of the Router resource to query for Nat Mapping information of VM endpoints.
    * @param {object} [options]
@@ -1421,7 +1421,7 @@ export class RoutersClient {
    * @param {string} request.region
    *   Name of the region for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {string} request.router
    *   Name of the Router resource to query for Nat Mapping information of VM endpoints.
    * @param {object} [options]
@@ -1480,7 +1480,7 @@ export class RoutersClient {
    * @param {string} request.region
    *   Name of the region for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {string} request.router
    *   Name of the Router resource to query for Nat Mapping information of VM endpoints.
    * @param {object} [options]
@@ -1536,7 +1536,7 @@ export class RoutersClient {
    * @param {string} request.region
    *   Name of the region for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1634,7 +1634,7 @@ export class RoutersClient {
    * @param {string} request.region
    *   Name of the region for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1688,7 +1688,7 @@ export class RoutersClient {
    * @param {string} request.region
    *   Name of the region for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

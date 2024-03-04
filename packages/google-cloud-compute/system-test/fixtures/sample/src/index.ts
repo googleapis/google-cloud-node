@@ -41,6 +41,7 @@ import {
   InstanceGroupsClient,
   InstancesClient,
   InstanceTemplatesClient,
+  InstantSnapshotsClient,
   InterconnectAttachmentsClient,
   InterconnectLocationsClient,
   InterconnectRemoteLocationsClient,
@@ -72,6 +73,7 @@ import {
   RegionInstanceGroupsClient,
   RegionInstancesClient,
   RegionInstanceTemplatesClient,
+  RegionInstantSnapshotsClient,
   RegionNetworkEndpointGroupsClient,
   RegionNetworkFirewallPoliciesClient,
   RegionNotificationEndpointsClient,
@@ -196,6 +198,9 @@ function doStuffWithInstancesClient(client: InstancesClient) {
 function doStuffWithInstanceTemplatesClient(client: InstanceTemplatesClient) {
   client.close();
 }
+function doStuffWithInstantSnapshotsClient(client: InstantSnapshotsClient) {
+  client.close();
+}
 function doStuffWithInterconnectAttachmentsClient(
   client: InterconnectAttachmentsClient
 ) {
@@ -312,6 +317,11 @@ function doStuffWithRegionInstancesClient(client: RegionInstancesClient) {
 }
 function doStuffWithRegionInstanceTemplatesClient(
   client: RegionInstanceTemplatesClient
+) {
+  client.close();
+}
+function doStuffWithRegionInstantSnapshotsClient(
+  client: RegionInstantSnapshotsClient
 ) {
   client.close();
 }
@@ -528,6 +538,9 @@ function main() {
   const instanceTemplatesClient = new InstanceTemplatesClient();
   doStuffWithInstanceTemplatesClient(instanceTemplatesClient);
   // check that the client instance can be created
+  const instantSnapshotsClient = new InstantSnapshotsClient();
+  doStuffWithInstantSnapshotsClient(instantSnapshotsClient);
+  // check that the client instance can be created
   const interconnectAttachmentsClient = new InterconnectAttachmentsClient();
   doStuffWithInterconnectAttachmentsClient(interconnectAttachmentsClient);
   // check that the client instance can be created
@@ -629,6 +642,9 @@ function main() {
   // check that the client instance can be created
   const regionInstanceTemplatesClient = new RegionInstanceTemplatesClient();
   doStuffWithRegionInstanceTemplatesClient(regionInstanceTemplatesClient);
+  // check that the client instance can be created
+  const regionInstantSnapshotsClient = new RegionInstantSnapshotsClient();
+  doStuffWithRegionInstantSnapshotsClient(regionInstantSnapshotsClient);
   // check that the client instance can be created
   const regionNetworkEndpointGroupsClient =
     new RegionNetworkEndpointGroupsClient();

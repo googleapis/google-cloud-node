@@ -47,6 +47,7 @@ function main() {
   const instanceGroupsClient = new compute.InstanceGroupsClient();
   const instancesClient = new compute.InstancesClient();
   const instanceTemplatesClient = new compute.InstanceTemplatesClient();
+  const instantSnapshotsClient = new compute.InstantSnapshotsClient();
   const interconnectAttachmentsClient =
     new compute.InterconnectAttachmentsClient();
   const interconnectLocationsClient = new compute.InterconnectLocationsClient();
@@ -87,6 +88,8 @@ function main() {
   const regionInstancesClient = new compute.RegionInstancesClient();
   const regionInstanceTemplatesClient =
     new compute.RegionInstanceTemplatesClient();
+  const regionInstantSnapshotsClient =
+    new compute.RegionInstantSnapshotsClient();
   const regionNetworkEndpointGroupsClient =
     new compute.RegionNetworkEndpointGroupsClient();
   const regionNetworkFirewallPoliciesClient =
