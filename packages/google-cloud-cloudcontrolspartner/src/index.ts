@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
 const CloudControlsPartnerCoreClient = v1beta.CloudControlsPartnerCoreClient;
@@ -26,11 +27,13 @@ type CloudControlsPartnerMonitoringClient =
   v1beta.CloudControlsPartnerMonitoringClient;
 
 export {
+  v1,
   v1beta,
   CloudControlsPartnerCoreClient,
   CloudControlsPartnerMonitoringClient,
 };
 export default {
+  v1,
   v1beta,
   CloudControlsPartnerCoreClient,
   CloudControlsPartnerMonitoringClient,
