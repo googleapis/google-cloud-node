@@ -2490,9 +2490,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2544,9 +2544,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2595,9 +2595,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2639,9 +2639,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2844,9 +2844,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2899,9 +2899,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2952,9 +2952,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2996,9 +2996,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       assert(
         (client.descriptors.page.listFirewallPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
