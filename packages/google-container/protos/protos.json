@@ -2333,6 +2333,11 @@
                       "oneof": [
                         "desiredInTransitEncryptionConfig"
                       ]
+                    },
+                    "_desiredEnableCiliumClusterwideNetworkPolicy": {
+                      "oneof": [
+                        "desiredEnableCiliumClusterwideNetworkPolicy"
+                      ]
                     }
                   },
                   "fields": {
@@ -2546,6 +2551,13 @@
                     "desiredInTransitEncryptionConfig": {
                       "type": "InTransitEncryptionConfig",
                       "id": 137,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "desiredEnableCiliumClusterwideNetworkPolicy": {
+                      "type": "bool",
+                      "id": 138,
                       "options": {
                         "proto3_optional": true
                       }
@@ -4770,6 +4782,11 @@
                       "oneof": [
                         "inTransitEncryptionConfig"
                       ]
+                    },
+                    "_enableCiliumClusterwideNetworkPolicy": {
+                      "oneof": [
+                        "enableCiliumClusterwideNetworkPolicy"
+                      ]
                     }
                   },
                   "fields": {
@@ -4831,6 +4848,13 @@
                     "inTransitEncryptionConfig": {
                       "type": "InTransitEncryptionConfig",
                       "id": 20,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "enableCiliumClusterwideNetworkPolicy": {
+                      "type": "bool",
+                      "id": 21,
                       "options": {
                         "proto3_optional": true
                       }
