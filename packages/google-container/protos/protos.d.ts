@@ -1215,6 +1215,9 @@ export namespace google {
 
                 /** NodeConfig enableConfidentialStorage */
                 enableConfidentialStorage?: (boolean|null);
+
+                /** NodeConfig secondaryBootDisks */
+                secondaryBootDisks?: (google.container.v1.ISecondaryBootDisk[]|null);
             }
 
             /** Represents a NodeConfig. */
@@ -1333,6 +1336,9 @@ export namespace google {
 
                 /** NodeConfig enableConfidentialStorage. */
                 public enableConfidentialStorage: boolean;
+
+                /** NodeConfig secondaryBootDisks. */
+                public secondaryBootDisks: google.container.v1.ISecondaryBootDisk[];
 
                 /** NodeConfig _fastSocket. */
                 public _fastSocket?: "fastSocket";
@@ -21586,6 +21592,118 @@ export namespace google {
                     CLUSTER_TIER_UNSPECIFIED = 0,
                     STANDARD = 1,
                     ENTERPRISE = 2
+                }
+            }
+
+            /** Properties of a SecondaryBootDisk. */
+            interface ISecondaryBootDisk {
+
+                /** SecondaryBootDisk mode */
+                mode?: (google.container.v1.SecondaryBootDisk.Mode|keyof typeof google.container.v1.SecondaryBootDisk.Mode|null);
+
+                /** SecondaryBootDisk diskImage */
+                diskImage?: (string|null);
+            }
+
+            /** Represents a SecondaryBootDisk. */
+            class SecondaryBootDisk implements ISecondaryBootDisk {
+
+                /**
+                 * Constructs a new SecondaryBootDisk.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.ISecondaryBootDisk);
+
+                /** SecondaryBootDisk mode. */
+                public mode: (google.container.v1.SecondaryBootDisk.Mode|keyof typeof google.container.v1.SecondaryBootDisk.Mode);
+
+                /** SecondaryBootDisk diskImage. */
+                public diskImage: string;
+
+                /**
+                 * Creates a new SecondaryBootDisk instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SecondaryBootDisk instance
+                 */
+                public static create(properties?: google.container.v1.ISecondaryBootDisk): google.container.v1.SecondaryBootDisk;
+
+                /**
+                 * Encodes the specified SecondaryBootDisk message. Does not implicitly {@link google.container.v1.SecondaryBootDisk.verify|verify} messages.
+                 * @param message SecondaryBootDisk message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.ISecondaryBootDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SecondaryBootDisk message, length delimited. Does not implicitly {@link google.container.v1.SecondaryBootDisk.verify|verify} messages.
+                 * @param message SecondaryBootDisk message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.ISecondaryBootDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SecondaryBootDisk message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SecondaryBootDisk
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.SecondaryBootDisk;
+
+                /**
+                 * Decodes a SecondaryBootDisk message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SecondaryBootDisk
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.SecondaryBootDisk;
+
+                /**
+                 * Verifies a SecondaryBootDisk message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SecondaryBootDisk message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SecondaryBootDisk
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.SecondaryBootDisk;
+
+                /**
+                 * Creates a plain object from a SecondaryBootDisk message. Also converts values to other types if specified.
+                 * @param message SecondaryBootDisk
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.SecondaryBootDisk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SecondaryBootDisk to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SecondaryBootDisk
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace SecondaryBootDisk {
+
+                /** Mode enum. */
+                enum Mode {
+                    MODE_UNSPECIFIED = 0,
+                    CONTAINER_IMAGE_CACHE = 1
                 }
             }
 
