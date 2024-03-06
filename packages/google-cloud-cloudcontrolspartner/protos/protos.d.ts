@@ -23,6 +23,4269 @@ export namespace google {
         /** Namespace cloudcontrolspartner. */
         namespace cloudcontrolspartner {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Properties of an AccessApprovalRequest. */
+                interface IAccessApprovalRequest {
+
+                    /** AccessApprovalRequest name */
+                    name?: (string|null);
+
+                    /** AccessApprovalRequest requestTime */
+                    requestTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessApprovalRequest requestedReason */
+                    requestedReason?: (google.cloud.cloudcontrolspartner.v1.IAccessReason|null);
+
+                    /** AccessApprovalRequest requestedExpirationTime */
+                    requestedExpirationTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an AccessApprovalRequest. */
+                class AccessApprovalRequest implements IAccessApprovalRequest {
+
+                    /**
+                     * Constructs a new AccessApprovalRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest);
+
+                    /** AccessApprovalRequest name. */
+                    public name: string;
+
+                    /** AccessApprovalRequest requestTime. */
+                    public requestTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessApprovalRequest requestedReason. */
+                    public requestedReason?: (google.cloud.cloudcontrolspartner.v1.IAccessReason|null);
+
+                    /** AccessApprovalRequest requestedExpirationTime. */
+                    public requestedExpirationTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new AccessApprovalRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessApprovalRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest): google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest;
+
+                    /**
+                     * Encodes the specified AccessApprovalRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.verify|verify} messages.
+                     * @param message AccessApprovalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessApprovalRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.verify|verify} messages.
+                     * @param message AccessApprovalRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessApprovalRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessApprovalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest;
+
+                    /**
+                     * Decodes an AccessApprovalRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessApprovalRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest;
+
+                    /**
+                     * Verifies an AccessApprovalRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessApprovalRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessApprovalRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest;
+
+                    /**
+                     * Creates a plain object from an AccessApprovalRequest message. Also converts values to other types if specified.
+                     * @param message AccessApprovalRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessApprovalRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessApprovalRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAccessApprovalRequestsRequest. */
+                interface IListAccessApprovalRequestsRequest {
+
+                    /** ListAccessApprovalRequestsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAccessApprovalRequestsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAccessApprovalRequestsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAccessApprovalRequestsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListAccessApprovalRequestsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListAccessApprovalRequestsRequest. */
+                class ListAccessApprovalRequestsRequest implements IListAccessApprovalRequestsRequest {
+
+                    /**
+                     * Constructs a new ListAccessApprovalRequestsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest);
+
+                    /** ListAccessApprovalRequestsRequest parent. */
+                    public parent: string;
+
+                    /** ListAccessApprovalRequestsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAccessApprovalRequestsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAccessApprovalRequestsRequest filter. */
+                    public filter: string;
+
+                    /** ListAccessApprovalRequestsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListAccessApprovalRequestsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAccessApprovalRequestsRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest): google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest;
+
+                    /**
+                     * Encodes the specified ListAccessApprovalRequestsRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest.verify|verify} messages.
+                     * @param message ListAccessApprovalRequestsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAccessApprovalRequestsRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest.verify|verify} messages.
+                     * @param message ListAccessApprovalRequestsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAccessApprovalRequestsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAccessApprovalRequestsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest;
+
+                    /**
+                     * Decodes a ListAccessApprovalRequestsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAccessApprovalRequestsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest;
+
+                    /**
+                     * Verifies a ListAccessApprovalRequestsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAccessApprovalRequestsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAccessApprovalRequestsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAccessApprovalRequestsRequest message. Also converts values to other types if specified.
+                     * @param message ListAccessApprovalRequestsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAccessApprovalRequestsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAccessApprovalRequestsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAccessApprovalRequestsResponse. */
+                interface IListAccessApprovalRequestsResponse {
+
+                    /** ListAccessApprovalRequestsResponse accessApprovalRequests */
+                    accessApprovalRequests?: (google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest[]|null);
+
+                    /** ListAccessApprovalRequestsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAccessApprovalRequestsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAccessApprovalRequestsResponse. */
+                class ListAccessApprovalRequestsResponse implements IListAccessApprovalRequestsResponse {
+
+                    /**
+                     * Constructs a new ListAccessApprovalRequestsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsResponse);
+
+                    /** ListAccessApprovalRequestsResponse accessApprovalRequests. */
+                    public accessApprovalRequests: google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest[];
+
+                    /** ListAccessApprovalRequestsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAccessApprovalRequestsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAccessApprovalRequestsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAccessApprovalRequestsResponse instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsResponse): google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse;
+
+                    /**
+                     * Encodes the specified ListAccessApprovalRequestsResponse message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse.verify|verify} messages.
+                     * @param message ListAccessApprovalRequestsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAccessApprovalRequestsResponse message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse.verify|verify} messages.
+                     * @param message ListAccessApprovalRequestsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAccessApprovalRequestsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAccessApprovalRequestsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse;
+
+                    /**
+                     * Decodes a ListAccessApprovalRequestsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAccessApprovalRequestsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse;
+
+                    /**
+                     * Verifies a ListAccessApprovalRequestsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAccessApprovalRequestsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAccessApprovalRequestsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAccessApprovalRequestsResponse message. Also converts values to other types if specified.
+                     * @param message ListAccessApprovalRequestsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAccessApprovalRequestsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAccessApprovalRequestsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AccessReason. */
+                interface IAccessReason {
+
+                    /** AccessReason type */
+                    type?: (google.cloud.cloudcontrolspartner.v1.AccessReason.Type|keyof typeof google.cloud.cloudcontrolspartner.v1.AccessReason.Type|null);
+
+                    /** AccessReason detail */
+                    detail?: (string|null);
+                }
+
+                /** Represents an AccessReason. */
+                class AccessReason implements IAccessReason {
+
+                    /**
+                     * Constructs a new AccessReason.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IAccessReason);
+
+                    /** AccessReason type. */
+                    public type: (google.cloud.cloudcontrolspartner.v1.AccessReason.Type|keyof typeof google.cloud.cloudcontrolspartner.v1.AccessReason.Type);
+
+                    /** AccessReason detail. */
+                    public detail: string;
+
+                    /**
+                     * Creates a new AccessReason instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessReason instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IAccessReason): google.cloud.cloudcontrolspartner.v1.AccessReason;
+
+                    /**
+                     * Encodes the specified AccessReason message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.AccessReason.verify|verify} messages.
+                     * @param message AccessReason message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IAccessReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessReason message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.AccessReason.verify|verify} messages.
+                     * @param message AccessReason message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IAccessReason, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessReason message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessReason
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.AccessReason;
+
+                    /**
+                     * Decodes an AccessReason message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessReason
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.AccessReason;
+
+                    /**
+                     * Verifies an AccessReason message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessReason message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessReason
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.AccessReason;
+
+                    /**
+                     * Creates a plain object from an AccessReason message. Also converts values to other types if specified.
+                     * @param message AccessReason
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.AccessReason, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessReason to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessReason
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AccessReason {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        CUSTOMER_INITIATED_SUPPORT = 1,
+                        GOOGLE_INITIATED_SERVICE = 2,
+                        GOOGLE_INITIATED_REVIEW = 3,
+                        THIRD_PARTY_DATA_REQUEST = 4,
+                        GOOGLE_RESPONSE_TO_PRODUCTION_ALERT = 5,
+                        CLOUD_INITIATED_ACCESS = 6
+                    }
+                }
+
+                /** CompletionState enum. */
+                enum CompletionState {
+                    COMPLETION_STATE_UNSPECIFIED = 0,
+                    PENDING = 1,
+                    SUCCEEDED = 2,
+                    FAILED = 3,
+                    NOT_APPLICABLE = 4
+                }
+
+                /** Represents a CloudControlsPartnerCore */
+                class CloudControlsPartnerCore extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CloudControlsPartnerCore service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CloudControlsPartnerCore service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CloudControlsPartnerCore;
+
+                    /**
+                     * Calls GetWorkload.
+                     * @param request GetWorkloadRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Workload
+                     */
+                    public getWorkload(request: google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.GetWorkloadCallback): void;
+
+                    /**
+                     * Calls GetWorkload.
+                     * @param request GetWorkloadRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getWorkload(request: google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest): Promise<google.cloud.cloudcontrolspartner.v1.Workload>;
+
+                    /**
+                     * Calls ListWorkloads.
+                     * @param request ListWorkloadsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListWorkloadsResponse
+                     */
+                    public listWorkloads(request: google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.ListWorkloadsCallback): void;
+
+                    /**
+                     * Calls ListWorkloads.
+                     * @param request ListWorkloadsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listWorkloads(request: google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest): Promise<google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse>;
+
+                    /**
+                     * Calls GetCustomer.
+                     * @param request GetCustomerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Customer
+                     */
+                    public getCustomer(request: google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.GetCustomerCallback): void;
+
+                    /**
+                     * Calls GetCustomer.
+                     * @param request GetCustomerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCustomer(request: google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest): Promise<google.cloud.cloudcontrolspartner.v1.Customer>;
+
+                    /**
+                     * Calls ListCustomers.
+                     * @param request ListCustomersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCustomersResponse
+                     */
+                    public listCustomers(request: google.cloud.cloudcontrolspartner.v1.IListCustomersRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.ListCustomersCallback): void;
+
+                    /**
+                     * Calls ListCustomers.
+                     * @param request ListCustomersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listCustomers(request: google.cloud.cloudcontrolspartner.v1.IListCustomersRequest): Promise<google.cloud.cloudcontrolspartner.v1.ListCustomersResponse>;
+
+                    /**
+                     * Calls GetEkmConnections.
+                     * @param request GetEkmConnectionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EkmConnections
+                     */
+                    public getEkmConnections(request: google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.GetEkmConnectionsCallback): void;
+
+                    /**
+                     * Calls GetEkmConnections.
+                     * @param request GetEkmConnectionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEkmConnections(request: google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest): Promise<google.cloud.cloudcontrolspartner.v1.EkmConnections>;
+
+                    /**
+                     * Calls GetPartnerPermissions.
+                     * @param request GetPartnerPermissionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PartnerPermissions
+                     */
+                    public getPartnerPermissions(request: google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.GetPartnerPermissionsCallback): void;
+
+                    /**
+                     * Calls GetPartnerPermissions.
+                     * @param request GetPartnerPermissionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPartnerPermissions(request: google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest): Promise<google.cloud.cloudcontrolspartner.v1.PartnerPermissions>;
+
+                    /**
+                     * Calls ListAccessApprovalRequests.
+                     * @param request ListAccessApprovalRequestsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAccessApprovalRequestsResponse
+                     */
+                    public listAccessApprovalRequests(request: google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.ListAccessApprovalRequestsCallback): void;
+
+                    /**
+                     * Calls ListAccessApprovalRequests.
+                     * @param request ListAccessApprovalRequestsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAccessApprovalRequests(request: google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest): Promise<google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse>;
+
+                    /**
+                     * Calls GetPartner.
+                     * @param request GetPartnerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Partner
+                     */
+                    public getPartner(request: google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.GetPartnerCallback): void;
+
+                    /**
+                     * Calls GetPartner.
+                     * @param request GetPartnerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPartner(request: google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest): Promise<google.cloud.cloudcontrolspartner.v1.Partner>;
+                }
+
+                namespace CloudControlsPartnerCore {
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|getWorkload}.
+                     * @param error Error, if any
+                     * @param [response] Workload
+                     */
+                    type GetWorkloadCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.Workload) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|listWorkloads}.
+                     * @param error Error, if any
+                     * @param [response] ListWorkloadsResponse
+                     */
+                    type ListWorkloadsCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|getCustomer}.
+                     * @param error Error, if any
+                     * @param [response] Customer
+                     */
+                    type GetCustomerCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.Customer) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|listCustomers}.
+                     * @param error Error, if any
+                     * @param [response] ListCustomersResponse
+                     */
+                    type ListCustomersCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.ListCustomersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|getEkmConnections}.
+                     * @param error Error, if any
+                     * @param [response] EkmConnections
+                     */
+                    type GetEkmConnectionsCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.EkmConnections) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|getPartnerPermissions}.
+                     * @param error Error, if any
+                     * @param [response] PartnerPermissions
+                     */
+                    type GetPartnerPermissionsCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.PartnerPermissions) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|listAccessApprovalRequests}.
+                     * @param error Error, if any
+                     * @param [response] ListAccessApprovalRequestsResponse
+                     */
+                    type ListAccessApprovalRequestsCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|getPartner}.
+                     * @param error Error, if any
+                     * @param [response] Partner
+                     */
+                    type GetPartnerCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.Partner) => void;
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** OperationMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** OperationMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IOperationMetadata): google.cloud.cloudcontrolspartner.v1.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Workload. */
+                interface IWorkload {
+
+                    /** Workload name */
+                    name?: (string|null);
+
+                    /** Workload folderId */
+                    folderId?: (number|Long|string|null);
+
+                    /** Workload createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workload folder */
+                    folder?: (string|null);
+
+                    /** Workload workloadOnboardingState */
+                    workloadOnboardingState?: (google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState|null);
+
+                    /** Workload isOnboarded */
+                    isOnboarded?: (boolean|null);
+
+                    /** Workload keyManagementProjectId */
+                    keyManagementProjectId?: (string|null);
+
+                    /** Workload location */
+                    location?: (string|null);
+
+                    /** Workload partner */
+                    partner?: (google.cloud.cloudcontrolspartner.v1.Workload.Partner|keyof typeof google.cloud.cloudcontrolspartner.v1.Workload.Partner|null);
+                }
+
+                /** Represents a Workload. */
+                class Workload implements IWorkload {
+
+                    /**
+                     * Constructs a new Workload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IWorkload);
+
+                    /** Workload name. */
+                    public name: string;
+
+                    /** Workload folderId. */
+                    public folderId: (number|Long|string);
+
+                    /** Workload createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workload folder. */
+                    public folder: string;
+
+                    /** Workload workloadOnboardingState. */
+                    public workloadOnboardingState?: (google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState|null);
+
+                    /** Workload isOnboarded. */
+                    public isOnboarded: boolean;
+
+                    /** Workload keyManagementProjectId. */
+                    public keyManagementProjectId: string;
+
+                    /** Workload location. */
+                    public location: string;
+
+                    /** Workload partner. */
+                    public partner: (google.cloud.cloudcontrolspartner.v1.Workload.Partner|keyof typeof google.cloud.cloudcontrolspartner.v1.Workload.Partner);
+
+                    /**
+                     * Creates a new Workload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Workload instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IWorkload): google.cloud.cloudcontrolspartner.v1.Workload;
+
+                    /**
+                     * Encodes the specified Workload message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Workload.verify|verify} messages.
+                     * @param message Workload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Workload message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Workload.verify|verify} messages.
+                     * @param message Workload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IWorkload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Workload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Workload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.Workload;
+
+                    /**
+                     * Decodes a Workload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Workload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.Workload;
+
+                    /**
+                     * Verifies a Workload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Workload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Workload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.Workload;
+
+                    /**
+                     * Creates a plain object from a Workload message. Also converts values to other types if specified.
+                     * @param message Workload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.Workload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Workload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Workload
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Workload {
+
+                    /** Partner enum. */
+                    enum Partner {
+                        PARTNER_UNSPECIFIED = 0,
+                        PARTNER_LOCAL_CONTROLS_BY_S3NS = 1,
+                        PARTNER_SOVEREIGN_CONTROLS_BY_T_SYSTEMS = 2,
+                        PARTNER_SOVEREIGN_CONTROLS_BY_SIA_MINSAIT = 3,
+                        PARTNER_SOVEREIGN_CONTROLS_BY_PSN = 4,
+                        PARTNER_SOVEREIGN_CONTROLS_BY_CNTXT = 6,
+                        PARTNER_SOVEREIGN_CONTROLS_BY_CNTXT_NO_EKM = 7
+                    }
+                }
+
+                /** Properties of a ListWorkloadsRequest. */
+                interface IListWorkloadsRequest {
+
+                    /** ListWorkloadsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListWorkloadsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListWorkloadsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListWorkloadsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListWorkloadsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListWorkloadsRequest. */
+                class ListWorkloadsRequest implements IListWorkloadsRequest {
+
+                    /**
+                     * Constructs a new ListWorkloadsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest);
+
+                    /** ListWorkloadsRequest parent. */
+                    public parent: string;
+
+                    /** ListWorkloadsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListWorkloadsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListWorkloadsRequest filter. */
+                    public filter: string;
+
+                    /** ListWorkloadsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListWorkloadsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkloadsRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest): google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest;
+
+                    /**
+                     * Encodes the specified ListWorkloadsRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest.verify|verify} messages.
+                     * @param message ListWorkloadsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkloadsRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest.verify|verify} messages.
+                     * @param message ListWorkloadsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkloadsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkloadsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest;
+
+                    /**
+                     * Decodes a ListWorkloadsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkloadsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest;
+
+                    /**
+                     * Verifies a ListWorkloadsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkloadsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkloadsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest;
+
+                    /**
+                     * Creates a plain object from a ListWorkloadsRequest message. Also converts values to other types if specified.
+                     * @param message ListWorkloadsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkloadsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWorkloadsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListWorkloadsResponse. */
+                interface IListWorkloadsResponse {
+
+                    /** ListWorkloadsResponse workloads */
+                    workloads?: (google.cloud.cloudcontrolspartner.v1.IWorkload[]|null);
+
+                    /** ListWorkloadsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListWorkloadsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListWorkloadsResponse. */
+                class ListWorkloadsResponse implements IListWorkloadsResponse {
+
+                    /**
+                     * Constructs a new ListWorkloadsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IListWorkloadsResponse);
+
+                    /** ListWorkloadsResponse workloads. */
+                    public workloads: google.cloud.cloudcontrolspartner.v1.IWorkload[];
+
+                    /** ListWorkloadsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListWorkloadsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListWorkloadsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListWorkloadsResponse instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IListWorkloadsResponse): google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse;
+
+                    /**
+                     * Encodes the specified ListWorkloadsResponse message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse.verify|verify} messages.
+                     * @param message ListWorkloadsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IListWorkloadsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListWorkloadsResponse message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse.verify|verify} messages.
+                     * @param message ListWorkloadsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IListWorkloadsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListWorkloadsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListWorkloadsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse;
+
+                    /**
+                     * Decodes a ListWorkloadsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListWorkloadsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse;
+
+                    /**
+                     * Verifies a ListWorkloadsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListWorkloadsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListWorkloadsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse;
+
+                    /**
+                     * Creates a plain object from a ListWorkloadsResponse message. Also converts values to other types if specified.
+                     * @param message ListWorkloadsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListWorkloadsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListWorkloadsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetWorkloadRequest. */
+                interface IGetWorkloadRequest {
+
+                    /** GetWorkloadRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetWorkloadRequest. */
+                class GetWorkloadRequest implements IGetWorkloadRequest {
+
+                    /**
+                     * Constructs a new GetWorkloadRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest);
+
+                    /** GetWorkloadRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetWorkloadRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetWorkloadRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest): google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest;
+
+                    /**
+                     * Encodes the specified GetWorkloadRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest.verify|verify} messages.
+                     * @param message GetWorkloadRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetWorkloadRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest.verify|verify} messages.
+                     * @param message GetWorkloadRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetWorkloadRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetWorkloadRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest;
+
+                    /**
+                     * Decodes a GetWorkloadRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetWorkloadRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest;
+
+                    /**
+                     * Verifies a GetWorkloadRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetWorkloadRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetWorkloadRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest;
+
+                    /**
+                     * Creates a plain object from a GetWorkloadRequest message. Also converts values to other types if specified.
+                     * @param message GetWorkloadRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetWorkloadRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetWorkloadRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WorkloadOnboardingState. */
+                interface IWorkloadOnboardingState {
+
+                    /** WorkloadOnboardingState onboardingSteps */
+                    onboardingSteps?: (google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep[]|null);
+                }
+
+                /** Represents a WorkloadOnboardingState. */
+                class WorkloadOnboardingState implements IWorkloadOnboardingState {
+
+                    /**
+                     * Constructs a new WorkloadOnboardingState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState);
+
+                    /** WorkloadOnboardingState onboardingSteps. */
+                    public onboardingSteps: google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep[];
+
+                    /**
+                     * Creates a new WorkloadOnboardingState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WorkloadOnboardingState instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState): google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState;
+
+                    /**
+                     * Encodes the specified WorkloadOnboardingState message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState.verify|verify} messages.
+                     * @param message WorkloadOnboardingState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WorkloadOnboardingState message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState.verify|verify} messages.
+                     * @param message WorkloadOnboardingState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WorkloadOnboardingState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WorkloadOnboardingState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState;
+
+                    /**
+                     * Decodes a WorkloadOnboardingState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WorkloadOnboardingState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState;
+
+                    /**
+                     * Verifies a WorkloadOnboardingState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WorkloadOnboardingState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WorkloadOnboardingState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState;
+
+                    /**
+                     * Creates a plain object from a WorkloadOnboardingState message. Also converts values to other types if specified.
+                     * @param message WorkloadOnboardingState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WorkloadOnboardingState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WorkloadOnboardingState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WorkloadOnboardingStep. */
+                interface IWorkloadOnboardingStep {
+
+                    /** WorkloadOnboardingStep step */
+                    step?: (google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.Step|keyof typeof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.Step|null);
+
+                    /** WorkloadOnboardingStep startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkloadOnboardingStep completionTime */
+                    completionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkloadOnboardingStep completionState */
+                    completionState?: (google.cloud.cloudcontrolspartner.v1.CompletionState|keyof typeof google.cloud.cloudcontrolspartner.v1.CompletionState|null);
+                }
+
+                /** Represents a WorkloadOnboardingStep. */
+                class WorkloadOnboardingStep implements IWorkloadOnboardingStep {
+
+                    /**
+                     * Constructs a new WorkloadOnboardingStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep);
+
+                    /** WorkloadOnboardingStep step. */
+                    public step: (google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.Step|keyof typeof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.Step);
+
+                    /** WorkloadOnboardingStep startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkloadOnboardingStep completionTime. */
+                    public completionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** WorkloadOnboardingStep completionState. */
+                    public completionState: (google.cloud.cloudcontrolspartner.v1.CompletionState|keyof typeof google.cloud.cloudcontrolspartner.v1.CompletionState);
+
+                    /**
+                     * Creates a new WorkloadOnboardingStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WorkloadOnboardingStep instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep): google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep;
+
+                    /**
+                     * Encodes the specified WorkloadOnboardingStep message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.verify|verify} messages.
+                     * @param message WorkloadOnboardingStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WorkloadOnboardingStep message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.verify|verify} messages.
+                     * @param message WorkloadOnboardingStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WorkloadOnboardingStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WorkloadOnboardingStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep;
+
+                    /**
+                     * Decodes a WorkloadOnboardingStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WorkloadOnboardingStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep;
+
+                    /**
+                     * Verifies a WorkloadOnboardingStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WorkloadOnboardingStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WorkloadOnboardingStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep;
+
+                    /**
+                     * Creates a plain object from a WorkloadOnboardingStep message. Also converts values to other types if specified.
+                     * @param message WorkloadOnboardingStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WorkloadOnboardingStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WorkloadOnboardingStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace WorkloadOnboardingStep {
+
+                    /** Step enum. */
+                    enum Step {
+                        STEP_UNSPECIFIED = 0,
+                        EKM_PROVISIONED = 1,
+                        SIGNED_ACCESS_APPROVAL_CONFIGURED = 2
+                    }
+                }
+
+                /** Properties of a Customer. */
+                interface ICustomer {
+
+                    /** Customer name */
+                    name?: (string|null);
+
+                    /** Customer displayName */
+                    displayName?: (string|null);
+
+                    /** Customer customerOnboardingState */
+                    customerOnboardingState?: (google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState|null);
+
+                    /** Customer isOnboarded */
+                    isOnboarded?: (boolean|null);
+                }
+
+                /** Represents a Customer. */
+                class Customer implements ICustomer {
+
+                    /**
+                     * Constructs a new Customer.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.ICustomer);
+
+                    /** Customer name. */
+                    public name: string;
+
+                    /** Customer displayName. */
+                    public displayName: string;
+
+                    /** Customer customerOnboardingState. */
+                    public customerOnboardingState?: (google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState|null);
+
+                    /** Customer isOnboarded. */
+                    public isOnboarded: boolean;
+
+                    /**
+                     * Creates a new Customer instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Customer instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.ICustomer): google.cloud.cloudcontrolspartner.v1.Customer;
+
+                    /**
+                     * Encodes the specified Customer message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Customer.verify|verify} messages.
+                     * @param message Customer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.ICustomer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Customer message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Customer.verify|verify} messages.
+                     * @param message Customer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.ICustomer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Customer message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Customer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.Customer;
+
+                    /**
+                     * Decodes a Customer message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Customer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.Customer;
+
+                    /**
+                     * Verifies a Customer message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Customer message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Customer
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.Customer;
+
+                    /**
+                     * Creates a plain object from a Customer message. Also converts values to other types if specified.
+                     * @param message Customer
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.Customer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Customer to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Customer
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCustomersRequest. */
+                interface IListCustomersRequest {
+
+                    /** ListCustomersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListCustomersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCustomersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListCustomersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListCustomersRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListCustomersRequest. */
+                class ListCustomersRequest implements IListCustomersRequest {
+
+                    /**
+                     * Constructs a new ListCustomersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IListCustomersRequest);
+
+                    /** ListCustomersRequest parent. */
+                    public parent: string;
+
+                    /** ListCustomersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCustomersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListCustomersRequest filter. */
+                    public filter: string;
+
+                    /** ListCustomersRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListCustomersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCustomersRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IListCustomersRequest): google.cloud.cloudcontrolspartner.v1.ListCustomersRequest;
+
+                    /**
+                     * Encodes the specified ListCustomersRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListCustomersRequest.verify|verify} messages.
+                     * @param message ListCustomersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IListCustomersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCustomersRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListCustomersRequest.verify|verify} messages.
+                     * @param message ListCustomersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IListCustomersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCustomersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCustomersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.ListCustomersRequest;
+
+                    /**
+                     * Decodes a ListCustomersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCustomersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.ListCustomersRequest;
+
+                    /**
+                     * Verifies a ListCustomersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCustomersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCustomersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.ListCustomersRequest;
+
+                    /**
+                     * Creates a plain object from a ListCustomersRequest message. Also converts values to other types if specified.
+                     * @param message ListCustomersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.ListCustomersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCustomersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCustomersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListCustomersResponse. */
+                interface IListCustomersResponse {
+
+                    /** ListCustomersResponse customers */
+                    customers?: (google.cloud.cloudcontrolspartner.v1.ICustomer[]|null);
+
+                    /** ListCustomersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListCustomersResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListCustomersResponse. */
+                class ListCustomersResponse implements IListCustomersResponse {
+
+                    /**
+                     * Constructs a new ListCustomersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IListCustomersResponse);
+
+                    /** ListCustomersResponse customers. */
+                    public customers: google.cloud.cloudcontrolspartner.v1.ICustomer[];
+
+                    /** ListCustomersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListCustomersResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListCustomersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListCustomersResponse instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IListCustomersResponse): google.cloud.cloudcontrolspartner.v1.ListCustomersResponse;
+
+                    /**
+                     * Encodes the specified ListCustomersResponse message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListCustomersResponse.verify|verify} messages.
+                     * @param message ListCustomersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IListCustomersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListCustomersResponse message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListCustomersResponse.verify|verify} messages.
+                     * @param message ListCustomersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IListCustomersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListCustomersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListCustomersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.ListCustomersResponse;
+
+                    /**
+                     * Decodes a ListCustomersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListCustomersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.ListCustomersResponse;
+
+                    /**
+                     * Verifies a ListCustomersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListCustomersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListCustomersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.ListCustomersResponse;
+
+                    /**
+                     * Creates a plain object from a ListCustomersResponse message. Also converts values to other types if specified.
+                     * @param message ListCustomersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.ListCustomersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListCustomersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListCustomersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetCustomerRequest. */
+                interface IGetCustomerRequest {
+
+                    /** GetCustomerRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCustomerRequest. */
+                class GetCustomerRequest implements IGetCustomerRequest {
+
+                    /**
+                     * Constructs a new GetCustomerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest);
+
+                    /** GetCustomerRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCustomerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCustomerRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest): google.cloud.cloudcontrolspartner.v1.GetCustomerRequest;
+
+                    /**
+                     * Encodes the specified GetCustomerRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetCustomerRequest.verify|verify} messages.
+                     * @param message GetCustomerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCustomerRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetCustomerRequest.verify|verify} messages.
+                     * @param message GetCustomerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCustomerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCustomerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.GetCustomerRequest;
+
+                    /**
+                     * Decodes a GetCustomerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCustomerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.GetCustomerRequest;
+
+                    /**
+                     * Verifies a GetCustomerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCustomerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCustomerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.GetCustomerRequest;
+
+                    /**
+                     * Creates a plain object from a GetCustomerRequest message. Also converts values to other types if specified.
+                     * @param message GetCustomerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.GetCustomerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCustomerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCustomerRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CustomerOnboardingState. */
+                interface ICustomerOnboardingState {
+
+                    /** CustomerOnboardingState onboardingSteps */
+                    onboardingSteps?: (google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep[]|null);
+                }
+
+                /** Represents a CustomerOnboardingState. */
+                class CustomerOnboardingState implements ICustomerOnboardingState {
+
+                    /**
+                     * Constructs a new CustomerOnboardingState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState);
+
+                    /** CustomerOnboardingState onboardingSteps. */
+                    public onboardingSteps: google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep[];
+
+                    /**
+                     * Creates a new CustomerOnboardingState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomerOnboardingState instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState): google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState;
+
+                    /**
+                     * Encodes the specified CustomerOnboardingState message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState.verify|verify} messages.
+                     * @param message CustomerOnboardingState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomerOnboardingState message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState.verify|verify} messages.
+                     * @param message CustomerOnboardingState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomerOnboardingState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomerOnboardingState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState;
+
+                    /**
+                     * Decodes a CustomerOnboardingState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomerOnboardingState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState;
+
+                    /**
+                     * Verifies a CustomerOnboardingState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomerOnboardingState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomerOnboardingState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState;
+
+                    /**
+                     * Creates a plain object from a CustomerOnboardingState message. Also converts values to other types if specified.
+                     * @param message CustomerOnboardingState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomerOnboardingState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomerOnboardingState
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CustomerOnboardingStep. */
+                interface ICustomerOnboardingStep {
+
+                    /** CustomerOnboardingStep step */
+                    step?: (google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.Step|keyof typeof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.Step|null);
+
+                    /** CustomerOnboardingStep startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomerOnboardingStep completionTime */
+                    completionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomerOnboardingStep completionState */
+                    completionState?: (google.cloud.cloudcontrolspartner.v1.CompletionState|keyof typeof google.cloud.cloudcontrolspartner.v1.CompletionState|null);
+                }
+
+                /** Represents a CustomerOnboardingStep. */
+                class CustomerOnboardingStep implements ICustomerOnboardingStep {
+
+                    /**
+                     * Constructs a new CustomerOnboardingStep.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep);
+
+                    /** CustomerOnboardingStep step. */
+                    public step: (google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.Step|keyof typeof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.Step);
+
+                    /** CustomerOnboardingStep startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomerOnboardingStep completionTime. */
+                    public completionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CustomerOnboardingStep completionState. */
+                    public completionState: (google.cloud.cloudcontrolspartner.v1.CompletionState|keyof typeof google.cloud.cloudcontrolspartner.v1.CompletionState);
+
+                    /**
+                     * Creates a new CustomerOnboardingStep instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomerOnboardingStep instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep): google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep;
+
+                    /**
+                     * Encodes the specified CustomerOnboardingStep message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.verify|verify} messages.
+                     * @param message CustomerOnboardingStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomerOnboardingStep message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.verify|verify} messages.
+                     * @param message CustomerOnboardingStep message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomerOnboardingStep message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomerOnboardingStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep;
+
+                    /**
+                     * Decodes a CustomerOnboardingStep message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomerOnboardingStep
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep;
+
+                    /**
+                     * Verifies a CustomerOnboardingStep message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomerOnboardingStep message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomerOnboardingStep
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep;
+
+                    /**
+                     * Creates a plain object from a CustomerOnboardingStep message. Also converts values to other types if specified.
+                     * @param message CustomerOnboardingStep
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomerOnboardingStep to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomerOnboardingStep
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CustomerOnboardingStep {
+
+                    /** Step enum. */
+                    enum Step {
+                        STEP_UNSPECIFIED = 0,
+                        KAJ_ENROLLMENT = 1,
+                        CUSTOMER_ENVIRONMENT = 2
+                    }
+                }
+
+                /** Properties of an EkmConnections. */
+                interface IEkmConnections {
+
+                    /** EkmConnections name */
+                    name?: (string|null);
+
+                    /** EkmConnections ekmConnections */
+                    ekmConnections?: (google.cloud.cloudcontrolspartner.v1.IEkmConnection[]|null);
+                }
+
+                /** Represents an EkmConnections. */
+                class EkmConnections implements IEkmConnections {
+
+                    /**
+                     * Constructs a new EkmConnections.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IEkmConnections);
+
+                    /** EkmConnections name. */
+                    public name: string;
+
+                    /** EkmConnections ekmConnections. */
+                    public ekmConnections: google.cloud.cloudcontrolspartner.v1.IEkmConnection[];
+
+                    /**
+                     * Creates a new EkmConnections instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EkmConnections instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IEkmConnections): google.cloud.cloudcontrolspartner.v1.EkmConnections;
+
+                    /**
+                     * Encodes the specified EkmConnections message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnections.verify|verify} messages.
+                     * @param message EkmConnections message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IEkmConnections, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EkmConnections message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnections.verify|verify} messages.
+                     * @param message EkmConnections message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IEkmConnections, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EkmConnections message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EkmConnections
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.EkmConnections;
+
+                    /**
+                     * Decodes an EkmConnections message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EkmConnections
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.EkmConnections;
+
+                    /**
+                     * Verifies an EkmConnections message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EkmConnections message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EkmConnections
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.EkmConnections;
+
+                    /**
+                     * Creates a plain object from an EkmConnections message. Also converts values to other types if specified.
+                     * @param message EkmConnections
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.EkmConnections, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EkmConnections to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EkmConnections
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetEkmConnectionsRequest. */
+                interface IGetEkmConnectionsRequest {
+
+                    /** GetEkmConnectionsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEkmConnectionsRequest. */
+                class GetEkmConnectionsRequest implements IGetEkmConnectionsRequest {
+
+                    /**
+                     * Constructs a new GetEkmConnectionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest);
+
+                    /** GetEkmConnectionsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEkmConnectionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEkmConnectionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest): google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest;
+
+                    /**
+                     * Encodes the specified GetEkmConnectionsRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest.verify|verify} messages.
+                     * @param message GetEkmConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEkmConnectionsRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest.verify|verify} messages.
+                     * @param message GetEkmConnectionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEkmConnectionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEkmConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest;
+
+                    /**
+                     * Decodes a GetEkmConnectionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEkmConnectionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest;
+
+                    /**
+                     * Verifies a GetEkmConnectionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEkmConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEkmConnectionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest;
+
+                    /**
+                     * Creates a plain object from a GetEkmConnectionsRequest message. Also converts values to other types if specified.
+                     * @param message GetEkmConnectionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEkmConnectionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetEkmConnectionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EkmConnection. */
+                interface IEkmConnection {
+
+                    /** EkmConnection connectionName */
+                    connectionName?: (string|null);
+
+                    /** EkmConnection connectionState */
+                    connectionState?: (google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionState|keyof typeof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionState|null);
+
+                    /** EkmConnection connectionError */
+                    connectionError?: (google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError|null);
+                }
+
+                /** Represents an EkmConnection. */
+                class EkmConnection implements IEkmConnection {
+
+                    /**
+                     * Constructs a new EkmConnection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IEkmConnection);
+
+                    /** EkmConnection connectionName. */
+                    public connectionName: string;
+
+                    /** EkmConnection connectionState. */
+                    public connectionState: (google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionState|keyof typeof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionState);
+
+                    /** EkmConnection connectionError. */
+                    public connectionError?: (google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError|null);
+
+                    /**
+                     * Creates a new EkmConnection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EkmConnection instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IEkmConnection): google.cloud.cloudcontrolspartner.v1.EkmConnection;
+
+                    /**
+                     * Encodes the specified EkmConnection message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnection.verify|verify} messages.
+                     * @param message EkmConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IEkmConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EkmConnection message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnection.verify|verify} messages.
+                     * @param message EkmConnection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IEkmConnection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EkmConnection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EkmConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.EkmConnection;
+
+                    /**
+                     * Decodes an EkmConnection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EkmConnection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.EkmConnection;
+
+                    /**
+                     * Verifies an EkmConnection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EkmConnection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EkmConnection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.EkmConnection;
+
+                    /**
+                     * Creates a plain object from an EkmConnection message. Also converts values to other types if specified.
+                     * @param message EkmConnection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.EkmConnection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EkmConnection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EkmConnection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EkmConnection {
+
+                    /** Properties of a ConnectionError. */
+                    interface IConnectionError {
+
+                        /** ConnectionError errorDomain */
+                        errorDomain?: (string|null);
+
+                        /** ConnectionError errorMessage */
+                        errorMessage?: (string|null);
+                    }
+
+                    /** Represents a ConnectionError. */
+                    class ConnectionError implements IConnectionError {
+
+                        /**
+                         * Constructs a new ConnectionError.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError);
+
+                        /** ConnectionError errorDomain. */
+                        public errorDomain: string;
+
+                        /** ConnectionError errorMessage. */
+                        public errorMessage: string;
+
+                        /**
+                         * Creates a new ConnectionError instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConnectionError instance
+                         */
+                        public static create(properties?: google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError): google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError;
+
+                        /**
+                         * Encodes the specified ConnectionError message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError.verify|verify} messages.
+                         * @param message ConnectionError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConnectionError message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError.verify|verify} messages.
+                         * @param message ConnectionError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConnectionError message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConnectionError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError;
+
+                        /**
+                         * Decodes a ConnectionError message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConnectionError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError;
+
+                        /**
+                         * Verifies a ConnectionError message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConnectionError message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConnectionError
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError;
+
+                        /**
+                         * Creates a plain object from a ConnectionError message. Also converts values to other types if specified.
+                         * @param message ConnectionError
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConnectionError to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConnectionError
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** ConnectionState enum. */
+                    enum ConnectionState {
+                        CONNECTION_STATE_UNSPECIFIED = 0,
+                        AVAILABLE = 1,
+                        NOT_AVAILABLE = 2,
+                        ERROR = 3,
+                        PERMISSION_DENIED = 4
+                    }
+                }
+
+                /** Properties of a PartnerPermissions. */
+                interface IPartnerPermissions {
+
+                    /** PartnerPermissions name */
+                    name?: (string|null);
+
+                    /** PartnerPermissions partnerPermissions */
+                    partnerPermissions?: (google.cloud.cloudcontrolspartner.v1.PartnerPermissions.Permission[]|null);
+                }
+
+                /** Represents a PartnerPermissions. */
+                class PartnerPermissions implements IPartnerPermissions {
+
+                    /**
+                     * Constructs a new PartnerPermissions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IPartnerPermissions);
+
+                    /** PartnerPermissions name. */
+                    public name: string;
+
+                    /** PartnerPermissions partnerPermissions. */
+                    public partnerPermissions: google.cloud.cloudcontrolspartner.v1.PartnerPermissions.Permission[];
+
+                    /**
+                     * Creates a new PartnerPermissions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PartnerPermissions instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IPartnerPermissions): google.cloud.cloudcontrolspartner.v1.PartnerPermissions;
+
+                    /**
+                     * Encodes the specified PartnerPermissions message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.PartnerPermissions.verify|verify} messages.
+                     * @param message PartnerPermissions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IPartnerPermissions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PartnerPermissions message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.PartnerPermissions.verify|verify} messages.
+                     * @param message PartnerPermissions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IPartnerPermissions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PartnerPermissions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PartnerPermissions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.PartnerPermissions;
+
+                    /**
+                     * Decodes a PartnerPermissions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PartnerPermissions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.PartnerPermissions;
+
+                    /**
+                     * Verifies a PartnerPermissions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PartnerPermissions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PartnerPermissions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.PartnerPermissions;
+
+                    /**
+                     * Creates a plain object from a PartnerPermissions message. Also converts values to other types if specified.
+                     * @param message PartnerPermissions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.PartnerPermissions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PartnerPermissions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PartnerPermissions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PartnerPermissions {
+
+                    /** Permission enum. */
+                    enum Permission {
+                        PERMISSION_UNSPECIFIED = 0,
+                        ACCESS_TRANSPARENCY_AND_EMERGENCY_ACCESS_LOGS = 1,
+                        ASSURED_WORKLOADS_MONITORING = 2,
+                        ACCESS_APPROVAL_REQUESTS = 3,
+                        ASSURED_WORKLOADS_EKM_CONNECTION_STATUS = 4
+                    }
+                }
+
+                /** Properties of a GetPartnerPermissionsRequest. */
+                interface IGetPartnerPermissionsRequest {
+
+                    /** GetPartnerPermissionsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPartnerPermissionsRequest. */
+                class GetPartnerPermissionsRequest implements IGetPartnerPermissionsRequest {
+
+                    /**
+                     * Constructs a new GetPartnerPermissionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest);
+
+                    /** GetPartnerPermissionsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPartnerPermissionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPartnerPermissionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest): google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest;
+
+                    /**
+                     * Encodes the specified GetPartnerPermissionsRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest.verify|verify} messages.
+                     * @param message GetPartnerPermissionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPartnerPermissionsRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest.verify|verify} messages.
+                     * @param message GetPartnerPermissionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPartnerPermissionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPartnerPermissionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest;
+
+                    /**
+                     * Decodes a GetPartnerPermissionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPartnerPermissionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest;
+
+                    /**
+                     * Verifies a GetPartnerPermissionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPartnerPermissionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPartnerPermissionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest;
+
+                    /**
+                     * Creates a plain object from a GetPartnerPermissionsRequest message. Also converts values to other types if specified.
+                     * @param message GetPartnerPermissionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPartnerPermissionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPartnerPermissionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Partner. */
+                interface IPartner {
+
+                    /** Partner name */
+                    name?: (string|null);
+
+                    /** Partner skus */
+                    skus?: (google.cloud.cloudcontrolspartner.v1.ISku[]|null);
+
+                    /** Partner ekmSolutions */
+                    ekmSolutions?: (google.cloud.cloudcontrolspartner.v1.IEkmMetadata[]|null);
+
+                    /** Partner operatedCloudRegions */
+                    operatedCloudRegions?: (string[]|null);
+
+                    /** Partner partnerProjectId */
+                    partnerProjectId?: (string|null);
+
+                    /** Partner createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Partner updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a Partner. */
+                class Partner implements IPartner {
+
+                    /**
+                     * Constructs a new Partner.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IPartner);
+
+                    /** Partner name. */
+                    public name: string;
+
+                    /** Partner skus. */
+                    public skus: google.cloud.cloudcontrolspartner.v1.ISku[];
+
+                    /** Partner ekmSolutions. */
+                    public ekmSolutions: google.cloud.cloudcontrolspartner.v1.IEkmMetadata[];
+
+                    /** Partner operatedCloudRegions. */
+                    public operatedCloudRegions: string[];
+
+                    /** Partner partnerProjectId. */
+                    public partnerProjectId: string;
+
+                    /** Partner createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Partner updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Partner instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Partner instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IPartner): google.cloud.cloudcontrolspartner.v1.Partner;
+
+                    /**
+                     * Encodes the specified Partner message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Partner.verify|verify} messages.
+                     * @param message Partner message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IPartner, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Partner message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Partner.verify|verify} messages.
+                     * @param message Partner message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IPartner, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Partner message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Partner
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.Partner;
+
+                    /**
+                     * Decodes a Partner message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Partner
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.Partner;
+
+                    /**
+                     * Verifies a Partner message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Partner message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Partner
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.Partner;
+
+                    /**
+                     * Creates a plain object from a Partner message. Also converts values to other types if specified.
+                     * @param message Partner
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.Partner, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Partner to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Partner
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetPartnerRequest. */
+                interface IGetPartnerRequest {
+
+                    /** GetPartnerRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPartnerRequest. */
+                class GetPartnerRequest implements IGetPartnerRequest {
+
+                    /**
+                     * Constructs a new GetPartnerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest);
+
+                    /** GetPartnerRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPartnerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPartnerRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest): google.cloud.cloudcontrolspartner.v1.GetPartnerRequest;
+
+                    /**
+                     * Encodes the specified GetPartnerRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetPartnerRequest.verify|verify} messages.
+                     * @param message GetPartnerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPartnerRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetPartnerRequest.verify|verify} messages.
+                     * @param message GetPartnerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPartnerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPartnerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.GetPartnerRequest;
+
+                    /**
+                     * Decodes a GetPartnerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPartnerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.GetPartnerRequest;
+
+                    /**
+                     * Verifies a GetPartnerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPartnerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPartnerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.GetPartnerRequest;
+
+                    /**
+                     * Creates a plain object from a GetPartnerRequest message. Also converts values to other types if specified.
+                     * @param message GetPartnerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.GetPartnerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPartnerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPartnerRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Sku. */
+                interface ISku {
+
+                    /** Sku id */
+                    id?: (string|null);
+
+                    /** Sku displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a Sku. */
+                class Sku implements ISku {
+
+                    /**
+                     * Constructs a new Sku.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.ISku);
+
+                    /** Sku id. */
+                    public id: string;
+
+                    /** Sku displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new Sku instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Sku instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.ISku): google.cloud.cloudcontrolspartner.v1.Sku;
+
+                    /**
+                     * Encodes the specified Sku message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Sku.verify|verify} messages.
+                     * @param message Sku message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.ISku, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Sku message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Sku.verify|verify} messages.
+                     * @param message Sku message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.ISku, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Sku message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Sku
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.Sku;
+
+                    /**
+                     * Decodes a Sku message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Sku
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.Sku;
+
+                    /**
+                     * Verifies a Sku message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Sku message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Sku
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.Sku;
+
+                    /**
+                     * Creates a plain object from a Sku message. Also converts values to other types if specified.
+                     * @param message Sku
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.Sku, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Sku to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Sku
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EkmMetadata. */
+                interface IEkmMetadata {
+
+                    /** EkmMetadata ekmSolution */
+                    ekmSolution?: (google.cloud.cloudcontrolspartner.v1.EkmMetadata.EkmSolution|keyof typeof google.cloud.cloudcontrolspartner.v1.EkmMetadata.EkmSolution|null);
+
+                    /** EkmMetadata ekmEndpointUri */
+                    ekmEndpointUri?: (string|null);
+                }
+
+                /** Represents an EkmMetadata. */
+                class EkmMetadata implements IEkmMetadata {
+
+                    /**
+                     * Constructs a new EkmMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IEkmMetadata);
+
+                    /** EkmMetadata ekmSolution. */
+                    public ekmSolution: (google.cloud.cloudcontrolspartner.v1.EkmMetadata.EkmSolution|keyof typeof google.cloud.cloudcontrolspartner.v1.EkmMetadata.EkmSolution);
+
+                    /** EkmMetadata ekmEndpointUri. */
+                    public ekmEndpointUri: string;
+
+                    /**
+                     * Creates a new EkmMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EkmMetadata instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IEkmMetadata): google.cloud.cloudcontrolspartner.v1.EkmMetadata;
+
+                    /**
+                     * Encodes the specified EkmMetadata message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmMetadata.verify|verify} messages.
+                     * @param message EkmMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IEkmMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EkmMetadata message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmMetadata.verify|verify} messages.
+                     * @param message EkmMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IEkmMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EkmMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EkmMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.EkmMetadata;
+
+                    /**
+                     * Decodes an EkmMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EkmMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.EkmMetadata;
+
+                    /**
+                     * Verifies an EkmMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EkmMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EkmMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.EkmMetadata;
+
+                    /**
+                     * Creates a plain object from an EkmMetadata message. Also converts values to other types if specified.
+                     * @param message EkmMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.EkmMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EkmMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EkmMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EkmMetadata {
+
+                    /** EkmSolution enum. */
+                    enum EkmSolution {
+                        EKM_SOLUTION_UNSPECIFIED = 0,
+                        FORTANIX = 1,
+                        FUTUREX = 2,
+                        THALES = 3,
+                        VIRTRU = 4
+                    }
+                }
+
+                /** Represents a CloudControlsPartnerMonitoring */
+                class CloudControlsPartnerMonitoring extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CloudControlsPartnerMonitoring service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CloudControlsPartnerMonitoring service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CloudControlsPartnerMonitoring;
+
+                    /**
+                     * Calls ListViolations.
+                     * @param request ListViolationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListViolationsResponse
+                     */
+                    public listViolations(request: google.cloud.cloudcontrolspartner.v1.IListViolationsRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring.ListViolationsCallback): void;
+
+                    /**
+                     * Calls ListViolations.
+                     * @param request ListViolationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listViolations(request: google.cloud.cloudcontrolspartner.v1.IListViolationsRequest): Promise<google.cloud.cloudcontrolspartner.v1.ListViolationsResponse>;
+
+                    /**
+                     * Calls GetViolation.
+                     * @param request GetViolationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Violation
+                     */
+                    public getViolation(request: google.cloud.cloudcontrolspartner.v1.IGetViolationRequest, callback: google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring.GetViolationCallback): void;
+
+                    /**
+                     * Calls GetViolation.
+                     * @param request GetViolationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getViolation(request: google.cloud.cloudcontrolspartner.v1.IGetViolationRequest): Promise<google.cloud.cloudcontrolspartner.v1.Violation>;
+                }
+
+                namespace CloudControlsPartnerMonitoring {
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring|listViolations}.
+                     * @param error Error, if any
+                     * @param [response] ListViolationsResponse
+                     */
+                    type ListViolationsCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.ListViolationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring|getViolation}.
+                     * @param error Error, if any
+                     * @param [response] Violation
+                     */
+                    type GetViolationCallback = (error: (Error|null), response?: google.cloud.cloudcontrolspartner.v1.Violation) => void;
+                }
+
+                /** Properties of a Violation. */
+                interface IViolation {
+
+                    /** Violation name */
+                    name?: (string|null);
+
+                    /** Violation description */
+                    description?: (string|null);
+
+                    /** Violation beginTime */
+                    beginTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation resolveTime */
+                    resolveTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation category */
+                    category?: (string|null);
+
+                    /** Violation state */
+                    state?: (google.cloud.cloudcontrolspartner.v1.Violation.State|keyof typeof google.cloud.cloudcontrolspartner.v1.Violation.State|null);
+
+                    /** Violation nonCompliantOrgPolicy */
+                    nonCompliantOrgPolicy?: (string|null);
+
+                    /** Violation folderId */
+                    folderId?: (number|Long|string|null);
+
+                    /** Violation remediation */
+                    remediation?: (google.cloud.cloudcontrolspartner.v1.Violation.IRemediation|null);
+                }
+
+                /** Represents a Violation. */
+                class Violation implements IViolation {
+
+                    /**
+                     * Constructs a new Violation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IViolation);
+
+                    /** Violation name. */
+                    public name: string;
+
+                    /** Violation description. */
+                    public description: string;
+
+                    /** Violation beginTime. */
+                    public beginTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation resolveTime. */
+                    public resolveTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Violation category. */
+                    public category: string;
+
+                    /** Violation state. */
+                    public state: (google.cloud.cloudcontrolspartner.v1.Violation.State|keyof typeof google.cloud.cloudcontrolspartner.v1.Violation.State);
+
+                    /** Violation nonCompliantOrgPolicy. */
+                    public nonCompliantOrgPolicy: string;
+
+                    /** Violation folderId. */
+                    public folderId: (number|Long|string);
+
+                    /** Violation remediation. */
+                    public remediation?: (google.cloud.cloudcontrolspartner.v1.Violation.IRemediation|null);
+
+                    /**
+                     * Creates a new Violation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Violation instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IViolation): google.cloud.cloudcontrolspartner.v1.Violation;
+
+                    /**
+                     * Encodes the specified Violation message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.verify|verify} messages.
+                     * @param message Violation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IViolation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Violation message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.verify|verify} messages.
+                     * @param message Violation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IViolation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Violation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Violation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.Violation;
+
+                    /**
+                     * Decodes a Violation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Violation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.Violation;
+
+                    /**
+                     * Verifies a Violation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Violation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Violation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.Violation;
+
+                    /**
+                     * Creates a plain object from a Violation message. Also converts values to other types if specified.
+                     * @param message Violation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.Violation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Violation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Violation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Violation {
+
+                    /** Properties of a Remediation. */
+                    interface IRemediation {
+
+                        /** Remediation instructions */
+                        instructions?: (google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions|null);
+
+                        /** Remediation compliantValues */
+                        compliantValues?: (string[]|null);
+
+                        /** Remediation remediationType */
+                        remediationType?: (google.cloud.cloudcontrolspartner.v1.Violation.Remediation.RemediationType|keyof typeof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.RemediationType|null);
+                    }
+
+                    /** Represents a Remediation. */
+                    class Remediation implements IRemediation {
+
+                        /**
+                         * Constructs a new Remediation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.cloudcontrolspartner.v1.Violation.IRemediation);
+
+                        /** Remediation instructions. */
+                        public instructions?: (google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions|null);
+
+                        /** Remediation compliantValues. */
+                        public compliantValues: string[];
+
+                        /** Remediation remediationType. */
+                        public remediationType: (google.cloud.cloudcontrolspartner.v1.Violation.Remediation.RemediationType|keyof typeof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.RemediationType);
+
+                        /**
+                         * Creates a new Remediation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Remediation instance
+                         */
+                        public static create(properties?: google.cloud.cloudcontrolspartner.v1.Violation.IRemediation): google.cloud.cloudcontrolspartner.v1.Violation.Remediation;
+
+                        /**
+                         * Encodes the specified Remediation message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.verify|verify} messages.
+                         * @param message Remediation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.cloudcontrolspartner.v1.Violation.IRemediation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Remediation message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.verify|verify} messages.
+                         * @param message Remediation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.Violation.IRemediation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Remediation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Remediation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.Violation.Remediation;
+
+                        /**
+                         * Decodes a Remediation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Remediation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.Violation.Remediation;
+
+                        /**
+                         * Verifies a Remediation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Remediation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Remediation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.Violation.Remediation;
+
+                        /**
+                         * Creates a plain object from a Remediation message. Also converts values to other types if specified.
+                         * @param message Remediation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.cloudcontrolspartner.v1.Violation.Remediation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Remediation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Remediation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Remediation {
+
+                        /** Properties of an Instructions. */
+                        interface IInstructions {
+
+                            /** Instructions gcloudInstructions */
+                            gcloudInstructions?: (google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud|null);
+
+                            /** Instructions consoleInstructions */
+                            consoleInstructions?: (google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole|null);
+                        }
+
+                        /** Represents an Instructions. */
+                        class Instructions implements IInstructions {
+
+                            /**
+                             * Constructs a new Instructions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions);
+
+                            /** Instructions gcloudInstructions. */
+                            public gcloudInstructions?: (google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud|null);
+
+                            /** Instructions consoleInstructions. */
+                            public consoleInstructions?: (google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole|null);
+
+                            /**
+                             * Creates a new Instructions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Instructions instance
+                             */
+                            public static create(properties?: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions;
+
+                            /**
+                             * Encodes the specified Instructions message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.verify|verify} messages.
+                             * @param message Instructions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Instructions message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.verify|verify} messages.
+                             * @param message Instructions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Instructions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Instructions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions;
+
+                            /**
+                             * Decodes an Instructions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Instructions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions;
+
+                            /**
+                             * Verifies an Instructions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Instructions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Instructions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions;
+
+                            /**
+                             * Creates a plain object from an Instructions message. Also converts values to other types if specified.
+                             * @param message Instructions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Instructions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Instructions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Instructions {
+
+                            /** Properties of a Gcloud. */
+                            interface IGcloud {
+
+                                /** Gcloud gcloudCommands */
+                                gcloudCommands?: (string[]|null);
+
+                                /** Gcloud steps */
+                                steps?: (string[]|null);
+
+                                /** Gcloud additionalLinks */
+                                additionalLinks?: (string[]|null);
+                            }
+
+                            /** Represents a Gcloud. */
+                            class Gcloud implements IGcloud {
+
+                                /**
+                                 * Constructs a new Gcloud.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud);
+
+                                /** Gcloud gcloudCommands. */
+                                public gcloudCommands: string[];
+
+                                /** Gcloud steps. */
+                                public steps: string[];
+
+                                /** Gcloud additionalLinks. */
+                                public additionalLinks: string[];
+
+                                /**
+                                 * Creates a new Gcloud instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Gcloud instance
+                                 */
+                                public static create(properties?: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud;
+
+                                /**
+                                 * Encodes the specified Gcloud message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.verify|verify} messages.
+                                 * @param message Gcloud message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Gcloud message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.verify|verify} messages.
+                                 * @param message Gcloud message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Gcloud message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Gcloud
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud;
+
+                                /**
+                                 * Decodes a Gcloud message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Gcloud
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud;
+
+                                /**
+                                 * Verifies a Gcloud message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Gcloud message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Gcloud
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud;
+
+                                /**
+                                 * Creates a plain object from a Gcloud message. Also converts values to other types if specified.
+                                 * @param message Gcloud
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Gcloud to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Gcloud
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a Console. */
+                            interface IConsole {
+
+                                /** Console consoleUris */
+                                consoleUris?: (string[]|null);
+
+                                /** Console steps */
+                                steps?: (string[]|null);
+
+                                /** Console additionalLinks */
+                                additionalLinks?: (string[]|null);
+                            }
+
+                            /** Represents a Console. */
+                            class Console implements IConsole {
+
+                                /**
+                                 * Constructs a new Console.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole);
+
+                                /** Console consoleUris. */
+                                public consoleUris: string[];
+
+                                /** Console steps. */
+                                public steps: string[];
+
+                                /** Console additionalLinks. */
+                                public additionalLinks: string[];
+
+                                /**
+                                 * Creates a new Console instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Console instance
+                                 */
+                                public static create(properties?: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console;
+
+                                /**
+                                 * Encodes the specified Console message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.verify|verify} messages.
+                                 * @param message Console message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Console message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.verify|verify} messages.
+                                 * @param message Console message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Console message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Console
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console;
+
+                                /**
+                                 * Decodes a Console message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Console
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console;
+
+                                /**
+                                 * Verifies a Console message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Console message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Console
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console;
+
+                                /**
+                                 * Creates a plain object from a Console message. Also converts values to other types if specified.
+                                 * @param message Console
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Console to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Console
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** RemediationType enum. */
+                        enum RemediationType {
+                            REMEDIATION_TYPE_UNSPECIFIED = 0,
+                            REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION = 1,
+                            REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION = 2,
+                            REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION = 3,
+                            REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION = 4,
+                            REMEDIATION_RESOURCE_VIOLATION = 5
+                        }
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RESOLVED = 1,
+                        UNRESOLVED = 2,
+                        EXCEPTION = 3
+                    }
+                }
+
+                /** Properties of a ListViolationsRequest. */
+                interface IListViolationsRequest {
+
+                    /** ListViolationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListViolationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListViolationsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListViolationsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListViolationsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListViolationsRequest interval */
+                    interval?: (google.type.IInterval|null);
+                }
+
+                /** Represents a ListViolationsRequest. */
+                class ListViolationsRequest implements IListViolationsRequest {
+
+                    /**
+                     * Constructs a new ListViolationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IListViolationsRequest);
+
+                    /** ListViolationsRequest parent. */
+                    public parent: string;
+
+                    /** ListViolationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListViolationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListViolationsRequest filter. */
+                    public filter: string;
+
+                    /** ListViolationsRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListViolationsRequest interval. */
+                    public interval?: (google.type.IInterval|null);
+
+                    /**
+                     * Creates a new ListViolationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListViolationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IListViolationsRequest): google.cloud.cloudcontrolspartner.v1.ListViolationsRequest;
+
+                    /**
+                     * Encodes the specified ListViolationsRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListViolationsRequest.verify|verify} messages.
+                     * @param message ListViolationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IListViolationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListViolationsRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListViolationsRequest.verify|verify} messages.
+                     * @param message ListViolationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IListViolationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListViolationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListViolationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.ListViolationsRequest;
+
+                    /**
+                     * Decodes a ListViolationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListViolationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.ListViolationsRequest;
+
+                    /**
+                     * Verifies a ListViolationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListViolationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListViolationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.ListViolationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListViolationsRequest message. Also converts values to other types if specified.
+                     * @param message ListViolationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.ListViolationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListViolationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListViolationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListViolationsResponse. */
+                interface IListViolationsResponse {
+
+                    /** ListViolationsResponse violations */
+                    violations?: (google.cloud.cloudcontrolspartner.v1.IViolation[]|null);
+
+                    /** ListViolationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListViolationsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListViolationsResponse. */
+                class ListViolationsResponse implements IListViolationsResponse {
+
+                    /**
+                     * Constructs a new ListViolationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IListViolationsResponse);
+
+                    /** ListViolationsResponse violations. */
+                    public violations: google.cloud.cloudcontrolspartner.v1.IViolation[];
+
+                    /** ListViolationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListViolationsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListViolationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListViolationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IListViolationsResponse): google.cloud.cloudcontrolspartner.v1.ListViolationsResponse;
+
+                    /**
+                     * Encodes the specified ListViolationsResponse message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListViolationsResponse.verify|verify} messages.
+                     * @param message ListViolationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IListViolationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListViolationsResponse message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListViolationsResponse.verify|verify} messages.
+                     * @param message ListViolationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IListViolationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListViolationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListViolationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.ListViolationsResponse;
+
+                    /**
+                     * Decodes a ListViolationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListViolationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.ListViolationsResponse;
+
+                    /**
+                     * Verifies a ListViolationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListViolationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListViolationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.ListViolationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListViolationsResponse message. Also converts values to other types if specified.
+                     * @param message ListViolationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.ListViolationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListViolationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListViolationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetViolationRequest. */
+                interface IGetViolationRequest {
+
+                    /** GetViolationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetViolationRequest. */
+                class GetViolationRequest implements IGetViolationRequest {
+
+                    /**
+                     * Constructs a new GetViolationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudcontrolspartner.v1.IGetViolationRequest);
+
+                    /** GetViolationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetViolationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetViolationRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudcontrolspartner.v1.IGetViolationRequest): google.cloud.cloudcontrolspartner.v1.GetViolationRequest;
+
+                    /**
+                     * Encodes the specified GetViolationRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetViolationRequest.verify|verify} messages.
+                     * @param message GetViolationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudcontrolspartner.v1.IGetViolationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetViolationRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetViolationRequest.verify|verify} messages.
+                     * @param message GetViolationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudcontrolspartner.v1.IGetViolationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetViolationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetViolationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudcontrolspartner.v1.GetViolationRequest;
+
+                    /**
+                     * Decodes a GetViolationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetViolationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudcontrolspartner.v1.GetViolationRequest;
+
+                    /**
+                     * Verifies a GetViolationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetViolationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetViolationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudcontrolspartner.v1.GetViolationRequest;
+
+                    /**
+                     * Creates a plain object from a GetViolationRequest message. Also converts values to other types if specified.
+                     * @param message GetViolationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudcontrolspartner.v1.GetViolationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetViolationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetViolationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
             /** Namespace v1beta. */
             namespace v1beta {
 

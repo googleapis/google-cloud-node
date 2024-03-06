@@ -57,6 +57,10542 @@
                  */
                 var cloudcontrolspartner = {};
     
+                cloudcontrolspartner.v1 = (function() {
+    
+                    /**
+                     * Namespace v1.
+                     * @memberof google.cloud.cloudcontrolspartner
+                     * @namespace
+                     */
+                    var v1 = {};
+    
+                    v1.AccessApprovalRequest = (function() {
+    
+                        /**
+                         * Properties of an AccessApprovalRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IAccessApprovalRequest
+                         * @property {string|null} [name] AccessApprovalRequest name
+                         * @property {google.protobuf.ITimestamp|null} [requestTime] AccessApprovalRequest requestTime
+                         * @property {google.cloud.cloudcontrolspartner.v1.IAccessReason|null} [requestedReason] AccessApprovalRequest requestedReason
+                         * @property {google.protobuf.ITimestamp|null} [requestedExpirationTime] AccessApprovalRequest requestedExpirationTime
+                         */
+    
+                        /**
+                         * Constructs a new AccessApprovalRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents an AccessApprovalRequest.
+                         * @implements IAccessApprovalRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest=} [properties] Properties to set
+                         */
+                        function AccessApprovalRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccessApprovalRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @instance
+                         */
+                        AccessApprovalRequest.prototype.name = "";
+    
+                        /**
+                         * AccessApprovalRequest requestTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} requestTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @instance
+                         */
+                        AccessApprovalRequest.prototype.requestTime = null;
+    
+                        /**
+                         * AccessApprovalRequest requestedReason.
+                         * @member {google.cloud.cloudcontrolspartner.v1.IAccessReason|null|undefined} requestedReason
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @instance
+                         */
+                        AccessApprovalRequest.prototype.requestedReason = null;
+    
+                        /**
+                         * AccessApprovalRequest requestedExpirationTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} requestedExpirationTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @instance
+                         */
+                        AccessApprovalRequest.prototype.requestedExpirationTime = null;
+    
+                        /**
+                         * Creates a new AccessApprovalRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest} AccessApprovalRequest instance
+                         */
+                        AccessApprovalRequest.create = function create(properties) {
+                            return new AccessApprovalRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccessApprovalRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest} message AccessApprovalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessApprovalRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestTime != null && Object.hasOwnProperty.call(message, "requestTime"))
+                                $root.google.protobuf.Timestamp.encode(message.requestTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestedReason != null && Object.hasOwnProperty.call(message, "requestedReason"))
+                                $root.google.cloud.cloudcontrolspartner.v1.AccessReason.encode(message.requestedReason, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestedExpirationTime != null && Object.hasOwnProperty.call(message, "requestedExpirationTime"))
+                                $root.google.protobuf.Timestamp.encode(message.requestedExpirationTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccessApprovalRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest} message AccessApprovalRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessApprovalRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccessApprovalRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest} AccessApprovalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessApprovalRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestedReason = $root.google.cloud.cloudcontrolspartner.v1.AccessReason.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestedExpirationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccessApprovalRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest} AccessApprovalRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessApprovalRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccessApprovalRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccessApprovalRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestTime != null && message.hasOwnProperty("requestTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.requestTime);
+                                if (error)
+                                    return "requestTime." + error;
+                            }
+                            if (message.requestedReason != null && message.hasOwnProperty("requestedReason")) {
+                                var error = $root.google.cloud.cloudcontrolspartner.v1.AccessReason.verify(message.requestedReason);
+                                if (error)
+                                    return "requestedReason." + error;
+                            }
+                            if (message.requestedExpirationTime != null && message.hasOwnProperty("requestedExpirationTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.requestedExpirationTime);
+                                if (error)
+                                    return "requestedExpirationTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccessApprovalRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest} AccessApprovalRequest
+                         */
+                        AccessApprovalRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestTime != null) {
+                                if (typeof object.requestTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.requestTime: object expected");
+                                message.requestTime = $root.google.protobuf.Timestamp.fromObject(object.requestTime);
+                            }
+                            if (object.requestedReason != null) {
+                                if (typeof object.requestedReason !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.requestedReason: object expected");
+                                message.requestedReason = $root.google.cloud.cloudcontrolspartner.v1.AccessReason.fromObject(object.requestedReason);
+                            }
+                            if (object.requestedExpirationTime != null) {
+                                if (typeof object.requestedExpirationTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.requestedExpirationTime: object expected");
+                                message.requestedExpirationTime = $root.google.protobuf.Timestamp.fromObject(object.requestedExpirationTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccessApprovalRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest} message AccessApprovalRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccessApprovalRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestTime = null;
+                                object.requestedReason = null;
+                                object.requestedExpirationTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestTime != null && message.hasOwnProperty("requestTime"))
+                                object.requestTime = $root.google.protobuf.Timestamp.toObject(message.requestTime, options);
+                            if (message.requestedReason != null && message.hasOwnProperty("requestedReason"))
+                                object.requestedReason = $root.google.cloud.cloudcontrolspartner.v1.AccessReason.toObject(message.requestedReason, options);
+                            if (message.requestedExpirationTime != null && message.hasOwnProperty("requestedExpirationTime"))
+                                object.requestedExpirationTime = $root.google.protobuf.Timestamp.toObject(message.requestedExpirationTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccessApprovalRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccessApprovalRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AccessApprovalRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AccessApprovalRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest";
+                        };
+    
+                        return AccessApprovalRequest;
+                    })();
+    
+                    v1.ListAccessApprovalRequestsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListAccessApprovalRequestsRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IListAccessApprovalRequestsRequest
+                         * @property {string|null} [parent] ListAccessApprovalRequestsRequest parent
+                         * @property {number|null} [pageSize] ListAccessApprovalRequestsRequest pageSize
+                         * @property {string|null} [pageToken] ListAccessApprovalRequestsRequest pageToken
+                         * @property {string|null} [filter] ListAccessApprovalRequestsRequest filter
+                         * @property {string|null} [orderBy] ListAccessApprovalRequestsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListAccessApprovalRequestsRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a ListAccessApprovalRequestsRequest.
+                         * @implements IListAccessApprovalRequestsRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest=} [properties] Properties to set
+                         */
+                        function ListAccessApprovalRequestsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAccessApprovalRequestsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @instance
+                         */
+                        ListAccessApprovalRequestsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListAccessApprovalRequestsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @instance
+                         */
+                        ListAccessApprovalRequestsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListAccessApprovalRequestsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @instance
+                         */
+                        ListAccessApprovalRequestsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListAccessApprovalRequestsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @instance
+                         */
+                        ListAccessApprovalRequestsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListAccessApprovalRequestsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @instance
+                         */
+                        ListAccessApprovalRequestsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListAccessApprovalRequestsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest} ListAccessApprovalRequestsRequest instance
+                         */
+                        ListAccessApprovalRequestsRequest.create = function create(properties) {
+                            return new ListAccessApprovalRequestsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccessApprovalRequestsRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest} message ListAccessApprovalRequestsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccessApprovalRequestsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccessApprovalRequestsRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest} message ListAccessApprovalRequestsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccessApprovalRequestsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAccessApprovalRequestsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest} ListAccessApprovalRequestsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccessApprovalRequestsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAccessApprovalRequestsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest} ListAccessApprovalRequestsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccessApprovalRequestsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAccessApprovalRequestsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAccessApprovalRequestsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAccessApprovalRequestsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest} ListAccessApprovalRequestsRequest
+                         */
+                        ListAccessApprovalRequestsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAccessApprovalRequestsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest} message ListAccessApprovalRequestsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAccessApprovalRequestsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAccessApprovalRequestsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAccessApprovalRequestsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAccessApprovalRequestsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAccessApprovalRequestsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest";
+                        };
+    
+                        return ListAccessApprovalRequestsRequest;
+                    })();
+    
+                    v1.ListAccessApprovalRequestsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListAccessApprovalRequestsResponse.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IListAccessApprovalRequestsResponse
+                         * @property {Array.<google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest>|null} [accessApprovalRequests] ListAccessApprovalRequestsResponse accessApprovalRequests
+                         * @property {string|null} [nextPageToken] ListAccessApprovalRequestsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListAccessApprovalRequestsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListAccessApprovalRequestsResponse.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a ListAccessApprovalRequestsResponse.
+                         * @implements IListAccessApprovalRequestsResponse
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsResponse=} [properties] Properties to set
+                         */
+                        function ListAccessApprovalRequestsResponse(properties) {
+                            this.accessApprovalRequests = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListAccessApprovalRequestsResponse accessApprovalRequests.
+                         * @member {Array.<google.cloud.cloudcontrolspartner.v1.IAccessApprovalRequest>} accessApprovalRequests
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @instance
+                         */
+                        ListAccessApprovalRequestsResponse.prototype.accessApprovalRequests = $util.emptyArray;
+    
+                        /**
+                         * ListAccessApprovalRequestsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @instance
+                         */
+                        ListAccessApprovalRequestsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListAccessApprovalRequestsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @instance
+                         */
+                        ListAccessApprovalRequestsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListAccessApprovalRequestsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse} ListAccessApprovalRequestsResponse instance
+                         */
+                        ListAccessApprovalRequestsResponse.create = function create(properties) {
+                            return new ListAccessApprovalRequestsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccessApprovalRequestsResponse message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsResponse} message ListAccessApprovalRequestsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccessApprovalRequestsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.accessApprovalRequests != null && message.accessApprovalRequests.length)
+                                for (var i = 0; i < message.accessApprovalRequests.length; ++i)
+                                    $root.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.encode(message.accessApprovalRequests[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListAccessApprovalRequestsResponse message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsResponse} message ListAccessApprovalRequestsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListAccessApprovalRequestsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListAccessApprovalRequestsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse} ListAccessApprovalRequestsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccessApprovalRequestsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.accessApprovalRequests && message.accessApprovalRequests.length))
+                                            message.accessApprovalRequests = [];
+                                        message.accessApprovalRequests.push($root.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListAccessApprovalRequestsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse} ListAccessApprovalRequestsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListAccessApprovalRequestsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListAccessApprovalRequestsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListAccessApprovalRequestsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.accessApprovalRequests != null && message.hasOwnProperty("accessApprovalRequests")) {
+                                if (!Array.isArray(message.accessApprovalRequests))
+                                    return "accessApprovalRequests: array expected";
+                                for (var i = 0; i < message.accessApprovalRequests.length; ++i) {
+                                    var error = $root.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.verify(message.accessApprovalRequests[i]);
+                                    if (error)
+                                        return "accessApprovalRequests." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListAccessApprovalRequestsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse} ListAccessApprovalRequestsResponse
+                         */
+                        ListAccessApprovalRequestsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse();
+                            if (object.accessApprovalRequests) {
+                                if (!Array.isArray(object.accessApprovalRequests))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse.accessApprovalRequests: array expected");
+                                message.accessApprovalRequests = [];
+                                for (var i = 0; i < object.accessApprovalRequests.length; ++i) {
+                                    if (typeof object.accessApprovalRequests[i] !== "object")
+                                        throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse.accessApprovalRequests: object expected");
+                                    message.accessApprovalRequests[i] = $root.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.fromObject(object.accessApprovalRequests[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListAccessApprovalRequestsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse} message ListAccessApprovalRequestsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListAccessApprovalRequestsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.accessApprovalRequests = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.accessApprovalRequests && message.accessApprovalRequests.length) {
+                                object.accessApprovalRequests = [];
+                                for (var j = 0; j < message.accessApprovalRequests.length; ++j)
+                                    object.accessApprovalRequests[j] = $root.google.cloud.cloudcontrolspartner.v1.AccessApprovalRequest.toObject(message.accessApprovalRequests[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListAccessApprovalRequestsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListAccessApprovalRequestsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListAccessApprovalRequestsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListAccessApprovalRequestsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse";
+                        };
+    
+                        return ListAccessApprovalRequestsResponse;
+                    })();
+    
+                    v1.AccessReason = (function() {
+    
+                        /**
+                         * Properties of an AccessReason.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IAccessReason
+                         * @property {google.cloud.cloudcontrolspartner.v1.AccessReason.Type|null} [type] AccessReason type
+                         * @property {string|null} [detail] AccessReason detail
+                         */
+    
+                        /**
+                         * Constructs a new AccessReason.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents an AccessReason.
+                         * @implements IAccessReason
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IAccessReason=} [properties] Properties to set
+                         */
+                        function AccessReason(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccessReason type.
+                         * @member {google.cloud.cloudcontrolspartner.v1.AccessReason.Type} type
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @instance
+                         */
+                        AccessReason.prototype.type = 0;
+    
+                        /**
+                         * AccessReason detail.
+                         * @member {string} detail
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @instance
+                         */
+                        AccessReason.prototype.detail = "";
+    
+                        /**
+                         * Creates a new AccessReason instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IAccessReason=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.AccessReason} AccessReason instance
+                         */
+                        AccessReason.create = function create(properties) {
+                            return new AccessReason(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccessReason message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.AccessReason.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IAccessReason} message AccessReason message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessReason.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                            if (message.detail != null && Object.hasOwnProperty.call(message, "detail"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.detail);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccessReason message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.AccessReason.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IAccessReason} message AccessReason message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessReason.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccessReason message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.AccessReason} AccessReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessReason.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.AccessReason();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.detail = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccessReason message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.AccessReason} AccessReason
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessReason.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccessReason message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccessReason.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.detail != null && message.hasOwnProperty("detail"))
+                                if (!$util.isString(message.detail))
+                                    return "detail: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccessReason message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.AccessReason} AccessReason
+                         */
+                        AccessReason.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.AccessReason)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.AccessReason();
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "CUSTOMER_INITIATED_SUPPORT":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "GOOGLE_INITIATED_SERVICE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "GOOGLE_INITIATED_REVIEW":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "THIRD_PARTY_DATA_REQUEST":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            case "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT":
+                            case 5:
+                                message.type = 5;
+                                break;
+                            case "CLOUD_INITIATED_ACCESS":
+                            case 6:
+                                message.type = 6;
+                                break;
+                            }
+                            if (object.detail != null)
+                                message.detail = String(object.detail);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccessReason message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.AccessReason} message AccessReason
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccessReason.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.detail = "";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.cloudcontrolspartner.v1.AccessReason.Type[message.type] === undefined ? message.type : $root.google.cloud.cloudcontrolspartner.v1.AccessReason.Type[message.type] : message.type;
+                            if (message.detail != null && message.hasOwnProperty("detail"))
+                                object.detail = message.detail;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccessReason to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccessReason.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AccessReason
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.AccessReason
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AccessReason.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.AccessReason";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.cloudcontrolspartner.v1.AccessReason.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} CUSTOMER_INITIATED_SUPPORT=1 CUSTOMER_INITIATED_SUPPORT value
+                         * @property {number} GOOGLE_INITIATED_SERVICE=2 GOOGLE_INITIATED_SERVICE value
+                         * @property {number} GOOGLE_INITIATED_REVIEW=3 GOOGLE_INITIATED_REVIEW value
+                         * @property {number} THIRD_PARTY_DATA_REQUEST=4 THIRD_PARTY_DATA_REQUEST value
+                         * @property {number} GOOGLE_RESPONSE_TO_PRODUCTION_ALERT=5 GOOGLE_RESPONSE_TO_PRODUCTION_ALERT value
+                         * @property {number} CLOUD_INITIATED_ACCESS=6 CLOUD_INITIATED_ACCESS value
+                         */
+                        AccessReason.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CUSTOMER_INITIATED_SUPPORT"] = 1;
+                            values[valuesById[2] = "GOOGLE_INITIATED_SERVICE"] = 2;
+                            values[valuesById[3] = "GOOGLE_INITIATED_REVIEW"] = 3;
+                            values[valuesById[4] = "THIRD_PARTY_DATA_REQUEST"] = 4;
+                            values[valuesById[5] = "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT"] = 5;
+                            values[valuesById[6] = "CLOUD_INITIATED_ACCESS"] = 6;
+                            return values;
+                        })();
+    
+                        return AccessReason;
+                    })();
+    
+                    /**
+                     * CompletionState enum.
+                     * @name google.cloud.cloudcontrolspartner.v1.CompletionState
+                     * @enum {number}
+                     * @property {number} COMPLETION_STATE_UNSPECIFIED=0 COMPLETION_STATE_UNSPECIFIED value
+                     * @property {number} PENDING=1 PENDING value
+                     * @property {number} SUCCEEDED=2 SUCCEEDED value
+                     * @property {number} FAILED=3 FAILED value
+                     * @property {number} NOT_APPLICABLE=4 NOT_APPLICABLE value
+                     */
+                    v1.CompletionState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "COMPLETION_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "PENDING"] = 1;
+                        values[valuesById[2] = "SUCCEEDED"] = 2;
+                        values[valuesById[3] = "FAILED"] = 3;
+                        values[valuesById[4] = "NOT_APPLICABLE"] = 4;
+                        return values;
+                    })();
+    
+                    v1.CloudControlsPartnerCore = (function() {
+    
+                        /**
+                         * Constructs a new CloudControlsPartnerCore service.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a CloudControlsPartnerCore
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function CloudControlsPartnerCore(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (CloudControlsPartnerCore.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = CloudControlsPartnerCore;
+    
+                        /**
+                         * Creates new CloudControlsPartnerCore service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {CloudControlsPartnerCore} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        CloudControlsPartnerCore.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|getWorkload}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @typedef GetWorkloadCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1.Workload} [response] Workload
+                         */
+    
+                        /**
+                         * Calls GetWorkload.
+                         * @function getWorkload
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest} request GetWorkloadRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.GetWorkloadCallback} callback Node-style callback called with the error, if any, and Workload
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerCore.prototype.getWorkload = function getWorkload(request, callback) {
+                            return this.rpcCall(getWorkload, $root.google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest, $root.google.cloud.cloudcontrolspartner.v1.Workload, request, callback);
+                        }, "name", { value: "GetWorkload" });
+    
+                        /**
+                         * Calls GetWorkload.
+                         * @function getWorkload
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest} request GetWorkloadRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1.Workload>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|listWorkloads}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @typedef ListWorkloadsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse} [response] ListWorkloadsResponse
+                         */
+    
+                        /**
+                         * Calls ListWorkloads.
+                         * @function listWorkloads
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest} request ListWorkloadsRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.ListWorkloadsCallback} callback Node-style callback called with the error, if any, and ListWorkloadsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerCore.prototype.listWorkloads = function listWorkloads(request, callback) {
+                            return this.rpcCall(listWorkloads, $root.google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest, $root.google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse, request, callback);
+                        }, "name", { value: "ListWorkloads" });
+    
+                        /**
+                         * Calls ListWorkloads.
+                         * @function listWorkloads
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest} request ListWorkloadsRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|getCustomer}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @typedef GetCustomerCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1.Customer} [response] Customer
+                         */
+    
+                        /**
+                         * Calls GetCustomer.
+                         * @function getCustomer
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest} request GetCustomerRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.GetCustomerCallback} callback Node-style callback called with the error, if any, and Customer
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerCore.prototype.getCustomer = function getCustomer(request, callback) {
+                            return this.rpcCall(getCustomer, $root.google.cloud.cloudcontrolspartner.v1.GetCustomerRequest, $root.google.cloud.cloudcontrolspartner.v1.Customer, request, callback);
+                        }, "name", { value: "GetCustomer" });
+    
+                        /**
+                         * Calls GetCustomer.
+                         * @function getCustomer
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest} request GetCustomerRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1.Customer>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|listCustomers}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @typedef ListCustomersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListCustomersResponse} [response] ListCustomersResponse
+                         */
+    
+                        /**
+                         * Calls ListCustomers.
+                         * @function listCustomers
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListCustomersRequest} request ListCustomersRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.ListCustomersCallback} callback Node-style callback called with the error, if any, and ListCustomersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerCore.prototype.listCustomers = function listCustomers(request, callback) {
+                            return this.rpcCall(listCustomers, $root.google.cloud.cloudcontrolspartner.v1.ListCustomersRequest, $root.google.cloud.cloudcontrolspartner.v1.ListCustomersResponse, request, callback);
+                        }, "name", { value: "ListCustomers" });
+    
+                        /**
+                         * Calls ListCustomers.
+                         * @function listCustomers
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListCustomersRequest} request ListCustomersRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1.ListCustomersResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|getEkmConnections}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @typedef GetEkmConnectionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1.EkmConnections} [response] EkmConnections
+                         */
+    
+                        /**
+                         * Calls GetEkmConnections.
+                         * @function getEkmConnections
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest} request GetEkmConnectionsRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.GetEkmConnectionsCallback} callback Node-style callback called with the error, if any, and EkmConnections
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerCore.prototype.getEkmConnections = function getEkmConnections(request, callback) {
+                            return this.rpcCall(getEkmConnections, $root.google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest, $root.google.cloud.cloudcontrolspartner.v1.EkmConnections, request, callback);
+                        }, "name", { value: "GetEkmConnections" });
+    
+                        /**
+                         * Calls GetEkmConnections.
+                         * @function getEkmConnections
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest} request GetEkmConnectionsRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1.EkmConnections>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|getPartnerPermissions}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @typedef GetPartnerPermissionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1.PartnerPermissions} [response] PartnerPermissions
+                         */
+    
+                        /**
+                         * Calls GetPartnerPermissions.
+                         * @function getPartnerPermissions
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest} request GetPartnerPermissionsRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.GetPartnerPermissionsCallback} callback Node-style callback called with the error, if any, and PartnerPermissions
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerCore.prototype.getPartnerPermissions = function getPartnerPermissions(request, callback) {
+                            return this.rpcCall(getPartnerPermissions, $root.google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest, $root.google.cloud.cloudcontrolspartner.v1.PartnerPermissions, request, callback);
+                        }, "name", { value: "GetPartnerPermissions" });
+    
+                        /**
+                         * Calls GetPartnerPermissions.
+                         * @function getPartnerPermissions
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest} request GetPartnerPermissionsRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1.PartnerPermissions>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|listAccessApprovalRequests}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @typedef ListAccessApprovalRequestsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse} [response] ListAccessApprovalRequestsResponse
+                         */
+    
+                        /**
+                         * Calls ListAccessApprovalRequests.
+                         * @function listAccessApprovalRequests
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest} request ListAccessApprovalRequestsRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.ListAccessApprovalRequestsCallback} callback Node-style callback called with the error, if any, and ListAccessApprovalRequestsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerCore.prototype.listAccessApprovalRequests = function listAccessApprovalRequests(request, callback) {
+                            return this.rpcCall(listAccessApprovalRequests, $root.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest, $root.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse, request, callback);
+                        }, "name", { value: "ListAccessApprovalRequests" });
+    
+                        /**
+                         * Calls ListAccessApprovalRequests.
+                         * @function listAccessApprovalRequests
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListAccessApprovalRequestsRequest} request ListAccessApprovalRequestsRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore|getPartner}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @typedef GetPartnerCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1.Partner} [response] Partner
+                         */
+    
+                        /**
+                         * Calls GetPartner.
+                         * @function getPartner
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest} request GetPartnerRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.GetPartnerCallback} callback Node-style callback called with the error, if any, and Partner
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerCore.prototype.getPartner = function getPartner(request, callback) {
+                            return this.rpcCall(getPartner, $root.google.cloud.cloudcontrolspartner.v1.GetPartnerRequest, $root.google.cloud.cloudcontrolspartner.v1.Partner, request, callback);
+                        }, "name", { value: "GetPartner" });
+    
+                        /**
+                         * Calls GetPartner.
+                         * @function getPartner
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest} request GetPartnerRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1.Partner>} Promise
+                         * @variation 2
+                         */
+    
+                        return CloudControlsPartnerCore;
+                    })();
+    
+                    v1.OperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an OperationMetadata.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IOperationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                         * @property {string|null} [target] OperationMetadata target
+                         * @property {string|null} [verb] OperationMetadata verb
+                         * @property {string|null} [statusMessage] OperationMetadata statusMessage
+                         * @property {boolean|null} [requestedCancellation] OperationMetadata requestedCancellation
+                         * @property {string|null} [apiVersion] OperationMetadata apiVersion
+                         */
+    
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents an OperationMetadata.
+                         * @implements IOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IOperationMetadata=} [properties] Properties to set
+                         */
+                        function OperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OperationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * OperationMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.endTime = null;
+    
+                        /**
+                         * OperationMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.target = "";
+    
+                        /**
+                         * OperationMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.verb = "";
+    
+                        /**
+                         * OperationMetadata statusMessage.
+                         * @member {string} statusMessage
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.statusMessage = "";
+    
+                        /**
+                         * OperationMetadata requestedCancellation.
+                         * @member {boolean} requestedCancellation
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.requestedCancellation = false;
+    
+                        /**
+                         * OperationMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.apiVersion = "";
+    
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.OperationMetadata} OperationMetadata instance
+                         */
+                        OperationMetadata.create = function create(properties) {
+                            return new OperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.OperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
+                            if (message.statusMessage != null && Object.hasOwnProperty.call(message, "statusMessage"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.statusMessage);
+                            if (message.requestedCancellation != null && Object.hasOwnProperty.call(message, "requestedCancellation"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.requestedCancellation);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.apiVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.OperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.OperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.statusMessage = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.requestedCancellation = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.apiVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                if (!$util.isString(message.statusMessage))
+                                    return "statusMessage: string expected";
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                if (typeof message.requestedCancellation !== "boolean")
+                                    return "requestedCancellation: boolean expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.OperationMetadata} OperationMetadata
+                         */
+                        OperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.OperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.OperationMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.OperationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.OperationMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusMessage != null)
+                                message.statusMessage = String(object.statusMessage);
+                            if (object.requestedCancellation != null)
+                                message.requestedCancellation = Boolean(object.requestedCancellation);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.OperationMetadata} message OperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusMessage = "";
+                                object.requestedCancellation = false;
+                                object.apiVersion = "";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusMessage != null && message.hasOwnProperty("statusMessage"))
+                                object.statusMessage = message.statusMessage;
+                            if (message.requestedCancellation != null && message.hasOwnProperty("requestedCancellation"))
+                                object.requestedCancellation = message.requestedCancellation;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.OperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.OperationMetadata";
+                        };
+    
+                        return OperationMetadata;
+                    })();
+    
+                    v1.Workload = (function() {
+    
+                        /**
+                         * Properties of a Workload.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IWorkload
+                         * @property {string|null} [name] Workload name
+                         * @property {number|Long|null} [folderId] Workload folderId
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Workload createTime
+                         * @property {string|null} [folder] Workload folder
+                         * @property {google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState|null} [workloadOnboardingState] Workload workloadOnboardingState
+                         * @property {boolean|null} [isOnboarded] Workload isOnboarded
+                         * @property {string|null} [keyManagementProjectId] Workload keyManagementProjectId
+                         * @property {string|null} [location] Workload location
+                         * @property {google.cloud.cloudcontrolspartner.v1.Workload.Partner|null} [partner] Workload partner
+                         */
+    
+                        /**
+                         * Constructs a new Workload.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a Workload.
+                         * @implements IWorkload
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkload=} [properties] Properties to set
+                         */
+                        function Workload(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Workload name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.name = "";
+    
+                        /**
+                         * Workload folderId.
+                         * @member {number|Long} folderId
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.folderId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Workload createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.createTime = null;
+    
+                        /**
+                         * Workload folder.
+                         * @member {string} folder
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.folder = "";
+    
+                        /**
+                         * Workload workloadOnboardingState.
+                         * @member {google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState|null|undefined} workloadOnboardingState
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.workloadOnboardingState = null;
+    
+                        /**
+                         * Workload isOnboarded.
+                         * @member {boolean} isOnboarded
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.isOnboarded = false;
+    
+                        /**
+                         * Workload keyManagementProjectId.
+                         * @member {string} keyManagementProjectId
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.keyManagementProjectId = "";
+    
+                        /**
+                         * Workload location.
+                         * @member {string} location
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.location = "";
+    
+                        /**
+                         * Workload partner.
+                         * @member {google.cloud.cloudcontrolspartner.v1.Workload.Partner} partner
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.partner = 0;
+    
+                        /**
+                         * Creates a new Workload instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkload=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Workload} Workload instance
+                         */
+                        Workload.create = function create(properties) {
+                            return new Workload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Workload message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Workload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkload} message Workload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Workload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.folderId != null && Object.hasOwnProperty.call(message, "folderId"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.folderId);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.folder != null && Object.hasOwnProperty.call(message, "folder"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.folder);
+                            if (message.workloadOnboardingState != null && Object.hasOwnProperty.call(message, "workloadOnboardingState"))
+                                $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState.encode(message.workloadOnboardingState, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.isOnboarded != null && Object.hasOwnProperty.call(message, "isOnboarded"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.isOnboarded);
+                            if (message.keyManagementProjectId != null && Object.hasOwnProperty.call(message, "keyManagementProjectId"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.keyManagementProjectId);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.location);
+                            if (message.partner != null && Object.hasOwnProperty.call(message, "partner"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.partner);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Workload message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Workload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkload} message Workload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Workload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Workload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Workload} Workload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Workload.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.Workload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.folderId = reader.int64();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.folder = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.workloadOnboardingState = $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.isOnboarded = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.keyManagementProjectId = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.partner = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Workload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Workload} Workload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Workload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Workload message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Workload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.folderId != null && message.hasOwnProperty("folderId"))
+                                if (!$util.isInteger(message.folderId) && !(message.folderId && $util.isInteger(message.folderId.low) && $util.isInteger(message.folderId.high)))
+                                    return "folderId: integer|Long expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.folder != null && message.hasOwnProperty("folder"))
+                                if (!$util.isString(message.folder))
+                                    return "folder: string expected";
+                            if (message.workloadOnboardingState != null && message.hasOwnProperty("workloadOnboardingState")) {
+                                var error = $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState.verify(message.workloadOnboardingState);
+                                if (error)
+                                    return "workloadOnboardingState." + error;
+                            }
+                            if (message.isOnboarded != null && message.hasOwnProperty("isOnboarded"))
+                                if (typeof message.isOnboarded !== "boolean")
+                                    return "isOnboarded: boolean expected";
+                            if (message.keyManagementProjectId != null && message.hasOwnProperty("keyManagementProjectId"))
+                                if (!$util.isString(message.keyManagementProjectId))
+                                    return "keyManagementProjectId: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.partner != null && message.hasOwnProperty("partner"))
+                                switch (message.partner) {
+                                default:
+                                    return "partner: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Workload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Workload} Workload
+                         */
+                        Workload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.Workload)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.Workload();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.folderId != null)
+                                if ($util.Long)
+                                    (message.folderId = $util.Long.fromValue(object.folderId)).unsigned = false;
+                                else if (typeof object.folderId === "string")
+                                    message.folderId = parseInt(object.folderId, 10);
+                                else if (typeof object.folderId === "number")
+                                    message.folderId = object.folderId;
+                                else if (typeof object.folderId === "object")
+                                    message.folderId = new $util.LongBits(object.folderId.low >>> 0, object.folderId.high >>> 0).toNumber();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Workload.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.folder != null)
+                                message.folder = String(object.folder);
+                            if (object.workloadOnboardingState != null) {
+                                if (typeof object.workloadOnboardingState !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Workload.workloadOnboardingState: object expected");
+                                message.workloadOnboardingState = $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState.fromObject(object.workloadOnboardingState);
+                            }
+                            if (object.isOnboarded != null)
+                                message.isOnboarded = Boolean(object.isOnboarded);
+                            if (object.keyManagementProjectId != null)
+                                message.keyManagementProjectId = String(object.keyManagementProjectId);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            switch (object.partner) {
+                            default:
+                                if (typeof object.partner === "number") {
+                                    message.partner = object.partner;
+                                    break;
+                                }
+                                break;
+                            case "PARTNER_UNSPECIFIED":
+                            case 0:
+                                message.partner = 0;
+                                break;
+                            case "PARTNER_LOCAL_CONTROLS_BY_S3NS":
+                            case 1:
+                                message.partner = 1;
+                                break;
+                            case "PARTNER_SOVEREIGN_CONTROLS_BY_T_SYSTEMS":
+                            case 2:
+                                message.partner = 2;
+                                break;
+                            case "PARTNER_SOVEREIGN_CONTROLS_BY_SIA_MINSAIT":
+                            case 3:
+                                message.partner = 3;
+                                break;
+                            case "PARTNER_SOVEREIGN_CONTROLS_BY_PSN":
+                            case 4:
+                                message.partner = 4;
+                                break;
+                            case "PARTNER_SOVEREIGN_CONTROLS_BY_CNTXT":
+                            case 6:
+                                message.partner = 6;
+                                break;
+                            case "PARTNER_SOVEREIGN_CONTROLS_BY_CNTXT_NO_EKM":
+                            case 7:
+                                message.partner = 7;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Workload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.Workload} message Workload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Workload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.folderId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.folderId = options.longs === String ? "0" : 0;
+                                object.createTime = null;
+                                object.folder = "";
+                                object.workloadOnboardingState = null;
+                                object.isOnboarded = false;
+                                object.keyManagementProjectId = "";
+                                object.location = "";
+                                object.partner = options.enums === String ? "PARTNER_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.folderId != null && message.hasOwnProperty("folderId"))
+                                if (typeof message.folderId === "number")
+                                    object.folderId = options.longs === String ? String(message.folderId) : message.folderId;
+                                else
+                                    object.folderId = options.longs === String ? $util.Long.prototype.toString.call(message.folderId) : options.longs === Number ? new $util.LongBits(message.folderId.low >>> 0, message.folderId.high >>> 0).toNumber() : message.folderId;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.folder != null && message.hasOwnProperty("folder"))
+                                object.folder = message.folder;
+                            if (message.workloadOnboardingState != null && message.hasOwnProperty("workloadOnboardingState"))
+                                object.workloadOnboardingState = $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState.toObject(message.workloadOnboardingState, options);
+                            if (message.isOnboarded != null && message.hasOwnProperty("isOnboarded"))
+                                object.isOnboarded = message.isOnboarded;
+                            if (message.keyManagementProjectId != null && message.hasOwnProperty("keyManagementProjectId"))
+                                object.keyManagementProjectId = message.keyManagementProjectId;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.partner != null && message.hasOwnProperty("partner"))
+                                object.partner = options.enums === String ? $root.google.cloud.cloudcontrolspartner.v1.Workload.Partner[message.partner] === undefined ? message.partner : $root.google.cloud.cloudcontrolspartner.v1.Workload.Partner[message.partner] : message.partner;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Workload to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Workload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Workload
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Workload
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Workload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.Workload";
+                        };
+    
+                        /**
+                         * Partner enum.
+                         * @name google.cloud.cloudcontrolspartner.v1.Workload.Partner
+                         * @enum {number}
+                         * @property {number} PARTNER_UNSPECIFIED=0 PARTNER_UNSPECIFIED value
+                         * @property {number} PARTNER_LOCAL_CONTROLS_BY_S3NS=1 PARTNER_LOCAL_CONTROLS_BY_S3NS value
+                         * @property {number} PARTNER_SOVEREIGN_CONTROLS_BY_T_SYSTEMS=2 PARTNER_SOVEREIGN_CONTROLS_BY_T_SYSTEMS value
+                         * @property {number} PARTNER_SOVEREIGN_CONTROLS_BY_SIA_MINSAIT=3 PARTNER_SOVEREIGN_CONTROLS_BY_SIA_MINSAIT value
+                         * @property {number} PARTNER_SOVEREIGN_CONTROLS_BY_PSN=4 PARTNER_SOVEREIGN_CONTROLS_BY_PSN value
+                         * @property {number} PARTNER_SOVEREIGN_CONTROLS_BY_CNTXT=6 PARTNER_SOVEREIGN_CONTROLS_BY_CNTXT value
+                         * @property {number} PARTNER_SOVEREIGN_CONTROLS_BY_CNTXT_NO_EKM=7 PARTNER_SOVEREIGN_CONTROLS_BY_CNTXT_NO_EKM value
+                         */
+                        Workload.Partner = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PARTNER_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PARTNER_LOCAL_CONTROLS_BY_S3NS"] = 1;
+                            values[valuesById[2] = "PARTNER_SOVEREIGN_CONTROLS_BY_T_SYSTEMS"] = 2;
+                            values[valuesById[3] = "PARTNER_SOVEREIGN_CONTROLS_BY_SIA_MINSAIT"] = 3;
+                            values[valuesById[4] = "PARTNER_SOVEREIGN_CONTROLS_BY_PSN"] = 4;
+                            values[valuesById[6] = "PARTNER_SOVEREIGN_CONTROLS_BY_CNTXT"] = 6;
+                            values[valuesById[7] = "PARTNER_SOVEREIGN_CONTROLS_BY_CNTXT_NO_EKM"] = 7;
+                            return values;
+                        })();
+    
+                        return Workload;
+                    })();
+    
+                    v1.ListWorkloadsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListWorkloadsRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IListWorkloadsRequest
+                         * @property {string|null} [parent] ListWorkloadsRequest parent
+                         * @property {number|null} [pageSize] ListWorkloadsRequest pageSize
+                         * @property {string|null} [pageToken] ListWorkloadsRequest pageToken
+                         * @property {string|null} [filter] ListWorkloadsRequest filter
+                         * @property {string|null} [orderBy] ListWorkloadsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkloadsRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a ListWorkloadsRequest.
+                         * @implements IListWorkloadsRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest=} [properties] Properties to set
+                         */
+                        function ListWorkloadsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkloadsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @instance
+                         */
+                        ListWorkloadsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListWorkloadsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @instance
+                         */
+                        ListWorkloadsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListWorkloadsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @instance
+                         */
+                        ListWorkloadsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListWorkloadsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @instance
+                         */
+                        ListWorkloadsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListWorkloadsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @instance
+                         */
+                        ListWorkloadsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListWorkloadsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest} ListWorkloadsRequest instance
+                         */
+                        ListWorkloadsRequest.create = function create(properties) {
+                            return new ListWorkloadsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkloadsRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest} message ListWorkloadsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkloadsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkloadsRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest} message ListWorkloadsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkloadsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkloadsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest} ListWorkloadsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkloadsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkloadsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest} ListWorkloadsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkloadsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkloadsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkloadsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkloadsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest} ListWorkloadsRequest
+                         */
+                        ListWorkloadsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkloadsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest} message ListWorkloadsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkloadsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkloadsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkloadsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkloadsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkloadsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest";
+                        };
+    
+                        return ListWorkloadsRequest;
+                    })();
+    
+                    v1.ListWorkloadsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListWorkloadsResponse.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IListWorkloadsResponse
+                         * @property {Array.<google.cloud.cloudcontrolspartner.v1.IWorkload>|null} [workloads] ListWorkloadsResponse workloads
+                         * @property {string|null} [nextPageToken] ListWorkloadsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListWorkloadsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkloadsResponse.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a ListWorkloadsResponse.
+                         * @implements IListWorkloadsResponse
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListWorkloadsResponse=} [properties] Properties to set
+                         */
+                        function ListWorkloadsResponse(properties) {
+                            this.workloads = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkloadsResponse workloads.
+                         * @member {Array.<google.cloud.cloudcontrolspartner.v1.IWorkload>} workloads
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @instance
+                         */
+                        ListWorkloadsResponse.prototype.workloads = $util.emptyArray;
+    
+                        /**
+                         * ListWorkloadsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @instance
+                         */
+                        ListWorkloadsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListWorkloadsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @instance
+                         */
+                        ListWorkloadsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListWorkloadsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListWorkloadsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse} ListWorkloadsResponse instance
+                         */
+                        ListWorkloadsResponse.create = function create(properties) {
+                            return new ListWorkloadsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkloadsResponse message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListWorkloadsResponse} message ListWorkloadsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkloadsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workloads != null && message.workloads.length)
+                                for (var i = 0; i < message.workloads.length; ++i)
+                                    $root.google.cloud.cloudcontrolspartner.v1.Workload.encode(message.workloads[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkloadsResponse message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListWorkloadsResponse} message ListWorkloadsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkloadsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkloadsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse} ListWorkloadsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkloadsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.workloads && message.workloads.length))
+                                            message.workloads = [];
+                                        message.workloads.push($root.google.cloud.cloudcontrolspartner.v1.Workload.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkloadsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse} ListWorkloadsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkloadsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkloadsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkloadsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workloads != null && message.hasOwnProperty("workloads")) {
+                                if (!Array.isArray(message.workloads))
+                                    return "workloads: array expected";
+                                for (var i = 0; i < message.workloads.length; ++i) {
+                                    var error = $root.google.cloud.cloudcontrolspartner.v1.Workload.verify(message.workloads[i]);
+                                    if (error)
+                                        return "workloads." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkloadsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse} ListWorkloadsResponse
+                         */
+                        ListWorkloadsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse();
+                            if (object.workloads) {
+                                if (!Array.isArray(object.workloads))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse.workloads: array expected");
+                                message.workloads = [];
+                                for (var i = 0; i < object.workloads.length; ++i) {
+                                    if (typeof object.workloads[i] !== "object")
+                                        throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse.workloads: object expected");
+                                    message.workloads[i] = $root.google.cloud.cloudcontrolspartner.v1.Workload.fromObject(object.workloads[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkloadsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse} message ListWorkloadsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkloadsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.workloads = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.workloads && message.workloads.length) {
+                                object.workloads = [];
+                                for (var j = 0; j < message.workloads.length; ++j)
+                                    object.workloads[j] = $root.google.cloud.cloudcontrolspartner.v1.Workload.toObject(message.workloads[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkloadsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkloadsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkloadsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkloadsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.ListWorkloadsResponse";
+                        };
+    
+                        return ListWorkloadsResponse;
+                    })();
+    
+                    v1.GetWorkloadRequest = (function() {
+    
+                        /**
+                         * Properties of a GetWorkloadRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IGetWorkloadRequest
+                         * @property {string|null} [name] GetWorkloadRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetWorkloadRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a GetWorkloadRequest.
+                         * @implements IGetWorkloadRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest=} [properties] Properties to set
+                         */
+                        function GetWorkloadRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetWorkloadRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest
+                         * @instance
+                         */
+                        GetWorkloadRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetWorkloadRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest} GetWorkloadRequest instance
+                         */
+                        GetWorkloadRequest.create = function create(properties) {
+                            return new GetWorkloadRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkloadRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest} message GetWorkloadRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkloadRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetWorkloadRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetWorkloadRequest} message GetWorkloadRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetWorkloadRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetWorkloadRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest} GetWorkloadRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkloadRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetWorkloadRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest} GetWorkloadRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetWorkloadRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetWorkloadRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetWorkloadRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetWorkloadRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest} GetWorkloadRequest
+                         */
+                        GetWorkloadRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetWorkloadRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest} message GetWorkloadRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetWorkloadRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetWorkloadRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetWorkloadRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetWorkloadRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetWorkloadRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest";
+                        };
+    
+                        return GetWorkloadRequest;
+                    })();
+    
+                    v1.WorkloadOnboardingState = (function() {
+    
+                        /**
+                         * Properties of a WorkloadOnboardingState.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IWorkloadOnboardingState
+                         * @property {Array.<google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep>|null} [onboardingSteps] WorkloadOnboardingState onboardingSteps
+                         */
+    
+                        /**
+                         * Constructs a new WorkloadOnboardingState.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a WorkloadOnboardingState.
+                         * @implements IWorkloadOnboardingState
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState=} [properties] Properties to set
+                         */
+                        function WorkloadOnboardingState(properties) {
+                            this.onboardingSteps = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WorkloadOnboardingState onboardingSteps.
+                         * @member {Array.<google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep>} onboardingSteps
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState
+                         * @instance
+                         */
+                        WorkloadOnboardingState.prototype.onboardingSteps = $util.emptyArray;
+    
+                        /**
+                         * Creates a new WorkloadOnboardingState instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState} WorkloadOnboardingState instance
+                         */
+                        WorkloadOnboardingState.create = function create(properties) {
+                            return new WorkloadOnboardingState(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WorkloadOnboardingState message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState} message WorkloadOnboardingState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkloadOnboardingState.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.onboardingSteps != null && message.onboardingSteps.length)
+                                for (var i = 0; i < message.onboardingSteps.length; ++i)
+                                    $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.encode(message.onboardingSteps[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WorkloadOnboardingState message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingState} message WorkloadOnboardingState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkloadOnboardingState.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WorkloadOnboardingState message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState} WorkloadOnboardingState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkloadOnboardingState.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.onboardingSteps && message.onboardingSteps.length))
+                                            message.onboardingSteps = [];
+                                        message.onboardingSteps.push($root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WorkloadOnboardingState message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState} WorkloadOnboardingState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkloadOnboardingState.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WorkloadOnboardingState message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WorkloadOnboardingState.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.onboardingSteps != null && message.hasOwnProperty("onboardingSteps")) {
+                                if (!Array.isArray(message.onboardingSteps))
+                                    return "onboardingSteps: array expected";
+                                for (var i = 0; i < message.onboardingSteps.length; ++i) {
+                                    var error = $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.verify(message.onboardingSteps[i]);
+                                    if (error)
+                                        return "onboardingSteps." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WorkloadOnboardingState message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState} WorkloadOnboardingState
+                         */
+                        WorkloadOnboardingState.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState();
+                            if (object.onboardingSteps) {
+                                if (!Array.isArray(object.onboardingSteps))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState.onboardingSteps: array expected");
+                                message.onboardingSteps = [];
+                                for (var i = 0; i < object.onboardingSteps.length; ++i) {
+                                    if (typeof object.onboardingSteps[i] !== "object")
+                                        throw TypeError(".google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState.onboardingSteps: object expected");
+                                    message.onboardingSteps[i] = $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.fromObject(object.onboardingSteps[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WorkloadOnboardingState message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState} message WorkloadOnboardingState
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WorkloadOnboardingState.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.onboardingSteps = [];
+                            if (message.onboardingSteps && message.onboardingSteps.length) {
+                                object.onboardingSteps = [];
+                                for (var j = 0; j < message.onboardingSteps.length; ++j)
+                                    object.onboardingSteps[j] = $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.toObject(message.onboardingSteps[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WorkloadOnboardingState to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WorkloadOnboardingState.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WorkloadOnboardingState
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WorkloadOnboardingState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingState";
+                        };
+    
+                        return WorkloadOnboardingState;
+                    })();
+    
+                    v1.WorkloadOnboardingStep = (function() {
+    
+                        /**
+                         * Properties of a WorkloadOnboardingStep.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IWorkloadOnboardingStep
+                         * @property {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.Step|null} [step] WorkloadOnboardingStep step
+                         * @property {google.protobuf.ITimestamp|null} [startTime] WorkloadOnboardingStep startTime
+                         * @property {google.protobuf.ITimestamp|null} [completionTime] WorkloadOnboardingStep completionTime
+                         * @property {google.cloud.cloudcontrolspartner.v1.CompletionState|null} [completionState] WorkloadOnboardingStep completionState
+                         */
+    
+                        /**
+                         * Constructs a new WorkloadOnboardingStep.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a WorkloadOnboardingStep.
+                         * @implements IWorkloadOnboardingStep
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep=} [properties] Properties to set
+                         */
+                        function WorkloadOnboardingStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WorkloadOnboardingStep step.
+                         * @member {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.Step} step
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @instance
+                         */
+                        WorkloadOnboardingStep.prototype.step = 0;
+    
+                        /**
+                         * WorkloadOnboardingStep startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @instance
+                         */
+                        WorkloadOnboardingStep.prototype.startTime = null;
+    
+                        /**
+                         * WorkloadOnboardingStep completionTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} completionTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @instance
+                         */
+                        WorkloadOnboardingStep.prototype.completionTime = null;
+    
+                        /**
+                         * WorkloadOnboardingStep completionState.
+                         * @member {google.cloud.cloudcontrolspartner.v1.CompletionState} completionState
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @instance
+                         */
+                        WorkloadOnboardingStep.prototype.completionState = 0;
+    
+                        /**
+                         * Creates a new WorkloadOnboardingStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep} WorkloadOnboardingStep instance
+                         */
+                        WorkloadOnboardingStep.create = function create(properties) {
+                            return new WorkloadOnboardingStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WorkloadOnboardingStep message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep} message WorkloadOnboardingStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkloadOnboardingStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.step != null && Object.hasOwnProperty.call(message, "step"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.step);
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.completionTime != null && Object.hasOwnProperty.call(message, "completionTime"))
+                                $root.google.protobuf.Timestamp.encode(message.completionTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.completionState != null && Object.hasOwnProperty.call(message, "completionState"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.completionState);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WorkloadOnboardingStep message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IWorkloadOnboardingStep} message WorkloadOnboardingStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WorkloadOnboardingStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WorkloadOnboardingStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep} WorkloadOnboardingStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkloadOnboardingStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.step = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.completionTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.completionState = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WorkloadOnboardingStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep} WorkloadOnboardingStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WorkloadOnboardingStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WorkloadOnboardingStep message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WorkloadOnboardingStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.step != null && message.hasOwnProperty("step"))
+                                switch (message.step) {
+                                default:
+                                    return "step: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.completionTime != null && message.hasOwnProperty("completionTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.completionTime);
+                                if (error)
+                                    return "completionTime." + error;
+                            }
+                            if (message.completionState != null && message.hasOwnProperty("completionState"))
+                                switch (message.completionState) {
+                                default:
+                                    return "completionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WorkloadOnboardingStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep} WorkloadOnboardingStep
+                         */
+                        WorkloadOnboardingStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep();
+                            switch (object.step) {
+                            default:
+                                if (typeof object.step === "number") {
+                                    message.step = object.step;
+                                    break;
+                                }
+                                break;
+                            case "STEP_UNSPECIFIED":
+                            case 0:
+                                message.step = 0;
+                                break;
+                            case "EKM_PROVISIONED":
+                            case 1:
+                                message.step = 1;
+                                break;
+                            case "SIGNED_ACCESS_APPROVAL_CONFIGURED":
+                            case 2:
+                                message.step = 2;
+                                break;
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.completionTime != null) {
+                                if (typeof object.completionTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.completionTime: object expected");
+                                message.completionTime = $root.google.protobuf.Timestamp.fromObject(object.completionTime);
+                            }
+                            switch (object.completionState) {
+                            default:
+                                if (typeof object.completionState === "number") {
+                                    message.completionState = object.completionState;
+                                    break;
+                                }
+                                break;
+                            case "COMPLETION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.completionState = 0;
+                                break;
+                            case "PENDING":
+                            case 1:
+                                message.completionState = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.completionState = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.completionState = 3;
+                                break;
+                            case "NOT_APPLICABLE":
+                            case 4:
+                                message.completionState = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WorkloadOnboardingStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep} message WorkloadOnboardingStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WorkloadOnboardingStep.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.step = options.enums === String ? "STEP_UNSPECIFIED" : 0;
+                                object.startTime = null;
+                                object.completionTime = null;
+                                object.completionState = options.enums === String ? "COMPLETION_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.step != null && message.hasOwnProperty("step"))
+                                object.step = options.enums === String ? $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.Step[message.step] === undefined ? message.step : $root.google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.Step[message.step] : message.step;
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.completionTime != null && message.hasOwnProperty("completionTime"))
+                                object.completionTime = $root.google.protobuf.Timestamp.toObject(message.completionTime, options);
+                            if (message.completionState != null && message.hasOwnProperty("completionState"))
+                                object.completionState = options.enums === String ? $root.google.cloud.cloudcontrolspartner.v1.CompletionState[message.completionState] === undefined ? message.completionState : $root.google.cloud.cloudcontrolspartner.v1.CompletionState[message.completionState] : message.completionState;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WorkloadOnboardingStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WorkloadOnboardingStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for WorkloadOnboardingStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        WorkloadOnboardingStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep";
+                        };
+    
+                        /**
+                         * Step enum.
+                         * @name google.cloud.cloudcontrolspartner.v1.WorkloadOnboardingStep.Step
+                         * @enum {number}
+                         * @property {number} STEP_UNSPECIFIED=0 STEP_UNSPECIFIED value
+                         * @property {number} EKM_PROVISIONED=1 EKM_PROVISIONED value
+                         * @property {number} SIGNED_ACCESS_APPROVAL_CONFIGURED=2 SIGNED_ACCESS_APPROVAL_CONFIGURED value
+                         */
+                        WorkloadOnboardingStep.Step = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STEP_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EKM_PROVISIONED"] = 1;
+                            values[valuesById[2] = "SIGNED_ACCESS_APPROVAL_CONFIGURED"] = 2;
+                            return values;
+                        })();
+    
+                        return WorkloadOnboardingStep;
+                    })();
+    
+                    v1.Customer = (function() {
+    
+                        /**
+                         * Properties of a Customer.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface ICustomer
+                         * @property {string|null} [name] Customer name
+                         * @property {string|null} [displayName] Customer displayName
+                         * @property {google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState|null} [customerOnboardingState] Customer customerOnboardingState
+                         * @property {boolean|null} [isOnboarded] Customer isOnboarded
+                         */
+    
+                        /**
+                         * Constructs a new Customer.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a Customer.
+                         * @implements ICustomer
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomer=} [properties] Properties to set
+                         */
+                        function Customer(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Customer name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @instance
+                         */
+                        Customer.prototype.name = "";
+    
+                        /**
+                         * Customer displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @instance
+                         */
+                        Customer.prototype.displayName = "";
+    
+                        /**
+                         * Customer customerOnboardingState.
+                         * @member {google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState|null|undefined} customerOnboardingState
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @instance
+                         */
+                        Customer.prototype.customerOnboardingState = null;
+    
+                        /**
+                         * Customer isOnboarded.
+                         * @member {boolean} isOnboarded
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @instance
+                         */
+                        Customer.prototype.isOnboarded = false;
+    
+                        /**
+                         * Creates a new Customer instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomer=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Customer} Customer instance
+                         */
+                        Customer.create = function create(properties) {
+                            return new Customer(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Customer message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Customer.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomer} message Customer message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Customer.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.customerOnboardingState != null && Object.hasOwnProperty.call(message, "customerOnboardingState"))
+                                $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState.encode(message.customerOnboardingState, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.isOnboarded != null && Object.hasOwnProperty.call(message, "isOnboarded"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isOnboarded);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Customer message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Customer.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomer} message Customer message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Customer.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Customer message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Customer} Customer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Customer.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.Customer();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.customerOnboardingState = $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.isOnboarded = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Customer message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Customer} Customer
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Customer.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Customer message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Customer.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.customerOnboardingState != null && message.hasOwnProperty("customerOnboardingState")) {
+                                var error = $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState.verify(message.customerOnboardingState);
+                                if (error)
+                                    return "customerOnboardingState." + error;
+                            }
+                            if (message.isOnboarded != null && message.hasOwnProperty("isOnboarded"))
+                                if (typeof message.isOnboarded !== "boolean")
+                                    return "isOnboarded: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Customer message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Customer} Customer
+                         */
+                        Customer.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.Customer)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.Customer();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.customerOnboardingState != null) {
+                                if (typeof object.customerOnboardingState !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Customer.customerOnboardingState: object expected");
+                                message.customerOnboardingState = $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState.fromObject(object.customerOnboardingState);
+                            }
+                            if (object.isOnboarded != null)
+                                message.isOnboarded = Boolean(object.isOnboarded);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Customer message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.Customer} message Customer
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Customer.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.customerOnboardingState = null;
+                                object.isOnboarded = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.customerOnboardingState != null && message.hasOwnProperty("customerOnboardingState"))
+                                object.customerOnboardingState = $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState.toObject(message.customerOnboardingState, options);
+                            if (message.isOnboarded != null && message.hasOwnProperty("isOnboarded"))
+                                object.isOnboarded = message.isOnboarded;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Customer to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Customer.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Customer
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Customer
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Customer.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.Customer";
+                        };
+    
+                        return Customer;
+                    })();
+    
+                    v1.ListCustomersRequest = (function() {
+    
+                        /**
+                         * Properties of a ListCustomersRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IListCustomersRequest
+                         * @property {string|null} [parent] ListCustomersRequest parent
+                         * @property {number|null} [pageSize] ListCustomersRequest pageSize
+                         * @property {string|null} [pageToken] ListCustomersRequest pageToken
+                         * @property {string|null} [filter] ListCustomersRequest filter
+                         * @property {string|null} [orderBy] ListCustomersRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomersRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a ListCustomersRequest.
+                         * @implements IListCustomersRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListCustomersRequest=} [properties] Properties to set
+                         */
+                        function ListCustomersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomersRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @instance
+                         */
+                        ListCustomersRequest.prototype.parent = "";
+    
+                        /**
+                         * ListCustomersRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @instance
+                         */
+                        ListCustomersRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListCustomersRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @instance
+                         */
+                        ListCustomersRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListCustomersRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @instance
+                         */
+                        ListCustomersRequest.prototype.filter = "";
+    
+                        /**
+                         * ListCustomersRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @instance
+                         */
+                        ListCustomersRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListCustomersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListCustomersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListCustomersRequest} ListCustomersRequest instance
+                         */
+                        ListCustomersRequest.create = function create(properties) {
+                            return new ListCustomersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomersRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListCustomersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListCustomersRequest} message ListCustomersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomersRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListCustomersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListCustomersRequest} message ListCustomersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListCustomersRequest} ListCustomersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomersRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.ListCustomersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListCustomersRequest} ListCustomersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListCustomersRequest} ListCustomersRequest
+                         */
+                        ListCustomersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.ListCustomersRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.ListCustomersRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListCustomersRequest} message ListCustomersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListCustomersRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListCustomersRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.ListCustomersRequest";
+                        };
+    
+                        return ListCustomersRequest;
+                    })();
+    
+                    v1.ListCustomersResponse = (function() {
+    
+                        /**
+                         * Properties of a ListCustomersResponse.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IListCustomersResponse
+                         * @property {Array.<google.cloud.cloudcontrolspartner.v1.ICustomer>|null} [customers] ListCustomersResponse customers
+                         * @property {string|null} [nextPageToken] ListCustomersResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListCustomersResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomersResponse.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a ListCustomersResponse.
+                         * @implements IListCustomersResponse
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListCustomersResponse=} [properties] Properties to set
+                         */
+                        function ListCustomersResponse(properties) {
+                            this.customers = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomersResponse customers.
+                         * @member {Array.<google.cloud.cloudcontrolspartner.v1.ICustomer>} customers
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @instance
+                         */
+                        ListCustomersResponse.prototype.customers = $util.emptyArray;
+    
+                        /**
+                         * ListCustomersResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @instance
+                         */
+                        ListCustomersResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListCustomersResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @instance
+                         */
+                        ListCustomersResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListCustomersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListCustomersResponse=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListCustomersResponse} ListCustomersResponse instance
+                         */
+                        ListCustomersResponse.create = function create(properties) {
+                            return new ListCustomersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomersResponse message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListCustomersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListCustomersResponse} message ListCustomersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customers != null && message.customers.length)
+                                for (var i = 0; i < message.customers.length; ++i)
+                                    $root.google.cloud.cloudcontrolspartner.v1.Customer.encode(message.customers[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomersResponse message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListCustomersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListCustomersResponse} message ListCustomersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListCustomersResponse} ListCustomersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomersResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.ListCustomersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.customers && message.customers.length))
+                                            message.customers = [];
+                                        message.customers.push($root.google.cloud.cloudcontrolspartner.v1.Customer.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListCustomersResponse} ListCustomersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomersResponse message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customers != null && message.hasOwnProperty("customers")) {
+                                if (!Array.isArray(message.customers))
+                                    return "customers: array expected";
+                                for (var i = 0; i < message.customers.length; ++i) {
+                                    var error = $root.google.cloud.cloudcontrolspartner.v1.Customer.verify(message.customers[i]);
+                                    if (error)
+                                        return "customers." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListCustomersResponse} ListCustomersResponse
+                         */
+                        ListCustomersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.ListCustomersResponse)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.ListCustomersResponse();
+                            if (object.customers) {
+                                if (!Array.isArray(object.customers))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListCustomersResponse.customers: array expected");
+                                message.customers = [];
+                                for (var i = 0; i < object.customers.length; ++i) {
+                                    if (typeof object.customers[i] !== "object")
+                                        throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListCustomersResponse.customers: object expected");
+                                    message.customers[i] = $root.google.cloud.cloudcontrolspartner.v1.Customer.fromObject(object.customers[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListCustomersResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListCustomersResponse} message ListCustomersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.customers = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.customers && message.customers.length) {
+                                object.customers = [];
+                                for (var j = 0; j < message.customers.length; ++j)
+                                    object.customers[j] = $root.google.cloud.cloudcontrolspartner.v1.Customer.toObject(message.customers[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListCustomersResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListCustomersResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListCustomersResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.ListCustomersResponse";
+                        };
+    
+                        return ListCustomersResponse;
+                    })();
+    
+                    v1.GetCustomerRequest = (function() {
+    
+                        /**
+                         * Properties of a GetCustomerRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IGetCustomerRequest
+                         * @property {string|null} [name] GetCustomerRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetCustomerRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a GetCustomerRequest.
+                         * @implements IGetCustomerRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest=} [properties] Properties to set
+                         */
+                        function GetCustomerRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetCustomerRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetCustomerRequest
+                         * @instance
+                         */
+                        GetCustomerRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetCustomerRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetCustomerRequest} GetCustomerRequest instance
+                         */
+                        GetCustomerRequest.create = function create(properties) {
+                            return new GetCustomerRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomerRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetCustomerRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest} message GetCustomerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomerRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomerRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetCustomerRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetCustomerRequest} message GetCustomerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomerRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetCustomerRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetCustomerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetCustomerRequest} GetCustomerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomerRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.GetCustomerRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetCustomerRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetCustomerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetCustomerRequest} GetCustomerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomerRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetCustomerRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetCustomerRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetCustomerRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetCustomerRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetCustomerRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetCustomerRequest} GetCustomerRequest
+                         */
+                        GetCustomerRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.GetCustomerRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.GetCustomerRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetCustomerRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetCustomerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.GetCustomerRequest} message GetCustomerRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetCustomerRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetCustomerRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetCustomerRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetCustomerRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetCustomerRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetCustomerRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetCustomerRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.GetCustomerRequest";
+                        };
+    
+                        return GetCustomerRequest;
+                    })();
+    
+                    v1.CustomerOnboardingState = (function() {
+    
+                        /**
+                         * Properties of a CustomerOnboardingState.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface ICustomerOnboardingState
+                         * @property {Array.<google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep>|null} [onboardingSteps] CustomerOnboardingState onboardingSteps
+                         */
+    
+                        /**
+                         * Constructs a new CustomerOnboardingState.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a CustomerOnboardingState.
+                         * @implements ICustomerOnboardingState
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState=} [properties] Properties to set
+                         */
+                        function CustomerOnboardingState(properties) {
+                            this.onboardingSteps = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomerOnboardingState onboardingSteps.
+                         * @member {Array.<google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep>} onboardingSteps
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState
+                         * @instance
+                         */
+                        CustomerOnboardingState.prototype.onboardingSteps = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CustomerOnboardingState instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState} CustomerOnboardingState instance
+                         */
+                        CustomerOnboardingState.create = function create(properties) {
+                            return new CustomerOnboardingState(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerOnboardingState message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState} message CustomerOnboardingState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerOnboardingState.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.onboardingSteps != null && message.onboardingSteps.length)
+                                for (var i = 0; i < message.onboardingSteps.length; ++i)
+                                    $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.encode(message.onboardingSteps[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerOnboardingState message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingState} message CustomerOnboardingState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerOnboardingState.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomerOnboardingState message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState} CustomerOnboardingState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerOnboardingState.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.onboardingSteps && message.onboardingSteps.length))
+                                            message.onboardingSteps = [];
+                                        message.onboardingSteps.push($root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomerOnboardingState message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState} CustomerOnboardingState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerOnboardingState.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomerOnboardingState message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomerOnboardingState.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.onboardingSteps != null && message.hasOwnProperty("onboardingSteps")) {
+                                if (!Array.isArray(message.onboardingSteps))
+                                    return "onboardingSteps: array expected";
+                                for (var i = 0; i < message.onboardingSteps.length; ++i) {
+                                    var error = $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.verify(message.onboardingSteps[i]);
+                                    if (error)
+                                        return "onboardingSteps." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomerOnboardingState message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState} CustomerOnboardingState
+                         */
+                        CustomerOnboardingState.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState();
+                            if (object.onboardingSteps) {
+                                if (!Array.isArray(object.onboardingSteps))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState.onboardingSteps: array expected");
+                                message.onboardingSteps = [];
+                                for (var i = 0; i < object.onboardingSteps.length; ++i) {
+                                    if (typeof object.onboardingSteps[i] !== "object")
+                                        throw TypeError(".google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState.onboardingSteps: object expected");
+                                    message.onboardingSteps[i] = $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.fromObject(object.onboardingSteps[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomerOnboardingState message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState} message CustomerOnboardingState
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomerOnboardingState.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.onboardingSteps = [];
+                            if (message.onboardingSteps && message.onboardingSteps.length) {
+                                object.onboardingSteps = [];
+                                for (var j = 0; j < message.onboardingSteps.length; ++j)
+                                    object.onboardingSteps[j] = $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.toObject(message.onboardingSteps[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomerOnboardingState to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomerOnboardingState.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomerOnboardingState
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomerOnboardingState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.CustomerOnboardingState";
+                        };
+    
+                        return CustomerOnboardingState;
+                    })();
+    
+                    v1.CustomerOnboardingStep = (function() {
+    
+                        /**
+                         * Properties of a CustomerOnboardingStep.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface ICustomerOnboardingStep
+                         * @property {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.Step|null} [step] CustomerOnboardingStep step
+                         * @property {google.protobuf.ITimestamp|null} [startTime] CustomerOnboardingStep startTime
+                         * @property {google.protobuf.ITimestamp|null} [completionTime] CustomerOnboardingStep completionTime
+                         * @property {google.cloud.cloudcontrolspartner.v1.CompletionState|null} [completionState] CustomerOnboardingStep completionState
+                         */
+    
+                        /**
+                         * Constructs a new CustomerOnboardingStep.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a CustomerOnboardingStep.
+                         * @implements ICustomerOnboardingStep
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep=} [properties] Properties to set
+                         */
+                        function CustomerOnboardingStep(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomerOnboardingStep step.
+                         * @member {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.Step} step
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @instance
+                         */
+                        CustomerOnboardingStep.prototype.step = 0;
+    
+                        /**
+                         * CustomerOnboardingStep startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @instance
+                         */
+                        CustomerOnboardingStep.prototype.startTime = null;
+    
+                        /**
+                         * CustomerOnboardingStep completionTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} completionTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @instance
+                         */
+                        CustomerOnboardingStep.prototype.completionTime = null;
+    
+                        /**
+                         * CustomerOnboardingStep completionState.
+                         * @member {google.cloud.cloudcontrolspartner.v1.CompletionState} completionState
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @instance
+                         */
+                        CustomerOnboardingStep.prototype.completionState = 0;
+    
+                        /**
+                         * Creates a new CustomerOnboardingStep instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep} CustomerOnboardingStep instance
+                         */
+                        CustomerOnboardingStep.create = function create(properties) {
+                            return new CustomerOnboardingStep(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerOnboardingStep message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep} message CustomerOnboardingStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerOnboardingStep.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.step != null && Object.hasOwnProperty.call(message, "step"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.step);
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.completionTime != null && Object.hasOwnProperty.call(message, "completionTime"))
+                                $root.google.protobuf.Timestamp.encode(message.completionTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.completionState != null && Object.hasOwnProperty.call(message, "completionState"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.completionState);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerOnboardingStep message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ICustomerOnboardingStep} message CustomerOnboardingStep message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerOnboardingStep.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomerOnboardingStep message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep} CustomerOnboardingStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerOnboardingStep.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.step = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.completionTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.completionState = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomerOnboardingStep message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep} CustomerOnboardingStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerOnboardingStep.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomerOnboardingStep message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomerOnboardingStep.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.step != null && message.hasOwnProperty("step"))
+                                switch (message.step) {
+                                default:
+                                    return "step: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
+                            if (message.completionTime != null && message.hasOwnProperty("completionTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.completionTime);
+                                if (error)
+                                    return "completionTime." + error;
+                            }
+                            if (message.completionState != null && message.hasOwnProperty("completionState"))
+                                switch (message.completionState) {
+                                default:
+                                    return "completionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomerOnboardingStep message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep} CustomerOnboardingStep
+                         */
+                        CustomerOnboardingStep.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep();
+                            switch (object.step) {
+                            default:
+                                if (typeof object.step === "number") {
+                                    message.step = object.step;
+                                    break;
+                                }
+                                break;
+                            case "STEP_UNSPECIFIED":
+                            case 0:
+                                message.step = 0;
+                                break;
+                            case "KAJ_ENROLLMENT":
+                            case 1:
+                                message.step = 1;
+                                break;
+                            case "CUSTOMER_ENVIRONMENT":
+                            case 2:
+                                message.step = 2;
+                                break;
+                            }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
+                            if (object.completionTime != null) {
+                                if (typeof object.completionTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.completionTime: object expected");
+                                message.completionTime = $root.google.protobuf.Timestamp.fromObject(object.completionTime);
+                            }
+                            switch (object.completionState) {
+                            default:
+                                if (typeof object.completionState === "number") {
+                                    message.completionState = object.completionState;
+                                    break;
+                                }
+                                break;
+                            case "COMPLETION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.completionState = 0;
+                                break;
+                            case "PENDING":
+                            case 1:
+                                message.completionState = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.completionState = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.completionState = 3;
+                                break;
+                            case "NOT_APPLICABLE":
+                            case 4:
+                                message.completionState = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomerOnboardingStep message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep} message CustomerOnboardingStep
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomerOnboardingStep.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.step = options.enums === String ? "STEP_UNSPECIFIED" : 0;
+                                object.startTime = null;
+                                object.completionTime = null;
+                                object.completionState = options.enums === String ? "COMPLETION_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.step != null && message.hasOwnProperty("step"))
+                                object.step = options.enums === String ? $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.Step[message.step] === undefined ? message.step : $root.google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.Step[message.step] : message.step;
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                            if (message.completionTime != null && message.hasOwnProperty("completionTime"))
+                                object.completionTime = $root.google.protobuf.Timestamp.toObject(message.completionTime, options);
+                            if (message.completionState != null && message.hasOwnProperty("completionState"))
+                                object.completionState = options.enums === String ? $root.google.cloud.cloudcontrolspartner.v1.CompletionState[message.completionState] === undefined ? message.completionState : $root.google.cloud.cloudcontrolspartner.v1.CompletionState[message.completionState] : message.completionState;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomerOnboardingStep to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomerOnboardingStep.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomerOnboardingStep
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomerOnboardingStep.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep";
+                        };
+    
+                        /**
+                         * Step enum.
+                         * @name google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep.Step
+                         * @enum {number}
+                         * @property {number} STEP_UNSPECIFIED=0 STEP_UNSPECIFIED value
+                         * @property {number} KAJ_ENROLLMENT=1 KAJ_ENROLLMENT value
+                         * @property {number} CUSTOMER_ENVIRONMENT=2 CUSTOMER_ENVIRONMENT value
+                         */
+                        CustomerOnboardingStep.Step = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STEP_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "KAJ_ENROLLMENT"] = 1;
+                            values[valuesById[2] = "CUSTOMER_ENVIRONMENT"] = 2;
+                            return values;
+                        })();
+    
+                        return CustomerOnboardingStep;
+                    })();
+    
+                    v1.EkmConnections = (function() {
+    
+                        /**
+                         * Properties of an EkmConnections.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IEkmConnections
+                         * @property {string|null} [name] EkmConnections name
+                         * @property {Array.<google.cloud.cloudcontrolspartner.v1.IEkmConnection>|null} [ekmConnections] EkmConnections ekmConnections
+                         */
+    
+                        /**
+                         * Constructs a new EkmConnections.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents an EkmConnections.
+                         * @implements IEkmConnections
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmConnections=} [properties] Properties to set
+                         */
+                        function EkmConnections(properties) {
+                            this.ekmConnections = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EkmConnections name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @instance
+                         */
+                        EkmConnections.prototype.name = "";
+    
+                        /**
+                         * EkmConnections ekmConnections.
+                         * @member {Array.<google.cloud.cloudcontrolspartner.v1.IEkmConnection>} ekmConnections
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @instance
+                         */
+                        EkmConnections.prototype.ekmConnections = $util.emptyArray;
+    
+                        /**
+                         * Creates a new EkmConnections instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmConnections=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnections} EkmConnections instance
+                         */
+                        EkmConnections.create = function create(properties) {
+                            return new EkmConnections(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EkmConnections message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnections.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmConnections} message EkmConnections message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EkmConnections.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.ekmConnections != null && message.ekmConnections.length)
+                                for (var i = 0; i < message.ekmConnections.length; ++i)
+                                    $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.encode(message.ekmConnections[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EkmConnections message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnections.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmConnections} message EkmConnections message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EkmConnections.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EkmConnections message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnections} EkmConnections
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EkmConnections.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.EkmConnections();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.ekmConnections && message.ekmConnections.length))
+                                            message.ekmConnections = [];
+                                        message.ekmConnections.push($root.google.cloud.cloudcontrolspartner.v1.EkmConnection.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EkmConnections message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnections} EkmConnections
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EkmConnections.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EkmConnections message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EkmConnections.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.ekmConnections != null && message.hasOwnProperty("ekmConnections")) {
+                                if (!Array.isArray(message.ekmConnections))
+                                    return "ekmConnections: array expected";
+                                for (var i = 0; i < message.ekmConnections.length; ++i) {
+                                    var error = $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.verify(message.ekmConnections[i]);
+                                    if (error)
+                                        return "ekmConnections." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EkmConnections message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnections} EkmConnections
+                         */
+                        EkmConnections.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.EkmConnections)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.EkmConnections();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.ekmConnections) {
+                                if (!Array.isArray(object.ekmConnections))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.EkmConnections.ekmConnections: array expected");
+                                message.ekmConnections = [];
+                                for (var i = 0; i < object.ekmConnections.length; ++i) {
+                                    if (typeof object.ekmConnections[i] !== "object")
+                                        throw TypeError(".google.cloud.cloudcontrolspartner.v1.EkmConnections.ekmConnections: object expected");
+                                    message.ekmConnections[i] = $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.fromObject(object.ekmConnections[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EkmConnections message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.EkmConnections} message EkmConnections
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EkmConnections.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ekmConnections = [];
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.ekmConnections && message.ekmConnections.length) {
+                                object.ekmConnections = [];
+                                for (var j = 0; j < message.ekmConnections.length; ++j)
+                                    object.ekmConnections[j] = $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.toObject(message.ekmConnections[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EkmConnections to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EkmConnections.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EkmConnections
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnections
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EkmConnections.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.EkmConnections";
+                        };
+    
+                        return EkmConnections;
+                    })();
+    
+                    v1.GetEkmConnectionsRequest = (function() {
+    
+                        /**
+                         * Properties of a GetEkmConnectionsRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IGetEkmConnectionsRequest
+                         * @property {string|null} [name] GetEkmConnectionsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetEkmConnectionsRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a GetEkmConnectionsRequest.
+                         * @implements IGetEkmConnectionsRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest=} [properties] Properties to set
+                         */
+                        function GetEkmConnectionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetEkmConnectionsRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest
+                         * @instance
+                         */
+                        GetEkmConnectionsRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetEkmConnectionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest} GetEkmConnectionsRequest instance
+                         */
+                        GetEkmConnectionsRequest.create = function create(properties) {
+                            return new GetEkmConnectionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetEkmConnectionsRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest} message GetEkmConnectionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEkmConnectionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetEkmConnectionsRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetEkmConnectionsRequest} message GetEkmConnectionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEkmConnectionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetEkmConnectionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest} GetEkmConnectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEkmConnectionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetEkmConnectionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest} GetEkmConnectionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEkmConnectionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetEkmConnectionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetEkmConnectionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetEkmConnectionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest} GetEkmConnectionsRequest
+                         */
+                        GetEkmConnectionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetEkmConnectionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest} message GetEkmConnectionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetEkmConnectionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetEkmConnectionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetEkmConnectionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetEkmConnectionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetEkmConnectionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest";
+                        };
+    
+                        return GetEkmConnectionsRequest;
+                    })();
+    
+                    v1.EkmConnection = (function() {
+    
+                        /**
+                         * Properties of an EkmConnection.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IEkmConnection
+                         * @property {string|null} [connectionName] EkmConnection connectionName
+                         * @property {google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionState|null} [connectionState] EkmConnection connectionState
+                         * @property {google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError|null} [connectionError] EkmConnection connectionError
+                         */
+    
+                        /**
+                         * Constructs a new EkmConnection.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents an EkmConnection.
+                         * @implements IEkmConnection
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmConnection=} [properties] Properties to set
+                         */
+                        function EkmConnection(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EkmConnection connectionName.
+                         * @member {string} connectionName
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @instance
+                         */
+                        EkmConnection.prototype.connectionName = "";
+    
+                        /**
+                         * EkmConnection connectionState.
+                         * @member {google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionState} connectionState
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @instance
+                         */
+                        EkmConnection.prototype.connectionState = 0;
+    
+                        /**
+                         * EkmConnection connectionError.
+                         * @member {google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError|null|undefined} connectionError
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @instance
+                         */
+                        EkmConnection.prototype.connectionError = null;
+    
+                        /**
+                         * Creates a new EkmConnection instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmConnection=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnection} EkmConnection instance
+                         */
+                        EkmConnection.create = function create(properties) {
+                            return new EkmConnection(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EkmConnection message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnection.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmConnection} message EkmConnection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EkmConnection.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.connectionName != null && Object.hasOwnProperty.call(message, "connectionName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.connectionName);
+                            if (message.connectionState != null && Object.hasOwnProperty.call(message, "connectionState"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.connectionState);
+                            if (message.connectionError != null && Object.hasOwnProperty.call(message, "connectionError"))
+                                $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError.encode(message.connectionError, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EkmConnection message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnection.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmConnection} message EkmConnection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EkmConnection.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EkmConnection message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnection} EkmConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EkmConnection.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.EkmConnection();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.connectionName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.connectionState = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.connectionError = $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EkmConnection message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnection} EkmConnection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EkmConnection.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EkmConnection message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EkmConnection.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.connectionName != null && message.hasOwnProperty("connectionName"))
+                                if (!$util.isString(message.connectionName))
+                                    return "connectionName: string expected";
+                            if (message.connectionState != null && message.hasOwnProperty("connectionState"))
+                                switch (message.connectionState) {
+                                default:
+                                    return "connectionState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.connectionError != null && message.hasOwnProperty("connectionError")) {
+                                var error = $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError.verify(message.connectionError);
+                                if (error)
+                                    return "connectionError." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EkmConnection message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnection} EkmConnection
+                         */
+                        EkmConnection.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.EkmConnection)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.EkmConnection();
+                            if (object.connectionName != null)
+                                message.connectionName = String(object.connectionName);
+                            switch (object.connectionState) {
+                            default:
+                                if (typeof object.connectionState === "number") {
+                                    message.connectionState = object.connectionState;
+                                    break;
+                                }
+                                break;
+                            case "CONNECTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.connectionState = 0;
+                                break;
+                            case "AVAILABLE":
+                            case 1:
+                                message.connectionState = 1;
+                                break;
+                            case "NOT_AVAILABLE":
+                            case 2:
+                                message.connectionState = 2;
+                                break;
+                            case "ERROR":
+                            case 3:
+                                message.connectionState = 3;
+                                break;
+                            case "PERMISSION_DENIED":
+                            case 4:
+                                message.connectionState = 4;
+                                break;
+                            }
+                            if (object.connectionError != null) {
+                                if (typeof object.connectionError !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.EkmConnection.connectionError: object expected");
+                                message.connectionError = $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError.fromObject(object.connectionError);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EkmConnection message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.EkmConnection} message EkmConnection
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EkmConnection.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.connectionName = "";
+                                object.connectionState = options.enums === String ? "CONNECTION_STATE_UNSPECIFIED" : 0;
+                                object.connectionError = null;
+                            }
+                            if (message.connectionName != null && message.hasOwnProperty("connectionName"))
+                                object.connectionName = message.connectionName;
+                            if (message.connectionState != null && message.hasOwnProperty("connectionState"))
+                                object.connectionState = options.enums === String ? $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionState[message.connectionState] === undefined ? message.connectionState : $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionState[message.connectionState] : message.connectionState;
+                            if (message.connectionError != null && message.hasOwnProperty("connectionError"))
+                                object.connectionError = $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError.toObject(message.connectionError, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EkmConnection to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EkmConnection.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EkmConnection
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EkmConnection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.EkmConnection";
+                        };
+    
+                        EkmConnection.ConnectionError = (function() {
+    
+                            /**
+                             * Properties of a ConnectionError.
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                             * @interface IConnectionError
+                             * @property {string|null} [errorDomain] ConnectionError errorDomain
+                             * @property {string|null} [errorMessage] ConnectionError errorMessage
+                             */
+    
+                            /**
+                             * Constructs a new ConnectionError.
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection
+                             * @classdesc Represents a ConnectionError.
+                             * @implements IConnectionError
+                             * @constructor
+                             * @param {google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError=} [properties] Properties to set
+                             */
+                            function ConnectionError(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConnectionError errorDomain.
+                             * @member {string} errorDomain
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @instance
+                             */
+                            ConnectionError.prototype.errorDomain = "";
+    
+                            /**
+                             * ConnectionError errorMessage.
+                             * @member {string} errorMessage
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @instance
+                             */
+                            ConnectionError.prototype.errorMessage = "";
+    
+                            /**
+                             * Creates a new ConnectionError instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @static
+                             * @param {google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError=} [properties] Properties to set
+                             * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError} ConnectionError instance
+                             */
+                            ConnectionError.create = function create(properties) {
+                                return new ConnectionError(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectionError message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @static
+                             * @param {google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError} message ConnectionError message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectionError.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.errorDomain != null && Object.hasOwnProperty.call(message, "errorDomain"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.errorDomain);
+                                if (message.errorMessage != null && Object.hasOwnProperty.call(message, "errorMessage"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.errorMessage);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConnectionError message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @static
+                             * @param {google.cloud.cloudcontrolspartner.v1.EkmConnection.IConnectionError} message ConnectionError message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConnectionError.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConnectionError message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError} ConnectionError
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectionError.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.errorDomain = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.errorMessage = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConnectionError message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError} ConnectionError
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConnectionError.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConnectionError message.
+                             * @function verify
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConnectionError.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.errorDomain != null && message.hasOwnProperty("errorDomain"))
+                                    if (!$util.isString(message.errorDomain))
+                                        return "errorDomain: string expected";
+                                if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                    if (!$util.isString(message.errorMessage))
+                                        return "errorMessage: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConnectionError message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError} ConnectionError
+                             */
+                            ConnectionError.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError)
+                                    return object;
+                                var message = new $root.google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError();
+                                if (object.errorDomain != null)
+                                    message.errorDomain = String(object.errorDomain);
+                                if (object.errorMessage != null)
+                                    message.errorMessage = String(object.errorMessage);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConnectionError message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @static
+                             * @param {google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError} message ConnectionError
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConnectionError.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.errorDomain = "";
+                                    object.errorMessage = "";
+                                }
+                                if (message.errorDomain != null && message.hasOwnProperty("errorDomain"))
+                                    object.errorDomain = message.errorDomain;
+                                if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                    object.errorMessage = message.errorMessage;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConnectionError to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConnectionError.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConnectionError
+                             * @function getTypeUrl
+                             * @memberof google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConnectionError.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError";
+                            };
+    
+                            return ConnectionError;
+                        })();
+    
+                        /**
+                         * ConnectionState enum.
+                         * @name google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionState
+                         * @enum {number}
+                         * @property {number} CONNECTION_STATE_UNSPECIFIED=0 CONNECTION_STATE_UNSPECIFIED value
+                         * @property {number} AVAILABLE=1 AVAILABLE value
+                         * @property {number} NOT_AVAILABLE=2 NOT_AVAILABLE value
+                         * @property {number} ERROR=3 ERROR value
+                         * @property {number} PERMISSION_DENIED=4 PERMISSION_DENIED value
+                         */
+                        EkmConnection.ConnectionState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONNECTION_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AVAILABLE"] = 1;
+                            values[valuesById[2] = "NOT_AVAILABLE"] = 2;
+                            values[valuesById[3] = "ERROR"] = 3;
+                            values[valuesById[4] = "PERMISSION_DENIED"] = 4;
+                            return values;
+                        })();
+    
+                        return EkmConnection;
+                    })();
+    
+                    v1.PartnerPermissions = (function() {
+    
+                        /**
+                         * Properties of a PartnerPermissions.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IPartnerPermissions
+                         * @property {string|null} [name] PartnerPermissions name
+                         * @property {Array.<google.cloud.cloudcontrolspartner.v1.PartnerPermissions.Permission>|null} [partnerPermissions] PartnerPermissions partnerPermissions
+                         */
+    
+                        /**
+                         * Constructs a new PartnerPermissions.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a PartnerPermissions.
+                         * @implements IPartnerPermissions
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IPartnerPermissions=} [properties] Properties to set
+                         */
+                        function PartnerPermissions(properties) {
+                            this.partnerPermissions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PartnerPermissions name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @instance
+                         */
+                        PartnerPermissions.prototype.name = "";
+    
+                        /**
+                         * PartnerPermissions partnerPermissions.
+                         * @member {Array.<google.cloud.cloudcontrolspartner.v1.PartnerPermissions.Permission>} partnerPermissions
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @instance
+                         */
+                        PartnerPermissions.prototype.partnerPermissions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new PartnerPermissions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IPartnerPermissions=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.PartnerPermissions} PartnerPermissions instance
+                         */
+                        PartnerPermissions.create = function create(properties) {
+                            return new PartnerPermissions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PartnerPermissions message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.PartnerPermissions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IPartnerPermissions} message PartnerPermissions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PartnerPermissions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.partnerPermissions != null && message.partnerPermissions.length) {
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                for (var i = 0; i < message.partnerPermissions.length; ++i)
+                                    writer.int32(message.partnerPermissions[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PartnerPermissions message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.PartnerPermissions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IPartnerPermissions} message PartnerPermissions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PartnerPermissions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PartnerPermissions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.PartnerPermissions} PartnerPermissions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PartnerPermissions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.PartnerPermissions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.partnerPermissions && message.partnerPermissions.length))
+                                            message.partnerPermissions = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.partnerPermissions.push(reader.int32());
+                                        } else
+                                            message.partnerPermissions.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PartnerPermissions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.PartnerPermissions} PartnerPermissions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PartnerPermissions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PartnerPermissions message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PartnerPermissions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.partnerPermissions != null && message.hasOwnProperty("partnerPermissions")) {
+                                if (!Array.isArray(message.partnerPermissions))
+                                    return "partnerPermissions: array expected";
+                                for (var i = 0; i < message.partnerPermissions.length; ++i)
+                                    switch (message.partnerPermissions[i]) {
+                                    default:
+                                        return "partnerPermissions: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PartnerPermissions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.PartnerPermissions} PartnerPermissions
+                         */
+                        PartnerPermissions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.PartnerPermissions)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.PartnerPermissions();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.partnerPermissions) {
+                                if (!Array.isArray(object.partnerPermissions))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.PartnerPermissions.partnerPermissions: array expected");
+                                message.partnerPermissions = [];
+                                for (var i = 0; i < object.partnerPermissions.length; ++i)
+                                    switch (object.partnerPermissions[i]) {
+                                    default:
+                                        if (typeof object.partnerPermissions[i] === "number") {
+                                            message.partnerPermissions[i] = object.partnerPermissions[i];
+                                            break;
+                                        }
+                                    case "PERMISSION_UNSPECIFIED":
+                                    case 0:
+                                        message.partnerPermissions[i] = 0;
+                                        break;
+                                    case "ACCESS_TRANSPARENCY_AND_EMERGENCY_ACCESS_LOGS":
+                                    case 1:
+                                        message.partnerPermissions[i] = 1;
+                                        break;
+                                    case "ASSURED_WORKLOADS_MONITORING":
+                                    case 2:
+                                        message.partnerPermissions[i] = 2;
+                                        break;
+                                    case "ACCESS_APPROVAL_REQUESTS":
+                                    case 3:
+                                        message.partnerPermissions[i] = 3;
+                                        break;
+                                    case "ASSURED_WORKLOADS_EKM_CONNECTION_STATUS":
+                                    case 4:
+                                        message.partnerPermissions[i] = 4;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PartnerPermissions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.PartnerPermissions} message PartnerPermissions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PartnerPermissions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.partnerPermissions = [];
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.partnerPermissions && message.partnerPermissions.length) {
+                                object.partnerPermissions = [];
+                                for (var j = 0; j < message.partnerPermissions.length; ++j)
+                                    object.partnerPermissions[j] = options.enums === String ? $root.google.cloud.cloudcontrolspartner.v1.PartnerPermissions.Permission[message.partnerPermissions[j]] === undefined ? message.partnerPermissions[j] : $root.google.cloud.cloudcontrolspartner.v1.PartnerPermissions.Permission[message.partnerPermissions[j]] : message.partnerPermissions[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PartnerPermissions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PartnerPermissions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PartnerPermissions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.PartnerPermissions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PartnerPermissions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.PartnerPermissions";
+                        };
+    
+                        /**
+                         * Permission enum.
+                         * @name google.cloud.cloudcontrolspartner.v1.PartnerPermissions.Permission
+                         * @enum {number}
+                         * @property {number} PERMISSION_UNSPECIFIED=0 PERMISSION_UNSPECIFIED value
+                         * @property {number} ACCESS_TRANSPARENCY_AND_EMERGENCY_ACCESS_LOGS=1 ACCESS_TRANSPARENCY_AND_EMERGENCY_ACCESS_LOGS value
+                         * @property {number} ASSURED_WORKLOADS_MONITORING=2 ASSURED_WORKLOADS_MONITORING value
+                         * @property {number} ACCESS_APPROVAL_REQUESTS=3 ACCESS_APPROVAL_REQUESTS value
+                         * @property {number} ASSURED_WORKLOADS_EKM_CONNECTION_STATUS=4 ASSURED_WORKLOADS_EKM_CONNECTION_STATUS value
+                         */
+                        PartnerPermissions.Permission = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PERMISSION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ACCESS_TRANSPARENCY_AND_EMERGENCY_ACCESS_LOGS"] = 1;
+                            values[valuesById[2] = "ASSURED_WORKLOADS_MONITORING"] = 2;
+                            values[valuesById[3] = "ACCESS_APPROVAL_REQUESTS"] = 3;
+                            values[valuesById[4] = "ASSURED_WORKLOADS_EKM_CONNECTION_STATUS"] = 4;
+                            return values;
+                        })();
+    
+                        return PartnerPermissions;
+                    })();
+    
+                    v1.GetPartnerPermissionsRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPartnerPermissionsRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IGetPartnerPermissionsRequest
+                         * @property {string|null} [name] GetPartnerPermissionsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetPartnerPermissionsRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a GetPartnerPermissionsRequest.
+                         * @implements IGetPartnerPermissionsRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest=} [properties] Properties to set
+                         */
+                        function GetPartnerPermissionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPartnerPermissionsRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest
+                         * @instance
+                         */
+                        GetPartnerPermissionsRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetPartnerPermissionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest} GetPartnerPermissionsRequest instance
+                         */
+                        GetPartnerPermissionsRequest.create = function create(properties) {
+                            return new GetPartnerPermissionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPartnerPermissionsRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest} message GetPartnerPermissionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPartnerPermissionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPartnerPermissionsRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerPermissionsRequest} message GetPartnerPermissionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPartnerPermissionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPartnerPermissionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest} GetPartnerPermissionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPartnerPermissionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPartnerPermissionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest} GetPartnerPermissionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPartnerPermissionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPartnerPermissionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPartnerPermissionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPartnerPermissionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest} GetPartnerPermissionsRequest
+                         */
+                        GetPartnerPermissionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPartnerPermissionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest} message GetPartnerPermissionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPartnerPermissionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPartnerPermissionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPartnerPermissionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetPartnerPermissionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetPartnerPermissionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest";
+                        };
+    
+                        return GetPartnerPermissionsRequest;
+                    })();
+    
+                    v1.Partner = (function() {
+    
+                        /**
+                         * Properties of a Partner.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IPartner
+                         * @property {string|null} [name] Partner name
+                         * @property {Array.<google.cloud.cloudcontrolspartner.v1.ISku>|null} [skus] Partner skus
+                         * @property {Array.<google.cloud.cloudcontrolspartner.v1.IEkmMetadata>|null} [ekmSolutions] Partner ekmSolutions
+                         * @property {Array.<string>|null} [operatedCloudRegions] Partner operatedCloudRegions
+                         * @property {string|null} [partnerProjectId] Partner partnerProjectId
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Partner createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Partner updateTime
+                         */
+    
+                        /**
+                         * Constructs a new Partner.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a Partner.
+                         * @implements IPartner
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IPartner=} [properties] Properties to set
+                         */
+                        function Partner(properties) {
+                            this.skus = [];
+                            this.ekmSolutions = [];
+                            this.operatedCloudRegions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Partner name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @instance
+                         */
+                        Partner.prototype.name = "";
+    
+                        /**
+                         * Partner skus.
+                         * @member {Array.<google.cloud.cloudcontrolspartner.v1.ISku>} skus
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @instance
+                         */
+                        Partner.prototype.skus = $util.emptyArray;
+    
+                        /**
+                         * Partner ekmSolutions.
+                         * @member {Array.<google.cloud.cloudcontrolspartner.v1.IEkmMetadata>} ekmSolutions
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @instance
+                         */
+                        Partner.prototype.ekmSolutions = $util.emptyArray;
+    
+                        /**
+                         * Partner operatedCloudRegions.
+                         * @member {Array.<string>} operatedCloudRegions
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @instance
+                         */
+                        Partner.prototype.operatedCloudRegions = $util.emptyArray;
+    
+                        /**
+                         * Partner partnerProjectId.
+                         * @member {string} partnerProjectId
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @instance
+                         */
+                        Partner.prototype.partnerProjectId = "";
+    
+                        /**
+                         * Partner createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @instance
+                         */
+                        Partner.prototype.createTime = null;
+    
+                        /**
+                         * Partner updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @instance
+                         */
+                        Partner.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new Partner instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IPartner=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Partner} Partner instance
+                         */
+                        Partner.create = function create(properties) {
+                            return new Partner(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Partner message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Partner.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IPartner} message Partner message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Partner.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.skus != null && message.skus.length)
+                                for (var i = 0; i < message.skus.length; ++i)
+                                    $root.google.cloud.cloudcontrolspartner.v1.Sku.encode(message.skus[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.ekmSolutions != null && message.ekmSolutions.length)
+                                for (var i = 0; i < message.ekmSolutions.length; ++i)
+                                    $root.google.cloud.cloudcontrolspartner.v1.EkmMetadata.encode(message.ekmSolutions[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.operatedCloudRegions != null && message.operatedCloudRegions.length)
+                                for (var i = 0; i < message.operatedCloudRegions.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.operatedCloudRegions[i]);
+                            if (message.partnerProjectId != null && Object.hasOwnProperty.call(message, "partnerProjectId"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.partnerProjectId);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Partner message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Partner.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IPartner} message Partner message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Partner.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Partner message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Partner} Partner
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Partner.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.Partner();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.skus && message.skus.length))
+                                            message.skus = [];
+                                        message.skus.push($root.google.cloud.cloudcontrolspartner.v1.Sku.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.ekmSolutions && message.ekmSolutions.length))
+                                            message.ekmSolutions = [];
+                                        message.ekmSolutions.push($root.google.cloud.cloudcontrolspartner.v1.EkmMetadata.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.operatedCloudRegions && message.operatedCloudRegions.length))
+                                            message.operatedCloudRegions = [];
+                                        message.operatedCloudRegions.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.partnerProjectId = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Partner message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Partner} Partner
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Partner.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Partner message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Partner.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.skus != null && message.hasOwnProperty("skus")) {
+                                if (!Array.isArray(message.skus))
+                                    return "skus: array expected";
+                                for (var i = 0; i < message.skus.length; ++i) {
+                                    var error = $root.google.cloud.cloudcontrolspartner.v1.Sku.verify(message.skus[i]);
+                                    if (error)
+                                        return "skus." + error;
+                                }
+                            }
+                            if (message.ekmSolutions != null && message.hasOwnProperty("ekmSolutions")) {
+                                if (!Array.isArray(message.ekmSolutions))
+                                    return "ekmSolutions: array expected";
+                                for (var i = 0; i < message.ekmSolutions.length; ++i) {
+                                    var error = $root.google.cloud.cloudcontrolspartner.v1.EkmMetadata.verify(message.ekmSolutions[i]);
+                                    if (error)
+                                        return "ekmSolutions." + error;
+                                }
+                            }
+                            if (message.operatedCloudRegions != null && message.hasOwnProperty("operatedCloudRegions")) {
+                                if (!Array.isArray(message.operatedCloudRegions))
+                                    return "operatedCloudRegions: array expected";
+                                for (var i = 0; i < message.operatedCloudRegions.length; ++i)
+                                    if (!$util.isString(message.operatedCloudRegions[i]))
+                                        return "operatedCloudRegions: string[] expected";
+                            }
+                            if (message.partnerProjectId != null && message.hasOwnProperty("partnerProjectId"))
+                                if (!$util.isString(message.partnerProjectId))
+                                    return "partnerProjectId: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Partner message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Partner} Partner
+                         */
+                        Partner.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.Partner)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.Partner();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.skus) {
+                                if (!Array.isArray(object.skus))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Partner.skus: array expected");
+                                message.skus = [];
+                                for (var i = 0; i < object.skus.length; ++i) {
+                                    if (typeof object.skus[i] !== "object")
+                                        throw TypeError(".google.cloud.cloudcontrolspartner.v1.Partner.skus: object expected");
+                                    message.skus[i] = $root.google.cloud.cloudcontrolspartner.v1.Sku.fromObject(object.skus[i]);
+                                }
+                            }
+                            if (object.ekmSolutions) {
+                                if (!Array.isArray(object.ekmSolutions))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Partner.ekmSolutions: array expected");
+                                message.ekmSolutions = [];
+                                for (var i = 0; i < object.ekmSolutions.length; ++i) {
+                                    if (typeof object.ekmSolutions[i] !== "object")
+                                        throw TypeError(".google.cloud.cloudcontrolspartner.v1.Partner.ekmSolutions: object expected");
+                                    message.ekmSolutions[i] = $root.google.cloud.cloudcontrolspartner.v1.EkmMetadata.fromObject(object.ekmSolutions[i]);
+                                }
+                            }
+                            if (object.operatedCloudRegions) {
+                                if (!Array.isArray(object.operatedCloudRegions))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Partner.operatedCloudRegions: array expected");
+                                message.operatedCloudRegions = [];
+                                for (var i = 0; i < object.operatedCloudRegions.length; ++i)
+                                    message.operatedCloudRegions[i] = String(object.operatedCloudRegions[i]);
+                            }
+                            if (object.partnerProjectId != null)
+                                message.partnerProjectId = String(object.partnerProjectId);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Partner.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Partner.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Partner message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.Partner} message Partner
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Partner.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.skus = [];
+                                object.ekmSolutions = [];
+                                object.operatedCloudRegions = [];
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.partnerProjectId = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.skus && message.skus.length) {
+                                object.skus = [];
+                                for (var j = 0; j < message.skus.length; ++j)
+                                    object.skus[j] = $root.google.cloud.cloudcontrolspartner.v1.Sku.toObject(message.skus[j], options);
+                            }
+                            if (message.ekmSolutions && message.ekmSolutions.length) {
+                                object.ekmSolutions = [];
+                                for (var j = 0; j < message.ekmSolutions.length; ++j)
+                                    object.ekmSolutions[j] = $root.google.cloud.cloudcontrolspartner.v1.EkmMetadata.toObject(message.ekmSolutions[j], options);
+                            }
+                            if (message.operatedCloudRegions && message.operatedCloudRegions.length) {
+                                object.operatedCloudRegions = [];
+                                for (var j = 0; j < message.operatedCloudRegions.length; ++j)
+                                    object.operatedCloudRegions[j] = message.operatedCloudRegions[j];
+                            }
+                            if (message.partnerProjectId != null && message.hasOwnProperty("partnerProjectId"))
+                                object.partnerProjectId = message.partnerProjectId;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Partner to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Partner.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Partner
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Partner
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Partner.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.Partner";
+                        };
+    
+                        return Partner;
+                    })();
+    
+                    v1.GetPartnerRequest = (function() {
+    
+                        /**
+                         * Properties of a GetPartnerRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IGetPartnerRequest
+                         * @property {string|null} [name] GetPartnerRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetPartnerRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a GetPartnerRequest.
+                         * @implements IGetPartnerRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest=} [properties] Properties to set
+                         */
+                        function GetPartnerRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetPartnerRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerRequest
+                         * @instance
+                         */
+                        GetPartnerRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetPartnerRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetPartnerRequest} GetPartnerRequest instance
+                         */
+                        GetPartnerRequest.create = function create(properties) {
+                            return new GetPartnerRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetPartnerRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetPartnerRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest} message GetPartnerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPartnerRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetPartnerRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetPartnerRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetPartnerRequest} message GetPartnerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetPartnerRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetPartnerRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetPartnerRequest} GetPartnerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPartnerRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.GetPartnerRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetPartnerRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetPartnerRequest} GetPartnerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetPartnerRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetPartnerRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetPartnerRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetPartnerRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetPartnerRequest} GetPartnerRequest
+                         */
+                        GetPartnerRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.GetPartnerRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.GetPartnerRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetPartnerRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.GetPartnerRequest} message GetPartnerRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetPartnerRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetPartnerRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetPartnerRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetPartnerRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetPartnerRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetPartnerRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.GetPartnerRequest";
+                        };
+    
+                        return GetPartnerRequest;
+                    })();
+    
+                    v1.Sku = (function() {
+    
+                        /**
+                         * Properties of a Sku.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface ISku
+                         * @property {string|null} [id] Sku id
+                         * @property {string|null} [displayName] Sku displayName
+                         */
+    
+                        /**
+                         * Constructs a new Sku.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a Sku.
+                         * @implements ISku
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.ISku=} [properties] Properties to set
+                         */
+                        function Sku(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Sku id.
+                         * @member {string} id
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @instance
+                         */
+                        Sku.prototype.id = "";
+    
+                        /**
+                         * Sku displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @instance
+                         */
+                        Sku.prototype.displayName = "";
+    
+                        /**
+                         * Creates a new Sku instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ISku=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Sku} Sku instance
+                         */
+                        Sku.create = function create(properties) {
+                            return new Sku(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Sku message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Sku.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ISku} message Sku message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Sku.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Sku message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Sku.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ISku} message Sku message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Sku.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Sku message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Sku} Sku
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Sku.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.Sku();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Sku message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Sku} Sku
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Sku.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Sku message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Sku.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Sku message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Sku} Sku
+                         */
+                        Sku.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.Sku)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.Sku();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Sku message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.Sku} message Sku
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Sku.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.id = "";
+                                object.displayName = "";
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Sku to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Sku.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Sku
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Sku
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Sku.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.Sku";
+                        };
+    
+                        return Sku;
+                    })();
+    
+                    v1.EkmMetadata = (function() {
+    
+                        /**
+                         * Properties of an EkmMetadata.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IEkmMetadata
+                         * @property {google.cloud.cloudcontrolspartner.v1.EkmMetadata.EkmSolution|null} [ekmSolution] EkmMetadata ekmSolution
+                         * @property {string|null} [ekmEndpointUri] EkmMetadata ekmEndpointUri
+                         */
+    
+                        /**
+                         * Constructs a new EkmMetadata.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents an EkmMetadata.
+                         * @implements IEkmMetadata
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmMetadata=} [properties] Properties to set
+                         */
+                        function EkmMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EkmMetadata ekmSolution.
+                         * @member {google.cloud.cloudcontrolspartner.v1.EkmMetadata.EkmSolution} ekmSolution
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @instance
+                         */
+                        EkmMetadata.prototype.ekmSolution = 0;
+    
+                        /**
+                         * EkmMetadata ekmEndpointUri.
+                         * @member {string} ekmEndpointUri
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @instance
+                         */
+                        EkmMetadata.prototype.ekmEndpointUri = "";
+    
+                        /**
+                         * Creates a new EkmMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmMetadata} EkmMetadata instance
+                         */
+                        EkmMetadata.create = function create(properties) {
+                            return new EkmMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EkmMetadata message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmMetadata} message EkmMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EkmMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ekmSolution != null && Object.hasOwnProperty.call(message, "ekmSolution"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.ekmSolution);
+                            if (message.ekmEndpointUri != null && Object.hasOwnProperty.call(message, "ekmEndpointUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ekmEndpointUri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EkmMetadata message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.EkmMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IEkmMetadata} message EkmMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EkmMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EkmMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmMetadata} EkmMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EkmMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.EkmMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.ekmSolution = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ekmEndpointUri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EkmMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmMetadata} EkmMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EkmMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EkmMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EkmMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ekmSolution != null && message.hasOwnProperty("ekmSolution"))
+                                switch (message.ekmSolution) {
+                                default:
+                                    return "ekmSolution: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.ekmEndpointUri != null && message.hasOwnProperty("ekmEndpointUri"))
+                                if (!$util.isString(message.ekmEndpointUri))
+                                    return "ekmEndpointUri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EkmMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.EkmMetadata} EkmMetadata
+                         */
+                        EkmMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.EkmMetadata)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.EkmMetadata();
+                            switch (object.ekmSolution) {
+                            default:
+                                if (typeof object.ekmSolution === "number") {
+                                    message.ekmSolution = object.ekmSolution;
+                                    break;
+                                }
+                                break;
+                            case "EKM_SOLUTION_UNSPECIFIED":
+                            case 0:
+                                message.ekmSolution = 0;
+                                break;
+                            case "FORTANIX":
+                            case 1:
+                                message.ekmSolution = 1;
+                                break;
+                            case "FUTUREX":
+                            case 2:
+                                message.ekmSolution = 2;
+                                break;
+                            case "THALES":
+                            case 3:
+                                message.ekmSolution = 3;
+                                break;
+                            case "VIRTRU":
+                            case 4:
+                                message.ekmSolution = 4;
+                                break;
+                            }
+                            if (object.ekmEndpointUri != null)
+                                message.ekmEndpointUri = String(object.ekmEndpointUri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EkmMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.EkmMetadata} message EkmMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EkmMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.ekmSolution = options.enums === String ? "EKM_SOLUTION_UNSPECIFIED" : 0;
+                                object.ekmEndpointUri = "";
+                            }
+                            if (message.ekmSolution != null && message.hasOwnProperty("ekmSolution"))
+                                object.ekmSolution = options.enums === String ? $root.google.cloud.cloudcontrolspartner.v1.EkmMetadata.EkmSolution[message.ekmSolution] === undefined ? message.ekmSolution : $root.google.cloud.cloudcontrolspartner.v1.EkmMetadata.EkmSolution[message.ekmSolution] : message.ekmSolution;
+                            if (message.ekmEndpointUri != null && message.hasOwnProperty("ekmEndpointUri"))
+                                object.ekmEndpointUri = message.ekmEndpointUri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EkmMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EkmMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EkmMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.EkmMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EkmMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.EkmMetadata";
+                        };
+    
+                        /**
+                         * EkmSolution enum.
+                         * @name google.cloud.cloudcontrolspartner.v1.EkmMetadata.EkmSolution
+                         * @enum {number}
+                         * @property {number} EKM_SOLUTION_UNSPECIFIED=0 EKM_SOLUTION_UNSPECIFIED value
+                         * @property {number} FORTANIX=1 FORTANIX value
+                         * @property {number} FUTUREX=2 FUTUREX value
+                         * @property {number} THALES=3 THALES value
+                         * @property {number} VIRTRU=4 VIRTRU value
+                         */
+                        EkmMetadata.EkmSolution = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "EKM_SOLUTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FORTANIX"] = 1;
+                            values[valuesById[2] = "FUTUREX"] = 2;
+                            values[valuesById[3] = "THALES"] = 3;
+                            values[valuesById[4] = "VIRTRU"] = 4;
+                            return values;
+                        })();
+    
+                        return EkmMetadata;
+                    })();
+    
+                    v1.CloudControlsPartnerMonitoring = (function() {
+    
+                        /**
+                         * Constructs a new CloudControlsPartnerMonitoring service.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a CloudControlsPartnerMonitoring
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function CloudControlsPartnerMonitoring(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (CloudControlsPartnerMonitoring.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = CloudControlsPartnerMonitoring;
+    
+                        /**
+                         * Creates new CloudControlsPartnerMonitoring service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {CloudControlsPartnerMonitoring} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        CloudControlsPartnerMonitoring.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring|listViolations}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring
+                         * @typedef ListViolationsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListViolationsResponse} [response] ListViolationsResponse
+                         */
+    
+                        /**
+                         * Calls ListViolations.
+                         * @function listViolations
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListViolationsRequest} request ListViolationsRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring.ListViolationsCallback} callback Node-style callback called with the error, if any, and ListViolationsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerMonitoring.prototype.listViolations = function listViolations(request, callback) {
+                            return this.rpcCall(listViolations, $root.google.cloud.cloudcontrolspartner.v1.ListViolationsRequest, $root.google.cloud.cloudcontrolspartner.v1.ListViolationsResponse, request, callback);
+                        }, "name", { value: "ListViolations" });
+    
+                        /**
+                         * Calls ListViolations.
+                         * @function listViolations
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListViolationsRequest} request ListViolationsRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1.ListViolationsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring|getViolation}.
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring
+                         * @typedef GetViolationCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.cloudcontrolspartner.v1.Violation} [response] Violation
+                         */
+    
+                        /**
+                         * Calls GetViolation.
+                         * @function getViolation
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetViolationRequest} request GetViolationRequest message or plain object
+                         * @param {google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring.GetViolationCallback} callback Node-style callback called with the error, if any, and Violation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudControlsPartnerMonitoring.prototype.getViolation = function getViolation(request, callback) {
+                            return this.rpcCall(getViolation, $root.google.cloud.cloudcontrolspartner.v1.GetViolationRequest, $root.google.cloud.cloudcontrolspartner.v1.Violation, request, callback);
+                        }, "name", { value: "GetViolation" });
+    
+                        /**
+                         * Calls GetViolation.
+                         * @function getViolation
+                         * @memberof google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerMonitoring
+                         * @instance
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetViolationRequest} request GetViolationRequest message or plain object
+                         * @returns {Promise<google.cloud.cloudcontrolspartner.v1.Violation>} Promise
+                         * @variation 2
+                         */
+    
+                        return CloudControlsPartnerMonitoring;
+                    })();
+    
+                    v1.Violation = (function() {
+    
+                        /**
+                         * Properties of a Violation.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IViolation
+                         * @property {string|null} [name] Violation name
+                         * @property {string|null} [description] Violation description
+                         * @property {google.protobuf.ITimestamp|null} [beginTime] Violation beginTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Violation updateTime
+                         * @property {google.protobuf.ITimestamp|null} [resolveTime] Violation resolveTime
+                         * @property {string|null} [category] Violation category
+                         * @property {google.cloud.cloudcontrolspartner.v1.Violation.State|null} [state] Violation state
+                         * @property {string|null} [nonCompliantOrgPolicy] Violation nonCompliantOrgPolicy
+                         * @property {number|Long|null} [folderId] Violation folderId
+                         * @property {google.cloud.cloudcontrolspartner.v1.Violation.IRemediation|null} [remediation] Violation remediation
+                         */
+    
+                        /**
+                         * Constructs a new Violation.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a Violation.
+                         * @implements IViolation
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IViolation=} [properties] Properties to set
+                         */
+                        function Violation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Violation name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.name = "";
+    
+                        /**
+                         * Violation description.
+                         * @member {string} description
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.description = "";
+    
+                        /**
+                         * Violation beginTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} beginTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.beginTime = null;
+    
+                        /**
+                         * Violation updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.updateTime = null;
+    
+                        /**
+                         * Violation resolveTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} resolveTime
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.resolveTime = null;
+    
+                        /**
+                         * Violation category.
+                         * @member {string} category
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.category = "";
+    
+                        /**
+                         * Violation state.
+                         * @member {google.cloud.cloudcontrolspartner.v1.Violation.State} state
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.state = 0;
+    
+                        /**
+                         * Violation nonCompliantOrgPolicy.
+                         * @member {string} nonCompliantOrgPolicy
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.nonCompliantOrgPolicy = "";
+    
+                        /**
+                         * Violation folderId.
+                         * @member {number|Long} folderId
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.folderId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Violation remediation.
+                         * @member {google.cloud.cloudcontrolspartner.v1.Violation.IRemediation|null|undefined} remediation
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @instance
+                         */
+                        Violation.prototype.remediation = null;
+    
+                        /**
+                         * Creates a new Violation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IViolation=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Violation} Violation instance
+                         */
+                        Violation.create = function create(properties) {
+                            return new Violation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Violation message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IViolation} message Violation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Violation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.beginTime != null && Object.hasOwnProperty.call(message, "beginTime"))
+                                $root.google.protobuf.Timestamp.encode(message.beginTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.resolveTime != null && Object.hasOwnProperty.call(message, "resolveTime"))
+                                $root.google.protobuf.Timestamp.encode(message.resolveTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.category);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.state);
+                            if (message.nonCompliantOrgPolicy != null && Object.hasOwnProperty.call(message, "nonCompliantOrgPolicy"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.nonCompliantOrgPolicy);
+                            if (message.folderId != null && Object.hasOwnProperty.call(message, "folderId"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.folderId);
+                            if (message.remediation != null && Object.hasOwnProperty.call(message, "remediation"))
+                                $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.encode(message.remediation, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Violation message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IViolation} message Violation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Violation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Violation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Violation} Violation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Violation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.Violation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.beginTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.resolveTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.category = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.nonCompliantOrgPolicy = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.folderId = reader.int64();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.remediation = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Violation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Violation} Violation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Violation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Violation message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Violation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.beginTime != null && message.hasOwnProperty("beginTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.beginTime);
+                                if (error)
+                                    return "beginTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.resolveTime != null && message.hasOwnProperty("resolveTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.resolveTime);
+                                if (error)
+                                    return "resolveTime." + error;
+                            }
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                if (!$util.isString(message.category))
+                                    return "category: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.nonCompliantOrgPolicy != null && message.hasOwnProperty("nonCompliantOrgPolicy"))
+                                if (!$util.isString(message.nonCompliantOrgPolicy))
+                                    return "nonCompliantOrgPolicy: string expected";
+                            if (message.folderId != null && message.hasOwnProperty("folderId"))
+                                if (!$util.isInteger(message.folderId) && !(message.folderId && $util.isInteger(message.folderId.low) && $util.isInteger(message.folderId.high)))
+                                    return "folderId: integer|Long expected";
+                            if (message.remediation != null && message.hasOwnProperty("remediation")) {
+                                var error = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.verify(message.remediation);
+                                if (error)
+                                    return "remediation." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Violation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.Violation} Violation
+                         */
+                        Violation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.Violation)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.Violation();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.beginTime != null) {
+                                if (typeof object.beginTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.beginTime: object expected");
+                                message.beginTime = $root.google.protobuf.Timestamp.fromObject(object.beginTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.resolveTime != null) {
+                                if (typeof object.resolveTime !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.resolveTime: object expected");
+                                message.resolveTime = $root.google.protobuf.Timestamp.fromObject(object.resolveTime);
+                            }
+                            if (object.category != null)
+                                message.category = String(object.category);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RESOLVED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "UNRESOLVED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "EXCEPTION":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            if (object.nonCompliantOrgPolicy != null)
+                                message.nonCompliantOrgPolicy = String(object.nonCompliantOrgPolicy);
+                            if (object.folderId != null)
+                                if ($util.Long)
+                                    (message.folderId = $util.Long.fromValue(object.folderId)).unsigned = false;
+                                else if (typeof object.folderId === "string")
+                                    message.folderId = parseInt(object.folderId, 10);
+                                else if (typeof object.folderId === "number")
+                                    message.folderId = object.folderId;
+                                else if (typeof object.folderId === "object")
+                                    message.folderId = new $util.LongBits(object.folderId.low >>> 0, object.folderId.high >>> 0).toNumber();
+                            if (object.remediation != null) {
+                                if (typeof object.remediation !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.remediation: object expected");
+                                message.remediation = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.fromObject(object.remediation);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Violation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.Violation} message Violation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Violation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.beginTime = null;
+                                object.updateTime = null;
+                                object.resolveTime = null;
+                                object.category = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.nonCompliantOrgPolicy = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.folderId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.folderId = options.longs === String ? "0" : 0;
+                                object.remediation = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.beginTime != null && message.hasOwnProperty("beginTime"))
+                                object.beginTime = $root.google.protobuf.Timestamp.toObject(message.beginTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.resolveTime != null && message.hasOwnProperty("resolveTime"))
+                                object.resolveTime = $root.google.protobuf.Timestamp.toObject(message.resolveTime, options);
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = message.category;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.cloudcontrolspartner.v1.Violation.State[message.state] === undefined ? message.state : $root.google.cloud.cloudcontrolspartner.v1.Violation.State[message.state] : message.state;
+                            if (message.nonCompliantOrgPolicy != null && message.hasOwnProperty("nonCompliantOrgPolicy"))
+                                object.nonCompliantOrgPolicy = message.nonCompliantOrgPolicy;
+                            if (message.folderId != null && message.hasOwnProperty("folderId"))
+                                if (typeof message.folderId === "number")
+                                    object.folderId = options.longs === String ? String(message.folderId) : message.folderId;
+                                else
+                                    object.folderId = options.longs === String ? $util.Long.prototype.toString.call(message.folderId) : options.longs === Number ? new $util.LongBits(message.folderId.low >>> 0, message.folderId.high >>> 0).toNumber() : message.folderId;
+                            if (message.remediation != null && message.hasOwnProperty("remediation"))
+                                object.remediation = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.toObject(message.remediation, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Violation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Violation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Violation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Violation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.Violation";
+                        };
+    
+                        Violation.Remediation = (function() {
+    
+                            /**
+                             * Properties of a Remediation.
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                             * @interface IRemediation
+                             * @property {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions|null} [instructions] Remediation instructions
+                             * @property {Array.<string>|null} [compliantValues] Remediation compliantValues
+                             * @property {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.RemediationType|null} [remediationType] Remediation remediationType
+                             */
+    
+                            /**
+                             * Constructs a new Remediation.
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation
+                             * @classdesc Represents a Remediation.
+                             * @implements IRemediation
+                             * @constructor
+                             * @param {google.cloud.cloudcontrolspartner.v1.Violation.IRemediation=} [properties] Properties to set
+                             */
+                            function Remediation(properties) {
+                                this.compliantValues = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Remediation instructions.
+                             * @member {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions|null|undefined} instructions
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @instance
+                             */
+                            Remediation.prototype.instructions = null;
+    
+                            /**
+                             * Remediation compliantValues.
+                             * @member {Array.<string>} compliantValues
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @instance
+                             */
+                            Remediation.prototype.compliantValues = $util.emptyArray;
+    
+                            /**
+                             * Remediation remediationType.
+                             * @member {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.RemediationType} remediationType
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @instance
+                             */
+                            Remediation.prototype.remediationType = 0;
+    
+                            /**
+                             * Creates a new Remediation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @static
+                             * @param {google.cloud.cloudcontrolspartner.v1.Violation.IRemediation=} [properties] Properties to set
+                             * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation} Remediation instance
+                             */
+                            Remediation.create = function create(properties) {
+                                return new Remediation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Remediation message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @static
+                             * @param {google.cloud.cloudcontrolspartner.v1.Violation.IRemediation} message Remediation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Remediation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.instructions != null && Object.hasOwnProperty.call(message, "instructions"))
+                                    $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.encode(message.instructions, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.compliantValues != null && message.compliantValues.length)
+                                    for (var i = 0; i < message.compliantValues.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.compliantValues[i]);
+                                if (message.remediationType != null && Object.hasOwnProperty.call(message, "remediationType"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.remediationType);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Remediation message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @static
+                             * @param {google.cloud.cloudcontrolspartner.v1.Violation.IRemediation} message Remediation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Remediation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Remediation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation} Remediation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Remediation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.instructions = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.compliantValues && message.compliantValues.length))
+                                                message.compliantValues = [];
+                                            message.compliantValues.push(reader.string());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.remediationType = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Remediation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation} Remediation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Remediation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Remediation message.
+                             * @function verify
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Remediation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.instructions != null && message.hasOwnProperty("instructions")) {
+                                    var error = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.verify(message.instructions);
+                                    if (error)
+                                        return "instructions." + error;
+                                }
+                                if (message.compliantValues != null && message.hasOwnProperty("compliantValues")) {
+                                    if (!Array.isArray(message.compliantValues))
+                                        return "compliantValues: array expected";
+                                    for (var i = 0; i < message.compliantValues.length; ++i)
+                                        if (!$util.isString(message.compliantValues[i]))
+                                            return "compliantValues: string[] expected";
+                                }
+                                if (message.remediationType != null && message.hasOwnProperty("remediationType"))
+                                    switch (message.remediationType) {
+                                    default:
+                                        return "remediationType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Remediation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation} Remediation
+                             */
+                            Remediation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation)
+                                    return object;
+                                var message = new $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation();
+                                if (object.instructions != null) {
+                                    if (typeof object.instructions !== "object")
+                                        throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.Remediation.instructions: object expected");
+                                    message.instructions = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.fromObject(object.instructions);
+                                }
+                                if (object.compliantValues) {
+                                    if (!Array.isArray(object.compliantValues))
+                                        throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.Remediation.compliantValues: array expected");
+                                    message.compliantValues = [];
+                                    for (var i = 0; i < object.compliantValues.length; ++i)
+                                        message.compliantValues[i] = String(object.compliantValues[i]);
+                                }
+                                switch (object.remediationType) {
+                                default:
+                                    if (typeof object.remediationType === "number") {
+                                        message.remediationType = object.remediationType;
+                                        break;
+                                    }
+                                    break;
+                                case "REMEDIATION_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.remediationType = 0;
+                                    break;
+                                case "REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION":
+                                case 1:
+                                    message.remediationType = 1;
+                                    break;
+                                case "REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION":
+                                case 2:
+                                    message.remediationType = 2;
+                                    break;
+                                case "REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION":
+                                case 3:
+                                    message.remediationType = 3;
+                                    break;
+                                case "REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION":
+                                case 4:
+                                    message.remediationType = 4;
+                                    break;
+                                case "REMEDIATION_RESOURCE_VIOLATION":
+                                case 5:
+                                    message.remediationType = 5;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Remediation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @static
+                             * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation} message Remediation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Remediation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.compliantValues = [];
+                                if (options.defaults) {
+                                    object.instructions = null;
+                                    object.remediationType = options.enums === String ? "REMEDIATION_TYPE_UNSPECIFIED" : 0;
+                                }
+                                if (message.instructions != null && message.hasOwnProperty("instructions"))
+                                    object.instructions = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.toObject(message.instructions, options);
+                                if (message.compliantValues && message.compliantValues.length) {
+                                    object.compliantValues = [];
+                                    for (var j = 0; j < message.compliantValues.length; ++j)
+                                        object.compliantValues[j] = message.compliantValues[j];
+                                }
+                                if (message.remediationType != null && message.hasOwnProperty("remediationType"))
+                                    object.remediationType = options.enums === String ? $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.RemediationType[message.remediationType] === undefined ? message.remediationType : $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.RemediationType[message.remediationType] : message.remediationType;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Remediation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Remediation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Remediation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Remediation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.Violation.Remediation";
+                            };
+    
+                            Remediation.Instructions = (function() {
+    
+                                /**
+                                 * Properties of an Instructions.
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                                 * @interface IInstructions
+                                 * @property {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud|null} [gcloudInstructions] Instructions gcloudInstructions
+                                 * @property {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole|null} [consoleInstructions] Instructions consoleInstructions
+                                 */
+    
+                                /**
+                                 * Constructs a new Instructions.
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation
+                                 * @classdesc Represents an Instructions.
+                                 * @implements IInstructions
+                                 * @constructor
+                                 * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions=} [properties] Properties to set
+                                 */
+                                function Instructions(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Instructions gcloudInstructions.
+                                 * @member {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud|null|undefined} gcloudInstructions
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @instance
+                                 */
+                                Instructions.prototype.gcloudInstructions = null;
+    
+                                /**
+                                 * Instructions consoleInstructions.
+                                 * @member {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole|null|undefined} consoleInstructions
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @instance
+                                 */
+                                Instructions.prototype.consoleInstructions = null;
+    
+                                /**
+                                 * Creates a new Instructions instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions=} [properties] Properties to set
+                                 * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions} Instructions instance
+                                 */
+                                Instructions.create = function create(properties) {
+                                    return new Instructions(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Instructions message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions} message Instructions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Instructions.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.gcloudInstructions != null && Object.hasOwnProperty.call(message, "gcloudInstructions"))
+                                        $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.encode(message.gcloudInstructions, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.consoleInstructions != null && Object.hasOwnProperty.call(message, "consoleInstructions"))
+                                        $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.encode(message.consoleInstructions, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Instructions message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.IInstructions} message Instructions message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Instructions.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an Instructions message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions} Instructions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Instructions.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.gcloudInstructions = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.consoleInstructions = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an Instructions message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions} Instructions
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Instructions.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an Instructions message.
+                                 * @function verify
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Instructions.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.gcloudInstructions != null && message.hasOwnProperty("gcloudInstructions")) {
+                                        var error = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.verify(message.gcloudInstructions);
+                                        if (error)
+                                            return "gcloudInstructions." + error;
+                                    }
+                                    if (message.consoleInstructions != null && message.hasOwnProperty("consoleInstructions")) {
+                                        var error = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.verify(message.consoleInstructions);
+                                        if (error)
+                                            return "consoleInstructions." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an Instructions message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions} Instructions
+                                 */
+                                Instructions.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions)
+                                        return object;
+                                    var message = new $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions();
+                                    if (object.gcloudInstructions != null) {
+                                        if (typeof object.gcloudInstructions !== "object")
+                                            throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.gcloudInstructions: object expected");
+                                        message.gcloudInstructions = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.fromObject(object.gcloudInstructions);
+                                    }
+                                    if (object.consoleInstructions != null) {
+                                        if (typeof object.consoleInstructions !== "object")
+                                            throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.consoleInstructions: object expected");
+                                        message.consoleInstructions = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.fromObject(object.consoleInstructions);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an Instructions message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions} message Instructions
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Instructions.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.gcloudInstructions = null;
+                                        object.consoleInstructions = null;
+                                    }
+                                    if (message.gcloudInstructions != null && message.hasOwnProperty("gcloudInstructions"))
+                                        object.gcloudInstructions = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.toObject(message.gcloudInstructions, options);
+                                    if (message.consoleInstructions != null && message.hasOwnProperty("consoleInstructions"))
+                                        object.consoleInstructions = $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.toObject(message.consoleInstructions, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Instructions to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Instructions.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Instructions
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Instructions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions";
+                                };
+    
+                                Instructions.Gcloud = (function() {
+    
+                                    /**
+                                     * Properties of a Gcloud.
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                     * @interface IGcloud
+                                     * @property {Array.<string>|null} [gcloudCommands] Gcloud gcloudCommands
+                                     * @property {Array.<string>|null} [steps] Gcloud steps
+                                     * @property {Array.<string>|null} [additionalLinks] Gcloud additionalLinks
+                                     */
+    
+                                    /**
+                                     * Constructs a new Gcloud.
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                     * @classdesc Represents a Gcloud.
+                                     * @implements IGcloud
+                                     * @constructor
+                                     * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud=} [properties] Properties to set
+                                     */
+                                    function Gcloud(properties) {
+                                        this.gcloudCommands = [];
+                                        this.steps = [];
+                                        this.additionalLinks = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Gcloud gcloudCommands.
+                                     * @member {Array.<string>} gcloudCommands
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @instance
+                                     */
+                                    Gcloud.prototype.gcloudCommands = $util.emptyArray;
+    
+                                    /**
+                                     * Gcloud steps.
+                                     * @member {Array.<string>} steps
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @instance
+                                     */
+                                    Gcloud.prototype.steps = $util.emptyArray;
+    
+                                    /**
+                                     * Gcloud additionalLinks.
+                                     * @member {Array.<string>} additionalLinks
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @instance
+                                     */
+                                    Gcloud.prototype.additionalLinks = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new Gcloud instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud=} [properties] Properties to set
+                                     * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud} Gcloud instance
+                                     */
+                                    Gcloud.create = function create(properties) {
+                                        return new Gcloud(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Gcloud message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud} message Gcloud message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Gcloud.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.gcloudCommands != null && message.gcloudCommands.length)
+                                            for (var i = 0; i < message.gcloudCommands.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.gcloudCommands[i]);
+                                        if (message.steps != null && message.steps.length)
+                                            for (var i = 0; i < message.steps.length; ++i)
+                                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.steps[i]);
+                                        if (message.additionalLinks != null && message.additionalLinks.length)
+                                            for (var i = 0; i < message.additionalLinks.length; ++i)
+                                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.additionalLinks[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Gcloud message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IGcloud} message Gcloud message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Gcloud.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Gcloud message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud} Gcloud
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Gcloud.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.gcloudCommands && message.gcloudCommands.length))
+                                                        message.gcloudCommands = [];
+                                                    message.gcloudCommands.push(reader.string());
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    if (!(message.steps && message.steps.length))
+                                                        message.steps = [];
+                                                    message.steps.push(reader.string());
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    if (!(message.additionalLinks && message.additionalLinks.length))
+                                                        message.additionalLinks = [];
+                                                    message.additionalLinks.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Gcloud message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud} Gcloud
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Gcloud.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Gcloud message.
+                                     * @function verify
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Gcloud.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.gcloudCommands != null && message.hasOwnProperty("gcloudCommands")) {
+                                            if (!Array.isArray(message.gcloudCommands))
+                                                return "gcloudCommands: array expected";
+                                            for (var i = 0; i < message.gcloudCommands.length; ++i)
+                                                if (!$util.isString(message.gcloudCommands[i]))
+                                                    return "gcloudCommands: string[] expected";
+                                        }
+                                        if (message.steps != null && message.hasOwnProperty("steps")) {
+                                            if (!Array.isArray(message.steps))
+                                                return "steps: array expected";
+                                            for (var i = 0; i < message.steps.length; ++i)
+                                                if (!$util.isString(message.steps[i]))
+                                                    return "steps: string[] expected";
+                                        }
+                                        if (message.additionalLinks != null && message.hasOwnProperty("additionalLinks")) {
+                                            if (!Array.isArray(message.additionalLinks))
+                                                return "additionalLinks: array expected";
+                                            for (var i = 0; i < message.additionalLinks.length; ++i)
+                                                if (!$util.isString(message.additionalLinks[i]))
+                                                    return "additionalLinks: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Gcloud message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud} Gcloud
+                                     */
+                                    Gcloud.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud)
+                                            return object;
+                                        var message = new $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud();
+                                        if (object.gcloudCommands) {
+                                            if (!Array.isArray(object.gcloudCommands))
+                                                throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.gcloudCommands: array expected");
+                                            message.gcloudCommands = [];
+                                            for (var i = 0; i < object.gcloudCommands.length; ++i)
+                                                message.gcloudCommands[i] = String(object.gcloudCommands[i]);
+                                        }
+                                        if (object.steps) {
+                                            if (!Array.isArray(object.steps))
+                                                throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.steps: array expected");
+                                            message.steps = [];
+                                            for (var i = 0; i < object.steps.length; ++i)
+                                                message.steps[i] = String(object.steps[i]);
+                                        }
+                                        if (object.additionalLinks) {
+                                            if (!Array.isArray(object.additionalLinks))
+                                                throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud.additionalLinks: array expected");
+                                            message.additionalLinks = [];
+                                            for (var i = 0; i < object.additionalLinks.length; ++i)
+                                                message.additionalLinks[i] = String(object.additionalLinks[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Gcloud message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud} message Gcloud
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Gcloud.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults) {
+                                            object.gcloudCommands = [];
+                                            object.steps = [];
+                                            object.additionalLinks = [];
+                                        }
+                                        if (message.gcloudCommands && message.gcloudCommands.length) {
+                                            object.gcloudCommands = [];
+                                            for (var j = 0; j < message.gcloudCommands.length; ++j)
+                                                object.gcloudCommands[j] = message.gcloudCommands[j];
+                                        }
+                                        if (message.steps && message.steps.length) {
+                                            object.steps = [];
+                                            for (var j = 0; j < message.steps.length; ++j)
+                                                object.steps[j] = message.steps[j];
+                                        }
+                                        if (message.additionalLinks && message.additionalLinks.length) {
+                                            object.additionalLinks = [];
+                                            for (var j = 0; j < message.additionalLinks.length; ++j)
+                                                object.additionalLinks[j] = message.additionalLinks[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Gcloud to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Gcloud.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Gcloud
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Gcloud.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Gcloud";
+                                    };
+    
+                                    return Gcloud;
+                                })();
+    
+                                Instructions.Console = (function() {
+    
+                                    /**
+                                     * Properties of a Console.
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                     * @interface IConsole
+                                     * @property {Array.<string>|null} [consoleUris] Console consoleUris
+                                     * @property {Array.<string>|null} [steps] Console steps
+                                     * @property {Array.<string>|null} [additionalLinks] Console additionalLinks
+                                     */
+    
+                                    /**
+                                     * Constructs a new Console.
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions
+                                     * @classdesc Represents a Console.
+                                     * @implements IConsole
+                                     * @constructor
+                                     * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole=} [properties] Properties to set
+                                     */
+                                    function Console(properties) {
+                                        this.consoleUris = [];
+                                        this.steps = [];
+                                        this.additionalLinks = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Console consoleUris.
+                                     * @member {Array.<string>} consoleUris
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @instance
+                                     */
+                                    Console.prototype.consoleUris = $util.emptyArray;
+    
+                                    /**
+                                     * Console steps.
+                                     * @member {Array.<string>} steps
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @instance
+                                     */
+                                    Console.prototype.steps = $util.emptyArray;
+    
+                                    /**
+                                     * Console additionalLinks.
+                                     * @member {Array.<string>} additionalLinks
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @instance
+                                     */
+                                    Console.prototype.additionalLinks = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new Console instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole=} [properties] Properties to set
+                                     * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console} Console instance
+                                     */
+                                    Console.create = function create(properties) {
+                                        return new Console(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Console message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole} message Console message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Console.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.consoleUris != null && message.consoleUris.length)
+                                            for (var i = 0; i < message.consoleUris.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.consoleUris[i]);
+                                        if (message.steps != null && message.steps.length)
+                                            for (var i = 0; i < message.steps.length; ++i)
+                                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.steps[i]);
+                                        if (message.additionalLinks != null && message.additionalLinks.length)
+                                            for (var i = 0; i < message.additionalLinks.length; ++i)
+                                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.additionalLinks[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Console message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.IConsole} message Console message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Console.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Console message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console} Console
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Console.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.consoleUris && message.consoleUris.length))
+                                                        message.consoleUris = [];
+                                                    message.consoleUris.push(reader.string());
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    if (!(message.steps && message.steps.length))
+                                                        message.steps = [];
+                                                    message.steps.push(reader.string());
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    if (!(message.additionalLinks && message.additionalLinks.length))
+                                                        message.additionalLinks = [];
+                                                    message.additionalLinks.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Console message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console} Console
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Console.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Console message.
+                                     * @function verify
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Console.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.consoleUris != null && message.hasOwnProperty("consoleUris")) {
+                                            if (!Array.isArray(message.consoleUris))
+                                                return "consoleUris: array expected";
+                                            for (var i = 0; i < message.consoleUris.length; ++i)
+                                                if (!$util.isString(message.consoleUris[i]))
+                                                    return "consoleUris: string[] expected";
+                                        }
+                                        if (message.steps != null && message.hasOwnProperty("steps")) {
+                                            if (!Array.isArray(message.steps))
+                                                return "steps: array expected";
+                                            for (var i = 0; i < message.steps.length; ++i)
+                                                if (!$util.isString(message.steps[i]))
+                                                    return "steps: string[] expected";
+                                        }
+                                        if (message.additionalLinks != null && message.hasOwnProperty("additionalLinks")) {
+                                            if (!Array.isArray(message.additionalLinks))
+                                                return "additionalLinks: array expected";
+                                            for (var i = 0; i < message.additionalLinks.length; ++i)
+                                                if (!$util.isString(message.additionalLinks[i]))
+                                                    return "additionalLinks: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Console message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console} Console
+                                     */
+                                    Console.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console)
+                                            return object;
+                                        var message = new $root.google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console();
+                                        if (object.consoleUris) {
+                                            if (!Array.isArray(object.consoleUris))
+                                                throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.consoleUris: array expected");
+                                            message.consoleUris = [];
+                                            for (var i = 0; i < object.consoleUris.length; ++i)
+                                                message.consoleUris[i] = String(object.consoleUris[i]);
+                                        }
+                                        if (object.steps) {
+                                            if (!Array.isArray(object.steps))
+                                                throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.steps: array expected");
+                                            message.steps = [];
+                                            for (var i = 0; i < object.steps.length; ++i)
+                                                message.steps[i] = String(object.steps[i]);
+                                        }
+                                        if (object.additionalLinks) {
+                                            if (!Array.isArray(object.additionalLinks))
+                                                throw TypeError(".google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console.additionalLinks: array expected");
+                                            message.additionalLinks = [];
+                                            for (var i = 0; i < object.additionalLinks.length; ++i)
+                                                message.additionalLinks[i] = String(object.additionalLinks[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Console message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console} message Console
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Console.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults) {
+                                            object.consoleUris = [];
+                                            object.steps = [];
+                                            object.additionalLinks = [];
+                                        }
+                                        if (message.consoleUris && message.consoleUris.length) {
+                                            object.consoleUris = [];
+                                            for (var j = 0; j < message.consoleUris.length; ++j)
+                                                object.consoleUris[j] = message.consoleUris[j];
+                                        }
+                                        if (message.steps && message.steps.length) {
+                                            object.steps = [];
+                                            for (var j = 0; j < message.steps.length; ++j)
+                                                object.steps[j] = message.steps[j];
+                                        }
+                                        if (message.additionalLinks && message.additionalLinks.length) {
+                                            object.additionalLinks = [];
+                                            for (var j = 0; j < message.additionalLinks.length; ++j)
+                                                object.additionalLinks[j] = message.additionalLinks[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Console to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Console.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Console
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Console.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.Violation.Remediation.Instructions.Console";
+                                    };
+    
+                                    return Console;
+                                })();
+    
+                                return Instructions;
+                            })();
+    
+                            /**
+                             * RemediationType enum.
+                             * @name google.cloud.cloudcontrolspartner.v1.Violation.Remediation.RemediationType
+                             * @enum {number}
+                             * @property {number} REMEDIATION_TYPE_UNSPECIFIED=0 REMEDIATION_TYPE_UNSPECIFIED value
+                             * @property {number} REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION=1 REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION value
+                             * @property {number} REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION=2 REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION value
+                             * @property {number} REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION=3 REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION value
+                             * @property {number} REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION=4 REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION value
+                             * @property {number} REMEDIATION_RESOURCE_VIOLATION=5 REMEDIATION_RESOURCE_VIOLATION value
+                             */
+                            Remediation.RemediationType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "REMEDIATION_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION"] = 1;
+                                values[valuesById[2] = "REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION"] = 2;
+                                values[valuesById[3] = "REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION"] = 3;
+                                values[valuesById[4] = "REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION"] = 4;
+                                values[valuesById[5] = "REMEDIATION_RESOURCE_VIOLATION"] = 5;
+                                return values;
+                            })();
+    
+                            return Remediation;
+                        })();
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.cloudcontrolspartner.v1.Violation.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RESOLVED=1 RESOLVED value
+                         * @property {number} UNRESOLVED=2 UNRESOLVED value
+                         * @property {number} EXCEPTION=3 EXCEPTION value
+                         */
+                        Violation.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RESOLVED"] = 1;
+                            values[valuesById[2] = "UNRESOLVED"] = 2;
+                            values[valuesById[3] = "EXCEPTION"] = 3;
+                            return values;
+                        })();
+    
+                        return Violation;
+                    })();
+    
+                    v1.ListViolationsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListViolationsRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IListViolationsRequest
+                         * @property {string|null} [parent] ListViolationsRequest parent
+                         * @property {number|null} [pageSize] ListViolationsRequest pageSize
+                         * @property {string|null} [pageToken] ListViolationsRequest pageToken
+                         * @property {string|null} [filter] ListViolationsRequest filter
+                         * @property {string|null} [orderBy] ListViolationsRequest orderBy
+                         * @property {google.type.IInterval|null} [interval] ListViolationsRequest interval
+                         */
+    
+                        /**
+                         * Constructs a new ListViolationsRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a ListViolationsRequest.
+                         * @implements IListViolationsRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListViolationsRequest=} [properties] Properties to set
+                         */
+                        function ListViolationsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListViolationsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @instance
+                         */
+                        ListViolationsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListViolationsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @instance
+                         */
+                        ListViolationsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListViolationsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @instance
+                         */
+                        ListViolationsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListViolationsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @instance
+                         */
+                        ListViolationsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListViolationsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @instance
+                         */
+                        ListViolationsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListViolationsRequest interval.
+                         * @member {google.type.IInterval|null|undefined} interval
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @instance
+                         */
+                        ListViolationsRequest.prototype.interval = null;
+    
+                        /**
+                         * Creates a new ListViolationsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListViolationsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListViolationsRequest} ListViolationsRequest instance
+                         */
+                        ListViolationsRequest.create = function create(properties) {
+                            return new ListViolationsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListViolationsRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListViolationsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListViolationsRequest} message ListViolationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListViolationsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            if (message.interval != null && Object.hasOwnProperty.call(message, "interval"))
+                                $root.google.type.Interval.encode(message.interval, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListViolationsRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListViolationsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListViolationsRequest} message ListViolationsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListViolationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListViolationsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListViolationsRequest} ListViolationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListViolationsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.ListViolationsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.interval = $root.google.type.Interval.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListViolationsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListViolationsRequest} ListViolationsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListViolationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListViolationsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListViolationsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.interval != null && message.hasOwnProperty("interval")) {
+                                var error = $root.google.type.Interval.verify(message.interval);
+                                if (error)
+                                    return "interval." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListViolationsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListViolationsRequest} ListViolationsRequest
+                         */
+                        ListViolationsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.ListViolationsRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.ListViolationsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.interval != null) {
+                                if (typeof object.interval !== "object")
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListViolationsRequest.interval: object expected");
+                                message.interval = $root.google.type.Interval.fromObject(object.interval);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListViolationsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListViolationsRequest} message ListViolationsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListViolationsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                                object.interval = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.interval != null && message.hasOwnProperty("interval"))
+                                object.interval = $root.google.type.Interval.toObject(message.interval, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListViolationsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListViolationsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListViolationsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListViolationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.ListViolationsRequest";
+                        };
+    
+                        return ListViolationsRequest;
+                    })();
+    
+                    v1.ListViolationsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListViolationsResponse.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IListViolationsResponse
+                         * @property {Array.<google.cloud.cloudcontrolspartner.v1.IViolation>|null} [violations] ListViolationsResponse violations
+                         * @property {string|null} [nextPageToken] ListViolationsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListViolationsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListViolationsResponse.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a ListViolationsResponse.
+                         * @implements IListViolationsResponse
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListViolationsResponse=} [properties] Properties to set
+                         */
+                        function ListViolationsResponse(properties) {
+                            this.violations = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListViolationsResponse violations.
+                         * @member {Array.<google.cloud.cloudcontrolspartner.v1.IViolation>} violations
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @instance
+                         */
+                        ListViolationsResponse.prototype.violations = $util.emptyArray;
+    
+                        /**
+                         * ListViolationsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @instance
+                         */
+                        ListViolationsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListViolationsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @instance
+                         */
+                        ListViolationsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListViolationsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListViolationsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListViolationsResponse} ListViolationsResponse instance
+                         */
+                        ListViolationsResponse.create = function create(properties) {
+                            return new ListViolationsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListViolationsResponse message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListViolationsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListViolationsResponse} message ListViolationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListViolationsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.violations != null && message.violations.length)
+                                for (var i = 0; i < message.violations.length; ++i)
+                                    $root.google.cloud.cloudcontrolspartner.v1.Violation.encode(message.violations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListViolationsResponse message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.ListViolationsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IListViolationsResponse} message ListViolationsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListViolationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListViolationsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListViolationsResponse} ListViolationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListViolationsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.ListViolationsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.violations && message.violations.length))
+                                            message.violations = [];
+                                        message.violations.push($root.google.cloud.cloudcontrolspartner.v1.Violation.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListViolationsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListViolationsResponse} ListViolationsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListViolationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListViolationsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListViolationsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.violations != null && message.hasOwnProperty("violations")) {
+                                if (!Array.isArray(message.violations))
+                                    return "violations: array expected";
+                                for (var i = 0; i < message.violations.length; ++i) {
+                                    var error = $root.google.cloud.cloudcontrolspartner.v1.Violation.verify(message.violations[i]);
+                                    if (error)
+                                        return "violations." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListViolationsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.ListViolationsResponse} ListViolationsResponse
+                         */
+                        ListViolationsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.ListViolationsResponse)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.ListViolationsResponse();
+                            if (object.violations) {
+                                if (!Array.isArray(object.violations))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListViolationsResponse.violations: array expected");
+                                message.violations = [];
+                                for (var i = 0; i < object.violations.length; ++i) {
+                                    if (typeof object.violations[i] !== "object")
+                                        throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListViolationsResponse.violations: object expected");
+                                    message.violations[i] = $root.google.cloud.cloudcontrolspartner.v1.Violation.fromObject(object.violations[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.cloudcontrolspartner.v1.ListViolationsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListViolationsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.ListViolationsResponse} message ListViolationsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListViolationsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.violations = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.violations && message.violations.length) {
+                                object.violations = [];
+                                for (var j = 0; j < message.violations.length; ++j)
+                                    object.violations[j] = $root.google.cloud.cloudcontrolspartner.v1.Violation.toObject(message.violations[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListViolationsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListViolationsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListViolationsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.ListViolationsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListViolationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.ListViolationsResponse";
+                        };
+    
+                        return ListViolationsResponse;
+                    })();
+    
+                    v1.GetViolationRequest = (function() {
+    
+                        /**
+                         * Properties of a GetViolationRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @interface IGetViolationRequest
+                         * @property {string|null} [name] GetViolationRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetViolationRequest.
+                         * @memberof google.cloud.cloudcontrolspartner.v1
+                         * @classdesc Represents a GetViolationRequest.
+                         * @implements IGetViolationRequest
+                         * @constructor
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetViolationRequest=} [properties] Properties to set
+                         */
+                        function GetViolationRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetViolationRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetViolationRequest
+                         * @instance
+                         */
+                        GetViolationRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetViolationRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetViolationRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetViolationRequest=} [properties] Properties to set
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetViolationRequest} GetViolationRequest instance
+                         */
+                        GetViolationRequest.create = function create(properties) {
+                            return new GetViolationRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetViolationRequest message. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetViolationRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetViolationRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetViolationRequest} message GetViolationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetViolationRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetViolationRequest message, length delimited. Does not implicitly {@link google.cloud.cloudcontrolspartner.v1.GetViolationRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetViolationRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.IGetViolationRequest} message GetViolationRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetViolationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetViolationRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetViolationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetViolationRequest} GetViolationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetViolationRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudcontrolspartner.v1.GetViolationRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetViolationRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetViolationRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetViolationRequest} GetViolationRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetViolationRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetViolationRequest message.
+                         * @function verify
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetViolationRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetViolationRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetViolationRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetViolationRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.cloudcontrolspartner.v1.GetViolationRequest} GetViolationRequest
+                         */
+                        GetViolationRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.cloudcontrolspartner.v1.GetViolationRequest)
+                                return object;
+                            var message = new $root.google.cloud.cloudcontrolspartner.v1.GetViolationRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetViolationRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetViolationRequest
+                         * @static
+                         * @param {google.cloud.cloudcontrolspartner.v1.GetViolationRequest} message GetViolationRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetViolationRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetViolationRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetViolationRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetViolationRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetViolationRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.cloudcontrolspartner.v1.GetViolationRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetViolationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.cloudcontrolspartner.v1.GetViolationRequest";
+                        };
+    
+                        return GetViolationRequest;
+                    })();
+    
+                    return v1;
+                })();
+    
                 cloudcontrolspartner.v1beta = (function() {
     
                     /**
