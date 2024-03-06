@@ -26978,6 +26978,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "baseModelSource": {
+                          "type": "BaseModelSource",
+                          "id": 50,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -27021,6 +27028,26 @@
                             }
                           }
                         },
+                        "BaseModelSource": {
+                          "oneofs": {
+                            "source": {
+                              "oneof": [
+                                "modelGardenSource",
+                                "genieSource"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "modelGardenSource": {
+                              "type": "ModelGardenSource",
+                              "id": 1
+                            },
+                            "genieSource": {
+                              "type": "GenieSource",
+                              "id": 2
+                            }
+                          }
+                        },
                         "DeploymentResourcesType": {
                           "values": {
                             "DEPLOYMENT_RESOURCES_TYPE_UNSPECIFIED": 0,
@@ -27034,6 +27061,28 @@
                     "LargeModelReference": {
                       "fields": {
                         "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ModelGardenSource": {
+                      "fields": {
+                        "publicModelName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GenieSource": {
+                      "fields": {
+                        "baseModelUri": {
                           "type": "string",
                           "id": 1,
                           "options": {
@@ -27533,6 +27582,27 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "probabilityScore": {
+                          "type": "float",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "severity": {
+                          "type": "HarmSeverity",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "severityScore": {
+                          "type": "float",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "blocked": {
                           "type": "bool",
                           "id": 3,
@@ -27549,6 +27619,15 @@
                             "LOW": 2,
                             "MEDIUM": 3,
                             "HIGH": 4
+                          }
+                        },
+                        "HarmSeverity": {
+                          "values": {
+                            "HARM_SEVERITY_UNSPECIFIED": 0,
+                            "HARM_SEVERITY_NEGLIGIBLE": 1,
+                            "HARM_SEVERITY_LOW": 2,
+                            "HARM_SEVERITY_MEDIUM": 3,
+                            "HARM_SEVERITY_HIGH": 4
                           }
                         }
                       }
@@ -27680,7 +27759,10 @@
                             "MAX_TOKENS": 2,
                             "SAFETY": 3,
                             "RECITATION": 4,
-                            "OTHER": 5
+                            "OTHER": 5,
+                            "BLOCKLIST": 6,
+                            "PROHIBITED_CONTENT": 7,
+                            "SPII": 8
                           }
                         }
                       }
@@ -29913,6 +29995,17 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -32463,6 +32556,7 @@
                           "type": "VectorSearchConfig",
                           "id": 8,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -32510,6 +32604,9 @@
                           }
                         },
                         "VectorSearchConfig": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "oneofs": {
                             "algorithmConfig": {
                               "oneof": [
@@ -32610,6 +32707,13 @@
                           }
                         },
                         "FeatureRegistrySource": {
+                          "oneofs": {
+                            "_projectNumber": {
+                              "oneof": [
+                                "projectNumber"
+                              ]
+                            }
+                          },
                           "fields": {
                             "featureGroups": {
                               "rule": "repeated",
@@ -32617,6 +32721,14 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "projectNumber": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           },
@@ -32683,6 +32795,33 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "syncSummary": {
+                          "type": "SyncSummary",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SyncSummary": {
+                          "fields": {
+                            "rowSynced": {
+                              "type": "int64",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "totalSlot": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
                           }
                         }
                       }
@@ -36608,7 +36747,8 @@
                                 "LESS_EQUAL": 2,
                                 "EQUAL": 3,
                                 "GREATER_EQUAL": 4,
-                                "GREATER": 5
+                                "GREATER": 5,
+                                "NOT_EQUAL": 6
                               }
                             }
                           }
@@ -44160,6 +44300,10 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        },
+                        "progressMessage": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -44168,6 +44312,10 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        },
+                        "progressMessage": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -44374,6 +44522,13 @@
                           "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "preflightValidations": {
+                          "type": "bool",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -45129,13 +45284,6 @@
                         "pipelineJobId": {
                           "type": "string",
                           "id": 3
-                        },
-                        "preflightValidations": {
-                          "type": "bool",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
                         }
                       }
                     },

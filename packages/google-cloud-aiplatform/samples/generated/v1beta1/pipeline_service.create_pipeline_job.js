@@ -45,11 +45,6 @@ function main(parent, pipelineJob) {
    *  are `/[a-z][0-9]-/`.
    */
   // const pipelineJobId = 'abc123'
-  /**
-   *  Optional. Whether to do component level validations before job creation.
-   *  Currently we only support Google First Party Component/Pipelines.
-   */
-  // const preflightValidations = true
 
   // Imports the Aiplatform library
   const {PipelineServiceClient} = require('@google-cloud/aiplatform').v1beta1;
