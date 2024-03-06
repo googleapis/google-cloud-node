@@ -28964,6 +28964,9 @@ export namespace google {
 
                 /** Cluster enterpriseConfig */
                 enterpriseConfig?: (google.container.v1beta1.IEnterpriseConfig|null);
+
+                /** Cluster secretManagerConfig */
+                secretManagerConfig?: (google.container.v1beta1.ISecretManagerConfig|null);
             }
 
             /** Represents a Cluster. */
@@ -29202,6 +29205,9 @@ export namespace google {
 
                 /** Cluster enterpriseConfig. */
                 public enterpriseConfig?: (google.container.v1beta1.IEnterpriseConfig|null);
+
+                /** Cluster secretManagerConfig. */
+                public secretManagerConfig?: (google.container.v1beta1.ISecretManagerConfig|null);
 
                 /** Cluster _nodePoolDefaults. */
                 public _nodePoolDefaults?: "nodePoolDefaults";
@@ -30244,6 +30250,12 @@ export namespace google {
 
                 /** ClusterUpdate desiredInTransitEncryptionConfig */
                 desiredInTransitEncryptionConfig?: (google.container.v1beta1.InTransitEncryptionConfig|keyof typeof google.container.v1beta1.InTransitEncryptionConfig|null);
+
+                /** ClusterUpdate desiredEnableCiliumClusterwideNetworkPolicy */
+                desiredEnableCiliumClusterwideNetworkPolicy?: (boolean|null);
+
+                /** ClusterUpdate desiredSecretManagerConfig */
+                desiredSecretManagerConfig?: (google.container.v1beta1.ISecretManagerConfig|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -30432,6 +30444,12 @@ export namespace google {
                 /** ClusterUpdate desiredInTransitEncryptionConfig. */
                 public desiredInTransitEncryptionConfig?: (google.container.v1beta1.InTransitEncryptionConfig|keyof typeof google.container.v1beta1.InTransitEncryptionConfig|null);
 
+                /** ClusterUpdate desiredEnableCiliumClusterwideNetworkPolicy. */
+                public desiredEnableCiliumClusterwideNetworkPolicy?: (boolean|null);
+
+                /** ClusterUpdate desiredSecretManagerConfig. */
+                public desiredSecretManagerConfig?: (google.container.v1beta1.ISecretManagerConfig|null);
+
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
 
@@ -30443,6 +30461,12 @@ export namespace google {
 
                 /** ClusterUpdate _desiredInTransitEncryptionConfig. */
                 public _desiredInTransitEncryptionConfig?: "desiredInTransitEncryptionConfig";
+
+                /** ClusterUpdate _desiredEnableCiliumClusterwideNetworkPolicy. */
+                public _desiredEnableCiliumClusterwideNetworkPolicy?: "desiredEnableCiliumClusterwideNetworkPolicy";
+
+                /** ClusterUpdate _desiredSecretManagerConfig. */
+                public _desiredSecretManagerConfig?: "desiredSecretManagerConfig";
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -39578,6 +39602,9 @@ export namespace google {
 
                 /** NetworkConfig inTransitEncryptionConfig */
                 inTransitEncryptionConfig?: (google.container.v1beta1.InTransitEncryptionConfig|keyof typeof google.container.v1beta1.InTransitEncryptionConfig|null);
+
+                /** NetworkConfig enableCiliumClusterwideNetworkPolicy */
+                enableCiliumClusterwideNetworkPolicy?: (boolean|null);
             }
 
             /** Represents a NetworkConfig. */
@@ -39631,11 +39658,17 @@ export namespace google {
                 /** NetworkConfig inTransitEncryptionConfig. */
                 public inTransitEncryptionConfig?: (google.container.v1beta1.InTransitEncryptionConfig|keyof typeof google.container.v1beta1.InTransitEncryptionConfig|null);
 
+                /** NetworkConfig enableCiliumClusterwideNetworkPolicy. */
+                public enableCiliumClusterwideNetworkPolicy?: (boolean|null);
+
                 /** NetworkConfig _enableFqdnNetworkPolicy. */
                 public _enableFqdnNetworkPolicy?: "enableFqdnNetworkPolicy";
 
                 /** NetworkConfig _inTransitEncryptionConfig. */
                 public _inTransitEncryptionConfig?: "inTransitEncryptionConfig";
+
+                /** NetworkConfig _enableCiliumClusterwideNetworkPolicy. */
+                public _enableCiliumClusterwideNetworkPolicy?: "enableCiliumClusterwideNetworkPolicy";
 
                 /**
                  * Creates a new NetworkConfig instance using the specified properties.
@@ -45854,6 +45887,106 @@ export namespace google {
                     STANDARD = 1,
                     ENTERPRISE = 2
                 }
+            }
+
+            /** Properties of a SecretManagerConfig. */
+            interface ISecretManagerConfig {
+
+                /** SecretManagerConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a SecretManagerConfig. */
+            class SecretManagerConfig implements ISecretManagerConfig {
+
+                /**
+                 * Constructs a new SecretManagerConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1beta1.ISecretManagerConfig);
+
+                /** SecretManagerConfig enabled. */
+                public enabled?: (boolean|null);
+
+                /** SecretManagerConfig _enabled. */
+                public _enabled?: "enabled";
+
+                /**
+                 * Creates a new SecretManagerConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SecretManagerConfig instance
+                 */
+                public static create(properties?: google.container.v1beta1.ISecretManagerConfig): google.container.v1beta1.SecretManagerConfig;
+
+                /**
+                 * Encodes the specified SecretManagerConfig message. Does not implicitly {@link google.container.v1beta1.SecretManagerConfig.verify|verify} messages.
+                 * @param message SecretManagerConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1beta1.ISecretManagerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SecretManagerConfig message, length delimited. Does not implicitly {@link google.container.v1beta1.SecretManagerConfig.verify|verify} messages.
+                 * @param message SecretManagerConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1beta1.ISecretManagerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SecretManagerConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SecretManagerConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.SecretManagerConfig;
+
+                /**
+                 * Decodes a SecretManagerConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SecretManagerConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.SecretManagerConfig;
+
+                /**
+                 * Verifies a SecretManagerConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SecretManagerConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SecretManagerConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1beta1.SecretManagerConfig;
+
+                /**
+                 * Creates a plain object from a SecretManagerConfig message. Also converts values to other types if specified.
+                 * @param message SecretManagerConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1beta1.SecretManagerConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SecretManagerConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SecretManagerConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a SecondaryBootDisk. */
