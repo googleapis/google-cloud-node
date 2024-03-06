@@ -1234,7 +1234,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 92,
                     "type": "FULL"
                 }
             ],
@@ -8054,7 +8054,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 92,
                     "type": "FULL"
                 }
             ],
@@ -9246,7 +9246,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -9266,10 +9266,6 @@
                     {
                         "name": "pipeline_job_id",
                         "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "preflight_validations",
-                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1beta1.PipelineJob",
