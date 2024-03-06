@@ -28,22 +28,28 @@
   * [Dlp_service.delete_job_trigger](#dlp_service.delete_job_trigger)
   * [Dlp_service.delete_stored_info_type](#dlp_service.delete_stored_info_type)
   * [Dlp_service.finish_dlp_job](#dlp_service.finish_dlp_job)
+  * [Dlp_service.get_column_data_profile](#dlp_service.get_column_data_profile)
   * [Dlp_service.get_deidentify_template](#dlp_service.get_deidentify_template)
   * [Dlp_service.get_discovery_config](#dlp_service.get_discovery_config)
   * [Dlp_service.get_dlp_job](#dlp_service.get_dlp_job)
   * [Dlp_service.get_inspect_template](#dlp_service.get_inspect_template)
   * [Dlp_service.get_job_trigger](#dlp_service.get_job_trigger)
+  * [Dlp_service.get_project_data_profile](#dlp_service.get_project_data_profile)
   * [Dlp_service.get_stored_info_type](#dlp_service.get_stored_info_type)
+  * [Dlp_service.get_table_data_profile](#dlp_service.get_table_data_profile)
   * [Dlp_service.hybrid_inspect_dlp_job](#dlp_service.hybrid_inspect_dlp_job)
   * [Dlp_service.hybrid_inspect_job_trigger](#dlp_service.hybrid_inspect_job_trigger)
   * [Dlp_service.inspect_content](#dlp_service.inspect_content)
+  * [Dlp_service.list_column_data_profiles](#dlp_service.list_column_data_profiles)
   * [Dlp_service.list_deidentify_templates](#dlp_service.list_deidentify_templates)
   * [Dlp_service.list_discovery_configs](#dlp_service.list_discovery_configs)
   * [Dlp_service.list_dlp_jobs](#dlp_service.list_dlp_jobs)
   * [Dlp_service.list_info_types](#dlp_service.list_info_types)
   * [Dlp_service.list_inspect_templates](#dlp_service.list_inspect_templates)
   * [Dlp_service.list_job_triggers](#dlp_service.list_job_triggers)
+  * [Dlp_service.list_project_data_profiles](#dlp_service.list_project_data_profiles)
   * [Dlp_service.list_stored_info_types](#dlp_service.list_stored_info_types)
+  * [Dlp_service.list_table_data_profiles](#dlp_service.list_table_data_profiles)
   * [Dlp_service.redact_image](#dlp_service.redact_image)
   * [Dlp_service.reidentify_content](#dlp_service.reidentify_content)
   * [Dlp_service.update_deidentify_template](#dlp_service.update_deidentify_template)
@@ -340,6 +346,23 @@ __Usage:__
 
 
 
+### Dlp_service.get_column_data_profile
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_column_data_profile.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_column_data_profile.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_column_data_profile.js`
+
+
+-----
+
+
+
+
 ### Dlp_service.get_deidentify_template
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_deidentify_template.js).
@@ -425,6 +448,23 @@ __Usage:__
 
 
 
+### Dlp_service.get_project_data_profile
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_project_data_profile.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_project_data_profile.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_project_data_profile.js`
+
+
+-----
+
+
+
+
 ### Dlp_service.get_stored_info_type
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_stored_info_type.js).
@@ -435,6 +475,23 @@ __Usage:__
 
 
 `node packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_stored_info_type.js`
+
+
+-----
+
+
+
+
+### Dlp_service.get_table_data_profile
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_table_data_profile.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_table_data_profile.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_table_data_profile.js`
 
 
 -----
@@ -486,6 +543,23 @@ __Usage:__
 
 
 `node packages/google-privacy-dlp/samples/generated/v2/dlp_service.inspect_content.js`
+
+
+-----
+
+
+
+
+### Dlp_service.list_column_data_profiles
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_column_data_profiles.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_column_data_profiles.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_column_data_profiles.js`
 
 
 -----
@@ -595,6 +669,23 @@ __Usage:__
 
 
 
+### Dlp_service.list_project_data_profiles
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_project_data_profiles.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_project_data_profiles.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_project_data_profiles.js`
+
+
+-----
+
+
+
+
 ### Dlp_service.list_stored_info_types
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_stored_info_types.js).
@@ -605,6 +696,23 @@ __Usage:__
 
 
 `node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_stored_info_types.js`
+
+
+-----
+
+
+
+
+### Dlp_service.list_table_data_profiles
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_table_data_profiles.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_table_data_profiles.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_table_data_profiles.js`
 
 
 -----
