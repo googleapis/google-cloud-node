@@ -3857,10 +3857,6 @@ class File extends ServiceObject<File, FileMetadata> {
       options
     );
 
-    if (metadata.retention !== undefined) {
-      options.overrideUnlockedRetention = true;
-    }
-
     super
       .setMetadata(metadata, options)
       .then(resp => cb!(null, ...resp))

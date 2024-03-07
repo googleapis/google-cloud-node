@@ -1648,7 +1648,10 @@ describe('storage', function () {
 
     it('should disable object retention on the file', async () => {
       const file = new File(objectRetentionBucket, fileName);
-      const [metadata] = await file.setMetadata({retention: null});
+      const [metadata] = await file.setMetadata(
+        {retention: null},
+        {overrideUnlockedRetention: true}
+      );
       assert.strictEqual(metadata.retention, undefined);
     });
   });
