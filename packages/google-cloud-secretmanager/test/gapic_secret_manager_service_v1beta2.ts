@@ -25,7 +25,7 @@ import * as secretmanagerserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf} from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -127,18 +127,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.SecretManagerServiceClient', () => {
+describe('v1beta2.SecretManagerServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient();
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'secretmanager.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient();
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -150,7 +150,8 @@ describe('v1.SecretManagerServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          secretmanagerserviceModule.v1.SecretManagerServiceClient.servicePath;
+          secretmanagerserviceModule.v1beta2.SecretManagerServiceClient
+            .servicePath;
         assert.strictEqual(servicePath, 'secretmanager.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -159,7 +160,8 @@ describe('v1.SecretManagerServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          secretmanagerserviceModule.v1.SecretManagerServiceClient.apiEndpoint;
+          secretmanagerserviceModule.v1beta2.SecretManagerServiceClient
+            .apiEndpoint;
         assert.strictEqual(apiEndpoint, 'secretmanager.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -167,7 +169,7 @@ describe('v1.SecretManagerServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           universeDomain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -176,7 +178,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           universe_domain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -184,7 +186,7 @@ describe('v1.SecretManagerServiceClient', () => {
     });
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -193,20 +195,20 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('has port', () => {
       const port =
-        secretmanagerserviceModule.v1.SecretManagerServiceClient.port;
+        secretmanagerserviceModule.v1beta2.SecretManagerServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient();
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           fallback: true,
         });
       assert(client);
@@ -214,7 +216,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -225,7 +227,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('has close method for the initialized client', done => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -238,7 +240,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -251,7 +253,7 @@ describe('v1.SecretManagerServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -264,7 +266,7 @@ describe('v1.SecretManagerServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -288,22 +290,22 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('createSecret', () => {
     it('invokes createSecret without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.CreateSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.CreateSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.CreateSecretRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.Secret()
+        new protos.google.cloud.secretmanager.v1beta2.Secret()
       );
       client.innerApiCalls.createSecret = stubSimpleCall(expectedResponse);
       const [response] = await client.createSecret(request);
@@ -320,22 +322,22 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes createSecret without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.CreateSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.CreateSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.CreateSecretRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.Secret()
+        new protos.google.cloud.secretmanager.v1beta2.Secret()
       );
       client.innerApiCalls.createSecret =
         stubSimpleCallWithCallback(expectedResponse);
@@ -344,7 +346,7 @@ describe('v1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1.ISecret | null
+            result?: protos.google.cloud.secretmanager.v1beta2.ISecret | null
           ) => {
             if (err) {
               reject(err);
@@ -368,16 +370,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes createSecret with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.CreateSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.CreateSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.CreateSecretRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -400,16 +402,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes createSecret with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.CreateSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.CreateSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.CreateSecretRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -422,22 +424,22 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('addSecretVersion', () => {
     it('invokes addSecretVersion without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.AddSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.AddSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.SecretVersion()
+        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
       );
       client.innerApiCalls.addSecretVersion = stubSimpleCall(expectedResponse);
       const [response] = await client.addSecretVersion(request);
@@ -454,22 +456,22 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes addSecretVersion without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.AddSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.AddSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.SecretVersion()
+        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
       );
       client.innerApiCalls.addSecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -478,7 +480,7 @@ describe('v1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1.ISecretVersion | null
+            result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion | null
           ) => {
             if (err) {
               reject(err);
@@ -502,16 +504,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes addSecretVersion with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.AddSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.AddSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -534,16 +536,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes addSecretVersion with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.AddSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.AddSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -556,22 +558,22 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('getSecret', () => {
     it('invokes getSecret without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.GetSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.GetSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.GetSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.Secret()
+        new protos.google.cloud.secretmanager.v1beta2.Secret()
       );
       client.innerApiCalls.getSecret = stubSimpleCall(expectedResponse);
       const [response] = await client.getSecret(request);
@@ -588,22 +590,22 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes getSecret without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.GetSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.GetSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.GetSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.Secret()
+        new protos.google.cloud.secretmanager.v1beta2.Secret()
       );
       client.innerApiCalls.getSecret =
         stubSimpleCallWithCallback(expectedResponse);
@@ -612,7 +614,7 @@ describe('v1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1.ISecret | null
+            result?: protos.google.cloud.secretmanager.v1beta2.ISecret | null
           ) => {
             if (err) {
               reject(err);
@@ -636,16 +638,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes getSecret with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.GetSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.GetSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.GetSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -665,16 +667,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes getSecret with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.GetSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.GetSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.GetSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -687,23 +689,23 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('updateSecret', () => {
     it('invokes updateSecret without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.UpdateSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
       );
       request.secret ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.UpdateSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.UpdateSecretRequest',
         ['secret', 'name']
       );
       request.secret.name = defaultValue1;
       const expectedHeaderRequestParams = `secret.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.Secret()
+        new protos.google.cloud.secretmanager.v1beta2.Secret()
       );
       client.innerApiCalls.updateSecret = stubSimpleCall(expectedResponse);
       const [response] = await client.updateSecret(request);
@@ -720,23 +722,23 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes updateSecret without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.UpdateSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
       );
       request.secret ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.UpdateSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.UpdateSecretRequest',
         ['secret', 'name']
       );
       request.secret.name = defaultValue1;
       const expectedHeaderRequestParams = `secret.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.Secret()
+        new protos.google.cloud.secretmanager.v1beta2.Secret()
       );
       client.innerApiCalls.updateSecret =
         stubSimpleCallWithCallback(expectedResponse);
@@ -745,7 +747,7 @@ describe('v1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1.ISecret | null
+            result?: protos.google.cloud.secretmanager.v1beta2.ISecret | null
           ) => {
             if (err) {
               reject(err);
@@ -769,17 +771,17 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes updateSecret with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.UpdateSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
       );
       request.secret ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.UpdateSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.UpdateSecretRequest',
         ['secret', 'name']
       );
       request.secret.name = defaultValue1;
@@ -802,17 +804,17 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes updateSecret with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.UpdateSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
       );
       request.secret ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.UpdateSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.UpdateSecretRequest',
         ['secret', 'name']
       );
       request.secret.name = defaultValue1;
@@ -825,16 +827,16 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('deleteSecret', () => {
     it('invokes deleteSecret without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DeleteSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DeleteSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.DeleteSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -857,16 +859,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes deleteSecret without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DeleteSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DeleteSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.DeleteSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -905,16 +907,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes deleteSecret with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DeleteSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DeleteSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.DeleteSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -937,16 +939,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes deleteSecret with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DeleteSecretRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DeleteSecretRequest',
+        '.google.cloud.secretmanager.v1beta2.DeleteSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -959,22 +961,22 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('getSecretVersion', () => {
     it('invokes getSecretVersion without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.GetSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.GetSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.SecretVersion()
+        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
       );
       client.innerApiCalls.getSecretVersion = stubSimpleCall(expectedResponse);
       const [response] = await client.getSecretVersion(request);
@@ -991,22 +993,22 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes getSecretVersion without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.GetSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.GetSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.SecretVersion()
+        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
       );
       client.innerApiCalls.getSecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1015,7 +1017,7 @@ describe('v1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1.ISecretVersion | null
+            result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion | null
           ) => {
             if (err) {
               reject(err);
@@ -1039,16 +1041,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes getSecretVersion with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.GetSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.GetSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1071,16 +1073,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes getSecretVersion with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.GetSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.GetSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1093,22 +1095,22 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('accessSecretVersion', () => {
     it('invokes accessSecretVersion without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.AccessSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.AccessSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.AccessSecretVersionResponse()
+        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse()
       );
       client.innerApiCalls.accessSecretVersion =
         stubSimpleCall(expectedResponse);
@@ -1126,22 +1128,22 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes accessSecretVersion without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.AccessSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.AccessSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.AccessSecretVersionResponse()
+        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse()
       );
       client.innerApiCalls.accessSecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1150,7 +1152,7 @@ describe('v1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1.IAccessSecretVersionResponse | null
+            result?: protos.google.cloud.secretmanager.v1beta2.IAccessSecretVersionResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -1174,16 +1176,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes accessSecretVersion with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.AccessSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.AccessSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1206,16 +1208,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes accessSecretVersion with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.AccessSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.AccessSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1228,22 +1230,22 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('disableSecretVersion', () => {
     it('invokes disableSecretVersion without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DisableSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DisableSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.SecretVersion()
+        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
       );
       client.innerApiCalls.disableSecretVersion =
         stubSimpleCall(expectedResponse);
@@ -1261,22 +1263,22 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes disableSecretVersion without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DisableSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DisableSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.SecretVersion()
+        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
       );
       client.innerApiCalls.disableSecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1285,7 +1287,7 @@ describe('v1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1.ISecretVersion | null
+            result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion | null
           ) => {
             if (err) {
               reject(err);
@@ -1309,16 +1311,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes disableSecretVersion with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DisableSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DisableSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1341,16 +1343,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes disableSecretVersion with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DisableSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DisableSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1363,22 +1365,22 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('enableSecretVersion', () => {
     it('invokes enableSecretVersion without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.EnableSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.EnableSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.SecretVersion()
+        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
       );
       client.innerApiCalls.enableSecretVersion =
         stubSimpleCall(expectedResponse);
@@ -1396,22 +1398,22 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes enableSecretVersion without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.EnableSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.EnableSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.SecretVersion()
+        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
       );
       client.innerApiCalls.enableSecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1420,7 +1422,7 @@ describe('v1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1.ISecretVersion | null
+            result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion | null
           ) => {
             if (err) {
               reject(err);
@@ -1444,16 +1446,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes enableSecretVersion with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.EnableSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.EnableSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1476,16 +1478,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes enableSecretVersion with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.EnableSecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.EnableSecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1498,22 +1500,22 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('destroySecretVersion', () => {
     it('invokes destroySecretVersion without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DestroySecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DestroySecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.SecretVersion()
+        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
       );
       client.innerApiCalls.destroySecretVersion =
         stubSimpleCall(expectedResponse);
@@ -1531,22 +1533,22 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes destroySecretVersion without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DestroySecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DestroySecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.SecretVersion()
+        new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
       );
       client.innerApiCalls.destroySecretVersion =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1555,7 +1557,7 @@ describe('v1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1.ISecretVersion | null
+            result?: protos.google.cloud.secretmanager.v1beta2.ISecretVersion | null
           ) => {
             if (err) {
               reject(err);
@@ -1579,16 +1581,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes destroySecretVersion with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DestroySecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DestroySecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1611,16 +1613,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes destroySecretVersion with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.DestroySecretVersionRequest()
+        new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.DestroySecretVersionRequest',
+        '.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1633,7 +1635,7 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1665,7 +1667,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1713,7 +1715,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1745,7 +1747,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1767,7 +1769,7 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1799,7 +1801,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1847,7 +1849,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1879,7 +1881,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1901,7 +1903,7 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1934,7 +1936,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1982,7 +1984,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2014,7 +2016,7 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2036,29 +2038,29 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('listSecrets', () => {
     it('invokes listSecrets without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
       ];
       client.innerApiCalls.listSecrets = stubSimpleCall(expectedResponse);
@@ -2076,29 +2078,29 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes listSecrets without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
       ];
       client.innerApiCalls.listSecrets =
@@ -2108,7 +2110,7 @@ describe('v1.SecretManagerServiceClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.secretmanager.v1.ISecret[] | null
+            result?: protos.google.cloud.secretmanager.v1beta2.ISecret[] | null
           ) => {
             if (err) {
               reject(err);
@@ -2132,16 +2134,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes listSecrets with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2164,39 +2166,40 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes listSecretsStream without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
       ];
       client.descriptors.page.listSecrets.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listSecretsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.secretmanager.v1.Secret[] = [];
+        const responses: protos.google.cloud.secretmanager.v1beta2.Secret[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.cloud.secretmanager.v1.Secret) => {
+          (response: protos.google.cloud.secretmanager.v1beta2.Secret) => {
             responses.push(response);
           }
         );
@@ -2225,16 +2228,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes listSecretsStream with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2246,10 +2249,11 @@ describe('v1.SecretManagerServiceClient', () => {
       );
       const stream = client.listSecretsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.secretmanager.v1.Secret[] = [];
+        const responses: protos.google.cloud.secretmanager.v1beta2.Secret[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.cloud.secretmanager.v1.Secret) => {
+          (response: protos.google.cloud.secretmanager.v1beta2.Secret) => {
             responses.push(response);
           }
         );
@@ -2277,34 +2281,34 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('uses async iteration with listSecrets without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.Secret()
+          new protos.google.cloud.secretmanager.v1beta2.Secret()
         ),
       ];
       client.descriptors.page.listSecrets.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.secretmanager.v1.ISecret[] = [];
+      const responses: protos.google.cloud.secretmanager.v1beta2.ISecret[] = [];
       const iterable = client.listSecretsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2327,16 +2331,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('uses async iteration with listSecrets with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2348,7 +2352,8 @@ describe('v1.SecretManagerServiceClient', () => {
       );
       const iterable = client.listSecretsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.secretmanager.v1.ISecret[] = [];
+        const responses: protos.google.cloud.secretmanager.v1beta2.ISecret[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2372,29 +2377,29 @@ describe('v1.SecretManagerServiceClient', () => {
   describe('listSecretVersions', () => {
     it('invokes listSecretVersions without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
       ];
       client.innerApiCalls.listSecretVersions =
@@ -2413,29 +2418,29 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes listSecretVersions without error using callback', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
       ];
       client.innerApiCalls.listSecretVersions =
@@ -2446,7 +2451,7 @@ describe('v1.SecretManagerServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.secretmanager.v1.ISecretVersion[]
+              | protos.google.cloud.secretmanager.v1beta2.ISecretVersion[]
               | null
           ) => {
             if (err) {
@@ -2471,16 +2476,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes listSecretVersions with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2503,40 +2508,42 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes listSecretVersionsStream without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
       ];
       client.descriptors.page.listSecretVersions.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listSecretVersionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.secretmanager.v1.SecretVersion[] =
+        const responses: protos.google.cloud.secretmanager.v1beta2.SecretVersion[] =
           [];
         stream.on(
           'data',
-          (response: protos.google.cloud.secretmanager.v1.SecretVersion) => {
+          (
+            response: protos.google.cloud.secretmanager.v1beta2.SecretVersion
+          ) => {
             responses.push(response);
           }
         );
@@ -2565,16 +2572,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('invokes listSecretVersionsStream with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2584,11 +2591,13 @@ describe('v1.SecretManagerServiceClient', () => {
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.listSecretVersionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.secretmanager.v1.SecretVersion[] =
+        const responses: protos.google.cloud.secretmanager.v1beta2.SecretVersion[] =
           [];
         stream.on(
           'data',
-          (response: protos.google.cloud.secretmanager.v1.SecretVersion) => {
+          (
+            response: protos.google.cloud.secretmanager.v1beta2.SecretVersion
+          ) => {
             responses.push(response);
           }
         );
@@ -2616,34 +2625,34 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('uses async iteration with listSecretVersions without error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
         generateSampleMessage(
-          new protos.google.cloud.secretmanager.v1.SecretVersion()
+          new protos.google.cloud.secretmanager.v1beta2.SecretVersion()
         ),
       ];
       client.descriptors.page.listSecretVersions.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.secretmanager.v1.ISecretVersion[] =
+      const responses: protos.google.cloud.secretmanager.v1beta2.ISecretVersion[] =
         [];
       const iterable = client.listSecretVersionsAsync(request);
       for await (const resource of iterable) {
@@ -2667,16 +2676,16 @@ describe('v1.SecretManagerServiceClient', () => {
 
     it('uses async iteration with listSecretVersions with error', async () => {
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
+        new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        '.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2686,7 +2695,7 @@ describe('v1.SecretManagerServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listSecretVersionsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.secretmanager.v1.ISecretVersion[] =
+        const responses: protos.google.cloud.secretmanager.v1beta2.ISecretVersion[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -2707,6 +2716,209 @@ describe('v1.SecretManagerServiceClient', () => {
       );
     });
   });
+  describe('getLocation', () => {
+    it('invokes getLocation without error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+      const response = await client.getLocation(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes getLocation without error using callback', async () => {
+      const client =
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLocation(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: LocationProtos.google.cloud.location.ILocation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+    });
+    it('invokes getLocation with error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.locationsClient.getLocation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getLocation(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('listLocationsAsync', () => {
+    it('uses async iteration with listLocations without error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+      ];
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+      const iterable = client.listLocationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+    it('uses async iteration with listLocations with error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listLocationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
 
   describe('Path templates', () => {
     describe('project', () => {
@@ -2715,7 +2927,7 @@ describe('v1.SecretManagerServiceClient', () => {
         project: 'projectValue',
       };
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2748,115 +2960,312 @@ describe('v1.SecretManagerServiceClient', () => {
       });
     });
 
-    describe('secret', () => {
-      const fakePath = '/rendered/path/secret';
+    describe('projectLocationSecret', () => {
+      const fakePath = '/rendered/path/projectLocationSecret';
       const expectedParameters = {
         project: 'projectValue',
+        location: 'locationValue',
         secret: 'secretValue',
       };
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
-      client.pathTemplates.secretPathTemplate.render = sinon
+      client.pathTemplates.projectLocationSecretPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.secretPathTemplate.match = sinon
+      client.pathTemplates.projectLocationSecretPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('secretPath', () => {
-        const result = client.secretPath('projectValue', 'secretValue');
+      it('projectLocationSecretPath', () => {
+        const result = client.projectLocationSecretPath(
+          'projectValue',
+          'locationValue',
+          'secretValue'
+        );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.secretPathTemplate.render as SinonStub)
+          (
+            client.pathTemplates.projectLocationSecretPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromSecretName', () => {
-        const result = client.matchProjectFromSecretName(fakePath);
+      it('matchProjectFromProjectLocationSecretName', () => {
+        const result =
+          client.matchProjectFromProjectLocationSecretName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.secretPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.projectLocationSecretPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchSecretFromSecretName', () => {
-        const result = client.matchSecretFromSecretName(fakePath);
+      it('matchLocationFromProjectLocationSecretName', () => {
+        const result =
+          client.matchLocationFromProjectLocationSecretName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSecretFromProjectLocationSecretName', () => {
+        const result =
+          client.matchSecretFromProjectLocationSecretName(fakePath);
         assert.strictEqual(result, 'secretValue');
         assert(
-          (client.pathTemplates.secretPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.projectLocationSecretPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
     });
 
-    describe('secretVersion', () => {
-      const fakePath = '/rendered/path/secretVersion';
+    describe('projectLocationSecretSecretVersion', () => {
+      const fakePath = '/rendered/path/projectLocationSecretSecretVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        secret: 'secretValue',
+        secret_version: 'secretVersionValue',
+      };
+      const client =
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationSecretSecretVersionPath', () => {
+        const result = client.projectLocationSecretSecretVersionPath(
+          'projectValue',
+          'locationValue',
+          'secretValue',
+          'secretVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchProjectFromProjectLocationSecretSecretVersionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchLocationFromProjectLocationSecretSecretVersionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSecretFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretFromProjectLocationSecretSecretVersionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'secretValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSecretVersionFromProjectLocationSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretVersionFromProjectLocationSecretSecretVersionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'secretVersionValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectSecret', () => {
+      const fakePath = '/rendered/path/projectSecret';
+      const expectedParameters = {
+        project: 'projectValue',
+        secret: 'secretValue',
+      };
+      const client =
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectSecretPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectSecretPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectSecretPath', () => {
+        const result = client.projectSecretPath('projectValue', 'secretValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectSecretPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectSecretName', () => {
+        const result = client.matchProjectFromProjectSecretName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectSecretPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSecretFromProjectSecretName', () => {
+        const result = client.matchSecretFromProjectSecretName(fakePath);
+        assert.strictEqual(result, 'secretValue');
+        assert(
+          (client.pathTemplates.projectSecretPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectSecretSecretVersion', () => {
+      const fakePath = '/rendered/path/projectSecretSecretVersion';
       const expectedParameters = {
         project: 'projectValue',
         secret: 'secretValue',
         secret_version: 'secretVersionValue',
       };
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
-      client.pathTemplates.secretVersionPathTemplate.render = sinon
+      client.pathTemplates.projectSecretSecretVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.secretVersionPathTemplate.match = sinon
+      client.pathTemplates.projectSecretSecretVersionPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('secretVersionPath', () => {
-        const result = client.secretVersionPath(
+      it('projectSecretSecretVersionPath', () => {
+        const result = client.projectSecretSecretVersionPath(
           'projectValue',
           'secretValue',
           'secretVersionValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.secretVersionPathTemplate.render as SinonStub)
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchProjectFromSecretVersionName', () => {
-        const result = client.matchProjectFromSecretVersionName(fakePath);
+      it('matchProjectFromProjectSecretSecretVersionName', () => {
+        const result =
+          client.matchProjectFromProjectSecretSecretVersionName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchSecretFromSecretVersionName', () => {
-        const result = client.matchSecretFromSecretVersionName(fakePath);
+      it('matchSecretFromProjectSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretFromProjectSecretSecretVersionName(fakePath);
         assert.strictEqual(result, 'secretValue');
         assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchSecretVersionFromSecretVersionName', () => {
-        const result = client.matchSecretVersionFromSecretVersionName(fakePath);
+      it('matchSecretVersionFromProjectSecretSecretVersionName', () => {
+        const result =
+          client.matchSecretVersionFromProjectSecretSecretVersionName(fakePath);
         assert.strictEqual(result, 'secretVersionValue');
         assert(
-          (client.pathTemplates.secretVersionPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.projectSecretSecretVersionPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2870,7 +3279,7 @@ describe('v1.SecretManagerServiceClient', () => {
         topic: 'topicValue',
       };
       const client =
-        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+        new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
