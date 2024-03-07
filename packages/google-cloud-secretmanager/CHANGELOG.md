@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.1.0...secret-manager-v5.2.0) (2024-03-07)
+
+
+### Features
+
+* [secretmanager] clients for SecretManager API v1beta2 ([#5117](https://github.com/googleapis/google-cloud-node/issues/5117)) ([2c2c42b](https://github.com/googleapis/google-cloud-node/commit/2c2c42b725f4504651a372b513258fac88c5b5f6))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.0.1...secret-manager-v5.1.0) (2024-02-09)
 
 

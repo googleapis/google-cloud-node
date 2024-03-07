@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/meet-v0.1.0...meet-v0.1.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* [Many APIs] Add client library version to headers ([#5077](https://github.com/googleapis/google-cloud-node/issues/5077)) ([f57c139](https://github.com/googleapis/google-cloud-node/commit/f57c1394819fc98bc12ac2fed6e245e34d395fdc))
+
 ## 0.1.0 (2024-02-27)
 
 

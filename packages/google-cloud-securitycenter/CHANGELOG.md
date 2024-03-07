@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [8.4.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.3.0...security-center-v8.4.0) (2024-03-07)
+
+
+### Features
+
+* [securitycenter] Added security center api V2 client library ([#5073](https://github.com/googleapis/google-cloud-node/issues/5073)) ([b4717ef](https://github.com/googleapis/google-cloud-node/commit/b4717ef3fce7029c95a89440c88992334b49e173))
+
 ## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.2.0...security-center-v8.3.0) (2024-02-22)
 
 
