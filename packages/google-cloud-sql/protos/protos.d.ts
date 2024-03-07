@@ -32526,7 +32526,9 @@ export namespace google {
                         INCOMPATIBLE_DATABASE_MINOR_VERSION = 37,
                         SOURCE_MAX_SUBSCRIPTIONS = 38,
                         UNABLE_TO_VERIFY_DEFINERS = 39,
-                        SUBSCRIPTION_CALCULATION_STATUS = 40
+                        SUBSCRIPTION_CALCULATION_STATUS = 40,
+                        PG_SUBSCRIPTION_COUNT = 41,
+                        PG_SYNC_PARALLEL_LEVEL = 42
                     }
                 }
 
