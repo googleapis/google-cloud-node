@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.8.0](https://github.com/googleapis/nodejs-storage/compare/v7.7.0...v7.8.0) (2024-03-07)
+
+
+### Features
+
+* Add includeFoldersAsPrefixes for managed folders ([#2413](https://github.com/googleapis/nodejs-storage/issues/2413)) ([3044d3c](https://github.com/googleapis/nodejs-storage/commit/3044d3cfb1b4a24f07fd6ec29e3d20d5818c4ca3))
+* Base TPC Support ([#2397](https://github.com/googleapis/nodejs-storage/issues/2397)) ([a3f4891](https://github.com/googleapis/nodejs-storage/commit/a3f4891ee60e57cc19929489cae6110b07955216))
+
+
+### Bug Fixes
+
+* Cannot read properties of null (reading length) in stream-shift ([#2422](https://github.com/googleapis/nodejs-storage/issues/2422)) ([11ebe2b](https://github.com/googleapis/nodejs-storage/commit/11ebe2bf905f8c15101446ecfe5a2d7c6005d0c3))
+* Do not automatically set overrideUnlockedRetention ([#2421](https://github.com/googleapis/nodejs-storage/issues/2421)) ([c781bdc](https://github.com/googleapis/nodejs-storage/commit/c781bdcd89f63b22af1c491a6e517e110331d4ca))
+
 ## [7.7.0](https://github.com/googleapis/nodejs-storage/compare/v7.6.0...v7.7.0) (2023-11-29)
 
 
