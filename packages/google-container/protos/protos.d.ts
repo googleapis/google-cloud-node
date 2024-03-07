@@ -7098,6 +7098,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredInTransitEncryptionConfig */
                 desiredInTransitEncryptionConfig?: (google.container.v1.InTransitEncryptionConfig|keyof typeof google.container.v1.InTransitEncryptionConfig|null);
+
+                /** ClusterUpdate desiredEnableCiliumClusterwideNetworkPolicy */
+                desiredEnableCiliumClusterwideNetworkPolicy?: (boolean|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -7262,6 +7265,9 @@ export namespace google {
                 /** ClusterUpdate desiredInTransitEncryptionConfig. */
                 public desiredInTransitEncryptionConfig?: (google.container.v1.InTransitEncryptionConfig|keyof typeof google.container.v1.InTransitEncryptionConfig|null);
 
+                /** ClusterUpdate desiredEnableCiliumClusterwideNetworkPolicy. */
+                public desiredEnableCiliumClusterwideNetworkPolicy?: (boolean|null);
+
                 /** ClusterUpdate _desiredEnablePrivateEndpoint. */
                 public _desiredEnablePrivateEndpoint?: "desiredEnablePrivateEndpoint";
 
@@ -7270,6 +7276,9 @@ export namespace google {
 
                 /** ClusterUpdate _desiredInTransitEncryptionConfig. */
                 public _desiredInTransitEncryptionConfig?: "desiredInTransitEncryptionConfig";
+
+                /** ClusterUpdate _desiredEnableCiliumClusterwideNetworkPolicy. */
+                public _desiredEnableCiliumClusterwideNetworkPolicy?: "desiredEnableCiliumClusterwideNetworkPolicy";
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -15544,6 +15553,9 @@ export namespace google {
 
                 /** NetworkConfig inTransitEncryptionConfig */
                 inTransitEncryptionConfig?: (google.container.v1.InTransitEncryptionConfig|keyof typeof google.container.v1.InTransitEncryptionConfig|null);
+
+                /** NetworkConfig enableCiliumClusterwideNetworkPolicy */
+                enableCiliumClusterwideNetworkPolicy?: (boolean|null);
             }
 
             /** Represents a NetworkConfig. */
@@ -15597,11 +15609,17 @@ export namespace google {
                 /** NetworkConfig inTransitEncryptionConfig. */
                 public inTransitEncryptionConfig?: (google.container.v1.InTransitEncryptionConfig|keyof typeof google.container.v1.InTransitEncryptionConfig|null);
 
+                /** NetworkConfig enableCiliumClusterwideNetworkPolicy. */
+                public enableCiliumClusterwideNetworkPolicy?: (boolean|null);
+
                 /** NetworkConfig _enableFqdnNetworkPolicy. */
                 public _enableFqdnNetworkPolicy?: "enableFqdnNetworkPolicy";
 
                 /** NetworkConfig _inTransitEncryptionConfig. */
                 public _inTransitEncryptionConfig?: "inTransitEncryptionConfig";
+
+                /** NetworkConfig _enableCiliumClusterwideNetworkPolicy. */
+                public _enableCiliumClusterwideNetworkPolicy?: "enableCiliumClusterwideNetworkPolicy";
 
                 /**
                  * Creates a new NetworkConfig instance using the specified properties.
