@@ -6259,15 +6259,16 @@ export class NetAppClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent value
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value to use if there are additional
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value to use if there are additional
    *   results to retrieve for this list request.
-   * @param {string} request.orderBy
-   *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
-   * @param {string} request.filter
-   *   List filter.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "name", "name desc" or ""
+   *   (unsorted).
+   * @param {string} [request.filter]
+   *   Optional. List filter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6361,15 +6362,16 @@ export class NetAppClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent value
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value to use if there are additional
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value to use if there are additional
    *   results to retrieve for this list request.
-   * @param {string} request.orderBy
-   *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
-   * @param {string} request.filter
-   *   List filter.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "name", "name desc" or ""
+   *   (unsorted).
+   * @param {string} [request.filter]
+   *   Optional. List filter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -6411,15 +6413,16 @@ export class NetAppClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent value
-   * @param {number} request.pageSize
-   *   The maximum number of items to return.
-   * @param {string} request.pageToken
-   *   The next_page_token value to use if there are additional
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value to use if there are additional
    *   results to retrieve for this list request.
-   * @param {string} request.orderBy
-   *   Sort results. Supported values are "name", "name desc" or "" (unsorted).
-   * @param {string} request.filter
-   *   List filter.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "name", "name desc" or ""
+   *   (unsorted).
+   * @param {string} [request.filter]
+   *   Optional. List filter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
