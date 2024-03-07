@@ -162,6 +162,7 @@ export interface GetFilesOptions {
   autoPaginate?: boolean;
   delimiter?: string;
   endOffset?: string;
+  includeFoldersAsPrefixes?: boolean;
   includeTrailingDelimiter?: boolean;
   prefix?: string;
   matchGlob?: string;
@@ -2608,6 +2609,10 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * @property {string} [endOffset] Filter results to objects whose names are
    * lexicographically before endOffset. If startOffset is also set, the objects
    * listed have names between startOffset (inclusive) and endOffset (exclusive).
+   * @property {boolean} [includeFoldersAsPrefixes] If true, includes folders and
+   * managed folders in the set of prefixes returned by the query. Only applicable if
+   * delimiter is set to / and autoPaginate is set to false.
+   * See: https://cloud.google.com/storage/docs/managed-folders
    * @property {boolean} [includeTrailingDelimiter] If true, objects that end in
    * exactly one instance of delimiter have their metadata included in items[]
    * in addition to the relevant part of the object name appearing in prefixes[].
@@ -2648,6 +2653,10 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    * @param {string} [query.endOffset] Filter results to objects whose names are
    * lexicographically before endOffset. If startOffset is also set, the objects
    * listed have names between startOffset (inclusive) and endOffset (exclusive).
+   * @param {boolean} [query.includeFoldersAsPrefixes] If true, includes folders and
+   * managed folders in the set of prefixes returned by the query. Only applicable if
+   * delimiter is set to / and autoPaginate is set to false.
+   * See: https://cloud.google.com/storage/docs/managed-folders
    * @param {boolean} [query.includeTrailingDelimiter] If true, objects that end in
    * exactly one instance of delimiter have their metadata included in items[]
    * in addition to the relevant part of the object name appearing in prefixes[].

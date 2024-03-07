@@ -1772,10 +1772,25 @@ describe('Bucket', () => {
     it('should get files with a query', done => {
       const token = 'next-page-token';
       bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.deepStrictEqual(reqOpts.qs, {maxResults: 5, pageToken: token});
+        assert.deepStrictEqual(reqOpts.qs, {
+          maxResults: 5,
+          pageToken: token,
+          includeFoldersAsPrefixes: true,
+          delimiter: '/',
+          autoPaginate: false,
+        });
         done();
       };
-      bucket.getFiles({maxResults: 5, pageToken: token}, util.noop);
+      bucket.getFiles(
+        {
+          maxResults: 5,
+          pageToken: token,
+          includeFoldersAsPrefixes: true,
+          delimiter: '/',
+          autoPaginate: false,
+        },
+        util.noop
+      );
     });
 
     it('should return nextQuery if more results exist', () => {
