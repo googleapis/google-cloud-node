@@ -1454,6 +1454,15 @@ export namespace google {
 
                     /** Step cloudRunRevision */
                     cloudRunRevision?: (google.cloud.networkmanagement.v1.ICloudRunRevisionInfo|null);
+
+                    /** Step proxyConnection */
+                    proxyConnection?: (google.cloud.networkmanagement.v1.IProxyConnectionInfo|null);
+
+                    /** Step loadBalancerBackendInfo */
+                    loadBalancerBackendInfo?: (google.cloud.networkmanagement.v1.ILoadBalancerBackendInfo|null);
+
+                    /** Step storageBucket */
+                    storageBucket?: (google.cloud.networkmanagement.v1.IStorageBucketInfo|null);
                 }
 
                 /** Represents a Step. */
@@ -1537,8 +1546,17 @@ export namespace google {
                     /** Step cloudRunRevision. */
                     public cloudRunRevision?: (google.cloud.networkmanagement.v1.ICloudRunRevisionInfo|null);
 
+                    /** Step proxyConnection. */
+                    public proxyConnection?: (google.cloud.networkmanagement.v1.IProxyConnectionInfo|null);
+
+                    /** Step loadBalancerBackendInfo. */
+                    public loadBalancerBackendInfo?: (google.cloud.networkmanagement.v1.ILoadBalancerBackendInfo|null);
+
+                    /** Step storageBucket. */
+                    public storageBucket?: (google.cloud.networkmanagement.v1.IStorageBucketInfo|null);
+
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -1636,6 +1654,7 @@ export namespace google {
                         APPLY_EGRESS_FIREWALL_RULE = 5,
                         APPLY_ROUTE = 6,
                         APPLY_FORWARDING_RULE = 7,
+                        ANALYZE_LOAD_BALANCER_BACKEND = 28,
                         SPOOFING_APPROVED = 8,
                         ARRIVE_AT_INSTANCE = 9,
                         ARRIVE_AT_INTERNAL_LOAD_BALANCER = 10,
@@ -3356,7 +3375,8 @@ export namespace google {
                         PSC_PUBLISHED_SERVICE = 6,
                         PSC_GOOGLE_API = 7,
                         PSC_VPC_SC = 8,
-                        SERVERLESS_NEG = 9
+                        SERVERLESS_NEG = 9,
+                        STORAGE_BUCKET = 10
                     }
                 }
 
@@ -4463,6 +4483,326 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ProxyConnectionInfo. */
+                interface IProxyConnectionInfo {
+
+                    /** ProxyConnectionInfo protocol */
+                    protocol?: (string|null);
+
+                    /** ProxyConnectionInfo oldSourceIp */
+                    oldSourceIp?: (string|null);
+
+                    /** ProxyConnectionInfo newSourceIp */
+                    newSourceIp?: (string|null);
+
+                    /** ProxyConnectionInfo oldDestinationIp */
+                    oldDestinationIp?: (string|null);
+
+                    /** ProxyConnectionInfo newDestinationIp */
+                    newDestinationIp?: (string|null);
+
+                    /** ProxyConnectionInfo oldSourcePort */
+                    oldSourcePort?: (number|null);
+
+                    /** ProxyConnectionInfo newSourcePort */
+                    newSourcePort?: (number|null);
+
+                    /** ProxyConnectionInfo oldDestinationPort */
+                    oldDestinationPort?: (number|null);
+
+                    /** ProxyConnectionInfo newDestinationPort */
+                    newDestinationPort?: (number|null);
+
+                    /** ProxyConnectionInfo subnetUri */
+                    subnetUri?: (string|null);
+
+                    /** ProxyConnectionInfo networkUri */
+                    networkUri?: (string|null);
+                }
+
+                /** Represents a ProxyConnectionInfo. */
+                class ProxyConnectionInfo implements IProxyConnectionInfo {
+
+                    /**
+                     * Constructs a new ProxyConnectionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IProxyConnectionInfo);
+
+                    /** ProxyConnectionInfo protocol. */
+                    public protocol: string;
+
+                    /** ProxyConnectionInfo oldSourceIp. */
+                    public oldSourceIp: string;
+
+                    /** ProxyConnectionInfo newSourceIp. */
+                    public newSourceIp: string;
+
+                    /** ProxyConnectionInfo oldDestinationIp. */
+                    public oldDestinationIp: string;
+
+                    /** ProxyConnectionInfo newDestinationIp. */
+                    public newDestinationIp: string;
+
+                    /** ProxyConnectionInfo oldSourcePort. */
+                    public oldSourcePort: number;
+
+                    /** ProxyConnectionInfo newSourcePort. */
+                    public newSourcePort: number;
+
+                    /** ProxyConnectionInfo oldDestinationPort. */
+                    public oldDestinationPort: number;
+
+                    /** ProxyConnectionInfo newDestinationPort. */
+                    public newDestinationPort: number;
+
+                    /** ProxyConnectionInfo subnetUri. */
+                    public subnetUri: string;
+
+                    /** ProxyConnectionInfo networkUri. */
+                    public networkUri: string;
+
+                    /**
+                     * Creates a new ProxyConnectionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProxyConnectionInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IProxyConnectionInfo): google.cloud.networkmanagement.v1.ProxyConnectionInfo;
+
+                    /**
+                     * Encodes the specified ProxyConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.ProxyConnectionInfo.verify|verify} messages.
+                     * @param message ProxyConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IProxyConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProxyConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.ProxyConnectionInfo.verify|verify} messages.
+                     * @param message ProxyConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IProxyConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProxyConnectionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProxyConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.ProxyConnectionInfo;
+
+                    /**
+                     * Decodes a ProxyConnectionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProxyConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.ProxyConnectionInfo;
+
+                    /**
+                     * Verifies a ProxyConnectionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProxyConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProxyConnectionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.ProxyConnectionInfo;
+
+                    /**
+                     * Creates a plain object from a ProxyConnectionInfo message. Also converts values to other types if specified.
+                     * @param message ProxyConnectionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.ProxyConnectionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProxyConnectionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProxyConnectionInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LoadBalancerBackendInfo. */
+                interface ILoadBalancerBackendInfo {
+
+                    /** LoadBalancerBackendInfo name */
+                    name?: (string|null);
+
+                    /** LoadBalancerBackendInfo instanceUri */
+                    instanceUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo backendServiceUri */
+                    backendServiceUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo instanceGroupUri */
+                    instanceGroupUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo networkEndpointGroupUri */
+                    networkEndpointGroupUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo backendBucketUri */
+                    backendBucketUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo pscServiceAttachmentUri */
+                    pscServiceAttachmentUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo pscGoogleApiTarget */
+                    pscGoogleApiTarget?: (string|null);
+
+                    /** LoadBalancerBackendInfo healthCheckUri */
+                    healthCheckUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo healthCheckFirewallsConfigState */
+                    healthCheckFirewallsConfigState?: (google.cloud.networkmanagement.v1.LoadBalancerBackendInfo.HealthCheckFirewallsConfigState|keyof typeof google.cloud.networkmanagement.v1.LoadBalancerBackendInfo.HealthCheckFirewallsConfigState|null);
+                }
+
+                /** Represents a LoadBalancerBackendInfo. */
+                class LoadBalancerBackendInfo implements ILoadBalancerBackendInfo {
+
+                    /**
+                     * Constructs a new LoadBalancerBackendInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.ILoadBalancerBackendInfo);
+
+                    /** LoadBalancerBackendInfo name. */
+                    public name: string;
+
+                    /** LoadBalancerBackendInfo instanceUri. */
+                    public instanceUri: string;
+
+                    /** LoadBalancerBackendInfo backendServiceUri. */
+                    public backendServiceUri: string;
+
+                    /** LoadBalancerBackendInfo instanceGroupUri. */
+                    public instanceGroupUri: string;
+
+                    /** LoadBalancerBackendInfo networkEndpointGroupUri. */
+                    public networkEndpointGroupUri: string;
+
+                    /** LoadBalancerBackendInfo backendBucketUri. */
+                    public backendBucketUri: string;
+
+                    /** LoadBalancerBackendInfo pscServiceAttachmentUri. */
+                    public pscServiceAttachmentUri: string;
+
+                    /** LoadBalancerBackendInfo pscGoogleApiTarget. */
+                    public pscGoogleApiTarget: string;
+
+                    /** LoadBalancerBackendInfo healthCheckUri. */
+                    public healthCheckUri: string;
+
+                    /** LoadBalancerBackendInfo healthCheckFirewallsConfigState. */
+                    public healthCheckFirewallsConfigState: (google.cloud.networkmanagement.v1.LoadBalancerBackendInfo.HealthCheckFirewallsConfigState|keyof typeof google.cloud.networkmanagement.v1.LoadBalancerBackendInfo.HealthCheckFirewallsConfigState);
+
+                    /**
+                     * Creates a new LoadBalancerBackendInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LoadBalancerBackendInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.ILoadBalancerBackendInfo): google.cloud.networkmanagement.v1.LoadBalancerBackendInfo;
+
+                    /**
+                     * Encodes the specified LoadBalancerBackendInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.LoadBalancerBackendInfo.verify|verify} messages.
+                     * @param message LoadBalancerBackendInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.ILoadBalancerBackendInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LoadBalancerBackendInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.LoadBalancerBackendInfo.verify|verify} messages.
+                     * @param message LoadBalancerBackendInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.ILoadBalancerBackendInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LoadBalancerBackendInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LoadBalancerBackendInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.LoadBalancerBackendInfo;
+
+                    /**
+                     * Decodes a LoadBalancerBackendInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LoadBalancerBackendInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.LoadBalancerBackendInfo;
+
+                    /**
+                     * Verifies a LoadBalancerBackendInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LoadBalancerBackendInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LoadBalancerBackendInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.LoadBalancerBackendInfo;
+
+                    /**
+                     * Creates a plain object from a LoadBalancerBackendInfo message. Also converts values to other types if specified.
+                     * @param message LoadBalancerBackendInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.LoadBalancerBackendInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LoadBalancerBackendInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LoadBalancerBackendInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace LoadBalancerBackendInfo {
+
+                    /** HealthCheckFirewallsConfigState enum. */
+                    enum HealthCheckFirewallsConfigState {
+                        HEALTH_CHECK_FIREWALLS_CONFIG_STATE_UNSPECIFIED = 0,
+                        FIREWALLS_CONFIGURED = 1,
+                        FIREWALLS_PARTIALLY_CONFIGURED = 2,
+                        FIREWALLS_NOT_CONFIGURED = 3,
+                        FIREWALLS_UNSUPPORTED = 4
+                    }
+                }
+
                 /** LoadBalancerType enum. */
                 enum LoadBalancerType {
                     LOAD_BALANCER_TYPE_UNSPECIFIED = 0,
@@ -4476,6 +4816,103 @@ export namespace google {
                     NETWORK_LOAD_BALANCER = 8,
                     LEGACY_NETWORK_LOAD_BALANCER = 9,
                     TCP_UDP_INTERNAL_LOAD_BALANCER = 10
+                }
+
+                /** Properties of a StorageBucketInfo. */
+                interface IStorageBucketInfo {
+
+                    /** StorageBucketInfo bucket */
+                    bucket?: (string|null);
+                }
+
+                /** Represents a StorageBucketInfo. */
+                class StorageBucketInfo implements IStorageBucketInfo {
+
+                    /**
+                     * Constructs a new StorageBucketInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.IStorageBucketInfo);
+
+                    /** StorageBucketInfo bucket. */
+                    public bucket: string;
+
+                    /**
+                     * Creates a new StorageBucketInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StorageBucketInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.IStorageBucketInfo): google.cloud.networkmanagement.v1.StorageBucketInfo;
+
+                    /**
+                     * Encodes the specified StorageBucketInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.StorageBucketInfo.verify|verify} messages.
+                     * @param message StorageBucketInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.IStorageBucketInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StorageBucketInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.StorageBucketInfo.verify|verify} messages.
+                     * @param message StorageBucketInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.IStorageBucketInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StorageBucketInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StorageBucketInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.StorageBucketInfo;
+
+                    /**
+                     * Decodes a StorageBucketInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StorageBucketInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.StorageBucketInfo;
+
+                    /**
+                     * Verifies a StorageBucketInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StorageBucketInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StorageBucketInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.StorageBucketInfo;
+
+                    /**
+                     * Creates a plain object from a StorageBucketInfo message. Also converts values to other types if specified.
+                     * @param message StorageBucketInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.StorageBucketInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StorageBucketInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StorageBucketInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a ReachabilityService */
@@ -6926,6 +7363,15 @@ export namespace google {
 
                     /** Step cloudRunRevision */
                     cloudRunRevision?: (google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo|null);
+
+                    /** Step proxyConnection */
+                    proxyConnection?: (google.cloud.networkmanagement.v1beta1.IProxyConnectionInfo|null);
+
+                    /** Step loadBalancerBackendInfo */
+                    loadBalancerBackendInfo?: (google.cloud.networkmanagement.v1beta1.ILoadBalancerBackendInfo|null);
+
+                    /** Step storageBucket */
+                    storageBucket?: (google.cloud.networkmanagement.v1beta1.IStorageBucketInfo|null);
                 }
 
                 /** Represents a Step. */
@@ -7009,8 +7455,17 @@ export namespace google {
                     /** Step cloudRunRevision. */
                     public cloudRunRevision?: (google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo|null);
 
+                    /** Step proxyConnection. */
+                    public proxyConnection?: (google.cloud.networkmanagement.v1beta1.IProxyConnectionInfo|null);
+
+                    /** Step loadBalancerBackendInfo. */
+                    public loadBalancerBackendInfo?: (google.cloud.networkmanagement.v1beta1.ILoadBalancerBackendInfo|null);
+
+                    /** Step storageBucket. */
+                    public storageBucket?: (google.cloud.networkmanagement.v1beta1.IStorageBucketInfo|null);
+
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -7108,6 +7563,7 @@ export namespace google {
                         APPLY_EGRESS_FIREWALL_RULE = 5,
                         APPLY_ROUTE = 6,
                         APPLY_FORWARDING_RULE = 7,
+                        ANALYZE_LOAD_BALANCER_BACKEND = 28,
                         SPOOFING_APPROVED = 8,
                         ARRIVE_AT_INSTANCE = 9,
                         ARRIVE_AT_INTERNAL_LOAD_BALANCER = 10,
@@ -8828,7 +9284,8 @@ export namespace google {
                         PSC_PUBLISHED_SERVICE = 6,
                         PSC_GOOGLE_API = 7,
                         PSC_VPC_SC = 8,
-                        SERVERLESS_NEG = 9
+                        SERVERLESS_NEG = 9,
+                        STORAGE_BUCKET = 10
                     }
                 }
 
@@ -9935,6 +10392,326 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ProxyConnectionInfo. */
+                interface IProxyConnectionInfo {
+
+                    /** ProxyConnectionInfo protocol */
+                    protocol?: (string|null);
+
+                    /** ProxyConnectionInfo oldSourceIp */
+                    oldSourceIp?: (string|null);
+
+                    /** ProxyConnectionInfo newSourceIp */
+                    newSourceIp?: (string|null);
+
+                    /** ProxyConnectionInfo oldDestinationIp */
+                    oldDestinationIp?: (string|null);
+
+                    /** ProxyConnectionInfo newDestinationIp */
+                    newDestinationIp?: (string|null);
+
+                    /** ProxyConnectionInfo oldSourcePort */
+                    oldSourcePort?: (number|null);
+
+                    /** ProxyConnectionInfo newSourcePort */
+                    newSourcePort?: (number|null);
+
+                    /** ProxyConnectionInfo oldDestinationPort */
+                    oldDestinationPort?: (number|null);
+
+                    /** ProxyConnectionInfo newDestinationPort */
+                    newDestinationPort?: (number|null);
+
+                    /** ProxyConnectionInfo subnetUri */
+                    subnetUri?: (string|null);
+
+                    /** ProxyConnectionInfo networkUri */
+                    networkUri?: (string|null);
+                }
+
+                /** Represents a ProxyConnectionInfo. */
+                class ProxyConnectionInfo implements IProxyConnectionInfo {
+
+                    /**
+                     * Constructs a new ProxyConnectionInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IProxyConnectionInfo);
+
+                    /** ProxyConnectionInfo protocol. */
+                    public protocol: string;
+
+                    /** ProxyConnectionInfo oldSourceIp. */
+                    public oldSourceIp: string;
+
+                    /** ProxyConnectionInfo newSourceIp. */
+                    public newSourceIp: string;
+
+                    /** ProxyConnectionInfo oldDestinationIp. */
+                    public oldDestinationIp: string;
+
+                    /** ProxyConnectionInfo newDestinationIp. */
+                    public newDestinationIp: string;
+
+                    /** ProxyConnectionInfo oldSourcePort. */
+                    public oldSourcePort: number;
+
+                    /** ProxyConnectionInfo newSourcePort. */
+                    public newSourcePort: number;
+
+                    /** ProxyConnectionInfo oldDestinationPort. */
+                    public oldDestinationPort: number;
+
+                    /** ProxyConnectionInfo newDestinationPort. */
+                    public newDestinationPort: number;
+
+                    /** ProxyConnectionInfo subnetUri. */
+                    public subnetUri: string;
+
+                    /** ProxyConnectionInfo networkUri. */
+                    public networkUri: string;
+
+                    /**
+                     * Creates a new ProxyConnectionInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProxyConnectionInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IProxyConnectionInfo): google.cloud.networkmanagement.v1beta1.ProxyConnectionInfo;
+
+                    /**
+                     * Encodes the specified ProxyConnectionInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ProxyConnectionInfo.verify|verify} messages.
+                     * @param message ProxyConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IProxyConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProxyConnectionInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ProxyConnectionInfo.verify|verify} messages.
+                     * @param message ProxyConnectionInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IProxyConnectionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProxyConnectionInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProxyConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.ProxyConnectionInfo;
+
+                    /**
+                     * Decodes a ProxyConnectionInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProxyConnectionInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.ProxyConnectionInfo;
+
+                    /**
+                     * Verifies a ProxyConnectionInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProxyConnectionInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProxyConnectionInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.ProxyConnectionInfo;
+
+                    /**
+                     * Creates a plain object from a ProxyConnectionInfo message. Also converts values to other types if specified.
+                     * @param message ProxyConnectionInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.ProxyConnectionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProxyConnectionInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProxyConnectionInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a LoadBalancerBackendInfo. */
+                interface ILoadBalancerBackendInfo {
+
+                    /** LoadBalancerBackendInfo name */
+                    name?: (string|null);
+
+                    /** LoadBalancerBackendInfo instanceUri */
+                    instanceUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo backendServiceUri */
+                    backendServiceUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo instanceGroupUri */
+                    instanceGroupUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo networkEndpointGroupUri */
+                    networkEndpointGroupUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo backendBucketUri */
+                    backendBucketUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo pscServiceAttachmentUri */
+                    pscServiceAttachmentUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo pscGoogleApiTarget */
+                    pscGoogleApiTarget?: (string|null);
+
+                    /** LoadBalancerBackendInfo healthCheckUri */
+                    healthCheckUri?: (string|null);
+
+                    /** LoadBalancerBackendInfo healthCheckFirewallsConfigState */
+                    healthCheckFirewallsConfigState?: (google.cloud.networkmanagement.v1beta1.LoadBalancerBackendInfo.HealthCheckFirewallsConfigState|keyof typeof google.cloud.networkmanagement.v1beta1.LoadBalancerBackendInfo.HealthCheckFirewallsConfigState|null);
+                }
+
+                /** Represents a LoadBalancerBackendInfo. */
+                class LoadBalancerBackendInfo implements ILoadBalancerBackendInfo {
+
+                    /**
+                     * Constructs a new LoadBalancerBackendInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.ILoadBalancerBackendInfo);
+
+                    /** LoadBalancerBackendInfo name. */
+                    public name: string;
+
+                    /** LoadBalancerBackendInfo instanceUri. */
+                    public instanceUri: string;
+
+                    /** LoadBalancerBackendInfo backendServiceUri. */
+                    public backendServiceUri: string;
+
+                    /** LoadBalancerBackendInfo instanceGroupUri. */
+                    public instanceGroupUri: string;
+
+                    /** LoadBalancerBackendInfo networkEndpointGroupUri. */
+                    public networkEndpointGroupUri: string;
+
+                    /** LoadBalancerBackendInfo backendBucketUri. */
+                    public backendBucketUri: string;
+
+                    /** LoadBalancerBackendInfo pscServiceAttachmentUri. */
+                    public pscServiceAttachmentUri: string;
+
+                    /** LoadBalancerBackendInfo pscGoogleApiTarget. */
+                    public pscGoogleApiTarget: string;
+
+                    /** LoadBalancerBackendInfo healthCheckUri. */
+                    public healthCheckUri: string;
+
+                    /** LoadBalancerBackendInfo healthCheckFirewallsConfigState. */
+                    public healthCheckFirewallsConfigState: (google.cloud.networkmanagement.v1beta1.LoadBalancerBackendInfo.HealthCheckFirewallsConfigState|keyof typeof google.cloud.networkmanagement.v1beta1.LoadBalancerBackendInfo.HealthCheckFirewallsConfigState);
+
+                    /**
+                     * Creates a new LoadBalancerBackendInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LoadBalancerBackendInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.ILoadBalancerBackendInfo): google.cloud.networkmanagement.v1beta1.LoadBalancerBackendInfo;
+
+                    /**
+                     * Encodes the specified LoadBalancerBackendInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.LoadBalancerBackendInfo.verify|verify} messages.
+                     * @param message LoadBalancerBackendInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.ILoadBalancerBackendInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LoadBalancerBackendInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.LoadBalancerBackendInfo.verify|verify} messages.
+                     * @param message LoadBalancerBackendInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.ILoadBalancerBackendInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LoadBalancerBackendInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LoadBalancerBackendInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.LoadBalancerBackendInfo;
+
+                    /**
+                     * Decodes a LoadBalancerBackendInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LoadBalancerBackendInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.LoadBalancerBackendInfo;
+
+                    /**
+                     * Verifies a LoadBalancerBackendInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LoadBalancerBackendInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LoadBalancerBackendInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.LoadBalancerBackendInfo;
+
+                    /**
+                     * Creates a plain object from a LoadBalancerBackendInfo message. Also converts values to other types if specified.
+                     * @param message LoadBalancerBackendInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.LoadBalancerBackendInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LoadBalancerBackendInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LoadBalancerBackendInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace LoadBalancerBackendInfo {
+
+                    /** HealthCheckFirewallsConfigState enum. */
+                    enum HealthCheckFirewallsConfigState {
+                        HEALTH_CHECK_FIREWALLS_CONFIG_STATE_UNSPECIFIED = 0,
+                        FIREWALLS_CONFIGURED = 1,
+                        FIREWALLS_PARTIALLY_CONFIGURED = 2,
+                        FIREWALLS_NOT_CONFIGURED = 3,
+                        FIREWALLS_UNSUPPORTED = 4
+                    }
+                }
+
                 /** LoadBalancerType enum. */
                 enum LoadBalancerType {
                     LOAD_BALANCER_TYPE_UNSPECIFIED = 0,
@@ -9948,6 +10725,103 @@ export namespace google {
                     NETWORK_LOAD_BALANCER = 8,
                     LEGACY_NETWORK_LOAD_BALANCER = 9,
                     TCP_UDP_INTERNAL_LOAD_BALANCER = 10
+                }
+
+                /** Properties of a StorageBucketInfo. */
+                interface IStorageBucketInfo {
+
+                    /** StorageBucketInfo bucket */
+                    bucket?: (string|null);
+                }
+
+                /** Represents a StorageBucketInfo. */
+                class StorageBucketInfo implements IStorageBucketInfo {
+
+                    /**
+                     * Constructs a new StorageBucketInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.IStorageBucketInfo);
+
+                    /** StorageBucketInfo bucket. */
+                    public bucket: string;
+
+                    /**
+                     * Creates a new StorageBucketInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StorageBucketInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.IStorageBucketInfo): google.cloud.networkmanagement.v1beta1.StorageBucketInfo;
+
+                    /**
+                     * Encodes the specified StorageBucketInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.StorageBucketInfo.verify|verify} messages.
+                     * @param message StorageBucketInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.IStorageBucketInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StorageBucketInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.StorageBucketInfo.verify|verify} messages.
+                     * @param message StorageBucketInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.IStorageBucketInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StorageBucketInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StorageBucketInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.StorageBucketInfo;
+
+                    /**
+                     * Decodes a StorageBucketInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StorageBucketInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.StorageBucketInfo;
+
+                    /**
+                     * Verifies a StorageBucketInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StorageBucketInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StorageBucketInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.StorageBucketInfo;
+
+                    /**
+                     * Creates a plain object from a StorageBucketInfo message. Also converts values to other types if specified.
+                     * @param message StorageBucketInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.StorageBucketInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StorageBucketInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StorageBucketInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a ReachabilityService */
@@ -10981,7 +11855,8 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -11885,6 +12760,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -11922,6 +12800,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -12503,6 +13384,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -12516,6 +13412,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -12797,6 +13708,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -12813,6 +13727,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -13016,7 +13933,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */
@@ -13139,6 +14059,21 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
         /** Properties of a FileDescriptorProto. */
         interface IFileDescriptorProto {
 
@@ -13179,7 +14114,7 @@ export namespace google {
             syntax?: (string|null);
 
             /** FileDescriptorProto edition */
-            edition?: (string|null);
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -13228,7 +14163,7 @@ export namespace google {
             public syntax: string;
 
             /** FileDescriptorProto edition. */
-            public edition: string;
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -13679,6 +14614,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -13692,6 +14636,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -13769,6 +14722,136 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -13955,8 +15038,8 @@ export namespace google {
             /** Label enum. */
             enum Label {
                 LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
             }
         }
 
@@ -14668,9 +15751,6 @@ export namespace google {
             /** FileOptions pyGenericServices */
             pyGenericServices?: (boolean|null);
 
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
             /** FileOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -14697,6 +15777,9 @@ export namespace google {
 
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -14744,9 +15827,6 @@ export namespace google {
             /** FileOptions pyGenericServices. */
             public pyGenericServices: boolean;
 
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
             /** FileOptions deprecated. */
             public deprecated: boolean;
 
@@ -14773,6 +15853,9 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -14883,6 +15966,9 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -14913,6 +15999,9 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15025,8 +16114,14 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -15074,8 +16169,14 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15194,10 +16295,116 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -15211,6 +16418,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15305,6 +16515,9 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -15326,6 +16539,9 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15414,6 +16630,12 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -15429,6 +16651,12 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15514,6 +16742,9 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -15535,6 +16766,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -15629,6 +16863,9 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -15656,6 +16893,9 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15980,6 +17220,394 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
