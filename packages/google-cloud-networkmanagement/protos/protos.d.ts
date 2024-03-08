@@ -1455,6 +1455,9 @@ export namespace google {
                     /** Step cloudRunRevision */
                     cloudRunRevision?: (google.cloud.networkmanagement.v1.ICloudRunRevisionInfo|null);
 
+                    /** Step nat */
+                    nat?: (google.cloud.networkmanagement.v1.INatInfo|null);
+
                     /** Step proxyConnection */
                     proxyConnection?: (google.cloud.networkmanagement.v1.IProxyConnectionInfo|null);
 
@@ -1546,6 +1549,9 @@ export namespace google {
                     /** Step cloudRunRevision. */
                     public cloudRunRevision?: (google.cloud.networkmanagement.v1.ICloudRunRevisionInfo|null);
 
+                    /** Step nat. */
+                    public nat?: (google.cloud.networkmanagement.v1.INatInfo|null);
+
                     /** Step proxyConnection. */
                     public proxyConnection?: (google.cloud.networkmanagement.v1.IProxyConnectionInfo|null);
 
@@ -1556,7 +1562,7 @@ export namespace google {
                     public storageBucket?: (google.cloud.networkmanagement.v1.IStorageBucketInfo|null);
 
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -4483,6 +4489,187 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a NatInfo. */
+                interface INatInfo {
+
+                    /** NatInfo type */
+                    type?: (google.cloud.networkmanagement.v1.NatInfo.Type|keyof typeof google.cloud.networkmanagement.v1.NatInfo.Type|null);
+
+                    /** NatInfo protocol */
+                    protocol?: (string|null);
+
+                    /** NatInfo networkUri */
+                    networkUri?: (string|null);
+
+                    /** NatInfo oldSourceIp */
+                    oldSourceIp?: (string|null);
+
+                    /** NatInfo newSourceIp */
+                    newSourceIp?: (string|null);
+
+                    /** NatInfo oldDestinationIp */
+                    oldDestinationIp?: (string|null);
+
+                    /** NatInfo newDestinationIp */
+                    newDestinationIp?: (string|null);
+
+                    /** NatInfo oldSourcePort */
+                    oldSourcePort?: (number|null);
+
+                    /** NatInfo newSourcePort */
+                    newSourcePort?: (number|null);
+
+                    /** NatInfo oldDestinationPort */
+                    oldDestinationPort?: (number|null);
+
+                    /** NatInfo newDestinationPort */
+                    newDestinationPort?: (number|null);
+
+                    /** NatInfo routerUri */
+                    routerUri?: (string|null);
+
+                    /** NatInfo natGatewayName */
+                    natGatewayName?: (string|null);
+                }
+
+                /** Represents a NatInfo. */
+                class NatInfo implements INatInfo {
+
+                    /**
+                     * Constructs a new NatInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1.INatInfo);
+
+                    /** NatInfo type. */
+                    public type: (google.cloud.networkmanagement.v1.NatInfo.Type|keyof typeof google.cloud.networkmanagement.v1.NatInfo.Type);
+
+                    /** NatInfo protocol. */
+                    public protocol: string;
+
+                    /** NatInfo networkUri. */
+                    public networkUri: string;
+
+                    /** NatInfo oldSourceIp. */
+                    public oldSourceIp: string;
+
+                    /** NatInfo newSourceIp. */
+                    public newSourceIp: string;
+
+                    /** NatInfo oldDestinationIp. */
+                    public oldDestinationIp: string;
+
+                    /** NatInfo newDestinationIp. */
+                    public newDestinationIp: string;
+
+                    /** NatInfo oldSourcePort. */
+                    public oldSourcePort: number;
+
+                    /** NatInfo newSourcePort. */
+                    public newSourcePort: number;
+
+                    /** NatInfo oldDestinationPort. */
+                    public oldDestinationPort: number;
+
+                    /** NatInfo newDestinationPort. */
+                    public newDestinationPort: number;
+
+                    /** NatInfo routerUri. */
+                    public routerUri: string;
+
+                    /** NatInfo natGatewayName. */
+                    public natGatewayName: string;
+
+                    /**
+                     * Creates a new NatInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NatInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1.INatInfo): google.cloud.networkmanagement.v1.NatInfo;
+
+                    /**
+                     * Encodes the specified NatInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.NatInfo.verify|verify} messages.
+                     * @param message NatInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1.INatInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NatInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.NatInfo.verify|verify} messages.
+                     * @param message NatInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1.INatInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NatInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NatInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1.NatInfo;
+
+                    /**
+                     * Decodes a NatInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NatInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1.NatInfo;
+
+                    /**
+                     * Verifies a NatInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NatInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NatInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1.NatInfo;
+
+                    /**
+                     * Creates a plain object from a NatInfo message. Also converts values to other types if specified.
+                     * @param message NatInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1.NatInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NatInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NatInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NatInfo {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        INTERNAL_TO_EXTERNAL = 1,
+                        EXTERNAL_TO_INTERNAL = 2,
+                        CLOUD_NAT = 3,
+                        PRIVATE_SERVICE_CONNECT = 4
+                    }
+                }
+
                 /** Properties of a ProxyConnectionInfo. */
                 interface IProxyConnectionInfo {
 
@@ -7364,6 +7551,9 @@ export namespace google {
                     /** Step cloudRunRevision */
                     cloudRunRevision?: (google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo|null);
 
+                    /** Step nat */
+                    nat?: (google.cloud.networkmanagement.v1beta1.INatInfo|null);
+
                     /** Step proxyConnection */
                     proxyConnection?: (google.cloud.networkmanagement.v1beta1.IProxyConnectionInfo|null);
 
@@ -7455,6 +7645,9 @@ export namespace google {
                     /** Step cloudRunRevision. */
                     public cloudRunRevision?: (google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo|null);
 
+                    /** Step nat. */
+                    public nat?: (google.cloud.networkmanagement.v1beta1.INatInfo|null);
+
                     /** Step proxyConnection. */
                     public proxyConnection?: (google.cloud.networkmanagement.v1beta1.IProxyConnectionInfo|null);
 
@@ -7465,7 +7658,7 @@ export namespace google {
                     public storageBucket?: (google.cloud.networkmanagement.v1beta1.IStorageBucketInfo|null);
 
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -10390,6 +10583,187 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NatInfo. */
+                interface INatInfo {
+
+                    /** NatInfo type */
+                    type?: (google.cloud.networkmanagement.v1beta1.NatInfo.Type|keyof typeof google.cloud.networkmanagement.v1beta1.NatInfo.Type|null);
+
+                    /** NatInfo protocol */
+                    protocol?: (string|null);
+
+                    /** NatInfo networkUri */
+                    networkUri?: (string|null);
+
+                    /** NatInfo oldSourceIp */
+                    oldSourceIp?: (string|null);
+
+                    /** NatInfo newSourceIp */
+                    newSourceIp?: (string|null);
+
+                    /** NatInfo oldDestinationIp */
+                    oldDestinationIp?: (string|null);
+
+                    /** NatInfo newDestinationIp */
+                    newDestinationIp?: (string|null);
+
+                    /** NatInfo oldSourcePort */
+                    oldSourcePort?: (number|null);
+
+                    /** NatInfo newSourcePort */
+                    newSourcePort?: (number|null);
+
+                    /** NatInfo oldDestinationPort */
+                    oldDestinationPort?: (number|null);
+
+                    /** NatInfo newDestinationPort */
+                    newDestinationPort?: (number|null);
+
+                    /** NatInfo routerUri */
+                    routerUri?: (string|null);
+
+                    /** NatInfo natGatewayName */
+                    natGatewayName?: (string|null);
+                }
+
+                /** Represents a NatInfo. */
+                class NatInfo implements INatInfo {
+
+                    /**
+                     * Constructs a new NatInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkmanagement.v1beta1.INatInfo);
+
+                    /** NatInfo type. */
+                    public type: (google.cloud.networkmanagement.v1beta1.NatInfo.Type|keyof typeof google.cloud.networkmanagement.v1beta1.NatInfo.Type);
+
+                    /** NatInfo protocol. */
+                    public protocol: string;
+
+                    /** NatInfo networkUri. */
+                    public networkUri: string;
+
+                    /** NatInfo oldSourceIp. */
+                    public oldSourceIp: string;
+
+                    /** NatInfo newSourceIp. */
+                    public newSourceIp: string;
+
+                    /** NatInfo oldDestinationIp. */
+                    public oldDestinationIp: string;
+
+                    /** NatInfo newDestinationIp. */
+                    public newDestinationIp: string;
+
+                    /** NatInfo oldSourcePort. */
+                    public oldSourcePort: number;
+
+                    /** NatInfo newSourcePort. */
+                    public newSourcePort: number;
+
+                    /** NatInfo oldDestinationPort. */
+                    public oldDestinationPort: number;
+
+                    /** NatInfo newDestinationPort. */
+                    public newDestinationPort: number;
+
+                    /** NatInfo routerUri. */
+                    public routerUri: string;
+
+                    /** NatInfo natGatewayName. */
+                    public natGatewayName: string;
+
+                    /**
+                     * Creates a new NatInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NatInfo instance
+                     */
+                    public static create(properties?: google.cloud.networkmanagement.v1beta1.INatInfo): google.cloud.networkmanagement.v1beta1.NatInfo;
+
+                    /**
+                     * Encodes the specified NatInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.NatInfo.verify|verify} messages.
+                     * @param message NatInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkmanagement.v1beta1.INatInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NatInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.NatInfo.verify|verify} messages.
+                     * @param message NatInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkmanagement.v1beta1.INatInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NatInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NatInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkmanagement.v1beta1.NatInfo;
+
+                    /**
+                     * Decodes a NatInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NatInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkmanagement.v1beta1.NatInfo;
+
+                    /**
+                     * Verifies a NatInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NatInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NatInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkmanagement.v1beta1.NatInfo;
+
+                    /**
+                     * Creates a plain object from a NatInfo message. Also converts values to other types if specified.
+                     * @param message NatInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkmanagement.v1beta1.NatInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NatInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NatInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NatInfo {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        INTERNAL_TO_EXTERNAL = 1,
+                        EXTERNAL_TO_INTERNAL = 2,
+                        CLOUD_NAT = 3,
+                        PRIVATE_SERVICE_CONNECT = 4
+                    }
                 }
 
                 /** Properties of a ProxyConnectionInfo. */

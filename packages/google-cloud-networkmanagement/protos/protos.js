@@ -3780,6 +3780,7 @@
                          * @property {google.cloud.networkmanagement.v1.ICloudFunctionInfo|null} [cloudFunction] Step cloudFunction
                          * @property {google.cloud.networkmanagement.v1.IAppEngineVersionInfo|null} [appEngineVersion] Step appEngineVersion
                          * @property {google.cloud.networkmanagement.v1.ICloudRunRevisionInfo|null} [cloudRunRevision] Step cloudRunRevision
+                         * @property {google.cloud.networkmanagement.v1.INatInfo|null} [nat] Step nat
                          * @property {google.cloud.networkmanagement.v1.IProxyConnectionInfo|null} [proxyConnection] Step proxyConnection
                          * @property {google.cloud.networkmanagement.v1.ILoadBalancerBackendInfo|null} [loadBalancerBackendInfo] Step loadBalancerBackendInfo
                          * @property {google.cloud.networkmanagement.v1.IStorageBucketInfo|null} [storageBucket] Step storageBucket
@@ -3993,6 +3994,14 @@
                         Step.prototype.cloudRunRevision = null;
     
                         /**
+                         * Step nat.
+                         * @member {google.cloud.networkmanagement.v1.INatInfo|null|undefined} nat
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.nat = null;
+    
+                        /**
                          * Step proxyConnection.
                          * @member {google.cloud.networkmanagement.v1.IProxyConnectionInfo|null|undefined} proxyConnection
                          * @memberof google.cloud.networkmanagement.v1.Step
@@ -4021,12 +4030,12 @@
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "cloudFunction", "appEngineVersion", "cloudRunRevision", "proxyConnection", "loadBalancerBackendInfo", "storageBucket"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4102,6 +4111,8 @@
                                 $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo.encode(message.cloudRunRevision, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             if (message.googleService != null && Object.hasOwnProperty.call(message, "googleService"))
                                 $root.google.cloud.networkmanagement.v1.GoogleServiceInfo.encode(message.googleService, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.nat != null && Object.hasOwnProperty.call(message, "nat"))
+                                $root.google.cloud.networkmanagement.v1.NatInfo.encode(message.nat, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                             if (message.proxyConnection != null && Object.hasOwnProperty.call(message, "proxyConnection"))
                                 $root.google.cloud.networkmanagement.v1.ProxyConnectionInfo.encode(message.proxyConnection, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.loadBalancerBackendInfo != null && Object.hasOwnProperty.call(message, "loadBalancerBackendInfo"))
@@ -4236,6 +4247,10 @@
                                     }
                                 case 23: {
                                         message.cloudRunRevision = $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 25: {
+                                        message.nat = $root.google.cloud.networkmanagement.v1.NatInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 26: {
@@ -4528,6 +4543,16 @@
                                         return "cloudRunRevision." + error;
                                 }
                             }
+                            if (message.nat != null && message.hasOwnProperty("nat")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.NatInfo.verify(message.nat);
+                                    if (error)
+                                        return "nat." + error;
+                                }
+                            }
                             if (message.proxyConnection != null && message.hasOwnProperty("proxyConnection")) {
                                 if (properties.stepInfo === 1)
                                     return "stepInfo: multiple values";
@@ -4803,6 +4828,11 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.cloudRunRevision: object expected");
                                 message.cloudRunRevision = $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo.fromObject(object.cloudRunRevision);
                             }
+                            if (object.nat != null) {
+                                if (typeof object.nat !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.nat: object expected");
+                                message.nat = $root.google.cloud.networkmanagement.v1.NatInfo.fromObject(object.nat);
+                            }
                             if (object.proxyConnection != null) {
                                 if (typeof object.proxyConnection !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.proxyConnection: object expected");
@@ -4947,6 +4977,11 @@
                                 object.googleService = $root.google.cloud.networkmanagement.v1.GoogleServiceInfo.toObject(message.googleService, options);
                                 if (options.oneofs)
                                     object.stepInfo = "googleService";
+                            }
+                            if (message.nat != null && message.hasOwnProperty("nat")) {
+                                object.nat = $root.google.cloud.networkmanagement.v1.NatInfo.toObject(message.nat, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "nat";
                             }
                             if (message.proxyConnection != null && message.hasOwnProperty("proxyConnection")) {
                                 object.proxyConnection = $root.google.cloud.networkmanagement.v1.ProxyConnectionInfo.toObject(message.proxyConnection, options);
@@ -12886,6 +12921,540 @@
                         return VpcConnectorInfo;
                     })();
     
+                    v1.NatInfo = (function() {
+    
+                        /**
+                         * Properties of a NatInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface INatInfo
+                         * @property {google.cloud.networkmanagement.v1.NatInfo.Type|null} [type] NatInfo type
+                         * @property {string|null} [protocol] NatInfo protocol
+                         * @property {string|null} [networkUri] NatInfo networkUri
+                         * @property {string|null} [oldSourceIp] NatInfo oldSourceIp
+                         * @property {string|null} [newSourceIp] NatInfo newSourceIp
+                         * @property {string|null} [oldDestinationIp] NatInfo oldDestinationIp
+                         * @property {string|null} [newDestinationIp] NatInfo newDestinationIp
+                         * @property {number|null} [oldSourcePort] NatInfo oldSourcePort
+                         * @property {number|null} [newSourcePort] NatInfo newSourcePort
+                         * @property {number|null} [oldDestinationPort] NatInfo oldDestinationPort
+                         * @property {number|null} [newDestinationPort] NatInfo newDestinationPort
+                         * @property {string|null} [routerUri] NatInfo routerUri
+                         * @property {string|null} [natGatewayName] NatInfo natGatewayName
+                         */
+    
+                        /**
+                         * Constructs a new NatInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a NatInfo.
+                         * @implements INatInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.INatInfo=} [properties] Properties to set
+                         */
+                        function NatInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NatInfo type.
+                         * @member {google.cloud.networkmanagement.v1.NatInfo.Type} type
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.type = 0;
+    
+                        /**
+                         * NatInfo protocol.
+                         * @member {string} protocol
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.protocol = "";
+    
+                        /**
+                         * NatInfo networkUri.
+                         * @member {string} networkUri
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.networkUri = "";
+    
+                        /**
+                         * NatInfo oldSourceIp.
+                         * @member {string} oldSourceIp
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.oldSourceIp = "";
+    
+                        /**
+                         * NatInfo newSourceIp.
+                         * @member {string} newSourceIp
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.newSourceIp = "";
+    
+                        /**
+                         * NatInfo oldDestinationIp.
+                         * @member {string} oldDestinationIp
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.oldDestinationIp = "";
+    
+                        /**
+                         * NatInfo newDestinationIp.
+                         * @member {string} newDestinationIp
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.newDestinationIp = "";
+    
+                        /**
+                         * NatInfo oldSourcePort.
+                         * @member {number} oldSourcePort
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.oldSourcePort = 0;
+    
+                        /**
+                         * NatInfo newSourcePort.
+                         * @member {number} newSourcePort
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.newSourcePort = 0;
+    
+                        /**
+                         * NatInfo oldDestinationPort.
+                         * @member {number} oldDestinationPort
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.oldDestinationPort = 0;
+    
+                        /**
+                         * NatInfo newDestinationPort.
+                         * @member {number} newDestinationPort
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.newDestinationPort = 0;
+    
+                        /**
+                         * NatInfo routerUri.
+                         * @member {string} routerUri
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.routerUri = "";
+    
+                        /**
+                         * NatInfo natGatewayName.
+                         * @member {string} natGatewayName
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.natGatewayName = "";
+    
+                        /**
+                         * Creates a new NatInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.INatInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.NatInfo} NatInfo instance
+                         */
+                        NatInfo.create = function create(properties) {
+                            return new NatInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NatInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.NatInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.INatInfo} message NatInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NatInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                            if (message.protocol != null && Object.hasOwnProperty.call(message, "protocol"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.protocol);
+                            if (message.networkUri != null && Object.hasOwnProperty.call(message, "networkUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.networkUri);
+                            if (message.oldSourceIp != null && Object.hasOwnProperty.call(message, "oldSourceIp"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.oldSourceIp);
+                            if (message.newSourceIp != null && Object.hasOwnProperty.call(message, "newSourceIp"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.newSourceIp);
+                            if (message.oldDestinationIp != null && Object.hasOwnProperty.call(message, "oldDestinationIp"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.oldDestinationIp);
+                            if (message.newDestinationIp != null && Object.hasOwnProperty.call(message, "newDestinationIp"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.newDestinationIp);
+                            if (message.oldSourcePort != null && Object.hasOwnProperty.call(message, "oldSourcePort"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.oldSourcePort);
+                            if (message.newSourcePort != null && Object.hasOwnProperty.call(message, "newSourcePort"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.newSourcePort);
+                            if (message.oldDestinationPort != null && Object.hasOwnProperty.call(message, "oldDestinationPort"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.oldDestinationPort);
+                            if (message.newDestinationPort != null && Object.hasOwnProperty.call(message, "newDestinationPort"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.newDestinationPort);
+                            if (message.routerUri != null && Object.hasOwnProperty.call(message, "routerUri"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.routerUri);
+                            if (message.natGatewayName != null && Object.hasOwnProperty.call(message, "natGatewayName"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.natGatewayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NatInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.NatInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.INatInfo} message NatInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NatInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NatInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.NatInfo} NatInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NatInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.NatInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.protocol = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.networkUri = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.oldSourceIp = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.newSourceIp = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.oldDestinationIp = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.newDestinationIp = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.oldSourcePort = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.newSourcePort = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.oldDestinationPort = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.newDestinationPort = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.routerUri = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.natGatewayName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NatInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.NatInfo} NatInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NatInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NatInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NatInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                if (!$util.isString(message.protocol))
+                                    return "protocol: string expected";
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                if (!$util.isString(message.networkUri))
+                                    return "networkUri: string expected";
+                            if (message.oldSourceIp != null && message.hasOwnProperty("oldSourceIp"))
+                                if (!$util.isString(message.oldSourceIp))
+                                    return "oldSourceIp: string expected";
+                            if (message.newSourceIp != null && message.hasOwnProperty("newSourceIp"))
+                                if (!$util.isString(message.newSourceIp))
+                                    return "newSourceIp: string expected";
+                            if (message.oldDestinationIp != null && message.hasOwnProperty("oldDestinationIp"))
+                                if (!$util.isString(message.oldDestinationIp))
+                                    return "oldDestinationIp: string expected";
+                            if (message.newDestinationIp != null && message.hasOwnProperty("newDestinationIp"))
+                                if (!$util.isString(message.newDestinationIp))
+                                    return "newDestinationIp: string expected";
+                            if (message.oldSourcePort != null && message.hasOwnProperty("oldSourcePort"))
+                                if (!$util.isInteger(message.oldSourcePort))
+                                    return "oldSourcePort: integer expected";
+                            if (message.newSourcePort != null && message.hasOwnProperty("newSourcePort"))
+                                if (!$util.isInteger(message.newSourcePort))
+                                    return "newSourcePort: integer expected";
+                            if (message.oldDestinationPort != null && message.hasOwnProperty("oldDestinationPort"))
+                                if (!$util.isInteger(message.oldDestinationPort))
+                                    return "oldDestinationPort: integer expected";
+                            if (message.newDestinationPort != null && message.hasOwnProperty("newDestinationPort"))
+                                if (!$util.isInteger(message.newDestinationPort))
+                                    return "newDestinationPort: integer expected";
+                            if (message.routerUri != null && message.hasOwnProperty("routerUri"))
+                                if (!$util.isString(message.routerUri))
+                                    return "routerUri: string expected";
+                            if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
+                                if (!$util.isString(message.natGatewayName))
+                                    return "natGatewayName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NatInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.NatInfo} NatInfo
+                         */
+                        NatInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.NatInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.NatInfo();
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "INTERNAL_TO_EXTERNAL":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "EXTERNAL_TO_INTERNAL":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "CLOUD_NAT":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "PRIVATE_SERVICE_CONNECT":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
+                            if (object.protocol != null)
+                                message.protocol = String(object.protocol);
+                            if (object.networkUri != null)
+                                message.networkUri = String(object.networkUri);
+                            if (object.oldSourceIp != null)
+                                message.oldSourceIp = String(object.oldSourceIp);
+                            if (object.newSourceIp != null)
+                                message.newSourceIp = String(object.newSourceIp);
+                            if (object.oldDestinationIp != null)
+                                message.oldDestinationIp = String(object.oldDestinationIp);
+                            if (object.newDestinationIp != null)
+                                message.newDestinationIp = String(object.newDestinationIp);
+                            if (object.oldSourcePort != null)
+                                message.oldSourcePort = object.oldSourcePort | 0;
+                            if (object.newSourcePort != null)
+                                message.newSourcePort = object.newSourcePort | 0;
+                            if (object.oldDestinationPort != null)
+                                message.oldDestinationPort = object.oldDestinationPort | 0;
+                            if (object.newDestinationPort != null)
+                                message.newDestinationPort = object.newDestinationPort | 0;
+                            if (object.routerUri != null)
+                                message.routerUri = String(object.routerUri);
+                            if (object.natGatewayName != null)
+                                message.natGatewayName = String(object.natGatewayName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NatInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.NatInfo} message NatInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NatInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.protocol = "";
+                                object.networkUri = "";
+                                object.oldSourceIp = "";
+                                object.newSourceIp = "";
+                                object.oldDestinationIp = "";
+                                object.newDestinationIp = "";
+                                object.oldSourcePort = 0;
+                                object.newSourcePort = 0;
+                                object.oldDestinationPort = 0;
+                                object.newDestinationPort = 0;
+                                object.routerUri = "";
+                                object.natGatewayName = "";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.networkmanagement.v1.NatInfo.Type[message.type] === undefined ? message.type : $root.google.cloud.networkmanagement.v1.NatInfo.Type[message.type] : message.type;
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                object.protocol = message.protocol;
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                object.networkUri = message.networkUri;
+                            if (message.oldSourceIp != null && message.hasOwnProperty("oldSourceIp"))
+                                object.oldSourceIp = message.oldSourceIp;
+                            if (message.newSourceIp != null && message.hasOwnProperty("newSourceIp"))
+                                object.newSourceIp = message.newSourceIp;
+                            if (message.oldDestinationIp != null && message.hasOwnProperty("oldDestinationIp"))
+                                object.oldDestinationIp = message.oldDestinationIp;
+                            if (message.newDestinationIp != null && message.hasOwnProperty("newDestinationIp"))
+                                object.newDestinationIp = message.newDestinationIp;
+                            if (message.oldSourcePort != null && message.hasOwnProperty("oldSourcePort"))
+                                object.oldSourcePort = message.oldSourcePort;
+                            if (message.newSourcePort != null && message.hasOwnProperty("newSourcePort"))
+                                object.newSourcePort = message.newSourcePort;
+                            if (message.oldDestinationPort != null && message.hasOwnProperty("oldDestinationPort"))
+                                object.oldDestinationPort = message.oldDestinationPort;
+                            if (message.newDestinationPort != null && message.hasOwnProperty("newDestinationPort"))
+                                object.newDestinationPort = message.newDestinationPort;
+                            if (message.routerUri != null && message.hasOwnProperty("routerUri"))
+                                object.routerUri = message.routerUri;
+                            if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
+                                object.natGatewayName = message.natGatewayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NatInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NatInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NatInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.NatInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NatInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.NatInfo";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.networkmanagement.v1.NatInfo.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} INTERNAL_TO_EXTERNAL=1 INTERNAL_TO_EXTERNAL value
+                         * @property {number} EXTERNAL_TO_INTERNAL=2 EXTERNAL_TO_INTERNAL value
+                         * @property {number} CLOUD_NAT=3 CLOUD_NAT value
+                         * @property {number} PRIVATE_SERVICE_CONNECT=4 PRIVATE_SERVICE_CONNECT value
+                         */
+                        NatInfo.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INTERNAL_TO_EXTERNAL"] = 1;
+                            values[valuesById[2] = "EXTERNAL_TO_INTERNAL"] = 2;
+                            values[valuesById[3] = "CLOUD_NAT"] = 3;
+                            values[valuesById[4] = "PRIVATE_SERVICE_CONNECT"] = 4;
+                            return values;
+                        })();
+    
+                        return NatInfo;
+                    })();
+    
                     v1.ProxyConnectionInfo = (function() {
     
                         /**
@@ -20016,6 +20585,7 @@
                          * @property {google.cloud.networkmanagement.v1beta1.ICloudFunctionInfo|null} [cloudFunction] Step cloudFunction
                          * @property {google.cloud.networkmanagement.v1beta1.IAppEngineVersionInfo|null} [appEngineVersion] Step appEngineVersion
                          * @property {google.cloud.networkmanagement.v1beta1.ICloudRunRevisionInfo|null} [cloudRunRevision] Step cloudRunRevision
+                         * @property {google.cloud.networkmanagement.v1beta1.INatInfo|null} [nat] Step nat
                          * @property {google.cloud.networkmanagement.v1beta1.IProxyConnectionInfo|null} [proxyConnection] Step proxyConnection
                          * @property {google.cloud.networkmanagement.v1beta1.ILoadBalancerBackendInfo|null} [loadBalancerBackendInfo] Step loadBalancerBackendInfo
                          * @property {google.cloud.networkmanagement.v1beta1.IStorageBucketInfo|null} [storageBucket] Step storageBucket
@@ -20229,6 +20799,14 @@
                         Step.prototype.cloudRunRevision = null;
     
                         /**
+                         * Step nat.
+                         * @member {google.cloud.networkmanagement.v1beta1.INatInfo|null|undefined} nat
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.nat = null;
+    
+                        /**
                          * Step proxyConnection.
                          * @member {google.cloud.networkmanagement.v1beta1.IProxyConnectionInfo|null|undefined} proxyConnection
                          * @memberof google.cloud.networkmanagement.v1beta1.Step
@@ -20257,12 +20835,12 @@
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1beta1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "cloudFunction", "appEngineVersion", "cloudRunRevision", "proxyConnection", "loadBalancerBackendInfo", "storageBucket"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "cloudFunction", "appEngineVersion", "cloudRunRevision", "nat", "proxyConnection", "loadBalancerBackendInfo", "storageBucket"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -20338,6 +20916,8 @@
                                 $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo.encode(message.cloudRunRevision, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                             if (message.googleService != null && Object.hasOwnProperty.call(message, "googleService"))
                                 $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.encode(message.googleService, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.nat != null && Object.hasOwnProperty.call(message, "nat"))
+                                $root.google.cloud.networkmanagement.v1beta1.NatInfo.encode(message.nat, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
                             if (message.proxyConnection != null && Object.hasOwnProperty.call(message, "proxyConnection"))
                                 $root.google.cloud.networkmanagement.v1beta1.ProxyConnectionInfo.encode(message.proxyConnection, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.loadBalancerBackendInfo != null && Object.hasOwnProperty.call(message, "loadBalancerBackendInfo"))
@@ -20472,6 +21052,10 @@
                                     }
                                 case 23: {
                                         message.cloudRunRevision = $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 25: {
+                                        message.nat = $root.google.cloud.networkmanagement.v1beta1.NatInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 26: {
@@ -20764,6 +21348,16 @@
                                         return "cloudRunRevision." + error;
                                 }
                             }
+                            if (message.nat != null && message.hasOwnProperty("nat")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.NatInfo.verify(message.nat);
+                                    if (error)
+                                        return "nat." + error;
+                                }
+                            }
                             if (message.proxyConnection != null && message.hasOwnProperty("proxyConnection")) {
                                 if (properties.stepInfo === 1)
                                     return "stepInfo: multiple values";
@@ -21039,6 +21633,11 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.cloudRunRevision: object expected");
                                 message.cloudRunRevision = $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo.fromObject(object.cloudRunRevision);
                             }
+                            if (object.nat != null) {
+                                if (typeof object.nat !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.nat: object expected");
+                                message.nat = $root.google.cloud.networkmanagement.v1beta1.NatInfo.fromObject(object.nat);
+                            }
                             if (object.proxyConnection != null) {
                                 if (typeof object.proxyConnection !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.proxyConnection: object expected");
@@ -21183,6 +21782,11 @@
                                 object.googleService = $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.toObject(message.googleService, options);
                                 if (options.oneofs)
                                     object.stepInfo = "googleService";
+                            }
+                            if (message.nat != null && message.hasOwnProperty("nat")) {
+                                object.nat = $root.google.cloud.networkmanagement.v1beta1.NatInfo.toObject(message.nat, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "nat";
                             }
                             if (message.proxyConnection != null && message.hasOwnProperty("proxyConnection")) {
                                 object.proxyConnection = $root.google.cloud.networkmanagement.v1beta1.ProxyConnectionInfo.toObject(message.proxyConnection, options);
@@ -29120,6 +29724,540 @@
                         };
     
                         return VpcConnectorInfo;
+                    })();
+    
+                    v1beta1.NatInfo = (function() {
+    
+                        /**
+                         * Properties of a NatInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface INatInfo
+                         * @property {google.cloud.networkmanagement.v1beta1.NatInfo.Type|null} [type] NatInfo type
+                         * @property {string|null} [protocol] NatInfo protocol
+                         * @property {string|null} [networkUri] NatInfo networkUri
+                         * @property {string|null} [oldSourceIp] NatInfo oldSourceIp
+                         * @property {string|null} [newSourceIp] NatInfo newSourceIp
+                         * @property {string|null} [oldDestinationIp] NatInfo oldDestinationIp
+                         * @property {string|null} [newDestinationIp] NatInfo newDestinationIp
+                         * @property {number|null} [oldSourcePort] NatInfo oldSourcePort
+                         * @property {number|null} [newSourcePort] NatInfo newSourcePort
+                         * @property {number|null} [oldDestinationPort] NatInfo oldDestinationPort
+                         * @property {number|null} [newDestinationPort] NatInfo newDestinationPort
+                         * @property {string|null} [routerUri] NatInfo routerUri
+                         * @property {string|null} [natGatewayName] NatInfo natGatewayName
+                         */
+    
+                        /**
+                         * Constructs a new NatInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a NatInfo.
+                         * @implements INatInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.INatInfo=} [properties] Properties to set
+                         */
+                        function NatInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NatInfo type.
+                         * @member {google.cloud.networkmanagement.v1beta1.NatInfo.Type} type
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.type = 0;
+    
+                        /**
+                         * NatInfo protocol.
+                         * @member {string} protocol
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.protocol = "";
+    
+                        /**
+                         * NatInfo networkUri.
+                         * @member {string} networkUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.networkUri = "";
+    
+                        /**
+                         * NatInfo oldSourceIp.
+                         * @member {string} oldSourceIp
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.oldSourceIp = "";
+    
+                        /**
+                         * NatInfo newSourceIp.
+                         * @member {string} newSourceIp
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.newSourceIp = "";
+    
+                        /**
+                         * NatInfo oldDestinationIp.
+                         * @member {string} oldDestinationIp
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.oldDestinationIp = "";
+    
+                        /**
+                         * NatInfo newDestinationIp.
+                         * @member {string} newDestinationIp
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.newDestinationIp = "";
+    
+                        /**
+                         * NatInfo oldSourcePort.
+                         * @member {number} oldSourcePort
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.oldSourcePort = 0;
+    
+                        /**
+                         * NatInfo newSourcePort.
+                         * @member {number} newSourcePort
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.newSourcePort = 0;
+    
+                        /**
+                         * NatInfo oldDestinationPort.
+                         * @member {number} oldDestinationPort
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.oldDestinationPort = 0;
+    
+                        /**
+                         * NatInfo newDestinationPort.
+                         * @member {number} newDestinationPort
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.newDestinationPort = 0;
+    
+                        /**
+                         * NatInfo routerUri.
+                         * @member {string} routerUri
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.routerUri = "";
+    
+                        /**
+                         * NatInfo natGatewayName.
+                         * @member {string} natGatewayName
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         */
+                        NatInfo.prototype.natGatewayName = "";
+    
+                        /**
+                         * Creates a new NatInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.INatInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.NatInfo} NatInfo instance
+                         */
+                        NatInfo.create = function create(properties) {
+                            return new NatInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NatInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.NatInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.INatInfo} message NatInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NatInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                            if (message.protocol != null && Object.hasOwnProperty.call(message, "protocol"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.protocol);
+                            if (message.networkUri != null && Object.hasOwnProperty.call(message, "networkUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.networkUri);
+                            if (message.oldSourceIp != null && Object.hasOwnProperty.call(message, "oldSourceIp"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.oldSourceIp);
+                            if (message.newSourceIp != null && Object.hasOwnProperty.call(message, "newSourceIp"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.newSourceIp);
+                            if (message.oldDestinationIp != null && Object.hasOwnProperty.call(message, "oldDestinationIp"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.oldDestinationIp);
+                            if (message.newDestinationIp != null && Object.hasOwnProperty.call(message, "newDestinationIp"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.newDestinationIp);
+                            if (message.oldSourcePort != null && Object.hasOwnProperty.call(message, "oldSourcePort"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.oldSourcePort);
+                            if (message.newSourcePort != null && Object.hasOwnProperty.call(message, "newSourcePort"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.newSourcePort);
+                            if (message.oldDestinationPort != null && Object.hasOwnProperty.call(message, "oldDestinationPort"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.oldDestinationPort);
+                            if (message.newDestinationPort != null && Object.hasOwnProperty.call(message, "newDestinationPort"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.newDestinationPort);
+                            if (message.routerUri != null && Object.hasOwnProperty.call(message, "routerUri"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.routerUri);
+                            if (message.natGatewayName != null && Object.hasOwnProperty.call(message, "natGatewayName"))
+                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.natGatewayName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NatInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.NatInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.INatInfo} message NatInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NatInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NatInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.NatInfo} NatInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NatInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.NatInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.protocol = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.networkUri = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.oldSourceIp = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.newSourceIp = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.oldDestinationIp = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.newDestinationIp = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.oldSourcePort = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.newSourcePort = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.oldDestinationPort = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.newDestinationPort = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.routerUri = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.natGatewayName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NatInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.NatInfo} NatInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NatInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NatInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NatInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                if (!$util.isString(message.protocol))
+                                    return "protocol: string expected";
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                if (!$util.isString(message.networkUri))
+                                    return "networkUri: string expected";
+                            if (message.oldSourceIp != null && message.hasOwnProperty("oldSourceIp"))
+                                if (!$util.isString(message.oldSourceIp))
+                                    return "oldSourceIp: string expected";
+                            if (message.newSourceIp != null && message.hasOwnProperty("newSourceIp"))
+                                if (!$util.isString(message.newSourceIp))
+                                    return "newSourceIp: string expected";
+                            if (message.oldDestinationIp != null && message.hasOwnProperty("oldDestinationIp"))
+                                if (!$util.isString(message.oldDestinationIp))
+                                    return "oldDestinationIp: string expected";
+                            if (message.newDestinationIp != null && message.hasOwnProperty("newDestinationIp"))
+                                if (!$util.isString(message.newDestinationIp))
+                                    return "newDestinationIp: string expected";
+                            if (message.oldSourcePort != null && message.hasOwnProperty("oldSourcePort"))
+                                if (!$util.isInteger(message.oldSourcePort))
+                                    return "oldSourcePort: integer expected";
+                            if (message.newSourcePort != null && message.hasOwnProperty("newSourcePort"))
+                                if (!$util.isInteger(message.newSourcePort))
+                                    return "newSourcePort: integer expected";
+                            if (message.oldDestinationPort != null && message.hasOwnProperty("oldDestinationPort"))
+                                if (!$util.isInteger(message.oldDestinationPort))
+                                    return "oldDestinationPort: integer expected";
+                            if (message.newDestinationPort != null && message.hasOwnProperty("newDestinationPort"))
+                                if (!$util.isInteger(message.newDestinationPort))
+                                    return "newDestinationPort: integer expected";
+                            if (message.routerUri != null && message.hasOwnProperty("routerUri"))
+                                if (!$util.isString(message.routerUri))
+                                    return "routerUri: string expected";
+                            if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
+                                if (!$util.isString(message.natGatewayName))
+                                    return "natGatewayName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NatInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.NatInfo} NatInfo
+                         */
+                        NatInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.NatInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.NatInfo();
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "INTERNAL_TO_EXTERNAL":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "EXTERNAL_TO_INTERNAL":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "CLOUD_NAT":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            case "PRIVATE_SERVICE_CONNECT":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
+                            if (object.protocol != null)
+                                message.protocol = String(object.protocol);
+                            if (object.networkUri != null)
+                                message.networkUri = String(object.networkUri);
+                            if (object.oldSourceIp != null)
+                                message.oldSourceIp = String(object.oldSourceIp);
+                            if (object.newSourceIp != null)
+                                message.newSourceIp = String(object.newSourceIp);
+                            if (object.oldDestinationIp != null)
+                                message.oldDestinationIp = String(object.oldDestinationIp);
+                            if (object.newDestinationIp != null)
+                                message.newDestinationIp = String(object.newDestinationIp);
+                            if (object.oldSourcePort != null)
+                                message.oldSourcePort = object.oldSourcePort | 0;
+                            if (object.newSourcePort != null)
+                                message.newSourcePort = object.newSourcePort | 0;
+                            if (object.oldDestinationPort != null)
+                                message.oldDestinationPort = object.oldDestinationPort | 0;
+                            if (object.newDestinationPort != null)
+                                message.newDestinationPort = object.newDestinationPort | 0;
+                            if (object.routerUri != null)
+                                message.routerUri = String(object.routerUri);
+                            if (object.natGatewayName != null)
+                                message.natGatewayName = String(object.natGatewayName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NatInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.NatInfo} message NatInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NatInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                object.protocol = "";
+                                object.networkUri = "";
+                                object.oldSourceIp = "";
+                                object.newSourceIp = "";
+                                object.oldDestinationIp = "";
+                                object.newDestinationIp = "";
+                                object.oldSourcePort = 0;
+                                object.newSourcePort = 0;
+                                object.oldDestinationPort = 0;
+                                object.newDestinationPort = 0;
+                                object.routerUri = "";
+                                object.natGatewayName = "";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.NatInfo.Type[message.type] === undefined ? message.type : $root.google.cloud.networkmanagement.v1beta1.NatInfo.Type[message.type] : message.type;
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                object.protocol = message.protocol;
+                            if (message.networkUri != null && message.hasOwnProperty("networkUri"))
+                                object.networkUri = message.networkUri;
+                            if (message.oldSourceIp != null && message.hasOwnProperty("oldSourceIp"))
+                                object.oldSourceIp = message.oldSourceIp;
+                            if (message.newSourceIp != null && message.hasOwnProperty("newSourceIp"))
+                                object.newSourceIp = message.newSourceIp;
+                            if (message.oldDestinationIp != null && message.hasOwnProperty("oldDestinationIp"))
+                                object.oldDestinationIp = message.oldDestinationIp;
+                            if (message.newDestinationIp != null && message.hasOwnProperty("newDestinationIp"))
+                                object.newDestinationIp = message.newDestinationIp;
+                            if (message.oldSourcePort != null && message.hasOwnProperty("oldSourcePort"))
+                                object.oldSourcePort = message.oldSourcePort;
+                            if (message.newSourcePort != null && message.hasOwnProperty("newSourcePort"))
+                                object.newSourcePort = message.newSourcePort;
+                            if (message.oldDestinationPort != null && message.hasOwnProperty("oldDestinationPort"))
+                                object.oldDestinationPort = message.oldDestinationPort;
+                            if (message.newDestinationPort != null && message.hasOwnProperty("newDestinationPort"))
+                                object.newDestinationPort = message.newDestinationPort;
+                            if (message.routerUri != null && message.hasOwnProperty("routerUri"))
+                                object.routerUri = message.routerUri;
+                            if (message.natGatewayName != null && message.hasOwnProperty("natGatewayName"))
+                                object.natGatewayName = message.natGatewayName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NatInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NatInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NatInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.NatInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NatInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.NatInfo";
+                        };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.networkmanagement.v1beta1.NatInfo.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} INTERNAL_TO_EXTERNAL=1 INTERNAL_TO_EXTERNAL value
+                         * @property {number} EXTERNAL_TO_INTERNAL=2 EXTERNAL_TO_INTERNAL value
+                         * @property {number} CLOUD_NAT=3 CLOUD_NAT value
+                         * @property {number} PRIVATE_SERVICE_CONNECT=4 PRIVATE_SERVICE_CONNECT value
+                         */
+                        NatInfo.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INTERNAL_TO_EXTERNAL"] = 1;
+                            values[valuesById[2] = "EXTERNAL_TO_INTERNAL"] = 2;
+                            values[valuesById[3] = "CLOUD_NAT"] = 3;
+                            values[valuesById[4] = "PRIVATE_SERVICE_CONNECT"] = 4;
+                            return values;
+                        })();
+    
+                        return NatInfo;
                     })();
     
                     v1beta1.ProxyConnectionInfo = (function() {

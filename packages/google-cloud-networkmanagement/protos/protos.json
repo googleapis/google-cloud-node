@@ -390,6 +390,7 @@
                             "cloudFunction",
                             "appEngineVersion",
                             "cloudRunRevision",
+                            "nat",
                             "proxyConnection",
                             "loadBalancerBackendInfo",
                             "storageBucket"
@@ -492,6 +493,10 @@
                         "cloudRunRevision": {
                           "type": "CloudRunRevisionInfo",
                           "id": 23
+                        },
+                        "nat": {
+                          "type": "NatInfo",
+                          "id": 25
                         },
                         "proxyConnection": {
                           "type": "ProxyConnectionInfo",
@@ -1313,6 +1318,73 @@
                         "location": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "NatInfo": {
+                      "fields": {
+                        "type": {
+                          "type": "Type",
+                          "id": 1
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "oldSourceIp": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "newSourceIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "oldDestinationIp": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "newDestinationIp": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "oldSourcePort": {
+                          "type": "int32",
+                          "id": 8
+                        },
+                        "newSourcePort": {
+                          "type": "int32",
+                          "id": 9
+                        },
+                        "oldDestinationPort": {
+                          "type": "int32",
+                          "id": 10
+                        },
+                        "newDestinationPort": {
+                          "type": "int32",
+                          "id": 11
+                        },
+                        "routerUri": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "natGatewayName": {
+                          "type": "string",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "INTERNAL_TO_EXTERNAL": 1,
+                            "EXTERNAL_TO_INTERNAL": 2,
+                            "CLOUD_NAT": 3,
+                            "PRIVATE_SERVICE_CONNECT": 4
+                          }
                         }
                       }
                     },
@@ -2134,6 +2206,7 @@
                             "cloudFunction",
                             "appEngineVersion",
                             "cloudRunRevision",
+                            "nat",
                             "proxyConnection",
                             "loadBalancerBackendInfo",
                             "storageBucket"
@@ -2236,6 +2309,10 @@
                         "cloudRunRevision": {
                           "type": "CloudRunRevisionInfo",
                           "id": 23
+                        },
+                        "nat": {
+                          "type": "NatInfo",
+                          "id": 25
                         },
                         "proxyConnection": {
                           "type": "ProxyConnectionInfo",
@@ -3057,6 +3134,73 @@
                         "location": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "NatInfo": {
+                      "fields": {
+                        "type": {
+                          "type": "Type",
+                          "id": 1
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "oldSourceIp": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "newSourceIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "oldDestinationIp": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "newDestinationIp": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "oldSourcePort": {
+                          "type": "int32",
+                          "id": 8
+                        },
+                        "newSourcePort": {
+                          "type": "int32",
+                          "id": 9
+                        },
+                        "oldDestinationPort": {
+                          "type": "int32",
+                          "id": 10
+                        },
+                        "newDestinationPort": {
+                          "type": "int32",
+                          "id": 11
+                        },
+                        "routerUri": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "natGatewayName": {
+                          "type": "string",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "INTERNAL_TO_EXTERNAL": 1,
+                            "EXTERNAL_TO_INTERNAL": 2,
+                            "CLOUD_NAT": 3,
+                            "PRIVATE_SERVICE_CONNECT": 4
+                          }
                         }
                       }
                     },
