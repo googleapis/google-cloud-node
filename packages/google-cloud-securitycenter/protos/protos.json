@@ -681,6 +681,60 @@
                         "externalSystemUpdateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 5
+                        },
+                        "caseUri": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "casePriority": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "caseSla": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9
+                        },
+                        "caseCreateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        },
+                        "caseCloseTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11
+                        },
+                        "ticketInfo": {
+                          "type": "TicketInfo",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "TicketInfo": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "assignee": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "uri": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "status": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 6
+                            }
+                          }
                         }
                       }
                     },
@@ -925,6 +979,10 @@
                           "type": "BackupDisasterRecovery",
                           "id": 55
                         },
+                        "securityPosture": {
+                          "type": "SecurityPosture",
+                          "id": 56
+                        },
                         "logEntries": {
                           "rule": "repeated",
                           "type": "LogEntry",
@@ -968,7 +1026,8 @@
                             "VULNERABILITY": 2,
                             "MISCONFIGURATION": 3,
                             "OBSERVATION": 4,
-                            "SCC_ERROR": 5
+                            "SCC_ERROR": 5,
+                            "POSTURE_VIOLATION": 6
                           }
                         }
                       }
@@ -1567,6 +1626,61 @@
                         "val": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SecurityPosture": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "revisionId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "postureDeploymentResource": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "postureDeployment": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "changedPolicy": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "policySet": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "policy": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "policyDriftDetails": {
+                          "rule": "repeated",
+                          "type": "PolicyDriftDetails",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "PolicyDriftDetails": {
+                          "fields": {
+                            "field": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "expectedValue": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "detectedValue": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
                         }
                       }
                     },
