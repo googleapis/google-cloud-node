@@ -143,6 +143,7 @@
   * [Schema_service.list_schemas](#schema_service.list_schemas)
   * [Schema_service.update_schema](#schema_service.update_schema)
   * [Search_service.search](#search_service.search)
+  * [Search_tuning_service.train_custom_model](#search_tuning_service.train_custom_model)
   * [Serving_config_service.get_serving_config](#serving_config_service.get_serving_config)
   * [Serving_config_service.list_serving_configs](#serving_config_service.list_serving_configs)
   * [Serving_config_service.update_serving_config](#serving_config_service.update_serving_config)
@@ -2398,6 +2399,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1beta/search_service.search.js`
+
+
+-----
+
+
+
+
+### Search_tuning_service.train_custom_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.train_custom_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.train_custom_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.train_custom_model.js`
 
 
 -----

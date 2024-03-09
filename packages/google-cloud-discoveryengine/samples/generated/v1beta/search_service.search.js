@@ -80,6 +80,10 @@ function main(servingConfig) {
    */
   // const offset = 1234
   /**
+   *  A list of data store specs to apply on a search call.
+   */
+  // const dataStoreSpecs = [1,2,3,4]
+  /**
    *  The filter syntax consists of an expression language for constructing a
    *  predicate from one or more fields of the documents being filtered. Filter
    *  expression is case-sensitive.

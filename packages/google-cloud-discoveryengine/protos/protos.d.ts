@@ -40895,6 +40895,9 @@ export namespace google {
 
                     /** Document derivedStructData */
                     derivedStructData?: (google.protobuf.IStruct|null);
+
+                    /** Document indexTime */
+                    indexTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a Document. */
@@ -40929,6 +40932,9 @@ export namespace google {
 
                     /** Document derivedStructData. */
                     public derivedStructData?: (google.protobuf.IStruct|null);
+
+                    /** Document indexTime. */
+                    public indexTime?: (google.protobuf.ITimestamp|null);
 
                     /** Document data. */
                     public data?: ("structData"|"jsonData");
@@ -42374,6 +42380,9 @@ export namespace google {
 
                     /** PurgeDocumentsMetadata failureCount */
                     failureCount?: (number|Long|string|null);
+
+                    /** PurgeDocumentsMetadata ignoredCount */
+                    ignoredCount?: (number|Long|string|null);
                 }
 
                 /** Represents a PurgeDocumentsMetadata. */
@@ -42396,6 +42405,9 @@ export namespace google {
 
                     /** PurgeDocumentsMetadata failureCount. */
                     public failureCount: (number|Long|string);
+
+                    /** PurgeDocumentsMetadata ignoredCount. */
+                    public ignoredCount: (number|Long|string);
 
                     /**
                      * Creates a new PurgeDocumentsMetadata instance using the specified properties.
@@ -43529,6 +43541,9 @@ export namespace google {
                     /** SearchRequest offset */
                     offset?: (number|null);
 
+                    /** SearchRequest dataStoreSpecs */
+                    dataStoreSpecs?: (google.cloud.discoveryengine.v1beta.SearchRequest.IDataStoreSpec[]|null);
+
                     /** SearchRequest filter */
                     filter?: (string|null);
 
@@ -43604,6 +43619,9 @@ export namespace google {
 
                     /** SearchRequest offset. */
                     public offset: number;
+
+                    /** SearchRequest dataStoreSpecs. */
+                    public dataStoreSpecs: google.cloud.discoveryengine.v1beta.SearchRequest.IDataStoreSpec[];
 
                     /** SearchRequest filter. */
                     public filter: string;
@@ -43824,6 +43842,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ImageQuery
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DataStoreSpec. */
+                    interface IDataStoreSpec {
+
+                        /** DataStoreSpec dataStore */
+                        dataStore?: (string|null);
+                    }
+
+                    /** Represents a DataStoreSpec. */
+                    class DataStoreSpec implements IDataStoreSpec {
+
+                        /**
+                         * Constructs a new DataStoreSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1beta.SearchRequest.IDataStoreSpec);
+
+                        /** DataStoreSpec dataStore. */
+                        public dataStore: string;
+
+                        /**
+                         * Creates a new DataStoreSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataStoreSpec instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1beta.SearchRequest.IDataStoreSpec): google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec;
+
+                        /**
+                         * Encodes the specified DataStoreSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec.verify|verify} messages.
+                         * @param message DataStoreSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1beta.SearchRequest.IDataStoreSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataStoreSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec.verify|verify} messages.
+                         * @param message DataStoreSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.SearchRequest.IDataStoreSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataStoreSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataStoreSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec;
+
+                        /**
+                         * Decodes a DataStoreSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataStoreSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec;
+
+                        /**
+                         * Verifies a DataStoreSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataStoreSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataStoreSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec;
+
+                        /**
+                         * Creates a plain object from a DataStoreSpec message. Also converts values to other types if specified.
+                         * @param message DataStoreSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataStoreSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataStoreSpec
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -47113,6 +47228,9 @@ export namespace google {
 
                     /** ConverseConversationRequest filter */
                     filter?: (string|null);
+
+                    /** ConverseConversationRequest boostSpec */
+                    boostSpec?: (google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec|null);
                 }
 
                 /** Represents a ConverseConversationRequest. */
@@ -47147,6 +47265,9 @@ export namespace google {
 
                     /** ConverseConversationRequest filter. */
                     public filter: string;
+
+                    /** ConverseConversationRequest boostSpec. */
+                    public boostSpec?: (google.cloud.discoveryengine.v1beta.SearchRequest.IBoostSpec|null);
 
                     /**
                      * Creates a new ConverseConversationRequest instance using the specified properties.
@@ -47988,6 +48109,12 @@ export namespace google {
 
                     /** DataStore createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataStore documentProcessingConfig */
+                    documentProcessingConfig?: (google.cloud.discoveryengine.v1beta.IDocumentProcessingConfig|null);
+
+                    /** DataStore startingSchema */
+                    startingSchema?: (google.cloud.discoveryengine.v1beta.ISchema|null);
                 }
 
                 /** Represents a DataStore. */
@@ -48019,6 +48146,12 @@ export namespace google {
 
                     /** DataStore createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataStore documentProcessingConfig. */
+                    public documentProcessingConfig?: (google.cloud.discoveryengine.v1beta.IDocumentProcessingConfig|null);
+
+                    /** DataStore startingSchema. */
+                    public startingSchema?: (google.cloud.discoveryengine.v1beta.ISchema|null);
 
                     /**
                      * Creates a new DataStore instance using the specified properties.
@@ -48107,6 +48240,533 @@ export namespace google {
                         CONTENT_REQUIRED = 2,
                         PUBLIC_WEBSITE = 3
                     }
+                }
+
+                /** Properties of a DocumentProcessingConfig. */
+                interface IDocumentProcessingConfig {
+
+                    /** DocumentProcessingConfig name */
+                    name?: (string|null);
+
+                    /** DocumentProcessingConfig defaultParsingConfig */
+                    defaultParsingConfig?: (google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.IParsingConfig|null);
+
+                    /** DocumentProcessingConfig parsingConfigOverrides */
+                    parsingConfigOverrides?: ({ [k: string]: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.IParsingConfig }|null);
+                }
+
+                /** Represents a DocumentProcessingConfig. */
+                class DocumentProcessingConfig implements IDocumentProcessingConfig {
+
+                    /**
+                     * Constructs a new DocumentProcessingConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1beta.IDocumentProcessingConfig);
+
+                    /** DocumentProcessingConfig name. */
+                    public name: string;
+
+                    /** DocumentProcessingConfig defaultParsingConfig. */
+                    public defaultParsingConfig?: (google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.IParsingConfig|null);
+
+                    /** DocumentProcessingConfig parsingConfigOverrides. */
+                    public parsingConfigOverrides: { [k: string]: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.IParsingConfig };
+
+                    /**
+                     * Creates a new DocumentProcessingConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DocumentProcessingConfig instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1beta.IDocumentProcessingConfig): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig;
+
+                    /**
+                     * Encodes the specified DocumentProcessingConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.verify|verify} messages.
+                     * @param message DocumentProcessingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1beta.IDocumentProcessingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DocumentProcessingConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.verify|verify} messages.
+                     * @param message DocumentProcessingConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.IDocumentProcessingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DocumentProcessingConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DocumentProcessingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig;
+
+                    /**
+                     * Decodes a DocumentProcessingConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DocumentProcessingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig;
+
+                    /**
+                     * Verifies a DocumentProcessingConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DocumentProcessingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DocumentProcessingConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig;
+
+                    /**
+                     * Creates a plain object from a DocumentProcessingConfig message. Also converts values to other types if specified.
+                     * @param message DocumentProcessingConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DocumentProcessingConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DocumentProcessingConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DocumentProcessingConfig {
+
+                    /** Properties of a ParsingConfig. */
+                    interface IParsingConfig {
+
+                        /** ParsingConfig digitalParsingConfig */
+                        digitalParsingConfig?: (google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IDigitalParsingConfig|null);
+
+                        /** ParsingConfig ocrParsingConfig */
+                        ocrParsingConfig?: (google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IOcrParsingConfig|null);
+                    }
+
+                    /** Represents a ParsingConfig. */
+                    class ParsingConfig implements IParsingConfig {
+
+                        /**
+                         * Constructs a new ParsingConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.IParsingConfig);
+
+                        /** ParsingConfig digitalParsingConfig. */
+                        public digitalParsingConfig?: (google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IDigitalParsingConfig|null);
+
+                        /** ParsingConfig ocrParsingConfig. */
+                        public ocrParsingConfig?: (google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IOcrParsingConfig|null);
+
+                        /** ParsingConfig typeDedicatedConfig. */
+                        public typeDedicatedConfig?: ("digitalParsingConfig"|"ocrParsingConfig");
+
+                        /**
+                         * Creates a new ParsingConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ParsingConfig instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.IParsingConfig): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig;
+
+                        /**
+                         * Encodes the specified ParsingConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.verify|verify} messages.
+                         * @param message ParsingConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.IParsingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ParsingConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.verify|verify} messages.
+                         * @param message ParsingConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.IParsingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ParsingConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ParsingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig;
+
+                        /**
+                         * Decodes a ParsingConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ParsingConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig;
+
+                        /**
+                         * Verifies a ParsingConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ParsingConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ParsingConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig;
+
+                        /**
+                         * Creates a plain object from a ParsingConfig message. Also converts values to other types if specified.
+                         * @param message ParsingConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ParsingConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ParsingConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ParsingConfig {
+
+                        /** Properties of a DigitalParsingConfig. */
+                        interface IDigitalParsingConfig {
+                        }
+
+                        /** Represents a DigitalParsingConfig. */
+                        class DigitalParsingConfig implements IDigitalParsingConfig {
+
+                            /**
+                             * Constructs a new DigitalParsingConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IDigitalParsingConfig);
+
+                            /**
+                             * Creates a new DigitalParsingConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DigitalParsingConfig instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IDigitalParsingConfig): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.DigitalParsingConfig;
+
+                            /**
+                             * Encodes the specified DigitalParsingConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.DigitalParsingConfig.verify|verify} messages.
+                             * @param message DigitalParsingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IDigitalParsingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DigitalParsingConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.DigitalParsingConfig.verify|verify} messages.
+                             * @param message DigitalParsingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IDigitalParsingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DigitalParsingConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DigitalParsingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.DigitalParsingConfig;
+
+                            /**
+                             * Decodes a DigitalParsingConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DigitalParsingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.DigitalParsingConfig;
+
+                            /**
+                             * Verifies a DigitalParsingConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DigitalParsingConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DigitalParsingConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.DigitalParsingConfig;
+
+                            /**
+                             * Creates a plain object from a DigitalParsingConfig message. Also converts values to other types if specified.
+                             * @param message DigitalParsingConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.DigitalParsingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DigitalParsingConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DigitalParsingConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an OcrParsingConfig. */
+                        interface IOcrParsingConfig {
+
+                            /** OcrParsingConfig enhancedDocumentElements */
+                            enhancedDocumentElements?: (string[]|null);
+
+                            /** OcrParsingConfig useNativeText */
+                            useNativeText?: (boolean|null);
+                        }
+
+                        /** Represents an OcrParsingConfig. */
+                        class OcrParsingConfig implements IOcrParsingConfig {
+
+                            /**
+                             * Constructs a new OcrParsingConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IOcrParsingConfig);
+
+                            /** OcrParsingConfig enhancedDocumentElements. */
+                            public enhancedDocumentElements: string[];
+
+                            /** OcrParsingConfig useNativeText. */
+                            public useNativeText: boolean;
+
+                            /**
+                             * Creates a new OcrParsingConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns OcrParsingConfig instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IOcrParsingConfig): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.OcrParsingConfig;
+
+                            /**
+                             * Encodes the specified OcrParsingConfig message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.OcrParsingConfig.verify|verify} messages.
+                             * @param message OcrParsingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IOcrParsingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified OcrParsingConfig message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.OcrParsingConfig.verify|verify} messages.
+                             * @param message OcrParsingConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.IOcrParsingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an OcrParsingConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns OcrParsingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.OcrParsingConfig;
+
+                            /**
+                             * Decodes an OcrParsingConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns OcrParsingConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.OcrParsingConfig;
+
+                            /**
+                             * Verifies an OcrParsingConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an OcrParsingConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns OcrParsingConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.OcrParsingConfig;
+
+                            /**
+                             * Creates a plain object from an OcrParsingConfig message. Also converts values to other types if specified.
+                             * @param message OcrParsingConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1beta.DocumentProcessingConfig.ParsingConfig.OcrParsingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this OcrParsingConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for OcrParsingConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a Schema. */
+                interface ISchema {
+
+                    /** Schema structSchema */
+                    structSchema?: (google.protobuf.IStruct|null);
+
+                    /** Schema jsonSchema */
+                    jsonSchema?: (string|null);
+
+                    /** Schema name */
+                    name?: (string|null);
+                }
+
+                /** Represents a Schema. */
+                class Schema implements ISchema {
+
+                    /**
+                     * Constructs a new Schema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1beta.ISchema);
+
+                    /** Schema structSchema. */
+                    public structSchema?: (google.protobuf.IStruct|null);
+
+                    /** Schema jsonSchema. */
+                    public jsonSchema?: (string|null);
+
+                    /** Schema name. */
+                    public name: string;
+
+                    /** Schema schema. */
+                    public schema?: ("structSchema"|"jsonSchema");
+
+                    /**
+                     * Creates a new Schema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Schema instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1beta.ISchema): google.cloud.discoveryengine.v1beta.Schema;
+
+                    /**
+                     * Encodes the specified Schema message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.Schema.verify|verify} messages.
+                     * @param message Schema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1beta.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Schema message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.Schema.verify|verify} messages.
+                     * @param message Schema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Schema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Schema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.Schema;
+
+                    /**
+                     * Decodes a Schema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Schema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.Schema;
+
+                    /**
+                     * Verifies a Schema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Schema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Schema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.Schema;
+
+                    /**
+                     * Creates a plain object from a Schema message. Also converts values to other types if specified.
+                     * @param message Schema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1beta.Schema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Schema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Schema
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a DataStoreService */
@@ -51911,118 +52571,6 @@ export namespace google {
                     }
                 }
 
-                /** Properties of a Schema. */
-                interface ISchema {
-
-                    /** Schema structSchema */
-                    structSchema?: (google.protobuf.IStruct|null);
-
-                    /** Schema jsonSchema */
-                    jsonSchema?: (string|null);
-
-                    /** Schema name */
-                    name?: (string|null);
-                }
-
-                /** Represents a Schema. */
-                class Schema implements ISchema {
-
-                    /**
-                     * Constructs a new Schema.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.discoveryengine.v1beta.ISchema);
-
-                    /** Schema structSchema. */
-                    public structSchema?: (google.protobuf.IStruct|null);
-
-                    /** Schema jsonSchema. */
-                    public jsonSchema?: (string|null);
-
-                    /** Schema name. */
-                    public name: string;
-
-                    /** Schema schema. */
-                    public schema?: ("structSchema"|"jsonSchema");
-
-                    /**
-                     * Creates a new Schema instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Schema instance
-                     */
-                    public static create(properties?: google.cloud.discoveryengine.v1beta.ISchema): google.cloud.discoveryengine.v1beta.Schema;
-
-                    /**
-                     * Encodes the specified Schema message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.Schema.verify|verify} messages.
-                     * @param message Schema message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.discoveryengine.v1beta.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Schema message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.Schema.verify|verify} messages.
-                     * @param message Schema message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.ISchema, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Schema message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Schema
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.Schema;
-
-                    /**
-                     * Decodes a Schema message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Schema
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.Schema;
-
-                    /**
-                     * Verifies a Schema message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Schema message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Schema
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.Schema;
-
-                    /**
-                     * Creates a plain object from a Schema message. Also converts values to other types if specified.
-                     * @param message Schema
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.discoveryengine.v1beta.Schema, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Schema to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Schema
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Represents a SchemaService */
                 class SchemaService extends $protobuf.rpc.Service {
 
@@ -53073,6 +53621,499 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteSchemaMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a SearchTuningService */
+                class SearchTuningService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SearchTuningService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SearchTuningService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SearchTuningService;
+
+                    /**
+                     * Calls TrainCustomModel.
+                     * @param request TrainCustomModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public trainCustomModel(request: google.cloud.discoveryengine.v1beta.ITrainCustomModelRequest, callback: google.cloud.discoveryengine.v1beta.SearchTuningService.TrainCustomModelCallback): void;
+
+                    /**
+                     * Calls TrainCustomModel.
+                     * @param request TrainCustomModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public trainCustomModel(request: google.cloud.discoveryengine.v1beta.ITrainCustomModelRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace SearchTuningService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1beta.SearchTuningService|trainCustomModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type TrainCustomModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a TrainCustomModelRequest. */
+                interface ITrainCustomModelRequest {
+
+                    /** TrainCustomModelRequest gcsTrainingInput */
+                    gcsTrainingInput?: (google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.IGcsTrainingInput|null);
+
+                    /** TrainCustomModelRequest dataStore */
+                    dataStore?: (string|null);
+
+                    /** TrainCustomModelRequest modelType */
+                    modelType?: (string|null);
+
+                    /** TrainCustomModelRequest errorConfig */
+                    errorConfig?: (google.cloud.discoveryengine.v1beta.IImportErrorConfig|null);
+                }
+
+                /** Represents a TrainCustomModelRequest. */
+                class TrainCustomModelRequest implements ITrainCustomModelRequest {
+
+                    /**
+                     * Constructs a new TrainCustomModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1beta.ITrainCustomModelRequest);
+
+                    /** TrainCustomModelRequest gcsTrainingInput. */
+                    public gcsTrainingInput?: (google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.IGcsTrainingInput|null);
+
+                    /** TrainCustomModelRequest dataStore. */
+                    public dataStore: string;
+
+                    /** TrainCustomModelRequest modelType. */
+                    public modelType: string;
+
+                    /** TrainCustomModelRequest errorConfig. */
+                    public errorConfig?: (google.cloud.discoveryengine.v1beta.IImportErrorConfig|null);
+
+                    /** TrainCustomModelRequest trainingInput. */
+                    public trainingInput?: "gcsTrainingInput";
+
+                    /**
+                     * Creates a new TrainCustomModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TrainCustomModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1beta.ITrainCustomModelRequest): google.cloud.discoveryengine.v1beta.TrainCustomModelRequest;
+
+                    /**
+                     * Encodes the specified TrainCustomModelRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.verify|verify} messages.
+                     * @param message TrainCustomModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1beta.ITrainCustomModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TrainCustomModelRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.verify|verify} messages.
+                     * @param message TrainCustomModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.ITrainCustomModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TrainCustomModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TrainCustomModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.TrainCustomModelRequest;
+
+                    /**
+                     * Decodes a TrainCustomModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TrainCustomModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.TrainCustomModelRequest;
+
+                    /**
+                     * Verifies a TrainCustomModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TrainCustomModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TrainCustomModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.TrainCustomModelRequest;
+
+                    /**
+                     * Creates a plain object from a TrainCustomModelRequest message. Also converts values to other types if specified.
+                     * @param message TrainCustomModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1beta.TrainCustomModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TrainCustomModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TrainCustomModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TrainCustomModelRequest {
+
+                    /** Properties of a GcsTrainingInput. */
+                    interface IGcsTrainingInput {
+
+                        /** GcsTrainingInput corpusDataPath */
+                        corpusDataPath?: (string|null);
+
+                        /** GcsTrainingInput queryDataPath */
+                        queryDataPath?: (string|null);
+
+                        /** GcsTrainingInput trainDataPath */
+                        trainDataPath?: (string|null);
+
+                        /** GcsTrainingInput testDataPath */
+                        testDataPath?: (string|null);
+                    }
+
+                    /** Represents a GcsTrainingInput. */
+                    class GcsTrainingInput implements IGcsTrainingInput {
+
+                        /**
+                         * Constructs a new GcsTrainingInput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.IGcsTrainingInput);
+
+                        /** GcsTrainingInput corpusDataPath. */
+                        public corpusDataPath: string;
+
+                        /** GcsTrainingInput queryDataPath. */
+                        public queryDataPath: string;
+
+                        /** GcsTrainingInput trainDataPath. */
+                        public trainDataPath: string;
+
+                        /** GcsTrainingInput testDataPath. */
+                        public testDataPath: string;
+
+                        /**
+                         * Creates a new GcsTrainingInput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsTrainingInput instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.IGcsTrainingInput): google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.GcsTrainingInput;
+
+                        /**
+                         * Encodes the specified GcsTrainingInput message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.GcsTrainingInput.verify|verify} messages.
+                         * @param message GcsTrainingInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.IGcsTrainingInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsTrainingInput message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.GcsTrainingInput.verify|verify} messages.
+                         * @param message GcsTrainingInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.IGcsTrainingInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsTrainingInput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsTrainingInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.GcsTrainingInput;
+
+                        /**
+                         * Decodes a GcsTrainingInput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsTrainingInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.GcsTrainingInput;
+
+                        /**
+                         * Verifies a GcsTrainingInput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsTrainingInput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsTrainingInput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.GcsTrainingInput;
+
+                        /**
+                         * Creates a plain object from a GcsTrainingInput message. Also converts values to other types if specified.
+                         * @param message GcsTrainingInput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.GcsTrainingInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsTrainingInput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsTrainingInput
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a TrainCustomModelResponse. */
+                interface ITrainCustomModelResponse {
+
+                    /** TrainCustomModelResponse errorSamples */
+                    errorSamples?: (google.rpc.IStatus[]|null);
+
+                    /** TrainCustomModelResponse errorConfig */
+                    errorConfig?: (google.cloud.discoveryengine.v1beta.IImportErrorConfig|null);
+
+                    /** TrainCustomModelResponse modelStatus */
+                    modelStatus?: (string|null);
+                }
+
+                /** Represents a TrainCustomModelResponse. */
+                class TrainCustomModelResponse implements ITrainCustomModelResponse {
+
+                    /**
+                     * Constructs a new TrainCustomModelResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1beta.ITrainCustomModelResponse);
+
+                    /** TrainCustomModelResponse errorSamples. */
+                    public errorSamples: google.rpc.IStatus[];
+
+                    /** TrainCustomModelResponse errorConfig. */
+                    public errorConfig?: (google.cloud.discoveryengine.v1beta.IImportErrorConfig|null);
+
+                    /** TrainCustomModelResponse modelStatus. */
+                    public modelStatus: string;
+
+                    /**
+                     * Creates a new TrainCustomModelResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TrainCustomModelResponse instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1beta.ITrainCustomModelResponse): google.cloud.discoveryengine.v1beta.TrainCustomModelResponse;
+
+                    /**
+                     * Encodes the specified TrainCustomModelResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.TrainCustomModelResponse.verify|verify} messages.
+                     * @param message TrainCustomModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1beta.ITrainCustomModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TrainCustomModelResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.TrainCustomModelResponse.verify|verify} messages.
+                     * @param message TrainCustomModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.ITrainCustomModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TrainCustomModelResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TrainCustomModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.TrainCustomModelResponse;
+
+                    /**
+                     * Decodes a TrainCustomModelResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TrainCustomModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.TrainCustomModelResponse;
+
+                    /**
+                     * Verifies a TrainCustomModelResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TrainCustomModelResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TrainCustomModelResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.TrainCustomModelResponse;
+
+                    /**
+                     * Creates a plain object from a TrainCustomModelResponse message. Also converts values to other types if specified.
+                     * @param message TrainCustomModelResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1beta.TrainCustomModelResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TrainCustomModelResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TrainCustomModelResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TrainCustomModelMetadata. */
+                interface ITrainCustomModelMetadata {
+
+                    /** TrainCustomModelMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TrainCustomModelMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a TrainCustomModelMetadata. */
+                class TrainCustomModelMetadata implements ITrainCustomModelMetadata {
+
+                    /**
+                     * Constructs a new TrainCustomModelMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1beta.ITrainCustomModelMetadata);
+
+                    /** TrainCustomModelMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TrainCustomModelMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new TrainCustomModelMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TrainCustomModelMetadata instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1beta.ITrainCustomModelMetadata): google.cloud.discoveryengine.v1beta.TrainCustomModelMetadata;
+
+                    /**
+                     * Encodes the specified TrainCustomModelMetadata message. Does not implicitly {@link google.cloud.discoveryengine.v1beta.TrainCustomModelMetadata.verify|verify} messages.
+                     * @param message TrainCustomModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1beta.ITrainCustomModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TrainCustomModelMetadata message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1beta.TrainCustomModelMetadata.verify|verify} messages.
+                     * @param message TrainCustomModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1beta.ITrainCustomModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TrainCustomModelMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TrainCustomModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1beta.TrainCustomModelMetadata;
+
+                    /**
+                     * Decodes a TrainCustomModelMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TrainCustomModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1beta.TrainCustomModelMetadata;
+
+                    /**
+                     * Verifies a TrainCustomModelMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TrainCustomModelMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TrainCustomModelMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1beta.TrainCustomModelMetadata;
+
+                    /**
+                     * Creates a plain object from a TrainCustomModelMetadata message. Also converts values to other types if specified.
+                     * @param message TrainCustomModelMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1beta.TrainCustomModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TrainCustomModelMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TrainCustomModelMetadata
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -58409,7 +59450,8 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a Http. */
@@ -59061,6 +60103,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -59098,6 +60143,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -59679,6 +60727,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -59692,6 +60755,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -59973,6 +61051,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -59989,6 +61070,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -60192,7 +61276,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */
@@ -60424,6 +61511,21 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
         /** Properties of a FileDescriptorProto. */
         interface IFileDescriptorProto {
 
@@ -60464,7 +61566,7 @@ export namespace google {
             syntax?: (string|null);
 
             /** FileDescriptorProto edition */
-            edition?: (string|null);
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -60513,7 +61615,7 @@ export namespace google {
             public syntax: string;
 
             /** FileDescriptorProto edition. */
-            public edition: string;
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -60964,6 +62066,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -60977,6 +62088,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -61054,6 +62174,136 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -61240,8 +62490,8 @@ export namespace google {
             /** Label enum. */
             enum Label {
                 LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
             }
         }
 
@@ -61953,9 +63203,6 @@ export namespace google {
             /** FileOptions pyGenericServices */
             pyGenericServices?: (boolean|null);
 
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
             /** FileOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -61982,6 +63229,9 @@ export namespace google {
 
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -62029,9 +63279,6 @@ export namespace google {
             /** FileOptions pyGenericServices. */
             public pyGenericServices: boolean;
 
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
             /** FileOptions deprecated. */
             public deprecated: boolean;
 
@@ -62058,6 +63305,9 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -62168,6 +63418,9 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -62198,6 +63451,9 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -62310,8 +63566,14 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -62359,8 +63621,14 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -62479,10 +63747,116 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -62496,6 +63870,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -62590,6 +63967,9 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -62611,6 +63991,9 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -62699,6 +64082,12 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -62714,6 +64103,12 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -62799,6 +64194,9 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -62820,6 +64218,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -62914,6 +64315,9 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -62941,6 +64345,9 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -63265,6 +64672,394 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
