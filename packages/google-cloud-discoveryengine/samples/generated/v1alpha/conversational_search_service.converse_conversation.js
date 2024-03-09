@@ -95,6 +95,12 @@ function main(name, query) {
    *  Filter (https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
    */
   // const filter = 'abc123'
+  /**
+   *  Boost specification to boost certain documents in search results which may
+   *  affect the converse response. For more information on boosting, see
+   *  Boosting (https://cloud.google.com/retail/docs/boosting#boost)
+   */
+  // const boostSpec = {}
 
   // Imports the Discoveryengine library
   const {ConversationalSearchServiceClient} = require('@google-cloud/discoveryengine').v1alpha;

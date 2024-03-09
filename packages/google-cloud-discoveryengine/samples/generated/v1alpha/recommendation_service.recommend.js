@@ -38,7 +38,9 @@ function main(servingConfig, userEvent) {
    *  config. For example, for Engine
    *  `projects/* /locations/global/collections/* /engines/my-engine`, you can use
    *  `projects/* /locations/global/collections/* /engines/my-engine/servingConfigs/my-engine`
-   *  for your Recommend   requests.
+   *  for your
+   *  RecommendationService.Recommend google.cloud.discoveryengine.v1alpha.RecommendationService.Recommend 
+   *  requests.
    */
   // const servingConfig = 'abc123'
   /**

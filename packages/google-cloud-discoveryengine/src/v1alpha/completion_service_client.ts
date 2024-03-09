@@ -23,6 +23,8 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
+  LROperation,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
@@ -64,6 +66,7 @@ export class CompletionServiceClient {
   innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   completionServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -197,6 +200,9 @@ export class CompletionServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aclConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aclConfig'
+      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
@@ -208,13 +214,25 @@ export class CompletionServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
         ),
+      projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+        ),
       projectLocationCollectionDataStoreConversationPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
         ),
+      projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/documentProcessingConfig'
+        ),
       projectLocationCollectionDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
+        ),
+      projectLocationCollectionDataStoreServingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}'
         ),
       projectLocationCollectionDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -228,6 +246,10 @@ export class CompletionServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/conversations/{conversation}'
         ),
+      projectLocationCollectionEngineServingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}'
+        ),
       projectLocationDataStorePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataStores/{data_store}'
       ),
@@ -235,13 +257,25 @@ export class CompletionServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
         ),
+      projectLocationDataStoreBranchDocumentChunkPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+        ),
       projectLocationDataStoreConversationPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
         ),
+      projectLocationDataStoreDocumentProcessingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/documentProcessingConfig'
+        ),
       projectLocationDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/schemas/{schema}'
+        ),
+      projectLocationDataStoreServingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/servingConfigs/{serving_config}'
         ),
       projectLocationDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -251,6 +285,139 @@ export class CompletionServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
         ),
+    };
+
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback) {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataConnector/operations/*}',
+          additional_bindings: [
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/models/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/engines/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/operations/*}',
+            },
+            {get: '/v1alpha/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1alpha/{name=projects/*/operations/*}'},
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataConnector}/operations',
+          additional_bindings: [
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/engines/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*}/operations',
+            },
+            {get: '/v1alpha/{name=projects/*/locations/*}/operations'},
+            {get: '/v1alpha/{name=projects/*}/operations'},
+          ],
+        },
+      ];
+    }
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
+    const importSuggestionDenyListEntriesResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.ImportSuggestionDenyListEntriesResponse'
+    ) as gax.protobuf.Type;
+    const importSuggestionDenyListEntriesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.ImportSuggestionDenyListEntriesMetadata'
+    ) as gax.protobuf.Type;
+    const purgeSuggestionDenyListEntriesResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.PurgeSuggestionDenyListEntriesResponse'
+    ) as gax.protobuf.Type;
+    const purgeSuggestionDenyListEntriesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.PurgeSuggestionDenyListEntriesMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      importSuggestionDenyListEntries:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          importSuggestionDenyListEntriesResponse.decode.bind(
+            importSuggestionDenyListEntriesResponse
+          ),
+          importSuggestionDenyListEntriesMetadata.decode.bind(
+            importSuggestionDenyListEntriesMetadata
+          )
+        ),
+      purgeSuggestionDenyListEntries: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeSuggestionDenyListEntriesResponse.decode.bind(
+          purgeSuggestionDenyListEntriesResponse
+        ),
+        purgeSuggestionDenyListEntriesMetadata.decode.bind(
+          purgeSuggestionDenyListEntriesMetadata
+        )
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -303,7 +470,11 @@ export class CompletionServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const completionServiceStubMethods = ['completeQuery'];
+    const completionServiceStubMethods = [
+      'completeQuery',
+      'importSuggestionDenyListEntries',
+      'purgeSuggestionDenyListEntries',
+    ];
     for (const methodName of completionServiceStubMethods) {
       const callPromise = this.completionServiceStub.then(
         stub =>
@@ -319,7 +490,7 @@ export class CompletionServiceClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.longrunning[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -430,8 +601,9 @@ export class CompletionServiceClient {
    *   Required. The typeahead input used to fetch suggestions. Maximum length is
    *   128 characters.
    * @param {string} request.queryModel
-   *   Selects data model of query suggestions for serving. Currently supported
-   *   values:
+   *   Specifies the autocomplete data model. This overrides any model specified
+   *   in the Configuration > Autocomplete section of the Cloud console. Currently
+   *   supported values:
    *
    *   * `document` - Using suggestions generated from user-imported documents.
    *   * `search-history` - Using suggestions generated from the past history of
@@ -557,6 +729,303 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Imports all
+   * {@link protos.google.cloud.discoveryengine.v1alpha.SuggestionDenyListEntry|SuggestionDenyListEntry}
+   * for a DataStore.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.discoveryengine.v1alpha.ImportSuggestionDenyListEntriesRequest.InlineSource} request.inlineSource
+   *   The Inline source for the input content for suggestion deny list entries.
+   * @param {google.cloud.discoveryengine.v1alpha.GcsSource} request.gcsSource
+   *   Cloud Storage location for the input content.
+   *
+   *   Only 1 file can be specified that contains all entries to import.
+   *   Supported values `gcs_source.schema` for autocomplete suggestion deny
+   *   list entry imports:
+   *
+   *   * `suggestion_deny_list` (default): One JSON [SuggestionDenyListEntry]
+   *   per line.
+   * @param {string} request.parent
+   *   Required. The parent data store resource name for which to import denylist
+   *   entries. Follows pattern projects/* /locations/* /collections/* /dataStores/*.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/completion_service.import_suggestion_deny_list_entries.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_CompletionService_ImportSuggestionDenyListEntries_async
+   */
+  importSuggestionDenyListEntries(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesResponse,
+        protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  importSuggestionDenyListEntries(
+    request: protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesResponse,
+        protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importSuggestionDenyListEntries(
+    request: protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesResponse,
+        protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importSuggestionDenyListEntries(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesResponse,
+            protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesResponse,
+        protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesResponse,
+        protos.google.cloud.discoveryengine.v1alpha.IImportSuggestionDenyListEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importSuggestionDenyListEntries(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `importSuggestionDenyListEntries()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/completion_service.import_suggestion_deny_list_entries.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_CompletionService_ImportSuggestionDenyListEntries_async
+   */
+  async checkImportSuggestionDenyListEntriesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1alpha.ImportSuggestionDenyListEntriesResponse,
+      protos.google.cloud.discoveryengine.v1alpha.ImportSuggestionDenyListEntriesMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importSuggestionDenyListEntries,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1alpha.ImportSuggestionDenyListEntriesResponse,
+      protos.google.cloud.discoveryengine.v1alpha.ImportSuggestionDenyListEntriesMetadata
+    >;
+  }
+  /**
+   * Permanently deletes all
+   * {@link protos.google.cloud.discoveryengine.v1alpha.SuggestionDenyListEntry|SuggestionDenyListEntry}
+   * for a DataStore.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent data store resource name for which to import denylist
+   *   entries. Follows pattern projects/* /locations/* /collections/* /dataStores/*.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/completion_service.purge_suggestion_deny_list_entries.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_CompletionService_PurgeSuggestionDenyListEntries_async
+   */
+  purgeSuggestionDenyListEntries(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesResponse,
+        protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  purgeSuggestionDenyListEntries(
+    request: protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesResponse,
+        protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeSuggestionDenyListEntries(
+    request: protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesResponse,
+        protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeSuggestionDenyListEntries(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesResponse,
+            protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesResponse,
+        protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesResponse,
+        protos.google.cloud.discoveryengine.v1alpha.IPurgeSuggestionDenyListEntriesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.purgeSuggestionDenyListEntries(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeSuggestionDenyListEntries()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/completion_service.purge_suggestion_deny_list_entries.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_CompletionService_PurgeSuggestionDenyListEntries_async
+   */
+  async checkPurgeSuggestionDenyListEntriesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1alpha.PurgeSuggestionDenyListEntriesResponse,
+      protos.google.cloud.discoveryengine.v1alpha.PurgeSuggestionDenyListEntriesMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.purgeSuggestionDenyListEntries,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1alpha.PurgeSuggestionDenyListEntriesResponse,
+      protos.google.cloud.discoveryengine.v1alpha.PurgeSuggestionDenyListEntriesMetadata
+    >;
+  }
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -634,9 +1103,222 @@ export class CompletionServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified aclConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  aclConfigPath(project: string, location: string) {
+    return this.pathTemplates.aclConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .location;
+  }
 
   /**
    * Return a fully-qualified engine resource name string.
@@ -912,6 +1594,145 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreBranchDocumentChunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} branch
+   * @param {string} document
+   * @param {string} chunk
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreBranchDocumentChunkPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    branch: string,
+    document: string,
+    chunk: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+        chunk: chunk,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).data_store;
+  }
+
+  /**
+   * Parse the branch from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).branch;
+  }
+
+  /**
+   * Parse the document from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).document;
+  }
+
+  /**
+   * Parse the chunk from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the chunk.
+   */
+  matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).chunk;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionDataStoreConversation resource name string.
    *
    * @param {string} project
@@ -1015,6 +1836,91 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreDocumentProcessingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreDocumentProcessingConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).data_store;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionDataStoreSchema resource name string.
    *
    * @param {string} project
@@ -1115,6 +2021,109 @@ export class CompletionServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.match(
       projectLocationCollectionDataStoreSchemaName
     ).schema;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreServingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} serving_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreServingConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    servingConfig: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        serving_config: servingConfig,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreServingConfigName(
+    projectLocationCollectionDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreServingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreServingConfigName(
+    projectLocationCollectionDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreServingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(
+    projectLocationCollectionDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreServingConfigName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(
+    projectLocationCollectionDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreServingConfigName
+    ).data_store;
+  }
+
+  /**
+   * Parse the serving_config from ProjectLocationCollectionDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_serving_config resource.
+   * @returns {string} A string representing the serving_config.
+   */
+  matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(
+    projectLocationCollectionDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreServingConfigName
+    ).serving_config;
   }
 
   /**
@@ -1409,6 +2418,109 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionEngineServingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} serving_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineServingConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    servingConfig: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+        serving_config: servingConfig,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineServingConfigName
+   *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineServingConfigName(
+    projectLocationCollectionEngineServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
+      projectLocationCollectionEngineServingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineServingConfigName
+   *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineServingConfigName(
+    projectLocationCollectionEngineServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
+      projectLocationCollectionEngineServingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineServingConfigName
+   *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineServingConfigName(
+    projectLocationCollectionEngineServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
+      projectLocationCollectionEngineServingConfigName
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineServingConfigName
+   *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineServingConfigName(
+    projectLocationCollectionEngineServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
+      projectLocationCollectionEngineServingConfigName
+    ).engine;
+  }
+
+  /**
+   * Parse the serving_config from ProjectLocationCollectionEngineServingConfig resource.
+   *
+   * @param {string} projectLocationCollectionEngineServingConfigName
+   *   A fully-qualified path representing project_location_collection_engine_serving_config resource.
+   * @returns {string} A string representing the serving_config.
+   */
+  matchServingConfigFromProjectLocationCollectionEngineServingConfigName(
+    projectLocationCollectionEngineServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.match(
+      projectLocationCollectionEngineServingConfigName
+    ).serving_config;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStore resource name string.
    *
    * @param {string} project
@@ -1577,6 +2689,127 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreBranchDocumentChunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} branch
+   * @param {string} document
+   * @param {string} chunk
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreBranchDocumentChunkPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    branch: string,
+    document: string,
+    chunk: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+        chunk: chunk,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).data_store;
+  }
+
+  /**
+   * Parse the branch from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).branch;
+  }
+
+  /**
+   * Parse the document from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).document;
+  }
+
+  /**
+   * Parse the chunk from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the chunk.
+   */
+  matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).chunk;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreConversation resource name string.
    *
    * @param {string} project
@@ -1662,6 +2895,73 @@ export class CompletionServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreDocumentProcessingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreDocumentProcessingConfigPath(
+    project: string,
+    location: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName(
+    projectLocationDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationDataStoreDocumentProcessingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName(
+    projectLocationDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationDataStoreDocumentProcessingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName(
+    projectLocationDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationDataStoreDocumentProcessingConfigName
+    ).data_store;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreSchema resource name string.
    *
    * @param {string} project
@@ -1744,6 +3044,91 @@ export class CompletionServiceClient {
     return this.pathTemplates.projectLocationDataStoreSchemaPathTemplate.match(
       projectLocationDataStoreSchemaName
     ).schema;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreServingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} serving_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreServingConfigPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    servingConfig: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        serving_config: servingConfig,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_data_store_serving_config resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreServingConfigName(
+    projectLocationDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
+      projectLocationDataStoreServingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_data_store_serving_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreServingConfigName(
+    projectLocationDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
+      projectLocationDataStoreServingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_data_store_serving_config resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreServingConfigName(
+    projectLocationDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
+      projectLocationDataStoreServingConfigName
+    ).data_store;
+  }
+
+  /**
+   * Parse the serving_config from ProjectLocationDataStoreServingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreServingConfigName
+   *   A fully-qualified path representing project_location_data_store_serving_config resource.
+   * @returns {string} A string representing the serving_config.
+   */
+  matchServingConfigFromProjectLocationDataStoreServingConfigName(
+    projectLocationDataStoreServingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match(
+      projectLocationDataStoreServingConfigName
+    ).serving_config;
   }
 
   /**
@@ -1910,6 +3295,7 @@ export class CompletionServiceClient {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();
