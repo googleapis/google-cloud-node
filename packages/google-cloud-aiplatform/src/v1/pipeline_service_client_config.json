@@ -56,7 +56,15 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "BatchDeletePipelineJobs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CancelPipelineJob": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchCancelPipelineJobs": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
