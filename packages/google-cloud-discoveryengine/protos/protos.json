@@ -4881,16 +4881,16 @@
                           "requestType": "ListChunksRequest",
                           "responseType": "ListChunksResponse",
                           "options": {
-                            "(google.api.http).get": "/v1alpha/{parent=projects/*/locations/*/dataStores/*/branches/*}/documents/*/chunks",
-                            "(google.api.http).additional_bindings.get": "/v1alpha/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/documents/*/chunks",
+                            "(google.api.http).get": "/v1alpha/{parent=projects/*/locations/*/dataStores/*/branches/*/documents/*}/chunks",
+                            "(google.api.http).additional_bindings.get": "/v1alpha/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*}/chunks",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1alpha/{parent=projects/*/locations/*/dataStores/*/branches/*}/documents/*/chunks",
+                                "get": "/v1alpha/{parent=projects/*/locations/*/dataStores/*/branches/*/documents/*}/chunks",
                                 "additional_bindings": {
-                                  "get": "/v1alpha/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/documents/*/chunks"
+                                  "get": "/v1alpha/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*}/chunks"
                                 }
                               }
                             },
