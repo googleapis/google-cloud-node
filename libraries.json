@@ -2685,6 +2685,24 @@
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-routing"
   },
   {
+    "name": "meet",
+    "name_pretty": "Google Meet API",
+    "product_documentation": "https://developers.google.com/meet/api/guides/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/meet/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-apps/meet",
+    "api_id": "meet.googleapis.com",
+    "default_version": "v2",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "meet",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-apps-meet",
+    "support_documentation": "https://developers.google.com/meet/api/guides/overview/docs/getting-support"
+  },
+  {
     "name": "gsuiteaddons",
     "name_pretty": "Google Workspace Add-ons API",
     "product_documentation": "developers.google.com/workspace/add-ons/",
@@ -2827,6 +2845,24 @@
     "api_shortname": "networkservices",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-networkservices",
     "support_documentation": "https://cloud.google.com/media-cdn/docs/getting-support"
+  },
+  {
+    "name": "parallelstore",
+    "name_pretty": "Parallelstore API",
+    "product_documentation": "http://cloud/parallelstore?hl=en",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/parallelstore/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/parallelstore",
+    "api_id": "parallelstore.googleapis.com",
+    "default_version": "v1beta",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "parallelstore",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-parallelstore",
+    "support_documentation": "https://http://cloud/parallelstore?hl=en/docs/getting-support"
   },
   {
     "name": "phishing-protection",

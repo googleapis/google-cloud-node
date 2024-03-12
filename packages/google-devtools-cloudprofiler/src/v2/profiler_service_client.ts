@@ -40,9 +40,8 @@ const version = require('../../../package.json').version;
  *  Manage the collection of continuous profiling data provided by profiling
  *  agents running in the cloud or by an offline provider of profiling data.
  *
- *  General guidelines:
- *  * Profiles for a single deployment must be created in ascending time order.
- *  * Profiles can be created in either online or offline mode, see below.
+ *  __The APIs listed in this service are intended for use within our profiler
+ *  agents only.__
  * @class
  * @memberof v2
  */
@@ -378,6 +377,11 @@ export class ProfilerServiceClient {
   /**
    * CreateProfile creates a new profile resource in the online mode.
    *
+   * _Direct use of this API is discouraged, please use a [supported
+   * profiler
+   * agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent)
+   * instead for profile collection._
+   *
    * The server ensures that the new profiles are created at a constant rate per
    * deployment, so the creation request may hang for some time until the next
    * profile session is available.
@@ -483,9 +487,14 @@ export class ProfilerServiceClient {
     return this.innerApiCalls.createProfile(request, options, callback);
   }
   /**
-   * CreateOfflineProfile creates a new profile resource in the offline mode.
-   * The client provides the profile to create along with the profile bytes, the
-   * server records it.
+   * CreateOfflineProfile creates a new profile resource in the offline
+   * mode. The client provides the profile to create along with the profile
+   * bytes, the server records it.
+   *
+   * _Direct use of this API is discouraged, please use a [supported
+   * profiler
+   * agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent)
+   * instead for profile collection._
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -587,6 +596,11 @@ export class ProfilerServiceClient {
    * created in the online mode. Updating the bytes for profiles created in the
    * offline mode is currently not supported: the profile content must be
    * provided at the time of the profile creation.
+   *
+   * _Direct use of this API is discouraged, please use a [supported
+   * profiler
+   * agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent)
+   * instead for profile collection._
    *
    * @param {Object} request
    *   The request object that will be sent.

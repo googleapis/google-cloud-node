@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.4.0...contentwarehouse-v1.5.0) (2024-02-22)
+
+
+### Features
+
+* [contentwarehouse] A new field `schema_override` is added to message `ProcessOptions` ([#5052](https://github.com/googleapis/google-cloud-node/issues/5052)) ([e1afd1f](https://github.com/googleapis/google-cloud-node/commit/e1afd1fc6779e73022f996ffa44378d0096f6269))
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.3.0...contentwarehouse-v1.4.0) (2024-02-07)
 
 

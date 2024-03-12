@@ -5,6 +5,354 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "1fb1181f966a376c4e9f08dd779ec90aff059e80",
+          "message": "[cloudprofiler] add `start_time` to Profile proto",
+          "issues": [
+            "5086"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "9038fee3-a6cd-43a1-9e05-55d95d11dbc3",
+      "createTime": "2024-02-28T15:00:12.175Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "208250ebe1508e4f2190e7233d8fb5ea5bfc7911",
+          "message": "[container] add secondary boot disks field to NodePool API",
+          "issues": [
+            "5094"
+          ]
+        }
+      ],
+      "version": "5.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "470a2bc9-52dc-450c-b336-9374e7ebc1ec",
+      "createTime": "2024-02-28T15:00:12.164Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "639c7076472d2e77845e2e5fdda954608566f852",
+          "message": "[alloydb] support for obtaining the public IP address of an Instance",
+          "issues": [
+            "5088"
+          ]
+        }
+      ],
+      "version": "1.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "98b66235-1783-4376-a39e-dde339faed4a",
+      "createTime": "2024-02-28T15:00:12.153Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "86b0c1f491041ba8a2fbc9ad31551076dde7e4c0",
+          "message": "Add initial files for google.cloud.parallelstore.v1beta",
+          "issues": [
+            "5068"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "2f25cc11-35bf-49ce-9045-58b6fbd0d1b7",
+      "createTime": "2024-02-27T18:32:19.600Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1e7df2f4831fc28b371cdb465b5e11861cad94c9",
+          "message": "Add initial files for google.apps.meet.v2",
+          "issues": [
+            "5005"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "b5660003-3946-4083-a878-0866c3e82d03",
+      "createTime": "2024-02-27T18:32:19.587Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "a1b39d399119d815282239638cde4903de4b2a76",
+          "message": "[container] Add client library version to headers",
+          "issues": [
+            "5076"
+          ]
+        }
+      ],
+      "version": "5.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "cefa9e6f-baa8-4e03-8861-ff746d3fb1b1",
+      "createTime": "2024-02-27T18:32:19.575Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "411e8eb9d577c92505a1b0e6845b9ece277280e7",
+          "message": "[tasks] Add client library version to headers",
+          "issues": [
+            "5083"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "5a9e6f2e-2413-44e1-9166-dcaa45da2dca",
+      "createTime": "2024-02-27T18:32:19.562Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5e386b6ec6ce8301f7563106da94852661cf1af6",
+          "message": "[networkservices] Add client library version to headers",
+          "issues": [
+            "5070"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "8d722d4f-9f4a-418f-b13c-108f4325222a",
+      "createTime": "2024-02-27T18:32:19.548Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b643f040b35dd180ad0264935373e44056283249",
+          "message": "Add CompositeKey message and composite_key field to FeatureViewDataKey",
+          "issues": [
+            "5072"
+          ]
+        }
+      ],
+      "version": "3.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "e7ab9bfd-d246-4b5f-a644-21364605551d",
+      "createTime": "2024-02-27T18:32:19.536Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c53c6ea8311a921b16a4e3b3c4d3d941afd82245",
+          "message": "[places] add AutoComplete API",
+          "issues": [
+            "5056"
+          ]
+        }
+      ],
+      "version": "1.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "bccc5c70-0aef-4ff9-8a0c-36f8e52fcb76",
+      "createTime": "2024-02-22T03:34:14.624Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "da1c96fcf441e412b3657b6b433c4a07c5afca1d",
+          "message": "[addressvalidation] add session token support for Autocomplete (New) sessions that end with a call to Address Validation",
+          "issues": [
+            "5059"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/addressvalidation",
+      "id": "04c4fb48-981a-40ed-b129-98e3016213ec",
+      "createTime": "2024-02-22T03:34:14.606Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "af0e580dbdca83f5e9cebe0df1d9e752c88f4357",
+          "message": "[container] add API to enable Provisioning Request API on existing nodepools",
+          "issues": [
+            "5065"
+          ]
+        }
+      ],
+      "version": "5.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "f166c4d6-0445-44fa-84ac-f5d9d2b703d7",
+      "createTime": "2024-02-22T03:34:14.594Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ff8ef66a10c3c78c941299eddb3ce79b09b91d14",
+          "message": "[sql] A new field `threads` is added to message `.google.cloud.sql.v1beta4.ExportContext`",
+          "issues": [
+            "5048"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "05ff393d-664c-435e-acc3-c2be8c3ffc00",
+      "createTime": "2024-02-22T03:34:14.576Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6f3ab0415304dd270cca99ce18949a2a1fc0e1a9",
+          "message": "Add API for writing BatchRecognize transcripts in SRT and VTT formats",
+          "issues": [
+            "5062"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "d866b794-7be5-4bdc-b9fd-bb7f76eb9bc2",
+      "createTime": "2024-02-22T03:34:14.566Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "934c300105e20afb8d8ed750e79e9935b7d42a79",
+          "message": "[securitycenter] Add Backup DR field to finding's list of attributes",
+          "issues": [
+            "5047"
+          ]
+        }
+      ],
+      "version": "8.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "e9022638-00fd-4d7f-8157-32078476b265",
+      "createTime": "2024-02-22T03:34:14.553Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5c58e553b1d0411715e160754787ded4b33d099c",
+          "message": "[recaptchaenterprise] Add an API method for reordering firewall policies",
+          "issues": [
+            "5050"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "c98dd3e4-c03b-4b57-bd3b-b720e8edf501",
+      "createTime": "2024-02-22T03:34:14.542Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8dcf23c3f9d4ec94d4effd46eb2551568c029598",
+          "message": "[orchestration] added ListWorkloads RPC",
+          "issues": [
+            "5044"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "3a935cee-e245-46d9-8013-9cebda3f837a",
+      "createTime": "2024-02-22T03:34:14.520Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e1afd1fc6779e73022f996ffa44378d0096f6269",
+          "message": "[contentwarehouse] A new field `schema_override` is added to message `ProcessOptions`",
+          "issues": [
+            "5052"
+          ]
+        }
+      ],
+      "version": "1.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "6a71c7da-4f70-475e-9db5-1229cdd2ea51",
+      "createTime": "2024-02-22T03:34:14.509Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d158bfb432f1c54ae9cb121607c33508e79accf0",
+          "message": "Add `point_of_contact` to `Feature` message",
+          "issues": [
+            "5064"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "6b73cce2fc4b29290b51878ba07aa4b9bca4e573",
+          "message": "Add Grounding feature to PredictionService.GenerateContent",
+          "issues": [
+            "5036"
+          ]
+        }
+      ],
+      "version": "3.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "650a80d0-e6e6-437c-b0bf-fde2361b3570",
+      "createTime": "2024-02-22T03:34:14.496Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f44291270aba5581520205feeed2dfe169eca790",
+          "message": "[servicecontrol] include api_key_uid in service control check response",
+          "issues": [
+            "5061"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "917a0b53-ffa2-4989-af7a-6b934d1e7a7b",
+      "createTime": "2024-02-22T03:34:14.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "88763bb1b7ce9ff884b9e3f476230d38985b2ff2",
           "message": "Trusted Private Cloud support, use the universeDomain parameter ",
           "issues": [
@@ -24325,5 +24673,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-02-09T18:22:14.501Z"
+  "updateTime": "2024-02-28T15:00:12.175Z"
 }

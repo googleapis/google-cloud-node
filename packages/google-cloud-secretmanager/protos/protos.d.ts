@@ -3556,6 +3556,3564 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
+
+            /** Namespace v1beta2. */
+            namespace v1beta2 {
+
+                /** Properties of a Secret. */
+                interface ISecret {
+
+                    /** Secret name */
+                    name?: (string|null);
+
+                    /** Secret replication */
+                    replication?: (google.cloud.secretmanager.v1beta2.IReplication|null);
+
+                    /** Secret createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Secret labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Secret topics */
+                    topics?: (google.cloud.secretmanager.v1beta2.ITopic[]|null);
+
+                    /** Secret expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Secret ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
+                    /** Secret etag */
+                    etag?: (string|null);
+
+                    /** Secret rotation */
+                    rotation?: (google.cloud.secretmanager.v1beta2.IRotation|null);
+
+                    /** Secret versionAliases */
+                    versionAliases?: ({ [k: string]: (number|Long|string) }|null);
+
+                    /** Secret annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** Secret versionDestroyTtl */
+                    versionDestroyTtl?: (google.protobuf.IDuration|null);
+
+                    /** Secret customerManagedEncryption */
+                    customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null);
+                }
+
+                /** Represents a Secret. */
+                class Secret implements ISecret {
+
+                    /**
+                     * Constructs a new Secret.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.ISecret);
+
+                    /** Secret name. */
+                    public name: string;
+
+                    /** Secret replication. */
+                    public replication?: (google.cloud.secretmanager.v1beta2.IReplication|null);
+
+                    /** Secret createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Secret labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Secret topics. */
+                    public topics: google.cloud.secretmanager.v1beta2.ITopic[];
+
+                    /** Secret expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Secret ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
+                    /** Secret etag. */
+                    public etag: string;
+
+                    /** Secret rotation. */
+                    public rotation?: (google.cloud.secretmanager.v1beta2.IRotation|null);
+
+                    /** Secret versionAliases. */
+                    public versionAliases: { [k: string]: (number|Long|string) };
+
+                    /** Secret annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** Secret versionDestroyTtl. */
+                    public versionDestroyTtl?: (google.protobuf.IDuration|null);
+
+                    /** Secret customerManagedEncryption. */
+                    public customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null);
+
+                    /** Secret expiration. */
+                    public expiration?: ("expireTime"|"ttl");
+
+                    /**
+                     * Creates a new Secret instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Secret instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.ISecret): google.cloud.secretmanager.v1beta2.Secret;
+
+                    /**
+                     * Encodes the specified Secret message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Secret.verify|verify} messages.
+                     * @param message Secret message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.ISecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Secret message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Secret.verify|verify} messages.
+                     * @param message Secret message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.ISecret, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Secret message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Secret
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.Secret;
+
+                    /**
+                     * Decodes a Secret message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Secret
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.Secret;
+
+                    /**
+                     * Verifies a Secret message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Secret message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Secret
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.Secret;
+
+                    /**
+                     * Creates a plain object from a Secret message. Also converts values to other types if specified.
+                     * @param message Secret
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.Secret, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Secret to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Secret
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SecretVersion. */
+                interface ISecretVersion {
+
+                    /** SecretVersion name */
+                    name?: (string|null);
+
+                    /** SecretVersion createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecretVersion destroyTime */
+                    destroyTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecretVersion state */
+                    state?: (google.cloud.secretmanager.v1beta2.SecretVersion.State|keyof typeof google.cloud.secretmanager.v1beta2.SecretVersion.State|null);
+
+                    /** SecretVersion replicationStatus */
+                    replicationStatus?: (google.cloud.secretmanager.v1beta2.IReplicationStatus|null);
+
+                    /** SecretVersion etag */
+                    etag?: (string|null);
+
+                    /** SecretVersion clientSpecifiedPayloadChecksum */
+                    clientSpecifiedPayloadChecksum?: (boolean|null);
+
+                    /** SecretVersion scheduledDestroyTime */
+                    scheduledDestroyTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecretVersion customerManagedEncryption */
+                    customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null);
+                }
+
+                /** Represents a SecretVersion. */
+                class SecretVersion implements ISecretVersion {
+
+                    /**
+                     * Constructs a new SecretVersion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.ISecretVersion);
+
+                    /** SecretVersion name. */
+                    public name: string;
+
+                    /** SecretVersion createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecretVersion destroyTime. */
+                    public destroyTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecretVersion state. */
+                    public state: (google.cloud.secretmanager.v1beta2.SecretVersion.State|keyof typeof google.cloud.secretmanager.v1beta2.SecretVersion.State);
+
+                    /** SecretVersion replicationStatus. */
+                    public replicationStatus?: (google.cloud.secretmanager.v1beta2.IReplicationStatus|null);
+
+                    /** SecretVersion etag. */
+                    public etag: string;
+
+                    /** SecretVersion clientSpecifiedPayloadChecksum. */
+                    public clientSpecifiedPayloadChecksum: boolean;
+
+                    /** SecretVersion scheduledDestroyTime. */
+                    public scheduledDestroyTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SecretVersion customerManagedEncryption. */
+                    public customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null);
+
+                    /**
+                     * Creates a new SecretVersion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretVersion instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.ISecretVersion): google.cloud.secretmanager.v1beta2.SecretVersion;
+
+                    /**
+                     * Encodes the specified SecretVersion message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.SecretVersion.verify|verify} messages.
+                     * @param message SecretVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.ISecretVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretVersion message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.SecretVersion.verify|verify} messages.
+                     * @param message SecretVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.ISecretVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretVersion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.SecretVersion;
+
+                    /**
+                     * Decodes a SecretVersion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.SecretVersion;
+
+                    /**
+                     * Verifies a SecretVersion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretVersion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretVersion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.SecretVersion;
+
+                    /**
+                     * Creates a plain object from a SecretVersion message. Also converts values to other types if specified.
+                     * @param message SecretVersion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.SecretVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretVersion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecretVersion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SecretVersion {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        DISABLED = 2,
+                        DESTROYED = 3
+                    }
+                }
+
+                /** Properties of a Replication. */
+                interface IReplication {
+
+                    /** Replication automatic */
+                    automatic?: (google.cloud.secretmanager.v1beta2.Replication.IAutomatic|null);
+
+                    /** Replication userManaged */
+                    userManaged?: (google.cloud.secretmanager.v1beta2.Replication.IUserManaged|null);
+                }
+
+                /** Represents a Replication. */
+                class Replication implements IReplication {
+
+                    /**
+                     * Constructs a new Replication.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IReplication);
+
+                    /** Replication automatic. */
+                    public automatic?: (google.cloud.secretmanager.v1beta2.Replication.IAutomatic|null);
+
+                    /** Replication userManaged. */
+                    public userManaged?: (google.cloud.secretmanager.v1beta2.Replication.IUserManaged|null);
+
+                    /** Replication replication. */
+                    public replication?: ("automatic"|"userManaged");
+
+                    /**
+                     * Creates a new Replication instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Replication instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IReplication): google.cloud.secretmanager.v1beta2.Replication;
+
+                    /**
+                     * Encodes the specified Replication message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.verify|verify} messages.
+                     * @param message Replication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IReplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Replication message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.verify|verify} messages.
+                     * @param message Replication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IReplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Replication message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Replication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.Replication;
+
+                    /**
+                     * Decodes a Replication message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Replication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.Replication;
+
+                    /**
+                     * Verifies a Replication message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Replication message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Replication
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.Replication;
+
+                    /**
+                     * Creates a plain object from a Replication message. Also converts values to other types if specified.
+                     * @param message Replication
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.Replication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Replication to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Replication
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Replication {
+
+                    /** Properties of an Automatic. */
+                    interface IAutomatic {
+
+                        /** Automatic customerManagedEncryption */
+                        customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null);
+                    }
+
+                    /** Represents an Automatic. */
+                    class Automatic implements IAutomatic {
+
+                        /**
+                         * Constructs a new Automatic.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.secretmanager.v1beta2.Replication.IAutomatic);
+
+                        /** Automatic customerManagedEncryption. */
+                        public customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null);
+
+                        /**
+                         * Creates a new Automatic instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Automatic instance
+                         */
+                        public static create(properties?: google.cloud.secretmanager.v1beta2.Replication.IAutomatic): google.cloud.secretmanager.v1beta2.Replication.Automatic;
+
+                        /**
+                         * Encodes the specified Automatic message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.Automatic.verify|verify} messages.
+                         * @param message Automatic message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.secretmanager.v1beta2.Replication.IAutomatic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Automatic message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.Automatic.verify|verify} messages.
+                         * @param message Automatic message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.Replication.IAutomatic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Automatic message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Automatic
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.Replication.Automatic;
+
+                        /**
+                         * Decodes an Automatic message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Automatic
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.Replication.Automatic;
+
+                        /**
+                         * Verifies an Automatic message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Automatic message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Automatic
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.Replication.Automatic;
+
+                        /**
+                         * Creates a plain object from an Automatic message. Also converts values to other types if specified.
+                         * @param message Automatic
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.secretmanager.v1beta2.Replication.Automatic, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Automatic to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Automatic
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a UserManaged. */
+                    interface IUserManaged {
+
+                        /** UserManaged replicas */
+                        replicas?: (google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica[]|null);
+                    }
+
+                    /** Represents a UserManaged. */
+                    class UserManaged implements IUserManaged {
+
+                        /**
+                         * Constructs a new UserManaged.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.secretmanager.v1beta2.Replication.IUserManaged);
+
+                        /** UserManaged replicas. */
+                        public replicas: google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica[];
+
+                        /**
+                         * Creates a new UserManaged instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserManaged instance
+                         */
+                        public static create(properties?: google.cloud.secretmanager.v1beta2.Replication.IUserManaged): google.cloud.secretmanager.v1beta2.Replication.UserManaged;
+
+                        /**
+                         * Encodes the specified UserManaged message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.UserManaged.verify|verify} messages.
+                         * @param message UserManaged message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.secretmanager.v1beta2.Replication.IUserManaged, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserManaged message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.UserManaged.verify|verify} messages.
+                         * @param message UserManaged message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.Replication.IUserManaged, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserManaged message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserManaged
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.Replication.UserManaged;
+
+                        /**
+                         * Decodes a UserManaged message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserManaged
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.Replication.UserManaged;
+
+                        /**
+                         * Verifies a UserManaged message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserManaged message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserManaged
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.Replication.UserManaged;
+
+                        /**
+                         * Creates a plain object from a UserManaged message. Also converts values to other types if specified.
+                         * @param message UserManaged
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.secretmanager.v1beta2.Replication.UserManaged, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserManaged to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserManaged
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace UserManaged {
+
+                        /** Properties of a Replica. */
+                        interface IReplica {
+
+                            /** Replica location */
+                            location?: (string|null);
+
+                            /** Replica customerManagedEncryption */
+                            customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null);
+                        }
+
+                        /** Represents a Replica. */
+                        class Replica implements IReplica {
+
+                            /**
+                             * Constructs a new Replica.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica);
+
+                            /** Replica location. */
+                            public location: string;
+
+                            /** Replica customerManagedEncryption. */
+                            public customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption|null);
+
+                            /**
+                             * Creates a new Replica instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Replica instance
+                             */
+                            public static create(properties?: google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica): google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica;
+
+                            /**
+                             * Encodes the specified Replica message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica.verify|verify} messages.
+                             * @param message Replica message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Replica message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica.verify|verify} messages.
+                             * @param message Replica message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.Replication.UserManaged.IReplica, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Replica message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Replica
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica;
+
+                            /**
+                             * Decodes a Replica message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Replica
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica;
+
+                            /**
+                             * Verifies a Replica message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Replica message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Replica
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica;
+
+                            /**
+                             * Creates a plain object from a Replica message. Also converts values to other types if specified.
+                             * @param message Replica
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.secretmanager.v1beta2.Replication.UserManaged.Replica, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Replica to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Replica
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a CustomerManagedEncryption. */
+                interface ICustomerManagedEncryption {
+
+                    /** CustomerManagedEncryption kmsKeyName */
+                    kmsKeyName?: (string|null);
+                }
+
+                /** Represents a CustomerManagedEncryption. */
+                class CustomerManagedEncryption implements ICustomerManagedEncryption {
+
+                    /**
+                     * Constructs a new CustomerManagedEncryption.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption);
+
+                    /** CustomerManagedEncryption kmsKeyName. */
+                    public kmsKeyName: string;
+
+                    /**
+                     * Creates a new CustomerManagedEncryption instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomerManagedEncryption instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption): google.cloud.secretmanager.v1beta2.CustomerManagedEncryption;
+
+                    /**
+                     * Encodes the specified CustomerManagedEncryption message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.verify|verify} messages.
+                     * @param message CustomerManagedEncryption message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomerManagedEncryption message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CustomerManagedEncryption.verify|verify} messages.
+                     * @param message CustomerManagedEncryption message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.ICustomerManagedEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomerManagedEncryption message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomerManagedEncryption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.CustomerManagedEncryption;
+
+                    /**
+                     * Decodes a CustomerManagedEncryption message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomerManagedEncryption
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.CustomerManagedEncryption;
+
+                    /**
+                     * Verifies a CustomerManagedEncryption message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomerManagedEncryption message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomerManagedEncryption
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.CustomerManagedEncryption;
+
+                    /**
+                     * Creates a plain object from a CustomerManagedEncryption message. Also converts values to other types if specified.
+                     * @param message CustomerManagedEncryption
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.CustomerManagedEncryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomerManagedEncryption to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomerManagedEncryption
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReplicationStatus. */
+                interface IReplicationStatus {
+
+                    /** ReplicationStatus automatic */
+                    automatic?: (google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus|null);
+
+                    /** ReplicationStatus userManaged */
+                    userManaged?: (google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus|null);
+                }
+
+                /** Represents a ReplicationStatus. */
+                class ReplicationStatus implements IReplicationStatus {
+
+                    /**
+                     * Constructs a new ReplicationStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IReplicationStatus);
+
+                    /** ReplicationStatus automatic. */
+                    public automatic?: (google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus|null);
+
+                    /** ReplicationStatus userManaged. */
+                    public userManaged?: (google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus|null);
+
+                    /** ReplicationStatus replicationStatus. */
+                    public replicationStatus?: ("automatic"|"userManaged");
+
+                    /**
+                     * Creates a new ReplicationStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReplicationStatus instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IReplicationStatus): google.cloud.secretmanager.v1beta2.ReplicationStatus;
+
+                    /**
+                     * Encodes the specified ReplicationStatus message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.verify|verify} messages.
+                     * @param message ReplicationStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IReplicationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReplicationStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.verify|verify} messages.
+                     * @param message ReplicationStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IReplicationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReplicationStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReplicationStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.ReplicationStatus;
+
+                    /**
+                     * Decodes a ReplicationStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReplicationStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.ReplicationStatus;
+
+                    /**
+                     * Verifies a ReplicationStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReplicationStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReplicationStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.ReplicationStatus;
+
+                    /**
+                     * Creates a plain object from a ReplicationStatus message. Also converts values to other types if specified.
+                     * @param message ReplicationStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.ReplicationStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReplicationStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReplicationStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReplicationStatus {
+
+                    /** Properties of an AutomaticStatus. */
+                    interface IAutomaticStatus {
+
+                        /** AutomaticStatus customerManagedEncryption */
+                        customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null);
+                    }
+
+                    /** Represents an AutomaticStatus. */
+                    class AutomaticStatus implements IAutomaticStatus {
+
+                        /**
+                         * Constructs a new AutomaticStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus);
+
+                        /** AutomaticStatus customerManagedEncryption. */
+                        public customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null);
+
+                        /**
+                         * Creates a new AutomaticStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutomaticStatus instance
+                         */
+                        public static create(properties?: google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus): google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus;
+
+                        /**
+                         * Encodes the specified AutomaticStatus message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus.verify|verify} messages.
+                         * @param message AutomaticStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutomaticStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus.verify|verify} messages.
+                         * @param message AutomaticStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.ReplicationStatus.IAutomaticStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutomaticStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutomaticStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus;
+
+                        /**
+                         * Decodes an AutomaticStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutomaticStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus;
+
+                        /**
+                         * Verifies an AutomaticStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutomaticStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutomaticStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus;
+
+                        /**
+                         * Creates a plain object from an AutomaticStatus message. Also converts values to other types if specified.
+                         * @param message AutomaticStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.secretmanager.v1beta2.ReplicationStatus.AutomaticStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutomaticStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AutomaticStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a UserManagedStatus. */
+                    interface IUserManagedStatus {
+
+                        /** UserManagedStatus replicas */
+                        replicas?: (google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus[]|null);
+                    }
+
+                    /** Represents a UserManagedStatus. */
+                    class UserManagedStatus implements IUserManagedStatus {
+
+                        /**
+                         * Constructs a new UserManagedStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus);
+
+                        /** UserManagedStatus replicas. */
+                        public replicas: google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus[];
+
+                        /**
+                         * Creates a new UserManagedStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserManagedStatus instance
+                         */
+                        public static create(properties?: google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus): google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus;
+
+                        /**
+                         * Encodes the specified UserManagedStatus message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.verify|verify} messages.
+                         * @param message UserManagedStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserManagedStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.verify|verify} messages.
+                         * @param message UserManagedStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.ReplicationStatus.IUserManagedStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserManagedStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserManagedStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus;
+
+                        /**
+                         * Decodes a UserManagedStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserManagedStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus;
+
+                        /**
+                         * Verifies a UserManagedStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserManagedStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserManagedStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus;
+
+                        /**
+                         * Creates a plain object from a UserManagedStatus message. Also converts values to other types if specified.
+                         * @param message UserManagedStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserManagedStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserManagedStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace UserManagedStatus {
+
+                        /** Properties of a ReplicaStatus. */
+                        interface IReplicaStatus {
+
+                            /** ReplicaStatus location */
+                            location?: (string|null);
+
+                            /** ReplicaStatus customerManagedEncryption */
+                            customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null);
+                        }
+
+                        /** Represents a ReplicaStatus. */
+                        class ReplicaStatus implements IReplicaStatus {
+
+                            /**
+                             * Constructs a new ReplicaStatus.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus);
+
+                            /** ReplicaStatus location. */
+                            public location: string;
+
+                            /** ReplicaStatus customerManagedEncryption. */
+                            public customerManagedEncryption?: (google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus|null);
+
+                            /**
+                             * Creates a new ReplicaStatus instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ReplicaStatus instance
+                             */
+                            public static create(properties?: google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus): google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus;
+
+                            /**
+                             * Encodes the specified ReplicaStatus message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus.verify|verify} messages.
+                             * @param message ReplicaStatus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ReplicaStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus.verify|verify} messages.
+                             * @param message ReplicaStatus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.IReplicaStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ReplicaStatus message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ReplicaStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus;
+
+                            /**
+                             * Decodes a ReplicaStatus message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ReplicaStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus;
+
+                            /**
+                             * Verifies a ReplicaStatus message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ReplicaStatus message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ReplicaStatus
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus;
+
+                            /**
+                             * Creates a plain object from a ReplicaStatus message. Also converts values to other types if specified.
+                             * @param message ReplicaStatus
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.secretmanager.v1beta2.ReplicationStatus.UserManagedStatus.ReplicaStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ReplicaStatus to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ReplicaStatus
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a CustomerManagedEncryptionStatus. */
+                interface ICustomerManagedEncryptionStatus {
+
+                    /** CustomerManagedEncryptionStatus kmsKeyVersionName */
+                    kmsKeyVersionName?: (string|null);
+                }
+
+                /** Represents a CustomerManagedEncryptionStatus. */
+                class CustomerManagedEncryptionStatus implements ICustomerManagedEncryptionStatus {
+
+                    /**
+                     * Constructs a new CustomerManagedEncryptionStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus);
+
+                    /** CustomerManagedEncryptionStatus kmsKeyVersionName. */
+                    public kmsKeyVersionName: string;
+
+                    /**
+                     * Creates a new CustomerManagedEncryptionStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomerManagedEncryptionStatus instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus): google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus;
+
+                    /**
+                     * Encodes the specified CustomerManagedEncryptionStatus message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.verify|verify} messages.
+                     * @param message CustomerManagedEncryptionStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomerManagedEncryptionStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus.verify|verify} messages.
+                     * @param message CustomerManagedEncryptionStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.ICustomerManagedEncryptionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomerManagedEncryptionStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomerManagedEncryptionStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus;
+
+                    /**
+                     * Decodes a CustomerManagedEncryptionStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomerManagedEncryptionStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus;
+
+                    /**
+                     * Verifies a CustomerManagedEncryptionStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomerManagedEncryptionStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomerManagedEncryptionStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus;
+
+                    /**
+                     * Creates a plain object from a CustomerManagedEncryptionStatus message. Also converts values to other types if specified.
+                     * @param message CustomerManagedEncryptionStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.CustomerManagedEncryptionStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomerManagedEncryptionStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomerManagedEncryptionStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Topic. */
+                interface ITopic {
+
+                    /** Topic name */
+                    name?: (string|null);
+                }
+
+                /** Represents a Topic. */
+                class Topic implements ITopic {
+
+                    /**
+                     * Constructs a new Topic.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.ITopic);
+
+                    /** Topic name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new Topic instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Topic instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.ITopic): google.cloud.secretmanager.v1beta2.Topic;
+
+                    /**
+                     * Encodes the specified Topic message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Topic.verify|verify} messages.
+                     * @param message Topic message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.ITopic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Topic message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Topic.verify|verify} messages.
+                     * @param message Topic message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.ITopic, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Topic message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Topic
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.Topic;
+
+                    /**
+                     * Decodes a Topic message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Topic
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.Topic;
+
+                    /**
+                     * Verifies a Topic message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Topic message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Topic
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.Topic;
+
+                    /**
+                     * Creates a plain object from a Topic message. Also converts values to other types if specified.
+                     * @param message Topic
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.Topic, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Topic to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Topic
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Rotation. */
+                interface IRotation {
+
+                    /** Rotation nextRotationTime */
+                    nextRotationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Rotation rotationPeriod */
+                    rotationPeriod?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a Rotation. */
+                class Rotation implements IRotation {
+
+                    /**
+                     * Constructs a new Rotation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IRotation);
+
+                    /** Rotation nextRotationTime. */
+                    public nextRotationTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Rotation rotationPeriod. */
+                    public rotationPeriod?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new Rotation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Rotation instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IRotation): google.cloud.secretmanager.v1beta2.Rotation;
+
+                    /**
+                     * Encodes the specified Rotation message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Rotation.verify|verify} messages.
+                     * @param message Rotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IRotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Rotation message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.Rotation.verify|verify} messages.
+                     * @param message Rotation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IRotation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Rotation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Rotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.Rotation;
+
+                    /**
+                     * Decodes a Rotation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Rotation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.Rotation;
+
+                    /**
+                     * Verifies a Rotation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Rotation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Rotation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.Rotation;
+
+                    /**
+                     * Creates a plain object from a Rotation message. Also converts values to other types if specified.
+                     * @param message Rotation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.Rotation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Rotation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Rotation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SecretPayload. */
+                interface ISecretPayload {
+
+                    /** SecretPayload data */
+                    data?: (Uint8Array|string|null);
+
+                    /** SecretPayload dataCrc32c */
+                    dataCrc32c?: (number|Long|string|null);
+                }
+
+                /** Represents a SecretPayload. */
+                class SecretPayload implements ISecretPayload {
+
+                    /**
+                     * Constructs a new SecretPayload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.ISecretPayload);
+
+                    /** SecretPayload data. */
+                    public data: (Uint8Array|string);
+
+                    /** SecretPayload dataCrc32c. */
+                    public dataCrc32c?: (number|Long|string|null);
+
+                    /** SecretPayload _dataCrc32c. */
+                    public _dataCrc32c?: "dataCrc32c";
+
+                    /**
+                     * Creates a new SecretPayload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecretPayload instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.ISecretPayload): google.cloud.secretmanager.v1beta2.SecretPayload;
+
+                    /**
+                     * Encodes the specified SecretPayload message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.SecretPayload.verify|verify} messages.
+                     * @param message SecretPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.ISecretPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecretPayload message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.SecretPayload.verify|verify} messages.
+                     * @param message SecretPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.ISecretPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecretPayload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecretPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.SecretPayload;
+
+                    /**
+                     * Decodes a SecretPayload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecretPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.SecretPayload;
+
+                    /**
+                     * Verifies a SecretPayload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecretPayload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecretPayload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.SecretPayload;
+
+                    /**
+                     * Creates a plain object from a SecretPayload message. Also converts values to other types if specified.
+                     * @param message SecretPayload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.SecretPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecretPayload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecretPayload
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a SecretManagerService */
+                class SecretManagerService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SecretManagerService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SecretManagerService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SecretManagerService;
+
+                    /**
+                     * Calls ListSecrets.
+                     * @param request ListSecretsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSecretsResponse
+                     */
+                    public listSecrets(request: google.cloud.secretmanager.v1beta2.IListSecretsRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.ListSecretsCallback): void;
+
+                    /**
+                     * Calls ListSecrets.
+                     * @param request ListSecretsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSecrets(request: google.cloud.secretmanager.v1beta2.IListSecretsRequest): Promise<google.cloud.secretmanager.v1beta2.ListSecretsResponse>;
+
+                    /**
+                     * Calls CreateSecret.
+                     * @param request CreateSecretRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Secret
+                     */
+                    public createSecret(request: google.cloud.secretmanager.v1beta2.ICreateSecretRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.CreateSecretCallback): void;
+
+                    /**
+                     * Calls CreateSecret.
+                     * @param request CreateSecretRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSecret(request: google.cloud.secretmanager.v1beta2.ICreateSecretRequest): Promise<google.cloud.secretmanager.v1beta2.Secret>;
+
+                    /**
+                     * Calls AddSecretVersion.
+                     * @param request AddSecretVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecretVersion
+                     */
+                    public addSecretVersion(request: google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.AddSecretVersionCallback): void;
+
+                    /**
+                     * Calls AddSecretVersion.
+                     * @param request AddSecretVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public addSecretVersion(request: google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest): Promise<google.cloud.secretmanager.v1beta2.SecretVersion>;
+
+                    /**
+                     * Calls GetSecret.
+                     * @param request GetSecretRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Secret
+                     */
+                    public getSecret(request: google.cloud.secretmanager.v1beta2.IGetSecretRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.GetSecretCallback): void;
+
+                    /**
+                     * Calls GetSecret.
+                     * @param request GetSecretRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSecret(request: google.cloud.secretmanager.v1beta2.IGetSecretRequest): Promise<google.cloud.secretmanager.v1beta2.Secret>;
+
+                    /**
+                     * Calls UpdateSecret.
+                     * @param request UpdateSecretRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Secret
+                     */
+                    public updateSecret(request: google.cloud.secretmanager.v1beta2.IUpdateSecretRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.UpdateSecretCallback): void;
+
+                    /**
+                     * Calls UpdateSecret.
+                     * @param request UpdateSecretRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSecret(request: google.cloud.secretmanager.v1beta2.IUpdateSecretRequest): Promise<google.cloud.secretmanager.v1beta2.Secret>;
+
+                    /**
+                     * Calls DeleteSecret.
+                     * @param request DeleteSecretRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteSecret(request: google.cloud.secretmanager.v1beta2.IDeleteSecretRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.DeleteSecretCallback): void;
+
+                    /**
+                     * Calls DeleteSecret.
+                     * @param request DeleteSecretRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSecret(request: google.cloud.secretmanager.v1beta2.IDeleteSecretRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListSecretVersions.
+                     * @param request ListSecretVersionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSecretVersionsResponse
+                     */
+                    public listSecretVersions(request: google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.ListSecretVersionsCallback): void;
+
+                    /**
+                     * Calls ListSecretVersions.
+                     * @param request ListSecretVersionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSecretVersions(request: google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest): Promise<google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse>;
+
+                    /**
+                     * Calls GetSecretVersion.
+                     * @param request GetSecretVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecretVersion
+                     */
+                    public getSecretVersion(request: google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.GetSecretVersionCallback): void;
+
+                    /**
+                     * Calls GetSecretVersion.
+                     * @param request GetSecretVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSecretVersion(request: google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest): Promise<google.cloud.secretmanager.v1beta2.SecretVersion>;
+
+                    /**
+                     * Calls AccessSecretVersion.
+                     * @param request AccessSecretVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AccessSecretVersionResponse
+                     */
+                    public accessSecretVersion(request: google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.AccessSecretVersionCallback): void;
+
+                    /**
+                     * Calls AccessSecretVersion.
+                     * @param request AccessSecretVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public accessSecretVersion(request: google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest): Promise<google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse>;
+
+                    /**
+                     * Calls DisableSecretVersion.
+                     * @param request DisableSecretVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecretVersion
+                     */
+                    public disableSecretVersion(request: google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.DisableSecretVersionCallback): void;
+
+                    /**
+                     * Calls DisableSecretVersion.
+                     * @param request DisableSecretVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public disableSecretVersion(request: google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest): Promise<google.cloud.secretmanager.v1beta2.SecretVersion>;
+
+                    /**
+                     * Calls EnableSecretVersion.
+                     * @param request EnableSecretVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecretVersion
+                     */
+                    public enableSecretVersion(request: google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.EnableSecretVersionCallback): void;
+
+                    /**
+                     * Calls EnableSecretVersion.
+                     * @param request EnableSecretVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public enableSecretVersion(request: google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest): Promise<google.cloud.secretmanager.v1beta2.SecretVersion>;
+
+                    /**
+                     * Calls DestroySecretVersion.
+                     * @param request DestroySecretVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecretVersion
+                     */
+                    public destroySecretVersion(request: google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.DestroySecretVersionCallback): void;
+
+                    /**
+                     * Calls DestroySecretVersion.
+                     * @param request DestroySecretVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public destroySecretVersion(request: google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest): Promise<google.cloud.secretmanager.v1beta2.SecretVersion>;
+
+                    /**
+                     * Calls SetIamPolicy.
+                     * @param request SetIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.SetIamPolicyCallback): void;
+
+                    /**
+                     * Calls SetIamPolicy.
+                     * @param request SetIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls GetIamPolicy.
+                     * @param request GetIamPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Policy
+                     */
+                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.GetIamPolicyCallback): void;
+
+                    /**
+                     * Calls GetIamPolicy.
+                     * @param request GetIamPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                    /**
+                     * Calls TestIamPermissions.
+                     * @param request TestIamPermissionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                     */
+                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest, callback: google.cloud.secretmanager.v1beta2.SecretManagerService.TestIamPermissionsCallback): void;
+
+                    /**
+                     * Calls TestIamPermissions.
+                     * @param request TestIamPermissionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+                }
+
+                namespace SecretManagerService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|listSecrets}.
+                     * @param error Error, if any
+                     * @param [response] ListSecretsResponse
+                     */
+                    type ListSecretsCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1beta2.ListSecretsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|createSecret}.
+                     * @param error Error, if any
+                     * @param [response] Secret
+                     */
+                    type CreateSecretCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1beta2.Secret) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|addSecretVersion}.
+                     * @param error Error, if any
+                     * @param [response] SecretVersion
+                     */
+                    type AddSecretVersionCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1beta2.SecretVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|getSecret}.
+                     * @param error Error, if any
+                     * @param [response] Secret
+                     */
+                    type GetSecretCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1beta2.Secret) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|updateSecret}.
+                     * @param error Error, if any
+                     * @param [response] Secret
+                     */
+                    type UpdateSecretCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1beta2.Secret) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|deleteSecret}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteSecretCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|listSecretVersions}.
+                     * @param error Error, if any
+                     * @param [response] ListSecretVersionsResponse
+                     */
+                    type ListSecretVersionsCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|getSecretVersion}.
+                     * @param error Error, if any
+                     * @param [response] SecretVersion
+                     */
+                    type GetSecretVersionCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1beta2.SecretVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|accessSecretVersion}.
+                     * @param error Error, if any
+                     * @param [response] AccessSecretVersionResponse
+                     */
+                    type AccessSecretVersionCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|disableSecretVersion}.
+                     * @param error Error, if any
+                     * @param [response] SecretVersion
+                     */
+                    type DisableSecretVersionCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1beta2.SecretVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|enableSecretVersion}.
+                     * @param error Error, if any
+                     * @param [response] SecretVersion
+                     */
+                    type EnableSecretVersionCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1beta2.SecretVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|destroySecretVersion}.
+                     * @param error Error, if any
+                     * @param [response] SecretVersion
+                     */
+                    type DestroySecretVersionCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1beta2.SecretVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|setIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|getIamPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Policy
+                     */
+                    type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1beta2.SecretManagerService|testIamPermissions}.
+                     * @param error Error, if any
+                     * @param [response] TestIamPermissionsResponse
+                     */
+                    type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+                }
+
+                /** Properties of a ListSecretsRequest. */
+                interface IListSecretsRequest {
+
+                    /** ListSecretsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSecretsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSecretsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSecretsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListSecretsRequest. */
+                class ListSecretsRequest implements IListSecretsRequest {
+
+                    /**
+                     * Constructs a new ListSecretsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IListSecretsRequest);
+
+                    /** ListSecretsRequest parent. */
+                    public parent: string;
+
+                    /** ListSecretsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSecretsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSecretsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListSecretsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSecretsRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IListSecretsRequest): google.cloud.secretmanager.v1beta2.ListSecretsRequest;
+
+                    /**
+                     * Encodes the specified ListSecretsRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretsRequest.verify|verify} messages.
+                     * @param message ListSecretsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IListSecretsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSecretsRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretsRequest.verify|verify} messages.
+                     * @param message ListSecretsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IListSecretsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSecretsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSecretsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.ListSecretsRequest;
+
+                    /**
+                     * Decodes a ListSecretsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSecretsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.ListSecretsRequest;
+
+                    /**
+                     * Verifies a ListSecretsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSecretsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSecretsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.ListSecretsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSecretsRequest message. Also converts values to other types if specified.
+                     * @param message ListSecretsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.ListSecretsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSecretsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSecretsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSecretsResponse. */
+                interface IListSecretsResponse {
+
+                    /** ListSecretsResponse secrets */
+                    secrets?: (google.cloud.secretmanager.v1beta2.ISecret[]|null);
+
+                    /** ListSecretsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListSecretsResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListSecretsResponse. */
+                class ListSecretsResponse implements IListSecretsResponse {
+
+                    /**
+                     * Constructs a new ListSecretsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IListSecretsResponse);
+
+                    /** ListSecretsResponse secrets. */
+                    public secrets: google.cloud.secretmanager.v1beta2.ISecret[];
+
+                    /** ListSecretsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListSecretsResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListSecretsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSecretsResponse instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IListSecretsResponse): google.cloud.secretmanager.v1beta2.ListSecretsResponse;
+
+                    /**
+                     * Encodes the specified ListSecretsResponse message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretsResponse.verify|verify} messages.
+                     * @param message ListSecretsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IListSecretsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSecretsResponse message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretsResponse.verify|verify} messages.
+                     * @param message ListSecretsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IListSecretsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSecretsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSecretsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.ListSecretsResponse;
+
+                    /**
+                     * Decodes a ListSecretsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSecretsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.ListSecretsResponse;
+
+                    /**
+                     * Verifies a ListSecretsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSecretsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSecretsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.ListSecretsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSecretsResponse message. Also converts values to other types if specified.
+                     * @param message ListSecretsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.ListSecretsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSecretsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSecretsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSecretRequest. */
+                interface ICreateSecretRequest {
+
+                    /** CreateSecretRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSecretRequest secretId */
+                    secretId?: (string|null);
+
+                    /** CreateSecretRequest secret */
+                    secret?: (google.cloud.secretmanager.v1beta2.ISecret|null);
+                }
+
+                /** Represents a CreateSecretRequest. */
+                class CreateSecretRequest implements ICreateSecretRequest {
+
+                    /**
+                     * Constructs a new CreateSecretRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.ICreateSecretRequest);
+
+                    /** CreateSecretRequest parent. */
+                    public parent: string;
+
+                    /** CreateSecretRequest secretId. */
+                    public secretId: string;
+
+                    /** CreateSecretRequest secret. */
+                    public secret?: (google.cloud.secretmanager.v1beta2.ISecret|null);
+
+                    /**
+                     * Creates a new CreateSecretRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSecretRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.ICreateSecretRequest): google.cloud.secretmanager.v1beta2.CreateSecretRequest;
+
+                    /**
+                     * Encodes the specified CreateSecretRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CreateSecretRequest.verify|verify} messages.
+                     * @param message CreateSecretRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.ICreateSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSecretRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.CreateSecretRequest.verify|verify} messages.
+                     * @param message CreateSecretRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.ICreateSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSecretRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSecretRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.CreateSecretRequest;
+
+                    /**
+                     * Decodes a CreateSecretRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSecretRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.CreateSecretRequest;
+
+                    /**
+                     * Verifies a CreateSecretRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSecretRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSecretRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.CreateSecretRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSecretRequest message. Also converts values to other types if specified.
+                     * @param message CreateSecretRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.CreateSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSecretRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSecretRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AddSecretVersionRequest. */
+                interface IAddSecretVersionRequest {
+
+                    /** AddSecretVersionRequest parent */
+                    parent?: (string|null);
+
+                    /** AddSecretVersionRequest payload */
+                    payload?: (google.cloud.secretmanager.v1beta2.ISecretPayload|null);
+                }
+
+                /** Represents an AddSecretVersionRequest. */
+                class AddSecretVersionRequest implements IAddSecretVersionRequest {
+
+                    /**
+                     * Constructs a new AddSecretVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest);
+
+                    /** AddSecretVersionRequest parent. */
+                    public parent: string;
+
+                    /** AddSecretVersionRequest payload. */
+                    public payload?: (google.cloud.secretmanager.v1beta2.ISecretPayload|null);
+
+                    /**
+                     * Creates a new AddSecretVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AddSecretVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest): google.cloud.secretmanager.v1beta2.AddSecretVersionRequest;
+
+                    /**
+                     * Encodes the specified AddSecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AddSecretVersionRequest.verify|verify} messages.
+                     * @param message AddSecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AddSecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AddSecretVersionRequest.verify|verify} messages.
+                     * @param message AddSecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IAddSecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AddSecretVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AddSecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.AddSecretVersionRequest;
+
+                    /**
+                     * Decodes an AddSecretVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AddSecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.AddSecretVersionRequest;
+
+                    /**
+                     * Verifies an AddSecretVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AddSecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AddSecretVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.AddSecretVersionRequest;
+
+                    /**
+                     * Creates a plain object from an AddSecretVersionRequest message. Also converts values to other types if specified.
+                     * @param message AddSecretVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.AddSecretVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AddSecretVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AddSecretVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSecretRequest. */
+                interface IGetSecretRequest {
+
+                    /** GetSecretRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSecretRequest. */
+                class GetSecretRequest implements IGetSecretRequest {
+
+                    /**
+                     * Constructs a new GetSecretRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IGetSecretRequest);
+
+                    /** GetSecretRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSecretRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSecretRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IGetSecretRequest): google.cloud.secretmanager.v1beta2.GetSecretRequest;
+
+                    /**
+                     * Encodes the specified GetSecretRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.GetSecretRequest.verify|verify} messages.
+                     * @param message GetSecretRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IGetSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSecretRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.GetSecretRequest.verify|verify} messages.
+                     * @param message GetSecretRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IGetSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSecretRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSecretRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.GetSecretRequest;
+
+                    /**
+                     * Decodes a GetSecretRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSecretRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.GetSecretRequest;
+
+                    /**
+                     * Verifies a GetSecretRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSecretRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSecretRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.GetSecretRequest;
+
+                    /**
+                     * Creates a plain object from a GetSecretRequest message. Also converts values to other types if specified.
+                     * @param message GetSecretRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.GetSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSecretRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSecretRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSecretVersionsRequest. */
+                interface IListSecretVersionsRequest {
+
+                    /** ListSecretVersionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSecretVersionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSecretVersionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSecretVersionsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListSecretVersionsRequest. */
+                class ListSecretVersionsRequest implements IListSecretVersionsRequest {
+
+                    /**
+                     * Constructs a new ListSecretVersionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest);
+
+                    /** ListSecretVersionsRequest parent. */
+                    public parent: string;
+
+                    /** ListSecretVersionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSecretVersionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSecretVersionsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListSecretVersionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSecretVersionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest): google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest;
+
+                    /**
+                     * Encodes the specified ListSecretVersionsRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest.verify|verify} messages.
+                     * @param message ListSecretVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSecretVersionsRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest.verify|verify} messages.
+                     * @param message ListSecretVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IListSecretVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSecretVersionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSecretVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest;
+
+                    /**
+                     * Decodes a ListSecretVersionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSecretVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest;
+
+                    /**
+                     * Verifies a ListSecretVersionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSecretVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSecretVersionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSecretVersionsRequest message. Also converts values to other types if specified.
+                     * @param message ListSecretVersionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSecretVersionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSecretVersionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSecretVersionsResponse. */
+                interface IListSecretVersionsResponse {
+
+                    /** ListSecretVersionsResponse versions */
+                    versions?: (google.cloud.secretmanager.v1beta2.ISecretVersion[]|null);
+
+                    /** ListSecretVersionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListSecretVersionsResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListSecretVersionsResponse. */
+                class ListSecretVersionsResponse implements IListSecretVersionsResponse {
+
+                    /**
+                     * Constructs a new ListSecretVersionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IListSecretVersionsResponse);
+
+                    /** ListSecretVersionsResponse versions. */
+                    public versions: google.cloud.secretmanager.v1beta2.ISecretVersion[];
+
+                    /** ListSecretVersionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListSecretVersionsResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListSecretVersionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSecretVersionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IListSecretVersionsResponse): google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse;
+
+                    /**
+                     * Encodes the specified ListSecretVersionsResponse message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse.verify|verify} messages.
+                     * @param message ListSecretVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IListSecretVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSecretVersionsResponse message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse.verify|verify} messages.
+                     * @param message ListSecretVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IListSecretVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSecretVersionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSecretVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse;
+
+                    /**
+                     * Decodes a ListSecretVersionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSecretVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse;
+
+                    /**
+                     * Verifies a ListSecretVersionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSecretVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSecretVersionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSecretVersionsResponse message. Also converts values to other types if specified.
+                     * @param message ListSecretVersionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.ListSecretVersionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSecretVersionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSecretVersionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSecretVersionRequest. */
+                interface IGetSecretVersionRequest {
+
+                    /** GetSecretVersionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSecretVersionRequest. */
+                class GetSecretVersionRequest implements IGetSecretVersionRequest {
+
+                    /**
+                     * Constructs a new GetSecretVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest);
+
+                    /** GetSecretVersionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSecretVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSecretVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest): google.cloud.secretmanager.v1beta2.GetSecretVersionRequest;
+
+                    /**
+                     * Encodes the specified GetSecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.GetSecretVersionRequest.verify|verify} messages.
+                     * @param message GetSecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.GetSecretVersionRequest.verify|verify} messages.
+                     * @param message GetSecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IGetSecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSecretVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.GetSecretVersionRequest;
+
+                    /**
+                     * Decodes a GetSecretVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.GetSecretVersionRequest;
+
+                    /**
+                     * Verifies a GetSecretVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSecretVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.GetSecretVersionRequest;
+
+                    /**
+                     * Creates a plain object from a GetSecretVersionRequest message. Also converts values to other types if specified.
+                     * @param message GetSecretVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.GetSecretVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSecretVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSecretVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSecretRequest. */
+                interface IUpdateSecretRequest {
+
+                    /** UpdateSecretRequest secret */
+                    secret?: (google.cloud.secretmanager.v1beta2.ISecret|null);
+
+                    /** UpdateSecretRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateSecretRequest. */
+                class UpdateSecretRequest implements IUpdateSecretRequest {
+
+                    /**
+                     * Constructs a new UpdateSecretRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IUpdateSecretRequest);
+
+                    /** UpdateSecretRequest secret. */
+                    public secret?: (google.cloud.secretmanager.v1beta2.ISecret|null);
+
+                    /** UpdateSecretRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateSecretRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSecretRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IUpdateSecretRequest): google.cloud.secretmanager.v1beta2.UpdateSecretRequest;
+
+                    /**
+                     * Encodes the specified UpdateSecretRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.UpdateSecretRequest.verify|verify} messages.
+                     * @param message UpdateSecretRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IUpdateSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSecretRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.UpdateSecretRequest.verify|verify} messages.
+                     * @param message UpdateSecretRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IUpdateSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSecretRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSecretRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.UpdateSecretRequest;
+
+                    /**
+                     * Decodes an UpdateSecretRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSecretRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.UpdateSecretRequest;
+
+                    /**
+                     * Verifies an UpdateSecretRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSecretRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSecretRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.UpdateSecretRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSecretRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSecretRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.UpdateSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSecretRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSecretRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AccessSecretVersionRequest. */
+                interface IAccessSecretVersionRequest {
+
+                    /** AccessSecretVersionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an AccessSecretVersionRequest. */
+                class AccessSecretVersionRequest implements IAccessSecretVersionRequest {
+
+                    /**
+                     * Constructs a new AccessSecretVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest);
+
+                    /** AccessSecretVersionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new AccessSecretVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessSecretVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest): google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest;
+
+                    /**
+                     * Encodes the specified AccessSecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest.verify|verify} messages.
+                     * @param message AccessSecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessSecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest.verify|verify} messages.
+                     * @param message AccessSecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IAccessSecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessSecretVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessSecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest;
+
+                    /**
+                     * Decodes an AccessSecretVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessSecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest;
+
+                    /**
+                     * Verifies an AccessSecretVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessSecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessSecretVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest;
+
+                    /**
+                     * Creates a plain object from an AccessSecretVersionRequest message. Also converts values to other types if specified.
+                     * @param message AccessSecretVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessSecretVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessSecretVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AccessSecretVersionResponse. */
+                interface IAccessSecretVersionResponse {
+
+                    /** AccessSecretVersionResponse name */
+                    name?: (string|null);
+
+                    /** AccessSecretVersionResponse payload */
+                    payload?: (google.cloud.secretmanager.v1beta2.ISecretPayload|null);
+                }
+
+                /** Represents an AccessSecretVersionResponse. */
+                class AccessSecretVersionResponse implements IAccessSecretVersionResponse {
+
+                    /**
+                     * Constructs a new AccessSecretVersionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IAccessSecretVersionResponse);
+
+                    /** AccessSecretVersionResponse name. */
+                    public name: string;
+
+                    /** AccessSecretVersionResponse payload. */
+                    public payload?: (google.cloud.secretmanager.v1beta2.ISecretPayload|null);
+
+                    /**
+                     * Creates a new AccessSecretVersionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessSecretVersionResponse instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IAccessSecretVersionResponse): google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse;
+
+                    /**
+                     * Encodes the specified AccessSecretVersionResponse message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse.verify|verify} messages.
+                     * @param message AccessSecretVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IAccessSecretVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessSecretVersionResponse message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse.verify|verify} messages.
+                     * @param message AccessSecretVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IAccessSecretVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessSecretVersionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessSecretVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse;
+
+                    /**
+                     * Decodes an AccessSecretVersionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessSecretVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse;
+
+                    /**
+                     * Verifies an AccessSecretVersionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessSecretVersionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessSecretVersionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse;
+
+                    /**
+                     * Creates a plain object from an AccessSecretVersionResponse message. Also converts values to other types if specified.
+                     * @param message AccessSecretVersionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.AccessSecretVersionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessSecretVersionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessSecretVersionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSecretRequest. */
+                interface IDeleteSecretRequest {
+
+                    /** DeleteSecretRequest name */
+                    name?: (string|null);
+
+                    /** DeleteSecretRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteSecretRequest. */
+                class DeleteSecretRequest implements IDeleteSecretRequest {
+
+                    /**
+                     * Constructs a new DeleteSecretRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IDeleteSecretRequest);
+
+                    /** DeleteSecretRequest name. */
+                    public name: string;
+
+                    /** DeleteSecretRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteSecretRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSecretRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IDeleteSecretRequest): google.cloud.secretmanager.v1beta2.DeleteSecretRequest;
+
+                    /**
+                     * Encodes the specified DeleteSecretRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DeleteSecretRequest.verify|verify} messages.
+                     * @param message DeleteSecretRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IDeleteSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSecretRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DeleteSecretRequest.verify|verify} messages.
+                     * @param message DeleteSecretRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IDeleteSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSecretRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSecretRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.DeleteSecretRequest;
+
+                    /**
+                     * Decodes a DeleteSecretRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSecretRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.DeleteSecretRequest;
+
+                    /**
+                     * Verifies a DeleteSecretRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSecretRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSecretRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.DeleteSecretRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSecretRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSecretRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.DeleteSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSecretRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSecretRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisableSecretVersionRequest. */
+                interface IDisableSecretVersionRequest {
+
+                    /** DisableSecretVersionRequest name */
+                    name?: (string|null);
+
+                    /** DisableSecretVersionRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DisableSecretVersionRequest. */
+                class DisableSecretVersionRequest implements IDisableSecretVersionRequest {
+
+                    /**
+                     * Constructs a new DisableSecretVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest);
+
+                    /** DisableSecretVersionRequest name. */
+                    public name: string;
+
+                    /** DisableSecretVersionRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DisableSecretVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisableSecretVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest): google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest;
+
+                    /**
+                     * Encodes the specified DisableSecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest.verify|verify} messages.
+                     * @param message DisableSecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisableSecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest.verify|verify} messages.
+                     * @param message DisableSecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IDisableSecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisableSecretVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisableSecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest;
+
+                    /**
+                     * Decodes a DisableSecretVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisableSecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest;
+
+                    /**
+                     * Verifies a DisableSecretVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisableSecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisableSecretVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest;
+
+                    /**
+                     * Creates a plain object from a DisableSecretVersionRequest message. Also converts values to other types if specified.
+                     * @param message DisableSecretVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisableSecretVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisableSecretVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EnableSecretVersionRequest. */
+                interface IEnableSecretVersionRequest {
+
+                    /** EnableSecretVersionRequest name */
+                    name?: (string|null);
+
+                    /** EnableSecretVersionRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents an EnableSecretVersionRequest. */
+                class EnableSecretVersionRequest implements IEnableSecretVersionRequest {
+
+                    /**
+                     * Constructs a new EnableSecretVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest);
+
+                    /** EnableSecretVersionRequest name. */
+                    public name: string;
+
+                    /** EnableSecretVersionRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new EnableSecretVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnableSecretVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest): google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest;
+
+                    /**
+                     * Encodes the specified EnableSecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest.verify|verify} messages.
+                     * @param message EnableSecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnableSecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest.verify|verify} messages.
+                     * @param message EnableSecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IEnableSecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnableSecretVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnableSecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest;
+
+                    /**
+                     * Decodes an EnableSecretVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnableSecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest;
+
+                    /**
+                     * Verifies an EnableSecretVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnableSecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnableSecretVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest;
+
+                    /**
+                     * Creates a plain object from an EnableSecretVersionRequest message. Also converts values to other types if specified.
+                     * @param message EnableSecretVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnableSecretVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EnableSecretVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DestroySecretVersionRequest. */
+                interface IDestroySecretVersionRequest {
+
+                    /** DestroySecretVersionRequest name */
+                    name?: (string|null);
+
+                    /** DestroySecretVersionRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DestroySecretVersionRequest. */
+                class DestroySecretVersionRequest implements IDestroySecretVersionRequest {
+
+                    /**
+                     * Constructs a new DestroySecretVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest);
+
+                    /** DestroySecretVersionRequest name. */
+                    public name: string;
+
+                    /** DestroySecretVersionRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DestroySecretVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DestroySecretVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest): google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest;
+
+                    /**
+                     * Encodes the specified DestroySecretVersionRequest message. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest.verify|verify} messages.
+                     * @param message DestroySecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DestroySecretVersionRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest.verify|verify} messages.
+                     * @param message DestroySecretVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1beta2.IDestroySecretVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DestroySecretVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DestroySecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest;
+
+                    /**
+                     * Decodes a DestroySecretVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DestroySecretVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest;
+
+                    /**
+                     * Verifies a DestroySecretVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DestroySecretVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DestroySecretVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest;
+
+                    /**
+                     * Creates a plain object from a DestroySecretVersionRequest message. Also converts values to other types if specified.
+                     * @param message DestroySecretVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DestroySecretVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DestroySecretVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
         }
 
         /** Namespace secrets. */
@@ -6186,7 +9744,8 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -7090,6 +10649,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -7127,6 +10689,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -7708,6 +11273,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -7721,6 +11301,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -8002,6 +11597,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -8018,6 +11616,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -8221,7 +11822,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */
@@ -8344,6 +11948,21 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
         /** Properties of a FileDescriptorProto. */
         interface IFileDescriptorProto {
 
@@ -8384,7 +12003,7 @@ export namespace google {
             syntax?: (string|null);
 
             /** FileDescriptorProto edition */
-            edition?: (string|null);
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -8433,7 +12052,7 @@ export namespace google {
             public syntax: string;
 
             /** FileDescriptorProto edition. */
-            public edition: string;
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -8884,6 +12503,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -8897,6 +12525,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -8974,6 +12611,136 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -9160,8 +12927,8 @@ export namespace google {
             /** Label enum. */
             enum Label {
                 LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
             }
         }
 
@@ -9873,9 +13640,6 @@ export namespace google {
             /** FileOptions pyGenericServices */
             pyGenericServices?: (boolean|null);
 
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
             /** FileOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -9902,6 +13666,9 @@ export namespace google {
 
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -9949,9 +13716,6 @@ export namespace google {
             /** FileOptions pyGenericServices. */
             public pyGenericServices: boolean;
 
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
             /** FileOptions deprecated. */
             public deprecated: boolean;
 
@@ -9978,6 +13742,9 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10088,6 +13855,9 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -10118,6 +13888,9 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10230,8 +14003,14 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -10279,8 +14058,14 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10399,10 +14184,116 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -10416,6 +14307,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10510,6 +14404,9 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -10531,6 +14428,9 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10619,6 +14519,12 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -10634,6 +14540,12 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10719,6 +14631,9 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -10740,6 +14655,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -10834,6 +14752,9 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -10858,6 +14779,9 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -11182,6 +15106,394 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

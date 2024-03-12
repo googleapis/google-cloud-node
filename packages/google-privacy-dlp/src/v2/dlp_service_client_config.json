@@ -205,6 +205,36 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "ListProjectDataProfiles": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "ListTableDataProfiles": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "ListColumnDataProfiles": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "GetProjectDataProfile": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "GetTableDataProfile": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "GetColumnDataProfile": {
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "HybridInspectDlpJob": {
           "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",

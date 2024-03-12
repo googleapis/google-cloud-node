@@ -15,7 +15,7 @@
             "regionTag": "compute_v1_generated_AcceleratorTypes_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of accelerator types.",
+            "description": " Retrieves an aggregated list of accelerator types. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "accelerator_types.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -195,7 +195,7 @@
             "regionTag": "compute_v1_generated_Addresses_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of addresses.",
+            "description": " Retrieves an aggregated list of addresses. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "addresses.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -591,7 +591,7 @@
             "regionTag": "compute_v1_generated_Autoscalers_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of autoscalers.",
+            "description": " Retrieves an aggregated list of autoscalers. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "autoscalers.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -1643,7 +1643,7 @@
             "regionTag": "compute_v1_generated_BackendServices_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all BackendService resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all BackendService resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "backend_services.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -2479,7 +2479,7 @@
             "regionTag": "compute_v1_generated_Disks_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of persistent disks.",
+            "description": " Retrieves an aggregated list of persistent disks. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "disks.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -3427,7 +3427,7 @@
             "regionTag": "compute_v1_generated_DiskTypes_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of disk types.",
+            "description": " Retrieves an aggregated list of disk types. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "disk_types.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -5051,7 +5051,7 @@
             "regionTag": "compute_v1_generated_ForwardingRules_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of forwarding rules.",
+            "description": " Retrieves an aggregated list of forwarding rules. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "forwarding_rules.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -6523,7 +6523,7 @@
             "regionTag": "compute_v1_generated_GlobalOperations_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of all operations.",
+            "description": " Retrieves an aggregated list of all operations. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "global_operations.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -7183,7 +7183,7 @@
             "regionTag": "compute_v1_generated_HealthChecks_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all HealthCheck resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all HealthCheck resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "health_checks.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -8203,7 +8203,7 @@
             "regionTag": "compute_v1_generated_InstanceGroupManagers_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of managed instance groups and groups them by zone.",
+            "description": " Retrieves the list of managed instance groups and groups them by zone. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "instance_group_managers.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -9355,7 +9355,7 @@
             "regionTag": "compute_v1_generated_InstanceGroups_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of instance groups and sorts them by zone.",
+            "description": " Retrieves the list of instance groups and sorts them by zone. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "instance_groups.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -9939,7 +9939,7 @@
             "regionTag": "compute_v1_generated_Instances_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of all of the instances in your project across all regions and zones. The performance of this method degrades when a filter is specified on a project that has a very large number of instances.",
+            "description": " Retrieves an aggregated list of all of the instances in your project across all regions and zones. The performance of this method degrades when a filter is specified on a project that has a very large number of instances. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "instances.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -12507,7 +12507,7 @@
             "regionTag": "compute_v1_generated_InstanceTemplates_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all InstanceTemplates resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all InstanceTemplates resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "instance_templates.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -12916,10 +12916,506 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_InstantSnapshots_AggregatedList_async",
+            "title": "AcceleratorTypes aggregatedList Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves an aggregated list of instantSnapshots. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
+            "canonical": true,
+            "file": "instant_snapshots.aggregated_list.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 83,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AggregatedList",
+                "fullName": "google.cloud.compute.v1.InstantSnapshots.AggregatedList",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "include_all_scopes",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "service_project_number",
+                        "type": "TYPE_INT64"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.InstantSnapshotAggregatedList",
+                "client": {
+                    "shortName": "InstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "AggregatedList",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshots.AggregatedList",
+                    "service": {
+                        "shortName": "InstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.InstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_InstantSnapshots_Delete_async",
+            "title": "AcceleratorTypes delete Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes the specified InstantSnapshot resource. Keep in mind that deleting a single instantSnapshot might not necessarily delete all the data on that instantSnapshot. If any data on the instantSnapshot that is marked for deletion is needed for subsequent instantSnapshots, the data will be moved to the next corresponding instantSnapshot. For more information, see Deleting instantSnapshots.",
+            "canonical": true,
+            "file": "instant_snapshots.delete.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Delete",
+                "fullName": "google.cloud.compute.v1.InstantSnapshots.Delete",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instant_snapshot",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "InstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "Delete",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshots.Delete",
+                    "service": {
+                        "shortName": "InstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.InstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_InstantSnapshots_Get_async",
+            "title": "AcceleratorTypes get Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the specified InstantSnapshot resource in the specified zone.",
+            "canonical": true,
+            "file": "instant_snapshots.get.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Get",
+                "fullName": "google.cloud.compute.v1.InstantSnapshots.Get",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instant_snapshot",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.InstantSnapshot",
+                "client": {
+                    "shortName": "InstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "Get",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshots.Get",
+                    "service": {
+                        "shortName": "InstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.InstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_InstantSnapshots_GetIamPolicy_async",
+            "title": "AcceleratorTypes getIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+            "canonical": true,
+            "file": "instant_snapshots.get_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetIamPolicy",
+                "fullName": "google.cloud.compute.v1.InstantSnapshots.GetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "options_requested_policy_version",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Policy",
+                "client": {
+                    "shortName": "InstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "GetIamPolicy",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshots.GetIamPolicy",
+                    "service": {
+                        "shortName": "InstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.InstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_InstantSnapshots_Insert_async",
+            "title": "AcceleratorTypes insert Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates an instant snapshot in the specified zone.",
+            "canonical": true,
+            "file": "instant_snapshots.insert.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Insert",
+                "fullName": "google.cloud.compute.v1.InstantSnapshots.Insert",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instant_snapshot_resource",
+                        "type": ".google.cloud.compute.v1.InstantSnapshot"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "InstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "Insert",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshots.Insert",
+                    "service": {
+                        "shortName": "InstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.InstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_InstantSnapshots_List_async",
+            "title": "AcceleratorTypes list Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the list of InstantSnapshot resources contained within the specified zone.",
+            "canonical": true,
+            "file": "instant_snapshots.list.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "List",
+                "fullName": "google.cloud.compute.v1.InstantSnapshots.List",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.InstantSnapshotList",
+                "client": {
+                    "shortName": "InstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "List",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshots.List",
+                    "service": {
+                        "shortName": "InstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.InstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_InstantSnapshots_SetIamPolicy_async",
+            "title": "AcceleratorTypes setIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the access control policy on the specified resource. Replaces any existing policy.",
+            "canonical": true,
+            "file": "instant_snapshots.set_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetIamPolicy",
+                "fullName": "google.cloud.compute.v1.InstantSnapshots.SetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone_set_policy_request_resource",
+                        "type": ".google.cloud.compute.v1.ZoneSetPolicyRequest"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Policy",
+                "client": {
+                    "shortName": "InstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "SetIamPolicy",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshots.SetIamPolicy",
+                    "service": {
+                        "shortName": "InstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.InstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_InstantSnapshots_SetLabels_async",
+            "title": "AcceleratorTypes setLabels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the labels on a instantSnapshot in the given zone. To learn more about labels, read the Labeling Resources documentation.",
+            "canonical": true,
+            "file": "instant_snapshots.set_labels.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetLabels",
+                "fullName": "google.cloud.compute.v1.InstantSnapshots.SetLabels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone_set_labels_request_resource",
+                        "type": ".google.cloud.compute.v1.ZoneSetLabelsRequest"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "InstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "SetLabels",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshots.SetLabels",
+                    "service": {
+                        "shortName": "InstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.InstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_InstantSnapshots_TestIamPermissions_async",
+            "title": "AcceleratorTypes testIamPermissions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns permissions that a caller has on the specified resource.",
+            "canonical": true,
+            "file": "instant_snapshots.test_iam_permissions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TestIamPermissions",
+                "fullName": "google.cloud.compute.v1.InstantSnapshots.TestIamPermissions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "test_permissions_request_resource",
+                        "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+                "client": {
+                    "shortName": "InstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "TestIamPermissions",
+                    "fullName": "google.cloud.compute.v1.InstantSnapshots.TestIamPermissions",
+                    "service": {
+                        "shortName": "InstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.InstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_InterconnectAttachments_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of interconnect attachments.",
+            "description": " Retrieves an aggregated list of interconnect attachments. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "interconnect_attachments.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -14699,7 +15195,7 @@
             "regionTag": "compute_v1_generated_MachineTypes_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of machine types.",
+            "description": " Retrieves an aggregated list of machine types. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "machine_types.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -14879,7 +15375,7 @@
             "regionTag": "compute_v1_generated_NetworkAttachments_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all NetworkAttachment resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all NetworkAttachment resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "network_attachments.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -15375,7 +15871,7 @@
             "regionTag": "compute_v1_generated_NetworkEdgeSecurityServices_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all NetworkEdgeSecurityService resources available to the specified project.",
+            "description": " Retrieves the list of all NetworkEdgeSecurityService resources available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "network_edge_security_services.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -15663,7 +16159,7 @@
             "regionTag": "compute_v1_generated_NetworkEndpointGroups_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of network endpoint groups and sorts them by zone.",
+            "description": " Retrieves the list of network endpoint groups and sorts them by zone. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "network_endpoint_groups.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -17635,7 +18131,7 @@
             "regionTag": "compute_v1_generated_NodeGroups_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of node groups. Note: use nodeGroups.listNodes for more details about each group.",
+            "description": " Retrieves an aggregated list of node groups. Note: use nodeGroups.listNodes for more details about each group. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "node_groups.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -18371,7 +18867,7 @@
             "regionTag": "compute_v1_generated_NodeTemplates_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of node templates.",
+            "description": " Retrieves an aggregated list of node templates. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "node_templates.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -18811,7 +19307,7 @@
             "regionTag": "compute_v1_generated_NodeTypes_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of node types.",
+            "description": " Retrieves an aggregated list of node types. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "node_types.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -18991,7 +19487,7 @@
             "regionTag": "compute_v1_generated_PacketMirrorings_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of packetMirrorings.",
+            "description": " Retrieves an aggregated list of packetMirrorings. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "packet_mirrorings.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -19864,6 +20360,54 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_Projects_SetCloudArmorTier_async",
+            "title": "AcceleratorTypes setCloudArmorTier Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the Cloud Armor tier of the project. To set ENTERPRISE or above the billing account of the project must be subscribed to Cloud Armor Enterprise. See Subscribing to Cloud Armor Enterprise for more information.",
+            "canonical": true,
+            "file": "projects.set_cloud_armor_tier.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetCloudArmorTier",
+                "fullName": "google.cloud.compute.v1.Projects.SetCloudArmorTier",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "projects_set_cloud_armor_tier_request_resource",
+                        "type": ".google.cloud.compute.v1.ProjectsSetCloudArmorTierRequest"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "ProjectsClient",
+                    "fullName": "google.cloud.compute.v1.ProjectsClient"
+                },
+                "method": {
+                    "shortName": "SetCloudArmorTier",
+                    "fullName": "google.cloud.compute.v1.Projects.SetCloudArmorTier",
+                    "service": {
+                        "shortName": "Projects",
+                        "fullName": "google.cloud.compute.v1.Projects"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_Projects_SetCommonInstanceMetadata_async",
             "title": "AcceleratorTypes setCommonInstanceMetadata Sample",
             "origin": "API_DEFINITION",
@@ -20359,7 +20903,7 @@
             "regionTag": "compute_v1_generated_PublicDelegatedPrefixes_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists all PublicDelegatedPrefix resources owned by the specific project across all scopes.",
+            "description": " Lists all PublicDelegatedPrefix resources owned by the specific project across all scopes. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "public_delegated_prefixes.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -21787,7 +22331,7 @@
             "regionTag": "compute_v1_generated_RegionCommitments_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of commitments by region.",
+            "description": " Retrieves an aggregated list of commitments by region. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "region_commitments.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -25311,6 +25855,434 @@
                     "service": {
                         "shortName": "RegionInstanceTemplates",
                         "fullName": "google.cloud.compute.v1.RegionInstanceTemplates"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionInstantSnapshots_Delete_async",
+            "title": "AcceleratorTypes delete Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes the specified InstantSnapshot resource. Keep in mind that deleting a single instantSnapshot might not necessarily delete all the data on that instantSnapshot. If any data on the instantSnapshot that is marked for deletion is needed for subsequent instantSnapshots, the data will be moved to the next corresponding instantSnapshot. For more information, see Deleting instantSnapshots.",
+            "canonical": true,
+            "file": "region_instant_snapshots.delete.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Delete",
+                "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.Delete",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instant_snapshot",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionInstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "Delete",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.Delete",
+                    "service": {
+                        "shortName": "RegionInstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.RegionInstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionInstantSnapshots_Get_async",
+            "title": "AcceleratorTypes get Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the specified InstantSnapshot resource in the specified region.",
+            "canonical": true,
+            "file": "region_instant_snapshots.get.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Get",
+                "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.Get",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instant_snapshot",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.InstantSnapshot",
+                "client": {
+                    "shortName": "RegionInstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "Get",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.Get",
+                    "service": {
+                        "shortName": "RegionInstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.RegionInstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionInstantSnapshots_GetIamPolicy_async",
+            "title": "AcceleratorTypes getIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+            "canonical": true,
+            "file": "region_instant_snapshots.get_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetIamPolicy",
+                "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.GetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "options_requested_policy_version",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Policy",
+                "client": {
+                    "shortName": "RegionInstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "GetIamPolicy",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.GetIamPolicy",
+                    "service": {
+                        "shortName": "RegionInstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.RegionInstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionInstantSnapshots_Insert_async",
+            "title": "AcceleratorTypes insert Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates an instant snapshot in the specified region.",
+            "canonical": true,
+            "file": "region_instant_snapshots.insert.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Insert",
+                "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.Insert",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instant_snapshot_resource",
+                        "type": ".google.cloud.compute.v1.InstantSnapshot"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionInstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "Insert",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.Insert",
+                    "service": {
+                        "shortName": "RegionInstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.RegionInstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionInstantSnapshots_List_async",
+            "title": "AcceleratorTypes list Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the list of InstantSnapshot resources contained within the specified region.",
+            "canonical": true,
+            "file": "region_instant_snapshots.list.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "List",
+                "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.List",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.InstantSnapshotList",
+                "client": {
+                    "shortName": "RegionInstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "List",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.List",
+                    "service": {
+                        "shortName": "RegionInstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.RegionInstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionInstantSnapshots_SetIamPolicy_async",
+            "title": "AcceleratorTypes setIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the access control policy on the specified resource. Replaces any existing policy.",
+            "canonical": true,
+            "file": "region_instant_snapshots.set_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetIamPolicy",
+                "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.SetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_set_policy_request_resource",
+                        "type": ".google.cloud.compute.v1.RegionSetPolicyRequest"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Policy",
+                "client": {
+                    "shortName": "RegionInstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "SetIamPolicy",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.SetIamPolicy",
+                    "service": {
+                        "shortName": "RegionInstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.RegionInstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionInstantSnapshots_SetLabels_async",
+            "title": "AcceleratorTypes setLabels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the labels on a instantSnapshot in the given region. To learn more about labels, read the Labeling Resources documentation.",
+            "canonical": true,
+            "file": "region_instant_snapshots.set_labels.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetLabels",
+                "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.SetLabels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_set_labels_request_resource",
+                        "type": ".google.cloud.compute.v1.RegionSetLabelsRequest"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionInstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "SetLabels",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.SetLabels",
+                    "service": {
+                        "shortName": "RegionInstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.RegionInstantSnapshots"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionInstantSnapshots_TestIamPermissions_async",
+            "title": "AcceleratorTypes testIamPermissions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns permissions that a caller has on the specified resource.",
+            "canonical": true,
+            "file": "region_instant_snapshots.test_iam_permissions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TestIamPermissions",
+                "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.TestIamPermissions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "test_permissions_request_resource",
+                        "type": ".google.cloud.compute.v1.TestPermissionsRequest"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.TestPermissionsResponse",
+                "client": {
+                    "shortName": "RegionInstantSnapshotsClient",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshotsClient"
+                },
+                "method": {
+                    "shortName": "TestIamPermissions",
+                    "fullName": "google.cloud.compute.v1.RegionInstantSnapshots.TestIamPermissions",
+                    "service": {
+                        "shortName": "RegionInstantSnapshots",
+                        "fullName": "google.cloud.compute.v1.RegionInstantSnapshots"
                     }
                 }
             }
@@ -29547,7 +30519,7 @@
             "regionTag": "compute_v1_generated_Reservations_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of reservations.",
+            "description": " Retrieves an aggregated list of reservations. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "reservations.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -30107,7 +31079,7 @@
             "regionTag": "compute_v1_generated_ResourcePolicies_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of resource policies.",
+            "description": " Retrieves an aggregated list of resource policies. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "resource_policies.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -30607,7 +31579,7 @@
             "regionTag": "compute_v1_generated_Routers_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of routers.",
+            "description": " Retrieves an aggregated list of routers. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "routers.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -31479,7 +32451,7 @@
             "regionTag": "compute_v1_generated_SecurityPolicies_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all SecurityPolicy resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all SecurityPolicy resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "security_policies.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -32071,7 +33043,7 @@
             "regionTag": "compute_v1_generated_ServiceAttachments_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all ServiceAttachment resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all ServiceAttachment resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "service_attachments.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -33051,7 +34023,7 @@
             "regionTag": "compute_v1_generated_SslCertificates_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all SslCertificate resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all SslCertificate resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "ssl_certificates.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -33319,7 +34291,7 @@
             "regionTag": "compute_v1_generated_SslPolicies_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all SslPolicy resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all SslPolicy resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "ssl_policies.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -33699,7 +34671,7 @@
             "regionTag": "compute_v1_generated_Subnetworks_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of subnetworks.",
+            "description": " Retrieves an aggregated list of subnetworks. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "subnetworks.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -34623,7 +35595,7 @@
             "regionTag": "compute_v1_generated_TargetHttpProxies_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all TargetHttpProxy resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all TargetHttpProxy resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "target_http_proxies.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -34995,7 +35967,7 @@
             "regionTag": "compute_v1_generated_TargetHttpsProxies_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all TargetHttpsProxy resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all TargetHttpsProxy resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "target_https_proxies.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -35575,7 +36547,7 @@
             "regionTag": "compute_v1_generated_TargetInstances_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of target instances.",
+            "description": " Retrieves an aggregated list of target instances. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "target_instances.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -36027,7 +36999,7 @@
             "regionTag": "compute_v1_generated_TargetPools_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of target pools.",
+            "description": " Retrieves an aggregated list of target pools. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "target_pools.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -37051,7 +38023,7 @@
             "regionTag": "compute_v1_generated_TargetTcpProxies_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all TargetTcpProxy resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all TargetTcpProxy resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "target_tcp_proxies.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -37423,7 +38395,7 @@
             "regionTag": "compute_v1_generated_TargetVpnGateways_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of target VPN gateways.",
+            "description": " Retrieves an aggregated list of target VPN gateways. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "target_vpn_gateways.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -37763,7 +38735,7 @@
             "regionTag": "compute_v1_generated_UrlMaps_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves the list of all UrlMap resources, regional and global, available to the specified project.",
+            "description": " Retrieves the list of all UrlMap resources, regional and global, available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "url_maps.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -38235,7 +39207,7 @@
             "regionTag": "compute_v1_generated_VpnGateways_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of VPN gateways.",
+            "description": " Retrieves an aggregated list of VPN gateways. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "vpn_gateways.aggregated_list.js",
             "language": "JAVASCRIPT",
@@ -38675,7 +39647,7 @@
             "regionTag": "compute_v1_generated_VpnTunnels_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieves an aggregated list of VPN tunnels.",
+            "description": " Retrieves an aggregated list of VPN tunnels. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
             "canonical": true,
             "file": "vpn_tunnels.aggregated_list.js",
             "language": "JAVASCRIPT",

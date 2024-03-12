@@ -174,6 +174,13 @@
                 "listUsersStream",
                 "listUsersAsync"
               ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "listDatabases",
+                "listDatabasesStream",
+                "listDatabasesAsync"
+              ]
             }
           }
         },
@@ -343,6 +350,13 @@
                 "listUsers",
                 "listUsersStream",
                 "listUsersAsync"
+              ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "listDatabases",
+                "listDatabasesStream",
+                "listDatabasesAsync"
               ]
             }
           }
