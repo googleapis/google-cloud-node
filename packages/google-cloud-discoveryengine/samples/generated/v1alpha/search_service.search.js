@@ -81,6 +81,10 @@ function main(servingConfig) {
    */
   // const offset = 1234
   /**
+   *  A list of data store specs to apply on a search call.
+   */
+  // const dataStoreSpecs = [1,2,3,4]
+  /**
    *  The filter syntax consists of an expression language for constructing a
    *  predicate from one or more fields of the documents being filtered. Filter
    *  expression is case-sensitive.
@@ -183,11 +187,12 @@ function main(servingConfig) {
   /**
    *  Uses the provided embedding to do additional semantic document retrieval.
    *  The retrieval is based on the dot product of
-   *  SearchRequest.embedding_spec.embedding_vectors.vector   and the document
-   *  embedding that is provided in
-   *  SearchRequest.embedding_spec.embedding_vectors.field_path .
-   *  If SearchRequest.embedding_spec.embedding_vectors.field_path   is not
-   *  provided, it will use ServingConfig.embedding_config.field_paths .
+   *  SearchRequest.EmbeddingSpec.EmbeddingVector.vector google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.vector 
+   *  and the document embedding that is provided in
+   *  SearchRequest.EmbeddingSpec.EmbeddingVector.field_path google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path.
+   *  If
+   *  SearchRequest.EmbeddingSpec.EmbeddingVector.field_path google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path 
+   *  is not provided, it will use ServingConfig.EmbeddingConfig.field_path .
    */
   // const embeddingSpec = {}
   /**
@@ -235,6 +240,10 @@ function main(servingConfig) {
    *  for more details.
    */
   // const userLabels = [1,2,3,4]
+  /**
+   *  Custom fine tuning configs.
+   */
+  // const customFineTuningSpec = {}
 
   // Imports the Discoveryengine library
   const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1alpha;
