@@ -15,7 +15,7 @@
     "test": "mocha test/*.test.js --timeout=600000"
   },
   "dependencies": {
-    "@google-cloud/dlp": "^5.2.0",
+    "@google-cloud/dlp": "^5.3.0",
     "@google-cloud/pubsub": "^4.0.0",
     "mime": "^4.0.0",
     "yargs": "^17.0.0"
