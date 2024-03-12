@@ -199,6 +199,9 @@ export class SearchServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aclConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aclConfig'
+      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
@@ -214,9 +217,17 @@ export class SearchServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
         ),
+      projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+        ),
       projectLocationCollectionDataStoreConversationPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
+        ),
+      projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/documentProcessingConfig'
         ),
       projectLocationCollectionDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -253,9 +264,17 @@ export class SearchServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
         ),
+      projectLocationDataStoreBranchDocumentChunkPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+        ),
       projectLocationDataStoreConversationPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
+        ),
+      projectLocationDataStoreDocumentProcessingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/documentProcessingConfig'
         ),
       projectLocationDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -498,6 +517,8 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number[]} request.dataStoreSpecs
+   *   A list of data store specs to apply on a search call.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -593,12 +614,13 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec} request.embeddingSpec
    *   Uses the provided embedding to do additional semantic document retrieval.
    *   The retrieval is based on the dot product of
-   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.vector} and the document
-   *   embedding that is provided in
-   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path}.
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.vector|SearchRequest.EmbeddingSpec.EmbeddingVector.vector}
+   *   and the document embedding that is provided in
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}.
    *
-   *   If {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path} is not
-   *   provided, it will use {@link protos.|ServingConfig.embedding_config.field_paths}.
+   *   If
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
+   *   is not provided, it will use {@link protos.|ServingConfig.EmbeddingConfig.field_path}.
    * @param {string} request.rankingExpression
    *   The ranking expression controls the customized ranking on retrieval
    *   documents. This overrides
@@ -641,6 +663,8 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
+   * @param {google.cloud.discoveryengine.v1alpha.CustomFineTuningSpec} request.customFineTuningSpec
+   *   Custom fine tuning configs.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -774,6 +798,8 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number[]} request.dataStoreSpecs
+   *   A list of data store specs to apply on a search call.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -869,12 +895,13 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec} request.embeddingSpec
    *   Uses the provided embedding to do additional semantic document retrieval.
    *   The retrieval is based on the dot product of
-   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.vector} and the document
-   *   embedding that is provided in
-   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path}.
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.vector|SearchRequest.EmbeddingSpec.EmbeddingVector.vector}
+   *   and the document embedding that is provided in
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}.
    *
-   *   If {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path} is not
-   *   provided, it will use {@link protos.|ServingConfig.embedding_config.field_paths}.
+   *   If
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
+   *   is not provided, it will use {@link protos.|ServingConfig.EmbeddingConfig.field_path}.
    * @param {string} request.rankingExpression
    *   The ranking expression controls the customized ranking on retrieval
    *   documents. This overrides
@@ -917,6 +944,8 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
+   * @param {google.cloud.discoveryengine.v1alpha.CustomFineTuningSpec} request.customFineTuningSpec
+   *   Custom fine tuning configs.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -998,6 +1027,8 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number[]} request.dataStoreSpecs
+   *   A list of data store specs to apply on a search call.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -1093,12 +1124,13 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec} request.embeddingSpec
    *   Uses the provided embedding to do additional semantic document retrieval.
    *   The retrieval is based on the dot product of
-   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.vector} and the document
-   *   embedding that is provided in
-   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path}.
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.vector|SearchRequest.EmbeddingSpec.EmbeddingVector.vector}
+   *   and the document embedding that is provided in
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}.
    *
-   *   If {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path} is not
-   *   provided, it will use {@link protos.|ServingConfig.embedding_config.field_paths}.
+   *   If
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
+   *   is not provided, it will use {@link protos.|ServingConfig.EmbeddingConfig.field_path}.
    * @param {string} request.rankingExpression
    *   The ranking expression controls the customized ranking on retrieval
    *   documents. This overrides
@@ -1141,6 +1173,8 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
+   * @param {google.cloud.discoveryengine.v1alpha.CustomFineTuningSpec} request.customFineTuningSpec
+   *   Custom fine tuning configs.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1255,6 +1289,44 @@ export class SearchServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified aclConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  aclConfigPath(project: string, location: string) {
+    return this.pathTemplates.aclConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .location;
+  }
 
   /**
    * Return a fully-qualified engine resource name string.
@@ -1633,6 +1705,145 @@ export class SearchServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreBranchDocumentChunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} branch
+   * @param {string} document
+   * @param {string} chunk
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreBranchDocumentChunkPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    branch: string,
+    document: string,
+    chunk: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+        chunk: chunk,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).data_store;
+  }
+
+  /**
+   * Parse the branch from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).branch;
+  }
+
+  /**
+   * Parse the document from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).document;
+  }
+
+  /**
+   * Parse the chunk from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the chunk.
+   */
+  matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).chunk;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionDataStoreConversation resource name string.
    *
    * @param {string} project
@@ -1733,6 +1944,91 @@ export class SearchServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
       projectLocationCollectionDataStoreConversationName
     ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreDocumentProcessingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreDocumentProcessingConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).data_store;
   }
 
   /**
@@ -2589,6 +2885,127 @@ export class SearchServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreBranchDocumentChunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} branch
+   * @param {string} document
+   * @param {string} chunk
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreBranchDocumentChunkPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    branch: string,
+    document: string,
+    chunk: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+        chunk: chunk,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).data_store;
+  }
+
+  /**
+   * Parse the branch from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).branch;
+  }
+
+  /**
+   * Parse the document from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).document;
+  }
+
+  /**
+   * Parse the chunk from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the chunk.
+   */
+  matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).chunk;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreConversation resource name string.
    *
    * @param {string} project
@@ -2671,6 +3088,73 @@ export class SearchServiceClient {
     return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
       projectLocationDataStoreConversationName
     ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreDocumentProcessingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreDocumentProcessingConfigPath(
+    project: string,
+    location: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName(
+    projectLocationDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationDataStoreDocumentProcessingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName(
+    projectLocationDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationDataStoreDocumentProcessingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName(
+    projectLocationDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationDataStoreDocumentProcessingConfigName
+    ).data_store;
   }
 
   /**

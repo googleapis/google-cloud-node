@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-discoveryengine",
-        "version": "1.4.0",
+        "version": "1.4.1",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -166,7 +166,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 117,
+                    "end": 123,
                     "type": "FULL"
                 }
             ],
@@ -206,6 +206,10 @@
                     {
                         "name": "filter",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "boost_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1beta.ConverseConversationResponse",
@@ -1530,7 +1534,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 258,
+                    "end": 262,
                     "type": "FULL"
                 }
             ],
@@ -1566,6 +1570,10 @@
                     {
                         "name": "offset",
                         "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "data_store_specs",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "filter",
@@ -1639,6 +1647,58 @@
                     "service": {
                         "shortName": "SearchService",
                         "fullName": "google.cloud.discoveryengine.v1beta.SearchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1beta_generated_SearchTuningService_TrainCustomModel_async",
+            "title": "CompletionService trainCustomModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Trains a custom model.",
+            "canonical": true,
+            "file": "search_tuning_service.train_custom_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TrainCustomModel",
+                "fullName": "google.cloud.discoveryengine.v1beta.SearchTuningService.TrainCustomModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "gcs_training_input",
+                        "type": ".google.cloud.discoveryengine.v1beta.TrainCustomModelRequest.GcsTrainingInput"
+                    },
+                    {
+                        "name": "data_store",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "error_config",
+                        "type": ".google.cloud.discoveryengine.v1beta.ImportErrorConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SearchTuningServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.SearchTuningServiceClient"
+                },
+                "method": {
+                    "shortName": "TrainCustomModel",
+                    "fullName": "google.cloud.discoveryengine.v1beta.SearchTuningService.TrainCustomModel",
+                    "service": {
+                        "shortName": "SearchTuningService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.SearchTuningService"
                     }
                 }
             }

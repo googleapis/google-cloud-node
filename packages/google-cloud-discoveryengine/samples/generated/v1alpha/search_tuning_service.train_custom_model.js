@@ -29,7 +29,7 @@ function main(dataStore) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Gcs training input.
+   *  Cloud Storage training input.
    */
   // const gcsTrainingInput = {}
   /**

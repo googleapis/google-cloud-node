@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The dataStore resource name. Format:
-   *  `projects/{project_number}/locations/{location}/collections/{collection}/dataStores/{data_store}`
+   *  Required. Full resource name of the parent resource. Format:
+   *  `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
    */
   // const parent = 'abc123'
   /**
