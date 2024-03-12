@@ -49,7 +49,7 @@ const version = require('../../../package.json').version;
  *  scheduling of data scans on Google Cloud Platform based data sets.
  *
  *  To learn more about concepts and find how-to guides see
- *  https://cloud.google.com/dlp/docs/.
+ *  https://cloud.google.com/sensitive-data-protection/docs/.
  * @class
  * @memberof v2
  */
@@ -226,6 +226,13 @@ export class DlpServiceClient {
       organizationInspectTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/inspectTemplates/{inspect_template}'
       ),
+      organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}'
+      ),
+      organizationLocationColumnDataProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/columnDataProfiles/{column_data_profile}'
+        ),
       organizationLocationDeidentifyTemplatePathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/deidentifyTemplates/{deidentify_template}'
@@ -234,9 +241,17 @@ export class DlpServiceClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/inspectTemplates/{inspect_template}'
         ),
+      organizationLocationProjectDataProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/projectDataProfiles/{project_data_profile}'
+        ),
       organizationLocationStoredInfoTypePathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/storedInfoTypes/{stored_info_type}'
+        ),
+      organizationLocationTableDataProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/tableDataProfiles/{table_data_profile}'
         ),
       organizationStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/storedInfoTypes/{stored_info_type}'
@@ -259,6 +274,10 @@ export class DlpServiceClient {
       projectJobTriggerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/jobTriggers/{job_trigger}'
       ),
+      projectLocationColumnDataProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/columnDataProfiles/{column_data_profile}'
+        ),
       projectLocationDeidentifyTemplatePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}'
@@ -273,9 +292,17 @@ export class DlpServiceClient {
       projectLocationJobTriggerPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/jobTriggers/{job_trigger}'
       ),
+      projectLocationProjectDataProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/projectDataProfiles/{project_data_profile}'
+        ),
       projectLocationStoredInfoTypePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/storedInfoTypes/{stored_info_type}'
+        ),
+      projectLocationTableDataProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/tableDataProfiles/{table_data_profile}'
         ),
       projectStoredInfoTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/storedInfoTypes/{stored_info_type}'
@@ -315,6 +342,21 @@ export class DlpServiceClient {
         'pageToken',
         'nextPageToken',
         'storedInfoTypes'
+      ),
+      listProjectDataProfiles: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'projectDataProfiles'
+      ),
+      listTableDataProfiles: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'tableDataProfiles'
+      ),
+      listColumnDataProfiles: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'columnDataProfiles'
       ),
     };
 
@@ -405,6 +447,12 @@ export class DlpServiceClient {
       'getStoredInfoType',
       'listStoredInfoTypes',
       'deleteStoredInfoType',
+      'listProjectDataProfiles',
+      'listTableDataProfiles',
+      'listColumnDataProfiles',
+      'getProjectDataProfile',
+      'getTableDataProfile',
+      'getColumnDataProfile',
       'hybridInspectDlpJob',
       'finishDlpJob',
     ];
@@ -529,8 +577,10 @@ export class DlpServiceClient {
    * system will automatically choose what detectors to run. By default this may
    * be all types, but may change over time as detectors are updated.
    *
-   * For how to guides, see https://cloud.google.com/dlp/docs/inspecting-images
-   * and https://cloud.google.com/dlp/docs/inspecting-text,
+   * For how to guides, see
+   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-images
+   * and
+   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-text,
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -539,7 +589,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -644,8 +694,9 @@ export class DlpServiceClient {
   /**
    * Redacts potentially sensitive info from an image.
    * This method has limits on input size, processing time, and output size.
-   * See https://cloud.google.com/dlp/docs/redacting-sensitive-data-images to
-   * learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/redacting-sensitive-data-images
+   * to learn more.
    *
    * When no InfoTypes or CustomInfoTypes are specified in this request, the
    * system will automatically choose what detectors to run. By default this may
@@ -658,7 +709,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -759,8 +810,9 @@ export class DlpServiceClient {
   /**
    * De-identifies potentially sensitive info from a ContentItem.
    * This method has limits on input size and output size.
-   * See https://cloud.google.com/dlp/docs/deidentify-sensitive-data to
-   * learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/deidentify-sensitive-data
+   * to learn more.
    *
    * When no InfoTypes or CustomInfoTypes are specified in this request, the
    * system will automatically choose what detectors to run. By default this may
@@ -773,7 +825,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -896,7 +948,7 @@ export class DlpServiceClient {
   /**
    * Re-identifies content that has been de-identified.
    * See
-   * https://cloud.google.com/dlp/docs/pseudonymization#re-identification_in_free_text_code_example
+   * https://cloud.google.com/sensitive-data-protection/docs/pseudonymization#re-identification_in_free_text_code_example
    * to learn more.
    *
    * @param {Object} request
@@ -906,7 +958,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1028,8 +1080,9 @@ export class DlpServiceClient {
   }
   /**
    * Returns a list of the sensitive information types that DLP API
-   * supports. See https://cloud.google.com/dlp/docs/infotypes-reference to
-   * learn more.
+   * supports. See
+   * https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1126,7 +1179,9 @@ export class DlpServiceClient {
   /**
    * Creates an InspectTemplate for reusing frequently used configuration
    * for inspecting content, images, and storage.
-   * See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1135,7 +1190,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1245,7 +1300,9 @@ export class DlpServiceClient {
   }
   /**
    * Updates the InspectTemplate.
-   * See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1342,7 +1399,9 @@ export class DlpServiceClient {
   }
   /**
    * Gets an InspectTemplate.
-   * See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1435,7 +1494,9 @@ export class DlpServiceClient {
   }
   /**
    * Deletes an InspectTemplate.
-   * See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1529,8 +1590,9 @@ export class DlpServiceClient {
   /**
    * Creates a DeidentifyTemplate for reusing frequently used configuration
    * for de-identifying content, images, and storage.
-   * See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-   * more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1539,7 +1601,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -1653,8 +1715,9 @@ export class DlpServiceClient {
   }
   /**
    * Updates the DeidentifyTemplate.
-   * See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-   * more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1756,8 +1819,9 @@ export class DlpServiceClient {
   }
   /**
    * Gets a DeidentifyTemplate.
-   * See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-   * more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1850,8 +1914,9 @@ export class DlpServiceClient {
   }
   /**
    * Deletes a DeidentifyTemplate.
-   * See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-   * more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1950,7 +2015,9 @@ export class DlpServiceClient {
   /**
    * Creates a job trigger to run DLP actions such as scanning storage for
    * sensitive information on a set schedule.
-   * See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1959,7 +2026,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -2059,7 +2126,9 @@ export class DlpServiceClient {
   }
   /**
    * Updates a job trigger.
-   * See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2248,7 +2317,9 @@ export class DlpServiceClient {
   }
   /**
    * Gets a job trigger.
-   * See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2332,7 +2403,9 @@ export class DlpServiceClient {
   }
   /**
    * Deletes a job trigger.
-   * See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2893,8 +2966,11 @@ export class DlpServiceClient {
   }
   /**
    * Creates a new job to inspect storage or calculate risk metrics.
-   * See https://cloud.google.com/dlp/docs/inspecting-storage and
-   * https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+   * and
+   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+   * to learn more.
    *
    * When no InfoTypes or CustomInfoTypes are specified in inspect jobs, the
    * system will automatically choose what detectors to run. By default this may
@@ -2907,7 +2983,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -3008,8 +3084,11 @@ export class DlpServiceClient {
   }
   /**
    * Gets the latest state of a long-running DlpJob.
-   * See https://cloud.google.com/dlp/docs/inspecting-storage and
-   * https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+   * and
+   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3094,8 +3173,11 @@ export class DlpServiceClient {
    * Deletes a long-running DlpJob. This method indicates that the client is
    * no longer interested in the DlpJob result. The job will be canceled if
    * possible.
-   * See https://cloud.google.com/dlp/docs/inspecting-storage and
-   * https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+   * and
+   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3180,8 +3262,11 @@ export class DlpServiceClient {
    * Starts asynchronous cancellation on a long-running DlpJob. The server
    * makes a best effort to cancel the DlpJob, but success is not
    * guaranteed.
-   * See https://cloud.google.com/dlp/docs/inspecting-storage and
-   * https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+   * and
+   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3264,8 +3349,9 @@ export class DlpServiceClient {
   }
   /**
    * Creates a pre-built stored infoType to be used for inspection.
-   * See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-   * learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3274,7 +3360,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -3385,8 +3471,9 @@ export class DlpServiceClient {
   /**
    * Updates the stored infoType by creating a new version. The existing version
    * will continue to be used until the new version is ready.
-   * See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-   * learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3485,8 +3572,9 @@ export class DlpServiceClient {
   }
   /**
    * Gets a stored infoType.
-   * See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-   * learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3573,8 +3661,9 @@ export class DlpServiceClient {
   }
   /**
    * Deletes a stored infoType.
-   * See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-   * learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3664,6 +3753,279 @@ export class DlpServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.deleteStoredInfoType(request, options, callback);
+  }
+  /**
+   * Gets a project data profile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name, for example
+   *   `organizations/12345/locations/us/projectDataProfiles/53234423`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.get_project_data_profile.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_GetProjectDataProfile_async
+   */
+  getProjectDataProfile(
+    request?: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IProjectDataProfile,
+      protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getProjectDataProfile(
+    request: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IProjectDataProfile,
+      | protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProjectDataProfile(
+    request: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IProjectDataProfile,
+      | protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProjectDataProfile(
+    request?: protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IProjectDataProfile,
+          | protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IProjectDataProfile,
+      | protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IProjectDataProfile,
+      protos.google.privacy.dlp.v2.IGetProjectDataProfileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getProjectDataProfile(request, options, callback);
+  }
+  /**
+   * Gets a table data profile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name, for example
+   *   `organizations/12345/locations/us/tableDataProfiles/53234423`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.get_table_data_profile.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_GetTableDataProfile_async
+   */
+  getTableDataProfile(
+    request?: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.ITableDataProfile,
+      protos.google.privacy.dlp.v2.IGetTableDataProfileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getTableDataProfile(
+    request: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.ITableDataProfile,
+      | protos.google.privacy.dlp.v2.IGetTableDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTableDataProfile(
+    request: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.ITableDataProfile,
+      | protos.google.privacy.dlp.v2.IGetTableDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getTableDataProfile(
+    request?: protos.google.privacy.dlp.v2.IGetTableDataProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.ITableDataProfile,
+          | protos.google.privacy.dlp.v2.IGetTableDataProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.ITableDataProfile,
+      | protos.google.privacy.dlp.v2.IGetTableDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.ITableDataProfile,
+      protos.google.privacy.dlp.v2.IGetTableDataProfileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getTableDataProfile(request, options, callback);
+  }
+  /**
+   * Gets a column data profile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name, for example
+   *   `organizations/12345/locations/us/columnDataProfiles/53234423`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.get_column_data_profile.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_GetColumnDataProfile_async
+   */
+  getColumnDataProfile(
+    request?: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IColumnDataProfile,
+      protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getColumnDataProfile(
+    request: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IColumnDataProfile,
+      | protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getColumnDataProfile(
+    request: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IColumnDataProfile,
+      | protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getColumnDataProfile(
+    request?: protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IColumnDataProfile,
+          | protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IColumnDataProfile,
+      | protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IColumnDataProfile,
+      protos.google.privacy.dlp.v2.IGetColumnDataProfileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getColumnDataProfile(request, options, callback);
   }
   /**
    * Inspect hybrid content and store findings to a job.
@@ -3767,7 +4129,7 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the DlpJob resource to be cancelled.
+   *   Required. The name of the DlpJob resource to be finished.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3846,7 +4208,9 @@ export class DlpServiceClient {
 
   /**
    * Lists InspectTemplates.
-   * See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3855,7 +4219,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -3989,7 +4353,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4071,7 +4435,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4144,8 +4508,9 @@ export class DlpServiceClient {
   }
   /**
    * Lists DeidentifyTemplates.
-   * See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-   * more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4154,7 +4519,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4292,7 +4657,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4374,7 +4739,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4447,7 +4812,9 @@ export class DlpServiceClient {
   }
   /**
    * Lists job triggers.
-   * See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4456,7 +4823,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4609,7 +4976,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -4716,7 +5083,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -5072,8 +5439,11 @@ export class DlpServiceClient {
   }
   /**
    * Lists DlpJobs that match the specified filter in the request.
-   * See https://cloud.google.com/dlp/docs/inspecting-storage and
-   * https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+   * and
+   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5082,7 +5452,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -5233,7 +5603,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -5340,7 +5710,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -5438,8 +5808,9 @@ export class DlpServiceClient {
   }
   /**
    * Lists stored infoTypes.
-   * See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-   * learn more.
+   * See
+   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+   * to learn more.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -5448,7 +5819,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -5579,7 +5950,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -5658,7 +6029,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/dlp/docs/specifying-location):
+   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:<br/>
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
@@ -5725,6 +6096,1013 @@ export class DlpServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IStoredInfoType>;
+  }
+  /**
+   * Lists data profiles for an organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. organizations/{org_id}/locations/{loc_id}
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by the server. If zero, server
+   *   returns a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *   * `project_id`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: GCP project ID
+   *   - `sensitivity_level`: How sensitive the data in a project is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   * @param {string} request.filter
+   *   Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `sensitivity_level` - HIGH|MODERATE|LOW
+   *       - `data_risk_level` - HIGH|MODERATE|LOW
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` or `!=`.
+   *
+   *   Examples:
+   *
+   *   * `project_id = 12345 AND status_code = 1`
+   *   * `project_id = 12345 AND sensitivity_level = HIGH`
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listProjectDataProfilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listProjectDataProfiles(
+    request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IProjectDataProfile[],
+      protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest | null,
+      protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse,
+    ]
+  >;
+  listProjectDataProfiles(
+    request: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IProjectDataProfile
+    >
+  ): void;
+  listProjectDataProfiles(
+    request: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IProjectDataProfile
+    >
+  ): void;
+  listProjectDataProfiles(
+    request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+          | protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IProjectDataProfile
+        >,
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IProjectDataProfile
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IProjectDataProfile[],
+      protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest | null,
+      protos.google.privacy.dlp.v2.IListProjectDataProfilesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listProjectDataProfiles(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. organizations/{org_id}/locations/{loc_id}
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by the server. If zero, server
+   *   returns a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *   * `project_id`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: GCP project ID
+   *   - `sensitivity_level`: How sensitive the data in a project is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   * @param {string} request.filter
+   *   Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `sensitivity_level` - HIGH|MODERATE|LOW
+   *       - `data_risk_level` - HIGH|MODERATE|LOW
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` or `!=`.
+   *
+   *   Examples:
+   *
+   *   * `project_id = 12345 AND status_code = 1`
+   *   * `project_id = 12345 AND sensitivity_level = HIGH`
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listProjectDataProfilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listProjectDataProfilesStream(
+    request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listProjectDataProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listProjectDataProfiles.createStream(
+      this.innerApiCalls.listProjectDataProfiles as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listProjectDataProfiles`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. organizations/{org_id}/locations/{loc_id}
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by the server. If zero, server
+   *   returns a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *   * `project_id`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: GCP project ID
+   *   - `sensitivity_level`: How sensitive the data in a project is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   * @param {string} request.filter
+   *   Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `sensitivity_level` - HIGH|MODERATE|LOW
+   *       - `data_risk_level` - HIGH|MODERATE|LOW
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` or `!=`.
+   *
+   *   Examples:
+   *
+   *   * `project_id = 12345 AND status_code = 1`
+   *   * `project_id = 12345 AND sensitivity_level = HIGH`
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.privacy.dlp.v2.ProjectDataProfile|ProjectDataProfile}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.list_project_data_profiles.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_ListProjectDataProfiles_async
+   */
+  listProjectDataProfilesAsync(
+    request?: protos.google.privacy.dlp.v2.IListProjectDataProfilesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IProjectDataProfile> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listProjectDataProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listProjectDataProfiles.asyncIterate(
+      this.innerApiCalls['listProjectDataProfiles'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IProjectDataProfile>;
+  }
+  /**
+   * Lists data profiles for an organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the organization or project, for
+   *   example `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by the server. If zero, server
+   *   returns a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *   * `project_id asc`
+   *   * `table_id`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: The GCP project ID.
+   *   - `dataset_id`: The ID of a BigQuery dataset.
+   *   - `table_id`: The ID of a BigQuery table.
+   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   *   - `last_modified`: The last time the resource was modified.
+   *   - `resource_visibility`: Visibility restriction for this resource.
+   *   - `row_count`: Number of rows in this resource.
+   * @param {string} request.filter
+   *   Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `project_id` - The GCP project ID.
+   *       - `dataset_id` - The BigQuery dataset ID.
+   *       - `table_id` - The ID of the BigQuery table.
+   *       - `sensitivity_level` - HIGH|MODERATE|LOW
+   *       - `data_risk_level` - HIGH|MODERATE|LOW
+   *       - `resource_visibility`: PUBLIC|RESTRICTED
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` or `!=`.
+   *
+   *   Examples:
+   *
+   *   * `project_id = 12345 AND status_code = 1`
+   *   * `project_id = 12345 AND sensitivity_level = HIGH`
+   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTableDataProfilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listTableDataProfiles(
+    request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.ITableDataProfile[],
+      protos.google.privacy.dlp.v2.IListTableDataProfilesRequest | null,
+      protos.google.privacy.dlp.v2.IListTableDataProfilesResponse,
+    ]
+  >;
+  listTableDataProfiles(
+    request: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.ITableDataProfile
+    >
+  ): void;
+  listTableDataProfiles(
+    request: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.ITableDataProfile
+    >
+  ): void;
+  listTableDataProfiles(
+    request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+          | protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.ITableDataProfile
+        >,
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListTableDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.ITableDataProfile
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.ITableDataProfile[],
+      protos.google.privacy.dlp.v2.IListTableDataProfilesRequest | null,
+      protos.google.privacy.dlp.v2.IListTableDataProfilesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listTableDataProfiles(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the organization or project, for
+   *   example `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by the server. If zero, server
+   *   returns a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *   * `project_id asc`
+   *   * `table_id`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: The GCP project ID.
+   *   - `dataset_id`: The ID of a BigQuery dataset.
+   *   - `table_id`: The ID of a BigQuery table.
+   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   *   - `last_modified`: The last time the resource was modified.
+   *   - `resource_visibility`: Visibility restriction for this resource.
+   *   - `row_count`: Number of rows in this resource.
+   * @param {string} request.filter
+   *   Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `project_id` - The GCP project ID.
+   *       - `dataset_id` - The BigQuery dataset ID.
+   *       - `table_id` - The ID of the BigQuery table.
+   *       - `sensitivity_level` - HIGH|MODERATE|LOW
+   *       - `data_risk_level` - HIGH|MODERATE|LOW
+   *       - `resource_visibility`: PUBLIC|RESTRICTED
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` or `!=`.
+   *
+   *   Examples:
+   *
+   *   * `project_id = 12345 AND status_code = 1`
+   *   * `project_id = 12345 AND sensitivity_level = HIGH`
+   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTableDataProfilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listTableDataProfilesStream(
+    request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTableDataProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listTableDataProfiles.createStream(
+      this.innerApiCalls.listTableDataProfiles as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listTableDataProfiles`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the organization or project, for
+   *   example `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by the server. If zero, server
+   *   returns a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *   * `project_id asc`
+   *   * `table_id`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: The GCP project ID.
+   *   - `dataset_id`: The ID of a BigQuery dataset.
+   *   - `table_id`: The ID of a BigQuery table.
+   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   *   - `last_modified`: The last time the resource was modified.
+   *   - `resource_visibility`: Visibility restriction for this resource.
+   *   - `row_count`: Number of rows in this resource.
+   * @param {string} request.filter
+   *   Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `project_id` - The GCP project ID.
+   *       - `dataset_id` - The BigQuery dataset ID.
+   *       - `table_id` - The ID of the BigQuery table.
+   *       - `sensitivity_level` - HIGH|MODERATE|LOW
+   *       - `data_risk_level` - HIGH|MODERATE|LOW
+   *       - `resource_visibility`: PUBLIC|RESTRICTED
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` or `!=`.
+   *
+   *   Examples:
+   *
+   *   * `project_id = 12345 AND status_code = 1`
+   *   * `project_id = 12345 AND sensitivity_level = HIGH`
+   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.privacy.dlp.v2.TableDataProfile|TableDataProfile}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.list_table_data_profiles.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_ListTableDataProfiles_async
+   */
+  listTableDataProfilesAsync(
+    request?: protos.google.privacy.dlp.v2.IListTableDataProfilesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.ITableDataProfile> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listTableDataProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listTableDataProfiles.asyncIterate(
+      this.innerApiCalls['listTableDataProfiles'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.ITableDataProfile>;
+  }
+  /**
+   * Lists data profiles for an organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the organization or project, for
+   *   example `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by the server. If zero, server
+   *   returns a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *   * `project_id asc`
+   *   * `table_id`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: The Google Cloud project ID.
+   *   - `dataset_id`: The ID of a BigQuery dataset.
+   *   - `table_id`: The ID of a BigQuery table.
+   *   - `sensitivity_level`: How sensitive the data in a column is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   * @param {string} request.filter
+   *   Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `table_data_profile_name` - The name of the related table data
+   *       profile.
+   *       - `project_id` - The Google Cloud project ID. (REQUIRED)
+   *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
+   *       - `table_id` - The BigQuery table ID. (REQUIRED)
+   *       - `field_id` - The ID of the BigQuery field.
+   *       - `info_type` - The infotype detected in the resource.
+   *       - `sensitivity_level` - HIGH|MEDIUM|LOW
+   *       - `data_risk_level`: How much risk is associated with this data.
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
+   *     filters also support `!=`.
+   *
+   *   Examples:
+   *
+   *   * project_id = 12345 AND status_code = 1
+   *   * project_id = 12345 AND sensitivity_level = HIGH
+   *   * project_id = 12345 AND info_type = STREET_ADDRESS
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listColumnDataProfilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listColumnDataProfiles(
+    request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IColumnDataProfile[],
+      protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest | null,
+      protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse,
+    ]
+  >;
+  listColumnDataProfiles(
+    request: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IColumnDataProfile
+    >
+  ): void;
+  listColumnDataProfiles(
+    request: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IColumnDataProfile
+    >
+  ): void;
+  listColumnDataProfiles(
+    request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+          | protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IColumnDataProfile
+        >,
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IColumnDataProfile
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IColumnDataProfile[],
+      protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest | null,
+      protos.google.privacy.dlp.v2.IListColumnDataProfilesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listColumnDataProfiles(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the organization or project, for
+   *   example `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by the server. If zero, server
+   *   returns a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *   * `project_id asc`
+   *   * `table_id`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: The Google Cloud project ID.
+   *   - `dataset_id`: The ID of a BigQuery dataset.
+   *   - `table_id`: The ID of a BigQuery table.
+   *   - `sensitivity_level`: How sensitive the data in a column is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   * @param {string} request.filter
+   *   Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `table_data_profile_name` - The name of the related table data
+   *       profile.
+   *       - `project_id` - The Google Cloud project ID. (REQUIRED)
+   *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
+   *       - `table_id` - The BigQuery table ID. (REQUIRED)
+   *       - `field_id` - The ID of the BigQuery field.
+   *       - `info_type` - The infotype detected in the resource.
+   *       - `sensitivity_level` - HIGH|MEDIUM|LOW
+   *       - `data_risk_level`: How much risk is associated with this data.
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
+   *     filters also support `!=`.
+   *
+   *   Examples:
+   *
+   *   * project_id = 12345 AND status_code = 1
+   *   * project_id = 12345 AND sensitivity_level = HIGH
+   *   * project_id = 12345 AND info_type = STREET_ADDRESS
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listColumnDataProfilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listColumnDataProfilesStream(
+    request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listColumnDataProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listColumnDataProfiles.createStream(
+      this.innerApiCalls.listColumnDataProfiles as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listColumnDataProfiles`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the organization or project, for
+   *   example `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
+   * @param {string} request.pageToken
+   *   Page token to continue retrieval.
+   * @param {number} request.pageSize
+   *   Size of the page. This value can be limited by the server. If zero, server
+   *   returns a page of max size 100.
+   * @param {string} request.orderBy
+   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *   * `project_id asc`
+   *   * `table_id`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: The Google Cloud project ID.
+   *   - `dataset_id`: The ID of a BigQuery dataset.
+   *   - `table_id`: The ID of a BigQuery table.
+   *   - `sensitivity_level`: How sensitive the data in a column is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   * @param {string} request.filter
+   *   Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `table_data_profile_name` - The name of the related table data
+   *       profile.
+   *       - `project_id` - The Google Cloud project ID. (REQUIRED)
+   *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
+   *       - `table_id` - The BigQuery table ID. (REQUIRED)
+   *       - `field_id` - The ID of the BigQuery field.
+   *       - `info_type` - The infotype detected in the resource.
+   *       - `sensitivity_level` - HIGH|MEDIUM|LOW
+   *       - `data_risk_level`: How much risk is associated with this data.
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
+   *     filters also support `!=`.
+   *
+   *   Examples:
+   *
+   *   * project_id = 12345 AND status_code = 1
+   *   * project_id = 12345 AND sensitivity_level = HIGH
+   *   * project_id = 12345 AND info_type = STREET_ADDRESS
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.privacy.dlp.v2.ColumnDataProfile|ColumnDataProfile}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.list_column_data_profiles.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_ListColumnDataProfiles_async
+   */
+  listColumnDataProfilesAsync(
+    request?: protos.google.privacy.dlp.v2.IListColumnDataProfilesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IColumnDataProfile> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listColumnDataProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listColumnDataProfiles.asyncIterate(
+      this.innerApiCalls['listColumnDataProfiles'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IColumnDataProfile>;
   }
   /**
    * Gets information about a location.
@@ -6073,6 +7451,115 @@ export class DlpServiceClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocation resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  organizationLocationPath(organization: string, location: string) {
+    return this.pathTemplates.organizationLocationPathTemplate.render({
+      organization: organization,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocation resource.
+   *
+   * @param {string} organizationLocationName
+   *   A fully-qualified path representing OrganizationLocation resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationName(
+    organizationLocationName: string
+  ) {
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocation resource.
+   *
+   * @param {string} organizationLocationName
+   *   A fully-qualified path representing OrganizationLocation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationName(organizationLocationName: string) {
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationColumnDataProfile resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} column_data_profile
+   * @returns {string} Resource name string.
+   */
+  organizationLocationColumnDataProfilePath(
+    organization: string,
+    location: string,
+    columnDataProfile: string
+  ) {
+    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        column_data_profile: columnDataProfile,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationColumnDataProfile resource.
+   *
+   * @param {string} organizationLocationColumnDataProfileName
+   *   A fully-qualified path representing organization_location_column_data_profile resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationColumnDataProfileName(
+    organizationLocationColumnDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.match(
+      organizationLocationColumnDataProfileName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationColumnDataProfile resource.
+   *
+   * @param {string} organizationLocationColumnDataProfileName
+   *   A fully-qualified path representing organization_location_column_data_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationColumnDataProfileName(
+    organizationLocationColumnDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.match(
+      organizationLocationColumnDataProfileName
+    ).location;
+  }
+
+  /**
+   * Parse the column_data_profile from OrganizationLocationColumnDataProfile resource.
+   *
+   * @param {string} organizationLocationColumnDataProfileName
+   *   A fully-qualified path representing organization_location_column_data_profile resource.
+   * @returns {string} A string representing the column_data_profile.
+   */
+  matchColumnDataProfileFromOrganizationLocationColumnDataProfileName(
+    organizationLocationColumnDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.match(
+      organizationLocationColumnDataProfileName
+    ).column_data_profile;
+  }
+
+  /**
    * Return a fully-qualified organizationLocationDeidentifyTemplate resource name string.
    *
    * @param {string} organization
@@ -6207,6 +7694,73 @@ export class DlpServiceClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationProjectDataProfile resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} project_data_profile
+   * @returns {string} Resource name string.
+   */
+  organizationLocationProjectDataProfilePath(
+    organization: string,
+    location: string,
+    projectDataProfile: string
+  ) {
+    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        project_data_profile: projectDataProfile,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationProjectDataProfile resource.
+   *
+   * @param {string} organizationLocationProjectDataProfileName
+   *   A fully-qualified path representing organization_location_project_data_profile resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationProjectDataProfileName(
+    organizationLocationProjectDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.match(
+      organizationLocationProjectDataProfileName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationProjectDataProfile resource.
+   *
+   * @param {string} organizationLocationProjectDataProfileName
+   *   A fully-qualified path representing organization_location_project_data_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationProjectDataProfileName(
+    organizationLocationProjectDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.match(
+      organizationLocationProjectDataProfileName
+    ).location;
+  }
+
+  /**
+   * Parse the project_data_profile from OrganizationLocationProjectDataProfile resource.
+   *
+   * @param {string} organizationLocationProjectDataProfileName
+   *   A fully-qualified path representing organization_location_project_data_profile resource.
+   * @returns {string} A string representing the project_data_profile.
+   */
+  matchProjectDataProfileFromOrganizationLocationProjectDataProfileName(
+    organizationLocationProjectDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationProjectDataProfilePathTemplate.match(
+      organizationLocationProjectDataProfileName
+    ).project_data_profile;
+  }
+
+  /**
    * Return a fully-qualified organizationLocationStoredInfoType resource name string.
    *
    * @param {string} organization
@@ -6271,6 +7825,73 @@ export class DlpServiceClient {
     return this.pathTemplates.organizationLocationStoredInfoTypePathTemplate.match(
       organizationLocationStoredInfoTypeName
     ).stored_info_type;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationTableDataProfile resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} table_data_profile
+   * @returns {string} Resource name string.
+   */
+  organizationLocationTableDataProfilePath(
+    organization: string,
+    location: string,
+    tableDataProfile: string
+  ) {
+    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        table_data_profile: tableDataProfile,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationTableDataProfile resource.
+   *
+   * @param {string} organizationLocationTableDataProfileName
+   *   A fully-qualified path representing organization_location_table_data_profile resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationTableDataProfileName(
+    organizationLocationTableDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.match(
+      organizationLocationTableDataProfileName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationTableDataProfile resource.
+   *
+   * @param {string} organizationLocationTableDataProfileName
+   *   A fully-qualified path representing organization_location_table_data_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationTableDataProfileName(
+    organizationLocationTableDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.match(
+      organizationLocationTableDataProfileName
+    ).location;
+  }
+
+  /**
+   * Parse the table_data_profile from OrganizationLocationTableDataProfile resource.
+   *
+   * @param {string} organizationLocationTableDataProfileName
+   *   A fully-qualified path representing organization_location_table_data_profile resource.
+   * @returns {string} A string representing the table_data_profile.
+   */
+  matchTableDataProfileFromOrganizationLocationTableDataProfileName(
+    organizationLocationTableDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationTableDataProfilePathTemplate.match(
+      organizationLocationTableDataProfileName
+    ).table_data_profile;
   }
 
   /**
@@ -6532,6 +8153,73 @@ export class DlpServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationColumnDataProfile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} column_data_profile
+   * @returns {string} Resource name string.
+   */
+  projectLocationColumnDataProfilePath(
+    project: string,
+    location: string,
+    columnDataProfile: string
+  ) {
+    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        column_data_profile: columnDataProfile,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationColumnDataProfile resource.
+   *
+   * @param {string} projectLocationColumnDataProfileName
+   *   A fully-qualified path representing project_location_column_data_profile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationColumnDataProfileName(
+    projectLocationColumnDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.match(
+      projectLocationColumnDataProfileName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationColumnDataProfile resource.
+   *
+   * @param {string} projectLocationColumnDataProfileName
+   *   A fully-qualified path representing project_location_column_data_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationColumnDataProfileName(
+    projectLocationColumnDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.match(
+      projectLocationColumnDataProfileName
+    ).location;
+  }
+
+  /**
+   * Parse the column_data_profile from ProjectLocationColumnDataProfile resource.
+   *
+   * @param {string} projectLocationColumnDataProfileName
+   *   A fully-qualified path representing project_location_column_data_profile resource.
+   * @returns {string} A string representing the column_data_profile.
+   */
+  matchColumnDataProfileFromProjectLocationColumnDataProfileName(
+    projectLocationColumnDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.match(
+      projectLocationColumnDataProfileName
+    ).column_data_profile;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDeidentifyTemplate resource name string.
    *
    * @param {string} project
@@ -6788,6 +8476,73 @@ export class DlpServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationProjectDataProfile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} project_data_profile
+   * @returns {string} Resource name string.
+   */
+  projectLocationProjectDataProfilePath(
+    project: string,
+    location: string,
+    projectDataProfile: string
+  ) {
+    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        project_data_profile: projectDataProfile,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationProjectDataProfile resource.
+   *
+   * @param {string} projectLocationProjectDataProfileName
+   *   A fully-qualified path representing project_location_project_data_profile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationProjectDataProfileName(
+    projectLocationProjectDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.match(
+      projectLocationProjectDataProfileName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationProjectDataProfile resource.
+   *
+   * @param {string} projectLocationProjectDataProfileName
+   *   A fully-qualified path representing project_location_project_data_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationProjectDataProfileName(
+    projectLocationProjectDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.match(
+      projectLocationProjectDataProfileName
+    ).location;
+  }
+
+  /**
+   * Parse the project_data_profile from ProjectLocationProjectDataProfile resource.
+   *
+   * @param {string} projectLocationProjectDataProfileName
+   *   A fully-qualified path representing project_location_project_data_profile resource.
+   * @returns {string} A string representing the project_data_profile.
+   */
+  matchProjectDataProfileFromProjectLocationProjectDataProfileName(
+    projectLocationProjectDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationProjectDataProfilePathTemplate.match(
+      projectLocationProjectDataProfileName
+    ).project_data_profile;
+  }
+
+  /**
    * Return a fully-qualified projectLocationStoredInfoType resource name string.
    *
    * @param {string} project
@@ -6850,6 +8605,73 @@ export class DlpServiceClient {
     return this.pathTemplates.projectLocationStoredInfoTypePathTemplate.match(
       projectLocationStoredInfoTypeName
     ).stored_info_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationTableDataProfile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} table_data_profile
+   * @returns {string} Resource name string.
+   */
+  projectLocationTableDataProfilePath(
+    project: string,
+    location: string,
+    tableDataProfile: string
+  ) {
+    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        table_data_profile: tableDataProfile,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationTableDataProfile resource.
+   *
+   * @param {string} projectLocationTableDataProfileName
+   *   A fully-qualified path representing project_location_table_data_profile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationTableDataProfileName(
+    projectLocationTableDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.match(
+      projectLocationTableDataProfileName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationTableDataProfile resource.
+   *
+   * @param {string} projectLocationTableDataProfileName
+   *   A fully-qualified path representing project_location_table_data_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationTableDataProfileName(
+    projectLocationTableDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.match(
+      projectLocationTableDataProfileName
+    ).location;
+  }
+
+  /**
+   * Parse the table_data_profile from ProjectLocationTableDataProfile resource.
+   *
+   * @param {string} projectLocationTableDataProfileName
+   *   A fully-qualified path representing project_location_table_data_profile resource.
+   * @returns {string} A string representing the table_data_profile.
+   */
+  matchTableDataProfileFromProjectLocationTableDataProfileName(
+    projectLocationTableDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationTableDataProfilePathTemplate.match(
+      projectLocationTableDataProfileName
+    ).table_data_profile;
   }
 
   /**

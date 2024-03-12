@@ -5198,9 +5198,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5252,9 +5252,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5304,9 +5304,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5349,9 +5349,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -5537,9 +5537,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5587,9 +5587,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5637,9 +5637,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5678,9 +5678,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -5878,9 +5878,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5934,9 +5934,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5986,9 +5986,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6031,9 +6031,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6613,9 +6613,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6667,9 +6667,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6717,9 +6717,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6758,9 +6758,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listFindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -6946,9 +6946,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listMuteConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -6996,9 +6996,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listMuteConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7045,9 +7045,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -7086,9 +7086,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listMuteConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -8390,9 +8390,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8441,9 +8441,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8490,9 +8490,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8532,9 +8532,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -8723,9 +8723,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listBigQueryExports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8773,9 +8773,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listBigQueryExports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8823,9 +8823,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -8864,9 +8864,9 @@ describe('v1.SecurityCenterClient', () => {
       assert(
         (client.descriptors.page.listBigQueryExports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -9281,6 +9281,68 @@ describe('v1.SecurityCenterClient', () => {
         assert(
           (
             client.pathTemplates.folderAssetSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('folderConstraintName', () => {
+      const fakePath = '/rendered/path/folderConstraintName';
+      const expectedParameters = {
+        folder: 'folderValue',
+        constraint_name: 'constraintNameValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderConstraintNamePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderConstraintNamePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderConstraintNamePath', () => {
+        const result = client.folderConstraintNamePath(
+          'folderValue',
+          'constraintNameValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderConstraintNamePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderConstraintNameName', () => {
+        const result = client.matchFolderFromFolderConstraintNameName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderConstraintNamePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConstraintNameFromFolderConstraintNameName', () => {
+        const result =
+          client.matchConstraintNameFromFolderConstraintNameName(fakePath);
+        assert.strictEqual(result, 'constraintNameValue');
+        assert(
+          (
+            client.pathTemplates.folderConstraintNamePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -10052,6 +10114,71 @@ describe('v1.SecurityCenterClient', () => {
         assert(
           (
             client.pathTemplates.organizationAssetSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationConstraintName', () => {
+      const fakePath = '/rendered/path/organizationConstraintName';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        constraint_name: 'constraintNameValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationConstraintNamePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationConstraintNamePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationConstraintNamePath', () => {
+        const result = client.organizationConstraintNamePath(
+          'organizationValue',
+          'constraintNameValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationConstraintNamePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationConstraintNameName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationConstraintNameName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationConstraintNamePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConstraintNameFromOrganizationConstraintNameName', () => {
+        const result =
+          client.matchConstraintNameFromOrganizationConstraintNameName(
+            fakePath
+          );
+        assert.strictEqual(result, 'constraintNameValue');
+        assert(
+          (
+            client.pathTemplates.organizationConstraintNamePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -10924,6 +11051,69 @@ describe('v1.SecurityCenterClient', () => {
         assert(
           (
             client.pathTemplates.projectAssetSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectConstraintName', () => {
+      const fakePath = '/rendered/path/projectConstraintName';
+      const expectedParameters = {
+        project: 'projectValue',
+        constraint_name: 'constraintNameValue',
+      };
+      const client = new securitycenterModule.v1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectConstraintNamePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectConstraintNamePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectConstraintNamePath', () => {
+        const result = client.projectConstraintNamePath(
+          'projectValue',
+          'constraintNameValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectConstraintNamePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectConstraintNameName', () => {
+        const result =
+          client.matchProjectFromProjectConstraintNameName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectConstraintNamePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConstraintNameFromProjectConstraintNameName', () => {
+        const result =
+          client.matchConstraintNameFromProjectConstraintNameName(fakePath);
+        assert.strictEqual(result, 'constraintNameValue');
+        assert(
+          (
+            client.pathTemplates.projectConstraintNamePathTemplate
               .match as SinonStub
           )
             .getCall(-1)

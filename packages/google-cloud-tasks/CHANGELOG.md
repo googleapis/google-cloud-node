@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.1.0...tasks-v5.1.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* [tasks] Add client library version to headers ([#5083](https://github.com/googleapis/google-cloud-node/issues/5083)) ([411e8eb](https://github.com/googleapis/google-cloud-node/commit/411e8eb9d577c92505a1b0e6845b9ece277280e7))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.0.0...tasks-v5.1.0) (2024-02-09)
 
 

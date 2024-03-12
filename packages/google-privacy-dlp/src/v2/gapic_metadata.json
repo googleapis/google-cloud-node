@@ -165,6 +165,21 @@
                 "deleteStoredInfoType"
               ]
             },
+            "GetProjectDataProfile": {
+              "methods": [
+                "getProjectDataProfile"
+              ]
+            },
+            "GetTableDataProfile": {
+              "methods": [
+                "getTableDataProfile"
+              ]
+            },
+            "GetColumnDataProfile": {
+              "methods": [
+                "getColumnDataProfile"
+              ]
+            },
             "HybridInspectDlpJob": {
               "methods": [
                 "hybridInspectDlpJob"
@@ -215,6 +230,27 @@
                 "listStoredInfoTypes",
                 "listStoredInfoTypesStream",
                 "listStoredInfoTypesAsync"
+              ]
+            },
+            "ListProjectDataProfiles": {
+              "methods": [
+                "listProjectDataProfiles",
+                "listProjectDataProfilesStream",
+                "listProjectDataProfilesAsync"
+              ]
+            },
+            "ListTableDataProfiles": {
+              "methods": [
+                "listTableDataProfiles",
+                "listTableDataProfilesStream",
+                "listTableDataProfilesAsync"
+              ]
+            },
+            "ListColumnDataProfiles": {
+              "methods": [
+                "listColumnDataProfiles",
+                "listColumnDataProfilesStream",
+                "listColumnDataProfilesAsync"
               ]
             }
           }
@@ -377,6 +413,21 @@
                 "deleteStoredInfoType"
               ]
             },
+            "GetProjectDataProfile": {
+              "methods": [
+                "getProjectDataProfile"
+              ]
+            },
+            "GetTableDataProfile": {
+              "methods": [
+                "getTableDataProfile"
+              ]
+            },
+            "GetColumnDataProfile": {
+              "methods": [
+                "getColumnDataProfile"
+              ]
+            },
             "HybridInspectDlpJob": {
               "methods": [
                 "hybridInspectDlpJob"
@@ -427,6 +478,27 @@
                 "listStoredInfoTypes",
                 "listStoredInfoTypesStream",
                 "listStoredInfoTypesAsync"
+              ]
+            },
+            "ListProjectDataProfiles": {
+              "methods": [
+                "listProjectDataProfiles",
+                "listProjectDataProfilesStream",
+                "listProjectDataProfilesAsync"
+              ]
+            },
+            "ListTableDataProfiles": {
+              "methods": [
+                "listTableDataProfiles",
+                "listTableDataProfilesStream",
+                "listTableDataProfilesAsync"
+              ]
+            },
+            "ListColumnDataProfiles": {
+              "methods": [
+                "listColumnDataProfiles",
+                "listColumnDataProfilesStream",
+                "listColumnDataProfilesAsync"
               ]
             }
           }

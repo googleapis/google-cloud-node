@@ -165,6 +165,7 @@
     "packages/google-cloud-redis-cluster": {},
     "packages/google-cloud-servicehealth": {},
     "packages/google-cloud-telcoautomation": {},
+    "packages/google-cloud-cloudcontrolspartner": {},
     "packages/google-apps-meet": {},
     "packages/google-cloud-parallelstore": {}
   },

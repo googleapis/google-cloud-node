@@ -129,13 +129,6 @@ function stubAsyncIterationCall<ResponseType>(
 
 describe('v2.ConferenceRecordsServiceClient', () => {
   describe('Common methods', () => {
-    it('has servicePath', () => {
-      const client =
-        new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient();
-      const servicePath = client.servicePath;
-      assert.strictEqual(servicePath, 'meet.googleapis.com');
-    });
-
     it('has apiEndpoint', () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient();
@@ -174,21 +167,21 @@ describe('v2.ConferenceRecordsServiceClient', () => {
         stub.restore();
       });
     }
-    it('sets servicePath according to universe domain camelCase', () => {
+    it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
           universeDomain: 'example.com',
         });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'meet.example.com');
     });
 
-    it('sets servicePath according to universe domain snakeCase', () => {
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new conferencerecordsserviceModule.v2.ConferenceRecordsServiceClient({
           universe_domain: 'example.com',
         });
-      const servicePath = client.servicePath;
+      const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'meet.example.com');
     });
     it('does not allow setting both universeDomain and universe_domain', () => {
@@ -1523,9 +1516,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listParticipants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1573,9 +1566,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listParticipants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1617,9 +1610,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listParticipants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1658,9 +1651,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listParticipants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2184,9 +2177,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listRecordings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2231,9 +2224,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listRecordings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2275,9 +2268,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listRecordings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2316,9 +2309,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listRecordings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2486,9 +2479,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listTranscripts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2533,9 +2526,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listTranscripts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2577,9 +2570,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listTranscripts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2618,9 +2611,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       assert(
         (client.descriptors.page.listTranscripts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

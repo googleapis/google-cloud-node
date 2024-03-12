@@ -40,6 +40,7 @@ export {InstanceGroupManagersClient} from './instance_group_managers_client';
 export {InstanceGroupsClient} from './instance_groups_client';
 export {InstancesClient} from './instances_client';
 export {InstanceTemplatesClient} from './instance_templates_client';
+export {InstantSnapshotsClient} from './instant_snapshots_client';
 export {InterconnectAttachmentsClient} from './interconnect_attachments_client';
 export {InterconnectLocationsClient} from './interconnect_locations_client';
 export {InterconnectRemoteLocationsClient} from './interconnect_remote_locations_client';
@@ -71,6 +72,7 @@ export {RegionInstanceGroupManagersClient} from './region_instance_group_manager
 export {RegionInstanceGroupsClient} from './region_instance_groups_client';
 export {RegionInstancesClient} from './region_instances_client';
 export {RegionInstanceTemplatesClient} from './region_instance_templates_client';
+export {RegionInstantSnapshotsClient} from './region_instant_snapshots_client';
 export {RegionNetworkEndpointGroupsClient} from './region_network_endpoint_groups_client';
 export {RegionNetworkFirewallPoliciesClient} from './region_network_firewall_policies_client';
 export {RegionNotificationEndpointsClient} from './region_notification_endpoints_client';

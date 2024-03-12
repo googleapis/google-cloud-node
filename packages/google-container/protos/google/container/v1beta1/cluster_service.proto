@@ -837,6 +837,9 @@ message NodeConfig {
   // Optional. Reserved for future use.
   bool enable_confidential_storage = 46
       [(google.api.field_behavior) = OPTIONAL];
+
+  // List of secondary boot disks attached to the nodes.
+  repeated SecondaryBootDisk secondary_boot_disks = 48;
 }
 
 // Specifies options for controlling advanced machine features.
@@ -2281,6 +2284,9 @@ message Cluster {
 
   // GKE Enterprise Configuration.
   EnterpriseConfig enterprise_config = 149;
+
+  // Secret CSI driver configuration.
+  SecretManagerConfig secret_manager_config = 150;
 }
 
 // Kubernetes open source beta apis enabled on the cluster.
@@ -2661,6 +2667,12 @@ message ClusterUpdate {
 
   // Specify the details of in-transit encryption.
   optional InTransitEncryptionConfig desired_in_transit_encryption_config = 137;
+
+  // Enable/Disable Cilium Clusterwide Network Policy for the cluster.
+  optional bool desired_enable_cilium_clusterwide_network_policy = 138;
+
+  // Enable/Disable Secret Manager Config.
+  optional SecretManagerConfig desired_secret_manager_config = 139;
 }
 
 // AdditionalPodRangesConfig is the configuration for additional pod secondary
@@ -4976,6 +4988,9 @@ message NetworkConfig {
 
   // Specify the details of in-transit encryption.
   optional InTransitEncryptionConfig in_transit_encryption_config = 20;
+
+  // Whether CiliumClusterWideNetworkPolicy is enabled on this cluster.
+  optional bool enable_cilium_clusterwide_network_policy = 21;
 }
 
 // GatewayAPIConfig contains the desired config of Gateway API on this cluster.
@@ -5937,6 +5952,33 @@ message EnterpriseConfig {
   // Output only. [Output only] cluster_tier specifies the premium tier of the
   // cluster.
   ClusterTier cluster_tier = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// SecretManagerConfig is config for secret manager enablement.
+message SecretManagerConfig {
+  // Whether the cluster is configured to use secret manager CSI component.
+  optional bool enabled = 1;
+}
+
+// SecondaryBootDisk represents a persistent disk attached to a node
+// with special configurations based on its mode.
+message SecondaryBootDisk {
+  // Mode specifies how the secondary boot disk will be used.
+  // This triggers mode-specified logic in the control plane.
+  enum Mode {
+    // MODE_UNSPECIFIED is when mode is not set.
+    MODE_UNSPECIFIED = 0;
+
+    // CONTAINER_IMAGE_CACHE is for using the secondary boot disk as
+    // a container image cache.
+    CONTAINER_IMAGE_CACHE = 1;
+  }
+
+  // Disk mode (container image cache, etc.)
+  Mode mode = 1;
+
+  // Fully-qualified resource ID for an existing disk image.
+  string disk_image = 2;
 }
 
 // Options for in-transit encryption.
