@@ -101,7 +101,7 @@ async function callListDiscoveredServices() {
   // Run request
   const iterable = apphubClient.listDiscoveredServicesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
