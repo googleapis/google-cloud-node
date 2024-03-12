@@ -4,6 +4,108 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "f70e1620c46328d45a46adb5a7786cf58f701352",
+          "message": "Add initial files for google.cloud.telcoautomation.v1",
+          "issues": [
+            "5017"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/telcoautomation",
+      "id": "e187086e-fd0f-4c7e-b705-76a63d51f794",
+      "createTime": "2024-03-12T07:21:35.129Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6a54e99233246cb00e5bee667edd927aaeb66be5",
+          "message": "[securitycenter] Add security_posture, external_system.case_uri, external_system.case_priority, external_system.case_sla, external_system.case_create_time, external_system.case_close_time, and external_system.ticket_info to finding's list of attr...",
+          "issues": [
+            "5119"
+          ]
+        }
+      ],
+      "version": "8.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "8e3807b3-6036-4adb-b48f-41ddd6b873c1",
+      "createTime": "2024-03-12T07:21:35.118Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8488d9a2de0950e50e5eab05cc286511d03de5e7",
+          "message": "[networkmanagement] add new NAT fields to Network Management API definition",
+          "issues": [
+            "5118"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "1cfb8504-e279-4f69-a76e-d774a58127e8",
+      "createTime": "2024-03-12T07:21:35.107Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "494a98f6b4908f89eedcc05db68bb6af99dc02cb",
+          "message": "[discoveryengine] `http_uri` fix for method `ListChunks` in service `ChunkService`",
+          "issues": [
+            "5120"
+          ]
+        }
+      ],
+      "version": "1.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "4c95c79c-edac-473d-b6df-4501efd79a8c",
+      "createTime": "2024-03-12T07:21:35.096Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2eb27fb603d97e43eca3968eeaab13d6280dec97",
+          "message": "[dialogflow] added text sections to the submitted summary",
+          "issues": [
+            "5121"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "6b4d8488-093d-4298-8c05-a7ced1cd1c6b",
+      "createTime": "2024-03-12T07:21:35.086Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "729d778f67e4e0869379b32d2b2b19c758ebc955",
+          "message": "A new value `NVIDIA_H100_80GB` is added to enum `AcceleratorType`",
+          "issues": [
+            "5114"
+          ]
+        }
+      ],
+      "version": "3.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "d7ba96a7-3f75-440e-a71b-5a258edecea0",
+      "createTime": "2024-03-12T07:21:35.071Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "f57c1394819fc98bc12ac2fed6e245e34d395fdc",
           "message": "[Many APIs] Add client library version to headers",
@@ -24859,5 +24961,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-03-07T16:18:27.517Z"
+  "updateTime": "2024-03-12T07:21:35.129Z"
 }

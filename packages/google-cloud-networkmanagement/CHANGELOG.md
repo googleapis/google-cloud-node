@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.2.0...network-management-v3.3.0) (2024-03-12)
+
+
+### Features
+
+* [networkmanagement] add new NAT fields to Network Management API definition ([#5118](https://github.com/googleapis/google-cloud-node/issues/5118)) ([8488d9a](https://github.com/googleapis/google-cloud-node/commit/8488d9a2de0950e50e5eab05cc286511d03de5e7))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.1.0...network-management-v3.2.0) (2024-02-09)
 
 
