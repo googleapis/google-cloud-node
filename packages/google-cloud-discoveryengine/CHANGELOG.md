@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.4.0...discoveryengine-v1.4.1) (2024-03-12)
+
+
+### Bug Fixes
+
+* [discoveryengine] `http_uri` fix for method `ListChunks` in service `ChunkService` ([#5120](https://github.com/googleapis/google-cloud-node/issues/5120)) ([494a98f](https://github.com/googleapis/google-cloud-node/commit/494a98f6b4908f89eedcc05db68bb6af99dc02cb))
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.3.1...discoveryengine-v1.4.0) (2024-02-09)
 
 
