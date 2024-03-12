@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.7.0...sql-v0.8.0) (2024-03-07)
+
+
+### Features
+
+* [sql] A new value `PG_SUBSCRIPTION_COUNT` is added to enum `SqlExternalSyncSettingErrorType` ([#5115](https://github.com/googleapis/google-cloud-node/issues/5115)) ([33edf62](https://github.com/googleapis/google-cloud-node/commit/33edf6239bdcf34b28ed328ae12f3ba261301de6))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.6.0...sql-v0.7.0) (2024-02-22)
 
 

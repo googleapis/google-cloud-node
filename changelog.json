@@ -4,6 +4,192 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "f57c1394819fc98bc12ac2fed6e245e34d395fdc",
+          "message": "[Many APIs] Add client library version to headers",
+          "issues": [
+            "5077"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "ea5629d0-4706-43ad-bfdb-6dd215ca850d",
+      "createTime": "2024-03-07T16:18:27.517Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fe6fc2c37a47139c6c67a6e500f57afc5abdd7ca",
+          "message": "[cloudcontrolspartner] added CloudControlsPartner API",
+          "issues": [
+            "5106"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "45a51f588c8d296e06dbecc87dd6875e9076fc62",
+          "message": "Add initial files for google.cloud.cloudcontrolspartner.v1beta",
+          "issues": [
+            "5067"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudcontrolspartner",
+      "id": "b14f0700-6ed1-45f2-847a-86abb189d82c",
+      "createTime": "2024-03-07T16:18:27.506Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3952337599fb281538ee3d192ba951488f9a9643",
+          "message": "[dlp] add RPCs for getting and listing project, table, and column data profiles",
+          "issues": [
+            "5109"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "e797713c-fa60-431d-88f2-0dfcc8db6870",
+      "createTime": "2024-03-07T16:18:27.495Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f52aa85e5aaf2303e7fda468eeb280fd441884a7",
+          "message": "[container] add API to enable/disable secret manager csi component on GKE clusters",
+          "issues": [
+            "5113"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "d7a3bb1217b5c22651c6f3af4e990a8c0cbca6e9",
+          "message": "[container] add API to enable/disable secret manager csi component on GKE clusters",
+          "issues": [
+            "5111"
+          ]
+        }
+      ],
+      "version": "5.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "8e7f86c7-b8ec-4dba-b386-55cfd3e440ec",
+      "createTime": "2024-03-07T16:18:27.483Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "33edf6239bdcf34b28ed328ae12f3ba261301de6",
+          "message": "[sql] A new value `PG_SUBSCRIPTION_COUNT` is added to enum `SqlExternalSyncSettingErrorType`",
+          "issues": [
+            "5115"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "9fe7ff0c-cd6b-4fb6-a5b6-fd5fc43aea8a",
+      "createTime": "2024-03-07T16:18:27.472Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b4717ef3fce7029c95a89440c88992334b49e173",
+          "message": "[securitycenter] Added security center api V2 client library",
+          "issues": [
+            "5073"
+          ]
+        }
+      ],
+      "version": "8.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "e40f4ee7-400a-445f-8d30-ac27f0529769",
+      "createTime": "2024-03-07T16:18:27.461Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2c2c42b725f4504651a372b513258fac88c5b5f6",
+          "message": "[secretmanager] clients for SecretManager API v1beta2",
+          "issues": [
+            "5117"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "370f85bc-02e8-4f38-b476-dda8949aa08e",
+      "createTime": "2024-03-07T16:18:27.450Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "77b54bec52823952f8b57c21a4cc05d97cafc55e",
+          "message": "[recaptchaenterprise] Add include_recaptcha_script for as a new action in firewall policies",
+          "issues": [
+            "5108"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "cc1a90f6-6b0f-462a-8aa1-be9174456b34",
+      "createTime": "2024-03-07T16:18:27.439Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7e4ae75f404ce899eef0d05f99ff6879d7920aae",
+          "message": "[compute] Update Compute Engine API to revision 20240220 (#886)",
+          "issues": [
+            "5100"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "45d8bdbd-3926-43cf-b385-e617cb9f5b7f",
+      "createTime": "2024-03-07T16:18:27.426Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0bdb9c88ecc4598a3fdc4616e41bcd690b6e2cff",
+          "message": "[asset] Add `asset_type` field to `GovernedIamPolicy` and `GovernedResource`",
+          "issues": [
+            "5110"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "f3b11342-6013-45d7-b32e-67290f6d163c",
+      "createTime": "2024-03-07T16:18:27.414Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "1fb1181f966a376c4e9f08dd779ec90aff059e80",
           "message": "[cloudprofiler] add `start_time` to Profile proto",
@@ -24673,5 +24859,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-02-28T15:00:12.175Z"
+  "updateTime": "2024-03-07T16:18:27.517Z"
 }

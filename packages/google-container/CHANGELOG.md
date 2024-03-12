@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.9.0...container-v5.10.0) (2024-03-07)
+
+
+### Features
+
+* [container] add API to enable/disable secret manager csi component on GKE clusters ([#5111](https://github.com/googleapis/google-cloud-node/issues/5111)) ([d7a3bb1](https://github.com/googleapis/google-cloud-node/commit/d7a3bb1217b5c22651c6f3af4e990a8c0cbca6e9))
+* [container] add API to enable/disable secret manager csi component on GKE clusters ([#5113](https://github.com/googleapis/google-cloud-node/issues/5113)) ([f52aa85](https://github.com/googleapis/google-cloud-node/commit/f52aa85e5aaf2303e7fda468eeb280fd441884a7))
+
 ## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.8.1...container-v5.9.0) (2024-02-28)
 
 
