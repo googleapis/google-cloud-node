@@ -981,9 +981,9 @@ describe('v2.KnowledgeBasesClient', () => {
       assert(
         (client.descriptors.page.listKnowledgeBases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1030,9 +1030,9 @@ describe('v2.KnowledgeBasesClient', () => {
       assert(
         (client.descriptors.page.listKnowledgeBases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1079,9 +1079,9 @@ describe('v2.KnowledgeBasesClient', () => {
       assert(
         (client.descriptors.page.listKnowledgeBases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1120,9 +1120,9 @@ describe('v2.KnowledgeBasesClient', () => {
       assert(
         (client.descriptors.page.listKnowledgeBases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
