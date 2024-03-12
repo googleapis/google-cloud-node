@@ -199,6 +199,8 @@
   * [Model_service.update_explanation_dataset](#model_service.update_explanation_dataset)
   * [Model_service.update_model](#model_service.update_model)
   * [Model_service.upload_model](#model_service.upload_model)
+  * [Pipeline_service.batch_cancel_pipeline_jobs](#pipeline_service.batch_cancel_pipeline_jobs)
+  * [Pipeline_service.batch_delete_pipeline_jobs](#pipeline_service.batch_delete_pipeline_jobs)
   * [Pipeline_service.cancel_pipeline_job](#pipeline_service.cancel_pipeline_job)
   * [Pipeline_service.cancel_training_pipeline](#pipeline_service.cancel_training_pipeline)
   * [Pipeline_service.create_pipeline_job](#pipeline_service.create_pipeline_job)
@@ -3743,6 +3745,40 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/model_service.upload_model.js`
+
+
+-----
+
+
+
+
+### Pipeline_service.batch_cancel_pipeline_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_cancel_pipeline_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_cancel_pipeline_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_cancel_pipeline_jobs.js`
+
+
+-----
+
+
+
+
+### Pipeline_service.batch_delete_pipeline_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_delete_pipeline_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_delete_pipeline_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_delete_pipeline_jobs.js`
 
 
 -----

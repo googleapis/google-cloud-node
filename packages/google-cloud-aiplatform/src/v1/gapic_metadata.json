@@ -2305,6 +2305,16 @@
                 "deletePipelineJob"
               ]
             },
+            "BatchDeletePipelineJobs": {
+              "methods": [
+                "batchDeletePipelineJobs"
+              ]
+            },
+            "BatchCancelPipelineJobs": {
+              "methods": [
+                "batchCancelPipelineJobs"
+              ]
+            },
             "ListTrainingPipelines": {
               "methods": [
                 "listTrainingPipelines",
@@ -2362,6 +2372,16 @@
             "DeletePipelineJob": {
               "methods": [
                 "deletePipelineJob"
+              ]
+            },
+            "BatchDeletePipelineJobs": {
+              "methods": [
+                "batchDeletePipelineJobs"
+              ]
+            },
+            "BatchCancelPipelineJobs": {
+              "methods": [
+                "batchCancelPipelineJobs"
               ]
             },
             "ListTrainingPipelines": {

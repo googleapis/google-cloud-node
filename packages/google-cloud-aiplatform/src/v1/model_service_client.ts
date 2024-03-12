@@ -426,6 +426,12 @@ export class ModelServiceClient {
             {
               post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -465,6 +471,14 @@ export class ModelServiceClient {
               post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -494,6 +508,12 @@ export class ModelServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
             },
           ],
         },
@@ -548,6 +568,9 @@ export class ModelServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',
             },
             {
               post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
@@ -651,6 +674,9 @@ export class ModelServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',
             },
             {
               post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
@@ -1078,6 +1104,9 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
+            },
             {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
@@ -1180,6 +1209,9 @@ export class ModelServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
             {get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
@@ -1289,6 +1321,7 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
             {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
@@ -1390,6 +1423,7 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
             {get: '/v1/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
@@ -1507,6 +1541,9 @@ export class ModelServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',
             },
             {
               post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
@@ -3677,12 +3714,14 @@ export class ModelServiceClient {
    *       * `labels.key=value` - key:value equality
    *       * `labels.key:* or labels:key - key existence
    *       * A key including a space must be quoted. `labels."a key"`.
+   *     * `base_model_name` only supports =
    *
    *   Some examples:
    *
    *     * `model=1234`
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
+   *     * `baseModelName="text-bison"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -3804,12 +3843,14 @@ export class ModelServiceClient {
    *       * `labels.key=value` - key:value equality
    *       * `labels.key:* or labels:key - key existence
    *       * A key including a space must be quoted. `labels."a key"`.
+   *     * `base_model_name` only supports =
    *
    *   Some examples:
    *
    *     * `model=1234`
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
+   *     * `baseModelName="text-bison"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -3885,12 +3926,14 @@ export class ModelServiceClient {
    *       * `labels.key=value` - key:value equality
    *       * `labels.key:* or labels:key - key existence
    *       * A key including a space must be quoted. `labels."a key"`.
+   *     * `base_model_name` only supports =
    *
    *   Some examples:
    *
    *     * `model=1234`
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
+   *     * `baseModelName="text-bison"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken

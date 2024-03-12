@@ -412,6 +412,12 @@ export class SpecialistPoolServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -428,6 +434,12 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
             },
           ],
         },
@@ -453,6 +465,14 @@ export class SpecialistPoolServiceClient {
               body: '*',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
               body: '*',
             },
@@ -470,6 +490,14 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -492,6 +520,12 @@ export class SpecialistPoolServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
             },
             {
@@ -505,6 +539,12 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
             },
           ],
         },
@@ -559,6 +599,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',
             },
             {
               post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
@@ -715,6 +758,12 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
@@ -1043,6 +1092,14 @@ export class SpecialistPoolServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
             },
             {
@@ -1157,6 +1214,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
             {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
@@ -1320,6 +1380,12 @@ export class SpecialistPoolServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
             },
             {
@@ -1411,6 +1477,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
             {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
@@ -1571,6 +1638,12 @@ export class SpecialistPoolServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}/operations',
             },
             {
@@ -1618,6 +1691,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',
             },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
           ],
         },
         {
@@ -1671,6 +1745,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',
             },
             {
               post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
@@ -1840,6 +1917,12 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',

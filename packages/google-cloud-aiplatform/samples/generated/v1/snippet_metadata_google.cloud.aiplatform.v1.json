@@ -1234,7 +1234,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 100,
+                    "end": 103,
                     "type": "FULL"
                 }
             ],
@@ -8038,7 +8038,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 100,
+                    "end": 102,
                     "type": "FULL"
                 }
             ],
@@ -9192,6 +9192,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_PipelineService_BatchDeletePipelineJobs_async",
+            "title": "DatasetService batchDeletePipelineJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Batch deletes PipelineJobs The Operation is atomic. If it fails, none of the PipelineJobs are deleted. If it succeeds, all of the PipelineJobs are deleted.",
+            "canonical": true,
+            "file": "pipeline_service.batch_delete_pipeline_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchDeletePipelineJobs",
+                "fullName": "google.cloud.aiplatform.v1.PipelineService.BatchDeletePipelineJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "names",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PipelineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.PipelineServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchDeletePipelineJobs",
+                    "fullName": "google.cloud.aiplatform.v1.PipelineService.BatchDeletePipelineJobs",
+                    "service": {
+                        "shortName": "PipelineService",
+                        "fullName": "google.cloud.aiplatform.v1.PipelineService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_PipelineService_CancelPipelineJob_async",
             "title": "DatasetService cancelPipelineJob Sample",
             "origin": "API_DEFINITION",
@@ -9224,6 +9268,50 @@
                 "method": {
                     "shortName": "CancelPipelineJob",
                     "fullName": "google.cloud.aiplatform.v1.PipelineService.CancelPipelineJob",
+                    "service": {
+                        "shortName": "PipelineService",
+                        "fullName": "google.cloud.aiplatform.v1.PipelineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_PipelineService_BatchCancelPipelineJobs_async",
+            "title": "DatasetService batchCancelPipelineJobs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Batch cancel PipelineJobs. Firstly the server will check if all the jobs are in non-terminal states, and skip the jobs that are already terminated. If the operation failed, none of the pipeline jobs are cancelled. The server will poll the states of all the pipeline jobs periodically to check the cancellation status. This operation will return an LRO.",
+            "canonical": true,
+            "file": "pipeline_service.batch_cancel_pipeline_jobs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchCancelPipelineJobs",
+                "fullName": "google.cloud.aiplatform.v1.PipelineService.BatchCancelPipelineJobs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "names",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PipelineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.PipelineServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchCancelPipelineJobs",
+                    "fullName": "google.cloud.aiplatform.v1.PipelineService.BatchCancelPipelineJobs",
                     "service": {
                         "shortName": "PipelineService",
                         "fullName": "google.cloud.aiplatform.v1.PipelineService"
