@@ -3181,6 +3181,24 @@ export namespace google {
 
                     /** ExternalSystem externalSystemUpdateTime */
                     externalSystemUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExternalSystem caseUri */
+                    caseUri?: (string|null);
+
+                    /** ExternalSystem casePriority */
+                    casePriority?: (string|null);
+
+                    /** ExternalSystem caseSla */
+                    caseSla?: (google.protobuf.ITimestamp|null);
+
+                    /** ExternalSystem caseCreateTime */
+                    caseCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExternalSystem caseCloseTime */
+                    caseCloseTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExternalSystem ticketInfo */
+                    ticketInfo?: (google.cloud.securitycenter.v1.ExternalSystem.ITicketInfo|null);
                 }
 
                 /** Represents an ExternalSystem. */
@@ -3206,6 +3224,24 @@ export namespace google {
 
                     /** ExternalSystem externalSystemUpdateTime. */
                     public externalSystemUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExternalSystem caseUri. */
+                    public caseUri: string;
+
+                    /** ExternalSystem casePriority. */
+                    public casePriority: string;
+
+                    /** ExternalSystem caseSla. */
+                    public caseSla?: (google.protobuf.ITimestamp|null);
+
+                    /** ExternalSystem caseCreateTime. */
+                    public caseCreateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExternalSystem caseCloseTime. */
+                    public caseCloseTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExternalSystem ticketInfo. */
+                    public ticketInfo?: (google.cloud.securitycenter.v1.ExternalSystem.ITicketInfo|null);
 
                     /**
                      * Creates a new ExternalSystem instance using the specified properties.
@@ -3283,6 +3319,136 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExternalSystem {
+
+                    /** Properties of a TicketInfo. */
+                    interface ITicketInfo {
+
+                        /** TicketInfo id */
+                        id?: (string|null);
+
+                        /** TicketInfo assignee */
+                        assignee?: (string|null);
+
+                        /** TicketInfo description */
+                        description?: (string|null);
+
+                        /** TicketInfo uri */
+                        uri?: (string|null);
+
+                        /** TicketInfo status */
+                        status?: (string|null);
+
+                        /** TicketInfo updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a TicketInfo. */
+                    class TicketInfo implements ITicketInfo {
+
+                        /**
+                         * Constructs a new TicketInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.ExternalSystem.ITicketInfo);
+
+                        /** TicketInfo id. */
+                        public id: string;
+
+                        /** TicketInfo assignee. */
+                        public assignee: string;
+
+                        /** TicketInfo description. */
+                        public description: string;
+
+                        /** TicketInfo uri. */
+                        public uri: string;
+
+                        /** TicketInfo status. */
+                        public status: string;
+
+                        /** TicketInfo updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new TicketInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TicketInfo instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.ExternalSystem.ITicketInfo): google.cloud.securitycenter.v1.ExternalSystem.TicketInfo;
+
+                        /**
+                         * Encodes the specified TicketInfo message. Does not implicitly {@link google.cloud.securitycenter.v1.ExternalSystem.TicketInfo.verify|verify} messages.
+                         * @param message TicketInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.ExternalSystem.ITicketInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TicketInfo message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.ExternalSystem.TicketInfo.verify|verify} messages.
+                         * @param message TicketInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.ExternalSystem.ITicketInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TicketInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TicketInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.ExternalSystem.TicketInfo;
+
+                        /**
+                         * Decodes a TicketInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TicketInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.ExternalSystem.TicketInfo;
+
+                        /**
+                         * Verifies a TicketInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TicketInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TicketInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.ExternalSystem.TicketInfo;
+
+                        /**
+                         * Creates a plain object from a TicketInfo message. Also converts values to other types if specified.
+                         * @param message TicketInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.ExternalSystem.TicketInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TicketInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TicketInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a File. */
@@ -3650,6 +3816,9 @@ export namespace google {
                     /** Finding backupDisasterRecovery */
                     backupDisasterRecovery?: (google.cloud.securitycenter.v1.IBackupDisasterRecovery|null);
 
+                    /** Finding securityPosture */
+                    securityPosture?: (google.cloud.securitycenter.v1.ISecurityPosture|null);
+
                     /** Finding logEntries */
                     logEntries?: (google.cloud.securitycenter.v1.ILogEntry[]|null);
 
@@ -3789,6 +3958,9 @@ export namespace google {
                     /** Finding backupDisasterRecovery. */
                     public backupDisasterRecovery?: (google.cloud.securitycenter.v1.IBackupDisasterRecovery|null);
 
+                    /** Finding securityPosture. */
+                    public securityPosture?: (google.cloud.securitycenter.v1.ISecurityPosture|null);
+
                     /** Finding logEntries. */
                     public logEntries: google.cloud.securitycenter.v1.ILogEntry[];
 
@@ -3906,7 +4078,8 @@ export namespace google {
                         VULNERABILITY = 2,
                         MISCONFIGURATION = 3,
                         OBSERVATION = 4,
-                        SCC_ERROR = 5
+                        SCC_ERROR = 5,
+                        POSTURE_VIOLATION = 6
                     }
                 }
 
@@ -6646,6 +6819,257 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SecurityPosture. */
+                interface ISecurityPosture {
+
+                    /** SecurityPosture name */
+                    name?: (string|null);
+
+                    /** SecurityPosture revisionId */
+                    revisionId?: (string|null);
+
+                    /** SecurityPosture postureDeploymentResource */
+                    postureDeploymentResource?: (string|null);
+
+                    /** SecurityPosture postureDeployment */
+                    postureDeployment?: (string|null);
+
+                    /** SecurityPosture changedPolicy */
+                    changedPolicy?: (string|null);
+
+                    /** SecurityPosture policySet */
+                    policySet?: (string|null);
+
+                    /** SecurityPosture policy */
+                    policy?: (string|null);
+
+                    /** SecurityPosture policyDriftDetails */
+                    policyDriftDetails?: (google.cloud.securitycenter.v1.SecurityPosture.IPolicyDriftDetails[]|null);
+                }
+
+                /** Represents a SecurityPosture. */
+                class SecurityPosture implements ISecurityPosture {
+
+                    /**
+                     * Constructs a new SecurityPosture.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.ISecurityPosture);
+
+                    /** SecurityPosture name. */
+                    public name: string;
+
+                    /** SecurityPosture revisionId. */
+                    public revisionId: string;
+
+                    /** SecurityPosture postureDeploymentResource. */
+                    public postureDeploymentResource: string;
+
+                    /** SecurityPosture postureDeployment. */
+                    public postureDeployment: string;
+
+                    /** SecurityPosture changedPolicy. */
+                    public changedPolicy: string;
+
+                    /** SecurityPosture policySet. */
+                    public policySet: string;
+
+                    /** SecurityPosture policy. */
+                    public policy: string;
+
+                    /** SecurityPosture policyDriftDetails. */
+                    public policyDriftDetails: google.cloud.securitycenter.v1.SecurityPosture.IPolicyDriftDetails[];
+
+                    /**
+                     * Creates a new SecurityPosture instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecurityPosture instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.ISecurityPosture): google.cloud.securitycenter.v1.SecurityPosture;
+
+                    /**
+                     * Encodes the specified SecurityPosture message. Does not implicitly {@link google.cloud.securitycenter.v1.SecurityPosture.verify|verify} messages.
+                     * @param message SecurityPosture message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.ISecurityPosture, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecurityPosture message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SecurityPosture.verify|verify} messages.
+                     * @param message SecurityPosture message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.ISecurityPosture, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecurityPosture message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecurityPosture
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.SecurityPosture;
+
+                    /**
+                     * Decodes a SecurityPosture message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecurityPosture
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.SecurityPosture;
+
+                    /**
+                     * Verifies a SecurityPosture message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecurityPosture message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecurityPosture
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.SecurityPosture;
+
+                    /**
+                     * Creates a plain object from a SecurityPosture message. Also converts values to other types if specified.
+                     * @param message SecurityPosture
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.SecurityPosture, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecurityPosture to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecurityPosture
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SecurityPosture {
+
+                    /** Properties of a PolicyDriftDetails. */
+                    interface IPolicyDriftDetails {
+
+                        /** PolicyDriftDetails field */
+                        field?: (string|null);
+
+                        /** PolicyDriftDetails expectedValue */
+                        expectedValue?: (string|null);
+
+                        /** PolicyDriftDetails detectedValue */
+                        detectedValue?: (string|null);
+                    }
+
+                    /** Represents a PolicyDriftDetails. */
+                    class PolicyDriftDetails implements IPolicyDriftDetails {
+
+                        /**
+                         * Constructs a new PolicyDriftDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.SecurityPosture.IPolicyDriftDetails);
+
+                        /** PolicyDriftDetails field. */
+                        public field: string;
+
+                        /** PolicyDriftDetails expectedValue. */
+                        public expectedValue: string;
+
+                        /** PolicyDriftDetails detectedValue. */
+                        public detectedValue: string;
+
+                        /**
+                         * Creates a new PolicyDriftDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PolicyDriftDetails instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.SecurityPosture.IPolicyDriftDetails): google.cloud.securitycenter.v1.SecurityPosture.PolicyDriftDetails;
+
+                        /**
+                         * Encodes the specified PolicyDriftDetails message. Does not implicitly {@link google.cloud.securitycenter.v1.SecurityPosture.PolicyDriftDetails.verify|verify} messages.
+                         * @param message PolicyDriftDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.SecurityPosture.IPolicyDriftDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PolicyDriftDetails message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.SecurityPosture.PolicyDriftDetails.verify|verify} messages.
+                         * @param message PolicyDriftDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.SecurityPosture.IPolicyDriftDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PolicyDriftDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PolicyDriftDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.SecurityPosture.PolicyDriftDetails;
+
+                        /**
+                         * Decodes a PolicyDriftDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PolicyDriftDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.SecurityPosture.PolicyDriftDetails;
+
+                        /**
+                         * Verifies a PolicyDriftDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PolicyDriftDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PolicyDriftDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.SecurityPosture.PolicyDriftDetails;
+
+                        /**
+                         * Creates a plain object from a PolicyDriftDetails message. Also converts values to other types if specified.
+                         * @param message PolicyDriftDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.SecurityPosture.PolicyDriftDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PolicyDriftDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PolicyDriftDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a Vulnerability. */

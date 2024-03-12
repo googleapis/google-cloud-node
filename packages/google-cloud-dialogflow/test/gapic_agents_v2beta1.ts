@@ -1767,9 +1767,9 @@ describe('v2beta1.AgentsClient', () => {
       assert(
         (client.descriptors.page.searchAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1818,9 +1818,9 @@ describe('v2beta1.AgentsClient', () => {
       assert(
         (client.descriptors.page.searchAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1867,9 +1867,9 @@ describe('v2beta1.AgentsClient', () => {
       assert(
         (client.descriptors.page.searchAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1907,9 +1907,9 @@ describe('v2beta1.AgentsClient', () => {
       assert(
         (client.descriptors.page.searchAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

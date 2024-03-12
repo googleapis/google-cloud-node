@@ -1379,9 +1379,9 @@ describe('v2.IntentsClient', () => {
       assert(
         (client.descriptors.page.listIntents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1430,9 +1430,9 @@ describe('v2.IntentsClient', () => {
       assert(
         (client.descriptors.page.listIntents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1473,9 +1473,9 @@ describe('v2.IntentsClient', () => {
       assert(
         (client.descriptors.page.listIntents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1515,9 +1515,9 @@ describe('v2.IntentsClient', () => {
       assert(
         (client.descriptors.page.listIntents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
