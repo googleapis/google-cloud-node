@@ -52,18 +52,16 @@ function main(parent) {
    *  Optional. Filter result QuotaPreferences by their state, type,
    *  create/update time range.
    *  Example filters:
-   *  `state=PENDING OR state=PENDING_PARTIALLY_GRANTED`
-   *  `state=PENDING OR state=PENDING_PARTIALLY_GRANTED AND
-   *   creation_time>2022-12-03T10:30:00`
-   *  If no filter is provided, returns all pending quota preferences.
+   *  `reconciling=true AND request_type=CLOUD_CONSOLE`,
+   *  `reconciling=true OR creation_time>2022-12-03T10:30:00`
    */
   // const filter = 'abc123'
   /**
    *  Optional. How to order of the results. By default, the results are ordered
    *  by create time.
    *  Example orders:
-   *  `type`
-   *  `state, create_time`
+   *  `quota_id`,
+   *  `service, create_time`
    */
   // const orderBy = 'abc123'
 
