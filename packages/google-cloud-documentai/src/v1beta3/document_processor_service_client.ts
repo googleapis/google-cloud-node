@@ -2976,6 +2976,8 @@ export class DocumentProcessorServiceClient {
    * @param {string} request.processorVersionSource
    *   The source processor version to import from. The source processor version
    *   and destination processor need to be in the same environment and region.
+   *   Note that ProcessorVersions with `model_type` `MODEL_TYPE_LLM` are not
+   *   supported.
    * @param {google.cloud.documentai.v1beta3.ImportProcessorVersionRequest.ExternalProcessorVersionSource} request.externalProcessorVersionSource
    *   The source processor version to import from. It can be from a different
    *   environment and region than the destination processor.

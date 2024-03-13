@@ -1476,9 +1476,9 @@ describe('v1beta3.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1528,9 +1528,9 @@ describe('v1beta3.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1578,9 +1578,9 @@ describe('v1beta3.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1619,9 +1619,9 @@ describe('v1beta3.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
