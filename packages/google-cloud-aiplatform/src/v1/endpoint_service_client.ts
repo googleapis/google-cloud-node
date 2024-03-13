@@ -411,6 +411,12 @@ export class EndpointServiceClient {
             {
               post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -450,6 +456,14 @@ export class EndpointServiceClient {
               post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -479,6 +493,12 @@ export class EndpointServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
             },
           ],
         },
@@ -533,6 +553,9 @@ export class EndpointServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',
             },
             {
               post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
@@ -636,6 +659,9 @@ export class EndpointServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',
             },
             {
               post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
@@ -1063,6 +1089,9 @@ export class EndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
+            },
             {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
@@ -1165,6 +1194,9 @@ export class EndpointServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
             {get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
@@ -1274,6 +1306,7 @@ export class EndpointServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
             {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
@@ -1375,6 +1408,7 @@ export class EndpointServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
             {get: '/v1/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
@@ -1492,6 +1526,9 @@ export class EndpointServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',
             },
             {
               post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
@@ -2869,20 +2906,23 @@ export class EndpointServiceClient {
    *   Optional. An expression for filtering the results of the request. For field
    *   names both snake_case and camelCase are supported.
    *
-   *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
+   *     * `endpoint` supports `=` and `!=`. `endpoint` represents the Endpoint
+   *     ID,
    *       i.e. the last segment of the Endpoint's [resource
    *       name][google.cloud.aiplatform.v1.Endpoint.name].
-   *     * `display_name` supports = and, !=
+   *     * `display_name` supports `=` and `!=`.
    *     * `labels` supports general map functions that is:
    *       * `labels.key=value` - key:value equality
-   *       * `labels.key:* or labels:key - key existence
+   *       * `labels.key:*` or `labels:key` - key existence
    *       * A key including a space must be quoted. `labels."a key"`.
+   *     * `base_model_name` only supports `=`.
    *
    *   Some examples:
    *
    *     * `endpoint=1`
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
+   *     * `baseModelName="text-bison"`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -3002,20 +3042,23 @@ export class EndpointServiceClient {
    *   Optional. An expression for filtering the results of the request. For field
    *   names both snake_case and camelCase are supported.
    *
-   *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
+   *     * `endpoint` supports `=` and `!=`. `endpoint` represents the Endpoint
+   *     ID,
    *       i.e. the last segment of the Endpoint's [resource
    *       name][google.cloud.aiplatform.v1.Endpoint.name].
-   *     * `display_name` supports = and, !=
+   *     * `display_name` supports `=` and `!=`.
    *     * `labels` supports general map functions that is:
    *       * `labels.key=value` - key:value equality
-   *       * `labels.key:* or labels:key - key existence
+   *       * `labels.key:*` or `labels:key` - key existence
    *       * A key including a space must be quoted. `labels."a key"`.
+   *     * `base_model_name` only supports `=`.
    *
    *   Some examples:
    *
    *     * `endpoint=1`
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
+   *     * `baseModelName="text-bison"`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]
@@ -3083,20 +3126,23 @@ export class EndpointServiceClient {
    *   Optional. An expression for filtering the results of the request. For field
    *   names both snake_case and camelCase are supported.
    *
-   *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
+   *     * `endpoint` supports `=` and `!=`. `endpoint` represents the Endpoint
+   *     ID,
    *       i.e. the last segment of the Endpoint's [resource
    *       name][google.cloud.aiplatform.v1.Endpoint.name].
-   *     * `display_name` supports = and, !=
+   *     * `display_name` supports `=` and `!=`.
    *     * `labels` supports general map functions that is:
    *       * `labels.key=value` - key:value equality
-   *       * `labels.key:* or labels:key - key existence
+   *       * `labels.key:*` or `labels:key` - key existence
    *       * A key including a space must be quoted. `labels."a key"`.
+   *     * `base_model_name` only supports `=`.
    *
    *   Some examples:
    *
    *     * `endpoint=1`
    *     * `displayName="myDisplayName"`
    *     * `labels.myKey="myValue"`
+   *     * `baseModelName="text-bison"`
    * @param {number} [request.pageSize]
    *   Optional. The standard list page size.
    * @param {string} [request.pageToken]

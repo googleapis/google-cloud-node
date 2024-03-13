@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.2.0...dlp-v5.3.0) (2024-03-07)
+
+
+### Features
+
+* [dlp] add RPCs for getting and listing project, table, and column data profiles ([#5109](https://github.com/googleapis/google-cloud-node/issues/5109)) ([3952337](https://github.com/googleapis/google-cloud-node/commit/3952337599fb281538ee3d192ba951488f9a9643))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.1.1...dlp-v5.2.0) (2024-02-09)
 
 

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dialogflow",
-        "version": "6.3.1",
+        "version": "6.4.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -3474,7 +3474,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 131,
+                    "end": 135,
                     "type": "FULL"
                 }
             ],
@@ -3502,6 +3502,10 @@
                     {
                         "name": "suggestion_input",
                         "type": ".google.cloud.dialogflow.v2beta1.SuggestionInput"
+                    },
+                    {
+                        "name": "intent_input",
+                        "type": ".google.cloud.dialogflow.v2beta1.IntentInput"
                     },
                     {
                         "name": "reply_audio_config",
@@ -3558,7 +3562,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 155,
+                    "end": 167,
                     "type": "FULL"
                 }
             ],
@@ -3594,6 +3598,14 @@
                     {
                         "name": "input_dtmf",
                         "type": ".google.cloud.dialogflow.v2beta1.TelephonyDtmfEvents"
+                    },
+                    {
+                        "name": "input_intent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "input_event",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "query_params",

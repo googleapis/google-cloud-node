@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.14.0",
+        "version": "3.15.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1234,7 +1234,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 92,
                     "type": "FULL"
                 }
             ],
@@ -2156,6 +2156,54 @@
                 "method": {
                     "shortName": "FetchFeatureValues",
                     "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.FetchFeatureValues",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreService_StreamingFetchFeatureValues_async",
+            "title": "DatasetService streamingFetchFeatureValues Sample",
+            "origin": "API_DEFINITION",
+            "description": " Bidirectional streaming RPC to fetch feature values under a FeatureView. Requests may not have a one-to-one mapping to responses and responses may be returned out-of-order to reduce latency.",
+            "canonical": true,
+            "file": "feature_online_store_service.streaming_fetch_feature_values.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamingFetchFeatureValues",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.StreamingFetchFeatureValues",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "feature_view",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "data_keys",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "data_format",
+                        "type": ".google.cloud.aiplatform.v1beta1.FeatureViewDataFormat"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesResponse",
+                "client": {
+                    "shortName": "FeatureOnlineStoreServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamingFetchFeatureValues",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.StreamingFetchFeatureValues",
                     "service": {
                         "shortName": "FeatureOnlineStoreService",
                         "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService"
@@ -8054,7 +8102,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 92,
                     "type": "FULL"
                 }
             ],
@@ -9246,7 +9294,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],
@@ -9266,10 +9314,6 @@
                     {
                         "name": "pipeline_job_id",
                         "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "preflight_validations",
-                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1beta1.PipelineJob",

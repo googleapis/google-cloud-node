@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.4.0...recaptcha-enterprise-v5.5.0) (2024-03-07)
+
+
+### Features
+
+* [recaptchaenterprise] Add include_recaptcha_script for as a new action in firewall policies ([#5108](https://github.com/googleapis/google-cloud-node/issues/5108)) ([77b54be](https://github.com/googleapis/google-cloud-node/commit/77b54bec52823952f8b57c21a4cc05d97cafc55e))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.3.0...recaptcha-enterprise-v5.4.0) (2024-02-22)
 
 

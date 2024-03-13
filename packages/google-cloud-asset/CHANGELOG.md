@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.4.0...asset-v5.5.0) (2024-03-07)
+
+
+### Features
+
+* [asset] Add `asset_type` field to `GovernedIamPolicy` and `GovernedResource` ([#5110](https://github.com/googleapis/google-cloud-node/issues/5110)) ([0bdb9c8](https://github.com/googleapis/google-cloud-node/commit/0bdb9c88ecc4598a3fdc4616e41bcd690b6e2cff))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.3.0...asset-v5.4.0) (2024-02-09)
 
 

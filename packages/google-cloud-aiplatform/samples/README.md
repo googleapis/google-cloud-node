@@ -199,6 +199,8 @@
   * [Model_service.update_explanation_dataset](#model_service.update_explanation_dataset)
   * [Model_service.update_model](#model_service.update_model)
   * [Model_service.upload_model](#model_service.upload_model)
+  * [Pipeline_service.batch_cancel_pipeline_jobs](#pipeline_service.batch_cancel_pipeline_jobs)
+  * [Pipeline_service.batch_delete_pipeline_jobs](#pipeline_service.batch_delete_pipeline_jobs)
   * [Pipeline_service.cancel_pipeline_job](#pipeline_service.cancel_pipeline_job)
   * [Pipeline_service.cancel_training_pipeline](#pipeline_service.cancel_training_pipeline)
   * [Pipeline_service.create_pipeline_job](#pipeline_service.create_pipeline_job)
@@ -325,6 +327,7 @@
   * [Feature_online_store_admin_service.update_feature_view](#feature_online_store_admin_service.update_feature_view)
   * [Feature_online_store_service.fetch_feature_values](#feature_online_store_service.fetch_feature_values)
   * [Feature_online_store_service.search_nearest_entities](#feature_online_store_service.search_nearest_entities)
+  * [Feature_online_store_service.streaming_fetch_feature_values](#feature_online_store_service.streaming_fetch_feature_values)
   * [Feature_registry_service.create_feature](#feature_registry_service.create_feature)
   * [Feature_registry_service.create_feature_group](#feature_registry_service.create_feature_group)
   * [Feature_registry_service.delete_feature](#feature_registry_service.delete_feature)
@@ -3750,6 +3753,40 @@ __Usage:__
 
 
 
+### Pipeline_service.batch_cancel_pipeline_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_cancel_pipeline_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_cancel_pipeline_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_cancel_pipeline_jobs.js`
+
+
+-----
+
+
+
+
+### Pipeline_service.batch_delete_pipeline_jobs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_delete_pipeline_jobs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_delete_pipeline_jobs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.batch_delete_pipeline_jobs.js`
+
+
+-----
+
+
+
+
 ### Pipeline_service.cancel_pipeline_job
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/pipeline_service.cancel_pipeline_job.js).
@@ -5885,6 +5922,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.search_nearest_entities.js`
+
+
+-----
+
+
+
+
+### Feature_online_store_service.streaming_fetch_feature_values
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.streaming_fetch_feature_values.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.streaming_fetch_feature_values.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_service.streaming_fetch_feature_values.js`
 
 
 -----

@@ -41,7 +41,8 @@ import * as gapicConfig from './serving_config_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for modifying ServingConfig.
+ *  Service for operations related to
+ *  {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig|ServingConfig}.
  * @class
  * @memberof v1beta
  */
@@ -202,6 +203,12 @@ export class ServingConfigServiceClient {
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
       projectLocationCollectionDataStorePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}'
@@ -213,6 +220,10 @@ export class ServingConfigServiceClient {
       projectLocationCollectionDataStoreConversationPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
+        ),
+      projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/documentProcessingConfig'
         ),
       projectLocationCollectionDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -248,6 +259,10 @@ export class ServingConfigServiceClient {
       projectLocationDataStoreConversationPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
+        ),
+      projectLocationDataStoreDocumentProcessingConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/documentProcessingConfig'
         ),
       projectLocationDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -561,7 +576,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the ServingConfig to get. Format:
-   *   `projects/{project_number}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config_id}`
+   *   `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -658,8 +673,8 @@ export class ServingConfigServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The dataStore resource name. Format:
-   *   `projects/{project_number}/locations/{location}/collections/{collection}/dataStores/{data_store}`
+   *   Required. Full resource name of the parent resource. Format:
+   *   `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -759,8 +774,8 @@ export class ServingConfigServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The dataStore resource name. Format:
-   *   `projects/{project_number}/locations/{location}/collections/{collection}/dataStores/{data_store}`
+   *   Required. Full resource name of the parent resource. Format:
+   *   `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -808,8 +823,8 @@ export class ServingConfigServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The dataStore resource name. Format:
-   *   `projects/{project_number}/locations/{location}/collections/{collection}/dataStores/{data_store}`
+   *   Required. Full resource name of the parent resource. Format:
+   *   `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -997,6 +1012,65 @@ export class ServingConfigServiceClient {
    */
   matchEngineFromEngineName(engineName: string) {
     return this.pathTemplates.enginePathTemplate.match(engineName).engine;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -1306,6 +1380,91 @@ export class ServingConfigServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
       projectLocationCollectionDataStoreConversationName
     ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreDocumentProcessingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreDocumentProcessingConfigPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_collection_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreDocumentProcessingConfigName(
+    projectLocationCollectionDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationCollectionDataStoreDocumentProcessingConfigName
+    ).data_store;
   }
 
   /**
@@ -2159,6 +2318,73 @@ export class ServingConfigServiceClient {
     return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
       projectLocationDataStoreConversationName
     ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreDocumentProcessingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreDocumentProcessingConfigPath(
+    project: string,
+    location: string,
+    dataStore: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreDocumentProcessingConfigName(
+    projectLocationDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationDataStoreDocumentProcessingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreDocumentProcessingConfigName(
+    projectLocationDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationDataStoreDocumentProcessingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreDocumentProcessingConfig resource.
+   *
+   * @param {string} projectLocationDataStoreDocumentProcessingConfigName
+   *   A fully-qualified path representing project_location_data_store_documentProcessingConfig resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreDocumentProcessingConfigName(
+    projectLocationDataStoreDocumentProcessingConfigName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.match(
+      projectLocationDataStoreDocumentProcessingConfigName
+    ).data_store;
   }
 
   /**

@@ -2223,7 +2223,7 @@ export class DisksClient {
   }
 
   /**
-   * Retrieves an aggregated list of persistent disks.
+   * Retrieves an aggregated list of persistent disks. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
@@ -2241,7 +2241,7 @@ export class DisksClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {number} request.serviceProjectNumber
    *   The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
    * @param {object} [options]
@@ -2295,7 +2295,7 @@ export class DisksClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {object} [options]
@@ -2393,7 +2393,7 @@ export class DisksClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {object} [options]
@@ -2447,7 +2447,7 @@ export class DisksClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {object} [options]

@@ -471,6 +471,30 @@
         }
       }
     },
+    "SearchTuningService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SearchTuningServiceClient",
+          "rpcs": {
+            "TrainCustomModel": {
+              "methods": [
+                "trainCustomModel"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SearchTuningServiceClient",
+          "rpcs": {
+            "TrainCustomModel": {
+              "methods": [
+                "trainCustomModel"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ServingConfigService": {
       "clients": {
         "grpc": {

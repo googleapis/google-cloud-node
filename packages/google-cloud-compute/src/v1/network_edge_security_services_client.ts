@@ -852,7 +852,7 @@ export class NetworkEdgeSecurityServicesClient {
   }
 
   /**
-   * Retrieves the list of all NetworkEdgeSecurityService resources available to the specified project.
+   * Retrieves the list of all NetworkEdgeSecurityService resources available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
@@ -870,7 +870,7 @@ export class NetworkEdgeSecurityServicesClient {
    * @param {string} request.project
    *   Name of the project scoping this request.
    * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
    * @param {number} request.serviceProjectNumber
    *   The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
    * @param {object} [options]

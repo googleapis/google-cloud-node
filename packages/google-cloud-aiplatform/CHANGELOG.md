@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.15.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.14.0...aiplatform-v3.15.0) (2024-03-12)
+
+
+### Features
+
+* A new value `NVIDIA_H100_80GB` is added to enum `AcceleratorType` ([#5114](https://github.com/googleapis/google-cloud-node/issues/5114)) ([729d778](https://github.com/googleapis/google-cloud-node/commit/729d778f67e4e0869379b32d2b2b19c758ebc955))
+
 ## [3.14.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.13.0...aiplatform-v3.14.0) (2024-02-27)
 
 

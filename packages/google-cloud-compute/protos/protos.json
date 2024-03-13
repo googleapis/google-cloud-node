@@ -34,6 +34,21 @@
                 }
               }
             },
+            "Edition": {
+              "values": {
+                "EDITION_UNKNOWN": 0,
+                "EDITION_PROTO2": 998,
+                "EDITION_PROTO3": 999,
+                "EDITION_2023": 1000,
+                "EDITION_2024": 1001,
+                "EDITION_1_TEST_ONLY": 1,
+                "EDITION_2_TEST_ONLY": 2,
+                "EDITION_99997_TEST_ONLY": 99997,
+                "EDITION_99998_TEST_ONLY": 99998,
+                "EDITION_99999_TEST_ONLY": 99999,
+                "EDITION_MAX": 2147483647
+              }
+            },
             "FileDescriptorProto": {
               "fields": {
                 "name": {
@@ -98,8 +113,8 @@
                   "id": 12
                 },
                 "edition": {
-                  "type": "string",
-                  "id": 13
+                  "type": "Edition",
+                  "id": 14
                 }
               }
             },
@@ -191,6 +206,26 @@
                   "rule": "repeated",
                   "type": "UninterpretedOption",
                   "id": 999
+                },
+                "declaration": {
+                  "rule": "repeated",
+                  "type": "Declaration",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_SOURCE"
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
+                "verification": {
+                  "type": "VerificationState",
+                  "id": 3,
+                  "options": {
+                    "default": "UNVERIFIED",
+                    "retention": "RETENTION_SOURCE"
+                  }
                 }
               },
               "extensions": [
@@ -198,7 +233,45 @@
                   1000,
                   536870911
                 ]
-              ]
+              ],
+              "nested": {
+                "Declaration": {
+                  "fields": {
+                    "number": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "fullName": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "type": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "reserved": {
+                      "type": "bool",
+                      "id": 5
+                    },
+                    "repeated": {
+                      "type": "bool",
+                      "id": 6
+                    }
+                  },
+                  "reserved": [
+                    [
+                      4,
+                      4
+                    ]
+                  ]
+                },
+                "VerificationState": {
+                  "values": {
+                    "DECLARATION": 0,
+                    "UNVERIFIED": 1
+                  }
+                }
+              }
             },
             "FieldDescriptorProto": {
               "fields": {
@@ -273,8 +346,8 @@
                 "Label": {
                   "values": {
                     "LABEL_OPTIONAL": 1,
-                    "LABEL_REQUIRED": 2,
-                    "LABEL_REPEATED": 3
+                    "LABEL_REPEATED": 3,
+                    "LABEL_REQUIRED": 2
                   }
                 }
               }
@@ -462,13 +535,6 @@
                     "default": false
                   }
                 },
-                "phpGenericServices": {
-                  "type": "bool",
-                  "id": 42,
-                  "options": {
-                    "default": false
-                  }
-                },
                 "deprecated": {
                   "type": "bool",
                   "id": 23,
@@ -511,6 +577,10 @@
                   "type": "string",
                   "id": 45
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -524,6 +594,10 @@
                 ]
               ],
               "reserved": [
+                [
+                  42,
+                  42
+                ],
                 [
                   38,
                   38
@@ -572,6 +646,10 @@
                   "options": {
                     "deprecated": true
                   }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 12
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -667,9 +745,22 @@
                   "type": "OptionRetention",
                   "id": 17
                 },
-                "target": {
+                "targets": {
+                  "rule": "repeated",
                   "type": "OptionTargetType",
-                  "id": 18
+                  "id": 19,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "editionDefaults": {
+                  "rule": "repeated",
+                  "type": "EditionDefault",
+                  "id": 20
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 21
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -687,6 +778,10 @@
                 [
                   4,
                   4
+                ],
+                [
+                  18,
+                  18
                 ]
               ],
               "nested": {
@@ -724,11 +819,27 @@
                     "TARGET_TYPE_SERVICE": 8,
                     "TARGET_TYPE_METHOD": 9
                   }
+                },
+                "EditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "value": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
                 }
               }
             },
             "OneofOptions": {
               "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 1
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -762,6 +873,10 @@
                     "deprecated": true
                   }
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 7
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -790,6 +905,17 @@
                     "default": false
                   }
                 },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 2
+                },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -805,6 +931,10 @@
             },
             "ServiceOptions": {
               "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 34
+                },
                 "deprecated": {
                   "type": "bool",
                   "id": 33,
@@ -840,6 +970,10 @@
                   "options": {
                     "default": "IDEMPOTENCY_UNKNOWN"
                   }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 35
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -906,6 +1040,166 @@
                     "isExtension": {
                       "rule": "required",
                       "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FeatureSet": {
+              "fields": {
+                "fieldPresence": {
+                  "type": "FieldPresence",
+                  "id": 1,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_2023",
+                    "edition_defaults.value": "EXPLICIT"
+                  }
+                },
+                "enumType": {
+                  "type": "EnumType",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "OPEN"
+                  }
+                },
+                "repeatedFieldEncoding": {
+                  "type": "RepeatedFieldEncoding",
+                  "id": 3,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "PACKED"
+                  }
+                },
+                "utf8Validation": {
+                  "type": "Utf8Validation",
+                  "id": 4,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "VERIFY"
+                  }
+                },
+                "messageEncoding": {
+                  "type": "MessageEncoding",
+                  "id": 5,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "edition_defaults.value": "LENGTH_PREFIXED"
+                  }
+                },
+                "jsonFormat": {
+                  "type": "JsonFormat",
+                  "id": 6,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "ALLOW"
+                  }
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  9995,
+                  9999
+                ]
+              ],
+              "reserved": [
+                [
+                  999,
+                  999
+                ]
+              ],
+              "nested": {
+                "FieldPresence": {
+                  "values": {
+                    "FIELD_PRESENCE_UNKNOWN": 0,
+                    "EXPLICIT": 1,
+                    "IMPLICIT": 2,
+                    "LEGACY_REQUIRED": 3
+                  }
+                },
+                "EnumType": {
+                  "values": {
+                    "ENUM_TYPE_UNKNOWN": 0,
+                    "OPEN": 1,
+                    "CLOSED": 2
+                  }
+                },
+                "RepeatedFieldEncoding": {
+                  "values": {
+                    "REPEATED_FIELD_ENCODING_UNKNOWN": 0,
+                    "PACKED": 1,
+                    "EXPANDED": 2
+                  }
+                },
+                "Utf8Validation": {
+                  "values": {
+                    "UTF8_VALIDATION_UNKNOWN": 0,
+                    "VERIFY": 2,
+                    "NONE": 3
+                  }
+                },
+                "MessageEncoding": {
+                  "values": {
+                    "MESSAGE_ENCODING_UNKNOWN": 0,
+                    "LENGTH_PREFIXED": 1,
+                    "DELIMITED": 2
+                  }
+                },
+                "JsonFormat": {
+                  "values": {
+                    "JSON_FORMAT_UNKNOWN": 0,
+                    "ALLOW": 1,
+                    "LEGACY_BEST_EFFORT": 2
+                  }
+                }
+              }
+            },
+            "FeatureSetDefaults": {
+              "fields": {
+                "defaults": {
+                  "rule": "repeated",
+                  "type": "FeatureSetEditionDefault",
+                  "id": 1
+                },
+                "minimumEdition": {
+                  "type": "Edition",
+                  "id": 4
+                },
+                "maximumEdition": {
+                  "type": "Edition",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "FeatureSetEditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "features": {
+                      "type": "FeatureSet",
                       "id": 2
                     }
                   }
@@ -4267,6 +4561,103 @@
                       }
                     },
                     "AggregatedListInstancesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_includeAllScopes": {
+                          "oneof": [
+                            "includeAllScopes"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        },
+                        "_serviceProjectNumber": {
+                          "oneof": [
+                            "serviceProjectNumber"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "includeAllScopes": {
+                          "type": "bool",
+                          "id": 391327988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceProjectNumber": {
+                          "type": "int64",
+                          "id": 316757497,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AggregatedListInstantSnapshotsRequest": {
                       "oneofs": {
                         "_filter": {
                           "oneof": [
@@ -9135,6 +9526,11 @@
                           "oneof": [
                             "maxUtilization"
                           ]
+                        },
+                        "_preference": {
+                          "oneof": [
+                            "preference"
+                          ]
                         }
                       },
                       "fields": {
@@ -9221,6 +9617,13 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "preference": {
+                          "type": "string",
+                          "id": 150781147,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -9230,6 +9633,14 @@
                             "CONNECTION": 246311646,
                             "RATE": 2508000,
                             "UTILIZATION": 157008386
+                          }
+                        },
+                        "Preference": {
+                          "values": {
+                            "UNDEFINED_PREFERENCE": 0,
+                            "DEFAULT": 115302945,
+                            "PREFERENCE_UNSPECIFIED": 496219571,
+                            "PREFERRED": 418847841
                           }
                         }
                       }
@@ -9811,6 +10222,11 @@
                             "selfLink"
                           ]
                         },
+                        "_serviceLbPolicy": {
+                          "oneof": [
+                            "serviceLbPolicy"
+                          ]
+                        },
                         "_sessionAffinity": {
                           "oneof": [
                             "sessionAffinity"
@@ -10072,6 +10488,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 133581016
+                        },
+                        "serviceLbPolicy": {
+                          "type": "string",
+                          "id": 94848785,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "sessionAffinity": {
                           "type": "string",
@@ -14051,6 +14474,47 @@
                         }
                       }
                     },
+                    "DeleteInstantSnapshotRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instantSnapshot": {
+                          "type": "string",
+                          "id": 391638626,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
                     "DeleteInterconnectAttachmentRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -14951,6 +15415,47 @@
                         "instanceTemplate": {
                           "type": "string",
                           "id": 309248228,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRegionInstantSnapshotRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instantSnapshot": {
+                          "type": "string",
+                          "id": 391638626,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -16839,6 +17344,16 @@
                             "sourceImageId"
                           ]
                         },
+                        "_sourceInstantSnapshot": {
+                          "oneof": [
+                            "sourceInstantSnapshot"
+                          ]
+                        },
+                        "_sourceInstantSnapshotId": {
+                          "oneof": [
+                            "sourceInstantSnapshotId"
+                          ]
+                        },
                         "_sourceSnapshot": {
                           "oneof": [
                             "sourceSnapshot"
@@ -17124,6 +17639,20 @@
                         "sourceImageId": {
                           "type": "string",
                           "id": 55328291,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceInstantSnapshot": {
+                          "type": "string",
+                          "id": 219202054,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceInstantSnapshotId": {
+                          "type": "string",
+                          "id": 287582708,
                           "options": {
                             "proto3_optional": true
                           }
@@ -18673,6 +19202,11 @@
                           "oneof": [
                             "ipAddress"
                           ]
+                        },
+                        "_ipv6Address": {
+                          "oneof": [
+                            "ipv6Address"
+                          ]
                         }
                       },
                       "fields": {
@@ -18686,6 +19220,13 @@
                         "ipAddress": {
                           "type": "string",
                           "id": 406272220,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ipv6Address": {
+                          "type": "string",
+                          "id": 341563804,
                           "options": {
                             "proto3_optional": true
                           }
@@ -21446,6 +21987,45 @@
                         }
                       }
                     },
+                    "GetIamPolicyInstantSnapshotRequest": {
+                      "oneofs": {
+                        "_optionsRequestedPolicyVersion": {
+                          "oneof": [
+                            "optionsRequestedPolicyVersion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "optionsRequestedPolicyVersion": {
+                          "type": "int32",
+                          "id": 499220029,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetIamPolicyLicenseRequest": {
                       "oneofs": {
                         "_optionsRequestedPolicyVersion": {
@@ -21699,6 +22279,45 @@
                       }
                     },
                     "GetIamPolicyRegionDiskRequest": {
+                      "oneofs": {
+                        "_optionsRequestedPolicyVersion": {
+                          "oneof": [
+                            "optionsRequestedPolicyVersion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "optionsRequestedPolicyVersion": {
+                          "type": "int32",
+                          "id": 499220029,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetIamPolicyRegionInstantSnapshotRequest": {
                       "oneofs": {
                         "_optionsRequestedPolicyVersion": {
                           "oneof": [
@@ -22094,6 +22713,31 @@
                         "project": {
                           "type": "string",
                           "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetInstantSnapshotRequest": {
+                      "fields": {
+                        "instantSnapshot": {
+                          "type": "string",
+                          "id": 391638626,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -22909,6 +23553,31 @@
                         "instanceTemplate": {
                           "type": "string",
                           "id": 309248228,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetRegionInstantSnapshotRequest": {
+                      "fields": {
+                        "instantSnapshot": {
+                          "type": "string",
+                          "id": 391638626,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -27666,6 +28335,47 @@
                         }
                       }
                     },
+                    "InsertInstantSnapshotRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instantSnapshotResource": {
+                          "type": "InstantSnapshot",
+                          "id": 383915339,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
                     "InsertInterconnectAttachmentRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -28546,6 +29256,47 @@
                         "instanceTemplateResource": {
                           "type": "InstanceTemplate",
                           "id": 10679561,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InsertRegionInstantSnapshotRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instantSnapshotResource": {
+                          "type": "InstantSnapshot",
+                          "id": 383915339,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -31368,6 +32119,11 @@
                     },
                     "InstanceGroupManagerInstanceLifecyclePolicy": {
                       "oneofs": {
+                        "_defaultActionOnFailure": {
+                          "oneof": [
+                            "defaultActionOnFailure"
+                          ]
+                        },
                         "_forceUpdateOnRepair": {
                           "oneof": [
                             "forceUpdateOnRepair"
@@ -31375,6 +32131,13 @@
                         }
                       },
                       "fields": {
+                        "defaultActionOnFailure": {
+                          "type": "string",
+                          "id": 61383253,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "forceUpdateOnRepair": {
                           "type": "string",
                           "id": 356302027,
@@ -31384,6 +32147,13 @@
                         }
                       },
                       "nested": {
+                        "DefaultActionOnFailure": {
+                          "values": {
+                            "UNDEFINED_DEFAULT_ACTION_ON_FAILURE": 0,
+                            "DO_NOTHING": 451307513,
+                            "REPAIR": 266277773
+                          }
+                        },
                         "ForceUpdateOnRepair": {
                           "values": {
                             "UNDEFINED_FORCE_UPDATE_ON_REPAIR": 0,
@@ -33432,6 +34202,440 @@
                           "rule": "repeated",
                           "type": "CustomerEncryptionKeyProtectedDisk",
                           "id": 95594102
+                        }
+                      }
+                    },
+                    "InstantSnapshot": {
+                      "oneofs": {
+                        "_architecture": {
+                          "oneof": [
+                            "architecture"
+                          ]
+                        },
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_diskSizeGb": {
+                          "oneof": [
+                            "diskSizeGb"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_labelFingerprint": {
+                          "oneof": [
+                            "labelFingerprint"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
+                        },
+                        "_resourceStatus": {
+                          "oneof": [
+                            "resourceStatus"
+                          ]
+                        },
+                        "_satisfiesPzi": {
+                          "oneof": [
+                            "satisfiesPzi"
+                          ]
+                        },
+                        "_satisfiesPzs": {
+                          "oneof": [
+                            "satisfiesPzs"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        },
+                        "_sourceDisk": {
+                          "oneof": [
+                            "sourceDisk"
+                          ]
+                        },
+                        "_sourceDiskId": {
+                          "oneof": [
+                            "sourceDiskId"
+                          ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
+                        },
+                        "_zone": {
+                          "oneof": [
+                            "zone"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "architecture": {
+                          "type": "string",
+                          "id": 302803283,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "diskSizeGb": {
+                          "type": "int64",
+                          "id": 316263735,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "labelFingerprint": {
+                          "type": "string",
+                          "id": 178124825,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 500195327
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resourceStatus": {
+                          "type": "InstantSnapshotResourceStatus",
+                          "id": 249429315,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 480964257,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 480964267,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceDisk": {
+                          "type": "string",
+                          "id": 451753793,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceDiskId": {
+                          "type": "string",
+                          "id": 454190809,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Architecture": {
+                          "values": {
+                            "UNDEFINED_ARCHITECTURE": 0,
+                            "ARCHITECTURE_UNSPECIFIED": 394750507,
+                            "ARM64": 62547450,
+                            "X86_64": 425300551
+                          }
+                        },
+                        "Status": {
+                          "values": {
+                            "UNDEFINED_STATUS": 0,
+                            "CREATING": 455564985,
+                            "DELETING": 528602024,
+                            "FAILED": 455706685,
+                            "READY": 77848963
+                          }
+                        }
+                      }
+                    },
+                    "InstantSnapshotAggregatedList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "InstantSnapshotsScopedList",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstantSnapshotList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "InstantSnapshot",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstantSnapshotResourceStatus": {
+                      "oneofs": {
+                        "_storageSizeBytes": {
+                          "oneof": [
+                            "storageSizeBytes"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "storageSizeBytes": {
+                          "type": "int64",
+                          "id": 387548913,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstantSnapshotsScopedList": {
+                      "oneofs": {
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instantSnapshots": {
+                          "rule": "repeated",
+                          "type": "InstantSnapshot",
+                          "id": 329637457
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -38939,6 +40143,86 @@
                         }
                       }
                     },
+                    "ListInstantSnapshotsRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "ListInterconnectAttachmentsRequest": {
                       "oneofs": {
                         "_filter": {
@@ -41945,6 +43229,86 @@
                       }
                     },
                     "ListRegionInstanceTemplatesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListRegionInstantSnapshotsRequest": {
                       "oneofs": {
                         "_filter": {
                           "oneof": [
@@ -54848,6 +56212,11 @@
                     },
                     "Project": {
                       "oneofs": {
+                        "_cloudArmorTier": {
+                          "oneof": [
+                            "cloudArmorTier"
+                          ]
+                        },
                         "_commonInstanceMetadata": {
                           "oneof": [
                             "commonInstanceMetadata"
@@ -54910,6 +56279,13 @@
                         }
                       },
                       "fields": {
+                        "cloudArmorTier": {
+                          "type": "string",
+                          "id": 4427052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "commonInstanceMetadata": {
                           "type": "Metadata",
                           "id": 185794117,
@@ -55006,6 +56382,14 @@
                         }
                       },
                       "nested": {
+                        "CloudArmorTier": {
+                          "values": {
+                            "UNDEFINED_CLOUD_ARMOR_TIER": 0,
+                            "CA_ENTERPRISE_ANNUAL": 219921116,
+                            "CA_ENTERPRISE_PAYGO": 453530323,
+                            "CA_STANDARD": 13156734
+                          }
+                        },
                         "DefaultNetworkTier": {
                           "values": {
                             "UNDEFINED_DEFAULT_NETWORK_TIER": 0,
@@ -55118,6 +56502,34 @@
                           "id": 105180467,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ProjectsSetCloudArmorTierRequest": {
+                      "oneofs": {
+                        "_cloudArmorTier": {
+                          "oneof": [
+                            "cloudArmorTier"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "cloudArmorTier": {
+                          "type": "string",
+                          "id": 4427052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CloudArmorTier": {
+                          "values": {
+                            "UNDEFINED_CLOUD_ARMOR_TIER": 0,
+                            "CA_ENTERPRISE_ANNUAL": 219921116,
+                            "CA_ENTERPRISE_PAYGO": 453530323,
+                            "CA_STANDARD": 13156734
                           }
                         }
                       }
@@ -65140,6 +66552,39 @@
                         }
                       }
                     },
+                    "SetCloudArmorTierProjectRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "projectsSetCloudArmorTierRequestResource": {
+                          "type": "ProjectsSetCloudArmorTierRequest",
+                          "id": 77053391,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "SetCommonInstanceMetadataOperationMetadata": {
                       "oneofs": {
                         "_clientOperationId": {
@@ -65642,6 +67087,38 @@
                         }
                       }
                     },
+                    "SetIamPolicyInstantSnapshotRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zoneSetPolicyRequestResource": {
+                          "type": "ZoneSetPolicyRequest",
+                          "id": 382082107,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SetIamPolicyLicenseRequest": {
                       "fields": {
                         "globalSetPolicyRequestResource": {
@@ -65846,6 +67323,38 @@
                       }
                     },
                     "SetIamPolicyRegionDiskRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "regionSetPolicyRequestResource": {
+                          "type": "RegionSetPolicyRequest",
+                          "id": 276489091,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SetIamPolicyRegionInstantSnapshotRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -66454,6 +67963,54 @@
                         }
                       }
                     },
+                    "SetLabelsInstantSnapshotRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        },
+                        "zoneSetLabelsRequestResource": {
+                          "type": "ZoneSetLabelsRequest",
+                          "id": 364950798,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SetLabelsInterconnectAttachmentRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -66529,6 +68086,54 @@
                       }
                     },
                     "SetLabelsRegionDiskRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "regionSetLabelsRequestResource": {
+                          "type": "RegionSetLabelsRequest",
+                          "id": 259357782,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SetLabelsRegionInstantSnapshotRequest": {
                       "oneofs": {
                         "_requestId": {
                           "oneof": [
@@ -68781,6 +70386,21 @@
                             "sourceDiskId"
                           ]
                         },
+                        "_sourceInstantSnapshot": {
+                          "oneof": [
+                            "sourceInstantSnapshot"
+                          ]
+                        },
+                        "_sourceInstantSnapshotEncryptionKey": {
+                          "oneof": [
+                            "sourceInstantSnapshotEncryptionKey"
+                          ]
+                        },
+                        "_sourceInstantSnapshotId": {
+                          "oneof": [
+                            "sourceInstantSnapshotId"
+                          ]
+                        },
                         "_sourceSnapshotSchedulePolicy": {
                           "oneof": [
                             "sourceSnapshotSchedulePolicy"
@@ -68985,6 +70605,27 @@
                         "sourceDiskId": {
                           "type": "string",
                           "id": 454190809,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceInstantSnapshot": {
+                          "type": "string",
+                          "id": 219202054,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceInstantSnapshotEncryptionKey": {
+                          "type": "CustomerEncryptionKey",
+                          "id": 436536060,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceInstantSnapshotId": {
+                          "type": "string",
+                          "id": 287582708,
                           "options": {
                             "proto3_optional": true
                           }
@@ -74557,6 +76198,38 @@
                         }
                       }
                     },
+                    "TestIamPermissionsInstantSnapshotRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "TestIamPermissionsLicenseCodeRequest": {
                       "fields": {
                         "project": {
@@ -74850,6 +76523,38 @@
                       }
                     },
                     "TestIamPermissionsRegionDiskRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsRegionInstantSnapshotRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -77622,6 +79327,11 @@
                             "description"
                           ]
                         },
+                        "_gatewayIpVersion": {
+                          "oneof": [
+                            "gatewayIpVersion"
+                          ]
+                        },
                         "_id": {
                           "oneof": [
                             "id"
@@ -77674,6 +79384,13 @@
                         "description": {
                           "type": "string",
                           "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "gatewayIpVersion": {
+                          "type": "string",
+                          "id": 65074843,
                           "options": {
                             "proto3_optional": true
                           }
@@ -77746,6 +79463,13 @@
                         }
                       },
                       "nested": {
+                        "GatewayIpVersion": {
+                          "values": {
+                            "UNDEFINED_GATEWAY_IP_VERSION": 0,
+                            "IPV4": 2254341,
+                            "IPV6": 2254343
+                          }
+                        },
                         "StackType": {
                           "values": {
                             "UNDEFINED_STACK_TYPE": 0,
@@ -78061,6 +79785,11 @@
                           "oneof": [
                             "ipAddress"
                           ]
+                        },
+                        "_ipv6Address": {
+                          "oneof": [
+                            "ipv6Address"
+                          ]
                         }
                       },
                       "fields": {
@@ -78081,6 +79810,13 @@
                         "ipAddress": {
                           "type": "string",
                           "id": 406272220,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ipv6Address": {
+                          "type": "string",
+                          "id": 341563804,
                           "options": {
                             "proto3_optional": true
                           }
@@ -84676,6 +86412,196 @@
                         }
                       }
                     },
+                    "InstantSnapshots": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "AggregatedList": {
+                          "requestType": "AggregatedListInstantSnapshotsRequest",
+                          "responseType": "InstantSnapshotAggregatedList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/aggregated/instantSnapshots",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/aggregated/instantSnapshots"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Delete": {
+                          "requestType": "DeleteInstantSnapshotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{instant_snapshot}",
+                            "(google.api.method_signature)": "project,zone,instant_snapshot",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{instant_snapshot}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,instant_snapshot"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetInstantSnapshotRequest",
+                          "responseType": "InstantSnapshot",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{instant_snapshot}",
+                            "(google.api.method_signature)": "project,zone,instant_snapshot"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{instant_snapshot}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,instant_snapshot"
+                            }
+                          ]
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "GetIamPolicyInstantSnapshotRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{resource}/getIamPolicy",
+                            "(google.api.method_signature)": "project,zone,resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{resource}/getIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,resource"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertInstantSnapshotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "instant_snapshot_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots",
+                            "(google.api.method_signature)": "project,zone,instant_snapshot_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "instant_snapshot_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,instant_snapshot_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListInstantSnapshotsRequest",
+                          "responseType": "InstantSnapshotList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots",
+                            "(google.api.method_signature)": "project,zone"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone"
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "SetIamPolicyInstantSnapshotRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).body": "zone_set_policy_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{resource}/setIamPolicy",
+                            "(google.api.method_signature)": "project,zone,resource,zone_set_policy_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "zone_set_policy_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{resource}/setIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,resource,zone_set_policy_request_resource"
+                            }
+                          ]
+                        },
+                        "SetLabels": {
+                          "requestType": "SetLabelsInstantSnapshotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "zone_set_labels_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{resource}/setLabels",
+                            "(google.api.method_signature)": "project,zone,resource,zone_set_labels_request_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "zone_set_labels_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{resource}/setLabels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,resource,zone_set_labels_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsInstantSnapshotRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,zone,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/instantSnapshots/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,resource,test_permissions_request_resource"
+                            }
+                          ]
+                        }
+                      }
+                    },
                     "InterconnectAttachments": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
@@ -87492,6 +89418,30 @@
                             }
                           ]
                         },
+                        "SetCloudArmorTier": {
+                          "requestType": "SetCloudArmorTierProjectRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "projects_set_cloud_armor_tier_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/setCloudArmorTier",
+                            "(google.api.method_signature)": "project,projects_set_cloud_armor_tier_request_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "projects_set_cloud_armor_tier_request_resource",
+                                "post": "/compute/v1/projects/{project}/setCloudArmorTier"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,projects_set_cloud_armor_tier_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
                         "SetCommonInstanceMetadata": {
                           "requestType": "SetCommonInstanceMetadataProjectRequest",
                           "responseType": "Operation",
@@ -89723,6 +91673,178 @@
                             },
                             {
                               "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RegionInstantSnapshots": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Delete": {
+                          "requestType": "DeleteRegionInstantSnapshotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{instant_snapshot}",
+                            "(google.api.method_signature)": "project,region,instant_snapshot",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{instant_snapshot}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,instant_snapshot"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetRegionInstantSnapshotRequest",
+                          "responseType": "InstantSnapshot",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{instant_snapshot}",
+                            "(google.api.method_signature)": "project,region,instant_snapshot"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{instant_snapshot}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,instant_snapshot"
+                            }
+                          ]
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "GetIamPolicyRegionInstantSnapshotRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{resource}/getIamPolicy",
+                            "(google.api.method_signature)": "project,region,resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{resource}/getIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertRegionInstantSnapshotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "instant_snapshot_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots",
+                            "(google.api.method_signature)": "project,region,instant_snapshot_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "instant_snapshot_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,instant_snapshot_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListRegionInstantSnapshotsRequest",
+                          "responseType": "InstantSnapshotList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "SetIamPolicyRegionInstantSnapshotRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).body": "region_set_policy_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{resource}/setIamPolicy",
+                            "(google.api.method_signature)": "project,region,resource,region_set_policy_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_set_policy_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{resource}/setIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,region_set_policy_request_resource"
+                            }
+                          ]
+                        },
+                        "SetLabels": {
+                          "requestType": "SetLabelsRegionInstantSnapshotRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "region_set_labels_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{resource}/setLabels",
+                            "(google.api.method_signature)": "project,region,resource,region_set_labels_request_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_set_labels_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{resource}/setLabels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,region_set_labels_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsRegionInstantSnapshotRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/instantSnapshots/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
                             }
                           ]
                         }
@@ -96992,6 +99114,10 @@
                   "rule": "repeated",
                   "type": "ClientLibrarySettings",
                   "id": 109
+                },
+                "protoReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 110
                 }
               }
             },
@@ -97049,6 +99175,31 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "renamedResources": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 3
+                },
+                "ignoredResources": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 4
+                },
+                "forcedNamespaceAliases": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                },
+                "handwrittenSignatures": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 6
                 }
               }
             },
@@ -97077,6 +99228,11 @@
                 "longRunning": {
                   "type": "LongRunning",
                   "id": 2
+                },
+                "autoPopulatedFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
                 }
               },
               "nested": {
@@ -97108,7 +99264,10 @@
                 "CLOUD": 1,
                 "ADS": 2,
                 "PHOTOS": 3,
-                "STREET_VIEW": 4
+                "STREET_VIEW": 4,
+                "SHOPPING": 5,
+                "GEO": 6,
+                "GENERATIVE_AI": 7
               }
             },
             "ClientLibraryDestination": {
@@ -97145,7 +99304,8 @@
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
               }
             },
             "resourceReference": {

@@ -1536,9 +1536,8 @@ export class CertificateAuthorityServiceClient {
   /**
    * FetchCaCerts returns the current trust anchor for the
    * {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}. This will include CA
-   * certificate chains for all ACTIVE
-   * {@link protos.google.cloud.security.privateca.v1.CertificateAuthority|CertificateAuthority}
-   * resources in the {@link protos.google.cloud.security.privateca.v1.CaPool|CaPool}.
+   * certificate chains for all Certificate Authorities in the ENABLED,
+   * DISABLED, or STAGED states.
    *
    * @param {Object} request
    *   The request object that will be sent.

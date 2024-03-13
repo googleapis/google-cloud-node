@@ -70,6 +70,18 @@ function main(participant) {
    */
   // const inputDtmf = {}
   /**
+   *  The intent to be triggered on V3 agent.
+   *  Format: `projects/<Project ID>/locations/<Location ID>/locations/
+   *  <Location ID>/agents/<Agent ID>/intents/<Intent ID>`.
+   */
+  // const inputIntent = 'abc123'
+  /**
+   *  The input event name.
+   *  This can only be sent once and would cancel the ongoing speech
+   *  recognition if any.
+   */
+  // const inputEvent = 'abc123'
+  /**
    *  Parameters for a Dialogflow virtual-agent query.
    */
   // const queryParams = {}

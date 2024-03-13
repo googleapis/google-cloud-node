@@ -1114,6 +1114,11 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "secondaryBootDisks": {
+                      "rule": "repeated",
+                      "type": "SecondaryBootDisk",
+                      "id": 48
                     }
                   }
                 },
@@ -2328,6 +2333,11 @@
                       "oneof": [
                         "desiredInTransitEncryptionConfig"
                       ]
+                    },
+                    "_desiredEnableCiliumClusterwideNetworkPolicy": {
+                      "oneof": [
+                        "desiredEnableCiliumClusterwideNetworkPolicy"
+                      ]
                     }
                   },
                   "fields": {
@@ -2541,6 +2551,13 @@
                     "desiredInTransitEncryptionConfig": {
                       "type": "InTransitEncryptionConfig",
                       "id": 137,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "desiredEnableCiliumClusterwideNetworkPolicy": {
+                      "type": "bool",
+                      "id": 138,
                       "options": {
                         "proto3_optional": true
                       }
@@ -4765,6 +4782,11 @@
                       "oneof": [
                         "inTransitEncryptionConfig"
                       ]
+                    },
+                    "_enableCiliumClusterwideNetworkPolicy": {
+                      "oneof": [
+                        "enableCiliumClusterwideNetworkPolicy"
+                      ]
                     }
                   },
                   "fields": {
@@ -4826,6 +4848,13 @@
                     "inTransitEncryptionConfig": {
                       "type": "InTransitEncryptionConfig",
                       "id": 20,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "enableCiliumClusterwideNetworkPolicy": {
+                      "type": "bool",
+                      "id": 21,
                       "options": {
                         "proto3_optional": true
                       }
@@ -5754,6 +5783,26 @@
                         "CLUSTER_TIER_UNSPECIFIED": 0,
                         "STANDARD": 1,
                         "ENTERPRISE": 2
+                      }
+                    }
+                  }
+                },
+                "SecondaryBootDisk": {
+                  "fields": {
+                    "mode": {
+                      "type": "Mode",
+                      "id": 1
+                    },
+                    "diskImage": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Mode": {
+                      "values": {
+                        "MODE_UNSPECIFIED": 0,
+                        "CONTAINER_IMAGE_CACHE": 1
                       }
                     }
                   }
@@ -8242,6 +8291,10 @@
                     "enterpriseConfig": {
                       "type": "EnterpriseConfig",
                       "id": 149
+                    },
+                    "secretManagerConfig": {
+                      "type": "SecretManagerConfig",
+                      "id": 150
                     }
                   },
                   "nested": {
@@ -8446,6 +8499,16 @@
                     "_desiredInTransitEncryptionConfig": {
                       "oneof": [
                         "desiredInTransitEncryptionConfig"
+                      ]
+                    },
+                    "_desiredEnableCiliumClusterwideNetworkPolicy": {
+                      "oneof": [
+                        "desiredEnableCiliumClusterwideNetworkPolicy"
+                      ]
+                    },
+                    "_desiredSecretManagerConfig": {
+                      "oneof": [
+                        "desiredSecretManagerConfig"
                       ]
                     }
                   },
@@ -8696,6 +8759,20 @@
                     "desiredInTransitEncryptionConfig": {
                       "type": "InTransitEncryptionConfig",
                       "id": 137,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "desiredEnableCiliumClusterwideNetworkPolicy": {
+                      "type": "bool",
+                      "id": 138,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "desiredSecretManagerConfig": {
+                      "type": "SecretManagerConfig",
+                      "id": 139,
                       "options": {
                         "proto3_optional": true
                       }
@@ -11155,6 +11232,11 @@
                       "oneof": [
                         "inTransitEncryptionConfig"
                       ]
+                    },
+                    "_enableCiliumClusterwideNetworkPolicy": {
+                      "oneof": [
+                        "enableCiliumClusterwideNetworkPolicy"
+                      ]
                     }
                   },
                   "fields": {
@@ -11216,6 +11298,13 @@
                     "inTransitEncryptionConfig": {
                       "type": "InTransitEncryptionConfig",
                       "id": 20,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "enableCiliumClusterwideNetworkPolicy": {
+                      "type": "bool",
+                      "id": 21,
                       "options": {
                         "proto3_optional": true
                       }
@@ -12198,6 +12287,24 @@
                         "CLUSTER_TIER_UNSPECIFIED": 0,
                         "STANDARD": 1,
                         "ENTERPRISE": 2
+                      }
+                    }
+                  }
+                },
+                "SecretManagerConfig": {
+                  "oneofs": {
+                    "_enabled": {
+                      "oneof": [
+                        "enabled"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1,
+                      "options": {
+                        "proto3_optional": true
                       }
                     }
                   }
