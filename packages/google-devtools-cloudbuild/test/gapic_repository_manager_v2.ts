@@ -2314,9 +2314,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2363,9 +2363,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2412,9 +2412,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2453,9 +2453,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -2640,9 +2640,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2689,9 +2689,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2738,9 +2738,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2779,9 +2779,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
