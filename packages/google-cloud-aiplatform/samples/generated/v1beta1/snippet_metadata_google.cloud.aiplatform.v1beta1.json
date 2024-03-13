@@ -2164,6 +2164,54 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreService_StreamingFetchFeatureValues_async",
+            "title": "DatasetService streamingFetchFeatureValues Sample",
+            "origin": "API_DEFINITION",
+            "description": " Bidirectional streaming RPC to fetch feature values under a FeatureView. Requests may not have a one-to-one mapping to responses and responses may be returned out-of-order to reduce latency.",
+            "canonical": true,
+            "file": "feature_online_store_service.streaming_fetch_feature_values.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamingFetchFeatureValues",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.StreamingFetchFeatureValues",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "feature_view",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "data_keys",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "data_format",
+                        "type": ".google.cloud.aiplatform.v1beta1.FeatureViewDataFormat"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesResponse",
+                "client": {
+                    "shortName": "FeatureOnlineStoreServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamingFetchFeatureValues",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.StreamingFetchFeatureValues",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreService_SearchNearestEntities_async",
             "title": "DatasetService searchNearestEntities Sample",
             "origin": "API_DEFINITION",

@@ -33281,6 +33281,28 @@
                             }
                           ]
                         },
+                        "StreamingFetchFeatureValues": {
+                          "requestType": "StreamingFetchFeatureValuesRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingFetchFeatureValuesResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:streamingFetchFeatureValues",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "feature_view, data_keys"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:streamingFetchFeatureValues",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "feature_view, data_keys"
+                            }
+                          ]
+                        },
                         "SearchNearestEntities": {
                           "requestType": "SearchNearestEntitiesRequest",
                           "responseType": "SearchNearestEntitiesResponse",
@@ -33413,6 +33435,10 @@
                         "protoStruct": {
                           "type": "google.protobuf.Struct",
                           "id": 2
+                        },
+                        "dataKey": {
+                          "type": "FeatureViewDataKey",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -33445,6 +33471,45 @@
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    "StreamingFetchFeatureValuesRequest": {
+                      "fields": {
+                        "featureView": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/FeatureView"
+                          }
+                        },
+                        "dataKeys": {
+                          "rule": "repeated",
+                          "type": "FeatureViewDataKey",
+                          "id": 2
+                        },
+                        "dataFormat": {
+                          "type": "FeatureViewDataFormat",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StreamingFetchFeatureValuesResponse": {
+                      "fields": {
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        },
+                        "data": {
+                          "rule": "repeated",
+                          "type": "FetchFeatureValuesResponse",
+                          "id": 2
+                        },
+                        "dataKeysWithError": {
+                          "rule": "repeated",
+                          "type": "FeatureViewDataKey",
+                          "id": 3
                         }
                       }
                     },
