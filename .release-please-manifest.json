@@ -112,7 +112,7 @@
   "packages/google-cloud-run": "1.1.0",
   "packages/google-cloud-scheduler": "4.1.0",
   "packages/google-cloud-secretmanager": "5.2.0",
-  "packages/google-cloud-security-privateca": "5.1.0",
+  "packages/google-cloud-security-privateca": "5.2.0",
   "packages/google-cloud-security-publicca": "1.1.0",
   "packages/google-cloud-securitycenter": "8.5.0",
   "packages/google-cloud-servicedirectory": "5.1.0",
@@ -166,5 +166,6 @@
   "packages/google-apps-meet": "0.1.1",
   "packages/google-cloud-parallelstore": "0.1.0",
   "packages/google-cloud-cloudcontrolspartner": "0.1.0",
-  "packages/google-cloud-telcoautomation": "0.1.0"
+  "packages/google-cloud-telcoautomation": "0.1.0",
+  "packages/google-cloud-apphub": "0.1.0"
 }
