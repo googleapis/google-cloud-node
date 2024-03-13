@@ -2452,6 +2452,24 @@
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-connectors"
   },
   {
+    "name": "cloudcontrolspartner",
+    "name_pretty": "Controls Partner API",
+    "product_documentation": "https://cloud.google.com/sovereign-controls-by-partners/docs/sovereign-partners",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudcontrolspartner/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/cloudcontrolspartner",
+    "api_id": "cloudcontrolspartner.googleapis.com",
+    "default_version": "v1beta",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "cloudcontrolspartner",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-cloudcontrolspartner",
+    "support_documentation": "https://cloud.google.com/sovereign-controls-by-partners/docs/getting-support"
+  },
+  {
     "default_version": "v1beta1",
     "release_level": "preview",
     "requires_billing": true,
@@ -3096,6 +3114,24 @@
     "api_shortname": "cloudsupport",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-support",
     "support_documentation": "https://cloud.google.com/support/docs/getting-support"
+  },
+  {
+    "name": "telcoautomation",
+    "name_pretty": "Telco Automation API",
+    "product_documentation": "https://cloud.google.com/telecom-network-automation",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/telcoautomation/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/telcoautomation",
+    "api_id": "telcoautomation.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "telcoautomation",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-telcoautomation",
+    "support_documentation": "https://cloud.google.com/telecom-network-automation/docs/getting-support"
   },
   {
     "name": "trace",
