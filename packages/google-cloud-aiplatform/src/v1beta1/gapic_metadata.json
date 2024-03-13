@@ -563,6 +563,11 @@
               "methods": [
                 "searchNearestEntities"
               ]
+            },
+            "StreamingFetchFeatureValues": {
+              "methods": [
+                "streamingFetchFeatureValues"
+              ]
             }
           }
         },
