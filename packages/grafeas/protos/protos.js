@@ -980,6 +980,7 @@
              * @property {number} COMPLIANCE=9 COMPLIANCE value
              * @property {number} DSSE_ATTESTATION=10 DSSE_ATTESTATION value
              * @property {number} VULNERABILITY_ASSESSMENT=11 VULNERABILITY_ASSESSMENT value
+             * @property {number} SBOM_REFERENCE=12 SBOM_REFERENCE value
              */
             v1.NoteKind = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -995,6 +996,7 @@
                 values[valuesById[9] = "COMPLIANCE"] = 9;
                 values[valuesById[10] = "DSSE_ATTESTATION"] = 10;
                 values[valuesById[11] = "VULNERABILITY_ASSESSMENT"] = 11;
+                values[valuesById[12] = "SBOM_REFERENCE"] = 12;
                 return values;
             })();
     
@@ -2857,6 +2859,7 @@
                  * @property {string|null} [provenanceBytes] BuildOccurrence provenanceBytes
                  * @property {grafeas.v1.IInTotoProvenance|null} [intotoProvenance] BuildOccurrence intotoProvenance
                  * @property {grafeas.v1.IInTotoStatement|null} [intotoStatement] BuildOccurrence intotoStatement
+                 * @property {grafeas.v1.IInTotoSlsaProvenanceV1|null} [inTotoSlsaProvenanceV1] BuildOccurrence inTotoSlsaProvenanceV1
                  */
     
                 /**
@@ -2907,6 +2910,14 @@
                 BuildOccurrence.prototype.intotoStatement = null;
     
                 /**
+                 * BuildOccurrence inTotoSlsaProvenanceV1.
+                 * @member {grafeas.v1.IInTotoSlsaProvenanceV1|null|undefined} inTotoSlsaProvenanceV1
+                 * @memberof grafeas.v1.BuildOccurrence
+                 * @instance
+                 */
+                BuildOccurrence.prototype.inTotoSlsaProvenanceV1 = null;
+    
+                /**
                  * Creates a new BuildOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.BuildOccurrence
@@ -2938,6 +2949,8 @@
                         $root.grafeas.v1.InTotoProvenance.encode(message.intotoProvenance, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     if (message.intotoStatement != null && Object.hasOwnProperty.call(message, "intotoStatement"))
                         $root.grafeas.v1.InTotoStatement.encode(message.intotoStatement, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.inTotoSlsaProvenanceV1 != null && Object.hasOwnProperty.call(message, "inTotoSlsaProvenanceV1"))
+                        $root.grafeas.v1.InTotoSlsaProvenanceV1.encode(message.inTotoSlsaProvenanceV1, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                     return writer;
                 };
     
@@ -2986,6 +2999,10 @@
                             }
                         case 4: {
                                 message.intotoStatement = $root.grafeas.v1.InTotoStatement.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 5: {
+                                message.inTotoSlsaProvenanceV1 = $root.grafeas.v1.InTotoSlsaProvenanceV1.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -3041,6 +3058,11 @@
                         if (error)
                             return "intotoStatement." + error;
                     }
+                    if (message.inTotoSlsaProvenanceV1 != null && message.hasOwnProperty("inTotoSlsaProvenanceV1")) {
+                        var error = $root.grafeas.v1.InTotoSlsaProvenanceV1.verify(message.inTotoSlsaProvenanceV1);
+                        if (error)
+                            return "inTotoSlsaProvenanceV1." + error;
+                    }
                     return null;
                 };
     
@@ -3073,6 +3095,11 @@
                             throw TypeError(".grafeas.v1.BuildOccurrence.intotoStatement: object expected");
                         message.intotoStatement = $root.grafeas.v1.InTotoStatement.fromObject(object.intotoStatement);
                     }
+                    if (object.inTotoSlsaProvenanceV1 != null) {
+                        if (typeof object.inTotoSlsaProvenanceV1 !== "object")
+                            throw TypeError(".grafeas.v1.BuildOccurrence.inTotoSlsaProvenanceV1: object expected");
+                        message.inTotoSlsaProvenanceV1 = $root.grafeas.v1.InTotoSlsaProvenanceV1.fromObject(object.inTotoSlsaProvenanceV1);
+                    }
                     return message;
                 };
     
@@ -3094,6 +3121,7 @@
                         object.provenanceBytes = "";
                         object.intotoProvenance = null;
                         object.intotoStatement = null;
+                        object.inTotoSlsaProvenanceV1 = null;
                     }
                     if (message.provenance != null && message.hasOwnProperty("provenance"))
                         object.provenance = $root.grafeas.v1.BuildProvenance.toObject(message.provenance, options);
@@ -3103,6 +3131,8 @@
                         object.intotoProvenance = $root.grafeas.v1.InTotoProvenance.toObject(message.intotoProvenance, options);
                     if (message.intotoStatement != null && message.hasOwnProperty("intotoStatement"))
                         object.intotoStatement = $root.grafeas.v1.InTotoStatement.toObject(message.intotoStatement, options);
+                    if (message.inTotoSlsaProvenanceV1 != null && message.hasOwnProperty("inTotoSlsaProvenanceV1"))
+                        object.inTotoSlsaProvenanceV1 = $root.grafeas.v1.InTotoSlsaProvenanceV1.toObject(message.inTotoSlsaProvenanceV1, options);
                     return object;
                 };
     
@@ -5208,6 +5238,2126 @@
                 };
     
                 return Subject;
+            })();
+    
+            v1.InTotoSlsaProvenanceV1 = (function() {
+    
+                /**
+                 * Properties of an InTotoSlsaProvenanceV1.
+                 * @memberof grafeas.v1
+                 * @interface IInTotoSlsaProvenanceV1
+                 * @property {string|null} [type] InTotoSlsaProvenanceV1 type
+                 * @property {Array.<grafeas.v1.ISubject>|null} [subject] InTotoSlsaProvenanceV1 subject
+                 * @property {string|null} [predicateType] InTotoSlsaProvenanceV1 predicateType
+                 * @property {grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1|null} [predicate] InTotoSlsaProvenanceV1 predicate
+                 */
+    
+                /**
+                 * Constructs a new InTotoSlsaProvenanceV1.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents an InTotoSlsaProvenanceV1.
+                 * @implements IInTotoSlsaProvenanceV1
+                 * @constructor
+                 * @param {grafeas.v1.IInTotoSlsaProvenanceV1=} [properties] Properties to set
+                 */
+                function InTotoSlsaProvenanceV1(properties) {
+                    this.subject = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * InTotoSlsaProvenanceV1 type.
+                 * @member {string} type
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @instance
+                 */
+                InTotoSlsaProvenanceV1.prototype.type = "";
+    
+                /**
+                 * InTotoSlsaProvenanceV1 subject.
+                 * @member {Array.<grafeas.v1.ISubject>} subject
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @instance
+                 */
+                InTotoSlsaProvenanceV1.prototype.subject = $util.emptyArray;
+    
+                /**
+                 * InTotoSlsaProvenanceV1 predicateType.
+                 * @member {string} predicateType
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @instance
+                 */
+                InTotoSlsaProvenanceV1.prototype.predicateType = "";
+    
+                /**
+                 * InTotoSlsaProvenanceV1 predicate.
+                 * @member {grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1|null|undefined} predicate
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @instance
+                 */
+                InTotoSlsaProvenanceV1.prototype.predicate = null;
+    
+                /**
+                 * Creates a new InTotoSlsaProvenanceV1 instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @static
+                 * @param {grafeas.v1.IInTotoSlsaProvenanceV1=} [properties] Properties to set
+                 * @returns {grafeas.v1.InTotoSlsaProvenanceV1} InTotoSlsaProvenanceV1 instance
+                 */
+                InTotoSlsaProvenanceV1.create = function create(properties) {
+                    return new InTotoSlsaProvenanceV1(properties);
+                };
+    
+                /**
+                 * Encodes the specified InTotoSlsaProvenanceV1 message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @static
+                 * @param {grafeas.v1.IInTotoSlsaProvenanceV1} message InTotoSlsaProvenanceV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                InTotoSlsaProvenanceV1.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.subject != null && message.subject.length)
+                        for (var i = 0; i < message.subject.length; ++i)
+                            $root.grafeas.v1.Subject.encode(message.subject[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.predicateType != null && Object.hasOwnProperty.call(message, "predicateType"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.predicateType);
+                    if (message.predicate != null && Object.hasOwnProperty.call(message, "predicate"))
+                        $root.grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1.encode(message.predicate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified InTotoSlsaProvenanceV1 message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @static
+                 * @param {grafeas.v1.IInTotoSlsaProvenanceV1} message InTotoSlsaProvenanceV1 message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                InTotoSlsaProvenanceV1.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an InTotoSlsaProvenanceV1 message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.InTotoSlsaProvenanceV1} InTotoSlsaProvenanceV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                InTotoSlsaProvenanceV1.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.InTotoSlsaProvenanceV1();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.subject && message.subject.length))
+                                    message.subject = [];
+                                message.subject.push($root.grafeas.v1.Subject.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 3: {
+                                message.predicateType = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.predicate = $root.grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an InTotoSlsaProvenanceV1 message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.InTotoSlsaProvenanceV1} InTotoSlsaProvenanceV1
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                InTotoSlsaProvenanceV1.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an InTotoSlsaProvenanceV1 message.
+                 * @function verify
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                InTotoSlsaProvenanceV1.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.subject != null && message.hasOwnProperty("subject")) {
+                        if (!Array.isArray(message.subject))
+                            return "subject: array expected";
+                        for (var i = 0; i < message.subject.length; ++i) {
+                            var error = $root.grafeas.v1.Subject.verify(message.subject[i]);
+                            if (error)
+                                return "subject." + error;
+                        }
+                    }
+                    if (message.predicateType != null && message.hasOwnProperty("predicateType"))
+                        if (!$util.isString(message.predicateType))
+                            return "predicateType: string expected";
+                    if (message.predicate != null && message.hasOwnProperty("predicate")) {
+                        var error = $root.grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1.verify(message.predicate);
+                        if (error)
+                            return "predicate." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an InTotoSlsaProvenanceV1 message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.InTotoSlsaProvenanceV1} InTotoSlsaProvenanceV1
+                 */
+                InTotoSlsaProvenanceV1.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.InTotoSlsaProvenanceV1)
+                        return object;
+                    var message = new $root.grafeas.v1.InTotoSlsaProvenanceV1();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.subject) {
+                        if (!Array.isArray(object.subject))
+                            throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.subject: array expected");
+                        message.subject = [];
+                        for (var i = 0; i < object.subject.length; ++i) {
+                            if (typeof object.subject[i] !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.subject: object expected");
+                            message.subject[i] = $root.grafeas.v1.Subject.fromObject(object.subject[i]);
+                        }
+                    }
+                    if (object.predicateType != null)
+                        message.predicateType = String(object.predicateType);
+                    if (object.predicate != null) {
+                        if (typeof object.predicate !== "object")
+                            throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.predicate: object expected");
+                        message.predicate = $root.grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1.fromObject(object.predicate);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an InTotoSlsaProvenanceV1 message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @static
+                 * @param {grafeas.v1.InTotoSlsaProvenanceV1} message InTotoSlsaProvenanceV1
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                InTotoSlsaProvenanceV1.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.subject = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.predicateType = "";
+                        object.predicate = null;
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.subject && message.subject.length) {
+                        object.subject = [];
+                        for (var j = 0; j < message.subject.length; ++j)
+                            object.subject[j] = $root.grafeas.v1.Subject.toObject(message.subject[j], options);
+                    }
+                    if (message.predicateType != null && message.hasOwnProperty("predicateType"))
+                        object.predicateType = message.predicateType;
+                    if (message.predicate != null && message.hasOwnProperty("predicate"))
+                        object.predicate = $root.grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1.toObject(message.predicate, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this InTotoSlsaProvenanceV1 to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                InTotoSlsaProvenanceV1.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for InTotoSlsaProvenanceV1
+                 * @function getTypeUrl
+                 * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                InTotoSlsaProvenanceV1.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/grafeas.v1.InTotoSlsaProvenanceV1";
+                };
+    
+                InTotoSlsaProvenanceV1.SlsaProvenanceV1 = (function() {
+    
+                    /**
+                     * Properties of a SlsaProvenanceV1.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @interface ISlsaProvenanceV1
+                     * @property {grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition|null} [buildDefinition] SlsaProvenanceV1 buildDefinition
+                     * @property {grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails|null} [runDetails] SlsaProvenanceV1 runDetails
+                     */
+    
+                    /**
+                     * Constructs a new SlsaProvenanceV1.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @classdesc Represents a SlsaProvenanceV1.
+                     * @implements ISlsaProvenanceV1
+                     * @constructor
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1=} [properties] Properties to set
+                     */
+                    function SlsaProvenanceV1(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SlsaProvenanceV1 buildDefinition.
+                     * @member {grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition|null|undefined} buildDefinition
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @instance
+                     */
+                    SlsaProvenanceV1.prototype.buildDefinition = null;
+    
+                    /**
+                     * SlsaProvenanceV1 runDetails.
+                     * @member {grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails|null|undefined} runDetails
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @instance
+                     */
+                    SlsaProvenanceV1.prototype.runDetails = null;
+    
+                    /**
+                     * Creates a new SlsaProvenanceV1 instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1=} [properties] Properties to set
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1} SlsaProvenanceV1 instance
+                     */
+                    SlsaProvenanceV1.create = function create(properties) {
+                        return new SlsaProvenanceV1(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaProvenanceV1 message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1} message SlsaProvenanceV1 message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaProvenanceV1.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.buildDefinition != null && Object.hasOwnProperty.call(message, "buildDefinition"))
+                            $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.encode(message.buildDefinition, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.runDetails != null && Object.hasOwnProperty.call(message, "runDetails"))
+                            $root.grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.encode(message.runDetails, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SlsaProvenanceV1 message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.ISlsaProvenanceV1} message SlsaProvenanceV1 message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SlsaProvenanceV1.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SlsaProvenanceV1 message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1} SlsaProvenanceV1
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaProvenanceV1.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.buildDefinition = $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.runDetails = $root.grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SlsaProvenanceV1 message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1} SlsaProvenanceV1
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SlsaProvenanceV1.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SlsaProvenanceV1 message.
+                     * @function verify
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SlsaProvenanceV1.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.buildDefinition != null && message.hasOwnProperty("buildDefinition")) {
+                            var error = $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.verify(message.buildDefinition);
+                            if (error)
+                                return "buildDefinition." + error;
+                        }
+                        if (message.runDetails != null && message.hasOwnProperty("runDetails")) {
+                            var error = $root.grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.verify(message.runDetails);
+                            if (error)
+                                return "runDetails." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SlsaProvenanceV1 message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1} SlsaProvenanceV1
+                     */
+                    SlsaProvenanceV1.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1)
+                            return object;
+                        var message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1();
+                        if (object.buildDefinition != null) {
+                            if (typeof object.buildDefinition !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1.buildDefinition: object expected");
+                            message.buildDefinition = $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.fromObject(object.buildDefinition);
+                        }
+                        if (object.runDetails != null) {
+                            if (typeof object.runDetails !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1.runDetails: object expected");
+                            message.runDetails = $root.grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.fromObject(object.runDetails);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SlsaProvenanceV1 message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1} message SlsaProvenanceV1
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SlsaProvenanceV1.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.buildDefinition = null;
+                            object.runDetails = null;
+                        }
+                        if (message.buildDefinition != null && message.hasOwnProperty("buildDefinition"))
+                            object.buildDefinition = $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.toObject(message.buildDefinition, options);
+                        if (message.runDetails != null && message.hasOwnProperty("runDetails"))
+                            object.runDetails = $root.grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.toObject(message.runDetails, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SlsaProvenanceV1 to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SlsaProvenanceV1.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SlsaProvenanceV1
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SlsaProvenanceV1.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1";
+                    };
+    
+                    return SlsaProvenanceV1;
+                })();
+    
+                InTotoSlsaProvenanceV1.BuildDefinition = (function() {
+    
+                    /**
+                     * Properties of a BuildDefinition.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @interface IBuildDefinition
+                     * @property {string|null} [buildType] BuildDefinition buildType
+                     * @property {google.protobuf.IStruct|null} [externalParameters] BuildDefinition externalParameters
+                     * @property {google.protobuf.IStruct|null} [internalParameters] BuildDefinition internalParameters
+                     * @property {Array.<grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor>|null} [resolvedDependencies] BuildDefinition resolvedDependencies
+                     */
+    
+                    /**
+                     * Constructs a new BuildDefinition.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @classdesc Represents a BuildDefinition.
+                     * @implements IBuildDefinition
+                     * @constructor
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition=} [properties] Properties to set
+                     */
+                    function BuildDefinition(properties) {
+                        this.resolvedDependencies = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * BuildDefinition buildType.
+                     * @member {string} buildType
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @instance
+                     */
+                    BuildDefinition.prototype.buildType = "";
+    
+                    /**
+                     * BuildDefinition externalParameters.
+                     * @member {google.protobuf.IStruct|null|undefined} externalParameters
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @instance
+                     */
+                    BuildDefinition.prototype.externalParameters = null;
+    
+                    /**
+                     * BuildDefinition internalParameters.
+                     * @member {google.protobuf.IStruct|null|undefined} internalParameters
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @instance
+                     */
+                    BuildDefinition.prototype.internalParameters = null;
+    
+                    /**
+                     * BuildDefinition resolvedDependencies.
+                     * @member {Array.<grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor>} resolvedDependencies
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @instance
+                     */
+                    BuildDefinition.prototype.resolvedDependencies = $util.emptyArray;
+    
+                    /**
+                     * Creates a new BuildDefinition instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition=} [properties] Properties to set
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition} BuildDefinition instance
+                     */
+                    BuildDefinition.create = function create(properties) {
+                        return new BuildDefinition(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified BuildDefinition message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition} message BuildDefinition message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BuildDefinition.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.buildType != null && Object.hasOwnProperty.call(message, "buildType"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.buildType);
+                        if (message.externalParameters != null && Object.hasOwnProperty.call(message, "externalParameters"))
+                            $root.google.protobuf.Struct.encode(message.externalParameters, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.internalParameters != null && Object.hasOwnProperty.call(message, "internalParameters"))
+                            $root.google.protobuf.Struct.encode(message.internalParameters, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.resolvedDependencies != null && message.resolvedDependencies.length)
+                            for (var i = 0; i < message.resolvedDependencies.length; ++i)
+                                $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.encode(message.resolvedDependencies[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified BuildDefinition message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IBuildDefinition} message BuildDefinition message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BuildDefinition.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a BuildDefinition message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition} BuildDefinition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BuildDefinition.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.buildType = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.externalParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.internalParameters = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.resolvedDependencies && message.resolvedDependencies.length))
+                                        message.resolvedDependencies = [];
+                                    message.resolvedDependencies.push($root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a BuildDefinition message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition} BuildDefinition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BuildDefinition.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a BuildDefinition message.
+                     * @function verify
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    BuildDefinition.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.buildType != null && message.hasOwnProperty("buildType"))
+                            if (!$util.isString(message.buildType))
+                                return "buildType: string expected";
+                        if (message.externalParameters != null && message.hasOwnProperty("externalParameters")) {
+                            var error = $root.google.protobuf.Struct.verify(message.externalParameters);
+                            if (error)
+                                return "externalParameters." + error;
+                        }
+                        if (message.internalParameters != null && message.hasOwnProperty("internalParameters")) {
+                            var error = $root.google.protobuf.Struct.verify(message.internalParameters);
+                            if (error)
+                                return "internalParameters." + error;
+                        }
+                        if (message.resolvedDependencies != null && message.hasOwnProperty("resolvedDependencies")) {
+                            if (!Array.isArray(message.resolvedDependencies))
+                                return "resolvedDependencies: array expected";
+                            for (var i = 0; i < message.resolvedDependencies.length; ++i) {
+                                var error = $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.verify(message.resolvedDependencies[i]);
+                                if (error)
+                                    return "resolvedDependencies." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a BuildDefinition message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition} BuildDefinition
+                     */
+                    BuildDefinition.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition)
+                            return object;
+                        var message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition();
+                        if (object.buildType != null)
+                            message.buildType = String(object.buildType);
+                        if (object.externalParameters != null) {
+                            if (typeof object.externalParameters !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.externalParameters: object expected");
+                            message.externalParameters = $root.google.protobuf.Struct.fromObject(object.externalParameters);
+                        }
+                        if (object.internalParameters != null) {
+                            if (typeof object.internalParameters !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.internalParameters: object expected");
+                            message.internalParameters = $root.google.protobuf.Struct.fromObject(object.internalParameters);
+                        }
+                        if (object.resolvedDependencies) {
+                            if (!Array.isArray(object.resolvedDependencies))
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.resolvedDependencies: array expected");
+                            message.resolvedDependencies = [];
+                            for (var i = 0; i < object.resolvedDependencies.length; ++i) {
+                                if (typeof object.resolvedDependencies[i] !== "object")
+                                    throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition.resolvedDependencies: object expected");
+                                message.resolvedDependencies[i] = $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.fromObject(object.resolvedDependencies[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a BuildDefinition message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition} message BuildDefinition
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    BuildDefinition.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.resolvedDependencies = [];
+                        if (options.defaults) {
+                            object.buildType = "";
+                            object.externalParameters = null;
+                            object.internalParameters = null;
+                        }
+                        if (message.buildType != null && message.hasOwnProperty("buildType"))
+                            object.buildType = message.buildType;
+                        if (message.externalParameters != null && message.hasOwnProperty("externalParameters"))
+                            object.externalParameters = $root.google.protobuf.Struct.toObject(message.externalParameters, options);
+                        if (message.internalParameters != null && message.hasOwnProperty("internalParameters"))
+                            object.internalParameters = $root.google.protobuf.Struct.toObject(message.internalParameters, options);
+                        if (message.resolvedDependencies && message.resolvedDependencies.length) {
+                            object.resolvedDependencies = [];
+                            for (var j = 0; j < message.resolvedDependencies.length; ++j)
+                                object.resolvedDependencies[j] = $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.toObject(message.resolvedDependencies[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this BuildDefinition to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    BuildDefinition.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for BuildDefinition
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BuildDefinition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition";
+                    };
+    
+                    return BuildDefinition;
+                })();
+    
+                InTotoSlsaProvenanceV1.ResourceDescriptor = (function() {
+    
+                    /**
+                     * Properties of a ResourceDescriptor.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @interface IResourceDescriptor
+                     * @property {string|null} [name] ResourceDescriptor name
+                     * @property {string|null} [uri] ResourceDescriptor uri
+                     * @property {Object.<string,string>|null} [digest] ResourceDescriptor digest
+                     * @property {Uint8Array|null} [content] ResourceDescriptor content
+                     * @property {string|null} [downloadLocation] ResourceDescriptor downloadLocation
+                     * @property {string|null} [mediaType] ResourceDescriptor mediaType
+                     * @property {Object.<string,google.protobuf.IValue>|null} [annotations] ResourceDescriptor annotations
+                     */
+    
+                    /**
+                     * Constructs a new ResourceDescriptor.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @classdesc Represents a ResourceDescriptor.
+                     * @implements IResourceDescriptor
+                     * @constructor
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor=} [properties] Properties to set
+                     */
+                    function ResourceDescriptor(properties) {
+                        this.digest = {};
+                        this.annotations = {};
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ResourceDescriptor name.
+                     * @member {string} name
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @instance
+                     */
+                    ResourceDescriptor.prototype.name = "";
+    
+                    /**
+                     * ResourceDescriptor uri.
+                     * @member {string} uri
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @instance
+                     */
+                    ResourceDescriptor.prototype.uri = "";
+    
+                    /**
+                     * ResourceDescriptor digest.
+                     * @member {Object.<string,string>} digest
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @instance
+                     */
+                    ResourceDescriptor.prototype.digest = $util.emptyObject;
+    
+                    /**
+                     * ResourceDescriptor content.
+                     * @member {Uint8Array} content
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @instance
+                     */
+                    ResourceDescriptor.prototype.content = $util.newBuffer([]);
+    
+                    /**
+                     * ResourceDescriptor downloadLocation.
+                     * @member {string} downloadLocation
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @instance
+                     */
+                    ResourceDescriptor.prototype.downloadLocation = "";
+    
+                    /**
+                     * ResourceDescriptor mediaType.
+                     * @member {string} mediaType
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @instance
+                     */
+                    ResourceDescriptor.prototype.mediaType = "";
+    
+                    /**
+                     * ResourceDescriptor annotations.
+                     * @member {Object.<string,google.protobuf.IValue>} annotations
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @instance
+                     */
+                    ResourceDescriptor.prototype.annotations = $util.emptyObject;
+    
+                    /**
+                     * Creates a new ResourceDescriptor instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor=} [properties] Properties to set
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor} ResourceDescriptor instance
+                     */
+                    ResourceDescriptor.create = function create(properties) {
+                        return new ResourceDescriptor(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ResourceDescriptor message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ResourceDescriptor.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                        if (message.digest != null && Object.hasOwnProperty.call(message, "digest"))
+                            for (var keys = Object.keys(message.digest), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.digest[keys[i]]).ldelim();
+                        if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.content);
+                        if (message.downloadLocation != null && Object.hasOwnProperty.call(message, "downloadLocation"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.downloadLocation);
+                        if (message.mediaType != null && Object.hasOwnProperty.call(message, "mediaType"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.mediaType);
+                        if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                            for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i) {
+                                writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                $root.google.protobuf.Value.encode(message.annotations[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                            }
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor} ResourceDescriptor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ResourceDescriptor.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.uri = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (message.digest === $util.emptyObject)
+                                        message.digest = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.digest[key] = value;
+                                    break;
+                                }
+                            case 4: {
+                                    message.content = reader.bytes();
+                                    break;
+                                }
+                            case 5: {
+                                    message.downloadLocation = reader.string();
+                                    break;
+                                }
+                            case 6: {
+                                    message.mediaType = reader.string();
+                                    break;
+                                }
+                            case 7: {
+                                    if (message.annotations === $util.emptyObject)
+                                        message.annotations = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.annotations[key] = value;
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor} ResourceDescriptor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ResourceDescriptor message.
+                     * @function verify
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ResourceDescriptor.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.uri != null && message.hasOwnProperty("uri"))
+                            if (!$util.isString(message.uri))
+                                return "uri: string expected";
+                        if (message.digest != null && message.hasOwnProperty("digest")) {
+                            if (!$util.isObject(message.digest))
+                                return "digest: object expected";
+                            var key = Object.keys(message.digest);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.digest[key[i]]))
+                                    return "digest: string{k:string} expected";
+                        }
+                        if (message.content != null && message.hasOwnProperty("content"))
+                            if (!(message.content && typeof message.content.length === "number" || $util.isString(message.content)))
+                                return "content: buffer expected";
+                        if (message.downloadLocation != null && message.hasOwnProperty("downloadLocation"))
+                            if (!$util.isString(message.downloadLocation))
+                                return "downloadLocation: string expected";
+                        if (message.mediaType != null && message.hasOwnProperty("mediaType"))
+                            if (!$util.isString(message.mediaType))
+                                return "mediaType: string expected";
+                        if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                            if (!$util.isObject(message.annotations))
+                                return "annotations: object expected";
+                            var key = Object.keys(message.annotations);
+                            for (var i = 0; i < key.length; ++i) {
+                                var error = $root.google.protobuf.Value.verify(message.annotations[key[i]]);
+                                if (error)
+                                    return "annotations." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor} ResourceDescriptor
+                     */
+                    ResourceDescriptor.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor)
+                            return object;
+                        var message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.uri != null)
+                            message.uri = String(object.uri);
+                        if (object.digest) {
+                            if (typeof object.digest !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.digest: object expected");
+                            message.digest = {};
+                            for (var keys = Object.keys(object.digest), i = 0; i < keys.length; ++i)
+                                message.digest[keys[i]] = String(object.digest[keys[i]]);
+                        }
+                        if (object.content != null)
+                            if (typeof object.content === "string")
+                                $util.base64.decode(object.content, message.content = $util.newBuffer($util.base64.length(object.content)), 0);
+                            else if (object.content.length >= 0)
+                                message.content = object.content;
+                        if (object.downloadLocation != null)
+                            message.downloadLocation = String(object.downloadLocation);
+                        if (object.mediaType != null)
+                            message.mediaType = String(object.mediaType);
+                        if (object.annotations) {
+                            if (typeof object.annotations !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.annotations: object expected");
+                            message.annotations = {};
+                            for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i) {
+                                if (typeof object.annotations[keys[i]] !== "object")
+                                    throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.annotations: object expected");
+                                message.annotations[keys[i]] = $root.google.protobuf.Value.fromObject(object.annotations[keys[i]]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor} message ResourceDescriptor
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ResourceDescriptor.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.objects || options.defaults) {
+                            object.digest = {};
+                            object.annotations = {};
+                        }
+                        if (options.defaults) {
+                            object.name = "";
+                            object.uri = "";
+                            if (options.bytes === String)
+                                object.content = "";
+                            else {
+                                object.content = [];
+                                if (options.bytes !== Array)
+                                    object.content = $util.newBuffer(object.content);
+                            }
+                            object.downloadLocation = "";
+                            object.mediaType = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.uri != null && message.hasOwnProperty("uri"))
+                            object.uri = message.uri;
+                        var keys2;
+                        if (message.digest && (keys2 = Object.keys(message.digest)).length) {
+                            object.digest = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.digest[keys2[j]] = message.digest[keys2[j]];
+                        }
+                        if (message.content != null && message.hasOwnProperty("content"))
+                            object.content = options.bytes === String ? $util.base64.encode(message.content, 0, message.content.length) : options.bytes === Array ? Array.prototype.slice.call(message.content) : message.content;
+                        if (message.downloadLocation != null && message.hasOwnProperty("downloadLocation"))
+                            object.downloadLocation = message.downloadLocation;
+                        if (message.mediaType != null && message.hasOwnProperty("mediaType"))
+                            object.mediaType = message.mediaType;
+                        if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                            object.annotations = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.annotations[keys2[j]] = $root.google.protobuf.Value.toObject(message.annotations[keys2[j]], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ResourceDescriptor to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ResourceDescriptor.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ResourceDescriptor
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor";
+                    };
+    
+                    return ResourceDescriptor;
+                })();
+    
+                InTotoSlsaProvenanceV1.RunDetails = (function() {
+    
+                    /**
+                     * Properties of a RunDetails.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @interface IRunDetails
+                     * @property {grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder|null} [builder] RunDetails builder
+                     * @property {grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata|null} [metadata] RunDetails metadata
+                     * @property {Array.<grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor>|null} [byproducts] RunDetails byproducts
+                     */
+    
+                    /**
+                     * Constructs a new RunDetails.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @classdesc Represents a RunDetails.
+                     * @implements IRunDetails
+                     * @constructor
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails=} [properties] Properties to set
+                     */
+                    function RunDetails(properties) {
+                        this.byproducts = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * RunDetails builder.
+                     * @member {grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder|null|undefined} builder
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @instance
+                     */
+                    RunDetails.prototype.builder = null;
+    
+                    /**
+                     * RunDetails metadata.
+                     * @member {grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata|null|undefined} metadata
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @instance
+                     */
+                    RunDetails.prototype.metadata = null;
+    
+                    /**
+                     * RunDetails byproducts.
+                     * @member {Array.<grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor>} byproducts
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @instance
+                     */
+                    RunDetails.prototype.byproducts = $util.emptyArray;
+    
+                    /**
+                     * Creates a new RunDetails instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails=} [properties] Properties to set
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.RunDetails} RunDetails instance
+                     */
+                    RunDetails.create = function create(properties) {
+                        return new RunDetails(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified RunDetails message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails} message RunDetails message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RunDetails.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.builder != null && Object.hasOwnProperty.call(message, "builder"))
+                            $root.grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.encode(message.builder, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                            $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata.encode(message.metadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.byproducts != null && message.byproducts.length)
+                            for (var i = 0; i < message.byproducts.length; ++i)
+                                $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.encode(message.byproducts[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified RunDetails message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IRunDetails} message RunDetails message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RunDetails.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a RunDetails message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.RunDetails} RunDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RunDetails.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.RunDetails();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.builder = $root.grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.metadata = $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.byproducts && message.byproducts.length))
+                                        message.byproducts = [];
+                                    message.byproducts.push($root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a RunDetails message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.RunDetails} RunDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RunDetails.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a RunDetails message.
+                     * @function verify
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    RunDetails.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.builder != null && message.hasOwnProperty("builder")) {
+                            var error = $root.grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.verify(message.builder);
+                            if (error)
+                                return "builder." + error;
+                        }
+                        if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                            var error = $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata.verify(message.metadata);
+                            if (error)
+                                return "metadata." + error;
+                        }
+                        if (message.byproducts != null && message.hasOwnProperty("byproducts")) {
+                            if (!Array.isArray(message.byproducts))
+                                return "byproducts: array expected";
+                            for (var i = 0; i < message.byproducts.length; ++i) {
+                                var error = $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.verify(message.byproducts[i]);
+                                if (error)
+                                    return "byproducts." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a RunDetails message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.RunDetails} RunDetails
+                     */
+                    RunDetails.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.InTotoSlsaProvenanceV1.RunDetails)
+                            return object;
+                        var message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.RunDetails();
+                        if (object.builder != null) {
+                            if (typeof object.builder !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.builder: object expected");
+                            message.builder = $root.grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.fromObject(object.builder);
+                        }
+                        if (object.metadata != null) {
+                            if (typeof object.metadata !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.metadata: object expected");
+                            message.metadata = $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata.fromObject(object.metadata);
+                        }
+                        if (object.byproducts) {
+                            if (!Array.isArray(object.byproducts))
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.byproducts: array expected");
+                            message.byproducts = [];
+                            for (var i = 0; i < object.byproducts.length; ++i) {
+                                if (typeof object.byproducts[i] !== "object")
+                                    throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.RunDetails.byproducts: object expected");
+                                message.byproducts[i] = $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.fromObject(object.byproducts[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a RunDetails message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.RunDetails} message RunDetails
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    RunDetails.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.byproducts = [];
+                        if (options.defaults) {
+                            object.builder = null;
+                            object.metadata = null;
+                        }
+                        if (message.builder != null && message.hasOwnProperty("builder"))
+                            object.builder = $root.grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.toObject(message.builder, options);
+                        if (message.metadata != null && message.hasOwnProperty("metadata"))
+                            object.metadata = $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata.toObject(message.metadata, options);
+                        if (message.byproducts && message.byproducts.length) {
+                            object.byproducts = [];
+                            for (var j = 0; j < message.byproducts.length; ++j)
+                                object.byproducts[j] = $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.toObject(message.byproducts[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this RunDetails to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    RunDetails.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for RunDetails
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.RunDetails
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    RunDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.InTotoSlsaProvenanceV1.RunDetails";
+                    };
+    
+                    return RunDetails;
+                })();
+    
+                InTotoSlsaProvenanceV1.ProvenanceBuilder = (function() {
+    
+                    /**
+                     * Properties of a ProvenanceBuilder.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @interface IProvenanceBuilder
+                     * @property {string|null} [id] ProvenanceBuilder id
+                     * @property {Object.<string,string>|null} [version] ProvenanceBuilder version
+                     * @property {Array.<grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor>|null} [builderDependencies] ProvenanceBuilder builderDependencies
+                     */
+    
+                    /**
+                     * Constructs a new ProvenanceBuilder.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @classdesc Represents a ProvenanceBuilder.
+                     * @implements IProvenanceBuilder
+                     * @constructor
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder=} [properties] Properties to set
+                     */
+                    function ProvenanceBuilder(properties) {
+                        this.version = {};
+                        this.builderDependencies = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ProvenanceBuilder id.
+                     * @member {string} id
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @instance
+                     */
+                    ProvenanceBuilder.prototype.id = "";
+    
+                    /**
+                     * ProvenanceBuilder version.
+                     * @member {Object.<string,string>} version
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @instance
+                     */
+                    ProvenanceBuilder.prototype.version = $util.emptyObject;
+    
+                    /**
+                     * ProvenanceBuilder builderDependencies.
+                     * @member {Array.<grafeas.v1.InTotoSlsaProvenanceV1.IResourceDescriptor>} builderDependencies
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @instance
+                     */
+                    ProvenanceBuilder.prototype.builderDependencies = $util.emptyArray;
+    
+                    /**
+                     * Creates a new ProvenanceBuilder instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder=} [properties] Properties to set
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder} ProvenanceBuilder instance
+                     */
+                    ProvenanceBuilder.create = function create(properties) {
+                        return new ProvenanceBuilder(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ProvenanceBuilder message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder} message ProvenanceBuilder message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ProvenanceBuilder.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                        if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                            for (var keys = Object.keys(message.version), i = 0; i < keys.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.version[keys[i]]).ldelim();
+                        if (message.builderDependencies != null && message.builderDependencies.length)
+                            for (var i = 0; i < message.builderDependencies.length; ++i)
+                                $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.encode(message.builderDependencies[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ProvenanceBuilder message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IProvenanceBuilder} message ProvenanceBuilder message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ProvenanceBuilder.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ProvenanceBuilder message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder} ProvenanceBuilder
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ProvenanceBuilder.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder(), key, value;
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.id = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (message.version === $util.emptyObject)
+                                        message.version = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.version[key] = value;
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.builderDependencies && message.builderDependencies.length))
+                                        message.builderDependencies = [];
+                                    message.builderDependencies.push($root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ProvenanceBuilder message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder} ProvenanceBuilder
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ProvenanceBuilder.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ProvenanceBuilder message.
+                     * @function verify
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ProvenanceBuilder.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            if (!$util.isString(message.id))
+                                return "id: string expected";
+                        if (message.version != null && message.hasOwnProperty("version")) {
+                            if (!$util.isObject(message.version))
+                                return "version: object expected";
+                            var key = Object.keys(message.version);
+                            for (var i = 0; i < key.length; ++i)
+                                if (!$util.isString(message.version[key[i]]))
+                                    return "version: string{k:string} expected";
+                        }
+                        if (message.builderDependencies != null && message.hasOwnProperty("builderDependencies")) {
+                            if (!Array.isArray(message.builderDependencies))
+                                return "builderDependencies: array expected";
+                            for (var i = 0; i < message.builderDependencies.length; ++i) {
+                                var error = $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.verify(message.builderDependencies[i]);
+                                if (error)
+                                    return "builderDependencies." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ProvenanceBuilder message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder} ProvenanceBuilder
+                     */
+                    ProvenanceBuilder.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder)
+                            return object;
+                        var message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder();
+                        if (object.id != null)
+                            message.id = String(object.id);
+                        if (object.version) {
+                            if (typeof object.version !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.version: object expected");
+                            message.version = {};
+                            for (var keys = Object.keys(object.version), i = 0; i < keys.length; ++i)
+                                message.version[keys[i]] = String(object.version[keys[i]]);
+                        }
+                        if (object.builderDependencies) {
+                            if (!Array.isArray(object.builderDependencies))
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.builderDependencies: array expected");
+                            message.builderDependencies = [];
+                            for (var i = 0; i < object.builderDependencies.length; ++i) {
+                                if (typeof object.builderDependencies[i] !== "object")
+                                    throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder.builderDependencies: object expected");
+                                message.builderDependencies[i] = $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.fromObject(object.builderDependencies[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ProvenanceBuilder message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder} message ProvenanceBuilder
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ProvenanceBuilder.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.builderDependencies = [];
+                        if (options.objects || options.defaults)
+                            object.version = {};
+                        if (options.defaults)
+                            object.id = "";
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            object.id = message.id;
+                        var keys2;
+                        if (message.version && (keys2 = Object.keys(message.version)).length) {
+                            object.version = {};
+                            for (var j = 0; j < keys2.length; ++j)
+                                object.version[keys2[j]] = message.version[keys2[j]];
+                        }
+                        if (message.builderDependencies && message.builderDependencies.length) {
+                            object.builderDependencies = [];
+                            for (var j = 0; j < message.builderDependencies.length; ++j)
+                                object.builderDependencies[j] = $root.grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor.toObject(message.builderDependencies[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ProvenanceBuilder to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ProvenanceBuilder.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ProvenanceBuilder
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ProvenanceBuilder.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder";
+                    };
+    
+                    return ProvenanceBuilder;
+                })();
+    
+                InTotoSlsaProvenanceV1.BuildMetadata = (function() {
+    
+                    /**
+                     * Properties of a BuildMetadata.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @interface IBuildMetadata
+                     * @property {string|null} [invocationId] BuildMetadata invocationId
+                     * @property {google.protobuf.ITimestamp|null} [startedOn] BuildMetadata startedOn
+                     * @property {google.protobuf.ITimestamp|null} [finishedOn] BuildMetadata finishedOn
+                     */
+    
+                    /**
+                     * Constructs a new BuildMetadata.
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1
+                     * @classdesc Represents a BuildMetadata.
+                     * @implements IBuildMetadata
+                     * @constructor
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata=} [properties] Properties to set
+                     */
+                    function BuildMetadata(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * BuildMetadata invocationId.
+                     * @member {string} invocationId
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @instance
+                     */
+                    BuildMetadata.prototype.invocationId = "";
+    
+                    /**
+                     * BuildMetadata startedOn.
+                     * @member {google.protobuf.ITimestamp|null|undefined} startedOn
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @instance
+                     */
+                    BuildMetadata.prototype.startedOn = null;
+    
+                    /**
+                     * BuildMetadata finishedOn.
+                     * @member {google.protobuf.ITimestamp|null|undefined} finishedOn
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @instance
+                     */
+                    BuildMetadata.prototype.finishedOn = null;
+    
+                    /**
+                     * Creates a new BuildMetadata instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata=} [properties] Properties to set
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata} BuildMetadata instance
+                     */
+                    BuildMetadata.create = function create(properties) {
+                        return new BuildMetadata(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified BuildMetadata message. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata} message BuildMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BuildMetadata.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.invocationId != null && Object.hasOwnProperty.call(message, "invocationId"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.invocationId);
+                        if (message.startedOn != null && Object.hasOwnProperty.call(message, "startedOn"))
+                            $root.google.protobuf.Timestamp.encode(message.startedOn, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.finishedOn != null && Object.hasOwnProperty.call(message, "finishedOn"))
+                            $root.google.protobuf.Timestamp.encode(message.finishedOn, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified BuildMetadata message, length delimited. Does not implicitly {@link grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.IBuildMetadata} message BuildMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BuildMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a BuildMetadata message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata} BuildMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BuildMetadata.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.invocationId = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.startedOn = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.finishedOn = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a BuildMetadata message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata} BuildMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BuildMetadata.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a BuildMetadata message.
+                     * @function verify
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    BuildMetadata.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.invocationId != null && message.hasOwnProperty("invocationId"))
+                            if (!$util.isString(message.invocationId))
+                                return "invocationId: string expected";
+                        if (message.startedOn != null && message.hasOwnProperty("startedOn")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.startedOn);
+                            if (error)
+                                return "startedOn." + error;
+                        }
+                        if (message.finishedOn != null && message.hasOwnProperty("finishedOn")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.finishedOn);
+                            if (error)
+                                return "finishedOn." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a BuildMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata} BuildMetadata
+                     */
+                    BuildMetadata.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata)
+                            return object;
+                        var message = new $root.grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata();
+                        if (object.invocationId != null)
+                            message.invocationId = String(object.invocationId);
+                        if (object.startedOn != null) {
+                            if (typeof object.startedOn !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata.startedOn: object expected");
+                            message.startedOn = $root.google.protobuf.Timestamp.fromObject(object.startedOn);
+                        }
+                        if (object.finishedOn != null) {
+                            if (typeof object.finishedOn !== "object")
+                                throw TypeError(".grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata.finishedOn: object expected");
+                            message.finishedOn = $root.google.protobuf.Timestamp.fromObject(object.finishedOn);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a BuildMetadata message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @static
+                     * @param {grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata} message BuildMetadata
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    BuildMetadata.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.invocationId = "";
+                            object.startedOn = null;
+                            object.finishedOn = null;
+                        }
+                        if (message.invocationId != null && message.hasOwnProperty("invocationId"))
+                            object.invocationId = message.invocationId;
+                        if (message.startedOn != null && message.hasOwnProperty("startedOn"))
+                            object.startedOn = $root.google.protobuf.Timestamp.toObject(message.startedOn, options);
+                        if (message.finishedOn != null && message.hasOwnProperty("finishedOn"))
+                            object.finishedOn = $root.google.protobuf.Timestamp.toObject(message.finishedOn, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this BuildMetadata to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    BuildMetadata.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for BuildMetadata
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BuildMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata";
+                    };
+    
+                    return BuildMetadata;
+                })();
+    
+                return InTotoSlsaProvenanceV1;
             })();
     
             v1.SlsaProvenance = (function() {
@@ -12765,6 +14915,7 @@
                  * @property {string|null} [remediation] ComplianceNote remediation
                  * @property {grafeas.v1.ComplianceNote.ICisBenchmark|null} [cisBenchmark] ComplianceNote cisBenchmark
                  * @property {Uint8Array|null} [scanInstructions] ComplianceNote scanInstructions
+                 * @property {string|null} [impact] ComplianceNote impact
                  */
     
                 /**
@@ -12839,6 +14990,14 @@
                  */
                 ComplianceNote.prototype.scanInstructions = $util.newBuffer([]);
     
+                /**
+                 * ComplianceNote impact.
+                 * @member {string|null|undefined} impact
+                 * @memberof grafeas.v1.ComplianceNote
+                 * @instance
+                 */
+                ComplianceNote.prototype.impact = null;
+    
                 // OneOf field names bound to virtual getters and setters
                 var $oneOfFields;
     
@@ -12850,6 +15009,17 @@
                  */
                 Object.defineProperty(ComplianceNote.prototype, "complianceType", {
                     get: $util.oneOfGetter($oneOfFields = ["cisBenchmark"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * ComplianceNote potentialImpact.
+                 * @member {"impact"|undefined} potentialImpact
+                 * @memberof grafeas.v1.ComplianceNote
+                 * @instance
+                 */
+                Object.defineProperty(ComplianceNote.prototype, "potentialImpact", {
+                    get: $util.oneOfGetter($oneOfFields = ["impact"]),
                     set: $util.oneOfSetter($oneOfFields)
                 });
     
@@ -12892,6 +15062,8 @@
                         $root.grafeas.v1.ComplianceNote.CisBenchmark.encode(message.cisBenchmark, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                     if (message.scanInstructions != null && Object.hasOwnProperty.call(message, "scanInstructions"))
                         writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.scanInstructions);
+                    if (message.impact != null && Object.hasOwnProperty.call(message, "impact"))
+                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.impact);
                     return writer;
                 };
     
@@ -12954,6 +15126,10 @@
                             }
                         case 7: {
                                 message.scanInstructions = reader.bytes();
+                                break;
+                            }
+                        case 8: {
+                                message.impact = reader.string();
                                 break;
                             }
                         default:
@@ -13024,6 +15200,11 @@
                     if (message.scanInstructions != null && message.hasOwnProperty("scanInstructions"))
                         if (!(message.scanInstructions && typeof message.scanInstructions.length === "number" || $util.isString(message.scanInstructions)))
                             return "scanInstructions: buffer expected";
+                    if (message.impact != null && message.hasOwnProperty("impact")) {
+                        properties.potentialImpact = 1;
+                        if (!$util.isString(message.impact))
+                            return "impact: string expected";
+                    }
                     return null;
                 };
     
@@ -13067,6 +15248,8 @@
                             $util.base64.decode(object.scanInstructions, message.scanInstructions = $util.newBuffer($util.base64.length(object.scanInstructions)), 0);
                         else if (object.scanInstructions.length >= 0)
                             message.scanInstructions = object.scanInstructions;
+                    if (object.impact != null)
+                        message.impact = String(object.impact);
                     return message;
                 };
     
@@ -13118,6 +15301,11 @@
                     }
                     if (message.scanInstructions != null && message.hasOwnProperty("scanInstructions"))
                         object.scanInstructions = options.bytes === String ? $util.base64.encode(message.scanInstructions, 0, message.scanInstructions.length) : options.bytes === Array ? Array.prototype.slice.call(message.scanInstructions) : message.scanInstructions;
+                    if (message.impact != null && message.hasOwnProperty("impact")) {
+                        object.impact = message.impact;
+                        if (options.oneofs)
+                            object.potentialImpact = "impact";
+                    }
                     return object;
                 };
     
@@ -16615,6 +18803,7 @@
                         case 9:
                         case 10:
                         case 11:
+                        case 12:
                             break;
                         }
                     return null;
@@ -16687,6 +18876,10 @@
                     case 11:
                         message.analysisKind = 11;
                         break;
+                    case "SBOM_REFERENCE":
+                    case 12:
+                        message.analysisKind = 12;
+                        break;
                     }
                     return message;
                 };
@@ -16754,6 +18947,7 @@
                  * @property {string|null} [cpe] DiscoveryOccurrence cpe
                  * @property {google.protobuf.ITimestamp|null} [lastScanTime] DiscoveryOccurrence lastScanTime
                  * @property {google.protobuf.ITimestamp|null} [archiveTime] DiscoveryOccurrence archiveTime
+                 * @property {grafeas.v1.DiscoveryOccurrence.ISBOMStatus|null} [sbomStatus] DiscoveryOccurrence sbomStatus
                  */
     
                 /**
@@ -16837,6 +19031,14 @@
                 DiscoveryOccurrence.prototype.archiveTime = null;
     
                 /**
+                 * DiscoveryOccurrence sbomStatus.
+                 * @member {grafeas.v1.DiscoveryOccurrence.ISBOMStatus|null|undefined} sbomStatus
+                 * @memberof grafeas.v1.DiscoveryOccurrence
+                 * @instance
+                 */
+                DiscoveryOccurrence.prototype.sbomStatus = null;
+    
+                /**
                  * Creates a new DiscoveryOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.DiscoveryOccurrence
@@ -16877,6 +19079,8 @@
                     if (message.analysisError != null && message.analysisError.length)
                         for (var i = 0; i < message.analysisError.length; ++i)
                             $root.google.rpc.Status.encode(message.analysisError[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.sbomStatus != null && Object.hasOwnProperty.call(message, "sbomStatus"))
+                        $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.encode(message.sbomStatus, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                     return writer;
                 };
     
@@ -16943,6 +19147,10 @@
                             }
                         case 6: {
                                 message.archiveTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                message.sbomStatus = $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -17033,6 +19241,11 @@
                         var error = $root.google.protobuf.Timestamp.verify(message.archiveTime);
                         if (error)
                             return "archiveTime." + error;
+                    }
+                    if (message.sbomStatus != null && message.hasOwnProperty("sbomStatus")) {
+                        var error = $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.verify(message.sbomStatus);
+                        if (error)
+                            return "sbomStatus." + error;
                     }
                     return null;
                 };
@@ -17137,6 +19350,11 @@
                             throw TypeError(".grafeas.v1.DiscoveryOccurrence.archiveTime: object expected");
                         message.archiveTime = $root.google.protobuf.Timestamp.fromObject(object.archiveTime);
                     }
+                    if (object.sbomStatus != null) {
+                        if (typeof object.sbomStatus !== "object")
+                            throw TypeError(".grafeas.v1.DiscoveryOccurrence.sbomStatus: object expected");
+                        message.sbomStatus = $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.fromObject(object.sbomStatus);
+                    }
                     return message;
                 };
     
@@ -17163,6 +19381,7 @@
                         object.lastScanTime = null;
                         object.archiveTime = null;
                         object.analysisCompleted = null;
+                        object.sbomStatus = null;
                     }
                     if (message.continuousAnalysis != null && message.hasOwnProperty("continuousAnalysis"))
                         object.continuousAnalysis = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis[message.continuousAnalysis] === undefined ? message.continuousAnalysis : $root.grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis[message.continuousAnalysis] : message.continuousAnalysis;
@@ -17183,6 +19402,8 @@
                         for (var j = 0; j < message.analysisError.length; ++j)
                             object.analysisError[j] = $root.google.rpc.Status.toObject(message.analysisError[j], options);
                     }
+                    if (message.sbomStatus != null && message.hasOwnProperty("sbomStatus"))
+                        object.sbomStatus = $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.toObject(message.sbomStatus, options);
                     return object;
                 };
     
@@ -17469,6 +19690,273 @@
                     };
     
                     return AnalysisCompleted;
+                })();
+    
+                DiscoveryOccurrence.SBOMStatus = (function() {
+    
+                    /**
+                     * Properties of a SBOMStatus.
+                     * @memberof grafeas.v1.DiscoveryOccurrence
+                     * @interface ISBOMStatus
+                     * @property {grafeas.v1.DiscoveryOccurrence.SBOMStatus.SBOMState|null} [sbomState] SBOMStatus sbomState
+                     * @property {string|null} [error] SBOMStatus error
+                     */
+    
+                    /**
+                     * Constructs a new SBOMStatus.
+                     * @memberof grafeas.v1.DiscoveryOccurrence
+                     * @classdesc Represents a SBOMStatus.
+                     * @implements ISBOMStatus
+                     * @constructor
+                     * @param {grafeas.v1.DiscoveryOccurrence.ISBOMStatus=} [properties] Properties to set
+                     */
+                    function SBOMStatus(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SBOMStatus sbomState.
+                     * @member {grafeas.v1.DiscoveryOccurrence.SBOMStatus.SBOMState} sbomState
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @instance
+                     */
+                    SBOMStatus.prototype.sbomState = 0;
+    
+                    /**
+                     * SBOMStatus error.
+                     * @member {string} error
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @instance
+                     */
+                    SBOMStatus.prototype.error = "";
+    
+                    /**
+                     * Creates a new SBOMStatus instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.ISBOMStatus=} [properties] Properties to set
+                     * @returns {grafeas.v1.DiscoveryOccurrence.SBOMStatus} SBOMStatus instance
+                     */
+                    SBOMStatus.create = function create(properties) {
+                        return new SBOMStatus(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SBOMStatus message. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.SBOMStatus.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.ISBOMStatus} message SBOMStatus message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SBOMStatus.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.sbomState != null && Object.hasOwnProperty.call(message, "sbomState"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.sbomState);
+                        if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.error);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SBOMStatus message, length delimited. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.SBOMStatus.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.ISBOMStatus} message SBOMStatus message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SBOMStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SBOMStatus message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.DiscoveryOccurrence.SBOMStatus} SBOMStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SBOMStatus.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.sbomState = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.error = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SBOMStatus message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.DiscoveryOccurrence.SBOMStatus} SBOMStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SBOMStatus.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SBOMStatus message.
+                     * @function verify
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SBOMStatus.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.sbomState != null && message.hasOwnProperty("sbomState"))
+                            switch (message.sbomState) {
+                            default:
+                                return "sbomState: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.error != null && message.hasOwnProperty("error"))
+                            if (!$util.isString(message.error))
+                                return "error: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SBOMStatus message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.DiscoveryOccurrence.SBOMStatus} SBOMStatus
+                     */
+                    SBOMStatus.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus)
+                            return object;
+                        var message = new $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus();
+                        switch (object.sbomState) {
+                        default:
+                            if (typeof object.sbomState === "number") {
+                                message.sbomState = object.sbomState;
+                                break;
+                            }
+                            break;
+                        case "SBOM_STATE_UNSPECIFIED":
+                        case 0:
+                            message.sbomState = 0;
+                            break;
+                        case "PENDING":
+                        case 1:
+                            message.sbomState = 1;
+                            break;
+                        case "COMPLETE":
+                        case 2:
+                            message.sbomState = 2;
+                            break;
+                        }
+                        if (object.error != null)
+                            message.error = String(object.error);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SBOMStatus message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.SBOMStatus} message SBOMStatus
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SBOMStatus.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.sbomState = options.enums === String ? "SBOM_STATE_UNSPECIFIED" : 0;
+                            object.error = "";
+                        }
+                        if (message.sbomState != null && message.hasOwnProperty("sbomState"))
+                            object.sbomState = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.SBOMState[message.sbomState] === undefined ? message.sbomState : $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.SBOMState[message.sbomState] : message.sbomState;
+                        if (message.error != null && message.hasOwnProperty("error"))
+                            object.error = message.error;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SBOMStatus to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SBOMStatus.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SBOMStatus
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.DiscoveryOccurrence.SBOMStatus
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SBOMStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.DiscoveryOccurrence.SBOMStatus";
+                    };
+    
+                    /**
+                     * SBOMState enum.
+                     * @name grafeas.v1.DiscoveryOccurrence.SBOMStatus.SBOMState
+                     * @enum {number}
+                     * @property {number} SBOM_STATE_UNSPECIFIED=0 SBOM_STATE_UNSPECIFIED value
+                     * @property {number} PENDING=1 PENDING value
+                     * @property {number} COMPLETE=2 COMPLETE value
+                     */
+                    SBOMStatus.SBOMState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SBOM_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "PENDING"] = 1;
+                        values[valuesById[2] = "COMPLETE"] = 2;
+                        return values;
+                    })();
+    
+                    return SBOMStatus;
                 })();
     
                 return DiscoveryOccurrence;
@@ -18661,6 +21149,7 @@
                  * @property {grafeas.v1.IUpgradeOccurrence|null} [upgrade] Occurrence upgrade
                  * @property {grafeas.v1.IComplianceOccurrence|null} [compliance] Occurrence compliance
                  * @property {grafeas.v1.IDSSEAttestationOccurrence|null} [dsseAttestation] Occurrence dsseAttestation
+                 * @property {grafeas.v1.ISBOMReferenceOccurrence|null} [sbomReference] Occurrence sbomReference
                  * @property {grafeas.v1.IEnvelope|null} [envelope] Occurrence envelope
                  */
     
@@ -18816,6 +21305,14 @@
                 Occurrence.prototype.dsseAttestation = null;
     
                 /**
+                 * Occurrence sbomReference.
+                 * @member {grafeas.v1.ISBOMReferenceOccurrence|null|undefined} sbomReference
+                 * @memberof grafeas.v1.Occurrence
+                 * @instance
+                 */
+                Occurrence.prototype.sbomReference = null;
+    
+                /**
                  * Occurrence envelope.
                  * @member {grafeas.v1.IEnvelope|null|undefined} envelope
                  * @memberof grafeas.v1.Occurrence
@@ -18828,12 +21325,12 @@
     
                 /**
                  * Occurrence details.
-                 * @member {"vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation"|undefined} details
+                 * @member {"vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation"|"sbomReference"|undefined} details
                  * @memberof grafeas.v1.Occurrence
                  * @instance
                  */
                 Object.defineProperty(Occurrence.prototype, "details", {
-                    get: $util.oneOfGetter($oneOfFields = ["vulnerability", "build", "image", "package", "deployment", "discovery", "attestation", "upgrade", "compliance", "dsseAttestation"]),
+                    get: $util.oneOfGetter($oneOfFields = ["vulnerability", "build", "image", "package", "deployment", "discovery", "attestation", "upgrade", "compliance", "dsseAttestation", "sbomReference"]),
                     set: $util.oneOfSetter($oneOfFields)
                 });
     
@@ -18897,6 +21394,8 @@
                         $root.grafeas.v1.DSSEAttestationOccurrence.encode(message.dsseAttestation, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                     if (message.envelope != null && Object.hasOwnProperty.call(message, "envelope"))
                         $root.grafeas.v1.Envelope.encode(message.envelope, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                    if (message.sbomReference != null && Object.hasOwnProperty.call(message, "sbomReference"))
+                        $root.grafeas.v1.SBOMReferenceOccurrence.encode(message.sbomReference, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                     return writer;
                 };
     
@@ -18999,6 +21498,10 @@
                                 message.dsseAttestation = $root.grafeas.v1.DSSEAttestationOccurrence.decode(reader, reader.uint32());
                                 break;
                             }
+                        case 19: {
+                                message.sbomReference = $root.grafeas.v1.SBOMReferenceOccurrence.decode(reader, reader.uint32());
+                                break;
+                            }
                         case 18: {
                                 message.envelope = $root.grafeas.v1.Envelope.decode(reader, reader.uint32());
                                 break;
@@ -19064,6 +21567,7 @@
                         case 9:
                         case 10:
                         case 11:
+                        case 12:
                             break;
                         }
                     if (message.remediation != null && message.hasOwnProperty("remediation"))
@@ -19177,6 +21681,16 @@
                                 return "dsseAttestation." + error;
                         }
                     }
+                    if (message.sbomReference != null && message.hasOwnProperty("sbomReference")) {
+                        if (properties.details === 1)
+                            return "details: multiple values";
+                        properties.details = 1;
+                        {
+                            var error = $root.grafeas.v1.SBOMReferenceOccurrence.verify(message.sbomReference);
+                            if (error)
+                                return "sbomReference." + error;
+                        }
+                    }
                     if (message.envelope != null && message.hasOwnProperty("envelope")) {
                         var error = $root.grafeas.v1.Envelope.verify(message.envelope);
                         if (error)
@@ -19258,6 +21772,10 @@
                     case 11:
                         message.kind = 11;
                         break;
+                    case "SBOM_REFERENCE":
+                    case 12:
+                        message.kind = 12;
+                        break;
                     }
                     if (object.remediation != null)
                         message.remediation = String(object.remediation);
@@ -19320,6 +21838,11 @@
                         if (typeof object.dsseAttestation !== "object")
                             throw TypeError(".grafeas.v1.Occurrence.dsseAttestation: object expected");
                         message.dsseAttestation = $root.grafeas.v1.DSSEAttestationOccurrence.fromObject(object.dsseAttestation);
+                    }
+                    if (object.sbomReference != null) {
+                        if (typeof object.sbomReference !== "object")
+                            throw TypeError(".grafeas.v1.Occurrence.sbomReference: object expected");
+                        message.sbomReference = $root.grafeas.v1.SBOMReferenceOccurrence.fromObject(object.sbomReference);
                     }
                     if (object.envelope != null) {
                         if (typeof object.envelope !== "object")
@@ -19418,6 +21941,11 @@
                     }
                     if (message.envelope != null && message.hasOwnProperty("envelope"))
                         object.envelope = $root.grafeas.v1.Envelope.toObject(message.envelope, options);
+                    if (message.sbomReference != null && message.hasOwnProperty("sbomReference")) {
+                        object.sbomReference = $root.grafeas.v1.SBOMReferenceOccurrence.toObject(message.sbomReference, options);
+                        if (options.oneofs)
+                            object.details = "sbomReference";
+                    }
                     return object;
                 };
     
@@ -19476,6 +22004,7 @@
                  * @property {grafeas.v1.IComplianceNote|null} [compliance] Note compliance
                  * @property {grafeas.v1.IDSSEAttestationNote|null} [dsseAttestation] Note dsseAttestation
                  * @property {grafeas.v1.IVulnerabilityAssessmentNote|null} [vulnerabilityAssessment] Note vulnerabilityAssessment
+                 * @property {grafeas.v1.ISBOMReferenceNote|null} [sbomReference] Note sbomReference
                  */
     
                 /**
@@ -19655,17 +22184,25 @@
                  */
                 Note.prototype.vulnerabilityAssessment = null;
     
+                /**
+                 * Note sbomReference.
+                 * @member {grafeas.v1.ISBOMReferenceNote|null|undefined} sbomReference
+                 * @memberof grafeas.v1.Note
+                 * @instance
+                 */
+                Note.prototype.sbomReference = null;
+    
                 // OneOf field names bound to virtual getters and setters
                 var $oneOfFields;
     
                 /**
                  * Note type.
-                 * @member {"vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation"|"vulnerabilityAssessment"|undefined} type
+                 * @member {"vulnerability"|"build"|"image"|"package"|"deployment"|"discovery"|"attestation"|"upgrade"|"compliance"|"dsseAttestation"|"vulnerabilityAssessment"|"sbomReference"|undefined} type
                  * @memberof grafeas.v1.Note
                  * @instance
                  */
                 Object.defineProperty(Note.prototype, "type", {
-                    get: $util.oneOfGetter($oneOfFields = ["vulnerability", "build", "image", "package", "deployment", "discovery", "attestation", "upgrade", "compliance", "dsseAttestation", "vulnerabilityAssessment"]),
+                    get: $util.oneOfGetter($oneOfFields = ["vulnerability", "build", "image", "package", "deployment", "discovery", "attestation", "upgrade", "compliance", "dsseAttestation", "vulnerabilityAssessment", "sbomReference"]),
                     set: $util.oneOfSetter($oneOfFields)
                 });
     
@@ -19735,6 +22272,8 @@
                         $root.grafeas.v1.DSSEAttestationNote.encode(message.dsseAttestation, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                     if (message.vulnerabilityAssessment != null && Object.hasOwnProperty.call(message, "vulnerabilityAssessment"))
                         $root.grafeas.v1.VulnerabilityAssessmentNote.encode(message.vulnerabilityAssessment, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                    if (message.sbomReference != null && Object.hasOwnProperty.call(message, "sbomReference"))
+                        $root.grafeas.v1.SBOMReferenceNote.encode(message.sbomReference, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                     return writer;
                 };
     
@@ -19853,6 +22392,10 @@
                                 message.vulnerabilityAssessment = $root.grafeas.v1.VulnerabilityAssessmentNote.decode(reader, reader.uint32());
                                 break;
                             }
+                        case 21: {
+                                message.sbomReference = $root.grafeas.v1.SBOMReferenceNote.decode(reader, reader.uint32());
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7);
                             break;
@@ -19914,6 +22457,7 @@
                         case 9:
                         case 10:
                         case 11:
+                        case 12:
                             break;
                         }
                     if (message.relatedUrl != null && message.hasOwnProperty("relatedUrl")) {
@@ -20055,6 +22599,16 @@
                                 return "vulnerabilityAssessment." + error;
                         }
                     }
+                    if (message.sbomReference != null && message.hasOwnProperty("sbomReference")) {
+                        if (properties.type === 1)
+                            return "type: multiple values";
+                        properties.type = 1;
+                        {
+                            var error = $root.grafeas.v1.SBOMReferenceNote.verify(message.sbomReference);
+                            if (error)
+                                return "sbomReference." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -20130,6 +22684,10 @@
                     case "VULNERABILITY_ASSESSMENT":
                     case 11:
                         message.kind = 11;
+                        break;
+                    case "SBOM_REFERENCE":
+                    case 12:
+                        message.kind = 12;
                         break;
                     }
                     if (object.relatedUrl) {
@@ -20218,6 +22776,11 @@
                         if (typeof object.vulnerabilityAssessment !== "object")
                             throw TypeError(".grafeas.v1.Note.vulnerabilityAssessment: object expected");
                         message.vulnerabilityAssessment = $root.grafeas.v1.VulnerabilityAssessmentNote.fromObject(object.vulnerabilityAssessment);
+                    }
+                    if (object.sbomReference != null) {
+                        if (typeof object.sbomReference !== "object")
+                            throw TypeError(".grafeas.v1.Note.sbomReference: object expected");
+                        message.sbomReference = $root.grafeas.v1.SBOMReferenceNote.fromObject(object.sbomReference);
                     }
                     return message;
                 };
@@ -20326,6 +22889,11 @@
                         object.vulnerabilityAssessment = $root.grafeas.v1.VulnerabilityAssessmentNote.toObject(message.vulnerabilityAssessment, options);
                         if (options.oneofs)
                             object.type = "vulnerabilityAssessment";
+                    }
+                    if (message.sbomReference != null && message.hasOwnProperty("sbomReference")) {
+                        object.sbomReference = $root.grafeas.v1.SBOMReferenceNote.toObject(message.sbomReference, options);
+                        if (options.oneofs)
+                            object.type = "sbomReference";
                     }
                     return object;
                 };
@@ -27830,6 +30398,1119 @@
                 return Version;
             })();
     
+            v1.SBOMReferenceNote = (function() {
+    
+                /**
+                 * Properties of a SBOMReferenceNote.
+                 * @memberof grafeas.v1
+                 * @interface ISBOMReferenceNote
+                 * @property {string|null} [format] SBOMReferenceNote format
+                 * @property {string|null} [version] SBOMReferenceNote version
+                 */
+    
+                /**
+                 * Constructs a new SBOMReferenceNote.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a SBOMReferenceNote.
+                 * @implements ISBOMReferenceNote
+                 * @constructor
+                 * @param {grafeas.v1.ISBOMReferenceNote=} [properties] Properties to set
+                 */
+                function SBOMReferenceNote(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SBOMReferenceNote format.
+                 * @member {string} format
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @instance
+                 */
+                SBOMReferenceNote.prototype.format = "";
+    
+                /**
+                 * SBOMReferenceNote version.
+                 * @member {string} version
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @instance
+                 */
+                SBOMReferenceNote.prototype.version = "";
+    
+                /**
+                 * Creates a new SBOMReferenceNote instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @static
+                 * @param {grafeas.v1.ISBOMReferenceNote=} [properties] Properties to set
+                 * @returns {grafeas.v1.SBOMReferenceNote} SBOMReferenceNote instance
+                 */
+                SBOMReferenceNote.create = function create(properties) {
+                    return new SBOMReferenceNote(properties);
+                };
+    
+                /**
+                 * Encodes the specified SBOMReferenceNote message. Does not implicitly {@link grafeas.v1.SBOMReferenceNote.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @static
+                 * @param {grafeas.v1.ISBOMReferenceNote} message SBOMReferenceNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SBOMReferenceNote.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.format);
+                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SBOMReferenceNote message, length delimited. Does not implicitly {@link grafeas.v1.SBOMReferenceNote.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @static
+                 * @param {grafeas.v1.ISBOMReferenceNote} message SBOMReferenceNote message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SBOMReferenceNote.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SBOMReferenceNote message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.SBOMReferenceNote} SBOMReferenceNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SBOMReferenceNote.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SBOMReferenceNote();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.version = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SBOMReferenceNote message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.SBOMReferenceNote} SBOMReferenceNote
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SBOMReferenceNote.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SBOMReferenceNote message.
+                 * @function verify
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SBOMReferenceNote.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        if (!$util.isString(message.format))
+                            return "format: string expected";
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        if (!$util.isString(message.version))
+                            return "version: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SBOMReferenceNote message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.SBOMReferenceNote} SBOMReferenceNote
+                 */
+                SBOMReferenceNote.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.SBOMReferenceNote)
+                        return object;
+                    var message = new $root.grafeas.v1.SBOMReferenceNote();
+                    if (object.format != null)
+                        message.format = String(object.format);
+                    if (object.version != null)
+                        message.version = String(object.version);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SBOMReferenceNote message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @static
+                 * @param {grafeas.v1.SBOMReferenceNote} message SBOMReferenceNote
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SBOMReferenceNote.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.format = "";
+                        object.version = "";
+                    }
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = message.format;
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        object.version = message.version;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SBOMReferenceNote to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SBOMReferenceNote.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SBOMReferenceNote
+                 * @function getTypeUrl
+                 * @memberof grafeas.v1.SBOMReferenceNote
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SBOMReferenceNote.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/grafeas.v1.SBOMReferenceNote";
+                };
+    
+                return SBOMReferenceNote;
+            })();
+    
+            v1.SBOMReferenceOccurrence = (function() {
+    
+                /**
+                 * Properties of a SBOMReferenceOccurrence.
+                 * @memberof grafeas.v1
+                 * @interface ISBOMReferenceOccurrence
+                 * @property {grafeas.v1.ISbomReferenceIntotoPayload|null} [payload] SBOMReferenceOccurrence payload
+                 * @property {string|null} [payloadType] SBOMReferenceOccurrence payloadType
+                 * @property {Array.<grafeas.v1.IEnvelopeSignature>|null} [signatures] SBOMReferenceOccurrence signatures
+                 */
+    
+                /**
+                 * Constructs a new SBOMReferenceOccurrence.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a SBOMReferenceOccurrence.
+                 * @implements ISBOMReferenceOccurrence
+                 * @constructor
+                 * @param {grafeas.v1.ISBOMReferenceOccurrence=} [properties] Properties to set
+                 */
+                function SBOMReferenceOccurrence(properties) {
+                    this.signatures = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SBOMReferenceOccurrence payload.
+                 * @member {grafeas.v1.ISbomReferenceIntotoPayload|null|undefined} payload
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @instance
+                 */
+                SBOMReferenceOccurrence.prototype.payload = null;
+    
+                /**
+                 * SBOMReferenceOccurrence payloadType.
+                 * @member {string} payloadType
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @instance
+                 */
+                SBOMReferenceOccurrence.prototype.payloadType = "";
+    
+                /**
+                 * SBOMReferenceOccurrence signatures.
+                 * @member {Array.<grafeas.v1.IEnvelopeSignature>} signatures
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @instance
+                 */
+                SBOMReferenceOccurrence.prototype.signatures = $util.emptyArray;
+    
+                /**
+                 * Creates a new SBOMReferenceOccurrence instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @static
+                 * @param {grafeas.v1.ISBOMReferenceOccurrence=} [properties] Properties to set
+                 * @returns {grafeas.v1.SBOMReferenceOccurrence} SBOMReferenceOccurrence instance
+                 */
+                SBOMReferenceOccurrence.create = function create(properties) {
+                    return new SBOMReferenceOccurrence(properties);
+                };
+    
+                /**
+                 * Encodes the specified SBOMReferenceOccurrence message. Does not implicitly {@link grafeas.v1.SBOMReferenceOccurrence.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @static
+                 * @param {grafeas.v1.ISBOMReferenceOccurrence} message SBOMReferenceOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SBOMReferenceOccurrence.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
+                        $root.grafeas.v1.SbomReferenceIntotoPayload.encode(message.payload, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.payloadType != null && Object.hasOwnProperty.call(message, "payloadType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.payloadType);
+                    if (message.signatures != null && message.signatures.length)
+                        for (var i = 0; i < message.signatures.length; ++i)
+                            $root.grafeas.v1.EnvelopeSignature.encode(message.signatures[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SBOMReferenceOccurrence message, length delimited. Does not implicitly {@link grafeas.v1.SBOMReferenceOccurrence.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @static
+                 * @param {grafeas.v1.ISBOMReferenceOccurrence} message SBOMReferenceOccurrence message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SBOMReferenceOccurrence.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SBOMReferenceOccurrence message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.SBOMReferenceOccurrence} SBOMReferenceOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SBOMReferenceOccurrence.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SBOMReferenceOccurrence();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.payload = $root.grafeas.v1.SbomReferenceIntotoPayload.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.payloadType = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.signatures && message.signatures.length))
+                                    message.signatures = [];
+                                message.signatures.push($root.grafeas.v1.EnvelopeSignature.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SBOMReferenceOccurrence message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.SBOMReferenceOccurrence} SBOMReferenceOccurrence
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SBOMReferenceOccurrence.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SBOMReferenceOccurrence message.
+                 * @function verify
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SBOMReferenceOccurrence.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.payload != null && message.hasOwnProperty("payload")) {
+                        var error = $root.grafeas.v1.SbomReferenceIntotoPayload.verify(message.payload);
+                        if (error)
+                            return "payload." + error;
+                    }
+                    if (message.payloadType != null && message.hasOwnProperty("payloadType"))
+                        if (!$util.isString(message.payloadType))
+                            return "payloadType: string expected";
+                    if (message.signatures != null && message.hasOwnProperty("signatures")) {
+                        if (!Array.isArray(message.signatures))
+                            return "signatures: array expected";
+                        for (var i = 0; i < message.signatures.length; ++i) {
+                            var error = $root.grafeas.v1.EnvelopeSignature.verify(message.signatures[i]);
+                            if (error)
+                                return "signatures." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a SBOMReferenceOccurrence message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.SBOMReferenceOccurrence} SBOMReferenceOccurrence
+                 */
+                SBOMReferenceOccurrence.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.SBOMReferenceOccurrence)
+                        return object;
+                    var message = new $root.grafeas.v1.SBOMReferenceOccurrence();
+                    if (object.payload != null) {
+                        if (typeof object.payload !== "object")
+                            throw TypeError(".grafeas.v1.SBOMReferenceOccurrence.payload: object expected");
+                        message.payload = $root.grafeas.v1.SbomReferenceIntotoPayload.fromObject(object.payload);
+                    }
+                    if (object.payloadType != null)
+                        message.payloadType = String(object.payloadType);
+                    if (object.signatures) {
+                        if (!Array.isArray(object.signatures))
+                            throw TypeError(".grafeas.v1.SBOMReferenceOccurrence.signatures: array expected");
+                        message.signatures = [];
+                        for (var i = 0; i < object.signatures.length; ++i) {
+                            if (typeof object.signatures[i] !== "object")
+                                throw TypeError(".grafeas.v1.SBOMReferenceOccurrence.signatures: object expected");
+                            message.signatures[i] = $root.grafeas.v1.EnvelopeSignature.fromObject(object.signatures[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SBOMReferenceOccurrence message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @static
+                 * @param {grafeas.v1.SBOMReferenceOccurrence} message SBOMReferenceOccurrence
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SBOMReferenceOccurrence.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.signatures = [];
+                    if (options.defaults) {
+                        object.payload = null;
+                        object.payloadType = "";
+                    }
+                    if (message.payload != null && message.hasOwnProperty("payload"))
+                        object.payload = $root.grafeas.v1.SbomReferenceIntotoPayload.toObject(message.payload, options);
+                    if (message.payloadType != null && message.hasOwnProperty("payloadType"))
+                        object.payloadType = message.payloadType;
+                    if (message.signatures && message.signatures.length) {
+                        object.signatures = [];
+                        for (var j = 0; j < message.signatures.length; ++j)
+                            object.signatures[j] = $root.grafeas.v1.EnvelopeSignature.toObject(message.signatures[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this SBOMReferenceOccurrence to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SBOMReferenceOccurrence.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SBOMReferenceOccurrence
+                 * @function getTypeUrl
+                 * @memberof grafeas.v1.SBOMReferenceOccurrence
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SBOMReferenceOccurrence.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/grafeas.v1.SBOMReferenceOccurrence";
+                };
+    
+                return SBOMReferenceOccurrence;
+            })();
+    
+            v1.SbomReferenceIntotoPayload = (function() {
+    
+                /**
+                 * Properties of a SbomReferenceIntotoPayload.
+                 * @memberof grafeas.v1
+                 * @interface ISbomReferenceIntotoPayload
+                 * @property {string|null} [type] SbomReferenceIntotoPayload type
+                 * @property {string|null} [predicateType] SbomReferenceIntotoPayload predicateType
+                 * @property {Array.<grafeas.v1.ISubject>|null} [subject] SbomReferenceIntotoPayload subject
+                 * @property {grafeas.v1.ISbomReferenceIntotoPredicate|null} [predicate] SbomReferenceIntotoPayload predicate
+                 */
+    
+                /**
+                 * Constructs a new SbomReferenceIntotoPayload.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a SbomReferenceIntotoPayload.
+                 * @implements ISbomReferenceIntotoPayload
+                 * @constructor
+                 * @param {grafeas.v1.ISbomReferenceIntotoPayload=} [properties] Properties to set
+                 */
+                function SbomReferenceIntotoPayload(properties) {
+                    this.subject = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SbomReferenceIntotoPayload type.
+                 * @member {string} type
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @instance
+                 */
+                SbomReferenceIntotoPayload.prototype.type = "";
+    
+                /**
+                 * SbomReferenceIntotoPayload predicateType.
+                 * @member {string} predicateType
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @instance
+                 */
+                SbomReferenceIntotoPayload.prototype.predicateType = "";
+    
+                /**
+                 * SbomReferenceIntotoPayload subject.
+                 * @member {Array.<grafeas.v1.ISubject>} subject
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @instance
+                 */
+                SbomReferenceIntotoPayload.prototype.subject = $util.emptyArray;
+    
+                /**
+                 * SbomReferenceIntotoPayload predicate.
+                 * @member {grafeas.v1.ISbomReferenceIntotoPredicate|null|undefined} predicate
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @instance
+                 */
+                SbomReferenceIntotoPayload.prototype.predicate = null;
+    
+                /**
+                 * Creates a new SbomReferenceIntotoPayload instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @static
+                 * @param {grafeas.v1.ISbomReferenceIntotoPayload=} [properties] Properties to set
+                 * @returns {grafeas.v1.SbomReferenceIntotoPayload} SbomReferenceIntotoPayload instance
+                 */
+                SbomReferenceIntotoPayload.create = function create(properties) {
+                    return new SbomReferenceIntotoPayload(properties);
+                };
+    
+                /**
+                 * Encodes the specified SbomReferenceIntotoPayload message. Does not implicitly {@link grafeas.v1.SbomReferenceIntotoPayload.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @static
+                 * @param {grafeas.v1.ISbomReferenceIntotoPayload} message SbomReferenceIntotoPayload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SbomReferenceIntotoPayload.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.predicateType != null && Object.hasOwnProperty.call(message, "predicateType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.predicateType);
+                    if (message.subject != null && message.subject.length)
+                        for (var i = 0; i < message.subject.length; ++i)
+                            $root.grafeas.v1.Subject.encode(message.subject[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.predicate != null && Object.hasOwnProperty.call(message, "predicate"))
+                        $root.grafeas.v1.SbomReferenceIntotoPredicate.encode(message.predicate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SbomReferenceIntotoPayload message, length delimited. Does not implicitly {@link grafeas.v1.SbomReferenceIntotoPayload.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @static
+                 * @param {grafeas.v1.ISbomReferenceIntotoPayload} message SbomReferenceIntotoPayload message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SbomReferenceIntotoPayload.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SbomReferenceIntotoPayload message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.SbomReferenceIntotoPayload} SbomReferenceIntotoPayload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SbomReferenceIntotoPayload.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SbomReferenceIntotoPayload();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.predicateType = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.subject && message.subject.length))
+                                    message.subject = [];
+                                message.subject.push($root.grafeas.v1.Subject.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                message.predicate = $root.grafeas.v1.SbomReferenceIntotoPredicate.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SbomReferenceIntotoPayload message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.SbomReferenceIntotoPayload} SbomReferenceIntotoPayload
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SbomReferenceIntotoPayload.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SbomReferenceIntotoPayload message.
+                 * @function verify
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SbomReferenceIntotoPayload.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.predicateType != null && message.hasOwnProperty("predicateType"))
+                        if (!$util.isString(message.predicateType))
+                            return "predicateType: string expected";
+                    if (message.subject != null && message.hasOwnProperty("subject")) {
+                        if (!Array.isArray(message.subject))
+                            return "subject: array expected";
+                        for (var i = 0; i < message.subject.length; ++i) {
+                            var error = $root.grafeas.v1.Subject.verify(message.subject[i]);
+                            if (error)
+                                return "subject." + error;
+                        }
+                    }
+                    if (message.predicate != null && message.hasOwnProperty("predicate")) {
+                        var error = $root.grafeas.v1.SbomReferenceIntotoPredicate.verify(message.predicate);
+                        if (error)
+                            return "predicate." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a SbomReferenceIntotoPayload message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.SbomReferenceIntotoPayload} SbomReferenceIntotoPayload
+                 */
+                SbomReferenceIntotoPayload.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.SbomReferenceIntotoPayload)
+                        return object;
+                    var message = new $root.grafeas.v1.SbomReferenceIntotoPayload();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.predicateType != null)
+                        message.predicateType = String(object.predicateType);
+                    if (object.subject) {
+                        if (!Array.isArray(object.subject))
+                            throw TypeError(".grafeas.v1.SbomReferenceIntotoPayload.subject: array expected");
+                        message.subject = [];
+                        for (var i = 0; i < object.subject.length; ++i) {
+                            if (typeof object.subject[i] !== "object")
+                                throw TypeError(".grafeas.v1.SbomReferenceIntotoPayload.subject: object expected");
+                            message.subject[i] = $root.grafeas.v1.Subject.fromObject(object.subject[i]);
+                        }
+                    }
+                    if (object.predicate != null) {
+                        if (typeof object.predicate !== "object")
+                            throw TypeError(".grafeas.v1.SbomReferenceIntotoPayload.predicate: object expected");
+                        message.predicate = $root.grafeas.v1.SbomReferenceIntotoPredicate.fromObject(object.predicate);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SbomReferenceIntotoPayload message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @static
+                 * @param {grafeas.v1.SbomReferenceIntotoPayload} message SbomReferenceIntotoPayload
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SbomReferenceIntotoPayload.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.subject = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.predicateType = "";
+                        object.predicate = null;
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.predicateType != null && message.hasOwnProperty("predicateType"))
+                        object.predicateType = message.predicateType;
+                    if (message.subject && message.subject.length) {
+                        object.subject = [];
+                        for (var j = 0; j < message.subject.length; ++j)
+                            object.subject[j] = $root.grafeas.v1.Subject.toObject(message.subject[j], options);
+                    }
+                    if (message.predicate != null && message.hasOwnProperty("predicate"))
+                        object.predicate = $root.grafeas.v1.SbomReferenceIntotoPredicate.toObject(message.predicate, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this SbomReferenceIntotoPayload to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SbomReferenceIntotoPayload.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SbomReferenceIntotoPayload
+                 * @function getTypeUrl
+                 * @memberof grafeas.v1.SbomReferenceIntotoPayload
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SbomReferenceIntotoPayload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/grafeas.v1.SbomReferenceIntotoPayload";
+                };
+    
+                return SbomReferenceIntotoPayload;
+            })();
+    
+            v1.SbomReferenceIntotoPredicate = (function() {
+    
+                /**
+                 * Properties of a SbomReferenceIntotoPredicate.
+                 * @memberof grafeas.v1
+                 * @interface ISbomReferenceIntotoPredicate
+                 * @property {string|null} [referrerId] SbomReferenceIntotoPredicate referrerId
+                 * @property {string|null} [location] SbomReferenceIntotoPredicate location
+                 * @property {string|null} [mimeType] SbomReferenceIntotoPredicate mimeType
+                 * @property {Object.<string,string>|null} [digest] SbomReferenceIntotoPredicate digest
+                 */
+    
+                /**
+                 * Constructs a new SbomReferenceIntotoPredicate.
+                 * @memberof grafeas.v1
+                 * @classdesc Represents a SbomReferenceIntotoPredicate.
+                 * @implements ISbomReferenceIntotoPredicate
+                 * @constructor
+                 * @param {grafeas.v1.ISbomReferenceIntotoPredicate=} [properties] Properties to set
+                 */
+                function SbomReferenceIntotoPredicate(properties) {
+                    this.digest = {};
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SbomReferenceIntotoPredicate referrerId.
+                 * @member {string} referrerId
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @instance
+                 */
+                SbomReferenceIntotoPredicate.prototype.referrerId = "";
+    
+                /**
+                 * SbomReferenceIntotoPredicate location.
+                 * @member {string} location
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @instance
+                 */
+                SbomReferenceIntotoPredicate.prototype.location = "";
+    
+                /**
+                 * SbomReferenceIntotoPredicate mimeType.
+                 * @member {string} mimeType
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @instance
+                 */
+                SbomReferenceIntotoPredicate.prototype.mimeType = "";
+    
+                /**
+                 * SbomReferenceIntotoPredicate digest.
+                 * @member {Object.<string,string>} digest
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @instance
+                 */
+                SbomReferenceIntotoPredicate.prototype.digest = $util.emptyObject;
+    
+                /**
+                 * Creates a new SbomReferenceIntotoPredicate instance using the specified properties.
+                 * @function create
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @static
+                 * @param {grafeas.v1.ISbomReferenceIntotoPredicate=} [properties] Properties to set
+                 * @returns {grafeas.v1.SbomReferenceIntotoPredicate} SbomReferenceIntotoPredicate instance
+                 */
+                SbomReferenceIntotoPredicate.create = function create(properties) {
+                    return new SbomReferenceIntotoPredicate(properties);
+                };
+    
+                /**
+                 * Encodes the specified SbomReferenceIntotoPredicate message. Does not implicitly {@link grafeas.v1.SbomReferenceIntotoPredicate.verify|verify} messages.
+                 * @function encode
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @static
+                 * @param {grafeas.v1.ISbomReferenceIntotoPredicate} message SbomReferenceIntotoPredicate message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SbomReferenceIntotoPredicate.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.referrerId != null && Object.hasOwnProperty.call(message, "referrerId"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.referrerId);
+                    if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.location);
+                    if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.mimeType);
+                    if (message.digest != null && Object.hasOwnProperty.call(message, "digest"))
+                        for (var keys = Object.keys(message.digest), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.digest[keys[i]]).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SbomReferenceIntotoPredicate message, length delimited. Does not implicitly {@link grafeas.v1.SbomReferenceIntotoPredicate.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @static
+                 * @param {grafeas.v1.ISbomReferenceIntotoPredicate} message SbomReferenceIntotoPredicate message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SbomReferenceIntotoPredicate.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SbomReferenceIntotoPredicate message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {grafeas.v1.SbomReferenceIntotoPredicate} SbomReferenceIntotoPredicate
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SbomReferenceIntotoPredicate.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.SbomReferenceIntotoPredicate(), key, value;
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.referrerId = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.location = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.mimeType = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                if (message.digest === $util.emptyObject)
+                                    message.digest = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.digest[key] = value;
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SbomReferenceIntotoPredicate message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {grafeas.v1.SbomReferenceIntotoPredicate} SbomReferenceIntotoPredicate
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SbomReferenceIntotoPredicate.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SbomReferenceIntotoPredicate message.
+                 * @function verify
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SbomReferenceIntotoPredicate.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.referrerId != null && message.hasOwnProperty("referrerId"))
+                        if (!$util.isString(message.referrerId))
+                            return "referrerId: string expected";
+                    if (message.location != null && message.hasOwnProperty("location"))
+                        if (!$util.isString(message.location))
+                            return "location: string expected";
+                    if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                        if (!$util.isString(message.mimeType))
+                            return "mimeType: string expected";
+                    if (message.digest != null && message.hasOwnProperty("digest")) {
+                        if (!$util.isObject(message.digest))
+                            return "digest: object expected";
+                        var key = Object.keys(message.digest);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.digest[key[i]]))
+                                return "digest: string{k:string} expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a SbomReferenceIntotoPredicate message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {grafeas.v1.SbomReferenceIntotoPredicate} SbomReferenceIntotoPredicate
+                 */
+                SbomReferenceIntotoPredicate.fromObject = function fromObject(object) {
+                    if (object instanceof $root.grafeas.v1.SbomReferenceIntotoPredicate)
+                        return object;
+                    var message = new $root.grafeas.v1.SbomReferenceIntotoPredicate();
+                    if (object.referrerId != null)
+                        message.referrerId = String(object.referrerId);
+                    if (object.location != null)
+                        message.location = String(object.location);
+                    if (object.mimeType != null)
+                        message.mimeType = String(object.mimeType);
+                    if (object.digest) {
+                        if (typeof object.digest !== "object")
+                            throw TypeError(".grafeas.v1.SbomReferenceIntotoPredicate.digest: object expected");
+                        message.digest = {};
+                        for (var keys = Object.keys(object.digest), i = 0; i < keys.length; ++i)
+                            message.digest[keys[i]] = String(object.digest[keys[i]]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SbomReferenceIntotoPredicate message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @static
+                 * @param {grafeas.v1.SbomReferenceIntotoPredicate} message SbomReferenceIntotoPredicate
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SbomReferenceIntotoPredicate.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.objects || options.defaults)
+                        object.digest = {};
+                    if (options.defaults) {
+                        object.referrerId = "";
+                        object.location = "";
+                        object.mimeType = "";
+                    }
+                    if (message.referrerId != null && message.hasOwnProperty("referrerId"))
+                        object.referrerId = message.referrerId;
+                    if (message.location != null && message.hasOwnProperty("location"))
+                        object.location = message.location;
+                    if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                        object.mimeType = message.mimeType;
+                    var keys2;
+                    if (message.digest && (keys2 = Object.keys(message.digest)).length) {
+                        object.digest = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.digest[keys2[j]] = message.digest[keys2[j]];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this SbomReferenceIntotoPredicate to JSON.
+                 * @function toJSON
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SbomReferenceIntotoPredicate.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SbomReferenceIntotoPredicate
+                 * @function getTypeUrl
+                 * @memberof grafeas.v1.SbomReferenceIntotoPredicate
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SbomReferenceIntotoPredicate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/grafeas.v1.SbomReferenceIntotoPredicate";
+                };
+    
+                return SbomReferenceIntotoPredicate;
+            })();
+    
             v1.UpgradeNote = (function() {
     
                 /**
@@ -30438,6 +34119,7 @@
                      * @memberof grafeas.v1.VulnerabilityAssessmentNote
                      * @interface IAssessment
                      * @property {string|null} [cve] Assessment cve
+                     * @property {string|null} [vulnerabilityId] Assessment vulnerabilityId
                      * @property {string|null} [shortDescription] Assessment shortDescription
                      * @property {string|null} [longDescription] Assessment longDescription
                      * @property {Array.<grafeas.v1.IRelatedUrl>|null} [relatedUris] Assessment relatedUris
@@ -30472,6 +34154,14 @@
                      * @instance
                      */
                     Assessment.prototype.cve = "";
+    
+                    /**
+                     * Assessment vulnerabilityId.
+                     * @member {string} vulnerabilityId
+                     * @memberof grafeas.v1.VulnerabilityAssessmentNote.Assessment
+                     * @instance
+                     */
+                    Assessment.prototype.vulnerabilityId = "";
     
                     /**
                      * Assessment shortDescription.
@@ -30572,6 +34262,8 @@
                         if (message.remediations != null && message.remediations.length)
                             for (var i = 0; i < message.remediations.length; ++i)
                                 $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.encode(message.remediations[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        if (message.vulnerabilityId != null && Object.hasOwnProperty.call(message, "vulnerabilityId"))
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.vulnerabilityId);
                         return writer;
                     };
     
@@ -30608,6 +34300,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.cve = reader.string();
+                                    break;
+                                }
+                            case 9: {
+                                    message.vulnerabilityId = reader.string();
                                     break;
                                 }
                             case 2: {
@@ -30682,6 +34378,9 @@
                         if (message.cve != null && message.hasOwnProperty("cve"))
                             if (!$util.isString(message.cve))
                                 return "cve: string expected";
+                        if (message.vulnerabilityId != null && message.hasOwnProperty("vulnerabilityId"))
+                            if (!$util.isString(message.vulnerabilityId))
+                                return "vulnerabilityId: string expected";
                         if (message.shortDescription != null && message.hasOwnProperty("shortDescription"))
                             if (!$util.isString(message.shortDescription))
                                 return "shortDescription: string expected";
@@ -30746,6 +34445,8 @@
                         var message = new $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment();
                         if (object.cve != null)
                             message.cve = String(object.cve);
+                        if (object.vulnerabilityId != null)
+                            message.vulnerabilityId = String(object.vulnerabilityId);
                         if (object.shortDescription != null)
                             message.shortDescription = String(object.shortDescription);
                         if (object.longDescription != null)
@@ -30837,6 +34538,7 @@
                             object.longDescription = "";
                             object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             object.justification = null;
+                            object.vulnerabilityId = "";
                         }
                         if (message.cve != null && message.hasOwnProperty("cve"))
                             object.cve = message.cve;
@@ -30863,6 +34565,8 @@
                             for (var j = 0; j < message.remediations.length; ++j)
                                 object.remediations[j] = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.toObject(message.remediations[j], options);
                         }
+                        if (message.vulnerabilityId != null && message.hasOwnProperty("vulnerabilityId"))
+                            object.vulnerabilityId = message.vulnerabilityId;
                         return object;
                     };
     
@@ -33073,6 +36777,7 @@
                  * @property {grafeas.v1.CVSSVersion|null} [cvssVersion] VulnerabilityOccurrence cvssVersion
                  * @property {grafeas.v1.ICVSS|null} [cvssV2] VulnerabilityOccurrence cvssV2
                  * @property {grafeas.v1.VulnerabilityOccurrence.IVexAssessment|null} [vexAssessment] VulnerabilityOccurrence vexAssessment
+                 * @property {string|null} [extraDetails] VulnerabilityOccurrence extraDetails
                  */
     
                 /**
@@ -33197,6 +36902,14 @@
                 VulnerabilityOccurrence.prototype.vexAssessment = null;
     
                 /**
+                 * VulnerabilityOccurrence extraDetails.
+                 * @member {string} extraDetails
+                 * @memberof grafeas.v1.VulnerabilityOccurrence
+                 * @instance
+                 */
+                VulnerabilityOccurrence.prototype.extraDetails = "";
+    
+                /**
                  * Creates a new VulnerabilityOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.VulnerabilityOccurrence
@@ -33248,6 +36961,8 @@
                         $root.grafeas.v1.CVSS.encode(message.cvssV2, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                     if (message.vexAssessment != null && Object.hasOwnProperty.call(message, "vexAssessment"))
                         $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment.encode(message.vexAssessment, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                    if (message.extraDetails != null && Object.hasOwnProperty.call(message, "extraDetails"))
+                        writer.uint32(/* id 14, wireType 2 =*/114).string(message.extraDetails);
                     return writer;
                 };
     
@@ -33336,6 +37051,10 @@
                             }
                         case 13: {
                                 message.vexAssessment = $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 14: {
+                                message.extraDetails = reader.string();
                                 break;
                             }
                         default:
@@ -33454,6 +37173,9 @@
                         if (error)
                             return "vexAssessment." + error;
                     }
+                    if (message.extraDetails != null && message.hasOwnProperty("extraDetails"))
+                        if (!$util.isString(message.extraDetails))
+                            return "extraDetails: string expected";
                     return null;
                 };
     
@@ -33598,6 +37320,8 @@
                             throw TypeError(".grafeas.v1.VulnerabilityOccurrence.vexAssessment: object expected");
                         message.vexAssessment = $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment.fromObject(object.vexAssessment);
                     }
+                    if (object.extraDetails != null)
+                        message.extraDetails = String(object.extraDetails);
                     return message;
                 };
     
@@ -33630,6 +37354,7 @@
                         object.cvssVersion = options.enums === String ? "CVSS_VERSION_UNSPECIFIED" : 0;
                         object.cvssV2 = null;
                         object.vexAssessment = null;
+                        object.extraDetails = "";
                     }
                     if (message.type != null && message.hasOwnProperty("type"))
                         object.type = message.type;
@@ -33663,6 +37388,8 @@
                         object.cvssV2 = $root.grafeas.v1.CVSS.toObject(message.cvssV2, options);
                     if (message.vexAssessment != null && message.hasOwnProperty("vexAssessment"))
                         object.vexAssessment = $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment.toObject(message.vexAssessment, options);
+                    if (message.extraDetails != null && message.hasOwnProperty("extraDetails"))
+                        object.extraDetails = message.extraDetails;
                     return object;
                 };
     
@@ -34181,6 +37908,7 @@
                      * @memberof grafeas.v1.VulnerabilityOccurrence
                      * @interface IVexAssessment
                      * @property {string|null} [cve] VexAssessment cve
+                     * @property {string|null} [vulnerabilityId] VexAssessment vulnerabilityId
                      * @property {Array.<grafeas.v1.IRelatedUrl>|null} [relatedUris] VexAssessment relatedUris
                      * @property {string|null} [noteName] VexAssessment noteName
                      * @property {grafeas.v1.VulnerabilityAssessmentNote.Assessment.State|null} [state] VexAssessment state
@@ -34214,6 +37942,14 @@
                      * @instance
                      */
                     VexAssessment.prototype.cve = "";
+    
+                    /**
+                     * VexAssessment vulnerabilityId.
+                     * @member {string} vulnerabilityId
+                     * @memberof grafeas.v1.VulnerabilityOccurrence.VexAssessment
+                     * @instance
+                     */
+                    VexAssessment.prototype.vulnerabilityId = "";
     
                     /**
                      * VexAssessment relatedUris.
@@ -34304,6 +38040,8 @@
                                 $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Remediation.encode(message.remediations[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         if (message.justification != null && Object.hasOwnProperty.call(message, "justification"))
                             $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.encode(message.justification, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.vulnerabilityId != null && Object.hasOwnProperty.call(message, "vulnerabilityId"))
+                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.vulnerabilityId);
                         return writer;
                     };
     
@@ -34340,6 +38078,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.cve = reader.string();
+                                    break;
+                                }
+                            case 8: {
+                                    message.vulnerabilityId = reader.string();
                                     break;
                                 }
                             case 2: {
@@ -34410,6 +38152,9 @@
                         if (message.cve != null && message.hasOwnProperty("cve"))
                             if (!$util.isString(message.cve))
                                 return "cve: string expected";
+                        if (message.vulnerabilityId != null && message.hasOwnProperty("vulnerabilityId"))
+                            if (!$util.isString(message.vulnerabilityId))
+                                return "vulnerabilityId: string expected";
                         if (message.relatedUris != null && message.hasOwnProperty("relatedUris")) {
                             if (!Array.isArray(message.relatedUris))
                                 return "relatedUris: array expected";
@@ -34471,6 +38216,8 @@
                         var message = new $root.grafeas.v1.VulnerabilityOccurrence.VexAssessment();
                         if (object.cve != null)
                             message.cve = String(object.cve);
+                        if (object.vulnerabilityId != null)
+                            message.vulnerabilityId = String(object.vulnerabilityId);
                         if (object.relatedUris) {
                             if (!Array.isArray(object.relatedUris))
                                 throw TypeError(".grafeas.v1.VulnerabilityOccurrence.VexAssessment.relatedUris: array expected");
@@ -34559,6 +38306,7 @@
                             object.noteName = "";
                             object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             object.justification = null;
+                            object.vulnerabilityId = "";
                         }
                         if (message.cve != null && message.hasOwnProperty("cve"))
                             object.cve = message.cve;
@@ -34583,6 +38331,8 @@
                         }
                         if (message.justification != null && message.hasOwnProperty("justification"))
                             object.justification = $root.grafeas.v1.VulnerabilityAssessmentNote.Assessment.Justification.toObject(message.justification, options);
+                        if (message.vulnerabilityId != null && message.hasOwnProperty("vulnerabilityId"))
+                            object.vulnerabilityId = message.vulnerabilityId;
                         return object;
                     };
     
@@ -36216,6 +39966,38 @@
                 return FileDescriptorSet;
             })();
     
+            /**
+             * Edition enum.
+             * @name google.protobuf.Edition
+             * @enum {number}
+             * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
+             * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
+             * @property {number} EDITION_2023=1000 EDITION_2023 value
+             * @property {number} EDITION_2024=1001 EDITION_2024 value
+             * @property {number} EDITION_1_TEST_ONLY=1 EDITION_1_TEST_ONLY value
+             * @property {number} EDITION_2_TEST_ONLY=2 EDITION_2_TEST_ONLY value
+             * @property {number} EDITION_99997_TEST_ONLY=99997 EDITION_99997_TEST_ONLY value
+             * @property {number} EDITION_99998_TEST_ONLY=99998 EDITION_99998_TEST_ONLY value
+             * @property {number} EDITION_99999_TEST_ONLY=99999 EDITION_99999_TEST_ONLY value
+             * @property {number} EDITION_MAX=2147483647 EDITION_MAX value
+             */
+            protobuf.Edition = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[998] = "EDITION_PROTO2"] = 998;
+                values[valuesById[999] = "EDITION_PROTO3"] = 999;
+                values[valuesById[1000] = "EDITION_2023"] = 1000;
+                values[valuesById[1001] = "EDITION_2024"] = 1001;
+                values[valuesById[1] = "EDITION_1_TEST_ONLY"] = 1;
+                values[valuesById[2] = "EDITION_2_TEST_ONLY"] = 2;
+                values[valuesById[99997] = "EDITION_99997_TEST_ONLY"] = 99997;
+                values[valuesById[99998] = "EDITION_99998_TEST_ONLY"] = 99998;
+                values[valuesById[99999] = "EDITION_99999_TEST_ONLY"] = 99999;
+                values[valuesById[2147483647] = "EDITION_MAX"] = 2147483647;
+                return values;
+            })();
+    
             protobuf.FileDescriptorProto = (function() {
     
                 /**
@@ -36234,7 +40016,7 @@
                  * @property {google.protobuf.IFileOptions|null} [options] FileDescriptorProto options
                  * @property {google.protobuf.ISourceCodeInfo|null} [sourceCodeInfo] FileDescriptorProto sourceCodeInfo
                  * @property {string|null} [syntax] FileDescriptorProto syntax
-                 * @property {string|null} [edition] FileDescriptorProto edition
+                 * @property {google.protobuf.Edition|null} [edition] FileDescriptorProto edition
                  */
     
                 /**
@@ -36357,11 +40139,11 @@
     
                 /**
                  * FileDescriptorProto edition.
-                 * @member {string} edition
+                 * @member {google.protobuf.Edition} edition
                  * @memberof google.protobuf.FileDescriptorProto
                  * @instance
                  */
-                FileDescriptorProto.prototype.edition = "";
+                FileDescriptorProto.prototype.edition = 0;
     
                 /**
                  * Creates a new FileDescriptorProto instance using the specified properties.
@@ -36419,7 +40201,7 @@
                     if (message.syntax != null && Object.hasOwnProperty.call(message, "syntax"))
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
-                        writer.uint32(/* id 13, wireType 2 =*/106).string(message.edition);
+                        writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
                     return writer;
                 };
     
@@ -36526,8 +40308,8 @@
                                 message.syntax = reader.string();
                                 break;
                             }
-                        case 13: {
-                                message.edition = reader.string();
+                        case 14: {
+                                message.edition = reader.int32();
                                 break;
                             }
                         default:
@@ -36642,8 +40424,22 @@
                         if (!$util.isString(message.syntax))
                             return "syntax: string expected";
                     if (message.edition != null && message.hasOwnProperty("edition"))
-                        if (!$util.isString(message.edition))
-                            return "edition: string expected";
+                        switch (message.edition) {
+                        default:
+                            return "edition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
                     return null;
                 };
     
@@ -36736,8 +40532,58 @@
                     }
                     if (object.syntax != null)
                         message.syntax = String(object.syntax);
-                    if (object.edition != null)
-                        message.edition = String(object.edition);
+                    switch (object.edition) {
+                    default:
+                        if (typeof object.edition === "number") {
+                            message.edition = object.edition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.edition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.edition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.edition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.edition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.edition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.edition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.edition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.edition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.edition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.edition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.edition = 2147483647;
+                        break;
+                    }
                     return message;
                 };
     
@@ -36769,7 +40615,7 @@
                         object.options = null;
                         object.sourceCodeInfo = null;
                         object.syntax = "";
-                        object.edition = "";
+                        object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -36817,7 +40663,7 @@
                     if (message.syntax != null && message.hasOwnProperty("syntax"))
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
-                        object.edition = message.edition;
+                        object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
                     return object;
                 };
     
@@ -37920,6 +41766,9 @@
                  * @memberof google.protobuf
                  * @interface IExtensionRangeOptions
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ExtensionRangeOptions uninterpretedOption
+                 * @property {Array.<google.protobuf.ExtensionRangeOptions.IDeclaration>|null} [declaration] ExtensionRangeOptions declaration
+                 * @property {google.protobuf.IFeatureSet|null} [features] ExtensionRangeOptions features
+                 * @property {google.protobuf.ExtensionRangeOptions.VerificationState|null} [verification] ExtensionRangeOptions verification
                  */
     
                 /**
@@ -37932,6 +41781,7 @@
                  */
                 function ExtensionRangeOptions(properties) {
                     this.uninterpretedOption = [];
+                    this.declaration = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -37945,6 +41795,30 @@
                  * @instance
                  */
                 ExtensionRangeOptions.prototype.uninterpretedOption = $util.emptyArray;
+    
+                /**
+                 * ExtensionRangeOptions declaration.
+                 * @member {Array.<google.protobuf.ExtensionRangeOptions.IDeclaration>} declaration
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.declaration = $util.emptyArray;
+    
+                /**
+                 * ExtensionRangeOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.features = null;
+    
+                /**
+                 * ExtensionRangeOptions verification.
+                 * @member {google.protobuf.ExtensionRangeOptions.VerificationState} verification
+                 * @memberof google.protobuf.ExtensionRangeOptions
+                 * @instance
+                 */
+                ExtensionRangeOptions.prototype.verification = 1;
     
                 /**
                  * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -37970,6 +41844,13 @@
                 ExtensionRangeOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (message.declaration != null && message.declaration.length)
+                        for (var i = 0; i < message.declaration.length; ++i)
+                            $root.google.protobuf.ExtensionRangeOptions.Declaration.encode(message.declaration[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.verification != null && Object.hasOwnProperty.call(message, "verification"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.verification);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -38011,6 +41892,20 @@
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.declaration && message.declaration.length))
+                                    message.declaration = [];
+                                message.declaration.push($root.google.protobuf.ExtensionRangeOptions.Declaration.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 50: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.verification = reader.int32();
                                 break;
                             }
                         default:
@@ -38057,6 +41952,28 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message.declaration != null && message.hasOwnProperty("declaration")) {
+                        if (!Array.isArray(message.declaration))
+                            return "declaration: array expected";
+                        for (var i = 0; i < message.declaration.length; ++i) {
+                            var error = $root.google.protobuf.ExtensionRangeOptions.Declaration.verify(message.declaration[i]);
+                            if (error)
+                                return "declaration." + error;
+                        }
+                    }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
+                    if (message.verification != null && message.hasOwnProperty("verification"))
+                        switch (message.verification) {
+                        default:
+                            return "verification: enum value expected";
+                        case 0:
+                        case 1:
+                            break;
+                        }
                     return null;
                 };
     
@@ -38082,6 +41999,37 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object.declaration) {
+                        if (!Array.isArray(object.declaration))
+                            throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: array expected");
+                        message.declaration = [];
+                        for (var i = 0; i < object.declaration.length; ++i) {
+                            if (typeof object.declaration[i] !== "object")
+                                throw TypeError(".google.protobuf.ExtensionRangeOptions.declaration: object expected");
+                            message.declaration[i] = $root.google.protobuf.ExtensionRangeOptions.Declaration.fromObject(object.declaration[i]);
+                        }
+                    }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.ExtensionRangeOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
+                    switch (object.verification) {
+                    case "DECLARATION":
+                    case 0:
+                        message.verification = 0;
+                        break;
+                    default:
+                        if (typeof object.verification === "number") {
+                            message.verification = object.verification;
+                            break;
+                        }
+                        break;
+                    case "UNVERIFIED":
+                    case 1:
+                        message.verification = 1;
+                        break;
+                    }
                     return message;
                 };
     
@@ -38098,8 +42046,23 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
+                        object.declaration = [];
                         object.uninterpretedOption = [];
+                    }
+                    if (options.defaults) {
+                        object.verification = options.enums === String ? "UNVERIFIED" : 1;
+                        object.features = null;
+                    }
+                    if (message.declaration && message.declaration.length) {
+                        object.declaration = [];
+                        for (var j = 0; j < message.declaration.length; ++j)
+                            object.declaration[j] = $root.google.protobuf.ExtensionRangeOptions.Declaration.toObject(message.declaration[j], options);
+                    }
+                    if (message.verification != null && message.hasOwnProperty("verification"))
+                        object.verification = options.enums === String ? $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] === undefined ? message.verification : $root.google.protobuf.ExtensionRangeOptions.VerificationState[message.verification] : message.verification;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -38133,6 +42096,316 @@
                     }
                     return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions";
                 };
+    
+                ExtensionRangeOptions.Declaration = (function() {
+    
+                    /**
+                     * Properties of a Declaration.
+                     * @memberof google.protobuf.ExtensionRangeOptions
+                     * @interface IDeclaration
+                     * @property {number|null} [number] Declaration number
+                     * @property {string|null} [fullName] Declaration fullName
+                     * @property {string|null} [type] Declaration type
+                     * @property {boolean|null} [reserved] Declaration reserved
+                     * @property {boolean|null} [repeated] Declaration repeated
+                     */
+    
+                    /**
+                     * Constructs a new Declaration.
+                     * @memberof google.protobuf.ExtensionRangeOptions
+                     * @classdesc Represents a Declaration.
+                     * @implements IDeclaration
+                     * @constructor
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration=} [properties] Properties to set
+                     */
+                    function Declaration(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Declaration number.
+                     * @member {number} number
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.number = 0;
+    
+                    /**
+                     * Declaration fullName.
+                     * @member {string} fullName
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.fullName = "";
+    
+                    /**
+                     * Declaration type.
+                     * @member {string} type
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.type = "";
+    
+                    /**
+                     * Declaration reserved.
+                     * @member {boolean} reserved
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.reserved = false;
+    
+                    /**
+                     * Declaration repeated.
+                     * @member {boolean} repeated
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     */
+                    Declaration.prototype.repeated = false;
+    
+                    /**
+                     * Creates a new Declaration instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration=} [properties] Properties to set
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration instance
+                     */
+                    Declaration.create = function create(properties) {
+                        return new Declaration(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration} message Declaration message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Declaration.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.number != null && Object.hasOwnProperty.call(message, "number"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.number);
+                        if (message.fullName != null && Object.hasOwnProperty.call(message, "fullName"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.fullName);
+                        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
+                        if (message.reserved != null && Object.hasOwnProperty.call(message, "reserved"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.reserved);
+                        if (message.repeated != null && Object.hasOwnProperty.call(message, "repeated"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).bool(message.repeated);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.IDeclaration} message Declaration message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Declaration.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Declaration message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Declaration.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.number = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.fullName = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.type = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.reserved = reader.bool();
+                                    break;
+                                }
+                            case 6: {
+                                    message.repeated = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Declaration.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Declaration message.
+                     * @function verify
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Declaration.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.number != null && message.hasOwnProperty("number"))
+                            if (!$util.isInteger(message.number))
+                                return "number: integer expected";
+                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                            if (!$util.isString(message.fullName))
+                                return "fullName: string expected";
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            if (!$util.isString(message.type))
+                                return "type: string expected";
+                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                            if (typeof message.reserved !== "boolean")
+                                return "reserved: boolean expected";
+                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                            if (typeof message.repeated !== "boolean")
+                                return "repeated: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.ExtensionRangeOptions.Declaration} Declaration
+                     */
+                    Declaration.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.ExtensionRangeOptions.Declaration)
+                            return object;
+                        var message = new $root.google.protobuf.ExtensionRangeOptions.Declaration();
+                        if (object.number != null)
+                            message.number = object.number | 0;
+                        if (object.fullName != null)
+                            message.fullName = String(object.fullName);
+                        if (object.type != null)
+                            message.type = String(object.type);
+                        if (object.reserved != null)
+                            message.reserved = Boolean(object.reserved);
+                        if (object.repeated != null)
+                            message.repeated = Boolean(object.repeated);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {google.protobuf.ExtensionRangeOptions.Declaration} message Declaration
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Declaration.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.number = 0;
+                            object.fullName = "";
+                            object.type = "";
+                            object.reserved = false;
+                            object.repeated = false;
+                        }
+                        if (message.number != null && message.hasOwnProperty("number"))
+                            object.number = message.number;
+                        if (message.fullName != null && message.hasOwnProperty("fullName"))
+                            object.fullName = message.fullName;
+                        if (message.type != null && message.hasOwnProperty("type"))
+                            object.type = message.type;
+                        if (message.reserved != null && message.hasOwnProperty("reserved"))
+                            object.reserved = message.reserved;
+                        if (message.repeated != null && message.hasOwnProperty("repeated"))
+                            object.repeated = message.repeated;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Declaration to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Declaration.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Declaration
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.ExtensionRangeOptions.Declaration
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Declaration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.ExtensionRangeOptions.Declaration";
+                    };
+    
+                    return Declaration;
+                })();
+    
+                /**
+                 * VerificationState enum.
+                 * @name google.protobuf.ExtensionRangeOptions.VerificationState
+                 * @enum {number}
+                 * @property {number} DECLARATION=0 DECLARATION value
+                 * @property {number} UNVERIFIED=1 UNVERIFIED value
+                 */
+                ExtensionRangeOptions.VerificationState = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "DECLARATION"] = 0;
+                    values[valuesById[1] = "UNVERIFIED"] = 1;
+                    return values;
+                })();
     
                 return ExtensionRangeOptions;
             })();
@@ -38429,8 +42702,8 @@
                         default:
                             return "label: enum value expected";
                         case 1:
-                        case 2:
                         case 3:
+                        case 2:
                             break;
                         }
                     if (message.type != null && message.hasOwnProperty("type"))
@@ -38510,13 +42783,13 @@
                     case 1:
                         message.label = 1;
                         break;
-                    case "LABEL_REQUIRED":
-                    case 2:
-                        message.label = 2;
-                        break;
                     case "LABEL_REPEATED":
                     case 3:
                         message.label = 3;
+                        break;
+                    case "LABEL_REQUIRED":
+                    case 2:
+                        message.label = 2;
                         break;
                     }
                     switch (object.type) {
@@ -38747,14 +43020,14 @@
                  * @name google.protobuf.FieldDescriptorProto.Label
                  * @enum {number}
                  * @property {number} LABEL_OPTIONAL=1 LABEL_OPTIONAL value
-                 * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  * @property {number} LABEL_REPEATED=3 LABEL_REPEATED value
+                 * @property {number} LABEL_REQUIRED=2 LABEL_REQUIRED value
                  */
                 FieldDescriptorProto.Label = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
                     values[valuesById[1] = "LABEL_OPTIONAL"] = 1;
-                    values[valuesById[2] = "LABEL_REQUIRED"] = 2;
                     values[valuesById[3] = "LABEL_REPEATED"] = 3;
+                    values[valuesById[2] = "LABEL_REQUIRED"] = 2;
                     return values;
                 })();
     
@@ -40453,7 +44726,6 @@
                  * @property {boolean|null} [ccGenericServices] FileOptions ccGenericServices
                  * @property {boolean|null} [javaGenericServices] FileOptions javaGenericServices
                  * @property {boolean|null} [pyGenericServices] FileOptions pyGenericServices
-                 * @property {boolean|null} [phpGenericServices] FileOptions phpGenericServices
                  * @property {boolean|null} [deprecated] FileOptions deprecated
                  * @property {boolean|null} [ccEnableArenas] FileOptions ccEnableArenas
                  * @property {string|null} [objcClassPrefix] FileOptions objcClassPrefix
@@ -40463,6 +44735,7 @@
                  * @property {string|null} [phpNamespace] FileOptions phpNamespace
                  * @property {string|null} [phpMetadataNamespace] FileOptions phpMetadataNamespace
                  * @property {string|null} [rubyPackage] FileOptions rubyPackage
+                 * @property {google.protobuf.IFeatureSet|null} [features] FileOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FileOptions uninterpretedOption
                  * @property {Array.<google.api.IResourceDescriptor>|null} [".google.api.resourceDefinition"] FileOptions .google.api.resourceDefinition
                  */
@@ -40565,14 +44838,6 @@
                 FileOptions.prototype.pyGenericServices = false;
     
                 /**
-                 * FileOptions phpGenericServices.
-                 * @member {boolean} phpGenericServices
-                 * @memberof google.protobuf.FileOptions
-                 * @instance
-                 */
-                FileOptions.prototype.phpGenericServices = false;
-    
-                /**
                  * FileOptions deprecated.
                  * @member {boolean} deprecated
                  * @memberof google.protobuf.FileOptions
@@ -40643,6 +44908,14 @@
                  * @instance
                  */
                 FileOptions.prototype.rubyPackage = "";
+    
+                /**
+                 * FileOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.FileOptions
+                 * @instance
+                 */
+                FileOptions.prototype.features = null;
     
                 /**
                  * FileOptions uninterpretedOption.
@@ -40718,12 +44991,12 @@
                         writer.uint32(/* id 40, wireType 2 =*/322).string(message.phpClassPrefix);
                     if (message.phpNamespace != null && Object.hasOwnProperty.call(message, "phpNamespace"))
                         writer.uint32(/* id 41, wireType 2 =*/330).string(message.phpNamespace);
-                    if (message.phpGenericServices != null && Object.hasOwnProperty.call(message, "phpGenericServices"))
-                        writer.uint32(/* id 42, wireType 0 =*/336).bool(message.phpGenericServices);
                     if (message.phpMetadataNamespace != null && Object.hasOwnProperty.call(message, "phpMetadataNamespace"))
                         writer.uint32(/* id 44, wireType 2 =*/354).string(message.phpMetadataNamespace);
                     if (message.rubyPackage != null && Object.hasOwnProperty.call(message, "rubyPackage"))
                         writer.uint32(/* id 45, wireType 2 =*/362).string(message.rubyPackage);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 50, wireType 2 =*/402).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -40804,10 +45077,6 @@
                                 message.pyGenericServices = reader.bool();
                                 break;
                             }
-                        case 42: {
-                                message.phpGenericServices = reader.bool();
-                                break;
-                            }
                         case 23: {
                                 message.deprecated = reader.bool();
                                 break;
@@ -40842,6 +45111,10 @@
                             }
                         case 45: {
                                 message.rubyPackage = reader.string();
+                                break;
+                            }
+                        case 50: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -40927,9 +45200,6 @@
                     if (message.pyGenericServices != null && message.hasOwnProperty("pyGenericServices"))
                         if (typeof message.pyGenericServices !== "boolean")
                             return "pyGenericServices: boolean expected";
-                    if (message.phpGenericServices != null && message.hasOwnProperty("phpGenericServices"))
-                        if (typeof message.phpGenericServices !== "boolean")
-                            return "phpGenericServices: boolean expected";
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -40957,6 +45227,11 @@
                     if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
                         if (!$util.isString(message.rubyPackage))
                             return "rubyPackage: string expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -41028,8 +45303,6 @@
                         message.javaGenericServices = Boolean(object.javaGenericServices);
                     if (object.pyGenericServices != null)
                         message.pyGenericServices = Boolean(object.pyGenericServices);
-                    if (object.phpGenericServices != null)
-                        message.phpGenericServices = Boolean(object.phpGenericServices);
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.ccEnableArenas != null)
@@ -41048,6 +45321,11 @@
                         message.phpMetadataNamespace = String(object.phpMetadataNamespace);
                     if (object.rubyPackage != null)
                         message.rubyPackage = String(object.rubyPackage);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.FileOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FileOptions.uninterpretedOption: array expected");
@@ -41106,9 +45384,9 @@
                         object.swiftPrefix = "";
                         object.phpClassPrefix = "";
                         object.phpNamespace = "";
-                        object.phpGenericServices = false;
                         object.phpMetadataNamespace = "";
                         object.rubyPackage = "";
+                        object.features = null;
                     }
                     if (message.javaPackage != null && message.hasOwnProperty("javaPackage"))
                         object.javaPackage = message.javaPackage;
@@ -41144,12 +45422,12 @@
                         object.phpClassPrefix = message.phpClassPrefix;
                     if (message.phpNamespace != null && message.hasOwnProperty("phpNamespace"))
                         object.phpNamespace = message.phpNamespace;
-                    if (message.phpGenericServices != null && message.hasOwnProperty("phpGenericServices"))
-                        object.phpGenericServices = message.phpGenericServices;
                     if (message.phpMetadataNamespace != null && message.hasOwnProperty("phpMetadataNamespace"))
                         object.phpMetadataNamespace = message.phpMetadataNamespace;
                     if (message.rubyPackage != null && message.hasOwnProperty("rubyPackage"))
                         object.rubyPackage = message.rubyPackage;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -41219,6 +45497,7 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] MessageOptions deprecatedLegacyJsonFieldConflicts
+                 * @property {google.protobuf.IFeatureSet|null} [features] MessageOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
                  * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
@@ -41280,6 +45559,14 @@
                 MessageOptions.prototype.deprecatedLegacyJsonFieldConflicts = false;
     
                 /**
+                 * MessageOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype.features = null;
+    
+                /**
                  * MessageOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.MessageOptions
@@ -41329,6 +45616,8 @@
                         writer.uint32(/* id 7, wireType 0 =*/56).bool(message.mapEntry);
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 11, wireType 0 =*/88).bool(message.deprecatedLegacyJsonFieldConflicts);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -41386,6 +45675,10 @@
                             }
                         case 11: {
                                 message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+                                break;
+                            }
+                        case 12: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -41448,6 +45741,11 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -41487,6 +45785,11 @@
                         message.mapEntry = Boolean(object.mapEntry);
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.MessageOptions.uninterpretedOption: array expected");
@@ -41526,6 +45829,7 @@
                         object.deprecated = false;
                         object.mapEntry = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
+                        object.features = null;
                         object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
@@ -41538,6 +45842,8 @@
                         object.mapEntry = message.mapEntry;
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -41592,7 +45898,9 @@
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {boolean|null} [debugRedact] FieldOptions debugRedact
                  * @property {google.protobuf.FieldOptions.OptionRetention|null} [retention] FieldOptions retention
-                 * @property {google.protobuf.FieldOptions.OptionTargetType|null} [target] FieldOptions target
+                 * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
+                 * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
+                 * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -41607,6 +45915,8 @@
                  * @param {google.protobuf.IFieldOptions=} [properties] Properties to set
                  */
                 function FieldOptions(properties) {
+                    this.targets = [];
+                    this.editionDefaults = [];
                     this.uninterpretedOption = [];
                     this[".google.api.fieldBehavior"] = [];
                     if (properties)
@@ -41688,12 +45998,28 @@
                 FieldOptions.prototype.retention = 0;
     
                 /**
-                 * FieldOptions target.
-                 * @member {google.protobuf.FieldOptions.OptionTargetType} target
+                 * FieldOptions targets.
+                 * @member {Array.<google.protobuf.FieldOptions.OptionTargetType>} targets
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
-                FieldOptions.prototype.target = 0;
+                FieldOptions.prototype.targets = $util.emptyArray;
+    
+                /**
+                 * FieldOptions editionDefaults.
+                 * @member {Array.<google.protobuf.FieldOptions.IEditionDefault>} editionDefaults
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.editionDefaults = $util.emptyArray;
+    
+                /**
+                 * FieldOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.features = null;
     
                 /**
                  * FieldOptions uninterpretedOption.
@@ -41761,8 +46087,14 @@
                         writer.uint32(/* id 16, wireType 0 =*/128).bool(message.debugRedact);
                     if (message.retention != null && Object.hasOwnProperty.call(message, "retention"))
                         writer.uint32(/* id 17, wireType 0 =*/136).int32(message.retention);
-                    if (message.target != null && Object.hasOwnProperty.call(message, "target"))
-                        writer.uint32(/* id 18, wireType 0 =*/144).int32(message.target);
+                    if (message.targets != null && message.targets.length)
+                        for (var i = 0; i < message.targets.length; ++i)
+                            writer.uint32(/* id 19, wireType 0 =*/152).int32(message.targets[i]);
+                    if (message.editionDefaults != null && message.editionDefaults.length)
+                        for (var i = 0; i < message.editionDefaults.length; ++i)
+                            $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -41844,8 +46176,25 @@
                                 message.retention = reader.int32();
                                 break;
                             }
-                        case 18: {
-                                message.target = reader.int32();
+                        case 19: {
+                                if (!(message.targets && message.targets.length))
+                                    message.targets = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.targets.push(reader.int32());
+                                } else
+                                    message.targets.push(reader.int32());
+                                break;
+                            }
+                        case 20: {
+                                if (!(message.editionDefaults && message.editionDefaults.length))
+                                    message.editionDefaults = [];
+                                message.editionDefaults.push($root.google.protobuf.FieldOptions.EditionDefault.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 21: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -41949,22 +46298,40 @@
                         case 2:
                             break;
                         }
-                    if (message.target != null && message.hasOwnProperty("target"))
-                        switch (message.target) {
-                        default:
-                            return "target: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                            break;
+                    if (message.targets != null && message.hasOwnProperty("targets")) {
+                        if (!Array.isArray(message.targets))
+                            return "targets: array expected";
+                        for (var i = 0; i < message.targets.length; ++i)
+                            switch (message.targets[i]) {
+                            default:
+                                return "targets: enum value[] expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                            case 6:
+                            case 7:
+                            case 8:
+                            case 9:
+                                break;
+                            }
+                    }
+                    if (message.editionDefaults != null && message.hasOwnProperty("editionDefaults")) {
+                        if (!Array.isArray(message.editionDefaults))
+                            return "editionDefaults: array expected";
+                        for (var i = 0; i < message.editionDefaults.length; ++i) {
+                            var error = $root.google.protobuf.FieldOptions.EditionDefault.verify(message.editionDefaults[i]);
+                            if (error)
+                                return "editionDefaults." + error;
                         }
+                    }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -41989,6 +46356,7 @@
                             case 5:
                             case 6:
                             case 7:
+                            case 8:
                                 break;
                             }
                     }
@@ -42084,53 +46452,73 @@
                         message.retention = 2;
                         break;
                     }
-                    switch (object.target) {
-                    default:
-                        if (typeof object.target === "number") {
-                            message.target = object.target;
-                            break;
+                    if (object.targets) {
+                        if (!Array.isArray(object.targets))
+                            throw TypeError(".google.protobuf.FieldOptions.targets: array expected");
+                        message.targets = [];
+                        for (var i = 0; i < object.targets.length; ++i)
+                            switch (object.targets[i]) {
+                            default:
+                                if (typeof object.targets[i] === "number") {
+                                    message.targets[i] = object.targets[i];
+                                    break;
+                                }
+                            case "TARGET_TYPE_UNKNOWN":
+                            case 0:
+                                message.targets[i] = 0;
+                                break;
+                            case "TARGET_TYPE_FILE":
+                            case 1:
+                                message.targets[i] = 1;
+                                break;
+                            case "TARGET_TYPE_EXTENSION_RANGE":
+                            case 2:
+                                message.targets[i] = 2;
+                                break;
+                            case "TARGET_TYPE_MESSAGE":
+                            case 3:
+                                message.targets[i] = 3;
+                                break;
+                            case "TARGET_TYPE_FIELD":
+                            case 4:
+                                message.targets[i] = 4;
+                                break;
+                            case "TARGET_TYPE_ONEOF":
+                            case 5:
+                                message.targets[i] = 5;
+                                break;
+                            case "TARGET_TYPE_ENUM":
+                            case 6:
+                                message.targets[i] = 6;
+                                break;
+                            case "TARGET_TYPE_ENUM_ENTRY":
+                            case 7:
+                                message.targets[i] = 7;
+                                break;
+                            case "TARGET_TYPE_SERVICE":
+                            case 8:
+                                message.targets[i] = 8;
+                                break;
+                            case "TARGET_TYPE_METHOD":
+                            case 9:
+                                message.targets[i] = 9;
+                                break;
+                            }
+                    }
+                    if (object.editionDefaults) {
+                        if (!Array.isArray(object.editionDefaults))
+                            throw TypeError(".google.protobuf.FieldOptions.editionDefaults: array expected");
+                        message.editionDefaults = [];
+                        for (var i = 0; i < object.editionDefaults.length; ++i) {
+                            if (typeof object.editionDefaults[i] !== "object")
+                                throw TypeError(".google.protobuf.FieldOptions.editionDefaults: object expected");
+                            message.editionDefaults[i] = $root.google.protobuf.FieldOptions.EditionDefault.fromObject(object.editionDefaults[i]);
                         }
-                        break;
-                    case "TARGET_TYPE_UNKNOWN":
-                    case 0:
-                        message.target = 0;
-                        break;
-                    case "TARGET_TYPE_FILE":
-                    case 1:
-                        message.target = 1;
-                        break;
-                    case "TARGET_TYPE_EXTENSION_RANGE":
-                    case 2:
-                        message.target = 2;
-                        break;
-                    case "TARGET_TYPE_MESSAGE":
-                    case 3:
-                        message.target = 3;
-                        break;
-                    case "TARGET_TYPE_FIELD":
-                    case 4:
-                        message.target = 4;
-                        break;
-                    case "TARGET_TYPE_ONEOF":
-                    case 5:
-                        message.target = 5;
-                        break;
-                    case "TARGET_TYPE_ENUM":
-                    case 6:
-                        message.target = 6;
-                        break;
-                    case "TARGET_TYPE_ENUM_ENTRY":
-                    case 7:
-                        message.target = 7;
-                        break;
-                    case "TARGET_TYPE_SERVICE":
-                    case 8:
-                        message.target = 8;
-                        break;
-                    case "TARGET_TYPE_METHOD":
-                    case 9:
-                        message.target = 9;
-                        break;
+                    }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
@@ -42185,6 +46573,10 @@
                             case 7:
                                 message[".google.api.fieldBehavior"][i] = 7;
                                 break;
+                            case "IDENTIFIER":
+                            case 8:
+                                message[".google.api.fieldBehavior"][i] = 8;
+                                break;
                             }
                     }
                     if (object[".google.api.resourceReference"] != null) {
@@ -42209,6 +46601,8 @@
                         options = {};
                     var object = {};
                     if (options.arrays || options.defaults) {
+                        object.targets = [];
+                        object.editionDefaults = [];
                         object.uninterpretedOption = [];
                         object[".google.api.fieldBehavior"] = [];
                     }
@@ -42222,7 +46616,7 @@
                         object.unverifiedLazy = false;
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
-                        object.target = options.enums === String ? "TARGET_TYPE_UNKNOWN" : 0;
+                        object.features = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -42243,8 +46637,18 @@
                         object.debugRedact = message.debugRedact;
                     if (message.retention != null && message.hasOwnProperty("retention"))
                         object.retention = options.enums === String ? $root.google.protobuf.FieldOptions.OptionRetention[message.retention] === undefined ? message.retention : $root.google.protobuf.FieldOptions.OptionRetention[message.retention] : message.retention;
-                    if (message.target != null && message.hasOwnProperty("target"))
-                        object.target = options.enums === String ? $root.google.protobuf.FieldOptions.OptionTargetType[message.target] === undefined ? message.target : $root.google.protobuf.FieldOptions.OptionTargetType[message.target] : message.target;
+                    if (message.targets && message.targets.length) {
+                        object.targets = [];
+                        for (var j = 0; j < message.targets.length; ++j)
+                            object.targets[j] = options.enums === String ? $root.google.protobuf.FieldOptions.OptionTargetType[message.targets[j]] === undefined ? message.targets[j] : $root.google.protobuf.FieldOptions.OptionTargetType[message.targets[j]] : message.targets[j];
+                    }
+                    if (message.editionDefaults && message.editionDefaults.length) {
+                        object.editionDefaults = [];
+                        for (var j = 0; j < message.editionDefaults.length; ++j)
+                            object.editionDefaults[j] = $root.google.protobuf.FieldOptions.EditionDefault.toObject(message.editionDefaults[j], options);
+                    }
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -42364,6 +46768,297 @@
                     return values;
                 })();
     
+                FieldOptions.EditionDefault = (function() {
+    
+                    /**
+                     * Properties of an EditionDefault.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IEditionDefault
+                     * @property {google.protobuf.Edition|null} [edition] EditionDefault edition
+                     * @property {string|null} [value] EditionDefault value
+                     */
+    
+                    /**
+                     * Constructs a new EditionDefault.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents an EditionDefault.
+                     * @implements IEditionDefault
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IEditionDefault=} [properties] Properties to set
+                     */
+                    function EditionDefault(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * EditionDefault edition.
+                     * @member {google.protobuf.Edition} edition
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     */
+                    EditionDefault.prototype.edition = 0;
+    
+                    /**
+                     * EditionDefault value.
+                     * @member {string} value
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     */
+                    EditionDefault.prototype.value = "";
+    
+                    /**
+                     * Creates a new EditionDefault instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault instance
+                     */
+                    EditionDefault.create = function create(properties) {
+                        return new EditionDefault(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault} message EditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EditionDefault.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IEditionDefault} message EditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    EditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an EditionDefault message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EditionDefault.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.EditionDefault();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 3: {
+                                    message.edition = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.value = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    EditionDefault.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an EditionDefault message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    EditionDefault.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            switch (message.edition) {
+                            default:
+                                return "edition: enum value expected";
+                            case 0:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            if (!$util.isString(message.value))
+                                return "value: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.EditionDefault} EditionDefault
+                     */
+                    EditionDefault.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.EditionDefault)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.EditionDefault();
+                        switch (object.edition) {
+                        default:
+                            if (typeof object.edition === "number") {
+                                message.edition = object.edition;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.edition = 0;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.edition = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.edition = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.edition = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.edition = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.edition = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.edition = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.edition = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.edition = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.edition = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.edition = 2147483647;
+                            break;
+                        }
+                        if (object.value != null)
+                            message.value = String(object.value);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {google.protobuf.FieldOptions.EditionDefault} message EditionDefault
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    EditionDefault.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.value = "";
+                            object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            object.value = message.value;
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this EditionDefault to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    EditionDefault.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for EditionDefault
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.EditionDefault
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    EditionDefault.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.EditionDefault";
+                    };
+    
+                    return EditionDefault;
+                })();
+    
                 return FieldOptions;
             })();
     
@@ -42373,6 +47068,7 @@
                  * Properties of an OneofOptions.
                  * @memberof google.protobuf
                  * @interface IOneofOptions
+                 * @property {google.protobuf.IFeatureSet|null} [features] OneofOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] OneofOptions uninterpretedOption
                  */
     
@@ -42391,6 +47087,14 @@
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
+    
+                /**
+                 * OneofOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.OneofOptions
+                 * @instance
+                 */
+                OneofOptions.prototype.features = null;
     
                 /**
                  * OneofOptions uninterpretedOption.
@@ -42424,6 +47128,8 @@
                 OneofOptions.encode = function encode(message, writer) {
                     if (!writer)
                         writer = $Writer.create();
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -42461,6 +47167,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
+                        case 1: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
@@ -42502,6 +47212,11 @@
                 OneofOptions.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -42526,6 +47241,11 @@
                     if (object instanceof $root.google.protobuf.OneofOptions)
                         return object;
                     var message = new $root.google.protobuf.OneofOptions();
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.OneofOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.OneofOptions.uninterpretedOption: array expected");
@@ -42554,6 +47274,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
+                    if (options.defaults)
+                        object.features = null;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -42600,6 +47324,7 @@
                  * @property {boolean|null} [allowAlias] EnumOptions allowAlias
                  * @property {boolean|null} [deprecated] EnumOptions deprecated
                  * @property {boolean|null} [deprecatedLegacyJsonFieldConflicts] EnumOptions deprecatedLegacyJsonFieldConflicts
+                 * @property {google.protobuf.IFeatureSet|null} [features] EnumOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumOptions uninterpretedOption
                  */
     
@@ -42644,6 +47369,14 @@
                 EnumOptions.prototype.deprecatedLegacyJsonFieldConflicts = false;
     
                 /**
+                 * EnumOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.EnumOptions
+                 * @instance
+                 */
+                EnumOptions.prototype.features = null;
+    
+                /**
                  * EnumOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumOptions
@@ -42681,6 +47414,8 @@
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.deprecated);
                     if (message.deprecatedLegacyJsonFieldConflicts != null && Object.hasOwnProperty.call(message, "deprecatedLegacyJsonFieldConflicts"))
                         writer.uint32(/* id 6, wireType 0 =*/48).bool(message.deprecatedLegacyJsonFieldConflicts);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -42728,6 +47463,10 @@
                             }
                         case 6: {
                                 message.deprecatedLegacyJsonFieldConflicts = reader.bool();
+                                break;
+                            }
+                        case 7: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -42780,6 +47519,11 @@
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         if (typeof message.deprecatedLegacyJsonFieldConflicts !== "boolean")
                             return "deprecatedLegacyJsonFieldConflicts: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -42810,6 +47554,11 @@
                         message.deprecated = Boolean(object.deprecated);
                     if (object.deprecatedLegacyJsonFieldConflicts != null)
                         message.deprecatedLegacyJsonFieldConflicts = Boolean(object.deprecatedLegacyJsonFieldConflicts);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.EnumOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumOptions.uninterpretedOption: array expected");
@@ -42842,6 +47591,7 @@
                         object.allowAlias = false;
                         object.deprecated = false;
                         object.deprecatedLegacyJsonFieldConflicts = false;
+                        object.features = null;
                     }
                     if (message.allowAlias != null && message.hasOwnProperty("allowAlias"))
                         object.allowAlias = message.allowAlias;
@@ -42849,6 +47599,8 @@
                         object.deprecated = message.deprecated;
                     if (message.deprecatedLegacyJsonFieldConflicts != null && message.hasOwnProperty("deprecatedLegacyJsonFieldConflicts"))
                         object.deprecatedLegacyJsonFieldConflicts = message.deprecatedLegacyJsonFieldConflicts;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -42893,6 +47645,8 @@
                  * @memberof google.protobuf
                  * @interface IEnumValueOptions
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
+                 * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
+                 * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -42919,6 +47673,22 @@
                  * @instance
                  */
                 EnumValueOptions.prototype.deprecated = false;
+    
+                /**
+                 * EnumValueOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.features = null;
+    
+                /**
+                 * EnumValueOptions debugRedact.
+                 * @member {boolean} debugRedact
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.debugRedact = false;
     
                 /**
                  * EnumValueOptions uninterpretedOption.
@@ -42954,6 +47724,10 @@
                         writer = $Writer.create();
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 1, wireType 0 =*/8).bool(message.deprecated);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -42993,6 +47767,14 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.deprecated = reader.bool();
+                                break;
+                            }
+                        case 2: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                message.debugRedact = reader.bool();
                                 break;
                             }
                         case 999: {
@@ -43039,6 +47821,14 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
+                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                        if (typeof message.debugRedact !== "boolean")
+                            return "debugRedact: boolean expected";
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -43065,6 +47855,13 @@
                     var message = new $root.google.protobuf.EnumValueOptions();
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
+                    if (object.debugRedact != null)
+                        message.debugRedact = Boolean(object.debugRedact);
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -43093,10 +47890,17 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.uninterpretedOption = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.deprecated = false;
+                        object.features = null;
+                        object.debugRedact = false;
+                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
+                        object.debugRedact = message.debugRedact;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -43140,6 +47944,7 @@
                  * Properties of a ServiceOptions.
                  * @memberof google.protobuf
                  * @interface IServiceOptions
+                 * @property {google.protobuf.IFeatureSet|null} [features] ServiceOptions features
                  * @property {boolean|null} [deprecated] ServiceOptions deprecated
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
@@ -43161,6 +47966,14 @@
                             if (properties[keys[i]] != null)
                                 this[keys[i]] = properties[keys[i]];
                 }
+    
+                /**
+                 * ServiceOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype.features = null;
     
                 /**
                  * ServiceOptions deprecated.
@@ -43220,6 +48033,8 @@
                         writer = $Writer.create();
                     if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -43261,6 +48076,10 @@
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
+                        case 34: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
                         case 33: {
                                 message.deprecated = reader.bool();
                                 break;
@@ -43314,6 +48133,11 @@
                 ServiceOptions.verify = function verify(message) {
                     if (typeof message !== "object" || message === null)
                         return "object expected";
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         if (typeof message.deprecated !== "boolean")
                             return "deprecated: boolean expected";
@@ -43347,6 +48171,11 @@
                     if (object instanceof $root.google.protobuf.ServiceOptions)
                         return object;
                     var message = new $root.google.protobuf.ServiceOptions();
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.ServiceOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     if (object.uninterpretedOption) {
@@ -43383,11 +48212,14 @@
                         object.uninterpretedOption = [];
                     if (options.defaults) {
                         object.deprecated = false;
+                        object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -43437,6 +48269,7 @@
                  * @interface IMethodOptions
                  * @property {boolean|null} [deprecated] MethodOptions deprecated
                  * @property {google.protobuf.MethodOptions.IdempotencyLevel|null} [idempotencyLevel] MethodOptions idempotencyLevel
+                 * @property {google.protobuf.IFeatureSet|null} [features] MethodOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
                  * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
                  * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
@@ -43474,6 +48307,14 @@
                  * @instance
                  */
                 MethodOptions.prototype.idempotencyLevel = 0;
+    
+                /**
+                 * MethodOptions features.
+                 * @member {google.protobuf.IFeatureSet|null|undefined} features
+                 * @memberof google.protobuf.MethodOptions
+                 * @instance
+                 */
+                MethodOptions.prototype.features = null;
     
                 /**
                  * MethodOptions uninterpretedOption.
@@ -43527,6 +48368,8 @@
                         writer.uint32(/* id 33, wireType 0 =*/264).bool(message.deprecated);
                     if (message.idempotencyLevel != null && Object.hasOwnProperty.call(message, "idempotencyLevel"))
                         writer.uint32(/* id 34, wireType 0 =*/272).int32(message.idempotencyLevel);
+                    if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                        $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -43575,6 +48418,10 @@
                             }
                         case 34: {
                                 message.idempotencyLevel = reader.int32();
+                                break;
+                            }
+                        case 35: {
+                                message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -43640,6 +48487,11 @@
                         case 2:
                             break;
                         }
+                    if (message.features != null && message.hasOwnProperty("features")) {
+                        var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (error)
+                            return "features." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -43698,6 +48550,11 @@
                         message.idempotencyLevel = 2;
                         break;
                     }
+                    if (object.features != null) {
+                        if (typeof object.features !== "object")
+                            throw TypeError(".google.protobuf.MethodOptions.features: object expected");
+                        message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.MethodOptions.uninterpretedOption: array expected");
@@ -43743,12 +48600,15 @@
                     if (options.defaults) {
                         object.deprecated = false;
                         object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
+                        object.features = null;
                         object[".google.api.http"] = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
                         object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                    if (message.features != null && message.hasOwnProperty("features"))
+                        object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -44435,6 +49295,1268 @@
                 })();
     
                 return UninterpretedOption;
+            })();
+    
+            protobuf.FeatureSet = (function() {
+    
+                /**
+                 * Properties of a FeatureSet.
+                 * @memberof google.protobuf
+                 * @interface IFeatureSet
+                 * @property {google.protobuf.FeatureSet.FieldPresence|null} [fieldPresence] FeatureSet fieldPresence
+                 * @property {google.protobuf.FeatureSet.EnumType|null} [enumType] FeatureSet enumType
+                 * @property {google.protobuf.FeatureSet.RepeatedFieldEncoding|null} [repeatedFieldEncoding] FeatureSet repeatedFieldEncoding
+                 * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
+                 * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
+                 * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 */
+    
+                /**
+                 * Constructs a new FeatureSet.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FeatureSet.
+                 * @implements IFeatureSet
+                 * @constructor
+                 * @param {google.protobuf.IFeatureSet=} [properties] Properties to set
+                 */
+                function FeatureSet(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FeatureSet fieldPresence.
+                 * @member {google.protobuf.FeatureSet.FieldPresence} fieldPresence
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.fieldPresence = 0;
+    
+                /**
+                 * FeatureSet enumType.
+                 * @member {google.protobuf.FeatureSet.EnumType} enumType
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enumType = 0;
+    
+                /**
+                 * FeatureSet repeatedFieldEncoding.
+                 * @member {google.protobuf.FeatureSet.RepeatedFieldEncoding} repeatedFieldEncoding
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.repeatedFieldEncoding = 0;
+    
+                /**
+                 * FeatureSet utf8Validation.
+                 * @member {google.protobuf.FeatureSet.Utf8Validation} utf8Validation
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.utf8Validation = 0;
+    
+                /**
+                 * FeatureSet messageEncoding.
+                 * @member {google.protobuf.FeatureSet.MessageEncoding} messageEncoding
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.messageEncoding = 0;
+    
+                /**
+                 * FeatureSet jsonFormat.
+                 * @member {google.protobuf.FeatureSet.JsonFormat} jsonFormat
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.jsonFormat = 0;
+    
+                /**
+                 * Creates a new FeatureSet instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet=} [properties] Properties to set
+                 * @returns {google.protobuf.FeatureSet} FeatureSet instance
+                 */
+                FeatureSet.create = function create(properties) {
+                    return new FeatureSet(properties);
+                };
+    
+                /**
+                 * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet} message FeatureSet message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSet.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.fieldPresence);
+                    if (message.enumType != null && Object.hasOwnProperty.call(message, "enumType"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.enumType);
+                    if (message.repeatedFieldEncoding != null && Object.hasOwnProperty.call(message, "repeatedFieldEncoding"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.repeatedFieldEncoding);
+                    if (message.utf8Validation != null && Object.hasOwnProperty.call(message, "utf8Validation"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.utf8Validation);
+                    if (message.messageEncoding != null && Object.hasOwnProperty.call(message, "messageEncoding"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
+                    if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.IFeatureSet} message FeatureSet message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSet.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FeatureSet message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSet.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.fieldPresence = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.enumType = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.repeatedFieldEncoding = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.utf8Validation = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.messageEncoding = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSet.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FeatureSet message.
+                 * @function verify
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FeatureSet.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                        switch (message.fieldPresence) {
+                        default:
+                            return "fieldPresence: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                        switch (message.enumType) {
+                        default:
+                            return "enumType: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                        switch (message.repeatedFieldEncoding) {
+                        default:
+                            return "repeatedFieldEncoding: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                        switch (message.utf8Validation) {
+                        default:
+                            return "utf8Validation: enum value expected";
+                        case 0:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                        switch (message.messageEncoding) {
+                        default:
+                            return "messageEncoding: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                        switch (message.jsonFormat) {
+                        default:
+                            return "jsonFormat: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FeatureSet} FeatureSet
+                 */
+                FeatureSet.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FeatureSet)
+                        return object;
+                    var message = new $root.google.protobuf.FeatureSet();
+                    switch (object.fieldPresence) {
+                    default:
+                        if (typeof object.fieldPresence === "number") {
+                            message.fieldPresence = object.fieldPresence;
+                            break;
+                        }
+                        break;
+                    case "FIELD_PRESENCE_UNKNOWN":
+                    case 0:
+                        message.fieldPresence = 0;
+                        break;
+                    case "EXPLICIT":
+                    case 1:
+                        message.fieldPresence = 1;
+                        break;
+                    case "IMPLICIT":
+                    case 2:
+                        message.fieldPresence = 2;
+                        break;
+                    case "LEGACY_REQUIRED":
+                    case 3:
+                        message.fieldPresence = 3;
+                        break;
+                    }
+                    switch (object.enumType) {
+                    default:
+                        if (typeof object.enumType === "number") {
+                            message.enumType = object.enumType;
+                            break;
+                        }
+                        break;
+                    case "ENUM_TYPE_UNKNOWN":
+                    case 0:
+                        message.enumType = 0;
+                        break;
+                    case "OPEN":
+                    case 1:
+                        message.enumType = 1;
+                        break;
+                    case "CLOSED":
+                    case 2:
+                        message.enumType = 2;
+                        break;
+                    }
+                    switch (object.repeatedFieldEncoding) {
+                    default:
+                        if (typeof object.repeatedFieldEncoding === "number") {
+                            message.repeatedFieldEncoding = object.repeatedFieldEncoding;
+                            break;
+                        }
+                        break;
+                    case "REPEATED_FIELD_ENCODING_UNKNOWN":
+                    case 0:
+                        message.repeatedFieldEncoding = 0;
+                        break;
+                    case "PACKED":
+                    case 1:
+                        message.repeatedFieldEncoding = 1;
+                        break;
+                    case "EXPANDED":
+                    case 2:
+                        message.repeatedFieldEncoding = 2;
+                        break;
+                    }
+                    switch (object.utf8Validation) {
+                    default:
+                        if (typeof object.utf8Validation === "number") {
+                            message.utf8Validation = object.utf8Validation;
+                            break;
+                        }
+                        break;
+                    case "UTF8_VALIDATION_UNKNOWN":
+                    case 0:
+                        message.utf8Validation = 0;
+                        break;
+                    case "VERIFY":
+                    case 2:
+                        message.utf8Validation = 2;
+                        break;
+                    case "NONE":
+                    case 3:
+                        message.utf8Validation = 3;
+                        break;
+                    }
+                    switch (object.messageEncoding) {
+                    default:
+                        if (typeof object.messageEncoding === "number") {
+                            message.messageEncoding = object.messageEncoding;
+                            break;
+                        }
+                        break;
+                    case "MESSAGE_ENCODING_UNKNOWN":
+                    case 0:
+                        message.messageEncoding = 0;
+                        break;
+                    case "LENGTH_PREFIXED":
+                    case 1:
+                        message.messageEncoding = 1;
+                        break;
+                    case "DELIMITED":
+                    case 2:
+                        message.messageEncoding = 2;
+                        break;
+                    }
+                    switch (object.jsonFormat) {
+                    default:
+                        if (typeof object.jsonFormat === "number") {
+                            message.jsonFormat = object.jsonFormat;
+                            break;
+                        }
+                        break;
+                    case "JSON_FORMAT_UNKNOWN":
+                    case 0:
+                        message.jsonFormat = 0;
+                        break;
+                    case "ALLOW":
+                    case 1:
+                        message.jsonFormat = 1;
+                        break;
+                    case "LEGACY_BEST_EFFORT":
+                    case 2:
+                        message.jsonFormat = 2;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {google.protobuf.FeatureSet} message FeatureSet
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FeatureSet.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.fieldPresence = options.enums === String ? "FIELD_PRESENCE_UNKNOWN" : 0;
+                        object.enumType = options.enums === String ? "ENUM_TYPE_UNKNOWN" : 0;
+                        object.repeatedFieldEncoding = options.enums === String ? "REPEATED_FIELD_ENCODING_UNKNOWN" : 0;
+                        object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
+                        object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
+                        object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                    }
+                    if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
+                        object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
+                    if (message.enumType != null && message.hasOwnProperty("enumType"))
+                        object.enumType = options.enums === String ? $root.google.protobuf.FeatureSet.EnumType[message.enumType] === undefined ? message.enumType : $root.google.protobuf.FeatureSet.EnumType[message.enumType] : message.enumType;
+                    if (message.repeatedFieldEncoding != null && message.hasOwnProperty("repeatedFieldEncoding"))
+                        object.repeatedFieldEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] === undefined ? message.repeatedFieldEncoding : $root.google.protobuf.FeatureSet.RepeatedFieldEncoding[message.repeatedFieldEncoding] : message.repeatedFieldEncoding;
+                    if (message.utf8Validation != null && message.hasOwnProperty("utf8Validation"))
+                        object.utf8Validation = options.enums === String ? $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] === undefined ? message.utf8Validation : $root.google.protobuf.FeatureSet.Utf8Validation[message.utf8Validation] : message.utf8Validation;
+                    if (message.messageEncoding != null && message.hasOwnProperty("messageEncoding"))
+                        object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
+                    if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
+                        object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FeatureSet to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FeatureSet.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FeatureSet
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FeatureSet
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FeatureSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FeatureSet";
+                };
+    
+                /**
+                 * FieldPresence enum.
+                 * @name google.protobuf.FeatureSet.FieldPresence
+                 * @enum {number}
+                 * @property {number} FIELD_PRESENCE_UNKNOWN=0 FIELD_PRESENCE_UNKNOWN value
+                 * @property {number} EXPLICIT=1 EXPLICIT value
+                 * @property {number} IMPLICIT=2 IMPLICIT value
+                 * @property {number} LEGACY_REQUIRED=3 LEGACY_REQUIRED value
+                 */
+                FeatureSet.FieldPresence = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FIELD_PRESENCE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "EXPLICIT"] = 1;
+                    values[valuesById[2] = "IMPLICIT"] = 2;
+                    values[valuesById[3] = "LEGACY_REQUIRED"] = 3;
+                    return values;
+                })();
+    
+                /**
+                 * EnumType enum.
+                 * @name google.protobuf.FeatureSet.EnumType
+                 * @enum {number}
+                 * @property {number} ENUM_TYPE_UNKNOWN=0 ENUM_TYPE_UNKNOWN value
+                 * @property {number} OPEN=1 OPEN value
+                 * @property {number} CLOSED=2 CLOSED value
+                 */
+                FeatureSet.EnumType = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENUM_TYPE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "OPEN"] = 1;
+                    values[valuesById[2] = "CLOSED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * RepeatedFieldEncoding enum.
+                 * @name google.protobuf.FeatureSet.RepeatedFieldEncoding
+                 * @enum {number}
+                 * @property {number} REPEATED_FIELD_ENCODING_UNKNOWN=0 REPEATED_FIELD_ENCODING_UNKNOWN value
+                 * @property {number} PACKED=1 PACKED value
+                 * @property {number} EXPANDED=2 EXPANDED value
+                 */
+                FeatureSet.RepeatedFieldEncoding = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "REPEATED_FIELD_ENCODING_UNKNOWN"] = 0;
+                    values[valuesById[1] = "PACKED"] = 1;
+                    values[valuesById[2] = "EXPANDED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Utf8Validation enum.
+                 * @name google.protobuf.FeatureSet.Utf8Validation
+                 * @enum {number}
+                 * @property {number} UTF8_VALIDATION_UNKNOWN=0 UTF8_VALIDATION_UNKNOWN value
+                 * @property {number} VERIFY=2 VERIFY value
+                 * @property {number} NONE=3 NONE value
+                 */
+                FeatureSet.Utf8Validation = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "UTF8_VALIDATION_UNKNOWN"] = 0;
+                    values[valuesById[2] = "VERIFY"] = 2;
+                    values[valuesById[3] = "NONE"] = 3;
+                    return values;
+                })();
+    
+                /**
+                 * MessageEncoding enum.
+                 * @name google.protobuf.FeatureSet.MessageEncoding
+                 * @enum {number}
+                 * @property {number} MESSAGE_ENCODING_UNKNOWN=0 MESSAGE_ENCODING_UNKNOWN value
+                 * @property {number} LENGTH_PREFIXED=1 LENGTH_PREFIXED value
+                 * @property {number} DELIMITED=2 DELIMITED value
+                 */
+                FeatureSet.MessageEncoding = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "MESSAGE_ENCODING_UNKNOWN"] = 0;
+                    values[valuesById[1] = "LENGTH_PREFIXED"] = 1;
+                    values[valuesById[2] = "DELIMITED"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * JsonFormat enum.
+                 * @name google.protobuf.FeatureSet.JsonFormat
+                 * @enum {number}
+                 * @property {number} JSON_FORMAT_UNKNOWN=0 JSON_FORMAT_UNKNOWN value
+                 * @property {number} ALLOW=1 ALLOW value
+                 * @property {number} LEGACY_BEST_EFFORT=2 LEGACY_BEST_EFFORT value
+                 */
+                FeatureSet.JsonFormat = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "JSON_FORMAT_UNKNOWN"] = 0;
+                    values[valuesById[1] = "ALLOW"] = 1;
+                    values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
+                    return values;
+                })();
+    
+                return FeatureSet;
+            })();
+    
+            protobuf.FeatureSetDefaults = (function() {
+    
+                /**
+                 * Properties of a FeatureSetDefaults.
+                 * @memberof google.protobuf
+                 * @interface IFeatureSetDefaults
+                 * @property {Array.<google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault>|null} [defaults] FeatureSetDefaults defaults
+                 * @property {google.protobuf.Edition|null} [minimumEdition] FeatureSetDefaults minimumEdition
+                 * @property {google.protobuf.Edition|null} [maximumEdition] FeatureSetDefaults maximumEdition
+                 */
+    
+                /**
+                 * Constructs a new FeatureSetDefaults.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FeatureSetDefaults.
+                 * @implements IFeatureSetDefaults
+                 * @constructor
+                 * @param {google.protobuf.IFeatureSetDefaults=} [properties] Properties to set
+                 */
+                function FeatureSetDefaults(properties) {
+                    this.defaults = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FeatureSetDefaults defaults.
+                 * @member {Array.<google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault>} defaults
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.defaults = $util.emptyArray;
+    
+                /**
+                 * FeatureSetDefaults minimumEdition.
+                 * @member {google.protobuf.Edition} minimumEdition
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.minimumEdition = 0;
+    
+                /**
+                 * FeatureSetDefaults maximumEdition.
+                 * @member {google.protobuf.Edition} maximumEdition
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 */
+                FeatureSetDefaults.prototype.maximumEdition = 0;
+    
+                /**
+                 * Creates a new FeatureSetDefaults instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults=} [properties] Properties to set
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults instance
+                 */
+                FeatureSetDefaults.create = function create(properties) {
+                    return new FeatureSetDefaults(properties);
+                };
+    
+                /**
+                 * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults} message FeatureSetDefaults message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSetDefaults.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.defaults != null && message.defaults.length)
+                        for (var i = 0; i < message.defaults.length; ++i)
+                            $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.encode(message.defaults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.minimumEdition != null && Object.hasOwnProperty.call(message, "minimumEdition"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.minimumEdition);
+                    if (message.maximumEdition != null && Object.hasOwnProperty.call(message, "maximumEdition"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.maximumEdition);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.IFeatureSetDefaults} message FeatureSetDefaults message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FeatureSetDefaults.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSetDefaults.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.defaults && message.defaults.length))
+                                    message.defaults = [];
+                                message.defaults.push($root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 4: {
+                                message.minimumEdition = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.maximumEdition = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FeatureSetDefaults.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FeatureSetDefaults message.
+                 * @function verify
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FeatureSetDefaults.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.defaults != null && message.hasOwnProperty("defaults")) {
+                        if (!Array.isArray(message.defaults))
+                            return "defaults: array expected";
+                        for (var i = 0; i < message.defaults.length; ++i) {
+                            var error = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify(message.defaults[i]);
+                            if (error)
+                                return "defaults." + error;
+                        }
+                    }
+                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                        switch (message.minimumEdition) {
+                        default:
+                            return "minimumEdition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
+                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                        switch (message.maximumEdition) {
+                        default:
+                            return "maximumEdition: enum value expected";
+                        case 0:
+                        case 998:
+                        case 999:
+                        case 1000:
+                        case 1001:
+                        case 1:
+                        case 2:
+                        case 99997:
+                        case 99998:
+                        case 99999:
+                        case 2147483647:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FeatureSetDefaults} FeatureSetDefaults
+                 */
+                FeatureSetDefaults.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FeatureSetDefaults)
+                        return object;
+                    var message = new $root.google.protobuf.FeatureSetDefaults();
+                    if (object.defaults) {
+                        if (!Array.isArray(object.defaults))
+                            throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: array expected");
+                        message.defaults = [];
+                        for (var i = 0; i < object.defaults.length; ++i) {
+                            if (typeof object.defaults[i] !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.defaults: object expected");
+                            message.defaults[i] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fromObject(object.defaults[i]);
+                        }
+                    }
+                    switch (object.minimumEdition) {
+                    default:
+                        if (typeof object.minimumEdition === "number") {
+                            message.minimumEdition = object.minimumEdition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.minimumEdition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.minimumEdition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.minimumEdition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.minimumEdition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.minimumEdition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.minimumEdition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.minimumEdition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.minimumEdition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.minimumEdition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.minimumEdition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.minimumEdition = 2147483647;
+                        break;
+                    }
+                    switch (object.maximumEdition) {
+                    default:
+                        if (typeof object.maximumEdition === "number") {
+                            message.maximumEdition = object.maximumEdition;
+                            break;
+                        }
+                        break;
+                    case "EDITION_UNKNOWN":
+                    case 0:
+                        message.maximumEdition = 0;
+                        break;
+                    case "EDITION_PROTO2":
+                    case 998:
+                        message.maximumEdition = 998;
+                        break;
+                    case "EDITION_PROTO3":
+                    case 999:
+                        message.maximumEdition = 999;
+                        break;
+                    case "EDITION_2023":
+                    case 1000:
+                        message.maximumEdition = 1000;
+                        break;
+                    case "EDITION_2024":
+                    case 1001:
+                        message.maximumEdition = 1001;
+                        break;
+                    case "EDITION_1_TEST_ONLY":
+                    case 1:
+                        message.maximumEdition = 1;
+                        break;
+                    case "EDITION_2_TEST_ONLY":
+                    case 2:
+                        message.maximumEdition = 2;
+                        break;
+                    case "EDITION_99997_TEST_ONLY":
+                    case 99997:
+                        message.maximumEdition = 99997;
+                        break;
+                    case "EDITION_99998_TEST_ONLY":
+                    case 99998:
+                        message.maximumEdition = 99998;
+                        break;
+                    case "EDITION_99999_TEST_ONLY":
+                    case 99999:
+                        message.maximumEdition = 99999;
+                        break;
+                    case "EDITION_MAX":
+                    case 2147483647:
+                        message.maximumEdition = 2147483647;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {google.protobuf.FeatureSetDefaults} message FeatureSetDefaults
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FeatureSetDefaults.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.defaults = [];
+                    if (options.defaults) {
+                        object.minimumEdition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        object.maximumEdition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                    }
+                    if (message.defaults && message.defaults.length) {
+                        object.defaults = [];
+                        for (var j = 0; j < message.defaults.length; ++j)
+                            object.defaults[j] = $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.toObject(message.defaults[j], options);
+                    }
+                    if (message.minimumEdition != null && message.hasOwnProperty("minimumEdition"))
+                        object.minimumEdition = options.enums === String ? $root.google.protobuf.Edition[message.minimumEdition] === undefined ? message.minimumEdition : $root.google.protobuf.Edition[message.minimumEdition] : message.minimumEdition;
+                    if (message.maximumEdition != null && message.hasOwnProperty("maximumEdition"))
+                        object.maximumEdition = options.enums === String ? $root.google.protobuf.Edition[message.maximumEdition] === undefined ? message.maximumEdition : $root.google.protobuf.Edition[message.maximumEdition] : message.maximumEdition;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FeatureSetDefaults to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FeatureSetDefaults.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FeatureSetDefaults
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FeatureSetDefaults
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FeatureSetDefaults.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FeatureSetDefaults";
+                };
+    
+                FeatureSetDefaults.FeatureSetEditionDefault = (function() {
+    
+                    /**
+                     * Properties of a FeatureSetEditionDefault.
+                     * @memberof google.protobuf.FeatureSetDefaults
+                     * @interface IFeatureSetEditionDefault
+                     * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
+                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSetEditionDefault.
+                     * @memberof google.protobuf.FeatureSetDefaults
+                     * @classdesc Represents a FeatureSetEditionDefault.
+                     * @implements IFeatureSetEditionDefault
+                     * @constructor
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault=} [properties] Properties to set
+                     */
+                    function FeatureSetEditionDefault(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSetEditionDefault edition.
+                     * @member {google.protobuf.Edition} edition
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.edition = 0;
+    
+                    /**
+                     * FeatureSetEditionDefault features.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.features = null;
+    
+                    /**
+                     * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault instance
+                     */
+                    FeatureSetEditionDefault.create = function create(properties) {
+                        return new FeatureSetEditionDefault(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault} message FeatureSetEditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSetEditionDefault.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault} message FeatureSetEditionDefault message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSetEditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSetEditionDefault.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 3: {
+                                    message.edition = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSetEditionDefault.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSetEditionDefault message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSetEditionDefault.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            switch (message.edition) {
+                            default:
+                                return "edition: enum value expected";
+                            case 0:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.features != null && message.hasOwnProperty("features")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                            if (error)
+                                return "features." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} FeatureSetEditionDefault
+                     */
+                    FeatureSetEditionDefault.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault)
+                            return object;
+                        var message = new $root.google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault();
+                        switch (object.edition) {
+                        default:
+                            if (typeof object.edition === "number") {
+                                message.edition = object.edition;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.edition = 0;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.edition = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.edition = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.edition = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.edition = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.edition = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.edition = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.edition = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.edition = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.edition = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.edition = 2147483647;
+                            break;
+                        }
+                        if (object.features != null) {
+                            if (typeof object.features !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
+                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault} message FeatureSetEditionDefault
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSetEditionDefault.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.features = null;
+                            object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.features != null && message.hasOwnProperty("features"))
+                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                        if (message.edition != null && message.hasOwnProperty("edition"))
+                            object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSetEditionDefault to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSetEditionDefault.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSetEditionDefault
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSetEditionDefault.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault";
+                    };
+    
+                    return FeatureSetEditionDefault;
+                })();
+    
+                return FeatureSetDefaults;
             })();
     
             protobuf.SourceCodeInfo = (function() {
@@ -46267,6 +52389,7 @@
              * @property {number} IMMUTABLE=5 IMMUTABLE value
              * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
              * @property {number} NON_EMPTY_DEFAULT=7 NON_EMPTY_DEFAULT value
+             * @property {number} IDENTIFIER=8 IDENTIFIER value
              */
             api.FieldBehavior = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -46278,6 +52401,7 @@
                 values[valuesById[5] = "IMMUTABLE"] = 5;
                 values[valuesById[6] = "UNORDERED_LIST"] = 6;
                 values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
+                values[valuesById[8] = "IDENTIFIER"] = 8;
                 return values;
             })();
     
@@ -48057,6 +54181,7 @@
                  * @property {string|null} [docTagPrefix] Publishing docTagPrefix
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
+                 * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
                  */
     
                 /**
@@ -48150,6 +54275,14 @@
                 Publishing.prototype.librarySettings = $util.emptyArray;
     
                 /**
+                 * Publishing protoReferenceDocumentationUri.
+                 * @member {string} protoReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.protoReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -48194,6 +54327,8 @@
                     if (message.librarySettings != null && message.librarySettings.length)
                         for (var i = 0; i < message.librarySettings.length; ++i)
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
+                    if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
+                        writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -48268,6 +54403,10 @@
                                 if (!(message.librarySettings && message.librarySettings.length))
                                     message.librarySettings = [];
                                 message.librarySettings.push($root.google.api.ClientLibrarySettings.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 110: {
+                                message.protoReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -48345,6 +54484,9 @@
                         case 2:
                         case 3:
                         case 4:
+                        case 5:
+                        case 6:
+                        case 7:
                             break;
                         }
                     if (message.librarySettings != null && message.hasOwnProperty("librarySettings")) {
@@ -48356,6 +54498,9 @@
                                 return "librarySettings." + error;
                         }
                     }
+                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                        if (!$util.isString(message.protoReferenceDocumentationUri))
+                            return "protoReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -48425,6 +54570,18 @@
                     case 4:
                         message.organization = 4;
                         break;
+                    case "SHOPPING":
+                    case 5:
+                        message.organization = 5;
+                        break;
+                    case "GEO":
+                    case 6:
+                        message.organization = 6;
+                        break;
+                    case "GENERATIVE_AI":
+                    case 7:
+                        message.organization = 7;
+                        break;
                     }
                     if (object.librarySettings) {
                         if (!Array.isArray(object.librarySettings))
@@ -48436,6 +54593,8 @@
                             message.librarySettings[i] = $root.google.api.ClientLibrarySettings.fromObject(object.librarySettings[i]);
                         }
                     }
+                    if (object.protoReferenceDocumentationUri != null)
+                        message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
                     return message;
                 };
     
@@ -48464,6 +54623,7 @@
                         object.githubLabel = "";
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
+                        object.protoReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -48492,6 +54652,8 @@
                         for (var j = 0; j < message.librarySettings.length; ++j)
                             object.librarySettings[j] = $root.google.api.ClientLibrarySettings.toObject(message.librarySettings[j], options);
                     }
+                    if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
+                        object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
                     return object;
                 };
     
@@ -49654,6 +55816,11 @@
                  * @memberof google.api
                  * @interface IDotnetSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] DotnetSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] DotnetSettings renamedServices
+                 * @property {Object.<string,string>|null} [renamedResources] DotnetSettings renamedResources
+                 * @property {Array.<string>|null} [ignoredResources] DotnetSettings ignoredResources
+                 * @property {Array.<string>|null} [forcedNamespaceAliases] DotnetSettings forcedNamespaceAliases
+                 * @property {Array.<string>|null} [handwrittenSignatures] DotnetSettings handwrittenSignatures
                  */
     
                 /**
@@ -49665,6 +55832,11 @@
                  * @param {google.api.IDotnetSettings=} [properties] Properties to set
                  */
                 function DotnetSettings(properties) {
+                    this.renamedServices = {};
+                    this.renamedResources = {};
+                    this.ignoredResources = [];
+                    this.forcedNamespaceAliases = [];
+                    this.handwrittenSignatures = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -49678,6 +55850,46 @@
                  * @instance
                  */
                 DotnetSettings.prototype.common = null;
+    
+                /**
+                 * DotnetSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.renamedServices = $util.emptyObject;
+    
+                /**
+                 * DotnetSettings renamedResources.
+                 * @member {Object.<string,string>} renamedResources
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.renamedResources = $util.emptyObject;
+    
+                /**
+                 * DotnetSettings ignoredResources.
+                 * @member {Array.<string>} ignoredResources
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.ignoredResources = $util.emptyArray;
+    
+                /**
+                 * DotnetSettings forcedNamespaceAliases.
+                 * @member {Array.<string>} forcedNamespaceAliases
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.forcedNamespaceAliases = $util.emptyArray;
+    
+                /**
+                 * DotnetSettings handwrittenSignatures.
+                 * @member {Array.<string>} handwrittenSignatures
+                 * @memberof google.api.DotnetSettings
+                 * @instance
+                 */
+                DotnetSettings.prototype.handwrittenSignatures = $util.emptyArray;
     
                 /**
                  * Creates a new DotnetSettings instance using the specified properties.
@@ -49705,6 +55917,21 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
+                    if (message.renamedResources != null && Object.hasOwnProperty.call(message, "renamedResources"))
+                        for (var keys = Object.keys(message.renamedResources), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedResources[keys[i]]).ldelim();
+                    if (message.ignoredResources != null && message.ignoredResources.length)
+                        for (var i = 0; i < message.ignoredResources.length; ++i)
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.ignoredResources[i]);
+                    if (message.forcedNamespaceAliases != null && message.forcedNamespaceAliases.length)
+                        for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.forcedNamespaceAliases[i]);
+                    if (message.handwrittenSignatures != null && message.handwrittenSignatures.length)
+                        for (var i = 0; i < message.handwrittenSignatures.length; ++i)
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.handwrittenSignatures[i]);
                     return writer;
                 };
     
@@ -49735,12 +55962,76 @@
                 DotnetSettings.decode = function decode(reader, length) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.DotnetSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
+                                break;
+                            }
+                        case 3: {
+                                if (message.renamedResources === $util.emptyObject)
+                                    message.renamedResources = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedResources[key] = value;
+                                break;
+                            }
+                        case 4: {
+                                if (!(message.ignoredResources && message.ignoredResources.length))
+                                    message.ignoredResources = [];
+                                message.ignoredResources.push(reader.string());
+                                break;
+                            }
+                        case 5: {
+                                if (!(message.forcedNamespaceAliases && message.forcedNamespaceAliases.length))
+                                    message.forcedNamespaceAliases = [];
+                                message.forcedNamespaceAliases.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                if (!(message.handwrittenSignatures && message.handwrittenSignatures.length))
+                                    message.handwrittenSignatures = [];
+                                message.handwrittenSignatures.push(reader.string());
                                 break;
                             }
                         default:
@@ -49783,6 +56074,43 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
+                    if (message.renamedResources != null && message.hasOwnProperty("renamedResources")) {
+                        if (!$util.isObject(message.renamedResources))
+                            return "renamedResources: object expected";
+                        var key = Object.keys(message.renamedResources);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedResources[key[i]]))
+                                return "renamedResources: string{k:string} expected";
+                    }
+                    if (message.ignoredResources != null && message.hasOwnProperty("ignoredResources")) {
+                        if (!Array.isArray(message.ignoredResources))
+                            return "ignoredResources: array expected";
+                        for (var i = 0; i < message.ignoredResources.length; ++i)
+                            if (!$util.isString(message.ignoredResources[i]))
+                                return "ignoredResources: string[] expected";
+                    }
+                    if (message.forcedNamespaceAliases != null && message.hasOwnProperty("forcedNamespaceAliases")) {
+                        if (!Array.isArray(message.forcedNamespaceAliases))
+                            return "forcedNamespaceAliases: array expected";
+                        for (var i = 0; i < message.forcedNamespaceAliases.length; ++i)
+                            if (!$util.isString(message.forcedNamespaceAliases[i]))
+                                return "forcedNamespaceAliases: string[] expected";
+                    }
+                    if (message.handwrittenSignatures != null && message.hasOwnProperty("handwrittenSignatures")) {
+                        if (!Array.isArray(message.handwrittenSignatures))
+                            return "handwrittenSignatures: array expected";
+                        for (var i = 0; i < message.handwrittenSignatures.length; ++i)
+                            if (!$util.isString(message.handwrittenSignatures[i]))
+                                return "handwrittenSignatures: string[] expected";
+                    }
                     return null;
                 };
     
@@ -49803,6 +56131,41 @@
                             throw TypeError(".google.api.DotnetSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.DotnetSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
+                    if (object.renamedResources) {
+                        if (typeof object.renamedResources !== "object")
+                            throw TypeError(".google.api.DotnetSettings.renamedResources: object expected");
+                        message.renamedResources = {};
+                        for (var keys = Object.keys(object.renamedResources), i = 0; i < keys.length; ++i)
+                            message.renamedResources[keys[i]] = String(object.renamedResources[keys[i]]);
+                    }
+                    if (object.ignoredResources) {
+                        if (!Array.isArray(object.ignoredResources))
+                            throw TypeError(".google.api.DotnetSettings.ignoredResources: array expected");
+                        message.ignoredResources = [];
+                        for (var i = 0; i < object.ignoredResources.length; ++i)
+                            message.ignoredResources[i] = String(object.ignoredResources[i]);
+                    }
+                    if (object.forcedNamespaceAliases) {
+                        if (!Array.isArray(object.forcedNamespaceAliases))
+                            throw TypeError(".google.api.DotnetSettings.forcedNamespaceAliases: array expected");
+                        message.forcedNamespaceAliases = [];
+                        for (var i = 0; i < object.forcedNamespaceAliases.length; ++i)
+                            message.forcedNamespaceAliases[i] = String(object.forcedNamespaceAliases[i]);
+                    }
+                    if (object.handwrittenSignatures) {
+                        if (!Array.isArray(object.handwrittenSignatures))
+                            throw TypeError(".google.api.DotnetSettings.handwrittenSignatures: array expected");
+                        message.handwrittenSignatures = [];
+                        for (var i = 0; i < object.handwrittenSignatures.length; ++i)
+                            message.handwrittenSignatures[i] = String(object.handwrittenSignatures[i]);
+                    }
                     return message;
                 };
     
@@ -49819,10 +56182,45 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.ignoredResources = [];
+                        object.forcedNamespaceAliases = [];
+                        object.handwrittenSignatures = [];
+                    }
+                    if (options.objects || options.defaults) {
+                        object.renamedServices = {};
+                        object.renamedResources = {};
+                    }
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
+                    if (message.renamedResources && (keys2 = Object.keys(message.renamedResources)).length) {
+                        object.renamedResources = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedResources[keys2[j]] = message.renamedResources[keys2[j]];
+                    }
+                    if (message.ignoredResources && message.ignoredResources.length) {
+                        object.ignoredResources = [];
+                        for (var j = 0; j < message.ignoredResources.length; ++j)
+                            object.ignoredResources[j] = message.ignoredResources[j];
+                    }
+                    if (message.forcedNamespaceAliases && message.forcedNamespaceAliases.length) {
+                        object.forcedNamespaceAliases = [];
+                        for (var j = 0; j < message.forcedNamespaceAliases.length; ++j)
+                            object.forcedNamespaceAliases[j] = message.forcedNamespaceAliases[j];
+                    }
+                    if (message.handwrittenSignatures && message.handwrittenSignatures.length) {
+                        object.handwrittenSignatures = [];
+                        for (var j = 0; j < message.handwrittenSignatures.length; ++j)
+                            object.handwrittenSignatures[j] = message.handwrittenSignatures[j];
+                    }
                     return object;
                 };
     
@@ -50279,6 +56677,7 @@
                  * @interface IMethodSettings
                  * @property {string|null} [selector] MethodSettings selector
                  * @property {google.api.MethodSettings.ILongRunning|null} [longRunning] MethodSettings longRunning
+                 * @property {Array.<string>|null} [autoPopulatedFields] MethodSettings autoPopulatedFields
                  */
     
                 /**
@@ -50290,6 +56689,7 @@
                  * @param {google.api.IMethodSettings=} [properties] Properties to set
                  */
                 function MethodSettings(properties) {
+                    this.autoPopulatedFields = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -50311,6 +56711,14 @@
                  * @instance
                  */
                 MethodSettings.prototype.longRunning = null;
+    
+                /**
+                 * MethodSettings autoPopulatedFields.
+                 * @member {Array.<string>} autoPopulatedFields
+                 * @memberof google.api.MethodSettings
+                 * @instance
+                 */
+                MethodSettings.prototype.autoPopulatedFields = $util.emptyArray;
     
                 /**
                  * Creates a new MethodSettings instance using the specified properties.
@@ -50340,6 +56748,9 @@
                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.selector);
                     if (message.longRunning != null && Object.hasOwnProperty.call(message, "longRunning"))
                         $root.google.api.MethodSettings.LongRunning.encode(message.longRunning, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    if (message.autoPopulatedFields != null && message.autoPopulatedFields.length)
+                        for (var i = 0; i < message.autoPopulatedFields.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.autoPopulatedFields[i]);
                     return writer;
                 };
     
@@ -50380,6 +56791,12 @@
                             }
                         case 2: {
                                 message.longRunning = $root.google.api.MethodSettings.LongRunning.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.autoPopulatedFields && message.autoPopulatedFields.length))
+                                    message.autoPopulatedFields = [];
+                                message.autoPopulatedFields.push(reader.string());
                                 break;
                             }
                         default:
@@ -50425,6 +56842,13 @@
                         if (error)
                             return "longRunning." + error;
                     }
+                    if (message.autoPopulatedFields != null && message.hasOwnProperty("autoPopulatedFields")) {
+                        if (!Array.isArray(message.autoPopulatedFields))
+                            return "autoPopulatedFields: array expected";
+                        for (var i = 0; i < message.autoPopulatedFields.length; ++i)
+                            if (!$util.isString(message.autoPopulatedFields[i]))
+                                return "autoPopulatedFields: string[] expected";
+                    }
                     return null;
                 };
     
@@ -50447,6 +56871,13 @@
                             throw TypeError(".google.api.MethodSettings.longRunning: object expected");
                         message.longRunning = $root.google.api.MethodSettings.LongRunning.fromObject(object.longRunning);
                     }
+                    if (object.autoPopulatedFields) {
+                        if (!Array.isArray(object.autoPopulatedFields))
+                            throw TypeError(".google.api.MethodSettings.autoPopulatedFields: array expected");
+                        message.autoPopulatedFields = [];
+                        for (var i = 0; i < object.autoPopulatedFields.length; ++i)
+                            message.autoPopulatedFields[i] = String(object.autoPopulatedFields[i]);
+                    }
                     return message;
                 };
     
@@ -50463,6 +56894,8 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.autoPopulatedFields = [];
                     if (options.defaults) {
                         object.selector = "";
                         object.longRunning = null;
@@ -50471,6 +56904,11 @@
                         object.selector = message.selector;
                     if (message.longRunning != null && message.hasOwnProperty("longRunning"))
                         object.longRunning = $root.google.api.MethodSettings.LongRunning.toObject(message.longRunning, options);
+                    if (message.autoPopulatedFields && message.autoPopulatedFields.length) {
+                        object.autoPopulatedFields = [];
+                        for (var j = 0; j < message.autoPopulatedFields.length; ++j)
+                            object.autoPopulatedFields[j] = message.autoPopulatedFields[j];
+                    }
                     return object;
                 };
     
@@ -50800,6 +57238,9 @@
              * @property {number} ADS=2 ADS value
              * @property {number} PHOTOS=3 PHOTOS value
              * @property {number} STREET_VIEW=4 STREET_VIEW value
+             * @property {number} SHOPPING=5 SHOPPING value
+             * @property {number} GEO=6 GEO value
+             * @property {number} GENERATIVE_AI=7 GENERATIVE_AI value
              */
             api.ClientLibraryOrganization = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -50808,6 +57249,9 @@
                 values[valuesById[2] = "ADS"] = 2;
                 values[valuesById[3] = "PHOTOS"] = 3;
                 values[valuesById[4] = "STREET_VIEW"] = 4;
+                values[valuesById[5] = "SHOPPING"] = 5;
+                values[valuesById[6] = "GEO"] = 6;
+                values[valuesById[7] = "GENERATIVE_AI"] = 7;
                 return values;
             })();
     
