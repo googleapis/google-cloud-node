@@ -5,6 +5,40 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "6bf58f91aff3ed22a9bf3b0abe895baeb9ac4f8d",
+          "message": "Add initial files for google.cloud.apphub.v1",
+          "issues": [
+            "5123"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apphub",
+      "id": "51c0d589-667c-4e38-a786-aad398e95e82",
+      "createTime": "2024-03-13T07:10:57.730Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c13aebf76e63387abe20889abf13a42b55a0e717",
+          "message": "[security] Add custom subject key identifier field",
+          "issues": [
+            "5125"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "5e545071-b4c6-438b-b3e6-595f269cf1a2",
+      "createTime": "2024-03-13T07:10:57.718Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "f70e1620c46328d45a46adb5a7786cf58f701352",
           "message": "Add initial files for google.cloud.telcoautomation.v1",
           "issues": [
@@ -24961,5 +24995,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-03-12T07:21:35.129Z"
+  "updateTime": "2024-03-13T07:10:57.730Z"
 }

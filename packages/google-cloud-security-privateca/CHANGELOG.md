@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v5.1.0...security-private-ca-v5.2.0) (2024-03-13)
+
+
+### Features
+
+* [security] Add custom subject key identifier field ([#5125](https://github.com/googleapis/google-cloud-node/issues/5125)) ([c13aebf](https://github.com/googleapis/google-cloud-node/commit/c13aebf76e63387abe20889abf13a42b55a0e717))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v5.0.1...security-private-ca-v5.1.0) (2024-02-09)
 
 
