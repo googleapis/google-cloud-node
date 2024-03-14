@@ -2734,9 +2734,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuilds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2782,9 +2782,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuilds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2822,9 +2822,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -2861,9 +2861,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3037,9 +3037,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3084,9 +3084,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3131,9 +3131,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3169,9 +3169,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3344,9 +3344,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listWorkerPools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3390,9 +3390,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listWorkerPools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3436,9 +3436,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3474,9 +3474,9 @@ describe('v1.CloudBuildClient', () => {
       assert(
         (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });

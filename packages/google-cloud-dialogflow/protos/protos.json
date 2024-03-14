@@ -11161,6 +11161,14 @@
                             "summaryText": {
                               "type": "string",
                               "id": 3
+                            },
+                            "textSections": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -11878,7 +11886,8 @@
                             "textInput",
                             "audioInput",
                             "eventInput",
-                            "suggestionInput"
+                            "suggestionInput",
+                            "intentInput"
                           ]
                         }
                       },
@@ -11906,6 +11915,10 @@
                         "suggestionInput": {
                           "type": "SuggestionInput",
                           "id": 12
+                        },
+                        "intentInput": {
+                          "type": "IntentInput",
+                          "id": 13
                         },
                         "replyAudioConfig": {
                           "type": "OutputAudioConfig",
@@ -11999,7 +12012,9 @@
                           "oneof": [
                             "inputAudio",
                             "inputText",
-                            "inputDtmf"
+                            "inputDtmf",
+                            "inputIntent",
+                            "inputEvent"
                           ]
                         }
                       },
@@ -12035,6 +12050,14 @@
                         "inputDtmf": {
                           "type": "TelephonyDtmfEvents",
                           "id": 9
+                        },
+                        "inputIntent": {
+                          "type": "string",
+                          "id": 17
+                        },
+                        "inputEvent": {
+                          "type": "string",
+                          "id": 20
                         },
                         "queryParams": {
                           "type": "QueryParameters",
@@ -12861,6 +12884,10 @@
                         "enableAutomaticPunctuation": {
                           "type": "bool",
                           "id": 17
+                        },
+                        "optOutConformerModelMigration": {
+                          "type": "bool",
+                          "id": 26
                         }
                       }
                     },
