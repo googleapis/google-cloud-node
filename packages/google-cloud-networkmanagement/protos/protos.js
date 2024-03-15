@@ -26844,6 +26844,7 @@
                          * @interface IDeliverInfo
                          * @property {google.cloud.networkmanagement.v1beta1.DeliverInfo.Target|null} [target] DeliverInfo target
                          * @property {string|null} [resourceUri] DeliverInfo resourceUri
+                         * @property {string|null} [ipAddress] DeliverInfo ipAddress
                          */
     
                         /**
@@ -26878,6 +26879,14 @@
                         DeliverInfo.prototype.resourceUri = "";
     
                         /**
+                         * DeliverInfo ipAddress.
+                         * @member {string} ipAddress
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeliverInfo
+                         * @instance
+                         */
+                        DeliverInfo.prototype.ipAddress = "";
+    
+                        /**
                          * Creates a new DeliverInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.DeliverInfo
@@ -26905,6 +26914,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.target);
                             if (message.resourceUri != null && Object.hasOwnProperty.call(message, "resourceUri"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceUri);
+                            if (message.ipAddress != null && Object.hasOwnProperty.call(message, "ipAddress"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.ipAddress);
                             return writer;
                         };
     
@@ -26945,6 +26956,10 @@
                                     }
                                 case 2: {
                                         message.resourceUri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ipAddress = reader.string();
                                         break;
                                     }
                                 default:
@@ -26997,11 +27012,18 @@
                                 case 8:
                                 case 9:
                                 case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 if (!$util.isString(message.resourceUri))
                                     return "resourceUri: string expected";
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                if (!$util.isString(message.ipAddress))
+                                    return "ipAddress: string expected";
                             return null;
                         };
     
@@ -27068,9 +27090,27 @@
                             case 10:
                                 message.target = 10;
                                 break;
+                            case "PRIVATE_NETWORK":
+                            case 11:
+                                message.target = 11;
+                                break;
+                            case "CLOUD_FUNCTION":
+                            case 12:
+                                message.target = 12;
+                                break;
+                            case "APP_ENGINE_VERSION":
+                            case 13:
+                                message.target = 13;
+                                break;
+                            case "CLOUD_RUN_REVISION":
+                            case 14:
+                                message.target = 14;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
+                            if (object.ipAddress != null)
+                                message.ipAddress = String(object.ipAddress);
                             return message;
                         };
     
@@ -27090,11 +27130,14 @@
                             if (options.defaults) {
                                 object.target = options.enums === String ? "TARGET_UNSPECIFIED" : 0;
                                 object.resourceUri = "";
+                                object.ipAddress = "";
                             }
                             if (message.target != null && message.hasOwnProperty("target"))
                                 object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.DeliverInfo.Target[message.target] === undefined ? message.target : $root.google.cloud.networkmanagement.v1beta1.DeliverInfo.Target[message.target] : message.target;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                object.ipAddress = message.ipAddress;
                             return object;
                         };
     
@@ -27139,6 +27182,10 @@
                          * @property {number} PSC_VPC_SC=8 PSC_VPC_SC value
                          * @property {number} SERVERLESS_NEG=9 SERVERLESS_NEG value
                          * @property {number} STORAGE_BUCKET=10 STORAGE_BUCKET value
+                         * @property {number} PRIVATE_NETWORK=11 PRIVATE_NETWORK value
+                         * @property {number} CLOUD_FUNCTION=12 CLOUD_FUNCTION value
+                         * @property {number} APP_ENGINE_VERSION=13 APP_ENGINE_VERSION value
+                         * @property {number} CLOUD_RUN_REVISION=14 CLOUD_RUN_REVISION value
                          */
                         DeliverInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -27153,6 +27200,10 @@
                             values[valuesById[8] = "PSC_VPC_SC"] = 8;
                             values[valuesById[9] = "SERVERLESS_NEG"] = 9;
                             values[valuesById[10] = "STORAGE_BUCKET"] = 10;
+                            values[valuesById[11] = "PRIVATE_NETWORK"] = 11;
+                            values[valuesById[12] = "CLOUD_FUNCTION"] = 12;
+                            values[valuesById[13] = "APP_ENGINE_VERSION"] = 13;
+                            values[valuesById[14] = "CLOUD_RUN_REVISION"] = 14;
                             return values;
                         })();
     
@@ -27167,6 +27218,7 @@
                          * @interface IForwardInfo
                          * @property {google.cloud.networkmanagement.v1beta1.ForwardInfo.Target|null} [target] ForwardInfo target
                          * @property {string|null} [resourceUri] ForwardInfo resourceUri
+                         * @property {string|null} [ipAddress] ForwardInfo ipAddress
                          */
     
                         /**
@@ -27201,6 +27253,14 @@
                         ForwardInfo.prototype.resourceUri = "";
     
                         /**
+                         * ForwardInfo ipAddress.
+                         * @member {string} ipAddress
+                         * @memberof google.cloud.networkmanagement.v1beta1.ForwardInfo
+                         * @instance
+                         */
+                        ForwardInfo.prototype.ipAddress = "";
+    
+                        /**
                          * Creates a new ForwardInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.ForwardInfo
@@ -27228,6 +27288,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.target);
                             if (message.resourceUri != null && Object.hasOwnProperty.call(message, "resourceUri"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceUri);
+                            if (message.ipAddress != null && Object.hasOwnProperty.call(message, "ipAddress"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.ipAddress);
                             return writer;
                         };
     
@@ -27268,6 +27330,10 @@
                                     }
                                 case 2: {
                                         message.resourceUri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ipAddress = reader.string();
                                         break;
                                     }
                                 default:
@@ -27318,11 +27384,15 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 if (!$util.isString(message.resourceUri))
                                     return "resourceUri: string expected";
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                if (!$util.isString(message.ipAddress))
+                                    return "ipAddress: string expected";
                             return null;
                         };
     
@@ -27381,9 +27451,15 @@
                             case 8:
                                 message.target = 8;
                                 break;
+                            case "ROUTER_APPLIANCE":
+                            case 9:
+                                message.target = 9;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
+                            if (object.ipAddress != null)
+                                message.ipAddress = String(object.ipAddress);
                             return message;
                         };
     
@@ -27403,11 +27479,14 @@
                             if (options.defaults) {
                                 object.target = options.enums === String ? "TARGET_UNSPECIFIED" : 0;
                                 object.resourceUri = "";
+                                object.ipAddress = "";
                             }
                             if (message.target != null && message.hasOwnProperty("target"))
                                 object.target = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.ForwardInfo.Target[message.target] === undefined ? message.target : $root.google.cloud.networkmanagement.v1beta1.ForwardInfo.Target[message.target] : message.target;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                object.ipAddress = message.ipAddress;
                             return object;
                         };
     
@@ -27450,6 +27529,7 @@
                          * @property {number} CLOUD_SQL_INSTANCE=6 CLOUD_SQL_INSTANCE value
                          * @property {number} ANOTHER_PROJECT=7 ANOTHER_PROJECT value
                          * @property {number} NCC_HUB=8 NCC_HUB value
+                         * @property {number} ROUTER_APPLIANCE=9 ROUTER_APPLIANCE value
                          */
                         ForwardInfo.Target = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -27462,6 +27542,7 @@
                             values[valuesById[6] = "CLOUD_SQL_INSTANCE"] = 6;
                             values[valuesById[7] = "ANOTHER_PROJECT"] = 7;
                             values[valuesById[8] = "NCC_HUB"] = 8;
+                            values[valuesById[9] = "ROUTER_APPLIANCE"] = 9;
                             return values;
                         })();
     
@@ -27476,6 +27557,7 @@
                          * @interface IAbortInfo
                          * @property {google.cloud.networkmanagement.v1beta1.AbortInfo.Cause|null} [cause] AbortInfo cause
                          * @property {string|null} [resourceUri] AbortInfo resourceUri
+                         * @property {string|null} [ipAddress] AbortInfo ipAddress
                          * @property {Array.<string>|null} [projectsMissingPermission] AbortInfo projectsMissingPermission
                          */
     
@@ -27510,6 +27592,14 @@
                          * @instance
                          */
                         AbortInfo.prototype.resourceUri = "";
+    
+                        /**
+                         * AbortInfo ipAddress.
+                         * @member {string} ipAddress
+                         * @memberof google.cloud.networkmanagement.v1beta1.AbortInfo
+                         * @instance
+                         */
+                        AbortInfo.prototype.ipAddress = "";
     
                         /**
                          * AbortInfo projectsMissingPermission.
@@ -27550,6 +27640,8 @@
                             if (message.projectsMissingPermission != null && message.projectsMissingPermission.length)
                                 for (var i = 0; i < message.projectsMissingPermission.length; ++i)
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectsMissingPermission[i]);
+                            if (message.ipAddress != null && Object.hasOwnProperty.call(message, "ipAddress"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.ipAddress);
                             return writer;
                         };
     
@@ -27590,6 +27682,10 @@
                                     }
                                 case 2: {
                                         message.resourceUri = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.ipAddress = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -27639,31 +27735,44 @@
                                     return "cause: enum value expected";
                                 case 0:
                                 case 1:
-                                case 2:
                                 case 3:
-                                case 4:
-                                case 5:
-                                case 6:
                                 case 7:
                                 case 8:
-                                case 9:
-                                case 10:
                                 case 11:
                                 case 12:
                                 case 13:
                                 case 14:
+                                case 2:
+                                case 23:
+                                case 4:
+                                case 28:
+                                case 29:
+                                case 5:
+                                case 6:
+                                case 9:
+                                case 10:
                                 case 15:
                                 case 16:
                                 case 17:
                                 case 18:
+                                case 24:
+                                case 25:
+                                case 26:
+                                case 27:
                                 case 19:
                                 case 20:
                                 case 21:
+                                case 22:
+                                case 30:
+                                case 31:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 if (!$util.isString(message.resourceUri))
                                     return "resourceUri: string expected";
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                if (!$util.isString(message.ipAddress))
+                                    return "ipAddress: string expected";
                             if (message.projectsMissingPermission != null && message.hasOwnProperty("projectsMissingPermission")) {
                                 if (!Array.isArray(message.projectsMissingPermission))
                                     return "projectsMissingPermission: array expected";
@@ -27701,25 +27810,9 @@
                             case 1:
                                 message.cause = 1;
                                 break;
-                            case "UNKNOWN_IP":
-                            case 2:
-                                message.cause = 2;
-                                break;
                             case "UNKNOWN_PROJECT":
                             case 3:
                                 message.cause = 3;
-                                break;
-                            case "PERMISSION_DENIED":
-                            case 4:
-                                message.cause = 4;
-                                break;
-                            case "NO_SOURCE_LOCATION":
-                            case 5:
-                                message.cause = 5;
-                                break;
-                            case "INVALID_ARGUMENT":
-                            case 6:
-                                message.cause = 6;
                                 break;
                             case "NO_EXTERNAL_IP":
                             case 7:
@@ -27728,14 +27821,6 @@
                             case "UNINTENDED_DESTINATION":
                             case 8:
                                 message.cause = 8;
-                                break;
-                            case "TRACE_TOO_LONG":
-                            case 9:
-                                message.cause = 9;
-                                break;
-                            case "INTERNAL_ERROR":
-                            case 10:
-                                message.cause = 10;
                                 break;
                             case "SOURCE_ENDPOINT_NOT_FOUND":
                             case 11:
@@ -27753,6 +27838,42 @@
                             case 14:
                                 message.cause = 14;
                                 break;
+                            case "UNKNOWN_IP":
+                            case 2:
+                                message.cause = 2;
+                                break;
+                            case "SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK":
+                            case 23:
+                                message.cause = 23;
+                                break;
+                            case "PERMISSION_DENIED":
+                            case 4:
+                                message.cause = 4;
+                                break;
+                            case "PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS":
+                            case 28:
+                                message.cause = 28;
+                                break;
+                            case "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS":
+                            case 29:
+                                message.cause = 29;
+                                break;
+                            case "NO_SOURCE_LOCATION":
+                            case 5:
+                                message.cause = 5;
+                                break;
+                            case "INVALID_ARGUMENT":
+                            case 6:
+                                message.cause = 6;
+                                break;
+                            case "TRACE_TOO_LONG":
+                            case 9:
+                                message.cause = 9;
+                                break;
+                            case "INTERNAL_ERROR":
+                            case 10:
+                                message.cause = 10;
+                                break;
                             case "UNSUPPORTED":
                             case 15:
                                 message.cause = 15;
@@ -27769,6 +27890,22 @@
                             case 18:
                                 message.cause = 18;
                                 break;
+                            case "VM_INSTANCE_CONFIG_NOT_FOUND":
+                            case 24:
+                                message.cause = 24;
+                                break;
+                            case "NETWORK_CONFIG_NOT_FOUND":
+                            case 25:
+                                message.cause = 25;
+                                break;
+                            case "FIREWALL_CONFIG_NOT_FOUND":
+                            case 26:
+                                message.cause = 26;
+                                break;
+                            case "ROUTE_CONFIG_NOT_FOUND":
+                            case 27:
+                                message.cause = 27;
+                                break;
                             case "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT":
                             case 19:
                                 message.cause = 19;
@@ -27781,9 +27918,23 @@
                             case 21:
                                 message.cause = 21;
                                 break;
+                            case "NON_ROUTABLE_IP_ADDRESS":
+                            case 22:
+                                message.cause = 22;
+                                break;
+                            case "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT":
+                            case 30:
+                                message.cause = 30;
+                                break;
+                            case "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG":
+                            case 31:
+                                message.cause = 31;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
+                            if (object.ipAddress != null)
+                                message.ipAddress = String(object.ipAddress);
                             if (object.projectsMissingPermission) {
                                 if (!Array.isArray(object.projectsMissingPermission))
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.AbortInfo.projectsMissingPermission: array expected");
@@ -27812,6 +27963,7 @@
                             if (options.defaults) {
                                 object.cause = options.enums === String ? "CAUSE_UNSPECIFIED" : 0;
                                 object.resourceUri = "";
+                                object.ipAddress = "";
                             }
                             if (message.cause != null && message.hasOwnProperty("cause"))
                                 object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.AbortInfo.Cause[message.cause] === undefined ? message.cause : $root.google.cloud.networkmanagement.v1beta1.AbortInfo.Cause[message.cause] : message.cause;
@@ -27822,6 +27974,8 @@
                                 for (var j = 0; j < message.projectsMissingPermission.length; ++j)
                                     object.projectsMissingPermission[j] = message.projectsMissingPermission[j];
                             }
+                            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
+                                object.ipAddress = message.ipAddress;
                             return object;
                         };
     
@@ -27857,51 +28011,71 @@
                          * @enum {number}
                          * @property {number} CAUSE_UNSPECIFIED=0 CAUSE_UNSPECIFIED value
                          * @property {number} UNKNOWN_NETWORK=1 UNKNOWN_NETWORK value
-                         * @property {number} UNKNOWN_IP=2 UNKNOWN_IP value
                          * @property {number} UNKNOWN_PROJECT=3 UNKNOWN_PROJECT value
-                         * @property {number} PERMISSION_DENIED=4 PERMISSION_DENIED value
-                         * @property {number} NO_SOURCE_LOCATION=5 NO_SOURCE_LOCATION value
-                         * @property {number} INVALID_ARGUMENT=6 INVALID_ARGUMENT value
                          * @property {number} NO_EXTERNAL_IP=7 NO_EXTERNAL_IP value
                          * @property {number} UNINTENDED_DESTINATION=8 UNINTENDED_DESTINATION value
-                         * @property {number} TRACE_TOO_LONG=9 TRACE_TOO_LONG value
-                         * @property {number} INTERNAL_ERROR=10 INTERNAL_ERROR value
                          * @property {number} SOURCE_ENDPOINT_NOT_FOUND=11 SOURCE_ENDPOINT_NOT_FOUND value
                          * @property {number} MISMATCHED_SOURCE_NETWORK=12 MISMATCHED_SOURCE_NETWORK value
                          * @property {number} DESTINATION_ENDPOINT_NOT_FOUND=13 DESTINATION_ENDPOINT_NOT_FOUND value
                          * @property {number} MISMATCHED_DESTINATION_NETWORK=14 MISMATCHED_DESTINATION_NETWORK value
+                         * @property {number} UNKNOWN_IP=2 UNKNOWN_IP value
+                         * @property {number} SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK=23 SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK value
+                         * @property {number} PERMISSION_DENIED=4 PERMISSION_DENIED value
+                         * @property {number} PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS=28 PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS value
+                         * @property {number} PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS=29 PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS value
+                         * @property {number} NO_SOURCE_LOCATION=5 NO_SOURCE_LOCATION value
+                         * @property {number} INVALID_ARGUMENT=6 INVALID_ARGUMENT value
+                         * @property {number} TRACE_TOO_LONG=9 TRACE_TOO_LONG value
+                         * @property {number} INTERNAL_ERROR=10 INTERNAL_ERROR value
                          * @property {number} UNSUPPORTED=15 UNSUPPORTED value
                          * @property {number} MISMATCHED_IP_VERSION=16 MISMATCHED_IP_VERSION value
                          * @property {number} GKE_KONNECTIVITY_PROXY_UNSUPPORTED=17 GKE_KONNECTIVITY_PROXY_UNSUPPORTED value
                          * @property {number} RESOURCE_CONFIG_NOT_FOUND=18 RESOURCE_CONFIG_NOT_FOUND value
+                         * @property {number} VM_INSTANCE_CONFIG_NOT_FOUND=24 VM_INSTANCE_CONFIG_NOT_FOUND value
+                         * @property {number} NETWORK_CONFIG_NOT_FOUND=25 NETWORK_CONFIG_NOT_FOUND value
+                         * @property {number} FIREWALL_CONFIG_NOT_FOUND=26 FIREWALL_CONFIG_NOT_FOUND value
+                         * @property {number} ROUTE_CONFIG_NOT_FOUND=27 ROUTE_CONFIG_NOT_FOUND value
                          * @property {number} GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT=19 GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT value
                          * @property {number} SOURCE_PSC_CLOUD_SQL_UNSUPPORTED=20 SOURCE_PSC_CLOUD_SQL_UNSUPPORTED value
                          * @property {number} SOURCE_FORWARDING_RULE_UNSUPPORTED=21 SOURCE_FORWARDING_RULE_UNSUPPORTED value
+                         * @property {number} NON_ROUTABLE_IP_ADDRESS=22 NON_ROUTABLE_IP_ADDRESS value
+                         * @property {number} UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT=30 UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT value
+                         * @property {number} UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG=31 UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG value
                          */
                         AbortInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "CAUSE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "UNKNOWN_NETWORK"] = 1;
-                            values[valuesById[2] = "UNKNOWN_IP"] = 2;
                             values[valuesById[3] = "UNKNOWN_PROJECT"] = 3;
-                            values[valuesById[4] = "PERMISSION_DENIED"] = 4;
-                            values[valuesById[5] = "NO_SOURCE_LOCATION"] = 5;
-                            values[valuesById[6] = "INVALID_ARGUMENT"] = 6;
                             values[valuesById[7] = "NO_EXTERNAL_IP"] = 7;
                             values[valuesById[8] = "UNINTENDED_DESTINATION"] = 8;
-                            values[valuesById[9] = "TRACE_TOO_LONG"] = 9;
-                            values[valuesById[10] = "INTERNAL_ERROR"] = 10;
                             values[valuesById[11] = "SOURCE_ENDPOINT_NOT_FOUND"] = 11;
                             values[valuesById[12] = "MISMATCHED_SOURCE_NETWORK"] = 12;
                             values[valuesById[13] = "DESTINATION_ENDPOINT_NOT_FOUND"] = 13;
                             values[valuesById[14] = "MISMATCHED_DESTINATION_NETWORK"] = 14;
+                            values[valuesById[2] = "UNKNOWN_IP"] = 2;
+                            values[valuesById[23] = "SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK"] = 23;
+                            values[valuesById[4] = "PERMISSION_DENIED"] = 4;
+                            values[valuesById[28] = "PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS"] = 28;
+                            values[valuesById[29] = "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS"] = 29;
+                            values[valuesById[5] = "NO_SOURCE_LOCATION"] = 5;
+                            values[valuesById[6] = "INVALID_ARGUMENT"] = 6;
+                            values[valuesById[9] = "TRACE_TOO_LONG"] = 9;
+                            values[valuesById[10] = "INTERNAL_ERROR"] = 10;
                             values[valuesById[15] = "UNSUPPORTED"] = 15;
                             values[valuesById[16] = "MISMATCHED_IP_VERSION"] = 16;
                             values[valuesById[17] = "GKE_KONNECTIVITY_PROXY_UNSUPPORTED"] = 17;
                             values[valuesById[18] = "RESOURCE_CONFIG_NOT_FOUND"] = 18;
+                            values[valuesById[24] = "VM_INSTANCE_CONFIG_NOT_FOUND"] = 24;
+                            values[valuesById[25] = "NETWORK_CONFIG_NOT_FOUND"] = 25;
+                            values[valuesById[26] = "FIREWALL_CONFIG_NOT_FOUND"] = 26;
+                            values[valuesById[27] = "ROUTE_CONFIG_NOT_FOUND"] = 27;
                             values[valuesById[19] = "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"] = 19;
                             values[valuesById[20] = "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED"] = 20;
                             values[valuesById[21] = "SOURCE_FORWARDING_RULE_UNSUPPORTED"] = 21;
+                            values[valuesById[22] = "NON_ROUTABLE_IP_ADDRESS"] = 22;
+                            values[valuesById[30] = "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT"] = 30;
+                            values[valuesById[31] = "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG"] = 31;
                             return values;
                         })();
     
@@ -27916,6 +28090,9 @@
                          * @interface IDropInfo
                          * @property {google.cloud.networkmanagement.v1beta1.DropInfo.Cause|null} [cause] DropInfo cause
                          * @property {string|null} [resourceUri] DropInfo resourceUri
+                         * @property {string|null} [sourceIp] DropInfo sourceIp
+                         * @property {string|null} [destinationIp] DropInfo destinationIp
+                         * @property {string|null} [region] DropInfo region
                          */
     
                         /**
@@ -27950,6 +28127,30 @@
                         DropInfo.prototype.resourceUri = "";
     
                         /**
+                         * DropInfo sourceIp.
+                         * @member {string} sourceIp
+                         * @memberof google.cloud.networkmanagement.v1beta1.DropInfo
+                         * @instance
+                         */
+                        DropInfo.prototype.sourceIp = "";
+    
+                        /**
+                         * DropInfo destinationIp.
+                         * @member {string} destinationIp
+                         * @memberof google.cloud.networkmanagement.v1beta1.DropInfo
+                         * @instance
+                         */
+                        DropInfo.prototype.destinationIp = "";
+    
+                        /**
+                         * DropInfo region.
+                         * @member {string} region
+                         * @memberof google.cloud.networkmanagement.v1beta1.DropInfo
+                         * @instance
+                         */
+                        DropInfo.prototype.region = "";
+    
+                        /**
                          * Creates a new DropInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.DropInfo
@@ -27977,6 +28178,12 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cause);
                             if (message.resourceUri != null && Object.hasOwnProperty.call(message, "resourceUri"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.resourceUri);
+                            if (message.sourceIp != null && Object.hasOwnProperty.call(message, "sourceIp"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.sourceIp);
+                            if (message.destinationIp != null && Object.hasOwnProperty.call(message, "destinationIp"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.destinationIp);
+                            if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.region);
                             return writer;
                         };
     
@@ -28017,6 +28224,18 @@
                                     }
                                 case 2: {
                                         message.resourceUri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sourceIp = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.destinationIp = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.region = reader.string();
                                         break;
                                     }
                                 default:
@@ -28065,12 +28284,22 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 42:
+                                case 43:
+                                case 49:
+                                case 50:
+                                case 51:
+                                case 52:
+                                case 53:
+                                case 44:
+                                case 45:
+                                case 46:
                                 case 7:
                                 case 8:
+                                case 47:
                                 case 9:
                                 case 10:
                                 case 11:
-                                case 25:
                                 case 12:
                                 case 13:
                                 case 14:
@@ -28094,15 +28323,34 @@
                                 case 22:
                                 case 23:
                                 case 24:
+                                case 25:
                                 case 26:
+                                case 41:
+                                case 48:
+                                case 54:
+                                case 58:
+                                case 57:
+                                case 55:
+                                case 56:
                                 case 29:
                                 case 37:
                                 case 39:
+                                case 40:
+                                case 59:
                                     break;
                                 }
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 if (!$util.isString(message.resourceUri))
                                     return "resourceUri: string expected";
+                            if (message.sourceIp != null && message.hasOwnProperty("sourceIp"))
+                                if (!$util.isString(message.sourceIp))
+                                    return "sourceIp: string expected";
+                            if (message.destinationIp != null && message.hasOwnProperty("destinationIp"))
+                                if (!$util.isString(message.destinationIp))
+                                    return "destinationIp: string expected";
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                if (!$util.isString(message.region))
+                                    return "region: string expected";
                             return null;
                         };
     
@@ -28153,6 +28401,46 @@
                             case 6:
                                 message.cause = 6;
                                 break;
+                            case "ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED":
+                            case 42:
+                                message.cause = 42;
+                                break;
+                            case "ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND":
+                            case 43:
+                                message.cause = 43;
+                                break;
+                            case "ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK":
+                            case 49:
+                                message.cause = 49;
+                                break;
+                            case "ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP":
+                            case 50:
+                                message.cause = 50;
+                                break;
+                            case "ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH":
+                            case 51:
+                                message.cause = 51;
+                                break;
+                            case "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED":
+                            case 52:
+                                message.cause = 52;
+                                break;
+                            case "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID":
+                            case 53:
+                                message.cause = 53;
+                                break;
+                            case "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS":
+                            case 44:
+                                message.cause = 44;
+                                break;
+                            case "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH":
+                            case 45:
+                                message.cause = 45;
+                                break;
+                            case "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH":
+                            case 46:
+                                message.cause = 46;
+                                break;
                             case "PRIVATE_TRAFFIC_TO_INTERNET":
                             case 7:
                                 message.cause = 7;
@@ -28160,6 +28448,10 @@
                             case "PRIVATE_GOOGLE_ACCESS_DISALLOWED":
                             case 8:
                                 message.cause = 8;
+                                break;
+                            case "PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED":
+                            case 47:
+                                message.cause = 47;
                                 break;
                             case "NO_EXTERNAL_ADDRESS":
                             case 9:
@@ -28172,10 +28464,6 @@
                             case "FORWARDING_RULE_MISMATCH":
                             case 11:
                                 message.cause = 11;
-                                break;
-                            case "FORWARDING_RULE_REGION_MISMATCH":
-                            case 25:
-                                message.cause = 25;
                                 break;
                             case "FORWARDING_RULE_NO_INSTANCES":
                             case 12:
@@ -28269,9 +28557,41 @@
                             case 24:
                                 message.cause = 24;
                                 break;
+                            case "FORWARDING_RULE_REGION_MISMATCH":
+                            case 25:
+                                message.cause = 25;
+                                break;
                             case "PSC_CONNECTION_NOT_ACCEPTED":
                             case 26:
                                 message.cause = 26;
+                                break;
+                            case "PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK":
+                            case 41:
+                                message.cause = 41;
+                                break;
+                            case "PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS":
+                            case 48:
+                                message.cause = 48;
+                                break;
+                            case "PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS":
+                            case 54:
+                                message.cause = 54;
+                                break;
+                            case "CLOUD_SQL_PSC_NEG_UNSUPPORTED":
+                            case 58:
+                                message.cause = 58;
+                                break;
+                            case "NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT":
+                            case 57:
+                                message.cause = 57;
+                                break;
+                            case "HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED":
+                            case 55:
+                                message.cause = 55;
+                                break;
+                            case "HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED":
+                            case 56:
+                                message.cause = 56;
                                 break;
                             case "CLOUD_RUN_REVISION_NOT_READY":
                             case 29:
@@ -28285,9 +28605,23 @@
                             case 39:
                                 message.cause = 39;
                                 break;
+                            case "CLOUD_NAT_NO_ADDRESSES":
+                            case 40:
+                                message.cause = 40;
+                                break;
+                            case "ROUTING_LOOP":
+                            case 59:
+                                message.cause = 59;
+                                break;
                             }
                             if (object.resourceUri != null)
                                 message.resourceUri = String(object.resourceUri);
+                            if (object.sourceIp != null)
+                                message.sourceIp = String(object.sourceIp);
+                            if (object.destinationIp != null)
+                                message.destinationIp = String(object.destinationIp);
+                            if (object.region != null)
+                                message.region = String(object.region);
                             return message;
                         };
     
@@ -28307,11 +28641,20 @@
                             if (options.defaults) {
                                 object.cause = options.enums === String ? "CAUSE_UNSPECIFIED" : 0;
                                 object.resourceUri = "";
+                                object.sourceIp = "";
+                                object.destinationIp = "";
+                                object.region = "";
                             }
                             if (message.cause != null && message.hasOwnProperty("cause"))
                                 object.cause = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.DropInfo.Cause[message.cause] === undefined ? message.cause : $root.google.cloud.networkmanagement.v1beta1.DropInfo.Cause[message.cause] : message.cause;
                             if (message.resourceUri != null && message.hasOwnProperty("resourceUri"))
                                 object.resourceUri = message.resourceUri;
+                            if (message.sourceIp != null && message.hasOwnProperty("sourceIp"))
+                                object.sourceIp = message.sourceIp;
+                            if (message.destinationIp != null && message.hasOwnProperty("destinationIp"))
+                                object.destinationIp = message.destinationIp;
+                            if (message.region != null && message.hasOwnProperty("region"))
+                                object.region = message.region;
                             return object;
                         };
     
@@ -28352,12 +28695,22 @@
                          * @property {number} NO_ROUTE=4 NO_ROUTE value
                          * @property {number} ROUTE_BLACKHOLE=5 ROUTE_BLACKHOLE value
                          * @property {number} ROUTE_WRONG_NETWORK=6 ROUTE_WRONG_NETWORK value
+                         * @property {number} ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED=42 ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED value
+                         * @property {number} ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND=43 ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND value
+                         * @property {number} ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK=49 ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK value
+                         * @property {number} ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP=50 ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP value
+                         * @property {number} ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH=51 ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH value
+                         * @property {number} ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED=52 ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED value
+                         * @property {number} ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID=53 ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID value
+                         * @property {number} NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS=44 NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS value
+                         * @property {number} VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH=45 VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH value
+                         * @property {number} VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH=46 VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH value
                          * @property {number} PRIVATE_TRAFFIC_TO_INTERNET=7 PRIVATE_TRAFFIC_TO_INTERNET value
                          * @property {number} PRIVATE_GOOGLE_ACCESS_DISALLOWED=8 PRIVATE_GOOGLE_ACCESS_DISALLOWED value
+                         * @property {number} PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED=47 PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED value
                          * @property {number} NO_EXTERNAL_ADDRESS=9 NO_EXTERNAL_ADDRESS value
                          * @property {number} UNKNOWN_INTERNAL_ADDRESS=10 UNKNOWN_INTERNAL_ADDRESS value
                          * @property {number} FORWARDING_RULE_MISMATCH=11 FORWARDING_RULE_MISMATCH value
-                         * @property {number} FORWARDING_RULE_REGION_MISMATCH=25 FORWARDING_RULE_REGION_MISMATCH value
                          * @property {number} FORWARDING_RULE_NO_INSTANCES=12 FORWARDING_RULE_NO_INSTANCES value
                          * @property {number} FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK=13 FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK value
                          * @property {number} INSTANCE_NOT_RUNNING=14 INSTANCE_NOT_RUNNING value
@@ -28381,10 +28734,20 @@
                          * @property {number} CLOUD_FUNCTION_NOT_ACTIVE=22 CLOUD_FUNCTION_NOT_ACTIVE value
                          * @property {number} VPC_CONNECTOR_NOT_SET=23 VPC_CONNECTOR_NOT_SET value
                          * @property {number} VPC_CONNECTOR_NOT_RUNNING=24 VPC_CONNECTOR_NOT_RUNNING value
+                         * @property {number} FORWARDING_RULE_REGION_MISMATCH=25 FORWARDING_RULE_REGION_MISMATCH value
                          * @property {number} PSC_CONNECTION_NOT_ACCEPTED=26 PSC_CONNECTION_NOT_ACCEPTED value
+                         * @property {number} PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK=41 PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK value
+                         * @property {number} PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS=48 PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS value
+                         * @property {number} PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS=54 PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS value
+                         * @property {number} CLOUD_SQL_PSC_NEG_UNSUPPORTED=58 CLOUD_SQL_PSC_NEG_UNSUPPORTED value
+                         * @property {number} NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT=57 NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT value
+                         * @property {number} HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED=55 HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED value
+                         * @property {number} HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED=56 HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED value
                          * @property {number} CLOUD_RUN_REVISION_NOT_READY=29 CLOUD_RUN_REVISION_NOT_READY value
                          * @property {number} DROPPED_INSIDE_PSC_SERVICE_PRODUCER=37 DROPPED_INSIDE_PSC_SERVICE_PRODUCER value
                          * @property {number} LOAD_BALANCER_HAS_NO_PROXY_SUBNET=39 LOAD_BALANCER_HAS_NO_PROXY_SUBNET value
+                         * @property {number} CLOUD_NAT_NO_ADDRESSES=40 CLOUD_NAT_NO_ADDRESSES value
+                         * @property {number} ROUTING_LOOP=59 ROUTING_LOOP value
                          */
                         DropInfo.Cause = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -28395,12 +28758,22 @@
                             values[valuesById[4] = "NO_ROUTE"] = 4;
                             values[valuesById[5] = "ROUTE_BLACKHOLE"] = 5;
                             values[valuesById[6] = "ROUTE_WRONG_NETWORK"] = 6;
+                            values[valuesById[42] = "ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED"] = 42;
+                            values[valuesById[43] = "ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND"] = 43;
+                            values[valuesById[49] = "ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK"] = 49;
+                            values[valuesById[50] = "ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP"] = 50;
+                            values[valuesById[51] = "ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH"] = 51;
+                            values[valuesById[52] = "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED"] = 52;
+                            values[valuesById[53] = "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID"] = 53;
+                            values[valuesById[44] = "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS"] = 44;
+                            values[valuesById[45] = "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH"] = 45;
+                            values[valuesById[46] = "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH"] = 46;
                             values[valuesById[7] = "PRIVATE_TRAFFIC_TO_INTERNET"] = 7;
                             values[valuesById[8] = "PRIVATE_GOOGLE_ACCESS_DISALLOWED"] = 8;
+                            values[valuesById[47] = "PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED"] = 47;
                             values[valuesById[9] = "NO_EXTERNAL_ADDRESS"] = 9;
                             values[valuesById[10] = "UNKNOWN_INTERNAL_ADDRESS"] = 10;
                             values[valuesById[11] = "FORWARDING_RULE_MISMATCH"] = 11;
-                            values[valuesById[25] = "FORWARDING_RULE_REGION_MISMATCH"] = 25;
                             values[valuesById[12] = "FORWARDING_RULE_NO_INSTANCES"] = 12;
                             values[valuesById[13] = "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"] = 13;
                             values[valuesById[14] = "INSTANCE_NOT_RUNNING"] = 14;
@@ -28424,10 +28797,20 @@
                             values[valuesById[22] = "CLOUD_FUNCTION_NOT_ACTIVE"] = 22;
                             values[valuesById[23] = "VPC_CONNECTOR_NOT_SET"] = 23;
                             values[valuesById[24] = "VPC_CONNECTOR_NOT_RUNNING"] = 24;
+                            values[valuesById[25] = "FORWARDING_RULE_REGION_MISMATCH"] = 25;
                             values[valuesById[26] = "PSC_CONNECTION_NOT_ACCEPTED"] = 26;
+                            values[valuesById[41] = "PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK"] = 41;
+                            values[valuesById[48] = "PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS"] = 48;
+                            values[valuesById[54] = "PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS"] = 54;
+                            values[valuesById[58] = "CLOUD_SQL_PSC_NEG_UNSUPPORTED"] = 58;
+                            values[valuesById[57] = "NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT"] = 57;
+                            values[valuesById[55] = "HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED"] = 55;
+                            values[valuesById[56] = "HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED"] = 56;
                             values[valuesById[29] = "CLOUD_RUN_REVISION_NOT_READY"] = 29;
                             values[valuesById[37] = "DROPPED_INSIDE_PSC_SERVICE_PRODUCER"] = 37;
                             values[valuesById[39] = "LOAD_BALANCER_HAS_NO_PROXY_SUBNET"] = 39;
+                            values[valuesById[40] = "CLOUD_NAT_NO_ADDRESSES"] = 40;
+                            values[valuesById[59] = "ROUTING_LOOP"] = 59;
                             return values;
                         })();
     

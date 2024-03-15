@@ -9440,6 +9440,9 @@ export namespace google {
 
                     /** DeliverInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** DeliverInfo ipAddress */
+                    ipAddress?: (string|null);
                 }
 
                 /** Represents a DeliverInfo. */
@@ -9456,6 +9459,9 @@ export namespace google {
 
                     /** DeliverInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** DeliverInfo ipAddress. */
+                    public ipAddress: string;
 
                     /**
                      * Creates a new DeliverInfo instance using the specified properties.
@@ -9549,7 +9555,11 @@ export namespace google {
                         PSC_GOOGLE_API = 7,
                         PSC_VPC_SC = 8,
                         SERVERLESS_NEG = 9,
-                        STORAGE_BUCKET = 10
+                        STORAGE_BUCKET = 10,
+                        PRIVATE_NETWORK = 11,
+                        CLOUD_FUNCTION = 12,
+                        APP_ENGINE_VERSION = 13,
+                        CLOUD_RUN_REVISION = 14
                     }
                 }
 
@@ -9561,6 +9571,9 @@ export namespace google {
 
                     /** ForwardInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** ForwardInfo ipAddress */
+                    ipAddress?: (string|null);
                 }
 
                 /** Represents a ForwardInfo. */
@@ -9577,6 +9590,9 @@ export namespace google {
 
                     /** ForwardInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** ForwardInfo ipAddress. */
+                    public ipAddress: string;
 
                     /**
                      * Creates a new ForwardInfo instance using the specified properties.
@@ -9668,7 +9684,8 @@ export namespace google {
                         IMPORTED_CUSTOM_ROUTE_NEXT_HOP = 5,
                         CLOUD_SQL_INSTANCE = 6,
                         ANOTHER_PROJECT = 7,
-                        NCC_HUB = 8
+                        NCC_HUB = 8,
+                        ROUTER_APPLIANCE = 9
                     }
                 }
 
@@ -9680,6 +9697,9 @@ export namespace google {
 
                     /** AbortInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** AbortInfo ipAddress */
+                    ipAddress?: (string|null);
 
                     /** AbortInfo projectsMissingPermission */
                     projectsMissingPermission?: (string[]|null);
@@ -9699,6 +9719,9 @@ export namespace google {
 
                     /** AbortInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** AbortInfo ipAddress. */
+                    public ipAddress: string;
 
                     /** AbortInfo projectsMissingPermission. */
                     public projectsMissingPermission: string[];
@@ -9787,26 +9810,36 @@ export namespace google {
                     enum Cause {
                         CAUSE_UNSPECIFIED = 0,
                         UNKNOWN_NETWORK = 1,
-                        UNKNOWN_IP = 2,
                         UNKNOWN_PROJECT = 3,
-                        PERMISSION_DENIED = 4,
-                        NO_SOURCE_LOCATION = 5,
-                        INVALID_ARGUMENT = 6,
                         NO_EXTERNAL_IP = 7,
                         UNINTENDED_DESTINATION = 8,
-                        TRACE_TOO_LONG = 9,
-                        INTERNAL_ERROR = 10,
                         SOURCE_ENDPOINT_NOT_FOUND = 11,
                         MISMATCHED_SOURCE_NETWORK = 12,
                         DESTINATION_ENDPOINT_NOT_FOUND = 13,
                         MISMATCHED_DESTINATION_NETWORK = 14,
+                        UNKNOWN_IP = 2,
+                        SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK = 23,
+                        PERMISSION_DENIED = 4,
+                        PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS = 28,
+                        PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS = 29,
+                        NO_SOURCE_LOCATION = 5,
+                        INVALID_ARGUMENT = 6,
+                        TRACE_TOO_LONG = 9,
+                        INTERNAL_ERROR = 10,
                         UNSUPPORTED = 15,
                         MISMATCHED_IP_VERSION = 16,
                         GKE_KONNECTIVITY_PROXY_UNSUPPORTED = 17,
                         RESOURCE_CONFIG_NOT_FOUND = 18,
+                        VM_INSTANCE_CONFIG_NOT_FOUND = 24,
+                        NETWORK_CONFIG_NOT_FOUND = 25,
+                        FIREWALL_CONFIG_NOT_FOUND = 26,
+                        ROUTE_CONFIG_NOT_FOUND = 27,
                         GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT = 19,
                         SOURCE_PSC_CLOUD_SQL_UNSUPPORTED = 20,
-                        SOURCE_FORWARDING_RULE_UNSUPPORTED = 21
+                        SOURCE_FORWARDING_RULE_UNSUPPORTED = 21,
+                        NON_ROUTABLE_IP_ADDRESS = 22,
+                        UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT = 30,
+                        UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG = 31
                     }
                 }
 
@@ -9818,6 +9851,15 @@ export namespace google {
 
                     /** DropInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** DropInfo sourceIp */
+                    sourceIp?: (string|null);
+
+                    /** DropInfo destinationIp */
+                    destinationIp?: (string|null);
+
+                    /** DropInfo region */
+                    region?: (string|null);
                 }
 
                 /** Represents a DropInfo. */
@@ -9834,6 +9876,15 @@ export namespace google {
 
                     /** DropInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** DropInfo sourceIp. */
+                    public sourceIp: string;
+
+                    /** DropInfo destinationIp. */
+                    public destinationIp: string;
+
+                    /** DropInfo region. */
+                    public region: string;
 
                     /**
                      * Creates a new DropInfo instance using the specified properties.
@@ -9924,12 +9975,22 @@ export namespace google {
                         NO_ROUTE = 4,
                         ROUTE_BLACKHOLE = 5,
                         ROUTE_WRONG_NETWORK = 6,
+                        ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED = 42,
+                        ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND = 43,
+                        ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK = 49,
+                        ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP = 50,
+                        ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH = 51,
+                        ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED = 52,
+                        ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID = 53,
+                        NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS = 44,
+                        VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH = 45,
+                        VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH = 46,
                         PRIVATE_TRAFFIC_TO_INTERNET = 7,
                         PRIVATE_GOOGLE_ACCESS_DISALLOWED = 8,
+                        PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED = 47,
                         NO_EXTERNAL_ADDRESS = 9,
                         UNKNOWN_INTERNAL_ADDRESS = 10,
                         FORWARDING_RULE_MISMATCH = 11,
-                        FORWARDING_RULE_REGION_MISMATCH = 25,
                         FORWARDING_RULE_NO_INSTANCES = 12,
                         FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK = 13,
                         INSTANCE_NOT_RUNNING = 14,
@@ -9953,10 +10014,20 @@ export namespace google {
                         CLOUD_FUNCTION_NOT_ACTIVE = 22,
                         VPC_CONNECTOR_NOT_SET = 23,
                         VPC_CONNECTOR_NOT_RUNNING = 24,
+                        FORWARDING_RULE_REGION_MISMATCH = 25,
                         PSC_CONNECTION_NOT_ACCEPTED = 26,
+                        PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK = 41,
+                        PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS = 48,
+                        PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS = 54,
+                        CLOUD_SQL_PSC_NEG_UNSUPPORTED = 58,
+                        NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT = 57,
+                        HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED = 55,
+                        HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED = 56,
                         CLOUD_RUN_REVISION_NOT_READY = 29,
                         DROPPED_INSIDE_PSC_SERVICE_PRODUCER = 37,
-                        LOAD_BALANCER_HAS_NO_PROXY_SUBNET = 39
+                        LOAD_BALANCER_HAS_NO_PROXY_SUBNET = 39,
+                        CLOUD_NAT_NO_ADDRESSES = 40,
+                        ROUTING_LOOP = 59
                     }
                 }
 
