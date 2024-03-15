@@ -11,7 +11,7 @@
     "module": "CommonJS",
     "declaration": true,
     "strict": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "emitDeclarationOnly": true,
     "lib": [
       "es2018",
@@ -19,7 +19,7 @@
     ]
   },
   "exclude": [
-    "node_modules/*"
+    "node_modules/**"
   ],
   "include": [
     "esm/src/*.ts",
