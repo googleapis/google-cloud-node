@@ -18,6 +18,9 @@
       "dom"
     ]
   },
+  "exclude": [
+    "node_modules/*"
+  ],
   "include": [
     "esm/src/*.ts",
     "esm/src/**/*.ts",
