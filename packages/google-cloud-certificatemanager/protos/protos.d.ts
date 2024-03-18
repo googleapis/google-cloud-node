@@ -1269,6 +1269,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteCertificateIssuanceConfig(request: google.cloud.certificatemanager.v1.IDeleteCertificateIssuanceConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListTrustConfigs.
+                     * @param request ListTrustConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListTrustConfigsResponse
+                     */
+                    public listTrustConfigs(request: google.cloud.certificatemanager.v1.IListTrustConfigsRequest, callback: google.cloud.certificatemanager.v1.CertificateManager.ListTrustConfigsCallback): void;
+
+                    /**
+                     * Calls ListTrustConfigs.
+                     * @param request ListTrustConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listTrustConfigs(request: google.cloud.certificatemanager.v1.IListTrustConfigsRequest): Promise<google.cloud.certificatemanager.v1.ListTrustConfigsResponse>;
+
+                    /**
+                     * Calls GetTrustConfig.
+                     * @param request GetTrustConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TrustConfig
+                     */
+                    public getTrustConfig(request: google.cloud.certificatemanager.v1.IGetTrustConfigRequest, callback: google.cloud.certificatemanager.v1.CertificateManager.GetTrustConfigCallback): void;
+
+                    /**
+                     * Calls GetTrustConfig.
+                     * @param request GetTrustConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getTrustConfig(request: google.cloud.certificatemanager.v1.IGetTrustConfigRequest): Promise<google.cloud.certificatemanager.v1.TrustConfig>;
+
+                    /**
+                     * Calls CreateTrustConfig.
+                     * @param request CreateTrustConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createTrustConfig(request: google.cloud.certificatemanager.v1.ICreateTrustConfigRequest, callback: google.cloud.certificatemanager.v1.CertificateManager.CreateTrustConfigCallback): void;
+
+                    /**
+                     * Calls CreateTrustConfig.
+                     * @param request CreateTrustConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createTrustConfig(request: google.cloud.certificatemanager.v1.ICreateTrustConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateTrustConfig.
+                     * @param request UpdateTrustConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateTrustConfig(request: google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest, callback: google.cloud.certificatemanager.v1.CertificateManager.UpdateTrustConfigCallback): void;
+
+                    /**
+                     * Calls UpdateTrustConfig.
+                     * @param request UpdateTrustConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateTrustConfig(request: google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteTrustConfig.
+                     * @param request DeleteTrustConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteTrustConfig(request: google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest, callback: google.cloud.certificatemanager.v1.CertificateManager.DeleteTrustConfigCallback): void;
+
+                    /**
+                     * Calls DeleteTrustConfig.
+                     * @param request DeleteTrustConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteTrustConfig(request: google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace CertificateManager {
@@ -1440,6 +1510,41 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteCertificateIssuanceConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|listTrustConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListTrustConfigsResponse
+                     */
+                    type ListTrustConfigsCallback = (error: (Error|null), response?: google.cloud.certificatemanager.v1.ListTrustConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|getTrustConfig}.
+                     * @param error Error, if any
+                     * @param [response] TrustConfig
+                     */
+                    type GetTrustConfigCallback = (error: (Error|null), response?: google.cloud.certificatemanager.v1.TrustConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|createTrustConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateTrustConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|updateTrustConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateTrustConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.certificatemanager.v1.CertificateManager|deleteTrustConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteTrustConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a ListCertificatesRequest. */
@@ -4772,7 +4877,8 @@ export namespace google {
                     /** Scope enum. */
                     enum Scope {
                         DEFAULT = 0,
-                        EDGE_CACHE = 1
+                        EDGE_CACHE = 1,
+                        ALL_REGIONS = 2
                     }
                 }
 
@@ -5304,6 +5410,9 @@ export namespace google {
 
                     /** DnsAuthorization dnsResourceRecord */
                     dnsResourceRecord?: (google.cloud.certificatemanager.v1.DnsAuthorization.IDnsResourceRecord|null);
+
+                    /** DnsAuthorization type */
+                    type?: (google.cloud.certificatemanager.v1.DnsAuthorization.Type|keyof typeof google.cloud.certificatemanager.v1.DnsAuthorization.Type|null);
                 }
 
                 /** Represents a DnsAuthorization. */
@@ -5335,6 +5444,9 @@ export namespace google {
 
                     /** DnsAuthorization dnsResourceRecord. */
                     public dnsResourceRecord?: (google.cloud.certificatemanager.v1.DnsAuthorization.IDnsResourceRecord|null);
+
+                    /** DnsAuthorization type. */
+                    public type: (google.cloud.certificatemanager.v1.DnsAuthorization.Type|keyof typeof google.cloud.certificatemanager.v1.DnsAuthorization.Type);
 
                     /**
                      * Creates a new DnsAuthorization instance using the specified properties.
@@ -5524,6 +5636,13 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        FIXED_RECORD = 1,
+                        PER_PROJECT_RECORD = 2
+                    }
                 }
 
                 /** ServingState enum. */
@@ -5531,6 +5650,1087 @@ export namespace google {
                     SERVING_STATE_UNSPECIFIED = 0,
                     ACTIVE = 1,
                     PENDING = 2
+                }
+
+                /** Properties of a ListTrustConfigsRequest. */
+                interface IListTrustConfigsRequest {
+
+                    /** ListTrustConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListTrustConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListTrustConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListTrustConfigsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListTrustConfigsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListTrustConfigsRequest. */
+                class ListTrustConfigsRequest implements IListTrustConfigsRequest {
+
+                    /**
+                     * Constructs a new ListTrustConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.IListTrustConfigsRequest);
+
+                    /** ListTrustConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListTrustConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListTrustConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListTrustConfigsRequest filter. */
+                    public filter: string;
+
+                    /** ListTrustConfigsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListTrustConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTrustConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.IListTrustConfigsRequest): google.cloud.certificatemanager.v1.ListTrustConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListTrustConfigsRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.ListTrustConfigsRequest.verify|verify} messages.
+                     * @param message ListTrustConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.IListTrustConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTrustConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.ListTrustConfigsRequest.verify|verify} messages.
+                     * @param message ListTrustConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.IListTrustConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTrustConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTrustConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.ListTrustConfigsRequest;
+
+                    /**
+                     * Decodes a ListTrustConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTrustConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.ListTrustConfigsRequest;
+
+                    /**
+                     * Verifies a ListTrustConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTrustConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTrustConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.ListTrustConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListTrustConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListTrustConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.ListTrustConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTrustConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTrustConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTrustConfigsResponse. */
+                interface IListTrustConfigsResponse {
+
+                    /** ListTrustConfigsResponse trustConfigs */
+                    trustConfigs?: (google.cloud.certificatemanager.v1.ITrustConfig[]|null);
+
+                    /** ListTrustConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListTrustConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListTrustConfigsResponse. */
+                class ListTrustConfigsResponse implements IListTrustConfigsResponse {
+
+                    /**
+                     * Constructs a new ListTrustConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.IListTrustConfigsResponse);
+
+                    /** ListTrustConfigsResponse trustConfigs. */
+                    public trustConfigs: google.cloud.certificatemanager.v1.ITrustConfig[];
+
+                    /** ListTrustConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListTrustConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListTrustConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTrustConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.IListTrustConfigsResponse): google.cloud.certificatemanager.v1.ListTrustConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListTrustConfigsResponse message. Does not implicitly {@link google.cloud.certificatemanager.v1.ListTrustConfigsResponse.verify|verify} messages.
+                     * @param message ListTrustConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.IListTrustConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTrustConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.ListTrustConfigsResponse.verify|verify} messages.
+                     * @param message ListTrustConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.IListTrustConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTrustConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTrustConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.ListTrustConfigsResponse;
+
+                    /**
+                     * Decodes a ListTrustConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTrustConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.ListTrustConfigsResponse;
+
+                    /**
+                     * Verifies a ListTrustConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTrustConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTrustConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.ListTrustConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListTrustConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListTrustConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.ListTrustConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTrustConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTrustConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetTrustConfigRequest. */
+                interface IGetTrustConfigRequest {
+
+                    /** GetTrustConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetTrustConfigRequest. */
+                class GetTrustConfigRequest implements IGetTrustConfigRequest {
+
+                    /**
+                     * Constructs a new GetTrustConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.IGetTrustConfigRequest);
+
+                    /** GetTrustConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetTrustConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetTrustConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.IGetTrustConfigRequest): google.cloud.certificatemanager.v1.GetTrustConfigRequest;
+
+                    /**
+                     * Encodes the specified GetTrustConfigRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.GetTrustConfigRequest.verify|verify} messages.
+                     * @param message GetTrustConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.IGetTrustConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetTrustConfigRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.GetTrustConfigRequest.verify|verify} messages.
+                     * @param message GetTrustConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.IGetTrustConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetTrustConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetTrustConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.GetTrustConfigRequest;
+
+                    /**
+                     * Decodes a GetTrustConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetTrustConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.GetTrustConfigRequest;
+
+                    /**
+                     * Verifies a GetTrustConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetTrustConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetTrustConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.GetTrustConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetTrustConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetTrustConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.GetTrustConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetTrustConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetTrustConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateTrustConfigRequest. */
+                interface ICreateTrustConfigRequest {
+
+                    /** CreateTrustConfigRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateTrustConfigRequest trustConfigId */
+                    trustConfigId?: (string|null);
+
+                    /** CreateTrustConfigRequest trustConfig */
+                    trustConfig?: (google.cloud.certificatemanager.v1.ITrustConfig|null);
+                }
+
+                /** Represents a CreateTrustConfigRequest. */
+                class CreateTrustConfigRequest implements ICreateTrustConfigRequest {
+
+                    /**
+                     * Constructs a new CreateTrustConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.ICreateTrustConfigRequest);
+
+                    /** CreateTrustConfigRequest parent. */
+                    public parent: string;
+
+                    /** CreateTrustConfigRequest trustConfigId. */
+                    public trustConfigId: string;
+
+                    /** CreateTrustConfigRequest trustConfig. */
+                    public trustConfig?: (google.cloud.certificatemanager.v1.ITrustConfig|null);
+
+                    /**
+                     * Creates a new CreateTrustConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateTrustConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.ICreateTrustConfigRequest): google.cloud.certificatemanager.v1.CreateTrustConfigRequest;
+
+                    /**
+                     * Encodes the specified CreateTrustConfigRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.CreateTrustConfigRequest.verify|verify} messages.
+                     * @param message CreateTrustConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.ICreateTrustConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateTrustConfigRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.CreateTrustConfigRequest.verify|verify} messages.
+                     * @param message CreateTrustConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.ICreateTrustConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateTrustConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateTrustConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.CreateTrustConfigRequest;
+
+                    /**
+                     * Decodes a CreateTrustConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateTrustConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.CreateTrustConfigRequest;
+
+                    /**
+                     * Verifies a CreateTrustConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateTrustConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateTrustConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.CreateTrustConfigRequest;
+
+                    /**
+                     * Creates a plain object from a CreateTrustConfigRequest message. Also converts values to other types if specified.
+                     * @param message CreateTrustConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.CreateTrustConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateTrustConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateTrustConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateTrustConfigRequest. */
+                interface IUpdateTrustConfigRequest {
+
+                    /** UpdateTrustConfigRequest trustConfig */
+                    trustConfig?: (google.cloud.certificatemanager.v1.ITrustConfig|null);
+
+                    /** UpdateTrustConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateTrustConfigRequest. */
+                class UpdateTrustConfigRequest implements IUpdateTrustConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateTrustConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest);
+
+                    /** UpdateTrustConfigRequest trustConfig. */
+                    public trustConfig?: (google.cloud.certificatemanager.v1.ITrustConfig|null);
+
+                    /** UpdateTrustConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateTrustConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateTrustConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest): google.cloud.certificatemanager.v1.UpdateTrustConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateTrustConfigRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.UpdateTrustConfigRequest.verify|verify} messages.
+                     * @param message UpdateTrustConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateTrustConfigRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.UpdateTrustConfigRequest.verify|verify} messages.
+                     * @param message UpdateTrustConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.IUpdateTrustConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateTrustConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateTrustConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.UpdateTrustConfigRequest;
+
+                    /**
+                     * Decodes an UpdateTrustConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateTrustConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.UpdateTrustConfigRequest;
+
+                    /**
+                     * Verifies an UpdateTrustConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateTrustConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateTrustConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.UpdateTrustConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateTrustConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateTrustConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.UpdateTrustConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateTrustConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateTrustConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteTrustConfigRequest. */
+                interface IDeleteTrustConfigRequest {
+
+                    /** DeleteTrustConfigRequest name */
+                    name?: (string|null);
+
+                    /** DeleteTrustConfigRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteTrustConfigRequest. */
+                class DeleteTrustConfigRequest implements IDeleteTrustConfigRequest {
+
+                    /**
+                     * Constructs a new DeleteTrustConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest);
+
+                    /** DeleteTrustConfigRequest name. */
+                    public name: string;
+
+                    /** DeleteTrustConfigRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteTrustConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteTrustConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest): google.cloud.certificatemanager.v1.DeleteTrustConfigRequest;
+
+                    /**
+                     * Encodes the specified DeleteTrustConfigRequest message. Does not implicitly {@link google.cloud.certificatemanager.v1.DeleteTrustConfigRequest.verify|verify} messages.
+                     * @param message DeleteTrustConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteTrustConfigRequest message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.DeleteTrustConfigRequest.verify|verify} messages.
+                     * @param message DeleteTrustConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.IDeleteTrustConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteTrustConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteTrustConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.DeleteTrustConfigRequest;
+
+                    /**
+                     * Decodes a DeleteTrustConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteTrustConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.DeleteTrustConfigRequest;
+
+                    /**
+                     * Verifies a DeleteTrustConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteTrustConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteTrustConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.DeleteTrustConfigRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteTrustConfigRequest message. Also converts values to other types if specified.
+                     * @param message DeleteTrustConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.DeleteTrustConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteTrustConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteTrustConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TrustConfig. */
+                interface ITrustConfig {
+
+                    /** TrustConfig name */
+                    name?: (string|null);
+
+                    /** TrustConfig createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TrustConfig updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TrustConfig labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** TrustConfig description */
+                    description?: (string|null);
+
+                    /** TrustConfig etag */
+                    etag?: (string|null);
+
+                    /** TrustConfig trustStores */
+                    trustStores?: (google.cloud.certificatemanager.v1.TrustConfig.ITrustStore[]|null);
+                }
+
+                /** Represents a TrustConfig. */
+                class TrustConfig implements ITrustConfig {
+
+                    /**
+                     * Constructs a new TrustConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.certificatemanager.v1.ITrustConfig);
+
+                    /** TrustConfig name. */
+                    public name: string;
+
+                    /** TrustConfig createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TrustConfig updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TrustConfig labels. */
+                    public labels: { [k: string]: string };
+
+                    /** TrustConfig description. */
+                    public description: string;
+
+                    /** TrustConfig etag. */
+                    public etag: string;
+
+                    /** TrustConfig trustStores. */
+                    public trustStores: google.cloud.certificatemanager.v1.TrustConfig.ITrustStore[];
+
+                    /**
+                     * Creates a new TrustConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TrustConfig instance
+                     */
+                    public static create(properties?: google.cloud.certificatemanager.v1.ITrustConfig): google.cloud.certificatemanager.v1.TrustConfig;
+
+                    /**
+                     * Encodes the specified TrustConfig message. Does not implicitly {@link google.cloud.certificatemanager.v1.TrustConfig.verify|verify} messages.
+                     * @param message TrustConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.certificatemanager.v1.ITrustConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TrustConfig message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.TrustConfig.verify|verify} messages.
+                     * @param message TrustConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.certificatemanager.v1.ITrustConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TrustConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TrustConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.TrustConfig;
+
+                    /**
+                     * Decodes a TrustConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TrustConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.TrustConfig;
+
+                    /**
+                     * Verifies a TrustConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TrustConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TrustConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.TrustConfig;
+
+                    /**
+                     * Creates a plain object from a TrustConfig message. Also converts values to other types if specified.
+                     * @param message TrustConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.certificatemanager.v1.TrustConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TrustConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TrustConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TrustConfig {
+
+                    /** Properties of a TrustAnchor. */
+                    interface ITrustAnchor {
+
+                        /** TrustAnchor pemCertificate */
+                        pemCertificate?: (string|null);
+                    }
+
+                    /** Represents a TrustAnchor. */
+                    class TrustAnchor implements ITrustAnchor {
+
+                        /**
+                         * Constructs a new TrustAnchor.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.certificatemanager.v1.TrustConfig.ITrustAnchor);
+
+                        /** TrustAnchor pemCertificate. */
+                        public pemCertificate?: (string|null);
+
+                        /** TrustAnchor kind. */
+                        public kind?: "pemCertificate";
+
+                        /**
+                         * Creates a new TrustAnchor instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TrustAnchor instance
+                         */
+                        public static create(properties?: google.cloud.certificatemanager.v1.TrustConfig.ITrustAnchor): google.cloud.certificatemanager.v1.TrustConfig.TrustAnchor;
+
+                        /**
+                         * Encodes the specified TrustAnchor message. Does not implicitly {@link google.cloud.certificatemanager.v1.TrustConfig.TrustAnchor.verify|verify} messages.
+                         * @param message TrustAnchor message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.certificatemanager.v1.TrustConfig.ITrustAnchor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TrustAnchor message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.TrustConfig.TrustAnchor.verify|verify} messages.
+                         * @param message TrustAnchor message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.certificatemanager.v1.TrustConfig.ITrustAnchor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TrustAnchor message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TrustAnchor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.TrustConfig.TrustAnchor;
+
+                        /**
+                         * Decodes a TrustAnchor message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TrustAnchor
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.TrustConfig.TrustAnchor;
+
+                        /**
+                         * Verifies a TrustAnchor message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TrustAnchor message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TrustAnchor
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.TrustConfig.TrustAnchor;
+
+                        /**
+                         * Creates a plain object from a TrustAnchor message. Also converts values to other types if specified.
+                         * @param message TrustAnchor
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.certificatemanager.v1.TrustConfig.TrustAnchor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TrustAnchor to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TrustAnchor
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an IntermediateCA. */
+                    interface IIntermediateCA {
+
+                        /** IntermediateCA pemCertificate */
+                        pemCertificate?: (string|null);
+                    }
+
+                    /** Represents an IntermediateCA. */
+                    class IntermediateCA implements IIntermediateCA {
+
+                        /**
+                         * Constructs a new IntermediateCA.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.certificatemanager.v1.TrustConfig.IIntermediateCA);
+
+                        /** IntermediateCA pemCertificate. */
+                        public pemCertificate?: (string|null);
+
+                        /** IntermediateCA kind. */
+                        public kind?: "pemCertificate";
+
+                        /**
+                         * Creates a new IntermediateCA instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IntermediateCA instance
+                         */
+                        public static create(properties?: google.cloud.certificatemanager.v1.TrustConfig.IIntermediateCA): google.cloud.certificatemanager.v1.TrustConfig.IntermediateCA;
+
+                        /**
+                         * Encodes the specified IntermediateCA message. Does not implicitly {@link google.cloud.certificatemanager.v1.TrustConfig.IntermediateCA.verify|verify} messages.
+                         * @param message IntermediateCA message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.certificatemanager.v1.TrustConfig.IIntermediateCA, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IntermediateCA message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.TrustConfig.IntermediateCA.verify|verify} messages.
+                         * @param message IntermediateCA message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.certificatemanager.v1.TrustConfig.IIntermediateCA, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IntermediateCA message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IntermediateCA
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.TrustConfig.IntermediateCA;
+
+                        /**
+                         * Decodes an IntermediateCA message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IntermediateCA
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.TrustConfig.IntermediateCA;
+
+                        /**
+                         * Verifies an IntermediateCA message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IntermediateCA message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IntermediateCA
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.TrustConfig.IntermediateCA;
+
+                        /**
+                         * Creates a plain object from an IntermediateCA message. Also converts values to other types if specified.
+                         * @param message IntermediateCA
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.certificatemanager.v1.TrustConfig.IntermediateCA, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IntermediateCA to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IntermediateCA
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TrustStore. */
+                    interface ITrustStore {
+
+                        /** TrustStore trustAnchors */
+                        trustAnchors?: (google.cloud.certificatemanager.v1.TrustConfig.ITrustAnchor[]|null);
+
+                        /** TrustStore intermediateCas */
+                        intermediateCas?: (google.cloud.certificatemanager.v1.TrustConfig.IIntermediateCA[]|null);
+                    }
+
+                    /** Represents a TrustStore. */
+                    class TrustStore implements ITrustStore {
+
+                        /**
+                         * Constructs a new TrustStore.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.certificatemanager.v1.TrustConfig.ITrustStore);
+
+                        /** TrustStore trustAnchors. */
+                        public trustAnchors: google.cloud.certificatemanager.v1.TrustConfig.ITrustAnchor[];
+
+                        /** TrustStore intermediateCas. */
+                        public intermediateCas: google.cloud.certificatemanager.v1.TrustConfig.IIntermediateCA[];
+
+                        /**
+                         * Creates a new TrustStore instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TrustStore instance
+                         */
+                        public static create(properties?: google.cloud.certificatemanager.v1.TrustConfig.ITrustStore): google.cloud.certificatemanager.v1.TrustConfig.TrustStore;
+
+                        /**
+                         * Encodes the specified TrustStore message. Does not implicitly {@link google.cloud.certificatemanager.v1.TrustConfig.TrustStore.verify|verify} messages.
+                         * @param message TrustStore message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.certificatemanager.v1.TrustConfig.ITrustStore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TrustStore message, length delimited. Does not implicitly {@link google.cloud.certificatemanager.v1.TrustConfig.TrustStore.verify|verify} messages.
+                         * @param message TrustStore message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.certificatemanager.v1.TrustConfig.ITrustStore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TrustStore message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TrustStore
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.certificatemanager.v1.TrustConfig.TrustStore;
+
+                        /**
+                         * Decodes a TrustStore message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TrustStore
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.certificatemanager.v1.TrustConfig.TrustStore;
+
+                        /**
+                         * Verifies a TrustStore message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TrustStore message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TrustStore
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.certificatemanager.v1.TrustConfig.TrustStore;
+
+                        /**
+                         * Creates a plain object from a TrustStore message. Also converts values to other types if specified.
+                         * @param message TrustStore
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.certificatemanager.v1.TrustConfig.TrustStore, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TrustStore to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TrustStore
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
             }
         }
@@ -5548,7 +6748,8 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -6452,6 +7653,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -6489,6 +7693,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -7070,6 +8277,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -7083,6 +8305,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -7364,6 +8601,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -7380,6 +8620,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -7583,7 +8826,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */
@@ -7706,6 +8952,21 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
         /** Properties of a FileDescriptorProto. */
         interface IFileDescriptorProto {
 
@@ -7746,7 +9007,7 @@ export namespace google {
             syntax?: (string|null);
 
             /** FileDescriptorProto edition */
-            edition?: (string|null);
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -7795,7 +9056,7 @@ export namespace google {
             public syntax: string;
 
             /** FileDescriptorProto edition. */
-            public edition: string;
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -8246,6 +9507,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -8259,6 +9529,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -8336,6 +9615,136 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -8522,8 +9931,8 @@ export namespace google {
             /** Label enum. */
             enum Label {
                 LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
             }
         }
 
@@ -9235,9 +10644,6 @@ export namespace google {
             /** FileOptions pyGenericServices */
             pyGenericServices?: (boolean|null);
 
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
             /** FileOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -9264,6 +10670,9 @@ export namespace google {
 
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -9311,9 +10720,6 @@ export namespace google {
             /** FileOptions pyGenericServices. */
             public pyGenericServices: boolean;
 
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
             /** FileOptions deprecated. */
             public deprecated: boolean;
 
@@ -9340,6 +10746,9 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9450,6 +10859,9 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -9480,6 +10892,9 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9592,8 +11007,14 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -9641,8 +11062,14 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9761,10 +11188,116 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -9778,6 +11311,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9872,6 +11408,9 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -9893,6 +11432,9 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9981,6 +11523,12 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -9996,6 +11544,12 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10081,6 +11635,9 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -10102,6 +11659,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -10196,6 +11756,9 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -10223,6 +11786,9 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10547,6 +12113,394 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -11212,6 +13166,103 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an Any. */
         interface IAny {
 
@@ -11400,103 +13451,6 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FieldMask. */
-        interface IFieldMask {
-
-            /** FieldMask paths */
-            paths?: (string[]|null);
-        }
-
-        /** Represents a FieldMask. */
-        class FieldMask implements IFieldMask {
-
-            /**
-             * Constructs a new FieldMask.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFieldMask);
-
-            /** FieldMask paths. */
-            public paths: string[];
-
-            /**
-             * Creates a new FieldMask instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldMask instance
-             */
-            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
-
-            /**
-             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
-
-            /**
-             * Verifies a FieldMask message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldMask
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
-
-            /**
-             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-             * @param message FieldMask
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldMask to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

@@ -50,7 +50,7 @@ function main(parent) {
   /**
    *  A list of Dns Authorization field names used to specify the order of the
    *  returned results. The default sorting order is ascending. To specify
-   *  descending order for a field, add a suffix " desc".
+   *  descending order for a field, add a suffix `" desc"`.
    */
   // const orderBy = 'abc123'
 

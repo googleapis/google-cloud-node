@@ -55,7 +55,7 @@ function main(parent) {
   /**
    *  A list of Certificate Map Entry field names used to specify
    *  the order of the returned results. The default sorting order is ascending.
-   *  To specify descending order for a field, add a suffix " desc".
+   *  To specify descending order for a field, add a suffix `" desc"`.
    */
   // const orderBy = 'abc123'
 
