@@ -28665,6 +28665,30 @@
                     })();
     
                     /**
+                     * EventType enum.
+                     * @name google.cloud.networkservices.v1beta1.EventType
+                     * @enum {number}
+                     * @property {number} EVENT_TYPE_UNSPECIFIED=0 EVENT_TYPE_UNSPECIFIED value
+                     * @property {number} REQUEST_HEADERS=1 REQUEST_HEADERS value
+                     * @property {number} REQUEST_BODY=2 REQUEST_BODY value
+                     * @property {number} RESPONSE_HEADERS=3 RESPONSE_HEADERS value
+                     * @property {number} RESPONSE_BODY=4 RESPONSE_BODY value
+                     * @property {number} REQUEST_TRAILERS=5 REQUEST_TRAILERS value
+                     * @property {number} RESPONSE_TRAILERS=6 RESPONSE_TRAILERS value
+                     */
+                    v1beta1.EventType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "EVENT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "REQUEST_HEADERS"] = 1;
+                        values[valuesById[2] = "REQUEST_BODY"] = 2;
+                        values[valuesById[3] = "RESPONSE_HEADERS"] = 3;
+                        values[valuesById[4] = "RESPONSE_BODY"] = 4;
+                        values[valuesById[5] = "REQUEST_TRAILERS"] = 5;
+                        values[valuesById[6] = "RESPONSE_TRAILERS"] = 6;
+                        return values;
+                    })();
+    
+                    /**
                      * LoadBalancingScheme enum.
                      * @name google.cloud.networkservices.v1beta1.LoadBalancingScheme
                      * @enum {number}
@@ -29166,7 +29190,7 @@
                              * @property {string|null} [name] Extension name
                              * @property {string|null} [authority] Extension authority
                              * @property {string|null} [service] Extension service
-                             * @property {Array.<google.cloud.networkservices.v1beta1.ExtensionChain.Extension.EventType>|null} [supportedEvents] Extension supportedEvents
+                             * @property {Array.<google.cloud.networkservices.v1beta1.EventType>|null} [supportedEvents] Extension supportedEvents
                              * @property {google.protobuf.IDuration|null} [timeout] Extension timeout
                              * @property {boolean|null} [failOpen] Extension failOpen
                              * @property {Array.<string>|null} [forwardHeaders] Extension forwardHeaders
@@ -29215,7 +29239,7 @@
     
                             /**
                              * Extension supportedEvents.
-                             * @member {Array.<google.cloud.networkservices.v1beta1.ExtensionChain.Extension.EventType>} supportedEvents
+                             * @member {Array.<google.cloud.networkservices.v1beta1.EventType>} supportedEvents
                              * @memberof google.cloud.networkservices.v1beta1.ExtensionChain.Extension
                              * @instance
                              */
@@ -29415,6 +29439,8 @@
                                         case 2:
                                         case 3:
                                         case 4:
+                                        case 5:
+                                        case 6:
                                             break;
                                         }
                                 }
@@ -29485,6 +29511,14 @@
                                         case 4:
                                             message.supportedEvents[i] = 4;
                                             break;
+                                        case "REQUEST_TRAILERS":
+                                        case 5:
+                                            message.supportedEvents[i] = 5;
+                                            break;
+                                        case "RESPONSE_TRAILERS":
+                                        case 6:
+                                            message.supportedEvents[i] = 6;
+                                            break;
                                         }
                                 }
                                 if (object.timeout != null) {
@@ -29537,7 +29571,7 @@
                                 if (message.supportedEvents && message.supportedEvents.length) {
                                     object.supportedEvents = [];
                                     for (var j = 0; j < message.supportedEvents.length; ++j)
-                                        object.supportedEvents[j] = options.enums === String ? $root.google.cloud.networkservices.v1beta1.ExtensionChain.Extension.EventType[message.supportedEvents[j]] === undefined ? message.supportedEvents[j] : $root.google.cloud.networkservices.v1beta1.ExtensionChain.Extension.EventType[message.supportedEvents[j]] : message.supportedEvents[j];
+                                        object.supportedEvents[j] = options.enums === String ? $root.google.cloud.networkservices.v1beta1.EventType[message.supportedEvents[j]] === undefined ? message.supportedEvents[j] : $root.google.cloud.networkservices.v1beta1.EventType[message.supportedEvents[j]] : message.supportedEvents[j];
                                 }
                                 if (message.timeout != null && message.hasOwnProperty("timeout"))
                                     object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
@@ -29576,26 +29610,6 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.networkservices.v1beta1.ExtensionChain.Extension";
                             };
-    
-                            /**
-                             * EventType enum.
-                             * @name google.cloud.networkservices.v1beta1.ExtensionChain.Extension.EventType
-                             * @enum {number}
-                             * @property {number} EVENT_TYPE_UNSPECIFIED=0 EVENT_TYPE_UNSPECIFIED value
-                             * @property {number} REQUEST_HEADERS=1 REQUEST_HEADERS value
-                             * @property {number} REQUEST_BODY=2 REQUEST_BODY value
-                             * @property {number} RESPONSE_HEADERS=3 RESPONSE_HEADERS value
-                             * @property {number} RESPONSE_BODY=4 RESPONSE_BODY value
-                             */
-                            Extension.EventType = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "EVENT_TYPE_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "REQUEST_HEADERS"] = 1;
-                                values[valuesById[2] = "REQUEST_BODY"] = 2;
-                                values[valuesById[3] = "RESPONSE_HEADERS"] = 3;
-                                values[valuesById[4] = "RESPONSE_BODY"] = 4;
-                                return values;
-                            })();
     
                             return Extension;
                         })();
