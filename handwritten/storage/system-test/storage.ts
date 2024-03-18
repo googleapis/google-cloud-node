@@ -773,6 +773,10 @@ describe('storage', function () {
 
     beforeEach(createBucket);
 
+    afterEach(async () => {
+      await bucket.delete();
+    });
+
     it("sets bucket's RPO to ASYNC_TURBO", async () => {
       await setTurboReplication(bucket, RPO_ASYNC_TURBO);
       const [bucketMetadata] = await bucket.getMetadata();
@@ -783,6 +787,80 @@ describe('storage', function () {
       await setTurboReplication(bucket, RPO_DEFAULT);
       const [bucketMetadata] = await bucket.getMetadata();
       return assert.strictEqual(bucketMetadata.rpo, RPO_DEFAULT);
+    });
+  });
+
+  describe('soft-delete', () => {
+    let bucket: Bucket;
+    const SOFT_DELETE_RETENTION_SECONDS = 7 * 24 * 60 * 60; //7 days in seconds;
+
+    beforeEach(async () => {
+      bucket = storage.bucket(generateName());
+      await bucket.create();
+      await bucket.setMetadata({
+        softDeletePolicy: {
+          retentionDurationSeconds: SOFT_DELETE_RETENTION_SECONDS,
+        },
+      });
+    });
+
+    afterEach(async () => {
+      await bucket.deleteFiles({force: true, versions: true});
+      await bucket.delete();
+    });
+
+    it('should set softDeletePolicy correctly', async () => {
+      const metadata = await bucket.getMetadata();
+      assert(metadata[0].softDeletePolicy);
+      assert(metadata[0].softDeletePolicy.effectiveTime);
+      assert.deepStrictEqual(
+        metadata[0].softDeletePolicy.retentionDurationSeconds,
+        SOFT_DELETE_RETENTION_SECONDS.toString()
+      );
+    });
+
+    it('should LIST soft-deleted files', async () => {
+      const f1 = bucket.file('file1');
+      const f2 = bucket.file('file2');
+      await f1.save('file1');
+      await f2.save('file2');
+      await f1.delete();
+      await f2.delete();
+      const [notSoftDeletedFiles] = await bucket.getFiles();
+      assert.strictEqual(notSoftDeletedFiles.length, 0);
+      const [softDeletedFiles] = await bucket.getFiles({softDeleted: true});
+      assert.strictEqual(softDeletedFiles.length, 2);
+    });
+
+    it('should GET a soft-deleted file', async () => {
+      const f1 = bucket.file('file3');
+      await f1.save('file3');
+      const [metadata] = await f1.getMetadata();
+      await f1.delete();
+      const [softDeletedFile] = await f1.get({
+        softDeleted: true,
+        generation: parseInt(metadata.generation?.toString() || '0'),
+      });
+      assert(softDeletedFile);
+      assert.strictEqual(
+        softDeletedFile.metadata.generation,
+        metadata.generation
+      );
+    });
+
+    it('should restore a soft-deleted file', async () => {
+      const f1 = bucket.file('file4');
+      await f1.save('file4');
+      const [metadata] = await f1.getMetadata();
+      await f1.delete();
+      let [files] = await bucket.getFiles();
+      assert.strictEqual(files.length, 0);
+      const restoredFile = await f1.restore({
+        generation: parseInt(metadata.generation?.toString() || '0'),
+      });
+      assert(restoredFile);
+      [files] = await bucket.getFiles();
+      assert.strictEqual(files.length, 1);
     });
   });
 

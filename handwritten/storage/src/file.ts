@@ -72,6 +72,8 @@ import {
   BaseMetadata,
   DeleteCallback,
   DeleteOptions,
+  GetResponse,
+  InstanceResponseCallback,
   RequestResponse,
   SetMetadataOptions,
 } from './nodejs-common/service-object.js';
@@ -172,6 +174,8 @@ export interface GetFileMetadataCallback {
 
 export interface GetFileOptions extends GetConfig {
   userProject?: string;
+  generation?: number;
+  softDeleted?: boolean;
 }
 
 export type GetFileResponse = [File, unknown];
@@ -418,6 +422,11 @@ export interface SetStorageClassCallback {
   (err?: Error | null, apiResponse?: unknown): void;
 }
 
+export interface RestoreOptions extends PreconditionOptions {
+  generation: number;
+  projection?: 'full' | 'noAcl';
+}
+
 export interface FileMetadata extends BaseMetadata {
   acl?: AclMetadata[] | null;
   bucket?: string;
@@ -436,6 +445,7 @@ export interface FileMetadata extends BaseMetadata {
   eventBasedHold?: boolean | null;
   readonly eventBasedHoldReleaseTime?: string;
   generation?: string | number;
+  hardDeleteTime?: string;
   kmsKeyName?: string;
   md5Hash?: string;
   mediaLink?: string;
@@ -454,6 +464,7 @@ export interface FileMetadata extends BaseMetadata {
   } | null;
   retentionExpirationTime?: string;
   size?: string | number;
+  softDeleteTime?: string;
   storageClass?: string;
   temporaryHold?: boolean | null;
   timeCreated?: string;
@@ -803,6 +814,9 @@ class File extends ServiceObject<File, FileMetadata> {
        * @param {options} [options] Configuration options.
        * @param {string} [options.userProject] The ID of the project which will be
        *     billed for the request.
+       * @param {number} [options.generation] The generation number to get
+       * @param {boolean} [options.softDeleted] If true, returns the soft-deleted object.
+            Object `generation` is required if `softDeleted` is set to True.
        * @param {GetFileCallback} [callback] Callback function.
        * @returns {Promise<GetFileResponse>}
        *
@@ -2344,6 +2358,27 @@ class File extends ServiceObject<File, FileMetadata> {
     return this;
   }
 
+  get(options?: GetFileOptions): Promise<GetResponse<File>>;
+  get(callback: InstanceResponseCallback<File>): void;
+  get(options: GetFileOptions, callback: InstanceResponseCallback<File>): void;
+  get(
+    optionsOrCallback?: GetFileOptions | InstanceResponseCallback<File>,
+    cb?: InstanceResponseCallback<File>
+  ): Promise<GetResponse<File>> | void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const options: any =
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    cb =
+      typeof optionsOrCallback === 'function'
+        ? (optionsOrCallback as InstanceResponseCallback<File>)
+        : cb;
+
+    super
+      .get(options)
+      .then(resp => cb!(null, ...resp))
+      .catch(cb!);
+  }
+
   getExpirationDate(): Promise<GetExpirationDateResponse>;
   getExpirationDate(callback: GetExpirationDateCallback): void;
   /**
@@ -3597,6 +3632,39 @@ class File extends ServiceObject<File, FileMetadata> {
     this.move(destinationFile, options, callback);
   }
 
+  /**
+   * @typedef {object} RestoreOptions Options for File#restore(). See an
+   *     {@link https://cloud.google.com/storage/docs/json_api/v1/objects#resource| Object resource}.
+   * @param {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   * @param {number} [generation] If present, selects a specific revision of this object.
+   * @param {string} [projection] Specifies the set of properties to return. If used, must be 'full' or 'noAcl'.
+   * @param {string | number} [ifGenerationMatch] Request proceeds if the generation of the target resource
+   *  matches the value used in the precondition.
+   *  If the values don't match, the request fails with a 412 Precondition Failed response.
+   * @param {string | number} [ifGenerationNotMatch] Request proceeds if the generation of the target resource does
+   *  not match the value used in the precondition. If the values match, the request fails with a 304 Not Modified response.
+   * @param {string | number} [ifMetagenerationMatch] Request proceeds if the meta-generation of the target resource
+   *  matches the value used in the precondition.
+   *  If the values don't match, the request fails with a 412 Precondition Failed response.
+   * @param {string | number} [ifMetagenerationNotMatch]  Request proceeds if the meta-generation of the target resource does
+   *  not match the value used in the precondition. If the values match, the request fails with a 304 Not Modified response.
+   */
+  /**
+   * Restores a soft-deleted file
+   * @param {RestoreOptions} options Restore options.
+   * @returns {Promise<File>}
+   */
+  async restore(options: RestoreOptions): Promise<File> {
+    const [file] = await this.request({
+      method: 'POST',
+      uri: '/restore',
+      qs: options,
+    });
+
+    return file as File;
+  }
+
   request(reqOpts: DecorateRequestOptions): Promise<RequestResponse>;
   request(
     reqOpts: DecorateRequestOptions,
@@ -4240,6 +4308,7 @@ promisifyAll(File, {
     'setEncryptionKey',
     'shouldRetryBasedOnPreconditionAndIdempotencyStrat',
     'getBufferFromReadable',
+    'restore',
   ],
 });
 

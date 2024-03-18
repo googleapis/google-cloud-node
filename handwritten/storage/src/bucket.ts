@@ -169,6 +169,7 @@ export interface GetFilesOptions {
   maxApiCalls?: number;
   maxResults?: number;
   pageToken?: string;
+  softDeleted?: boolean;
   startOffset?: string;
   userProject?: string;
   versions?: boolean;
@@ -342,6 +343,10 @@ export interface BucketMetadata extends BaseMetadata {
     retentionPeriod?: string | number;
   } | null;
   rpo?: string;
+  softDeletePolicy?: {
+    retentionDurationSeconds?: string | number;
+    readonly effectiveTime?: string;
+  };
   storageClass?: string;
   timeCreated?: string;
   updated?: string;
@@ -2629,6 +2634,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *     or 1 page of results will be returned per call.
    * @property {string} [pageToken] A previously-returned page token
    *     representing part of the larger set of results to view.
+   * @property {boolean} [softDeleted] If true, only soft-deleted object versions will be
+   *     listed as distinct results in order of generation number. Note `soft_deleted` and
+   *     `versions` cannot be set to true simultaneously.
    * @property {string} [startOffset] Filter results to objects whose names are
    * lexicographically equal to or after startOffset. If endOffset is also set,
    * the objects listed have names between startOffset (inclusive) and endOffset (exclusive).
@@ -2671,6 +2679,9 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
    *     or 1 page of results will be returned per call.
    * @param {string} [query.pageToken] A previously-returned page token
    *     representing part of the larger set of results to view.
+   * @param {boolean} [query.softDeleted] If true, only soft-deleted object versions will be
+   *     listed as distinct results in order of generation number. Note `soft_deleted` and
+   *     `versions` cannot be set to true simultaneously.
    * @param {string} [query.startOffset] Filter results to objects whose names are
    * lexicographically equal to or after startOffset. If endOffset is also set,
    * the objects listed have names between startOffset (inclusive) and endOffset (exclusive).

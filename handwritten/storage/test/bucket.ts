@@ -1863,6 +1863,25 @@ describe('Bucket', () => {
       });
     });
 
+    it('should return soft-deleted Files if queried for softDeleted', done => {
+      const softDeletedTime = new Date('1/1/2024').toISOString();
+      bucket.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(null, {
+          items: [{name: 'fake-file-name', generation: 1, softDeletedTime}],
+        });
+      };
+
+      bucket.getFiles({softDeleted: true}, (err: Error, files: FakeFile[]) => {
+        assert.ifError(err);
+        assert(files[0] instanceof FakeFile);
+        assert.strictEqual(files[0].metadata.softDeletedTime, softDeletedTime);
+        done();
+      });
+    });
+
     it('should set kmsKeyName on file', done => {
       const kmsKeyName = 'kms-key-name';
 

@@ -104,6 +104,7 @@ const fakePromisify = {
       'setEncryptionKey',
       'shouldRetryBasedOnPreconditionAndIdempotencyStrat',
       'getBufferFromReadable',
+      'restore',
     ]);
   },
 };
@@ -4142,6 +4143,26 @@ describe('File', () => {
         cb();
       };
       file.rename('new-name', done);
+    });
+  });
+
+  describe('restore', () => {
+    it('should pass options to underlying request call', async () => {
+      file.parent.request = function (
+        reqOpts: DecorateRequestOptions,
+        callback_: Function
+      ) {
+        assert.strictEqual(this, file);
+        assert.deepStrictEqual(reqOpts, {
+          method: 'POST',
+          uri: '/restore',
+          qs: {generation: 123},
+        });
+        assert.strictEqual(callback_, undefined);
+        return [];
+      };
+
+      await file.restore({generation: 123});
     });
   });
 
