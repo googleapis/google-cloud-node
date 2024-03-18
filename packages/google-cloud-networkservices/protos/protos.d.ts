@@ -12031,6 +12031,17 @@ export namespace google {
                     type DeleteLbRouteExtensionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
+                /** EventType enum. */
+                enum EventType {
+                    EVENT_TYPE_UNSPECIFIED = 0,
+                    REQUEST_HEADERS = 1,
+                    REQUEST_BODY = 2,
+                    RESPONSE_HEADERS = 3,
+                    RESPONSE_BODY = 4,
+                    REQUEST_TRAILERS = 5,
+                    RESPONSE_TRAILERS = 6
+                }
+
                 /** LoadBalancingScheme enum. */
                 enum LoadBalancingScheme {
                     LOAD_BALANCING_SCHEME_UNSPECIFIED = 0,
@@ -12259,7 +12270,7 @@ export namespace google {
                         service?: (string|null);
 
                         /** Extension supportedEvents */
-                        supportedEvents?: (google.cloud.networkservices.v1beta1.ExtensionChain.Extension.EventType[]|null);
+                        supportedEvents?: (google.cloud.networkservices.v1beta1.EventType[]|null);
 
                         /** Extension timeout */
                         timeout?: (google.protobuf.IDuration|null);
@@ -12290,7 +12301,7 @@ export namespace google {
                         public service: string;
 
                         /** Extension supportedEvents. */
-                        public supportedEvents: google.cloud.networkservices.v1beta1.ExtensionChain.Extension.EventType[];
+                        public supportedEvents: google.cloud.networkservices.v1beta1.EventType[];
 
                         /** Extension timeout. */
                         public timeout?: (google.protobuf.IDuration|null);
@@ -12377,18 +12388,6 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace Extension {
-
-                        /** EventType enum. */
-                        enum EventType {
-                            EVENT_TYPE_UNSPECIFIED = 0,
-                            REQUEST_HEADERS = 1,
-                            REQUEST_BODY = 2,
-                            RESPONSE_HEADERS = 3,
-                            RESPONSE_BODY = 4
-                        }
                     }
                 }
 

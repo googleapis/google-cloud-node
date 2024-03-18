@@ -3682,6 +3682,17 @@
                         }
                       }
                     },
+                    "EventType": {
+                      "values": {
+                        "EVENT_TYPE_UNSPECIFIED": 0,
+                        "REQUEST_HEADERS": 1,
+                        "REQUEST_BODY": 2,
+                        "RESPONSE_HEADERS": 3,
+                        "RESPONSE_BODY": 4,
+                        "REQUEST_TRAILERS": 5,
+                        "RESPONSE_TRAILERS": 6
+                      }
+                    },
                     "LoadBalancingScheme": {
                       "values": {
                         "LOAD_BALANCING_SCHEME_UNSPECIFIED": 0,
@@ -3761,7 +3772,7 @@
                               "type": "google.protobuf.Duration",
                               "id": 5,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "failOpen": {
@@ -3777,17 +3788,6 @@
                               "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "EventType": {
-                              "values": {
-                                "EVENT_TYPE_UNSPECIFIED": 0,
-                                "REQUEST_HEADERS": 1,
-                                "REQUEST_BODY": 2,
-                                "RESPONSE_HEADERS": 3,
-                                "RESPONSE_BODY": 4
                               }
                             }
                           }
