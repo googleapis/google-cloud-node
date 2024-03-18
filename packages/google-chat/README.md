@@ -5,7 +5,7 @@
 # [Google Chat API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-chat)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/chat.svg)](https://www.npmjs.org/package/@google-cloud/chat)
+[![npm version](https://img.shields.io/npm/v/@google-apps/chat.svg)](https://www.npmjs.org/package/@google-apps/chat)
 
 
 
@@ -50,7 +50,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/chat
+npm install @google-apps/chat
 ```
 
 
@@ -98,7 +98,7 @@ npm install @google-cloud/chat
 // const filter = 'abc123'
 
 // Imports the Chat library
-const {ChatServiceClient} = require('@google-cloud/chat').v1;
+const {ChatServiceClient} = require('@google-apps/chat').v1;
 
 // Instantiates a client
 const chatClient = new ChatServiceClient();
@@ -173,7 +173,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/chat@legacy-8` installs client libraries
+For example, `npm install @google-apps/chat@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning

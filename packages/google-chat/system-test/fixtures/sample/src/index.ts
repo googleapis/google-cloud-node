@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ChatServiceClient} from '@google-cloud/chat';
+import {ChatServiceClient} from '@google-apps/chat';
 
 // check that the client class type name can be used
 function doStuffWithChatServiceClient(client: ChatServiceClient) {

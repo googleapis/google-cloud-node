@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/chat",
+  "name": "@google-apps/chat",
   "version": "0.0.0",
   "description": "Google Chat API client for Node.js",
   "repository": {

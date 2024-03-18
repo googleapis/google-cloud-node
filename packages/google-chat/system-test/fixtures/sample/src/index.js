@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const chat = require('@google-cloud/chat');
+const chat = require('@google-apps/chat');
 
 function main() {
   const chatServiceClient = new chat.ChatServiceClient();

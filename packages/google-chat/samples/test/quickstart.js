@@ -18,7 +18,7 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {ChatServiceClient} = require('@google-cloud/chat').v1;
+const {ChatServiceClient} = require('@google-apps/chat').v1;
 const chatClient = new ChatServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});

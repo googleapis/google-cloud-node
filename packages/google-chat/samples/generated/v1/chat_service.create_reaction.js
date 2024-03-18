@@ -39,7 +39,7 @@ function main(parent, reaction) {
   // const reaction = {}
 
   // Imports the Chat library
-  const {ChatServiceClient} = require('@google-cloud/chat').v1;
+  const {ChatServiceClient} = require('@google-apps/chat').v1;
 
   // Instantiates a client
   const chatClient = new ChatServiceClient();
