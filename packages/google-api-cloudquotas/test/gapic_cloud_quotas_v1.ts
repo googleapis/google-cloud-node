@@ -972,9 +972,9 @@ describe('v1.CloudQuotasClient', () => {
       assert(
         (client.descriptors.page.listQuotaInfos.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1021,9 +1021,9 @@ describe('v1.CloudQuotasClient', () => {
       assert(
         (client.descriptors.page.listQuotaInfos.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1064,9 +1064,9 @@ describe('v1.CloudQuotasClient', () => {
       assert(
         (client.descriptors.page.listQuotaInfos.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1104,9 +1104,9 @@ describe('v1.CloudQuotasClient', () => {
       assert(
         (client.descriptors.page.listQuotaInfos.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -1293,9 +1293,9 @@ describe('v1.CloudQuotasClient', () => {
       assert(
         (client.descriptors.page.listQuotaPreferences.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1343,9 +1343,9 @@ describe('v1.CloudQuotasClient', () => {
       assert(
         (client.descriptors.page.listQuotaPreferences.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1392,9 +1392,9 @@ describe('v1.CloudQuotasClient', () => {
       assert(
         (client.descriptors.page.listQuotaPreferences.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -1433,9 +1433,9 @@ describe('v1.CloudQuotasClient', () => {
       assert(
         (client.descriptors.page.listQuotaPreferences.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
