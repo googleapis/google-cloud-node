@@ -1624,6 +1624,137 @@ describe('v1.ConfigClient', () => {
     });
   });
 
+  describe('getTerraformVersion', () => {
+    it('invokes getTerraformVersion without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.GetTerraformVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.GetTerraformVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.config.v1.TerraformVersion()
+      );
+      client.innerApiCalls.getTerraformVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getTerraformVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTerraformVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTerraformVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTerraformVersion without error using callback', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.GetTerraformVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.GetTerraformVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.config.v1.TerraformVersion()
+      );
+      client.innerApiCalls.getTerraformVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getTerraformVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.config.v1.ITerraformVersion | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTerraformVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTerraformVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTerraformVersion with error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.GetTerraformVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.GetTerraformVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getTerraformVersion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getTerraformVersion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getTerraformVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTerraformVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTerraformVersion with closed client', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.GetTerraformVersionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.GetTerraformVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getTerraformVersion(request), expectedError);
+    });
+  });
+
   describe('createDeployment', () => {
     it('invokes createDeployment without error', async () => {
       const client = new configModule.v1.ConfigClient({
@@ -3148,9 +3279,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3197,9 +3328,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3240,9 +3371,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3280,9 +3411,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3449,9 +3580,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listRevisions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3498,9 +3629,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listRevisions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3541,9 +3672,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listRevisions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3581,9 +3712,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listRevisions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -3750,9 +3881,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3799,9 +3930,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3842,9 +3973,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3882,9 +4013,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4048,9 +4179,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listPreviews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4096,9 +4227,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listPreviews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4139,9 +4270,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listPreviews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4178,6 +4309,355 @@ describe('v1.ConfigClient', () => {
       );
       assert(
         (client.descriptors.page.listPreviews.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listTerraformVersions', () => {
+    it('invokes listTerraformVersions without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListTerraformVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListTerraformVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+      ];
+      client.innerApiCalls.listTerraformVersions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listTerraformVersions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTerraformVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTerraformVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTerraformVersions without error using callback', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListTerraformVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListTerraformVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+      ];
+      client.innerApiCalls.listTerraformVersions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listTerraformVersions(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.config.v1.ITerraformVersion[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTerraformVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTerraformVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTerraformVersions with error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListTerraformVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListTerraformVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listTerraformVersions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listTerraformVersions(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listTerraformVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTerraformVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTerraformVersionsStream without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListTerraformVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListTerraformVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+      ];
+      client.descriptors.page.listTerraformVersions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listTerraformVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.config.v1.TerraformVersion[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.config.v1.TerraformVersion) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listTerraformVersions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTerraformVersions, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listTerraformVersions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listTerraformVersionsStream with error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListTerraformVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListTerraformVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTerraformVersions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listTerraformVersionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.config.v1.TerraformVersion[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.config.v1.TerraformVersion) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listTerraformVersions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTerraformVersions, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listTerraformVersions
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listTerraformVersions without error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListTerraformVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListTerraformVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.config.v1.TerraformVersion()
+        ),
+      ];
+      client.descriptors.page.listTerraformVersions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.config.v1.ITerraformVersion[] = [];
+      const iterable = client.listTerraformVersionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTerraformVersions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listTerraformVersions
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listTerraformVersions with error', async () => {
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.config.v1.ListTerraformVersionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.config.v1.ListTerraformVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTerraformVersions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listTerraformVersionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.config.v1.ITerraformVersion[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTerraformVersions
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listTerraformVersions
+            .asyncIterate as SinonStub
+        )
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -5402,6 +5882,74 @@ describe('v1.ConfigClient', () => {
         assert.strictEqual(result, 'serviceAccountValue');
         assert(
           (client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('terraformVersion', () => {
+      const fakePath = '/rendered/path/terraformVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        terraform_version: 'terraformVersionValue',
+      };
+      const client = new configModule.v1.ConfigClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.terraformVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.terraformVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('terraformVersionPath', () => {
+        const result = client.terraformVersionPath(
+          'projectValue',
+          'locationValue',
+          'terraformVersionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.terraformVersionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTerraformVersionName', () => {
+        const result = client.matchProjectFromTerraformVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.terraformVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTerraformVersionName', () => {
+        const result = client.matchLocationFromTerraformVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.terraformVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTerraformVersionFromTerraformVersionName', () => {
+        const result =
+          client.matchTerraformVersionFromTerraformVersionName(fakePath);
+        assert.strictEqual(result, 'terraformVersionValue');
+        assert(
+          (client.pathTemplates.terraformVersionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
