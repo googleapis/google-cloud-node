@@ -29,7 +29,7 @@ describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
-    projectId = await storageClient.getProjectId();
+    projectId = await controlClient.getProjectId();
   });
 
   it('should run quickstart', async () => {
