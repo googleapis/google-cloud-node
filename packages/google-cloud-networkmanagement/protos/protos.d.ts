@@ -2433,7 +2433,10 @@ export namespace google {
                         GOOGLE_SERVICE_TYPE_UNSPECIFIED = 0,
                         IAP = 1,
                         GFE_PROXY_OR_HEALTH_CHECK_PROBER = 2,
-                        CLOUD_DNS = 3
+                        CLOUD_DNS = 3,
+                        GOOGLE_API = 4,
+                        GOOGLE_API_PSC = 5,
+                        GOOGLE_API_VPC_SC = 6
                     }
                 }
 
@@ -8600,7 +8603,10 @@ export namespace google {
                         GOOGLE_SERVICE_TYPE_UNSPECIFIED = 0,
                         IAP = 1,
                         GFE_PROXY_OR_HEALTH_CHECK_PROBER = 2,
-                        CLOUD_DNS = 3
+                        CLOUD_DNS = 3,
+                        GOOGLE_API = 4,
+                        GOOGLE_API_PSC = 5,
+                        GOOGLE_API_VPC_SC = 6
                     }
                 }
 

@@ -7274,6 +7274,9 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             return null;
@@ -7315,6 +7318,18 @@
                             case "CLOUD_DNS":
                             case 3:
                                 message.googleServiceType = 3;
+                                break;
+                            case "GOOGLE_API":
+                            case 4:
+                                message.googleServiceType = 4;
+                                break;
+                            case "GOOGLE_API_PSC":
+                            case 5:
+                                message.googleServiceType = 5;
+                                break;
+                            case "GOOGLE_API_VPC_SC":
+                            case 6:
+                                message.googleServiceType = 6;
                                 break;
                             }
                             return message;
@@ -7378,6 +7393,9 @@
                          * @property {number} IAP=1 IAP value
                          * @property {number} GFE_PROXY_OR_HEALTH_CHECK_PROBER=2 GFE_PROXY_OR_HEALTH_CHECK_PROBER value
                          * @property {number} CLOUD_DNS=3 CLOUD_DNS value
+                         * @property {number} GOOGLE_API=4 GOOGLE_API value
+                         * @property {number} GOOGLE_API_PSC=5 GOOGLE_API_PSC value
+                         * @property {number} GOOGLE_API_VPC_SC=6 GOOGLE_API_VPC_SC value
                          */
                         GoogleServiceInfo.GoogleServiceType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7385,6 +7403,9 @@
                             values[valuesById[1] = "IAP"] = 1;
                             values[valuesById[2] = "GFE_PROXY_OR_HEALTH_CHECK_PROBER"] = 2;
                             values[valuesById[3] = "CLOUD_DNS"] = 3;
+                            values[valuesById[4] = "GOOGLE_API"] = 4;
+                            values[valuesById[5] = "GOOGLE_API_PSC"] = 5;
+                            values[valuesById[6] = "GOOGLE_API_VPC_SC"] = 6;
                             return values;
                         })();
     
@@ -24462,6 +24483,9 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             return null;
@@ -24503,6 +24527,18 @@
                             case "CLOUD_DNS":
                             case 3:
                                 message.googleServiceType = 3;
+                                break;
+                            case "GOOGLE_API":
+                            case 4:
+                                message.googleServiceType = 4;
+                                break;
+                            case "GOOGLE_API_PSC":
+                            case 5:
+                                message.googleServiceType = 5;
+                                break;
+                            case "GOOGLE_API_VPC_SC":
+                            case 6:
+                                message.googleServiceType = 6;
                                 break;
                             }
                             return message;
@@ -24566,6 +24602,9 @@
                          * @property {number} IAP=1 IAP value
                          * @property {number} GFE_PROXY_OR_HEALTH_CHECK_PROBER=2 GFE_PROXY_OR_HEALTH_CHECK_PROBER value
                          * @property {number} CLOUD_DNS=3 CLOUD_DNS value
+                         * @property {number} GOOGLE_API=4 GOOGLE_API value
+                         * @property {number} GOOGLE_API_PSC=5 GOOGLE_API_PSC value
+                         * @property {number} GOOGLE_API_VPC_SC=6 GOOGLE_API_VPC_SC value
                          */
                         GoogleServiceInfo.GoogleServiceType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -24573,6 +24612,9 @@
                             values[valuesById[1] = "IAP"] = 1;
                             values[valuesById[2] = "GFE_PROXY_OR_HEALTH_CHECK_PROBER"] = 2;
                             values[valuesById[3] = "CLOUD_DNS"] = 3;
+                            values[valuesById[4] = "GOOGLE_API"] = 4;
+                            values[valuesById[5] = "GOOGLE_API_PSC"] = 5;
+                            values[valuesById[6] = "GOOGLE_API_VPC_SC"] = 6;
                             return values;
                         })();
     
