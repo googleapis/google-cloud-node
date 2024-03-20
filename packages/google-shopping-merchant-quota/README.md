@@ -94,7 +94,7 @@ async function callListQuotaGroups() {
   // Run request
   const iterable = quotaClient.listQuotaGroupsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
