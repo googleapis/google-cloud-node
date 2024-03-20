@@ -31,7 +31,7 @@
   "devDependencies": {
     "@google-cloud/bigquery": "^7.0.0",
     "@types/chai": "^4.2.16",
-    "@types/rimraf": "^3.0.0",
+    "@types/rimraf": "^4.0.0",
     "chai": "^4.2.0",
     "gts": "^5.0.0",
     "mocha": "^9.2.2",
