@@ -169,7 +169,8 @@
     "packages/google-apps-meet": {},
     "packages/google-cloud-parallelstore": {},
     "packages/google-chat": {},
-    "packages/google-cloud-apphub": {}
+    "packages/google-cloud-apphub": {},
+    "packages/google-storage-control": {}
   },
   "plugins": [
     {
