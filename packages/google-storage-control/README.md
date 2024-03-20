@@ -123,7 +123,7 @@ async function callListFolders() {
   // Run request
   const iterable = controlClient.listFoldersAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
