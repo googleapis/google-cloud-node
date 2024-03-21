@@ -1218,6 +1218,9 @@ export namespace google {
 
                 /** NodeConfig secondaryBootDisks */
                 secondaryBootDisks?: (google.container.v1.ISecondaryBootDisk[]|null);
+
+                /** NodeConfig secondaryBootDiskUpdateStrategy */
+                secondaryBootDiskUpdateStrategy?: (google.container.v1.ISecondaryBootDiskUpdateStrategy|null);
             }
 
             /** Represents a NodeConfig. */
@@ -1340,8 +1343,14 @@ export namespace google {
                 /** NodeConfig secondaryBootDisks. */
                 public secondaryBootDisks: google.container.v1.ISecondaryBootDisk[];
 
+                /** NodeConfig secondaryBootDiskUpdateStrategy. */
+                public secondaryBootDiskUpdateStrategy?: (google.container.v1.ISecondaryBootDiskUpdateStrategy|null);
+
                 /** NodeConfig _fastSocket. */
                 public _fastSocket?: "fastSocket";
+
+                /** NodeConfig _secondaryBootDiskUpdateStrategy. */
+                public _secondaryBootDiskUpdateStrategy?: "secondaryBootDiskUpdateStrategy";
 
                 /**
                  * Creates a new NodeConfig instance using the specified properties.
@@ -7093,6 +7102,9 @@ export namespace google {
                 /** ClusterUpdate desiredK8sBetaApis */
                 desiredK8sBetaApis?: (google.container.v1.IK8sBetaAPIConfig|null);
 
+                /** ClusterUpdate desiredEnableMultiNetworking */
+                desiredEnableMultiNetworking?: (boolean|null);
+
                 /** ClusterUpdate desiredNodePoolAutoConfigResourceManagerTags */
                 desiredNodePoolAutoConfigResourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
 
@@ -7259,6 +7271,9 @@ export namespace google {
                 /** ClusterUpdate desiredK8sBetaApis. */
                 public desiredK8sBetaApis?: (google.container.v1.IK8sBetaAPIConfig|null);
 
+                /** ClusterUpdate desiredEnableMultiNetworking. */
+                public desiredEnableMultiNetworking?: (boolean|null);
+
                 /** ClusterUpdate desiredNodePoolAutoConfigResourceManagerTags. */
                 public desiredNodePoolAutoConfigResourceManagerTags?: (google.container.v1.IResourceManagerTags|null);
 
@@ -7273,6 +7288,9 @@ export namespace google {
 
                 /** ClusterUpdate _desiredEnableFqdnNetworkPolicy. */
                 public _desiredEnableFqdnNetworkPolicy?: "desiredEnableFqdnNetworkPolicy";
+
+                /** ClusterUpdate _desiredEnableMultiNetworking. */
+                public _desiredEnableMultiNetworking?: "desiredEnableMultiNetworking";
 
                 /** ClusterUpdate _desiredInTransitEncryptionConfig. */
                 public _desiredInTransitEncryptionConfig?: "desiredInTransitEncryptionConfig";
@@ -21730,6 +21748,97 @@ export namespace google {
                 IN_TRANSIT_ENCRYPTION_CONFIG_UNSPECIFIED = 0,
                 IN_TRANSIT_ENCRYPTION_DISABLED = 1,
                 IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT = 2
+            }
+
+            /** Properties of a SecondaryBootDiskUpdateStrategy. */
+            interface ISecondaryBootDiskUpdateStrategy {
+            }
+
+            /** Represents a SecondaryBootDiskUpdateStrategy. */
+            class SecondaryBootDiskUpdateStrategy implements ISecondaryBootDiskUpdateStrategy {
+
+                /**
+                 * Constructs a new SecondaryBootDiskUpdateStrategy.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.ISecondaryBootDiskUpdateStrategy);
+
+                /**
+                 * Creates a new SecondaryBootDiskUpdateStrategy instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SecondaryBootDiskUpdateStrategy instance
+                 */
+                public static create(properties?: google.container.v1.ISecondaryBootDiskUpdateStrategy): google.container.v1.SecondaryBootDiskUpdateStrategy;
+
+                /**
+                 * Encodes the specified SecondaryBootDiskUpdateStrategy message. Does not implicitly {@link google.container.v1.SecondaryBootDiskUpdateStrategy.verify|verify} messages.
+                 * @param message SecondaryBootDiskUpdateStrategy message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.ISecondaryBootDiskUpdateStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SecondaryBootDiskUpdateStrategy message, length delimited. Does not implicitly {@link google.container.v1.SecondaryBootDiskUpdateStrategy.verify|verify} messages.
+                 * @param message SecondaryBootDiskUpdateStrategy message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.ISecondaryBootDiskUpdateStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SecondaryBootDiskUpdateStrategy message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SecondaryBootDiskUpdateStrategy
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.SecondaryBootDiskUpdateStrategy;
+
+                /**
+                 * Decodes a SecondaryBootDiskUpdateStrategy message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SecondaryBootDiskUpdateStrategy
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.SecondaryBootDiskUpdateStrategy;
+
+                /**
+                 * Verifies a SecondaryBootDiskUpdateStrategy message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SecondaryBootDiskUpdateStrategy message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SecondaryBootDiskUpdateStrategy
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.SecondaryBootDiskUpdateStrategy;
+
+                /**
+                 * Creates a plain object from a SecondaryBootDiskUpdateStrategy message. Also converts values to other types if specified.
+                 * @param message SecondaryBootDiskUpdateStrategy
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.SecondaryBootDiskUpdateStrategy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SecondaryBootDiskUpdateStrategy to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SecondaryBootDiskUpdateStrategy
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
