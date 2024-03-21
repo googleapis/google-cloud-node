@@ -32528,7 +32528,9 @@ export namespace google {
                         UNABLE_TO_VERIFY_DEFINERS = 39,
                         SUBSCRIPTION_CALCULATION_STATUS = 40,
                         PG_SUBSCRIPTION_COUNT = 41,
-                        PG_SYNC_PARALLEL_LEVEL = 42
+                        PG_SYNC_PARALLEL_LEVEL = 42,
+                        INSUFFICIENT_DISK_SIZE = 43,
+                        INSUFFICIENT_MACHINE_TIER = 44
                     }
                 }
 
