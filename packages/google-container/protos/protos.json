@@ -6755,6 +6755,11 @@
                       "oneof": [
                         "fastSocket"
                       ]
+                    },
+                    "_secondaryBootDiskUpdateStrategy": {
+                      "oneof": [
+                        "secondaryBootDiskUpdateStrategy"
+                      ]
                     }
                   },
                   "fields": {
@@ -6927,6 +6932,13 @@
                       "rule": "repeated",
                       "type": "SecondaryBootDisk",
                       "id": 48
+                    },
+                    "secondaryBootDiskUpdateStrategy": {
+                      "type": "SecondaryBootDiskUpdateStrategy",
+                      "id": 50,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     }
                   }
                 },
@@ -8523,6 +8535,11 @@
                         "desiredEnableFqdnNetworkPolicy"
                       ]
                     },
+                    "_desiredEnableMultiNetworking": {
+                      "oneof": [
+                        "desiredEnableMultiNetworking"
+                      ]
+                    },
                     "_desiredInTransitEncryptionConfig": {
                       "oneof": [
                         "desiredInTransitEncryptionConfig"
@@ -8778,6 +8795,13 @@
                     "desiredHostMaintenancePolicy": {
                       "type": "HostMaintenancePolicy",
                       "id": 132
+                    },
+                    "desiredEnableMultiNetworking": {
+                      "type": "bool",
+                      "id": 135,
+                      "options": {
+                        "proto3_optional": true
+                      }
                     },
                     "desiredNodePoolAutoConfigResourceManagerTags": {
                       "type": "ResourceManagerTags",
@@ -12362,6 +12386,9 @@
                     "IN_TRANSIT_ENCRYPTION_DISABLED": 1,
                     "IN_TRANSIT_ENCRYPTION_INTER_NODE_TRANSPARENT": 2
                   }
+                },
+                "SecondaryBootDiskUpdateStrategy": {
+                  "fields": {}
                 }
               }
             }
