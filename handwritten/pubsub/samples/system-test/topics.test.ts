@@ -96,6 +96,43 @@ describe('topics', () => {
     assert.ok(exists, 'Topic was created');
   });
 
+  const kinesisFakeArns = {
+    roleArn: 'arn:aws:iam::111111111111:role/fake-role-name',
+    gcpServiceAccount:
+      'fake-service-account@fake-gcp-project.iam.gserviceaccount.com',
+    streamArn: 'arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name',
+    consumerArn:
+      'arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name/consumer/consumer-1:1111111111',
+  };
+
+  it('should create a topic with kinesis ingestion', async () => {
+    const name = topicName('create-kinesis');
+
+    const output = execSync(
+      `${commandFor('createTopicWithKinesisIngestion')} ${name} ${
+        kinesisFakeArns.roleArn
+      } ${kinesisFakeArns.gcpServiceAccount} ${kinesisFakeArns.streamArn} ${
+        kinesisFakeArns.consumerArn
+      }`
+    );
+    assert.include(output, `Topic ${name} created with AWS Kinesis ingestion.`);
+    const [topics] = await pubsub.getTopics();
+    const exists = topics.some(t => t.name === fullTopicName(name));
+    assert.ok(exists, 'Topic was created');
+  });
+
+  it('should update a topic with kinesis integration', async () => {
+    const pair = await createPair('update-kinesis');
+    const output = execSync(
+      `${commandFor('updateTopicIngestionType')} ${pair.t.name} ${
+        kinesisFakeArns.roleArn
+      } ${kinesisFakeArns.gcpServiceAccount} ${kinesisFakeArns.streamArn} ${
+        kinesisFakeArns.consumerArn
+      }`
+    );
+    assert.include(output, 'Topic updated with Kinesis source successfully.');
+  });
+
   it('should list topics', async () => {
     const pair = await createPair('list');
     const output = execSync(`${commandFor('listAllTopics')}`);

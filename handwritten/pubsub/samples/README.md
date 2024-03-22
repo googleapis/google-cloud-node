@@ -34,6 +34,7 @@ guides.
   * [Create Subscription with ordering enabled](#create-subscription-with-ordering-enabled)
   * [Create Subscription With Retry Policy](#create-subscription-with-retry-policy)
   * [Create Topic](#create-topic)
+  * [Create Topic With Kinesis Ingestion](#create-topic-with-kinesis-ingestion)
   * [Create Topic With Schema](#create-topic-with-schema)
   * [Create Topic With Schema Revisions](#create-topic-with-schema-revisions)
   * [Delete a previously created schema](#delete-a-previously-created-schema)
@@ -81,6 +82,7 @@ guides.
   * [Test Subscription Permissions](#test-subscription-permissions)
   * [Test Topic Permissions](#test-topic-permissions)
   * [Update Dead Letter Policy](#update-dead-letter-policy)
+  * [Update Topic Ingestion Type](#update-topic-ingestion-type)
   * [Update Topic Schema](#update-topic-schema)
   * [Validate a schema definition](#validate-a-schema-definition)
 
@@ -358,6 +360,25 @@ __Usage:__
 
 
 `node createTopic.js <topic-name-or-id>`
+
+
+-----
+
+
+
+
+### Create Topic With Kinesis Ingestion
+
+Creates a new topic, with Kinesis ingestion enabled.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createTopicWithKinesisIngestion.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createTopicWithKinesisIngestion.js,samples/README.md)
+
+__Usage:__
+
+
+`node createTopicWithKinesisIngestion.js <topic-name> <role-arn> <gcp-service-account> <stream-arn> <consumer-arn>`
 
 
 -----
@@ -1251,6 +1272,25 @@ __Usage:__
 
 
 `node updateDeadLetterPolicy.js <topic-name-or-id> <subscription-name-or-id>`
+
+
+-----
+
+
+
+
+### Update Topic Ingestion Type
+
+Update the ingestion type on a topic.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/updateTopicIngestionType.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/updateTopicIngestionType.js,samples/README.md)
+
+__Usage:__
+
+
+`node updateTopicIngestionType.js <topic-name-or-id> <stream-arn> <consumer-arn> <aws-role-arn> <gcp-service-account>`
 
 
 -----
