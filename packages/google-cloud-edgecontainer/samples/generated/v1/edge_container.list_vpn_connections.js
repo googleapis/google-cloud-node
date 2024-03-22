@@ -29,7 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent location, which owns this collection of VPN connections.
+   *  Required. The parent location, which owns this collection of VPN
+   *  connections.
    */
   // const parent = 'abc123'
   /**
