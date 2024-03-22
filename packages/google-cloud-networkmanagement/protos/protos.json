@@ -468,7 +468,10 @@
                         },
                         "loadBalancer": {
                           "type": "LoadBalancerInfo",
-                          "id": 16
+                          "id": 16,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "network": {
                           "type": "NetworkInfo",
@@ -513,6 +516,14 @@
                       },
                       "nested": {
                         "State": {
+                          "valuesOptions": {
+                            "ARRIVE_AT_INTERNAL_LOAD_BALANCER": {
+                              "deprecated": true
+                            },
+                            "ARRIVE_AT_EXTERNAL_LOAD_BALANCER": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "STATE_UNSPECIFIED": 0,
                             "START_FROM_INSTANCE": 1,
@@ -855,7 +866,10 @@
                         },
                         "healthCheckUri": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "backends": {
                           "rule": "repeated",
@@ -2389,7 +2403,10 @@
                         },
                         "loadBalancer": {
                           "type": "LoadBalancerInfo",
-                          "id": 16
+                          "id": 16,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "network": {
                           "type": "NetworkInfo",
@@ -2434,6 +2451,14 @@
                       },
                       "nested": {
                         "State": {
+                          "valuesOptions": {
+                            "ARRIVE_AT_INTERNAL_LOAD_BALANCER": {
+                              "deprecated": true
+                            },
+                            "ARRIVE_AT_EXTERNAL_LOAD_BALANCER": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "STATE_UNSPECIFIED": 0,
                             "START_FROM_INSTANCE": 1,
@@ -2776,7 +2801,10 @@
                         },
                         "healthCheckUri": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "backends": {
                           "rule": "repeated",
