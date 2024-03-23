@@ -10150,7 +10150,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -10170,6 +10170,10 @@
                     {
                         "name": "tools",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "tool_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolConfig"
                     },
                     {
                         "name": "safety_settings",
@@ -10206,7 +10210,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -10226,6 +10230,10 @@
                     {
                         "name": "tools",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "tool_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolConfig"
                     },
                     {
                         "name": "safety_settings",

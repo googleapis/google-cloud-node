@@ -1255,6 +1255,8 @@ export class PredictionServiceClient {
    *   A `Tool` is a piece of code that enables the system to interact with
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model.
+   * @param {google.cloud.aiplatform.v1beta1.ToolConfig} [request.toolConfig]
+   *   Tool config. This config is shared for all tools provided in the request.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.
@@ -1490,6 +1492,8 @@ export class PredictionServiceClient {
    *   A `Tool` is a piece of code that enables the system to interact with
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model.
+   * @param {google.cloud.aiplatform.v1beta1.ToolConfig} [request.toolConfig]
+   *   Tool config. This config is shared for all tools provided in the request.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.

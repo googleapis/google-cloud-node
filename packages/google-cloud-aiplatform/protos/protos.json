@@ -6511,7 +6511,8 @@
                       "oneofs": {
                         "storageType": {
                           "oneof": [
-                            "bigtable"
+                            "bigtable",
+                            "optimized"
                           ]
                         }
                       },
@@ -6519,6 +6520,10 @@
                         "bigtable": {
                           "type": "Bigtable",
                           "id": 8
+                        },
+                        "optimized": {
+                          "type": "Optimized",
+                          "id": 12
                         },
                         "name": {
                           "type": "string",
@@ -6562,6 +6567,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "dedicatedServingEndpoint": {
+                          "type": "DedicatedServingEndpoint",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -6599,6 +6611,20 @@
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "Optimized": {
+                          "fields": {}
+                        },
+                        "DedicatedServingEndpoint": {
+                          "fields": {
+                            "publicEndpointDomainName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
@@ -7307,6 +7333,13 @@
                         "syncConfig": {
                           "type": "SyncConfig",
                           "id": 7
+                        },
+                        "indexConfig": {
+                          "type": "IndexConfig",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -7334,6 +7367,106 @@
                             "cron": {
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "IndexConfig": {
+                          "oneofs": {
+                            "algorithmConfig": {
+                              "oneof": [
+                                "treeAhConfig",
+                                "bruteForceConfig"
+                              ]
+                            },
+                            "_embeddingDimension": {
+                              "oneof": [
+                                "embeddingDimension"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "treeAhConfig": {
+                              "type": "TreeAHConfig",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "bruteForceConfig": {
+                              "type": "BruteForceConfig",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "embeddingColumn": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filterColumns": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "crowdingColumn": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "embeddingDimension": {
+                              "type": "int32",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "distanceMeasureType": {
+                              "type": "DistanceMeasureType",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "BruteForceConfig": {
+                              "fields": {}
+                            },
+                            "TreeAHConfig": {
+                              "oneofs": {
+                                "_leafNodeEmbeddingCount": {
+                                  "oneof": [
+                                    "leafNodeEmbeddingCount"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "leafNodeEmbeddingCount": {
+                                  "type": "int64",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "DistanceMeasureType": {
+                              "values": {
+                                "DISTANCE_MEASURE_TYPE_UNSPECIFIED": 0,
+                                "SQUARED_L2_DISTANCE": 1,
+                                "COSINE_DISTANCE": 2,
+                                "DOT_PRODUCT_DISTANCE": 3
+                              }
                             }
                           }
                         },
@@ -7575,6 +7708,10 @@
                         "protoStruct": {
                           "type": "google.protobuf.Struct",
                           "id": 2
+                        },
+                        "dataKey": {
+                          "type": "FeatureViewDataKey",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -28430,6 +28567,46 @@
                         }
                       }
                     },
+                    "ToolConfig": {
+                      "fields": {
+                        "functionCallingConfig": {
+                          "type": "FunctionCallingConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FunctionCallingConfig": {
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowedFunctionNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "AUTO": 1,
+                            "ANY": 2,
+                            "NONE": 3
+                          }
+                        }
+                      }
+                    },
                     "Type": {
                       "values": {
                         "TYPE_UNSPECIFIED": 0,
@@ -46868,6 +47045,13 @@
                           "rule": "repeated",
                           "type": "Tool",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "toolConfig": {
+                          "type": "ToolConfig",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
