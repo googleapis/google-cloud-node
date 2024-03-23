@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.16.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.15.0...aiplatform-v3.16.0) (2024-03-23)
+
+
+### Features
+
+* Add v1beta1 StreamingFetchFeatureValues API ([#5128](https://github.com/googleapis/google-cloud-node/issues/5128)) ([4849a58](https://github.com/googleapis/google-cloud-node/commit/4849a58a9761a0123f3232f33651bd6972e6fd3a))
+
 ## [3.15.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.14.0...aiplatform-v3.15.0) (2024-03-12)
 
 

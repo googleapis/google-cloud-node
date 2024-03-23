@@ -5,6 +5,159 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "0aab0441677cb4cc037c2adc08b10f3556e9f459",
+          "message": "Add initial files for google.chat.v1",
+          "issues": [
+            "5091"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "59654662-c7e7-4230-91a5-4ddbf3f013de",
+      "createTime": "2024-03-23T10:48:03.284Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "31c36a88987e2dd68c70fb6220b5bf1311239d2d",
+          "message": "[grafeas] A new field `in_toto_slsa_provenance_v1` is added to message `BuildOccurrence`",
+          "issues": [
+            "5133"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "0741e690-1431-420d-bc71-47faba55b88d",
+      "createTime": "2024-03-23T10:48:03.190Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e15c0fa84d38e7bfd1e1ff2551b6b39ccbbd8554",
+          "message": "[containeranalysis] A new field `in_toto_slsa_provenance_v1` is added to message `BuildOccurrence`",
+          "issues": [
+            "5134"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "70a90e0d-58ff-45af-b03c-cf796b195620",
+      "createTime": "2024-03-23T10:48:03.100Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "334e7b93b4a996ca70fd4b95e98ca5e0c56eb623",
+          "message": "[cloudbuild] Add Bitbucket Data Center Config and Bitbucket Cloud config for Cloud Build Repositories",
+          "issues": [
+            "5132"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "7d07b63c-cd3b-4bd8-99aa-c1b861fbb377",
+      "createTime": "2024-03-23T10:48:03.080Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0aab0441677cb4cc037c2adc08b10f3556e9f459",
+          "message": "Add initial files for google.chat.v1",
+          "issues": [
+            "5091"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "9acdbe39-8d3a-4bf2-8c3b-bea54bea9aaa",
+      "createTime": "2024-03-23T10:48:03.067Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f930cd21e4f3dba436281a1db4f65714d795fb6c",
+          "message": "[dialogflow] added text sections to the submitted summary",
+          "issues": [
+            "5130"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "10e1ea03-8dfa-4646-991c-dd620f2a61cb",
+      "createTime": "2024-03-23T10:48:03.054Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "14aea7707c87513792390466a44a84da35d8fb9a",
+          "message": "[datacatalog] Add RANGE type to Data Catalog",
+          "issues": [
+            "5138"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "a1943610-2564-4f51-aedb-7de93b8f6eca",
+      "createTime": "2024-03-23T10:48:03.039Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fbc2b487f1f2c3eb9f7e95187e6acb28522b6753",
+          "message": "[binaryauthorization] A new field `in_toto_slsa_provenance_v1` is added to message `BuildOccurrence`",
+          "issues": [
+            "5135"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "4f60faca-6bf5-4298-a98b-51a53ba0113a",
+      "createTime": "2024-03-23T10:48:03.009Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4849a58a9761a0123f3232f33651bd6972e6fd3a",
+          "message": "Add v1beta1 StreamingFetchFeatureValues API",
+          "issues": [
+            "5128"
+          ]
+        }
+      ],
+      "version": "3.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "97448747-0fd7-4bed-9c70-0079255d8c5f",
+      "createTime": "2024-03-23T10:48:02.993Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "6bf58f91aff3ed22a9bf3b0abe895baeb9ac4f8d",
           "message": "Add initial files for google.cloud.apphub.v1",
           "issues": [
@@ -24995,5 +25148,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-03-13T07:10:57.730Z"
+  "updateTime": "2024-03-23T10:48:03.284Z"
 }

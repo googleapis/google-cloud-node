@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.1.1...tasks-v5.2.0) (2024-03-23)
+
+
+### Features
+
+* Add initial files for google.chat.v1 ([#5091](https://github.com/googleapis/google-cloud-node/issues/5091)) ([0aab044](https://github.com/googleapis/google-cloud-node/commit/0aab0441677cb4cc037c2adc08b10f3556e9f459))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.1.0...tasks-v5.1.1) (2024-02-27)
 
 

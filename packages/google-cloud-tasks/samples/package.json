@@ -15,7 +15,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@google-cloud/tasks": "^5.1.1",
+    "@google-cloud/tasks": "^5.2.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3"
   },
