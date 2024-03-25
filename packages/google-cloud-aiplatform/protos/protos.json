@@ -6511,7 +6511,8 @@
                       "oneofs": {
                         "storageType": {
                           "oneof": [
-                            "bigtable"
+                            "bigtable",
+                            "optimized"
                           ]
                         }
                       },
@@ -6519,6 +6520,10 @@
                         "bigtable": {
                           "type": "Bigtable",
                           "id": 8
+                        },
+                        "optimized": {
+                          "type": "Optimized",
+                          "id": 12
                         },
                         "name": {
                           "type": "string",
@@ -6562,6 +6567,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "dedicatedServingEndpoint": {
+                          "type": "DedicatedServingEndpoint",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -6599,6 +6611,20 @@
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "Optimized": {
+                          "fields": {}
+                        },
+                        "DedicatedServingEndpoint": {
+                          "fields": {
+                            "publicEndpointDomainName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
@@ -7307,6 +7333,13 @@
                         "syncConfig": {
                           "type": "SyncConfig",
                           "id": 7
+                        },
+                        "indexConfig": {
+                          "type": "IndexConfig",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -7334,6 +7367,106 @@
                             "cron": {
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "IndexConfig": {
+                          "oneofs": {
+                            "algorithmConfig": {
+                              "oneof": [
+                                "treeAhConfig",
+                                "bruteForceConfig"
+                              ]
+                            },
+                            "_embeddingDimension": {
+                              "oneof": [
+                                "embeddingDimension"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "treeAhConfig": {
+                              "type": "TreeAHConfig",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "bruteForceConfig": {
+                              "type": "BruteForceConfig",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "embeddingColumn": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filterColumns": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "crowdingColumn": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "embeddingDimension": {
+                              "type": "int32",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "distanceMeasureType": {
+                              "type": "DistanceMeasureType",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "BruteForceConfig": {
+                              "fields": {}
+                            },
+                            "TreeAHConfig": {
+                              "oneofs": {
+                                "_leafNodeEmbeddingCount": {
+                                  "oneof": [
+                                    "leafNodeEmbeddingCount"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "leafNodeEmbeddingCount": {
+                                  "type": "int64",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "DistanceMeasureType": {
+                              "values": {
+                                "DISTANCE_MEASURE_TYPE_UNSPECIFIED": 0,
+                                "SQUARED_L2_DISTANCE": 1,
+                                "COSINE_DISTANCE": 2,
+                                "DOT_PRODUCT_DISTANCE": 3
+                              }
                             }
                           }
                         },
@@ -7575,6 +7708,10 @@
                         "protoStruct": {
                           "type": "google.protobuf.Struct",
                           "id": 2
+                        },
+                        "dataKey": {
+                          "type": "FeatureViewDataKey",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -28430,6 +28567,46 @@
                         }
                       }
                     },
+                    "ToolConfig": {
+                      "fields": {
+                        "functionCallingConfig": {
+                          "type": "FunctionCallingConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FunctionCallingConfig": {
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allowedFunctionNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "AUTO": 1,
+                            "ANY": 2,
+                            "NONE": 3
+                          }
+                        }
+                      }
+                    },
                     "Type": {
                       "values": {
                         "TYPE_UNSPECIFIED": 0,
@@ -46872,6 +47049,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "toolConfig": {
+                          "type": "ToolConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "safetySettings": {
                           "rule": "repeated",
                           "type": "SafetySetting",
@@ -46961,6 +47145,364 @@
                               "type": "int32",
                               "id": 3
                             }
+                          }
+                        }
+                      }
+                    },
+                    "ReasoningEngineSpec": {
+                      "fields": {
+                        "packageSpec": {
+                          "type": "PackageSpec",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "classMethods": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Struct",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PackageSpec": {
+                          "fields": {
+                            "pickleObjectGcsUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dependencyFilesGcsUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "requirementsGcsUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pythonVersion": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ReasoningEngine": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/ReasoningEngine",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}",
+                        "(google.api.resource).plural": "reasoningEngines",
+                        "(google.api.resource).singular": "reasoningEngine"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "spec": {
+                          "type": "ReasoningEngineSpec",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ReasoningEngineExecutionService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "QueryReasoningEngine": {
+                          "requestType": "QueryReasoningEngineRequest",
+                          "responseType": "QueryReasoningEngineResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:query",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:query",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "QueryReasoningEngineRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngine"
+                          }
+                        },
+                        "input": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QueryReasoningEngineResponse": {
+                      "fields": {
+                        "output": {
+                          "type": "google.protobuf.Value",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ReasoningEngineService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateReasoningEngine": {
+                          "requestType": "CreateReasoningEngineRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/reasoningEngines",
+                            "(google.api.http).body": "reasoning_engine",
+                            "(google.api.method_signature)": "parent,reasoning_engine",
+                            "(google.longrunning.operation_info).response_type": "ReasoningEngine",
+                            "(google.longrunning.operation_info).metadata_type": "CreateReasoningEngineOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/reasoningEngines",
+                                "body": "reasoning_engine"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,reasoning_engine"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ReasoningEngine",
+                                "metadata_type": "CreateReasoningEngineOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetReasoningEngine": {
+                          "requestType": "GetReasoningEngineRequest",
+                          "responseType": "ReasoningEngine",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListReasoningEngines": {
+                          "requestType": "ListReasoningEnginesRequest",
+                          "responseType": "ListReasoningEnginesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/reasoningEngines",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/reasoningEngines"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteReasoningEngine": {
+                          "requestType": "DeleteReasoningEngineRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateReasoningEngineRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "reasoningEngine": {
+                          "type": "ReasoningEngine",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateReasoningEngineOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetReasoningEngineRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngine"
+                          }
+                        }
+                      }
+                    },
+                    "ListReasoningEnginesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListReasoningEnginesResponse": {
+                      "fields": {
+                        "reasoningEngines": {
+                          "rule": "repeated",
+                          "type": "ReasoningEngine",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteReasoningEngineRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ReasoningEngine"
                           }
                         }
                       }
