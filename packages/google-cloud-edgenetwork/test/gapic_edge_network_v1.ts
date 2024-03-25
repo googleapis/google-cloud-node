@@ -444,6 +444,7 @@ describe('v1.EdgeNetworkClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.GetZoneRequest()
@@ -459,6 +460,7 @@ describe('v1.EdgeNetworkClient', () => {
       );
       client.innerApiCalls.getZone = stubSimpleCall(expectedResponse);
       const [response] = await client.getZone(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (client.innerApiCalls.getZone as SinonStub).getCall(
         0
@@ -475,6 +477,7 @@ describe('v1.EdgeNetworkClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.GetZoneRequest()
@@ -506,6 +509,7 @@ describe('v1.EdgeNetworkClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (client.innerApiCalls.getZone as SinonStub).getCall(
         0
@@ -522,6 +526,7 @@ describe('v1.EdgeNetworkClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.GetZoneRequest()
@@ -535,6 +540,7 @@ describe('v1.EdgeNetworkClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.getZone = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getZone(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (client.innerApiCalls.getZone as SinonStub).getCall(
         0
       ).args[0];
@@ -550,6 +556,7 @@ describe('v1.EdgeNetworkClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.GetZoneRequest()
@@ -562,6 +569,7 @@ describe('v1.EdgeNetworkClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getZone(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -3545,6 +3553,7 @@ describe('v1.EdgeNetworkClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.ListZonesRequest()
@@ -3562,6 +3571,7 @@ describe('v1.EdgeNetworkClient', () => {
       ];
       client.innerApiCalls.listZones = stubSimpleCall(expectedResponse);
       const [response] = await client.listZones(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listZones as SinonStub
@@ -3578,6 +3588,7 @@ describe('v1.EdgeNetworkClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.ListZonesRequest()
@@ -3611,6 +3622,7 @@ describe('v1.EdgeNetworkClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listZones as SinonStub
@@ -3627,6 +3639,7 @@ describe('v1.EdgeNetworkClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.ListZonesRequest()
@@ -3640,6 +3653,7 @@ describe('v1.EdgeNetworkClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.listZones = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listZones(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.listZones as SinonStub
       ).getCall(0).args[0];
@@ -3655,6 +3669,7 @@ describe('v1.EdgeNetworkClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.ListZonesRequest()
@@ -3689,6 +3704,7 @@ describe('v1.EdgeNetworkClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
@@ -3698,9 +3714,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3709,6 +3725,7 @@ describe('v1.EdgeNetworkClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.ListZonesRequest()
@@ -3741,6 +3758,7 @@ describe('v1.EdgeNetworkClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
           .getCall(0)
@@ -3749,9 +3767,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3760,6 +3778,7 @@ describe('v1.EdgeNetworkClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.ListZonesRequest()
@@ -3782,6 +3801,7 @@ describe('v1.EdgeNetworkClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (client.descriptors.page.listZones.asyncIterate as SinonStub).getCall(0)
@@ -3791,9 +3811,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listZones.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -3802,6 +3822,7 @@ describe('v1.EdgeNetworkClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgenetwork.v1.ListZonesRequest()
@@ -3824,6 +3845,7 @@ describe('v1.EdgeNetworkClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (client.descriptors.page.listZones.asyncIterate as SinonStub).getCall(0)
           .args[1],
@@ -3832,9 +3854,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listZones.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4001,9 +4023,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4052,9 +4074,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4095,9 +4117,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4135,9 +4157,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4304,9 +4326,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4355,9 +4377,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listSubnets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4398,9 +4420,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4440,9 +4462,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listSubnets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -4627,9 +4649,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listInterconnects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4676,9 +4698,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listInterconnects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4725,9 +4747,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listInterconnects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -4766,9 +4788,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listInterconnects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
@@ -5294,9 +5316,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listRouters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5345,9 +5367,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listRouters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5388,9 +5410,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listRouters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
@@ -5430,9 +5452,9 @@ describe('v1.EdgeNetworkClient', () => {
       assert(
         (client.descriptors.page.listRouters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
