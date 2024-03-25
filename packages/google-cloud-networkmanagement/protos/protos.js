@@ -84,6 +84,7 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] ConnectivityTest updateTime
                          * @property {google.cloud.networkmanagement.v1.IReachabilityDetails|null} [reachabilityDetails] ConnectivityTest reachabilityDetails
                          * @property {google.cloud.networkmanagement.v1.IProbingDetails|null} [probingDetails] ConnectivityTest probingDetails
+                         * @property {boolean|null} [bypassFirewallChecks] ConnectivityTest bypassFirewallChecks
                          */
     
                         /**
@@ -200,6 +201,14 @@
                         ConnectivityTest.prototype.probingDetails = null;
     
                         /**
+                         * ConnectivityTest bypassFirewallChecks.
+                         * @member {boolean} bypassFirewallChecks
+                         * @memberof google.cloud.networkmanagement.v1.ConnectivityTest
+                         * @instance
+                         */
+                        ConnectivityTest.prototype.bypassFirewallChecks = false;
+    
+                        /**
                          * Creates a new ConnectivityTest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.ConnectivityTest
@@ -249,6 +258,8 @@
                                 $root.google.cloud.networkmanagement.v1.ReachabilityDetails.encode(message.reachabilityDetails, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.probingDetails != null && Object.hasOwnProperty.call(message, "probingDetails"))
                                 $root.google.cloud.networkmanagement.v1.ProbingDetails.encode(message.probingDetails, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.bypassFirewallChecks != null && Object.hasOwnProperty.call(message, "bypassFirewallChecks"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).bool(message.bypassFirewallChecks);
                             return writer;
                         };
     
@@ -352,6 +363,10 @@
                                         message.probingDetails = $root.google.cloud.networkmanagement.v1.ProbingDetails.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 17: {
+                                        message.bypassFirewallChecks = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -444,6 +459,9 @@
                                 if (error)
                                     return "probingDetails." + error;
                             }
+                            if (message.bypassFirewallChecks != null && message.hasOwnProperty("bypassFirewallChecks"))
+                                if (typeof message.bypassFirewallChecks !== "boolean")
+                                    return "bypassFirewallChecks: boolean expected";
                             return null;
                         };
     
@@ -511,6 +529,8 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1.ConnectivityTest.probingDetails: object expected");
                                 message.probingDetails = $root.google.cloud.networkmanagement.v1.ProbingDetails.fromObject(object.probingDetails);
                             }
+                            if (object.bypassFirewallChecks != null)
+                                message.bypassFirewallChecks = Boolean(object.bypassFirewallChecks);
                             return message;
                         };
     
@@ -542,6 +562,7 @@
                                 object.updateTime = null;
                                 object.reachabilityDetails = null;
                                 object.probingDetails = null;
+                                object.bypassFirewallChecks = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -574,6 +595,8 @@
                                 object.reachabilityDetails = $root.google.cloud.networkmanagement.v1.ReachabilityDetails.toObject(message.reachabilityDetails, options);
                             if (message.probingDetails != null && message.hasOwnProperty("probingDetails"))
                                 object.probingDetails = $root.google.cloud.networkmanagement.v1.ProbingDetails.toObject(message.probingDetails, options);
+                            if (message.bypassFirewallChecks != null && message.hasOwnProperty("bypassFirewallChecks"))
+                                object.bypassFirewallChecks = message.bypassFirewallChecks;
                             return object;
                         };
     
@@ -3505,6 +3528,7 @@
                          * @interface ITrace
                          * @property {google.cloud.networkmanagement.v1.IEndpointInfo|null} [endpointInfo] Trace endpointInfo
                          * @property {Array.<google.cloud.networkmanagement.v1.IStep>|null} [steps] Trace steps
+                         * @property {number|null} [forwardTraceId] Trace forwardTraceId
                          */
     
                         /**
@@ -3540,6 +3564,14 @@
                         Trace.prototype.steps = $util.emptyArray;
     
                         /**
+                         * Trace forwardTraceId.
+                         * @member {number} forwardTraceId
+                         * @memberof google.cloud.networkmanagement.v1.Trace
+                         * @instance
+                         */
+                        Trace.prototype.forwardTraceId = 0;
+    
+                        /**
                          * Creates a new Trace instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1.Trace
@@ -3568,6 +3600,8 @@
                             if (message.steps != null && message.steps.length)
                                 for (var i = 0; i < message.steps.length; ++i)
                                     $root.google.cloud.networkmanagement.v1.Step.encode(message.steps[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.forwardTraceId != null && Object.hasOwnProperty.call(message, "forwardTraceId"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.forwardTraceId);
                             return writer;
                         };
     
@@ -3610,6 +3644,10 @@
                                         if (!(message.steps && message.steps.length))
                                             message.steps = [];
                                         message.steps.push($root.google.cloud.networkmanagement.v1.Step.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.forwardTraceId = reader.int32();
                                         break;
                                     }
                                 default:
@@ -3661,6 +3699,9 @@
                                         return "steps." + error;
                                 }
                             }
+                            if (message.forwardTraceId != null && message.hasOwnProperty("forwardTraceId"))
+                                if (!$util.isInteger(message.forwardTraceId))
+                                    return "forwardTraceId: integer expected";
                             return null;
                         };
     
@@ -3691,6 +3732,8 @@
                                     message.steps[i] = $root.google.cloud.networkmanagement.v1.Step.fromObject(object.steps[i]);
                                 }
                             }
+                            if (object.forwardTraceId != null)
+                                message.forwardTraceId = object.forwardTraceId | 0;
                             return message;
                         };
     
@@ -3709,8 +3752,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.steps = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.endpointInfo = null;
+                                object.forwardTraceId = 0;
+                            }
                             if (message.endpointInfo != null && message.hasOwnProperty("endpointInfo"))
                                 object.endpointInfo = $root.google.cloud.networkmanagement.v1.EndpointInfo.toObject(message.endpointInfo, options);
                             if (message.steps && message.steps.length) {
@@ -3718,6 +3763,8 @@
                                 for (var j = 0; j < message.steps.length; ++j)
                                     object.steps[j] = $root.google.cloud.networkmanagement.v1.Step.toObject(message.steps[j], options);
                             }
+                            if (message.forwardTraceId != null && message.hasOwnProperty("forwardTraceId"))
+                                object.forwardTraceId = message.forwardTraceId;
                             return object;
                         };
     
@@ -4318,6 +4365,8 @@
                                 case 23:
                                 case 25:
                                 case 26:
+                                case 29:
+                                case 30:
                                 case 4:
                                 case 5:
                                 case 6:
@@ -4646,6 +4695,14 @@
                             case "START_FROM_CLOUD_RUN_REVISION":
                             case 26:
                                 message.state = 26;
+                                break;
+                            case "START_FROM_STORAGE_BUCKET":
+                            case 29:
+                                message.state = 29;
+                                break;
+                            case "START_FROM_PSC_PUBLISHED_SERVICE":
+                            case 30:
+                                message.state = 30;
                                 break;
                             case "APPLY_INGRESS_FIREWALL_RULE":
                             case 4:
@@ -5041,6 +5098,8 @@
                          * @property {number} START_FROM_CLOUD_FUNCTION=23 START_FROM_CLOUD_FUNCTION value
                          * @property {number} START_FROM_APP_ENGINE_VERSION=25 START_FROM_APP_ENGINE_VERSION value
                          * @property {number} START_FROM_CLOUD_RUN_REVISION=26 START_FROM_CLOUD_RUN_REVISION value
+                         * @property {number} START_FROM_STORAGE_BUCKET=29 START_FROM_STORAGE_BUCKET value
+                         * @property {number} START_FROM_PSC_PUBLISHED_SERVICE=30 START_FROM_PSC_PUBLISHED_SERVICE value
                          * @property {number} APPLY_INGRESS_FIREWALL_RULE=4 APPLY_INGRESS_FIREWALL_RULE value
                          * @property {number} APPLY_EGRESS_FIREWALL_RULE=5 APPLY_EGRESS_FIREWALL_RULE value
                          * @property {number} APPLY_ROUTE=6 APPLY_ROUTE value
@@ -5073,6 +5132,8 @@
                             values[valuesById[23] = "START_FROM_CLOUD_FUNCTION"] = 23;
                             values[valuesById[25] = "START_FROM_APP_ENGINE_VERSION"] = 25;
                             values[valuesById[26] = "START_FROM_CLOUD_RUN_REVISION"] = 26;
+                            values[valuesById[29] = "START_FROM_STORAGE_BUCKET"] = 29;
+                            values[valuesById[30] = "START_FROM_PSC_PUBLISHED_SERVICE"] = 30;
                             values[valuesById[4] = "APPLY_INGRESS_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "APPLY_EGRESS_FIREWALL_RULE"] = 5;
                             values[valuesById[6] = "APPLY_ROUTE"] = 6;
@@ -6050,6 +6111,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 101:
                                     break;
                                 }
                             return null;
@@ -6129,6 +6191,10 @@
                             case "NETWORK_REGIONAL_FIREWALL_POLICY_RULE":
                             case 6:
                                 message.firewallRuleType = 6;
+                                break;
+                            case "TRACKING_STATE":
+                            case 101:
+                                message.firewallRuleType = 101;
                                 break;
                             }
                             return message;
@@ -6227,6 +6293,7 @@
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
                          * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
+                         * @property {number} TRACKING_STATE=101 TRACKING_STATE value
                          */
                         FirewallInfo.FirewallRuleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -6237,6 +6304,7 @@
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
                             values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
+                            values[valuesById[101] = "TRACKING_STATE"] = 101;
                             return values;
                         })();
     
@@ -17293,6 +17361,7 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] ConnectivityTest updateTime
                          * @property {google.cloud.networkmanagement.v1beta1.IReachabilityDetails|null} [reachabilityDetails] ConnectivityTest reachabilityDetails
                          * @property {google.cloud.networkmanagement.v1beta1.IProbingDetails|null} [probingDetails] ConnectivityTest probingDetails
+                         * @property {boolean|null} [bypassFirewallChecks] ConnectivityTest bypassFirewallChecks
                          */
     
                         /**
@@ -17409,6 +17478,14 @@
                         ConnectivityTest.prototype.probingDetails = null;
     
                         /**
+                         * ConnectivityTest bypassFirewallChecks.
+                         * @member {boolean} bypassFirewallChecks
+                         * @memberof google.cloud.networkmanagement.v1beta1.ConnectivityTest
+                         * @instance
+                         */
+                        ConnectivityTest.prototype.bypassFirewallChecks = false;
+    
+                        /**
                          * Creates a new ConnectivityTest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.ConnectivityTest
@@ -17458,6 +17535,8 @@
                                 $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.encode(message.reachabilityDetails, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.probingDetails != null && Object.hasOwnProperty.call(message, "probingDetails"))
                                 $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.encode(message.probingDetails, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                            if (message.bypassFirewallChecks != null && Object.hasOwnProperty.call(message, "bypassFirewallChecks"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).bool(message.bypassFirewallChecks);
                             return writer;
                         };
     
@@ -17561,6 +17640,10 @@
                                         message.probingDetails = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 17: {
+                                        message.bypassFirewallChecks = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17653,6 +17736,9 @@
                                 if (error)
                                     return "probingDetails." + error;
                             }
+                            if (message.bypassFirewallChecks != null && message.hasOwnProperty("bypassFirewallChecks"))
+                                if (typeof message.bypassFirewallChecks !== "boolean")
+                                    return "bypassFirewallChecks: boolean expected";
                             return null;
                         };
     
@@ -17720,6 +17806,8 @@
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.ConnectivityTest.probingDetails: object expected");
                                 message.probingDetails = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.fromObject(object.probingDetails);
                             }
+                            if (object.bypassFirewallChecks != null)
+                                message.bypassFirewallChecks = Boolean(object.bypassFirewallChecks);
                             return message;
                         };
     
@@ -17751,6 +17839,7 @@
                                 object.updateTime = null;
                                 object.reachabilityDetails = null;
                                 object.probingDetails = null;
+                                object.bypassFirewallChecks = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -17783,6 +17872,8 @@
                                 object.reachabilityDetails = $root.google.cloud.networkmanagement.v1beta1.ReachabilityDetails.toObject(message.reachabilityDetails, options);
                             if (message.probingDetails != null && message.hasOwnProperty("probingDetails"))
                                 object.probingDetails = $root.google.cloud.networkmanagement.v1beta1.ProbingDetails.toObject(message.probingDetails, options);
+                            if (message.bypassFirewallChecks != null && message.hasOwnProperty("bypassFirewallChecks"))
+                                object.bypassFirewallChecks = message.bypassFirewallChecks;
                             return object;
                         };
     
@@ -20714,6 +20805,7 @@
                          * @interface ITrace
                          * @property {google.cloud.networkmanagement.v1beta1.IEndpointInfo|null} [endpointInfo] Trace endpointInfo
                          * @property {Array.<google.cloud.networkmanagement.v1beta1.IStep>|null} [steps] Trace steps
+                         * @property {number|null} [forwardTraceId] Trace forwardTraceId
                          */
     
                         /**
@@ -20749,6 +20841,14 @@
                         Trace.prototype.steps = $util.emptyArray;
     
                         /**
+                         * Trace forwardTraceId.
+                         * @member {number} forwardTraceId
+                         * @memberof google.cloud.networkmanagement.v1beta1.Trace
+                         * @instance
+                         */
+                        Trace.prototype.forwardTraceId = 0;
+    
+                        /**
                          * Creates a new Trace instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkmanagement.v1beta1.Trace
@@ -20777,6 +20877,8 @@
                             if (message.steps != null && message.steps.length)
                                 for (var i = 0; i < message.steps.length; ++i)
                                     $root.google.cloud.networkmanagement.v1beta1.Step.encode(message.steps[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.forwardTraceId != null && Object.hasOwnProperty.call(message, "forwardTraceId"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.forwardTraceId);
                             return writer;
                         };
     
@@ -20819,6 +20921,10 @@
                                         if (!(message.steps && message.steps.length))
                                             message.steps = [];
                                         message.steps.push($root.google.cloud.networkmanagement.v1beta1.Step.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        message.forwardTraceId = reader.int32();
                                         break;
                                     }
                                 default:
@@ -20870,6 +20976,9 @@
                                         return "steps." + error;
                                 }
                             }
+                            if (message.forwardTraceId != null && message.hasOwnProperty("forwardTraceId"))
+                                if (!$util.isInteger(message.forwardTraceId))
+                                    return "forwardTraceId: integer expected";
                             return null;
                         };
     
@@ -20900,6 +21009,8 @@
                                     message.steps[i] = $root.google.cloud.networkmanagement.v1beta1.Step.fromObject(object.steps[i]);
                                 }
                             }
+                            if (object.forwardTraceId != null)
+                                message.forwardTraceId = object.forwardTraceId | 0;
                             return message;
                         };
     
@@ -20918,8 +21029,10 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.steps = [];
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.endpointInfo = null;
+                                object.forwardTraceId = 0;
+                            }
                             if (message.endpointInfo != null && message.hasOwnProperty("endpointInfo"))
                                 object.endpointInfo = $root.google.cloud.networkmanagement.v1beta1.EndpointInfo.toObject(message.endpointInfo, options);
                             if (message.steps && message.steps.length) {
@@ -20927,6 +21040,8 @@
                                 for (var j = 0; j < message.steps.length; ++j)
                                     object.steps[j] = $root.google.cloud.networkmanagement.v1beta1.Step.toObject(message.steps[j], options);
                             }
+                            if (message.forwardTraceId != null && message.hasOwnProperty("forwardTraceId"))
+                                object.forwardTraceId = message.forwardTraceId;
                             return object;
                         };
     
@@ -21527,6 +21642,8 @@
                                 case 23:
                                 case 25:
                                 case 26:
+                                case 29:
+                                case 30:
                                 case 4:
                                 case 5:
                                 case 6:
@@ -21855,6 +21972,14 @@
                             case "START_FROM_CLOUD_RUN_REVISION":
                             case 26:
                                 message.state = 26;
+                                break;
+                            case "START_FROM_STORAGE_BUCKET":
+                            case 29:
+                                message.state = 29;
+                                break;
+                            case "START_FROM_PSC_PUBLISHED_SERVICE":
+                            case 30:
+                                message.state = 30;
                                 break;
                             case "APPLY_INGRESS_FIREWALL_RULE":
                             case 4:
@@ -22250,6 +22375,8 @@
                          * @property {number} START_FROM_CLOUD_FUNCTION=23 START_FROM_CLOUD_FUNCTION value
                          * @property {number} START_FROM_APP_ENGINE_VERSION=25 START_FROM_APP_ENGINE_VERSION value
                          * @property {number} START_FROM_CLOUD_RUN_REVISION=26 START_FROM_CLOUD_RUN_REVISION value
+                         * @property {number} START_FROM_STORAGE_BUCKET=29 START_FROM_STORAGE_BUCKET value
+                         * @property {number} START_FROM_PSC_PUBLISHED_SERVICE=30 START_FROM_PSC_PUBLISHED_SERVICE value
                          * @property {number} APPLY_INGRESS_FIREWALL_RULE=4 APPLY_INGRESS_FIREWALL_RULE value
                          * @property {number} APPLY_EGRESS_FIREWALL_RULE=5 APPLY_EGRESS_FIREWALL_RULE value
                          * @property {number} APPLY_ROUTE=6 APPLY_ROUTE value
@@ -22282,6 +22409,8 @@
                             values[valuesById[23] = "START_FROM_CLOUD_FUNCTION"] = 23;
                             values[valuesById[25] = "START_FROM_APP_ENGINE_VERSION"] = 25;
                             values[valuesById[26] = "START_FROM_CLOUD_RUN_REVISION"] = 26;
+                            values[valuesById[29] = "START_FROM_STORAGE_BUCKET"] = 29;
+                            values[valuesById[30] = "START_FROM_PSC_PUBLISHED_SERVICE"] = 30;
                             values[valuesById[4] = "APPLY_INGRESS_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "APPLY_EGRESS_FIREWALL_RULE"] = 5;
                             values[valuesById[6] = "APPLY_ROUTE"] = 6;
@@ -23259,6 +23388,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 101:
                                     break;
                                 }
                             return null;
@@ -23338,6 +23468,10 @@
                             case "NETWORK_REGIONAL_FIREWALL_POLICY_RULE":
                             case 6:
                                 message.firewallRuleType = 6;
+                                break;
+                            case "TRACKING_STATE":
+                            case 101:
+                                message.firewallRuleType = 101;
                                 break;
                             }
                             return message;
@@ -23436,6 +23570,7 @@
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
                          * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
                          * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
+                         * @property {number} TRACKING_STATE=101 TRACKING_STATE value
                          */
                         FirewallInfo.FirewallRuleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -23446,6 +23581,7 @@
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
                             values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
                             values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
+                            values[valuesById[101] = "TRACKING_STATE"] = 101;
                             return values;
                         })();
     
