@@ -613,7 +613,7 @@
                 "csharp_namespace": "Google.Cloud.Datastore.V1",
                 "go_package": "google.golang.org/genproto/googleapis/datastore/v1;datastore",
                 "java_multiple_files": true,
-                "java_outer_classname": "DatastoreProto",
+                "java_outer_classname": "QueryProfileProto",
                 "java_package": "com.google.datastore.v1",
                 "php_namespace": "Google\\Cloud\\Datastore\\V1",
                 "ruby_package": "Google::Cloud::Datastore::V1"
@@ -1525,6 +1525,13 @@
                     "gqlQuery": {
                       "type": "GqlQuery",
                       "id": 7
+                    },
+                    "explainOptions": {
+                      "type": "ExplainOptions",
+                      "id": 12,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -1541,6 +1548,10 @@
                     "transaction": {
                       "type": "bytes",
                       "id": 5
+                    },
+                    "explainMetrics": {
+                      "type": "ExplainMetrics",
+                      "id": 9
                     }
                   }
                 },
@@ -1580,6 +1591,13 @@
                     "gqlQuery": {
                       "type": "GqlQuery",
                       "id": 7
+                    },
+                    "explainOptions": {
+                      "type": "ExplainOptions",
+                      "id": 11,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -1596,6 +1614,10 @@
                     "transaction": {
                       "type": "bytes",
                       "id": 5
+                    },
+                    "explainMetrics": {
+                      "type": "ExplainMetrics",
+                      "id": 9
                     }
                   }
                 },
@@ -1917,6 +1939,58 @@
                           "id": 1
                         }
                       }
+                    }
+                  }
+                },
+                "ExplainOptions": {
+                  "fields": {
+                    "analyze": {
+                      "type": "bool",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ExplainMetrics": {
+                  "fields": {
+                    "planSummary": {
+                      "type": "PlanSummary",
+                      "id": 1
+                    },
+                    "executionStats": {
+                      "type": "ExecutionStats",
+                      "id": 2
+                    }
+                  }
+                },
+                "PlanSummary": {
+                  "fields": {
+                    "indexesUsed": {
+                      "rule": "repeated",
+                      "type": "google.protobuf.Struct",
+                      "id": 1
+                    }
+                  }
+                },
+                "ExecutionStats": {
+                  "fields": {
+                    "resultsReturned": {
+                      "type": "int64",
+                      "id": 1
+                    },
+                    "executionDuration": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    },
+                    "readOperations": {
+                      "type": "int64",
+                      "id": 4
+                    },
+                    "debugStats": {
+                      "type": "google.protobuf.Struct",
+                      "id": 5
                     }
                   }
                 }

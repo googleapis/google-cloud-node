@@ -5802,6 +5802,9 @@ export namespace google {
 
                 /** RunQueryRequest gqlQuery */
                 gqlQuery?: (google.datastore.v1.IGqlQuery|null);
+
+                /** RunQueryRequest explainOptions */
+                explainOptions?: (google.datastore.v1.IExplainOptions|null);
             }
 
             /** Represents a RunQueryRequest. */
@@ -5830,6 +5833,9 @@ export namespace google {
 
                 /** RunQueryRequest gqlQuery. */
                 public gqlQuery?: (google.datastore.v1.IGqlQuery|null);
+
+                /** RunQueryRequest explainOptions. */
+                public explainOptions?: (google.datastore.v1.IExplainOptions|null);
 
                 /** RunQueryRequest queryType. */
                 public queryType?: ("query"|"gqlQuery");
@@ -5923,6 +5929,9 @@ export namespace google {
 
                 /** RunQueryResponse transaction */
                 transaction?: (Uint8Array|string|null);
+
+                /** RunQueryResponse explainMetrics */
+                explainMetrics?: (google.datastore.v1.IExplainMetrics|null);
             }
 
             /** Represents a RunQueryResponse. */
@@ -5942,6 +5951,9 @@ export namespace google {
 
                 /** RunQueryResponse transaction. */
                 public transaction: (Uint8Array|string);
+
+                /** RunQueryResponse explainMetrics. */
+                public explainMetrics?: (google.datastore.v1.IExplainMetrics|null);
 
                 /**
                  * Creates a new RunQueryResponse instance using the specified properties.
@@ -6041,6 +6053,9 @@ export namespace google {
 
                 /** RunAggregationQueryRequest gqlQuery */
                 gqlQuery?: (google.datastore.v1.IGqlQuery|null);
+
+                /** RunAggregationQueryRequest explainOptions */
+                explainOptions?: (google.datastore.v1.IExplainOptions|null);
             }
 
             /** Represents a RunAggregationQueryRequest. */
@@ -6069,6 +6084,9 @@ export namespace google {
 
                 /** RunAggregationQueryRequest gqlQuery. */
                 public gqlQuery?: (google.datastore.v1.IGqlQuery|null);
+
+                /** RunAggregationQueryRequest explainOptions. */
+                public explainOptions?: (google.datastore.v1.IExplainOptions|null);
 
                 /** RunAggregationQueryRequest queryType. */
                 public queryType?: ("aggregationQuery"|"gqlQuery");
@@ -6162,6 +6180,9 @@ export namespace google {
 
                 /** RunAggregationQueryResponse transaction */
                 transaction?: (Uint8Array|string|null);
+
+                /** RunAggregationQueryResponse explainMetrics */
+                explainMetrics?: (google.datastore.v1.IExplainMetrics|null);
             }
 
             /** Represents a RunAggregationQueryResponse. */
@@ -6181,6 +6202,9 @@ export namespace google {
 
                 /** RunAggregationQueryResponse transaction. */
                 public transaction: (Uint8Array|string);
+
+                /** RunAggregationQueryResponse explainMetrics. */
+                public explainMetrics?: (google.datastore.v1.IExplainMetrics|null);
 
                 /**
                  * Creates a new RunAggregationQueryResponse instance using the specified properties.
@@ -8004,6 +8028,418 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+            }
+
+            /** Properties of an ExplainOptions. */
+            interface IExplainOptions {
+
+                /** ExplainOptions analyze */
+                analyze?: (boolean|null);
+            }
+
+            /** Represents an ExplainOptions. */
+            class ExplainOptions implements IExplainOptions {
+
+                /**
+                 * Constructs a new ExplainOptions.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.datastore.v1.IExplainOptions);
+
+                /** ExplainOptions analyze. */
+                public analyze: boolean;
+
+                /**
+                 * Creates a new ExplainOptions instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExplainOptions instance
+                 */
+                public static create(properties?: google.datastore.v1.IExplainOptions): google.datastore.v1.ExplainOptions;
+
+                /**
+                 * Encodes the specified ExplainOptions message. Does not implicitly {@link google.datastore.v1.ExplainOptions.verify|verify} messages.
+                 * @param message ExplainOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.datastore.v1.IExplainOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExplainOptions message, length delimited. Does not implicitly {@link google.datastore.v1.ExplainOptions.verify|verify} messages.
+                 * @param message ExplainOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.datastore.v1.IExplainOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExplainOptions message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExplainOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.v1.ExplainOptions;
+
+                /**
+                 * Decodes an ExplainOptions message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExplainOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.v1.ExplainOptions;
+
+                /**
+                 * Verifies an ExplainOptions message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExplainOptions message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExplainOptions
+                 */
+                public static fromObject(object: { [k: string]: any }): google.datastore.v1.ExplainOptions;
+
+                /**
+                 * Creates a plain object from an ExplainOptions message. Also converts values to other types if specified.
+                 * @param message ExplainOptions
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.datastore.v1.ExplainOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExplainOptions to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExplainOptions
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an ExplainMetrics. */
+            interface IExplainMetrics {
+
+                /** ExplainMetrics planSummary */
+                planSummary?: (google.datastore.v1.IPlanSummary|null);
+
+                /** ExplainMetrics executionStats */
+                executionStats?: (google.datastore.v1.IExecutionStats|null);
+            }
+
+            /** Represents an ExplainMetrics. */
+            class ExplainMetrics implements IExplainMetrics {
+
+                /**
+                 * Constructs a new ExplainMetrics.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.datastore.v1.IExplainMetrics);
+
+                /** ExplainMetrics planSummary. */
+                public planSummary?: (google.datastore.v1.IPlanSummary|null);
+
+                /** ExplainMetrics executionStats. */
+                public executionStats?: (google.datastore.v1.IExecutionStats|null);
+
+                /**
+                 * Creates a new ExplainMetrics instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExplainMetrics instance
+                 */
+                public static create(properties?: google.datastore.v1.IExplainMetrics): google.datastore.v1.ExplainMetrics;
+
+                /**
+                 * Encodes the specified ExplainMetrics message. Does not implicitly {@link google.datastore.v1.ExplainMetrics.verify|verify} messages.
+                 * @param message ExplainMetrics message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.datastore.v1.IExplainMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExplainMetrics message, length delimited. Does not implicitly {@link google.datastore.v1.ExplainMetrics.verify|verify} messages.
+                 * @param message ExplainMetrics message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.datastore.v1.IExplainMetrics, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExplainMetrics message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExplainMetrics
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.v1.ExplainMetrics;
+
+                /**
+                 * Decodes an ExplainMetrics message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExplainMetrics
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.v1.ExplainMetrics;
+
+                /**
+                 * Verifies an ExplainMetrics message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExplainMetrics message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExplainMetrics
+                 */
+                public static fromObject(object: { [k: string]: any }): google.datastore.v1.ExplainMetrics;
+
+                /**
+                 * Creates a plain object from an ExplainMetrics message. Also converts values to other types if specified.
+                 * @param message ExplainMetrics
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.datastore.v1.ExplainMetrics, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExplainMetrics to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExplainMetrics
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a PlanSummary. */
+            interface IPlanSummary {
+
+                /** PlanSummary indexesUsed */
+                indexesUsed?: (google.protobuf.IStruct[]|null);
+            }
+
+            /** Represents a PlanSummary. */
+            class PlanSummary implements IPlanSummary {
+
+                /**
+                 * Constructs a new PlanSummary.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.datastore.v1.IPlanSummary);
+
+                /** PlanSummary indexesUsed. */
+                public indexesUsed: google.protobuf.IStruct[];
+
+                /**
+                 * Creates a new PlanSummary instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns PlanSummary instance
+                 */
+                public static create(properties?: google.datastore.v1.IPlanSummary): google.datastore.v1.PlanSummary;
+
+                /**
+                 * Encodes the specified PlanSummary message. Does not implicitly {@link google.datastore.v1.PlanSummary.verify|verify} messages.
+                 * @param message PlanSummary message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.datastore.v1.IPlanSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified PlanSummary message, length delimited. Does not implicitly {@link google.datastore.v1.PlanSummary.verify|verify} messages.
+                 * @param message PlanSummary message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.datastore.v1.IPlanSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a PlanSummary message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns PlanSummary
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.v1.PlanSummary;
+
+                /**
+                 * Decodes a PlanSummary message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns PlanSummary
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.v1.PlanSummary;
+
+                /**
+                 * Verifies a PlanSummary message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a PlanSummary message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns PlanSummary
+                 */
+                public static fromObject(object: { [k: string]: any }): google.datastore.v1.PlanSummary;
+
+                /**
+                 * Creates a plain object from a PlanSummary message. Also converts values to other types if specified.
+                 * @param message PlanSummary
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.datastore.v1.PlanSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this PlanSummary to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for PlanSummary
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an ExecutionStats. */
+            interface IExecutionStats {
+
+                /** ExecutionStats resultsReturned */
+                resultsReturned?: (number|Long|string|null);
+
+                /** ExecutionStats executionDuration */
+                executionDuration?: (google.protobuf.IDuration|null);
+
+                /** ExecutionStats readOperations */
+                readOperations?: (number|Long|string|null);
+
+                /** ExecutionStats debugStats */
+                debugStats?: (google.protobuf.IStruct|null);
+            }
+
+            /** Represents an ExecutionStats. */
+            class ExecutionStats implements IExecutionStats {
+
+                /**
+                 * Constructs a new ExecutionStats.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.datastore.v1.IExecutionStats);
+
+                /** ExecutionStats resultsReturned. */
+                public resultsReturned: (number|Long|string);
+
+                /** ExecutionStats executionDuration. */
+                public executionDuration?: (google.protobuf.IDuration|null);
+
+                /** ExecutionStats readOperations. */
+                public readOperations: (number|Long|string);
+
+                /** ExecutionStats debugStats. */
+                public debugStats?: (google.protobuf.IStruct|null);
+
+                /**
+                 * Creates a new ExecutionStats instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExecutionStats instance
+                 */
+                public static create(properties?: google.datastore.v1.IExecutionStats): google.datastore.v1.ExecutionStats;
+
+                /**
+                 * Encodes the specified ExecutionStats message. Does not implicitly {@link google.datastore.v1.ExecutionStats.verify|verify} messages.
+                 * @param message ExecutionStats message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.datastore.v1.IExecutionStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExecutionStats message, length delimited. Does not implicitly {@link google.datastore.v1.ExecutionStats.verify|verify} messages.
+                 * @param message ExecutionStats message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.datastore.v1.IExecutionStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExecutionStats message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExecutionStats
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.v1.ExecutionStats;
+
+                /**
+                 * Decodes an ExecutionStats message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExecutionStats
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.v1.ExecutionStats;
+
+                /**
+                 * Verifies an ExecutionStats message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExecutionStats message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExecutionStats
+                 */
+                public static fromObject(object: { [k: string]: any }): google.datastore.v1.ExecutionStats;
+
+                /**
+                 * Creates a plain object from an ExecutionStats message. Also converts values to other types if specified.
+                 * @param message ExecutionStats
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.datastore.v1.ExecutionStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExecutionStats to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExecutionStats
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
     }

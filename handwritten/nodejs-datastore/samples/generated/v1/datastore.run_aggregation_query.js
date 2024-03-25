@@ -57,6 +57,11 @@ function main(projectId) {
    *  The GQL query to run. This query must be an aggregation query.
    */
   // const gqlQuery = {}
+  /**
+   *  Optional. Explain options for the query. If set, additional query
+   *  statistics will be returned. If not, only query results will be returned.
+   */
+  // const explainOptions = {}
 
   // Imports the Datastore library
   const {DatastoreClient} = require('@google-cloud/datastore').v1;

@@ -14732,6 +14732,7 @@
                      * @property {google.datastore.v1.IReadOptions|null} [readOptions] RunQueryRequest readOptions
                      * @property {google.datastore.v1.IQuery|null} [query] RunQueryRequest query
                      * @property {google.datastore.v1.IGqlQuery|null} [gqlQuery] RunQueryRequest gqlQuery
+                     * @property {google.datastore.v1.IExplainOptions|null} [explainOptions] RunQueryRequest explainOptions
                      */
     
                     /**
@@ -14797,6 +14798,14 @@
                      */
                     RunQueryRequest.prototype.gqlQuery = null;
     
+                    /**
+                     * RunQueryRequest explainOptions.
+                     * @member {google.datastore.v1.IExplainOptions|null|undefined} explainOptions
+                     * @memberof google.datastore.v1.RunQueryRequest
+                     * @instance
+                     */
+                    RunQueryRequest.prototype.explainOptions = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -14847,6 +14856,8 @@
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
                         if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
+                        if (message.explainOptions != null && Object.hasOwnProperty.call(message, "explainOptions"))
+                            $root.google.datastore.v1.ExplainOptions.encode(message.explainOptions, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                         return writer;
                     };
     
@@ -14903,6 +14914,10 @@
                                 }
                             case 7: {
                                     message.gqlQuery = $root.google.datastore.v1.GqlQuery.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 12: {
+                                    message.explainOptions = $root.google.datastore.v1.ExplainOptions.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -14975,6 +14990,11 @@
                                     return "gqlQuery." + error;
                             }
                         }
+                        if (message.explainOptions != null && message.hasOwnProperty("explainOptions")) {
+                            var error = $root.google.datastore.v1.ExplainOptions.verify(message.explainOptions);
+                            if (error)
+                                return "explainOptions." + error;
+                        }
                         return null;
                     };
     
@@ -15014,6 +15034,11 @@
                                 throw TypeError(".google.datastore.v1.RunQueryRequest.gqlQuery: object expected");
                             message.gqlQuery = $root.google.datastore.v1.GqlQuery.fromObject(object.gqlQuery);
                         }
+                        if (object.explainOptions != null) {
+                            if (typeof object.explainOptions !== "object")
+                                throw TypeError(".google.datastore.v1.RunQueryRequest.explainOptions: object expected");
+                            message.explainOptions = $root.google.datastore.v1.ExplainOptions.fromObject(object.explainOptions);
+                        }
                         return message;
                     };
     
@@ -15035,6 +15060,7 @@
                             object.partitionId = null;
                             object.projectId = "";
                             object.databaseId = "";
+                            object.explainOptions = null;
                         }
                         if (message.readOptions != null && message.hasOwnProperty("readOptions"))
                             object.readOptions = $root.google.datastore.v1.ReadOptions.toObject(message.readOptions, options);
@@ -15054,6 +15080,8 @@
                             object.projectId = message.projectId;
                         if (message.databaseId != null && message.hasOwnProperty("databaseId"))
                             object.databaseId = message.databaseId;
+                        if (message.explainOptions != null && message.hasOwnProperty("explainOptions"))
+                            object.explainOptions = $root.google.datastore.v1.ExplainOptions.toObject(message.explainOptions, options);
                         return object;
                     };
     
@@ -15095,6 +15123,7 @@
                      * @property {google.datastore.v1.IQueryResultBatch|null} [batch] RunQueryResponse batch
                      * @property {google.datastore.v1.IQuery|null} [query] RunQueryResponse query
                      * @property {Uint8Array|null} [transaction] RunQueryResponse transaction
+                     * @property {google.datastore.v1.IExplainMetrics|null} [explainMetrics] RunQueryResponse explainMetrics
                      */
     
                     /**
@@ -15137,6 +15166,14 @@
                     RunQueryResponse.prototype.transaction = $util.newBuffer([]);
     
                     /**
+                     * RunQueryResponse explainMetrics.
+                     * @member {google.datastore.v1.IExplainMetrics|null|undefined} explainMetrics
+                     * @memberof google.datastore.v1.RunQueryResponse
+                     * @instance
+                     */
+                    RunQueryResponse.prototype.explainMetrics = null;
+    
+                    /**
                      * Creates a new RunQueryResponse instance using the specified properties.
                      * @function create
                      * @memberof google.datastore.v1.RunQueryResponse
@@ -15166,6 +15203,8 @@
                             $root.google.datastore.v1.Query.encode(message.query, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.transaction != null && Object.hasOwnProperty.call(message, "transaction"))
                             writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.transaction);
+                        if (message.explainMetrics != null && Object.hasOwnProperty.call(message, "explainMetrics"))
+                            $root.google.datastore.v1.ExplainMetrics.encode(message.explainMetrics, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                         return writer;
                     };
     
@@ -15210,6 +15249,10 @@
                                 }
                             case 5: {
                                     message.transaction = reader.bytes();
+                                    break;
+                                }
+                            case 9: {
+                                    message.explainMetrics = $root.google.datastore.v1.ExplainMetrics.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -15260,6 +15303,11 @@
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             if (!(message.transaction && typeof message.transaction.length === "number" || $util.isString(message.transaction)))
                                 return "transaction: buffer expected";
+                        if (message.explainMetrics != null && message.hasOwnProperty("explainMetrics")) {
+                            var error = $root.google.datastore.v1.ExplainMetrics.verify(message.explainMetrics);
+                            if (error)
+                                return "explainMetrics." + error;
+                        }
                         return null;
                     };
     
@@ -15290,6 +15338,11 @@
                                 $util.base64.decode(object.transaction, message.transaction = $util.newBuffer($util.base64.length(object.transaction)), 0);
                             else if (object.transaction.length >= 0)
                                 message.transaction = object.transaction;
+                        if (object.explainMetrics != null) {
+                            if (typeof object.explainMetrics !== "object")
+                                throw TypeError(".google.datastore.v1.RunQueryResponse.explainMetrics: object expected");
+                            message.explainMetrics = $root.google.datastore.v1.ExplainMetrics.fromObject(object.explainMetrics);
+                        }
                         return message;
                     };
     
@@ -15316,6 +15369,7 @@
                                 if (options.bytes !== Array)
                                     object.transaction = $util.newBuffer(object.transaction);
                             }
+                            object.explainMetrics = null;
                         }
                         if (message.batch != null && message.hasOwnProperty("batch"))
                             object.batch = $root.google.datastore.v1.QueryResultBatch.toObject(message.batch, options);
@@ -15323,6 +15377,8 @@
                             object.query = $root.google.datastore.v1.Query.toObject(message.query, options);
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             object.transaction = options.bytes === String ? $util.base64.encode(message.transaction, 0, message.transaction.length) : options.bytes === Array ? Array.prototype.slice.call(message.transaction) : message.transaction;
+                        if (message.explainMetrics != null && message.hasOwnProperty("explainMetrics"))
+                            object.explainMetrics = $root.google.datastore.v1.ExplainMetrics.toObject(message.explainMetrics, options);
                         return object;
                     };
     
@@ -15367,6 +15423,7 @@
                      * @property {google.datastore.v1.IReadOptions|null} [readOptions] RunAggregationQueryRequest readOptions
                      * @property {google.datastore.v1.IAggregationQuery|null} [aggregationQuery] RunAggregationQueryRequest aggregationQuery
                      * @property {google.datastore.v1.IGqlQuery|null} [gqlQuery] RunAggregationQueryRequest gqlQuery
+                     * @property {google.datastore.v1.IExplainOptions|null} [explainOptions] RunAggregationQueryRequest explainOptions
                      */
     
                     /**
@@ -15432,6 +15489,14 @@
                      */
                     RunAggregationQueryRequest.prototype.gqlQuery = null;
     
+                    /**
+                     * RunAggregationQueryRequest explainOptions.
+                     * @member {google.datastore.v1.IExplainOptions|null|undefined} explainOptions
+                     * @memberof google.datastore.v1.RunAggregationQueryRequest
+                     * @instance
+                     */
+                    RunAggregationQueryRequest.prototype.explainOptions = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -15482,6 +15547,8 @@
                             writer.uint32(/* id 8, wireType 2 =*/66).string(message.projectId);
                         if (message.databaseId != null && Object.hasOwnProperty.call(message, "databaseId"))
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.databaseId);
+                        if (message.explainOptions != null && Object.hasOwnProperty.call(message, "explainOptions"))
+                            $root.google.datastore.v1.ExplainOptions.encode(message.explainOptions, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                         return writer;
                     };
     
@@ -15538,6 +15605,10 @@
                                 }
                             case 7: {
                                     message.gqlQuery = $root.google.datastore.v1.GqlQuery.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 11: {
+                                    message.explainOptions = $root.google.datastore.v1.ExplainOptions.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -15610,6 +15681,11 @@
                                     return "gqlQuery." + error;
                             }
                         }
+                        if (message.explainOptions != null && message.hasOwnProperty("explainOptions")) {
+                            var error = $root.google.datastore.v1.ExplainOptions.verify(message.explainOptions);
+                            if (error)
+                                return "explainOptions." + error;
+                        }
                         return null;
                     };
     
@@ -15649,6 +15725,11 @@
                                 throw TypeError(".google.datastore.v1.RunAggregationQueryRequest.gqlQuery: object expected");
                             message.gqlQuery = $root.google.datastore.v1.GqlQuery.fromObject(object.gqlQuery);
                         }
+                        if (object.explainOptions != null) {
+                            if (typeof object.explainOptions !== "object")
+                                throw TypeError(".google.datastore.v1.RunAggregationQueryRequest.explainOptions: object expected");
+                            message.explainOptions = $root.google.datastore.v1.ExplainOptions.fromObject(object.explainOptions);
+                        }
                         return message;
                     };
     
@@ -15670,6 +15751,7 @@
                             object.partitionId = null;
                             object.projectId = "";
                             object.databaseId = "";
+                            object.explainOptions = null;
                         }
                         if (message.readOptions != null && message.hasOwnProperty("readOptions"))
                             object.readOptions = $root.google.datastore.v1.ReadOptions.toObject(message.readOptions, options);
@@ -15689,6 +15771,8 @@
                             object.projectId = message.projectId;
                         if (message.databaseId != null && message.hasOwnProperty("databaseId"))
                             object.databaseId = message.databaseId;
+                        if (message.explainOptions != null && message.hasOwnProperty("explainOptions"))
+                            object.explainOptions = $root.google.datastore.v1.ExplainOptions.toObject(message.explainOptions, options);
                         return object;
                     };
     
@@ -15730,6 +15814,7 @@
                      * @property {google.datastore.v1.IAggregationResultBatch|null} [batch] RunAggregationQueryResponse batch
                      * @property {google.datastore.v1.IAggregationQuery|null} [query] RunAggregationQueryResponse query
                      * @property {Uint8Array|null} [transaction] RunAggregationQueryResponse transaction
+                     * @property {google.datastore.v1.IExplainMetrics|null} [explainMetrics] RunAggregationQueryResponse explainMetrics
                      */
     
                     /**
@@ -15772,6 +15857,14 @@
                     RunAggregationQueryResponse.prototype.transaction = $util.newBuffer([]);
     
                     /**
+                     * RunAggregationQueryResponse explainMetrics.
+                     * @member {google.datastore.v1.IExplainMetrics|null|undefined} explainMetrics
+                     * @memberof google.datastore.v1.RunAggregationQueryResponse
+                     * @instance
+                     */
+                    RunAggregationQueryResponse.prototype.explainMetrics = null;
+    
+                    /**
                      * Creates a new RunAggregationQueryResponse instance using the specified properties.
                      * @function create
                      * @memberof google.datastore.v1.RunAggregationQueryResponse
@@ -15801,6 +15894,8 @@
                             $root.google.datastore.v1.AggregationQuery.encode(message.query, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.transaction != null && Object.hasOwnProperty.call(message, "transaction"))
                             writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.transaction);
+                        if (message.explainMetrics != null && Object.hasOwnProperty.call(message, "explainMetrics"))
+                            $root.google.datastore.v1.ExplainMetrics.encode(message.explainMetrics, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                         return writer;
                     };
     
@@ -15845,6 +15940,10 @@
                                 }
                             case 5: {
                                     message.transaction = reader.bytes();
+                                    break;
+                                }
+                            case 9: {
+                                    message.explainMetrics = $root.google.datastore.v1.ExplainMetrics.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -15895,6 +15994,11 @@
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             if (!(message.transaction && typeof message.transaction.length === "number" || $util.isString(message.transaction)))
                                 return "transaction: buffer expected";
+                        if (message.explainMetrics != null && message.hasOwnProperty("explainMetrics")) {
+                            var error = $root.google.datastore.v1.ExplainMetrics.verify(message.explainMetrics);
+                            if (error)
+                                return "explainMetrics." + error;
+                        }
                         return null;
                     };
     
@@ -15925,6 +16029,11 @@
                                 $util.base64.decode(object.transaction, message.transaction = $util.newBuffer($util.base64.length(object.transaction)), 0);
                             else if (object.transaction.length >= 0)
                                 message.transaction = object.transaction;
+                        if (object.explainMetrics != null) {
+                            if (typeof object.explainMetrics !== "object")
+                                throw TypeError(".google.datastore.v1.RunAggregationQueryResponse.explainMetrics: object expected");
+                            message.explainMetrics = $root.google.datastore.v1.ExplainMetrics.fromObject(object.explainMetrics);
+                        }
                         return message;
                     };
     
@@ -15951,6 +16060,7 @@
                                 if (options.bytes !== Array)
                                     object.transaction = $util.newBuffer(object.transaction);
                             }
+                            object.explainMetrics = null;
                         }
                         if (message.batch != null && message.hasOwnProperty("batch"))
                             object.batch = $root.google.datastore.v1.AggregationResultBatch.toObject(message.batch, options);
@@ -15958,6 +16068,8 @@
                             object.query = $root.google.datastore.v1.AggregationQuery.toObject(message.query, options);
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             object.transaction = options.bytes === String ? $util.base64.encode(message.transaction, 0, message.transaction.length) : options.bytes === Array ? Array.prototype.slice.call(message.transaction) : message.transaction;
+                        if (message.explainMetrics != null && message.hasOwnProperty("explainMetrics"))
+                            object.explainMetrics = $root.google.datastore.v1.ExplainMetrics.toObject(message.explainMetrics, options);
                         return object;
                     };
     
@@ -20309,6 +20421,981 @@
                     })();
     
                     return TransactionOptions;
+                })();
+    
+                v1.ExplainOptions = (function() {
+    
+                    /**
+                     * Properties of an ExplainOptions.
+                     * @memberof google.datastore.v1
+                     * @interface IExplainOptions
+                     * @property {boolean|null} [analyze] ExplainOptions analyze
+                     */
+    
+                    /**
+                     * Constructs a new ExplainOptions.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents an ExplainOptions.
+                     * @implements IExplainOptions
+                     * @constructor
+                     * @param {google.datastore.v1.IExplainOptions=} [properties] Properties to set
+                     */
+                    function ExplainOptions(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExplainOptions analyze.
+                     * @member {boolean} analyze
+                     * @memberof google.datastore.v1.ExplainOptions
+                     * @instance
+                     */
+                    ExplainOptions.prototype.analyze = false;
+    
+                    /**
+                     * Creates a new ExplainOptions instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.ExplainOptions
+                     * @static
+                     * @param {google.datastore.v1.IExplainOptions=} [properties] Properties to set
+                     * @returns {google.datastore.v1.ExplainOptions} ExplainOptions instance
+                     */
+                    ExplainOptions.create = function create(properties) {
+                        return new ExplainOptions(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExplainOptions message. Does not implicitly {@link google.datastore.v1.ExplainOptions.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.ExplainOptions
+                     * @static
+                     * @param {google.datastore.v1.IExplainOptions} message ExplainOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExplainOptions.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.analyze != null && Object.hasOwnProperty.call(message, "analyze"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.analyze);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExplainOptions message, length delimited. Does not implicitly {@link google.datastore.v1.ExplainOptions.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.ExplainOptions
+                     * @static
+                     * @param {google.datastore.v1.IExplainOptions} message ExplainOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExplainOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExplainOptions message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.ExplainOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.ExplainOptions} ExplainOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExplainOptions.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.ExplainOptions();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.analyze = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExplainOptions message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.ExplainOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.ExplainOptions} ExplainOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExplainOptions.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExplainOptions message.
+                     * @function verify
+                     * @memberof google.datastore.v1.ExplainOptions
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExplainOptions.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.analyze != null && message.hasOwnProperty("analyze"))
+                            if (typeof message.analyze !== "boolean")
+                                return "analyze: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExplainOptions message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.ExplainOptions
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.ExplainOptions} ExplainOptions
+                     */
+                    ExplainOptions.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.ExplainOptions)
+                            return object;
+                        var message = new $root.google.datastore.v1.ExplainOptions();
+                        if (object.analyze != null)
+                            message.analyze = Boolean(object.analyze);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExplainOptions message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.ExplainOptions
+                     * @static
+                     * @param {google.datastore.v1.ExplainOptions} message ExplainOptions
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExplainOptions.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.analyze = false;
+                        if (message.analyze != null && message.hasOwnProperty("analyze"))
+                            object.analyze = message.analyze;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExplainOptions to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.ExplainOptions
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExplainOptions.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExplainOptions
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.ExplainOptions
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExplainOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.ExplainOptions";
+                    };
+    
+                    return ExplainOptions;
+                })();
+    
+                v1.ExplainMetrics = (function() {
+    
+                    /**
+                     * Properties of an ExplainMetrics.
+                     * @memberof google.datastore.v1
+                     * @interface IExplainMetrics
+                     * @property {google.datastore.v1.IPlanSummary|null} [planSummary] ExplainMetrics planSummary
+                     * @property {google.datastore.v1.IExecutionStats|null} [executionStats] ExplainMetrics executionStats
+                     */
+    
+                    /**
+                     * Constructs a new ExplainMetrics.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents an ExplainMetrics.
+                     * @implements IExplainMetrics
+                     * @constructor
+                     * @param {google.datastore.v1.IExplainMetrics=} [properties] Properties to set
+                     */
+                    function ExplainMetrics(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExplainMetrics planSummary.
+                     * @member {google.datastore.v1.IPlanSummary|null|undefined} planSummary
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @instance
+                     */
+                    ExplainMetrics.prototype.planSummary = null;
+    
+                    /**
+                     * ExplainMetrics executionStats.
+                     * @member {google.datastore.v1.IExecutionStats|null|undefined} executionStats
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @instance
+                     */
+                    ExplainMetrics.prototype.executionStats = null;
+    
+                    /**
+                     * Creates a new ExplainMetrics instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @static
+                     * @param {google.datastore.v1.IExplainMetrics=} [properties] Properties to set
+                     * @returns {google.datastore.v1.ExplainMetrics} ExplainMetrics instance
+                     */
+                    ExplainMetrics.create = function create(properties) {
+                        return new ExplainMetrics(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExplainMetrics message. Does not implicitly {@link google.datastore.v1.ExplainMetrics.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @static
+                     * @param {google.datastore.v1.IExplainMetrics} message ExplainMetrics message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExplainMetrics.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.planSummary != null && Object.hasOwnProperty.call(message, "planSummary"))
+                            $root.google.datastore.v1.PlanSummary.encode(message.planSummary, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.executionStats != null && Object.hasOwnProperty.call(message, "executionStats"))
+                            $root.google.datastore.v1.ExecutionStats.encode(message.executionStats, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExplainMetrics message, length delimited. Does not implicitly {@link google.datastore.v1.ExplainMetrics.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @static
+                     * @param {google.datastore.v1.IExplainMetrics} message ExplainMetrics message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExplainMetrics.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExplainMetrics message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.ExplainMetrics} ExplainMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExplainMetrics.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.ExplainMetrics();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.planSummary = $root.google.datastore.v1.PlanSummary.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.executionStats = $root.google.datastore.v1.ExecutionStats.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExplainMetrics message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.ExplainMetrics} ExplainMetrics
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExplainMetrics.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExplainMetrics message.
+                     * @function verify
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExplainMetrics.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.planSummary != null && message.hasOwnProperty("planSummary")) {
+                            var error = $root.google.datastore.v1.PlanSummary.verify(message.planSummary);
+                            if (error)
+                                return "planSummary." + error;
+                        }
+                        if (message.executionStats != null && message.hasOwnProperty("executionStats")) {
+                            var error = $root.google.datastore.v1.ExecutionStats.verify(message.executionStats);
+                            if (error)
+                                return "executionStats." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExplainMetrics message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.ExplainMetrics} ExplainMetrics
+                     */
+                    ExplainMetrics.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.ExplainMetrics)
+                            return object;
+                        var message = new $root.google.datastore.v1.ExplainMetrics();
+                        if (object.planSummary != null) {
+                            if (typeof object.planSummary !== "object")
+                                throw TypeError(".google.datastore.v1.ExplainMetrics.planSummary: object expected");
+                            message.planSummary = $root.google.datastore.v1.PlanSummary.fromObject(object.planSummary);
+                        }
+                        if (object.executionStats != null) {
+                            if (typeof object.executionStats !== "object")
+                                throw TypeError(".google.datastore.v1.ExplainMetrics.executionStats: object expected");
+                            message.executionStats = $root.google.datastore.v1.ExecutionStats.fromObject(object.executionStats);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExplainMetrics message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @static
+                     * @param {google.datastore.v1.ExplainMetrics} message ExplainMetrics
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExplainMetrics.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.planSummary = null;
+                            object.executionStats = null;
+                        }
+                        if (message.planSummary != null && message.hasOwnProperty("planSummary"))
+                            object.planSummary = $root.google.datastore.v1.PlanSummary.toObject(message.planSummary, options);
+                        if (message.executionStats != null && message.hasOwnProperty("executionStats"))
+                            object.executionStats = $root.google.datastore.v1.ExecutionStats.toObject(message.executionStats, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExplainMetrics to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExplainMetrics.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExplainMetrics
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.ExplainMetrics
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExplainMetrics.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.ExplainMetrics";
+                    };
+    
+                    return ExplainMetrics;
+                })();
+    
+                v1.PlanSummary = (function() {
+    
+                    /**
+                     * Properties of a PlanSummary.
+                     * @memberof google.datastore.v1
+                     * @interface IPlanSummary
+                     * @property {Array.<google.protobuf.IStruct>|null} [indexesUsed] PlanSummary indexesUsed
+                     */
+    
+                    /**
+                     * Constructs a new PlanSummary.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents a PlanSummary.
+                     * @implements IPlanSummary
+                     * @constructor
+                     * @param {google.datastore.v1.IPlanSummary=} [properties] Properties to set
+                     */
+                    function PlanSummary(properties) {
+                        this.indexesUsed = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PlanSummary indexesUsed.
+                     * @member {Array.<google.protobuf.IStruct>} indexesUsed
+                     * @memberof google.datastore.v1.PlanSummary
+                     * @instance
+                     */
+                    PlanSummary.prototype.indexesUsed = $util.emptyArray;
+    
+                    /**
+                     * Creates a new PlanSummary instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.PlanSummary
+                     * @static
+                     * @param {google.datastore.v1.IPlanSummary=} [properties] Properties to set
+                     * @returns {google.datastore.v1.PlanSummary} PlanSummary instance
+                     */
+                    PlanSummary.create = function create(properties) {
+                        return new PlanSummary(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PlanSummary message. Does not implicitly {@link google.datastore.v1.PlanSummary.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.PlanSummary
+                     * @static
+                     * @param {google.datastore.v1.IPlanSummary} message PlanSummary message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PlanSummary.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.indexesUsed != null && message.indexesUsed.length)
+                            for (var i = 0; i < message.indexesUsed.length; ++i)
+                                $root.google.protobuf.Struct.encode(message.indexesUsed[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PlanSummary message, length delimited. Does not implicitly {@link google.datastore.v1.PlanSummary.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.PlanSummary
+                     * @static
+                     * @param {google.datastore.v1.IPlanSummary} message PlanSummary message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PlanSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PlanSummary message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.PlanSummary
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.PlanSummary} PlanSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PlanSummary.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.PlanSummary();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.indexesUsed && message.indexesUsed.length))
+                                        message.indexesUsed = [];
+                                    message.indexesUsed.push($root.google.protobuf.Struct.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PlanSummary message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.PlanSummary
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.PlanSummary} PlanSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PlanSummary.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PlanSummary message.
+                     * @function verify
+                     * @memberof google.datastore.v1.PlanSummary
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PlanSummary.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.indexesUsed != null && message.hasOwnProperty("indexesUsed")) {
+                            if (!Array.isArray(message.indexesUsed))
+                                return "indexesUsed: array expected";
+                            for (var i = 0; i < message.indexesUsed.length; ++i) {
+                                var error = $root.google.protobuf.Struct.verify(message.indexesUsed[i]);
+                                if (error)
+                                    return "indexesUsed." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PlanSummary message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.PlanSummary
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.PlanSummary} PlanSummary
+                     */
+                    PlanSummary.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.PlanSummary)
+                            return object;
+                        var message = new $root.google.datastore.v1.PlanSummary();
+                        if (object.indexesUsed) {
+                            if (!Array.isArray(object.indexesUsed))
+                                throw TypeError(".google.datastore.v1.PlanSummary.indexesUsed: array expected");
+                            message.indexesUsed = [];
+                            for (var i = 0; i < object.indexesUsed.length; ++i) {
+                                if (typeof object.indexesUsed[i] !== "object")
+                                    throw TypeError(".google.datastore.v1.PlanSummary.indexesUsed: object expected");
+                                message.indexesUsed[i] = $root.google.protobuf.Struct.fromObject(object.indexesUsed[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PlanSummary message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.PlanSummary
+                     * @static
+                     * @param {google.datastore.v1.PlanSummary} message PlanSummary
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PlanSummary.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.indexesUsed = [];
+                        if (message.indexesUsed && message.indexesUsed.length) {
+                            object.indexesUsed = [];
+                            for (var j = 0; j < message.indexesUsed.length; ++j)
+                                object.indexesUsed[j] = $root.google.protobuf.Struct.toObject(message.indexesUsed[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PlanSummary to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.PlanSummary
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PlanSummary.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PlanSummary
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.PlanSummary
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PlanSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.PlanSummary";
+                    };
+    
+                    return PlanSummary;
+                })();
+    
+                v1.ExecutionStats = (function() {
+    
+                    /**
+                     * Properties of an ExecutionStats.
+                     * @memberof google.datastore.v1
+                     * @interface IExecutionStats
+                     * @property {number|Long|null} [resultsReturned] ExecutionStats resultsReturned
+                     * @property {google.protobuf.IDuration|null} [executionDuration] ExecutionStats executionDuration
+                     * @property {number|Long|null} [readOperations] ExecutionStats readOperations
+                     * @property {google.protobuf.IStruct|null} [debugStats] ExecutionStats debugStats
+                     */
+    
+                    /**
+                     * Constructs a new ExecutionStats.
+                     * @memberof google.datastore.v1
+                     * @classdesc Represents an ExecutionStats.
+                     * @implements IExecutionStats
+                     * @constructor
+                     * @param {google.datastore.v1.IExecutionStats=} [properties] Properties to set
+                     */
+                    function ExecutionStats(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExecutionStats resultsReturned.
+                     * @member {number|Long} resultsReturned
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @instance
+                     */
+                    ExecutionStats.prototype.resultsReturned = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * ExecutionStats executionDuration.
+                     * @member {google.protobuf.IDuration|null|undefined} executionDuration
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @instance
+                     */
+                    ExecutionStats.prototype.executionDuration = null;
+    
+                    /**
+                     * ExecutionStats readOperations.
+                     * @member {number|Long} readOperations
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @instance
+                     */
+                    ExecutionStats.prototype.readOperations = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                    /**
+                     * ExecutionStats debugStats.
+                     * @member {google.protobuf.IStruct|null|undefined} debugStats
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @instance
+                     */
+                    ExecutionStats.prototype.debugStats = null;
+    
+                    /**
+                     * Creates a new ExecutionStats instance using the specified properties.
+                     * @function create
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @static
+                     * @param {google.datastore.v1.IExecutionStats=} [properties] Properties to set
+                     * @returns {google.datastore.v1.ExecutionStats} ExecutionStats instance
+                     */
+                    ExecutionStats.create = function create(properties) {
+                        return new ExecutionStats(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExecutionStats message. Does not implicitly {@link google.datastore.v1.ExecutionStats.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @static
+                     * @param {google.datastore.v1.IExecutionStats} message ExecutionStats message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExecutionStats.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resultsReturned != null && Object.hasOwnProperty.call(message, "resultsReturned"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.resultsReturned);
+                        if (message.executionDuration != null && Object.hasOwnProperty.call(message, "executionDuration"))
+                            $root.google.protobuf.Duration.encode(message.executionDuration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.readOperations != null && Object.hasOwnProperty.call(message, "readOperations"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int64(message.readOperations);
+                        if (message.debugStats != null && Object.hasOwnProperty.call(message, "debugStats"))
+                            $root.google.protobuf.Struct.encode(message.debugStats, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExecutionStats message, length delimited. Does not implicitly {@link google.datastore.v1.ExecutionStats.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @static
+                     * @param {google.datastore.v1.IExecutionStats} message ExecutionStats message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExecutionStats.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExecutionStats message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.datastore.v1.ExecutionStats} ExecutionStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExecutionStats.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.ExecutionStats();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.resultsReturned = reader.int64();
+                                    break;
+                                }
+                            case 3: {
+                                    message.executionDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.readOperations = reader.int64();
+                                    break;
+                                }
+                            case 5: {
+                                    message.debugStats = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExecutionStats message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.datastore.v1.ExecutionStats} ExecutionStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExecutionStats.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExecutionStats message.
+                     * @function verify
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExecutionStats.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resultsReturned != null && message.hasOwnProperty("resultsReturned"))
+                            if (!$util.isInteger(message.resultsReturned) && !(message.resultsReturned && $util.isInteger(message.resultsReturned.low) && $util.isInteger(message.resultsReturned.high)))
+                                return "resultsReturned: integer|Long expected";
+                        if (message.executionDuration != null && message.hasOwnProperty("executionDuration")) {
+                            var error = $root.google.protobuf.Duration.verify(message.executionDuration);
+                            if (error)
+                                return "executionDuration." + error;
+                        }
+                        if (message.readOperations != null && message.hasOwnProperty("readOperations"))
+                            if (!$util.isInteger(message.readOperations) && !(message.readOperations && $util.isInteger(message.readOperations.low) && $util.isInteger(message.readOperations.high)))
+                                return "readOperations: integer|Long expected";
+                        if (message.debugStats != null && message.hasOwnProperty("debugStats")) {
+                            var error = $root.google.protobuf.Struct.verify(message.debugStats);
+                            if (error)
+                                return "debugStats." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExecutionStats message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.datastore.v1.ExecutionStats} ExecutionStats
+                     */
+                    ExecutionStats.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.datastore.v1.ExecutionStats)
+                            return object;
+                        var message = new $root.google.datastore.v1.ExecutionStats();
+                        if (object.resultsReturned != null)
+                            if ($util.Long)
+                                (message.resultsReturned = $util.Long.fromValue(object.resultsReturned)).unsigned = false;
+                            else if (typeof object.resultsReturned === "string")
+                                message.resultsReturned = parseInt(object.resultsReturned, 10);
+                            else if (typeof object.resultsReturned === "number")
+                                message.resultsReturned = object.resultsReturned;
+                            else if (typeof object.resultsReturned === "object")
+                                message.resultsReturned = new $util.LongBits(object.resultsReturned.low >>> 0, object.resultsReturned.high >>> 0).toNumber();
+                        if (object.executionDuration != null) {
+                            if (typeof object.executionDuration !== "object")
+                                throw TypeError(".google.datastore.v1.ExecutionStats.executionDuration: object expected");
+                            message.executionDuration = $root.google.protobuf.Duration.fromObject(object.executionDuration);
+                        }
+                        if (object.readOperations != null)
+                            if ($util.Long)
+                                (message.readOperations = $util.Long.fromValue(object.readOperations)).unsigned = false;
+                            else if (typeof object.readOperations === "string")
+                                message.readOperations = parseInt(object.readOperations, 10);
+                            else if (typeof object.readOperations === "number")
+                                message.readOperations = object.readOperations;
+                            else if (typeof object.readOperations === "object")
+                                message.readOperations = new $util.LongBits(object.readOperations.low >>> 0, object.readOperations.high >>> 0).toNumber();
+                        if (object.debugStats != null) {
+                            if (typeof object.debugStats !== "object")
+                                throw TypeError(".google.datastore.v1.ExecutionStats.debugStats: object expected");
+                            message.debugStats = $root.google.protobuf.Struct.fromObject(object.debugStats);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExecutionStats message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @static
+                     * @param {google.datastore.v1.ExecutionStats} message ExecutionStats
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExecutionStats.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.resultsReturned = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.resultsReturned = options.longs === String ? "0" : 0;
+                            object.executionDuration = null;
+                            if ($util.Long) {
+                                var long = new $util.Long(0, 0, false);
+                                object.readOperations = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            } else
+                                object.readOperations = options.longs === String ? "0" : 0;
+                            object.debugStats = null;
+                        }
+                        if (message.resultsReturned != null && message.hasOwnProperty("resultsReturned"))
+                            if (typeof message.resultsReturned === "number")
+                                object.resultsReturned = options.longs === String ? String(message.resultsReturned) : message.resultsReturned;
+                            else
+                                object.resultsReturned = options.longs === String ? $util.Long.prototype.toString.call(message.resultsReturned) : options.longs === Number ? new $util.LongBits(message.resultsReturned.low >>> 0, message.resultsReturned.high >>> 0).toNumber() : message.resultsReturned;
+                        if (message.executionDuration != null && message.hasOwnProperty("executionDuration"))
+                            object.executionDuration = $root.google.protobuf.Duration.toObject(message.executionDuration, options);
+                        if (message.readOperations != null && message.hasOwnProperty("readOperations"))
+                            if (typeof message.readOperations === "number")
+                                object.readOperations = options.longs === String ? String(message.readOperations) : message.readOperations;
+                            else
+                                object.readOperations = options.longs === String ? $util.Long.prototype.toString.call(message.readOperations) : options.longs === Number ? new $util.LongBits(message.readOperations.low >>> 0, message.readOperations.high >>> 0).toNumber() : message.readOperations;
+                        if (message.debugStats != null && message.hasOwnProperty("debugStats"))
+                            object.debugStats = $root.google.protobuf.Struct.toObject(message.debugStats, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExecutionStats to JSON.
+                     * @function toJSON
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExecutionStats.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExecutionStats
+                     * @function getTypeUrl
+                     * @memberof google.datastore.v1.ExecutionStats
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExecutionStats.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.datastore.v1.ExecutionStats";
+                    };
+    
+                    return ExecutionStats;
                 })();
     
                 return v1;
