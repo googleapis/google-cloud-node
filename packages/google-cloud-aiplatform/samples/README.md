@@ -312,6 +312,7 @@
   * [Endpoint_service.mutate_deployed_model](#endpoint_service.mutate_deployed_model)
   * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
   * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
+  * [Evaluation_service.evaluate_instances](#evaluation_service.evaluate_instances)
   * [Feature_online_store_admin_service.create_feature_online_store](#feature_online_store_admin_service.create_feature_online_store)
   * [Feature_online_store_admin_service.create_feature_view](#feature_online_store_admin_service.create_feature_view)
   * [Feature_online_store_admin_service.delete_feature_online_store](#feature_online_store_admin_service.delete_feature_online_store)
@@ -500,6 +501,11 @@
   * [Prediction_service.stream_generate_content](#prediction_service.stream_generate_content)
   * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
   * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
+  * [Reasoning_engine_execution_service.query_reasoning_engine](#reasoning_engine_execution_service.query_reasoning_engine)
+  * [Reasoning_engine_service.create_reasoning_engine](#reasoning_engine_service.create_reasoning_engine)
+  * [Reasoning_engine_service.delete_reasoning_engine](#reasoning_engine_service.delete_reasoning_engine)
+  * [Reasoning_engine_service.get_reasoning_engine](#reasoning_engine_service.get_reasoning_engine)
+  * [Reasoning_engine_service.list_reasoning_engines](#reasoning_engine_service.list_reasoning_engines)
   * [Schedule_service.create_schedule](#schedule_service.create_schedule)
   * [Schedule_service.delete_schedule](#schedule_service.delete_schedule)
   * [Schedule_service.get_schedule](#schedule_service.get_schedule)
@@ -5674,6 +5680,23 @@ __Usage:__
 
 
 
+### Evaluation_service.evaluate_instances
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_instances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_instances.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_instances.js`
+
+
+-----
+
+
+
+
 ### Feature_online_store_admin_service.create_feature_online_store
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_online_store_admin_service.create_feature_online_store.js).
@@ -8863,6 +8886,91 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_raw_predict.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_execution_service.query_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.query_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.query_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.query_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.create_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.create_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.create_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.create_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.delete_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.delete_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.delete_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.delete_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.get_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.get_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.get_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.get_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.list_reasoning_engines
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.list_reasoning_engines.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.list_reasoning_engines.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.list_reasoning_engines.js`
 
 
 -----

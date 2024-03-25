@@ -322,6 +322,9 @@ export class FeaturestoreServiceClient {
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'publishers/{publisher}/models/{model}'
       ),
+      reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
+      ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
       ),
@@ -8869,6 +8872,65 @@ export class FeaturestoreServiceClient {
     return this.pathTemplates.publisherModelPathTemplate.match(
       publisherModelName
     ).model;
+  }
+
+  /**
+   * Return a fully-qualified reasoningEngine resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @returns {string} Resource name string.
+   */
+  reasoningEnginePath(
+    project: string,
+    location: string,
+    reasoningEngine: string
+  ) {
+    return this.pathTemplates.reasoningEnginePathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+    });
+  }
+
+  /**
+   * Parse the project from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).reasoning_engine;
   }
 
   /**

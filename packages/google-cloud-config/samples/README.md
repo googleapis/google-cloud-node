@@ -25,11 +25,13 @@
   * [Config.get_preview](#config.get_preview)
   * [Config.get_resource](#config.get_resource)
   * [Config.get_revision](#config.get_revision)
+  * [Config.get_terraform_version](#config.get_terraform_version)
   * [Config.import_statefile](#config.import_statefile)
   * [Config.list_deployments](#config.list_deployments)
   * [Config.list_previews](#config.list_previews)
   * [Config.list_resources](#config.list_resources)
   * [Config.list_revisions](#config.list_revisions)
+  * [Config.list_terraform_versions](#config.list_terraform_versions)
   * [Config.lock_deployment](#config.lock_deployment)
   * [Config.unlock_deployment](#config.unlock_deployment)
   * [Config.update_deployment](#config.update_deployment)
@@ -271,6 +273,23 @@ __Usage:__
 
 
 
+### Config.get_terraform_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_terraform_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_terraform_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-config/samples/generated/v1/config.get_terraform_version.js`
+
+
+-----
+
+
+
+
 ### Config.import_statefile
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.import_statefile.js).
@@ -349,6 +368,23 @@ __Usage:__
 
 
 `node packages/google-cloud-config/samples/generated/v1/config.list_revisions.js`
+
+
+-----
+
+
+
+
+### Config.list_terraform_versions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_terraform_versions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_terraform_versions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-config/samples/generated/v1/config.list_terraform_versions.js`
 
 
 -----

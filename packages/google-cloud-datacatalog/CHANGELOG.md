@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.1.1...datacatalog-v4.2.0) (2024-03-23)
+
+
+### Features
+
+* [datacatalog] Add RANGE type to Data Catalog ([#5138](https://github.com/googleapis/google-cloud-node/issues/5138)) ([14aea77](https://github.com/googleapis/google-cloud-node/commit/14aea7707c87513792390466a44a84da35d8fb9a))
+
 ## [4.1.1](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.1.0...datacatalog-v4.1.1) (2024-01-15)
 
 

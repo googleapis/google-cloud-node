@@ -208,6 +208,58 @@
             }
         },
         {
+            "regionTag": "edgecontainer_v1_generated_EdgeContainer_UpgradeCluster_async",
+            "title": "EdgeContainer upgradeCluster Sample",
+            "origin": "API_DEFINITION",
+            "description": " Upgrades a single cluster.",
+            "canonical": true,
+            "file": "edge_container.upgrade_cluster.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpgradeCluster",
+                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpgradeCluster",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "target_version",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "schedule",
+                        "type": ".google.cloud.edgecontainer.v1.UpgradeClusterRequest.Schedule"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "EdgeContainerClient",
+                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+                },
+                "method": {
+                    "shortName": "UpgradeCluster",
+                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpgradeCluster",
+                    "service": {
+                        "shortName": "EdgeContainer",
+                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "edgecontainer_v1_generated_EdgeContainer_DeleteCluster_async",
             "title": "EdgeContainer deleteCluster Sample",
             "origin": "API_DEFINITION",
@@ -284,6 +336,46 @@
                 "method": {
                     "shortName": "GenerateAccessToken",
                     "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GenerateAccessToken",
+                    "service": {
+                        "shortName": "EdgeContainer",
+                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "edgecontainer_v1_generated_EdgeContainer_GenerateOfflineCredential_async",
+            "title": "EdgeContainer generateOfflineCredential Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates an offline credential for a Cluster.",
+            "canonical": true,
+            "file": "edge_container.generate_offline_credential.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GenerateOfflineCredential",
+                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GenerateOfflineCredential",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "cluster",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse",
+                "client": {
+                    "shortName": "EdgeContainerClient",
+                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+                },
+                "method": {
+                    "shortName": "GenerateOfflineCredential",
+                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GenerateOfflineCredential",
                     "service": {
                         "shortName": "EdgeContainer",
                         "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
@@ -638,7 +730,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -812,6 +904,46 @@
                 "method": {
                     "shortName": "DeleteVpnConnection",
                     "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteVpnConnection",
+                    "service": {
+                        "shortName": "EdgeContainer",
+                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "edgecontainer_v1_generated_EdgeContainer_GetServerConfig_async",
+            "title": "EdgeContainer getServerConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the server config.",
+            "canonical": true,
+            "file": "edge_container.get_server_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetServerConfig",
+                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetServerConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.edgecontainer.v1.ServerConfig",
+                "client": {
+                    "shortName": "EdgeContainerClient",
+                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+                },
+                "method": {
+                    "shortName": "GetServerConfig",
+                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetServerConfig",
                     "service": {
                         "shortName": "EdgeContainer",
                         "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"

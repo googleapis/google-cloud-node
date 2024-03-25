@@ -393,6 +393,30 @@
         }
       }
     },
+    "EvaluationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EvaluationServiceClient",
+          "rpcs": {
+            "EvaluateInstances": {
+              "methods": [
+                "evaluateInstances"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EvaluationServiceClient",
+          "rpcs": {
+            "EvaluateInstances": {
+              "methods": [
+                "evaluateInstances"
+              ]
+            }
+          }
+        }
+      }
+    },
     "FeatureOnlineStoreAdminService": {
       "clients": {
         "grpc": {
@@ -2587,6 +2611,88 @@
             "GenerateContent": {
               "methods": [
                 "generateContent"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ReasoningEngineExecutionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReasoningEngineExecutionServiceClient",
+          "rpcs": {
+            "QueryReasoningEngine": {
+              "methods": [
+                "queryReasoningEngine"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReasoningEngineExecutionServiceClient",
+          "rpcs": {
+            "QueryReasoningEngine": {
+              "methods": [
+                "queryReasoningEngine"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ReasoningEngineService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReasoningEngineServiceClient",
+          "rpcs": {
+            "GetReasoningEngine": {
+              "methods": [
+                "getReasoningEngine"
+              ]
+            },
+            "CreateReasoningEngine": {
+              "methods": [
+                "createReasoningEngine"
+              ]
+            },
+            "DeleteReasoningEngine": {
+              "methods": [
+                "deleteReasoningEngine"
+              ]
+            },
+            "ListReasoningEngines": {
+              "methods": [
+                "listReasoningEngines",
+                "listReasoningEnginesStream",
+                "listReasoningEnginesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReasoningEngineServiceClient",
+          "rpcs": {
+            "GetReasoningEngine": {
+              "methods": [
+                "getReasoningEngine"
+              ]
+            },
+            "CreateReasoningEngine": {
+              "methods": [
+                "createReasoningEngine"
+              ]
+            },
+            "DeleteReasoningEngine": {
+              "methods": [
+                "deleteReasoningEngine"
+              ]
+            },
+            "ListReasoningEngines": {
+              "methods": [
+                "listReasoningEngines",
+                "listReasoningEnginesStream",
+                "listReasoningEnginesAsync"
               ]
             }
           }

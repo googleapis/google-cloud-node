@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.2.0...containeranalysis-v5.3.0) (2024-03-23)
+
+
+### Features
+
+* [containeranalysis] A new field `in_toto_slsa_provenance_v1` is added to message `BuildOccurrence` ([#5134](https://github.com/googleapis/google-cloud-node/issues/5134)) ([e15c0fa](https://github.com/googleapis/google-cloud-node/commit/e15c0fa84d38e7bfd1e1ff2551b6b39ccbbd8554))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.1.1...containeranalysis-v5.2.0) (2024-02-09)
 
 

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.15.0",
+        "version": "3.16.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1503,6 +1503,138 @@
                     "service": {
                         "shortName": "EndpointService",
                         "fullName": "google.cloud.aiplatform.v1beta1.EndpointService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_EvaluationService_EvaluateInstances_async",
+            "title": "DatasetService evaluateInstances Sample",
+            "origin": "API_DEFINITION",
+            "description": " Evaluates instances based on a given metric.",
+            "canonical": true,
+            "file": "evaluation_service.evaluate_instances.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 152,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "EvaluateInstances",
+                "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService.EvaluateInstances",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "exact_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ExactMatchInput"
+                    },
+                    {
+                        "name": "bleu_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.BleuInput"
+                    },
+                    {
+                        "name": "rouge_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.RougeInput"
+                    },
+                    {
+                        "name": "fluency_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.FluencyInput"
+                    },
+                    {
+                        "name": "coherence_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.CoherenceInput"
+                    },
+                    {
+                        "name": "safety_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SafetyInput"
+                    },
+                    {
+                        "name": "groundedness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.GroundednessInput"
+                    },
+                    {
+                        "name": "fulfillment_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.FulfillmentInput"
+                    },
+                    {
+                        "name": "response_recall_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ResponseRecallInput"
+                    },
+                    {
+                        "name": "summarization_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SummarizationQualityInput"
+                    },
+                    {
+                        "name": "pairwise_summarization_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.PairwiseSummarizationQualityInput"
+                    },
+                    {
+                        "name": "summarization_helpfulness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SummarizationHelpfulnessInput"
+                    },
+                    {
+                        "name": "summarization_verbosity_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SummarizationVerbosityInput"
+                    },
+                    {
+                        "name": "question_answering_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringQualityInput"
+                    },
+                    {
+                        "name": "pairwise_question_answering_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.PairwiseQuestionAnsweringQualityInput"
+                    },
+                    {
+                        "name": "question_answering_relevance_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringRelevanceInput"
+                    },
+                    {
+                        "name": "question_answering_helpfulness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringHelpfulnessInput"
+                    },
+                    {
+                        "name": "question_answering_correctness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringCorrectnessInput"
+                    },
+                    {
+                        "name": "rag_context_recall_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.RagContextRecallInput"
+                    },
+                    {
+                        "name": "tool_call_valid_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolCallValidInput"
+                    },
+                    {
+                        "name": "tool_name_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolNameMatchInput"
+                    },
+                    {
+                        "name": "tool_parameter_key_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolParameterKeyMatchInput"
+                    },
+                    {
+                        "name": "tool_parameter_kv_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolParameterKVMatchInput"
+                    },
+                    {
+                        "name": "location",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.EvaluateInstancesResponse",
+                "client": {
+                    "shortName": "EvaluationServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.EvaluationServiceClient"
+                },
+                "method": {
+                    "shortName": "EvaluateInstances",
+                    "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService.EvaluateInstances",
+                    "service": {
+                        "shortName": "EvaluationService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService"
                     }
                 }
             }
@@ -10150,7 +10282,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -10170,6 +10302,10 @@
                     {
                         "name": "tools",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "tool_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolConfig"
                     },
                     {
                         "name": "safety_settings",
@@ -10206,7 +10342,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -10228,6 +10364,10 @@
                         "type": "TYPE_MESSAGE[]"
                     },
                     {
+                        "name": "tool_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolConfig"
+                    },
+                    {
                         "name": "safety_settings",
                         "type": "TYPE_MESSAGE[]"
                     },
@@ -10247,6 +10387,226 @@
                     "service": {
                         "shortName": "PredictionService",
                         "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineExecutionService_QueryReasoningEngine_async",
+            "title": "DatasetService queryReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Queries using a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_execution_service.query_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.QueryReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "input",
+                        "type": ".google.protobuf.Struct"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.QueryReasoningEngineResponse",
+                "client": {
+                    "shortName": "ReasoningEngineExecutionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionServiceClient"
+                },
+                "method": {
+                    "shortName": "QueryReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.QueryReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineExecutionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineService_CreateReasoningEngine_async",
+            "title": "DatasetService createReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_service.create_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.CreateReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "reasoning_engine",
+                        "type": ".google.cloud.aiplatform.v1beta1.ReasoningEngine"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.CreateReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineService_GetReasoningEngine_async",
+            "title": "DatasetService getReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_service.get_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.GetReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ReasoningEngine",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "GetReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.GetReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineService_ListReasoningEngines_async",
+            "title": "DatasetService listReasoningEngines Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists reasoning engines in a location.",
+            "canonical": true,
+            "file": "reasoning_engine_service.list_reasoning_engines.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListReasoningEngines",
+                "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.ListReasoningEngines",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListReasoningEnginesResponse",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "ListReasoningEngines",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.ListReasoningEngines",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineService_DeleteReasoningEngine_async",
+            "title": "DatasetService deleteReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_service.delete_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.DeleteReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService.DeleteReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.ReasoningEngineService"
                     }
                 }
             }

@@ -19,6 +19,7 @@
 export {DatasetServiceClient} from './dataset_service_client';
 export {DeploymentResourcePoolServiceClient} from './deployment_resource_pool_service_client';
 export {EndpointServiceClient} from './endpoint_service_client';
+export {EvaluationServiceClient} from './evaluation_service_client';
 export {FeatureOnlineStoreAdminServiceClient} from './feature_online_store_admin_service_client';
 export {FeatureOnlineStoreServiceClient} from './feature_online_store_service_client';
 export {FeatureRegistryServiceClient} from './feature_registry_service_client';
@@ -36,6 +37,8 @@ export {ModelServiceClient} from './model_service_client';
 export {PersistentResourceServiceClient} from './persistent_resource_service_client';
 export {PipelineServiceClient} from './pipeline_service_client';
 export {PredictionServiceClient} from './prediction_service_client';
+export {ReasoningEngineExecutionServiceClient} from './reasoning_engine_execution_service_client';
+export {ReasoningEngineServiceClient} from './reasoning_engine_service_client';
 export {ScheduleServiceClient} from './schedule_service_client';
 export {SpecialistPoolServiceClient} from './specialist_pool_service_client';
 export {TensorboardServiceClient} from './tensorboard_service_client';

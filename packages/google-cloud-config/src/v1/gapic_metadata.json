@@ -60,6 +60,11 @@
                 "exportPreviewResult"
               ]
             },
+            "GetTerraformVersion": {
+              "methods": [
+                "getTerraformVersion"
+              ]
+            },
             "CreateDeployment": {
               "methods": [
                 "createDeployment"
@@ -121,6 +126,13 @@
                 "listPreviews",
                 "listPreviewsStream",
                 "listPreviewsAsync"
+              ]
+            },
+            "ListTerraformVersions": {
+              "methods": [
+                "listTerraformVersions",
+                "listTerraformVersionsStream",
+                "listTerraformVersionsAsync"
               ]
             }
           }
@@ -178,6 +190,11 @@
                 "exportPreviewResult"
               ]
             },
+            "GetTerraformVersion": {
+              "methods": [
+                "getTerraformVersion"
+              ]
+            },
             "CreateDeployment": {
               "methods": [
                 "createDeployment"
@@ -239,6 +256,13 @@
                 "listPreviews",
                 "listPreviewsStream",
                 "listPreviewsAsync"
+              ]
+            },
+            "ListTerraformVersions": {
+              "methods": [
+                "listTerraformVersions",
+                "listTerraformVersionsStream",
+                "listTerraformVersionsAsync"
               ]
             }
           }
