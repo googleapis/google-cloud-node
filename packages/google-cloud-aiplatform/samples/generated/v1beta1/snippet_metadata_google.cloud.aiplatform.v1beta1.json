@@ -1508,6 +1508,138 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_EvaluationService_EvaluateInstances_async",
+            "title": "DatasetService evaluateInstances Sample",
+            "origin": "API_DEFINITION",
+            "description": " Evaluates instances based on a given metric.",
+            "canonical": true,
+            "file": "evaluation_service.evaluate_instances.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 152,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "EvaluateInstances",
+                "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService.EvaluateInstances",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "exact_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ExactMatchInput"
+                    },
+                    {
+                        "name": "bleu_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.BleuInput"
+                    },
+                    {
+                        "name": "rouge_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.RougeInput"
+                    },
+                    {
+                        "name": "fluency_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.FluencyInput"
+                    },
+                    {
+                        "name": "coherence_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.CoherenceInput"
+                    },
+                    {
+                        "name": "safety_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SafetyInput"
+                    },
+                    {
+                        "name": "groundedness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.GroundednessInput"
+                    },
+                    {
+                        "name": "fulfillment_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.FulfillmentInput"
+                    },
+                    {
+                        "name": "response_recall_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ResponseRecallInput"
+                    },
+                    {
+                        "name": "summarization_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SummarizationQualityInput"
+                    },
+                    {
+                        "name": "pairwise_summarization_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.PairwiseSummarizationQualityInput"
+                    },
+                    {
+                        "name": "summarization_helpfulness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SummarizationHelpfulnessInput"
+                    },
+                    {
+                        "name": "summarization_verbosity_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.SummarizationVerbosityInput"
+                    },
+                    {
+                        "name": "question_answering_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringQualityInput"
+                    },
+                    {
+                        "name": "pairwise_question_answering_quality_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.PairwiseQuestionAnsweringQualityInput"
+                    },
+                    {
+                        "name": "question_answering_relevance_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringRelevanceInput"
+                    },
+                    {
+                        "name": "question_answering_helpfulness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringHelpfulnessInput"
+                    },
+                    {
+                        "name": "question_answering_correctness_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringCorrectnessInput"
+                    },
+                    {
+                        "name": "rag_context_recall_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.RagContextRecallInput"
+                    },
+                    {
+                        "name": "tool_call_valid_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolCallValidInput"
+                    },
+                    {
+                        "name": "tool_name_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolNameMatchInput"
+                    },
+                    {
+                        "name": "tool_parameter_key_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolParameterKeyMatchInput"
+                    },
+                    {
+                        "name": "tool_parameter_kv_match_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.ToolParameterKVMatchInput"
+                    },
+                    {
+                        "name": "location",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.EvaluateInstancesResponse",
+                "client": {
+                    "shortName": "EvaluationServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.EvaluationServiceClient"
+                },
+                "method": {
+                    "shortName": "EvaluateInstances",
+                    "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService.EvaluateInstances",
+                    "service": {
+                        "shortName": "EvaluationService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.EvaluationService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_CreateFeatureOnlineStore_async",
             "title": "DatasetService createFeatureOnlineStore Sample",
             "origin": "API_DEFINITION",
