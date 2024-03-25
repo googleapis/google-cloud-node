@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.2.0...cloudbuild-v4.3.0) (2024-03-23)
+
+
+### Features
+
+* [cloudbuild] Add Bitbucket Data Center Config and Bitbucket Cloud config for Cloud Build Repositories ([#5132](https://github.com/googleapis/google-cloud-node/issues/5132)) ([334e7b9](https://github.com/googleapis/google-cloud-node/commit/334e7b93b4a996ca70fd4b95e98ca5e0c56eb623))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.1.1...cloudbuild-v4.2.0) (2024-02-09)
 
 
