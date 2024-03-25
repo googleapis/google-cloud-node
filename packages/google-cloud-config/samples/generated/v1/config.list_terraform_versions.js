@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START config_v1_generated_Config_ListPreviews_async]
+  // [START config_v1_generated_Config_ListTerraformVersions_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,8 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent in whose context the Previews are listed. The parent
-   *  value is in the format: 'projects/{project_id}/locations/{location}'.
+   *  Required. The parent in whose context the TerraformVersions are listed. The
+   *  parent value is in the format:
+   *  'projects/{project_id}/locations/{location}'.
    */
   // const parent = 'abc123'
   /**
@@ -40,30 +41,20 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Optional. Token returned by previous call to 'ListDeployments' which
+   *  Optional. Token returned by previous call to 'ListTerraformVersions' which
    *  specifies the position in the list from where to continue listing the
    *  resources.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. Lists the Deployments that match the filter expression. A filter
-   *  expression filters the resources listed in the response. The expression
-   *  must be of the form '{field} {operator} {value}' where operators: '<', '>',
+   *  Optional. Lists the TerraformVersions that match the filter expression. A
+   *  filter expression filters the resources listed in the response. The
+   *  expression must be of the form '{field} {operator} {value}' where
+   *  operators: '<', '>',
    *  '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
    *  operator which is roughly synonymous with equality). {field} can refer to a
    *  proto or JSON field, or a synthetic field. Field names can be camelCase or
    *  snake_case.
-   *  Examples:
-   *  - Filter by name:
-   *    name = "projects/foo/locations/us-central1/deployments/bar
-   *  - Filter by labels:
-   *    - Resources that have a key called 'foo'
-   *      labels.foo:*
-   *    - Resources that have a key called 'foo' whose value is 'bar'
-   *      labels.foo = bar
-   *  - Filter by state:
-   *    - Deployments in CREATING state.
-   *      state=CREATING
    */
   // const filter = 'abc123'
   /**
@@ -77,21 +68,21 @@ function main(parent) {
   // Instantiates a client
   const configClient = new ConfigClient();
 
-  async function callListPreviews() {
+  async function callListTerraformVersions() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = configClient.listPreviewsAsync(request);
+    const iterable = configClient.listTerraformVersionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListPreviews();
-  // [END config_v1_generated_Config_ListPreviews_async]
+  callListTerraformVersions();
+  // [END config_v1_generated_Config_ListTerraformVersions_async]
 }
 
 process.on('unhandledRejection', err => {
