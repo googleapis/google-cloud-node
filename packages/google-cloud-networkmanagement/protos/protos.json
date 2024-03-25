@@ -96,6 +96,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "bypassFirewallChecks": {
+                          "type": "bool",
+                          "id": 17
                         }
                       }
                     },
@@ -363,6 +367,10 @@
                           "rule": "repeated",
                           "type": "Step",
                           "id": 2
+                        },
+                        "forwardTraceId": {
+                          "type": "int32",
+                          "id": 4
                         }
                       }
                     },
@@ -535,6 +543,8 @@
                             "START_FROM_CLOUD_FUNCTION": 23,
                             "START_FROM_APP_ENGINE_VERSION": 25,
                             "START_FROM_CLOUD_RUN_REVISION": 26,
+                            "START_FROM_STORAGE_BUCKET": 29,
+                            "START_FROM_PSC_PUBLISHED_SERVICE": 30,
                             "APPLY_INGRESS_FIREWALL_RULE": 4,
                             "APPLY_EGRESS_FIREWALL_RULE": 5,
                             "APPLY_ROUTE": 6,
@@ -668,7 +678,8 @@
                             "IMPLIED_VPC_FIREWALL_RULE": 3,
                             "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4,
                             "NETWORK_FIREWALL_POLICY_RULE": 5,
-                            "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6
+                            "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6,
+                            "TRACKING_STATE": 101
                           }
                         }
                       }
@@ -2031,6 +2042,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "bypassFirewallChecks": {
+                          "type": "bool",
+                          "id": 17
                         }
                       }
                     },
@@ -2298,6 +2313,10 @@
                           "rule": "repeated",
                           "type": "Step",
                           "id": 2
+                        },
+                        "forwardTraceId": {
+                          "type": "int32",
+                          "id": 4
                         }
                       }
                     },
@@ -2470,6 +2489,8 @@
                             "START_FROM_CLOUD_FUNCTION": 23,
                             "START_FROM_APP_ENGINE_VERSION": 25,
                             "START_FROM_CLOUD_RUN_REVISION": 26,
+                            "START_FROM_STORAGE_BUCKET": 29,
+                            "START_FROM_PSC_PUBLISHED_SERVICE": 30,
                             "APPLY_INGRESS_FIREWALL_RULE": 4,
                             "APPLY_EGRESS_FIREWALL_RULE": 5,
                             "APPLY_ROUTE": 6,
@@ -2603,7 +2624,8 @@
                             "IMPLIED_VPC_FIREWALL_RULE": 3,
                             "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4,
                             "NETWORK_FIREWALL_POLICY_RULE": 5,
-                            "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6
+                            "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6,
+                            "TRACKING_STATE": 101
                           }
                         }
                       }

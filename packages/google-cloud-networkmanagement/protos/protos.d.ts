@@ -64,6 +64,9 @@ export namespace google {
 
                     /** ConnectivityTest probingDetails */
                     probingDetails?: (google.cloud.networkmanagement.v1.IProbingDetails|null);
+
+                    /** ConnectivityTest bypassFirewallChecks */
+                    bypassFirewallChecks?: (boolean|null);
                 }
 
                 /** Represents a ConnectivityTest. */
@@ -110,6 +113,9 @@ export namespace google {
 
                     /** ConnectivityTest probingDetails. */
                     public probingDetails?: (google.cloud.networkmanagement.v1.IProbingDetails|null);
+
+                    /** ConnectivityTest bypassFirewallChecks. */
+                    public bypassFirewallChecks: boolean;
 
                     /**
                      * Creates a new ConnectivityTest instance using the specified properties.
@@ -1285,6 +1291,9 @@ export namespace google {
 
                     /** Trace steps */
                     steps?: (google.cloud.networkmanagement.v1.IStep[]|null);
+
+                    /** Trace forwardTraceId */
+                    forwardTraceId?: (number|null);
                 }
 
                 /** Represents a Trace. */
@@ -1301,6 +1310,9 @@ export namespace google {
 
                     /** Trace steps. */
                     public steps: google.cloud.networkmanagement.v1.IStep[];
+
+                    /** Trace forwardTraceId. */
+                    public forwardTraceId: number;
 
                     /**
                      * Creates a new Trace instance using the specified properties.
@@ -1656,6 +1668,8 @@ export namespace google {
                         START_FROM_CLOUD_FUNCTION = 23,
                         START_FROM_APP_ENGINE_VERSION = 25,
                         START_FROM_CLOUD_RUN_REVISION = 26,
+                        START_FROM_STORAGE_BUCKET = 29,
+                        START_FROM_PSC_PUBLISHED_SERVICE = 30,
                         APPLY_INGRESS_FIREWALL_RULE = 4,
                         APPLY_EGRESS_FIREWALL_RULE = 5,
                         APPLY_ROUTE = 6,
@@ -2087,7 +2101,8 @@ export namespace google {
                         IMPLIED_VPC_FIREWALL_RULE = 3,
                         SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4,
                         NETWORK_FIREWALL_POLICY_RULE = 5,
-                        NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6
+                        NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6,
+                        TRACKING_STATE = 101
                     }
                 }
 
@@ -6234,6 +6249,9 @@ export namespace google {
 
                     /** ConnectivityTest probingDetails */
                     probingDetails?: (google.cloud.networkmanagement.v1beta1.IProbingDetails|null);
+
+                    /** ConnectivityTest bypassFirewallChecks */
+                    bypassFirewallChecks?: (boolean|null);
                 }
 
                 /** Represents a ConnectivityTest. */
@@ -6280,6 +6298,9 @@ export namespace google {
 
                     /** ConnectivityTest probingDetails. */
                     public probingDetails?: (google.cloud.networkmanagement.v1beta1.IProbingDetails|null);
+
+                    /** ConnectivityTest bypassFirewallChecks. */
+                    public bypassFirewallChecks: boolean;
 
                     /**
                      * Creates a new ConnectivityTest instance using the specified properties.
@@ -7455,6 +7476,9 @@ export namespace google {
 
                     /** Trace steps */
                     steps?: (google.cloud.networkmanagement.v1beta1.IStep[]|null);
+
+                    /** Trace forwardTraceId */
+                    forwardTraceId?: (number|null);
                 }
 
                 /** Represents a Trace. */
@@ -7471,6 +7495,9 @@ export namespace google {
 
                     /** Trace steps. */
                     public steps: google.cloud.networkmanagement.v1beta1.IStep[];
+
+                    /** Trace forwardTraceId. */
+                    public forwardTraceId: number;
 
                     /**
                      * Creates a new Trace instance using the specified properties.
@@ -7826,6 +7853,8 @@ export namespace google {
                         START_FROM_CLOUD_FUNCTION = 23,
                         START_FROM_APP_ENGINE_VERSION = 25,
                         START_FROM_CLOUD_RUN_REVISION = 26,
+                        START_FROM_STORAGE_BUCKET = 29,
+                        START_FROM_PSC_PUBLISHED_SERVICE = 30,
                         APPLY_INGRESS_FIREWALL_RULE = 4,
                         APPLY_EGRESS_FIREWALL_RULE = 5,
                         APPLY_ROUTE = 6,
@@ -8257,7 +8286,8 @@ export namespace google {
                         IMPLIED_VPC_FIREWALL_RULE = 3,
                         SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4,
                         NETWORK_FIREWALL_POLICY_RULE = 5,
-                        NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6
+                        NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6,
+                        TRACKING_STATE = 101
                     }
                 }
 
