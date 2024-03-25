@@ -19,10 +19,12 @@
 import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
+const DepServiceClient = v1.DepServiceClient;
+type DepServiceClient = v1.DepServiceClient;
 const NetworkServicesClient = v1.NetworkServicesClient;
 type NetworkServicesClient = v1.NetworkServicesClient;
 
-export {v1, v1beta1, NetworkServicesClient};
-export default {v1, v1beta1, NetworkServicesClient};
+export {v1, v1beta1, DepServiceClient, NetworkServicesClient};
+export default {v1, v1beta1, DepServiceClient, NetworkServicesClient};
 import * as protos from '../protos/protos';
 export {protos};
