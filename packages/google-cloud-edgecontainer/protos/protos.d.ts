@@ -63,11 +63,50 @@ export namespace google {
                     /** Cluster endpoint */
                     endpoint?: (string|null);
 
+                    /** Cluster port */
+                    port?: (number|null);
+
                     /** Cluster clusterCaCertificate */
                     clusterCaCertificate?: (string|null);
 
                     /** Cluster maintenancePolicy */
                     maintenancePolicy?: (google.cloud.edgecontainer.v1.IMaintenancePolicy|null);
+
+                    /** Cluster controlPlaneVersion */
+                    controlPlaneVersion?: (string|null);
+
+                    /** Cluster nodeVersion */
+                    nodeVersion?: (string|null);
+
+                    /** Cluster controlPlane */
+                    controlPlane?: (google.cloud.edgecontainer.v1.Cluster.IControlPlane|null);
+
+                    /** Cluster systemAddonsConfig */
+                    systemAddonsConfig?: (google.cloud.edgecontainer.v1.Cluster.ISystemAddonsConfig|null);
+
+                    /** Cluster externalLoadBalancerIpv4AddressPools */
+                    externalLoadBalancerIpv4AddressPools?: (string[]|null);
+
+                    /** Cluster controlPlaneEncryption */
+                    controlPlaneEncryption?: (google.cloud.edgecontainer.v1.Cluster.IControlPlaneEncryption|null);
+
+                    /** Cluster status */
+                    status?: (google.cloud.edgecontainer.v1.Cluster.Status|keyof typeof google.cloud.edgecontainer.v1.Cluster.Status|null);
+
+                    /** Cluster maintenanceEvents */
+                    maintenanceEvents?: (google.cloud.edgecontainer.v1.Cluster.IMaintenanceEvent[]|null);
+
+                    /** Cluster targetVersion */
+                    targetVersion?: (string|null);
+
+                    /** Cluster releaseChannel */
+                    releaseChannel?: (google.cloud.edgecontainer.v1.Cluster.ReleaseChannel|keyof typeof google.cloud.edgecontainer.v1.Cluster.ReleaseChannel|null);
+
+                    /** Cluster survivabilityConfig */
+                    survivabilityConfig?: (google.cloud.edgecontainer.v1.Cluster.ISurvivabilityConfig|null);
+
+                    /** Cluster externalLoadBalancerIpv6AddressPools */
+                    externalLoadBalancerIpv6AddressPools?: (string[]|null);
                 }
 
                 /** Represents a Cluster. */
@@ -106,11 +145,50 @@ export namespace google {
                     /** Cluster endpoint. */
                     public endpoint: string;
 
+                    /** Cluster port. */
+                    public port: number;
+
                     /** Cluster clusterCaCertificate. */
                     public clusterCaCertificate: string;
 
                     /** Cluster maintenancePolicy. */
                     public maintenancePolicy?: (google.cloud.edgecontainer.v1.IMaintenancePolicy|null);
+
+                    /** Cluster controlPlaneVersion. */
+                    public controlPlaneVersion: string;
+
+                    /** Cluster nodeVersion. */
+                    public nodeVersion: string;
+
+                    /** Cluster controlPlane. */
+                    public controlPlane?: (google.cloud.edgecontainer.v1.Cluster.IControlPlane|null);
+
+                    /** Cluster systemAddonsConfig. */
+                    public systemAddonsConfig?: (google.cloud.edgecontainer.v1.Cluster.ISystemAddonsConfig|null);
+
+                    /** Cluster externalLoadBalancerIpv4AddressPools. */
+                    public externalLoadBalancerIpv4AddressPools: string[];
+
+                    /** Cluster controlPlaneEncryption. */
+                    public controlPlaneEncryption?: (google.cloud.edgecontainer.v1.Cluster.IControlPlaneEncryption|null);
+
+                    /** Cluster status. */
+                    public status: (google.cloud.edgecontainer.v1.Cluster.Status|keyof typeof google.cloud.edgecontainer.v1.Cluster.Status);
+
+                    /** Cluster maintenanceEvents. */
+                    public maintenanceEvents: google.cloud.edgecontainer.v1.Cluster.IMaintenanceEvent[];
+
+                    /** Cluster targetVersion. */
+                    public targetVersion: string;
+
+                    /** Cluster releaseChannel. */
+                    public releaseChannel: (google.cloud.edgecontainer.v1.Cluster.ReleaseChannel|keyof typeof google.cloud.edgecontainer.v1.Cluster.ReleaseChannel);
+
+                    /** Cluster survivabilityConfig. */
+                    public survivabilityConfig?: (google.cloud.edgecontainer.v1.Cluster.ISurvivabilityConfig|null);
+
+                    /** Cluster externalLoadBalancerIpv6AddressPools. */
+                    public externalLoadBalancerIpv6AddressPools: string[];
 
                     /**
                      * Creates a new Cluster instance using the specified properties.
@@ -188,6 +266,938 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Cluster {
+
+                    /** Properties of a ControlPlane. */
+                    interface IControlPlane {
+
+                        /** ControlPlane remote */
+                        remote?: (google.cloud.edgecontainer.v1.Cluster.ControlPlane.IRemote|null);
+
+                        /** ControlPlane local */
+                        local?: (google.cloud.edgecontainer.v1.Cluster.ControlPlane.ILocal|null);
+                    }
+
+                    /** Represents a ControlPlane. */
+                    class ControlPlane implements IControlPlane {
+
+                        /**
+                         * Constructs a new ControlPlane.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.edgecontainer.v1.Cluster.IControlPlane);
+
+                        /** ControlPlane remote. */
+                        public remote?: (google.cloud.edgecontainer.v1.Cluster.ControlPlane.IRemote|null);
+
+                        /** ControlPlane local. */
+                        public local?: (google.cloud.edgecontainer.v1.Cluster.ControlPlane.ILocal|null);
+
+                        /** ControlPlane config. */
+                        public config?: ("remote"|"local");
+
+                        /**
+                         * Creates a new ControlPlane instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ControlPlane instance
+                         */
+                        public static create(properties?: google.cloud.edgecontainer.v1.Cluster.IControlPlane): google.cloud.edgecontainer.v1.Cluster.ControlPlane;
+
+                        /**
+                         * Encodes the specified ControlPlane message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ControlPlane.verify|verify} messages.
+                         * @param message ControlPlane message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.edgecontainer.v1.Cluster.IControlPlane, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ControlPlane message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ControlPlane.verify|verify} messages.
+                         * @param message ControlPlane message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.edgecontainer.v1.Cluster.IControlPlane, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ControlPlane message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ControlPlane
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.Cluster.ControlPlane;
+
+                        /**
+                         * Decodes a ControlPlane message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ControlPlane
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.Cluster.ControlPlane;
+
+                        /**
+                         * Verifies a ControlPlane message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ControlPlane message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ControlPlane
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.Cluster.ControlPlane;
+
+                        /**
+                         * Creates a plain object from a ControlPlane message. Also converts values to other types if specified.
+                         * @param message ControlPlane
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.edgecontainer.v1.Cluster.ControlPlane, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ControlPlane to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ControlPlane
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ControlPlane {
+
+                        /** Properties of a Remote. */
+                        interface IRemote {
+                        }
+
+                        /** Represents a Remote. */
+                        class Remote implements IRemote {
+
+                            /**
+                             * Constructs a new Remote.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.edgecontainer.v1.Cluster.ControlPlane.IRemote);
+
+                            /**
+                             * Creates a new Remote instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Remote instance
+                             */
+                            public static create(properties?: google.cloud.edgecontainer.v1.Cluster.ControlPlane.IRemote): google.cloud.edgecontainer.v1.Cluster.ControlPlane.Remote;
+
+                            /**
+                             * Encodes the specified Remote message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ControlPlane.Remote.verify|verify} messages.
+                             * @param message Remote message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.edgecontainer.v1.Cluster.ControlPlane.IRemote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Remote message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ControlPlane.Remote.verify|verify} messages.
+                             * @param message Remote message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.edgecontainer.v1.Cluster.ControlPlane.IRemote, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Remote message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Remote
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.Cluster.ControlPlane.Remote;
+
+                            /**
+                             * Decodes a Remote message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Remote
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.Cluster.ControlPlane.Remote;
+
+                            /**
+                             * Verifies a Remote message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Remote message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Remote
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.Cluster.ControlPlane.Remote;
+
+                            /**
+                             * Creates a plain object from a Remote message. Also converts values to other types if specified.
+                             * @param message Remote
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.edgecontainer.v1.Cluster.ControlPlane.Remote, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Remote to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Remote
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Local. */
+                        interface ILocal {
+
+                            /** Local nodeLocation */
+                            nodeLocation?: (string|null);
+
+                            /** Local nodeCount */
+                            nodeCount?: (number|null);
+
+                            /** Local machineFilter */
+                            machineFilter?: (string|null);
+
+                            /** Local sharedDeploymentPolicy */
+                            sharedDeploymentPolicy?: (google.cloud.edgecontainer.v1.Cluster.ControlPlane.SharedDeploymentPolicy|keyof typeof google.cloud.edgecontainer.v1.Cluster.ControlPlane.SharedDeploymentPolicy|null);
+                        }
+
+                        /** Represents a Local. */
+                        class Local implements ILocal {
+
+                            /**
+                             * Constructs a new Local.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.edgecontainer.v1.Cluster.ControlPlane.ILocal);
+
+                            /** Local nodeLocation. */
+                            public nodeLocation: string;
+
+                            /** Local nodeCount. */
+                            public nodeCount: number;
+
+                            /** Local machineFilter. */
+                            public machineFilter: string;
+
+                            /** Local sharedDeploymentPolicy. */
+                            public sharedDeploymentPolicy: (google.cloud.edgecontainer.v1.Cluster.ControlPlane.SharedDeploymentPolicy|keyof typeof google.cloud.edgecontainer.v1.Cluster.ControlPlane.SharedDeploymentPolicy);
+
+                            /**
+                             * Creates a new Local instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Local instance
+                             */
+                            public static create(properties?: google.cloud.edgecontainer.v1.Cluster.ControlPlane.ILocal): google.cloud.edgecontainer.v1.Cluster.ControlPlane.Local;
+
+                            /**
+                             * Encodes the specified Local message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ControlPlane.Local.verify|verify} messages.
+                             * @param message Local message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.edgecontainer.v1.Cluster.ControlPlane.ILocal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Local message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ControlPlane.Local.verify|verify} messages.
+                             * @param message Local message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.edgecontainer.v1.Cluster.ControlPlane.ILocal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Local message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Local
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.Cluster.ControlPlane.Local;
+
+                            /**
+                             * Decodes a Local message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Local
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.Cluster.ControlPlane.Local;
+
+                            /**
+                             * Verifies a Local message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Local message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Local
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.Cluster.ControlPlane.Local;
+
+                            /**
+                             * Creates a plain object from a Local message. Also converts values to other types if specified.
+                             * @param message Local
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.edgecontainer.v1.Cluster.ControlPlane.Local, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Local to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Local
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** SharedDeploymentPolicy enum. */
+                        enum SharedDeploymentPolicy {
+                            SHARED_DEPLOYMENT_POLICY_UNSPECIFIED = 0,
+                            ALLOWED = 1,
+                            DISALLOWED = 2
+                        }
+                    }
+
+                    /** Properties of a SystemAddonsConfig. */
+                    interface ISystemAddonsConfig {
+
+                        /** SystemAddonsConfig ingress */
+                        ingress?: (google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IIngress|null);
+                    }
+
+                    /** Represents a SystemAddonsConfig. */
+                    class SystemAddonsConfig implements ISystemAddonsConfig {
+
+                        /**
+                         * Constructs a new SystemAddonsConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.edgecontainer.v1.Cluster.ISystemAddonsConfig);
+
+                        /** SystemAddonsConfig ingress. */
+                        public ingress?: (google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IIngress|null);
+
+                        /**
+                         * Creates a new SystemAddonsConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SystemAddonsConfig instance
+                         */
+                        public static create(properties?: google.cloud.edgecontainer.v1.Cluster.ISystemAddonsConfig): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig;
+
+                        /**
+                         * Encodes the specified SystemAddonsConfig message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.verify|verify} messages.
+                         * @param message SystemAddonsConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.edgecontainer.v1.Cluster.ISystemAddonsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SystemAddonsConfig message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.verify|verify} messages.
+                         * @param message SystemAddonsConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.edgecontainer.v1.Cluster.ISystemAddonsConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SystemAddonsConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SystemAddonsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig;
+
+                        /**
+                         * Decodes a SystemAddonsConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SystemAddonsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig;
+
+                        /**
+                         * Verifies a SystemAddonsConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SystemAddonsConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SystemAddonsConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig;
+
+                        /**
+                         * Creates a plain object from a SystemAddonsConfig message. Also converts values to other types if specified.
+                         * @param message SystemAddonsConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SystemAddonsConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SystemAddonsConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SystemAddonsConfig {
+
+                        /** Properties of an Ingress. */
+                        interface IIngress {
+
+                            /** Ingress disabled */
+                            disabled?: (boolean|null);
+
+                            /** Ingress ipv4Vip */
+                            ipv4Vip?: (string|null);
+                        }
+
+                        /** Represents an Ingress. */
+                        class Ingress implements IIngress {
+
+                            /**
+                             * Constructs a new Ingress.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IIngress);
+
+                            /** Ingress disabled. */
+                            public disabled: boolean;
+
+                            /** Ingress ipv4Vip. */
+                            public ipv4Vip: string;
+
+                            /**
+                             * Creates a new Ingress instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Ingress instance
+                             */
+                            public static create(properties?: google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IIngress): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress;
+
+                            /**
+                             * Encodes the specified Ingress message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress.verify|verify} messages.
+                             * @param message Ingress message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IIngress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Ingress message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress.verify|verify} messages.
+                             * @param message Ingress message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IIngress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Ingress message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Ingress
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress;
+
+                            /**
+                             * Decodes an Ingress message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Ingress
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress;
+
+                            /**
+                             * Verifies an Ingress message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Ingress message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Ingress
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress;
+
+                            /**
+                             * Creates a plain object from an Ingress message. Also converts values to other types if specified.
+                             * @param message Ingress
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.Ingress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Ingress to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Ingress
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a ControlPlaneEncryption. */
+                    interface IControlPlaneEncryption {
+
+                        /** ControlPlaneEncryption kmsKey */
+                        kmsKey?: (string|null);
+
+                        /** ControlPlaneEncryption kmsKeyActiveVersion */
+                        kmsKeyActiveVersion?: (string|null);
+
+                        /** ControlPlaneEncryption kmsKeyState */
+                        kmsKeyState?: (google.cloud.edgecontainer.v1.KmsKeyState|keyof typeof google.cloud.edgecontainer.v1.KmsKeyState|null);
+
+                        /** ControlPlaneEncryption kmsStatus */
+                        kmsStatus?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents a ControlPlaneEncryption. */
+                    class ControlPlaneEncryption implements IControlPlaneEncryption {
+
+                        /**
+                         * Constructs a new ControlPlaneEncryption.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.edgecontainer.v1.Cluster.IControlPlaneEncryption);
+
+                        /** ControlPlaneEncryption kmsKey. */
+                        public kmsKey: string;
+
+                        /** ControlPlaneEncryption kmsKeyActiveVersion. */
+                        public kmsKeyActiveVersion: string;
+
+                        /** ControlPlaneEncryption kmsKeyState. */
+                        public kmsKeyState: (google.cloud.edgecontainer.v1.KmsKeyState|keyof typeof google.cloud.edgecontainer.v1.KmsKeyState);
+
+                        /** ControlPlaneEncryption kmsStatus. */
+                        public kmsStatus?: (google.rpc.IStatus|null);
+
+                        /**
+                         * Creates a new ControlPlaneEncryption instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ControlPlaneEncryption instance
+                         */
+                        public static create(properties?: google.cloud.edgecontainer.v1.Cluster.IControlPlaneEncryption): google.cloud.edgecontainer.v1.Cluster.ControlPlaneEncryption;
+
+                        /**
+                         * Encodes the specified ControlPlaneEncryption message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ControlPlaneEncryption.verify|verify} messages.
+                         * @param message ControlPlaneEncryption message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.edgecontainer.v1.Cluster.IControlPlaneEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ControlPlaneEncryption message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ControlPlaneEncryption.verify|verify} messages.
+                         * @param message ControlPlaneEncryption message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.edgecontainer.v1.Cluster.IControlPlaneEncryption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ControlPlaneEncryption message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ControlPlaneEncryption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.Cluster.ControlPlaneEncryption;
+
+                        /**
+                         * Decodes a ControlPlaneEncryption message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ControlPlaneEncryption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.Cluster.ControlPlaneEncryption;
+
+                        /**
+                         * Verifies a ControlPlaneEncryption message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ControlPlaneEncryption message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ControlPlaneEncryption
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.Cluster.ControlPlaneEncryption;
+
+                        /**
+                         * Creates a plain object from a ControlPlaneEncryption message. Also converts values to other types if specified.
+                         * @param message ControlPlaneEncryption
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.edgecontainer.v1.Cluster.ControlPlaneEncryption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ControlPlaneEncryption to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ControlPlaneEncryption
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MaintenanceEvent. */
+                    interface IMaintenanceEvent {
+
+                        /** MaintenanceEvent uuid */
+                        uuid?: (string|null);
+
+                        /** MaintenanceEvent targetVersion */
+                        targetVersion?: (string|null);
+
+                        /** MaintenanceEvent operation */
+                        operation?: (string|null);
+
+                        /** MaintenanceEvent type */
+                        type?: (google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.Type|keyof typeof google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.Type|null);
+
+                        /** MaintenanceEvent schedule */
+                        schedule?: (google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.Schedule|keyof typeof google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.Schedule|null);
+
+                        /** MaintenanceEvent state */
+                        state?: (google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.State|keyof typeof google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.State|null);
+
+                        /** MaintenanceEvent createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceEvent startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceEvent endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceEvent updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a MaintenanceEvent. */
+                    class MaintenanceEvent implements IMaintenanceEvent {
+
+                        /**
+                         * Constructs a new MaintenanceEvent.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.edgecontainer.v1.Cluster.IMaintenanceEvent);
+
+                        /** MaintenanceEvent uuid. */
+                        public uuid: string;
+
+                        /** MaintenanceEvent targetVersion. */
+                        public targetVersion: string;
+
+                        /** MaintenanceEvent operation. */
+                        public operation: string;
+
+                        /** MaintenanceEvent type. */
+                        public type: (google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.Type|keyof typeof google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.Type);
+
+                        /** MaintenanceEvent schedule. */
+                        public schedule: (google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.Schedule|keyof typeof google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.Schedule);
+
+                        /** MaintenanceEvent state. */
+                        public state: (google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.State|keyof typeof google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.State);
+
+                        /** MaintenanceEvent createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceEvent startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceEvent endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MaintenanceEvent updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new MaintenanceEvent instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MaintenanceEvent instance
+                         */
+                        public static create(properties?: google.cloud.edgecontainer.v1.Cluster.IMaintenanceEvent): google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent;
+
+                        /**
+                         * Encodes the specified MaintenanceEvent message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.verify|verify} messages.
+                         * @param message MaintenanceEvent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.edgecontainer.v1.Cluster.IMaintenanceEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MaintenanceEvent message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent.verify|verify} messages.
+                         * @param message MaintenanceEvent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.edgecontainer.v1.Cluster.IMaintenanceEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MaintenanceEvent message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MaintenanceEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent;
+
+                        /**
+                         * Decodes a MaintenanceEvent message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MaintenanceEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent;
+
+                        /**
+                         * Verifies a MaintenanceEvent message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MaintenanceEvent message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MaintenanceEvent
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent;
+
+                        /**
+                         * Creates a plain object from a MaintenanceEvent message. Also converts values to other types if specified.
+                         * @param message MaintenanceEvent
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.edgecontainer.v1.Cluster.MaintenanceEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MaintenanceEvent to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MaintenanceEvent
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MaintenanceEvent {
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            USER_INITIATED_UPGRADE = 1,
+                            GOOGLE_DRIVEN_UPGRADE = 2
+                        }
+
+                        /** Schedule enum. */
+                        enum Schedule {
+                            SCHEDULE_UNSPECIFIED = 0,
+                            IMMEDIATELY = 1
+                        }
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            RECONCILING = 1,
+                            SUCCEEDED = 2,
+                            FAILED = 3
+                        }
+                    }
+
+                    /** Properties of a SurvivabilityConfig. */
+                    interface ISurvivabilityConfig {
+
+                        /** SurvivabilityConfig offlineRebootTtl */
+                        offlineRebootTtl?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a SurvivabilityConfig. */
+                    class SurvivabilityConfig implements ISurvivabilityConfig {
+
+                        /**
+                         * Constructs a new SurvivabilityConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.edgecontainer.v1.Cluster.ISurvivabilityConfig);
+
+                        /** SurvivabilityConfig offlineRebootTtl. */
+                        public offlineRebootTtl?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new SurvivabilityConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SurvivabilityConfig instance
+                         */
+                        public static create(properties?: google.cloud.edgecontainer.v1.Cluster.ISurvivabilityConfig): google.cloud.edgecontainer.v1.Cluster.SurvivabilityConfig;
+
+                        /**
+                         * Encodes the specified SurvivabilityConfig message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.SurvivabilityConfig.verify|verify} messages.
+                         * @param message SurvivabilityConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.edgecontainer.v1.Cluster.ISurvivabilityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SurvivabilityConfig message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.SurvivabilityConfig.verify|verify} messages.
+                         * @param message SurvivabilityConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.edgecontainer.v1.Cluster.ISurvivabilityConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SurvivabilityConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SurvivabilityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.Cluster.SurvivabilityConfig;
+
+                        /**
+                         * Decodes a SurvivabilityConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SurvivabilityConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.Cluster.SurvivabilityConfig;
+
+                        /**
+                         * Verifies a SurvivabilityConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SurvivabilityConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SurvivabilityConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.Cluster.SurvivabilityConfig;
+
+                        /**
+                         * Creates a plain object from a SurvivabilityConfig message. Also converts values to other types if specified.
+                         * @param message SurvivabilityConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.edgecontainer.v1.Cluster.SurvivabilityConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SurvivabilityConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SurvivabilityConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Status enum. */
+                    enum Status {
+                        STATUS_UNSPECIFIED = 0,
+                        PROVISIONING = 1,
+                        RUNNING = 2,
+                        DELETING = 3,
+                        ERROR = 4,
+                        RECONCILING = 5
+                    }
+
+                    /** ReleaseChannel enum. */
+                    enum ReleaseChannel {
+                        RELEASE_CHANNEL_UNSPECIFIED = 0,
+                        NONE = 1,
+                        REGULAR = 2
+                    }
                 }
 
                 /** Properties of a ClusterNetworking. */
@@ -616,6 +1626,12 @@ export namespace google {
 
                     /** NodePool localDiskEncryption */
                     localDiskEncryption?: (google.cloud.edgecontainer.v1.NodePool.ILocalDiskEncryption|null);
+
+                    /** NodePool nodeVersion */
+                    nodeVersion?: (string|null);
+
+                    /** NodePool nodeConfig */
+                    nodeConfig?: (google.cloud.edgecontainer.v1.NodePool.INodeConfig|null);
                 }
 
                 /** Represents a NodePool. */
@@ -650,6 +1666,12 @@ export namespace google {
 
                     /** NodePool localDiskEncryption. */
                     public localDiskEncryption?: (google.cloud.edgecontainer.v1.NodePool.ILocalDiskEncryption|null);
+
+                    /** NodePool nodeVersion. */
+                    public nodeVersion: string;
+
+                    /** NodePool nodeConfig. */
+                    public nodeConfig?: (google.cloud.edgecontainer.v1.NodePool.INodeConfig|null);
 
                     /**
                      * Creates a new NodePool instance using the specified properties.
@@ -845,6 +1867,103 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a NodeConfig. */
+                    interface INodeConfig {
+
+                        /** NodeConfig labels */
+                        labels?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a NodeConfig. */
+                    class NodeConfig implements INodeConfig {
+
+                        /**
+                         * Constructs a new NodeConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.edgecontainer.v1.NodePool.INodeConfig);
+
+                        /** NodeConfig labels. */
+                        public labels: { [k: string]: string };
+
+                        /**
+                         * Creates a new NodeConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NodeConfig instance
+                         */
+                        public static create(properties?: google.cloud.edgecontainer.v1.NodePool.INodeConfig): google.cloud.edgecontainer.v1.NodePool.NodeConfig;
+
+                        /**
+                         * Encodes the specified NodeConfig message. Does not implicitly {@link google.cloud.edgecontainer.v1.NodePool.NodeConfig.verify|verify} messages.
+                         * @param message NodeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.edgecontainer.v1.NodePool.INodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NodeConfig message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.NodePool.NodeConfig.verify|verify} messages.
+                         * @param message NodeConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.edgecontainer.v1.NodePool.INodeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NodeConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NodeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.NodePool.NodeConfig;
+
+                        /**
+                         * Decodes a NodeConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NodeConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.NodePool.NodeConfig;
+
+                        /**
+                         * Verifies a NodeConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NodeConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NodeConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.NodePool.NodeConfig;
+
+                        /**
+                         * Creates a plain object from a NodeConfig message. Also converts values to other types if specified.
+                         * @param message NodeConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.edgecontainer.v1.NodePool.NodeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NodeConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NodeConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a Machine. */
@@ -867,6 +1986,9 @@ export namespace google {
 
                     /** Machine zone */
                     zone?: (string|null);
+
+                    /** Machine version */
+                    version?: (string|null);
 
                     /** Machine disabled */
                     disabled?: (boolean|null);
@@ -898,6 +2020,9 @@ export namespace google {
 
                     /** Machine zone. */
                     public zone: string;
+
+                    /** Machine version. */
+                    public version: string;
 
                     /** Machine disabled. */
                     public disabled: boolean;
@@ -1013,6 +2138,9 @@ export namespace google {
                     /** VpnConnection enableHighAvailability */
                     enableHighAvailability?: (boolean|null);
 
+                    /** VpnConnection router */
+                    router?: (string|null);
+
                     /** VpnConnection details */
                     details?: (google.cloud.edgecontainer.v1.VpnConnection.IDetails|null);
                 }
@@ -1055,6 +2183,9 @@ export namespace google {
 
                     /** VpnConnection enableHighAvailability. */
                     public enableHighAvailability: boolean;
+
+                    /** VpnConnection router. */
+                    public router: string;
 
                     /** VpnConnection details. */
                     public details?: (google.cloud.edgecontainer.v1.VpnConnection.IDetails|null);
@@ -1672,6 +2803,9 @@ export namespace google {
 
                     /** ZoneMetadata quota */
                     quota?: (google.cloud.edgecontainer.v1.IQuota[]|null);
+
+                    /** ZoneMetadata rackTypes */
+                    rackTypes?: ({ [k: string]: google.cloud.edgecontainer.v1.ZoneMetadata.RackType }|null);
                 }
 
                 /** Represents a ZoneMetadata. */
@@ -1685,6 +2819,9 @@ export namespace google {
 
                     /** ZoneMetadata quota. */
                     public quota: google.cloud.edgecontainer.v1.IQuota[];
+
+                    /** ZoneMetadata rackTypes. */
+                    public rackTypes: { [k: string]: google.cloud.edgecontainer.v1.ZoneMetadata.RackType };
 
                     /**
                      * Creates a new ZoneMetadata instance using the specified properties.
@@ -1762,6 +2899,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ZoneMetadata {
+
+                    /** RackType enum. */
+                    enum RackType {
+                        RACK_TYPE_UNSPECIFIED = 0,
+                        BASE = 1,
+                        EXPANSION = 2
+                    }
                 }
 
                 /** Properties of a Quota. */
@@ -2273,6 +3420,309 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ServerConfig. */
+                interface IServerConfig {
+
+                    /** ServerConfig channels */
+                    channels?: ({ [k: string]: google.cloud.edgecontainer.v1.IChannelConfig }|null);
+
+                    /** ServerConfig versions */
+                    versions?: (google.cloud.edgecontainer.v1.IVersion[]|null);
+
+                    /** ServerConfig defaultVersion */
+                    defaultVersion?: (string|null);
+                }
+
+                /** Represents a ServerConfig. */
+                class ServerConfig implements IServerConfig {
+
+                    /**
+                     * Constructs a new ServerConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.edgecontainer.v1.IServerConfig);
+
+                    /** ServerConfig channels. */
+                    public channels: { [k: string]: google.cloud.edgecontainer.v1.IChannelConfig };
+
+                    /** ServerConfig versions. */
+                    public versions: google.cloud.edgecontainer.v1.IVersion[];
+
+                    /** ServerConfig defaultVersion. */
+                    public defaultVersion: string;
+
+                    /**
+                     * Creates a new ServerConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServerConfig instance
+                     */
+                    public static create(properties?: google.cloud.edgecontainer.v1.IServerConfig): google.cloud.edgecontainer.v1.ServerConfig;
+
+                    /**
+                     * Encodes the specified ServerConfig message. Does not implicitly {@link google.cloud.edgecontainer.v1.ServerConfig.verify|verify} messages.
+                     * @param message ServerConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.edgecontainer.v1.IServerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServerConfig message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.ServerConfig.verify|verify} messages.
+                     * @param message ServerConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.edgecontainer.v1.IServerConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServerConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServerConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.ServerConfig;
+
+                    /**
+                     * Decodes a ServerConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServerConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.ServerConfig;
+
+                    /**
+                     * Verifies a ServerConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServerConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServerConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.ServerConfig;
+
+                    /**
+                     * Creates a plain object from a ServerConfig message. Also converts values to other types if specified.
+                     * @param message ServerConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.edgecontainer.v1.ServerConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServerConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServerConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ChannelConfig. */
+                interface IChannelConfig {
+
+                    /** ChannelConfig defaultVersion */
+                    defaultVersion?: (string|null);
+                }
+
+                /** Represents a ChannelConfig. */
+                class ChannelConfig implements IChannelConfig {
+
+                    /**
+                     * Constructs a new ChannelConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.edgecontainer.v1.IChannelConfig);
+
+                    /** ChannelConfig defaultVersion. */
+                    public defaultVersion: string;
+
+                    /**
+                     * Creates a new ChannelConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChannelConfig instance
+                     */
+                    public static create(properties?: google.cloud.edgecontainer.v1.IChannelConfig): google.cloud.edgecontainer.v1.ChannelConfig;
+
+                    /**
+                     * Encodes the specified ChannelConfig message. Does not implicitly {@link google.cloud.edgecontainer.v1.ChannelConfig.verify|verify} messages.
+                     * @param message ChannelConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.edgecontainer.v1.IChannelConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChannelConfig message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.ChannelConfig.verify|verify} messages.
+                     * @param message ChannelConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.edgecontainer.v1.IChannelConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChannelConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChannelConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.ChannelConfig;
+
+                    /**
+                     * Decodes a ChannelConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChannelConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.ChannelConfig;
+
+                    /**
+                     * Verifies a ChannelConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChannelConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChannelConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.ChannelConfig;
+
+                    /**
+                     * Creates a plain object from a ChannelConfig message. Also converts values to other types if specified.
+                     * @param message ChannelConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.edgecontainer.v1.ChannelConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChannelConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ChannelConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Version. */
+                interface IVersion {
+
+                    /** Version name */
+                    name?: (string|null);
+                }
+
+                /** Represents a Version. */
+                class Version implements IVersion {
+
+                    /**
+                     * Constructs a new Version.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.edgecontainer.v1.IVersion);
+
+                    /** Version name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new Version instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Version instance
+                     */
+                    public static create(properties?: google.cloud.edgecontainer.v1.IVersion): google.cloud.edgecontainer.v1.Version;
+
+                    /**
+                     * Encodes the specified Version message. Does not implicitly {@link google.cloud.edgecontainer.v1.Version.verify|verify} messages.
+                     * @param message Version message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.edgecontainer.v1.IVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Version message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Version.verify|verify} messages.
+                     * @param message Version message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.edgecontainer.v1.IVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Version message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Version
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.Version;
+
+                    /**
+                     * Decodes a Version message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Version
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.Version;
+
+                    /**
+                     * Verifies a Version message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Version message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Version
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.Version;
+
+                    /**
+                     * Creates a plain object from a Version message. Also converts values to other types if specified.
+                     * @param message Version
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.edgecontainer.v1.Version, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Version to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Version
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents an EdgeContainer */
                 class EdgeContainer extends $protobuf.rpc.Service {
 
@@ -2350,6 +3800,20 @@ export namespace google {
                     public updateCluster(request: google.cloud.edgecontainer.v1.IUpdateClusterRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpgradeCluster.
+                     * @param request UpgradeClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public upgradeCluster(request: google.cloud.edgecontainer.v1.IUpgradeClusterRequest, callback: google.cloud.edgecontainer.v1.EdgeContainer.UpgradeClusterCallback): void;
+
+                    /**
+                     * Calls UpgradeCluster.
+                     * @param request UpgradeClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public upgradeCluster(request: google.cloud.edgecontainer.v1.IUpgradeClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteCluster.
                      * @param request DeleteClusterRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -2376,6 +3840,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public generateAccessToken(request: google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest): Promise<google.cloud.edgecontainer.v1.GenerateAccessTokenResponse>;
+
+                    /**
+                     * Calls GenerateOfflineCredential.
+                     * @param request GenerateOfflineCredentialRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateOfflineCredentialResponse
+                     */
+                    public generateOfflineCredential(request: google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest, callback: google.cloud.edgecontainer.v1.EdgeContainer.GenerateOfflineCredentialCallback): void;
+
+                    /**
+                     * Calls GenerateOfflineCredential.
+                     * @param request GenerateOfflineCredentialRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateOfflineCredential(request: google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest): Promise<google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse>;
 
                     /**
                      * Calls ListNodePools.
@@ -2530,6 +4008,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteVpnConnection(request: google.cloud.edgecontainer.v1.IDeleteVpnConnectionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetServerConfig.
+                     * @param request GetServerConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ServerConfig
+                     */
+                    public getServerConfig(request: google.cloud.edgecontainer.v1.IGetServerConfigRequest, callback: google.cloud.edgecontainer.v1.EdgeContainer.GetServerConfigCallback): void;
+
+                    /**
+                     * Calls GetServerConfig.
+                     * @param request GetServerConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getServerConfig(request: google.cloud.edgecontainer.v1.IGetServerConfigRequest): Promise<google.cloud.edgecontainer.v1.ServerConfig>;
                 }
 
                 namespace EdgeContainer {
@@ -2563,6 +4055,13 @@ export namespace google {
                     type UpdateClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.edgecontainer.v1.EdgeContainer|upgradeCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpgradeClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.edgecontainer.v1.EdgeContainer|deleteCluster}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -2575,6 +4074,13 @@ export namespace google {
                      * @param [response] GenerateAccessTokenResponse
                      */
                     type GenerateAccessTokenCallback = (error: (Error|null), response?: google.cloud.edgecontainer.v1.GenerateAccessTokenResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.edgecontainer.v1.EdgeContainer|generateOfflineCredential}.
+                     * @param error Error, if any
+                     * @param [response] GenerateOfflineCredentialResponse
+                     */
+                    type GenerateOfflineCredentialCallback = (error: (Error|null), response?: google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.edgecontainer.v1.EdgeContainer|listNodePools}.
@@ -2652,6 +4158,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteVpnConnectionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.edgecontainer.v1.EdgeContainer|getServerConfig}.
+                     * @param error Error, if any
+                     * @param [response] ServerConfig
+                     */
+                    type GetServerConfigCallback = (error: (Error|null), response?: google.cloud.edgecontainer.v1.ServerConfig) => void;
                 }
 
                 /** Properties of an OperationMetadata. */
@@ -2677,6 +4190,9 @@ export namespace google {
 
                     /** OperationMetadata apiVersion */
                     apiVersion?: (string|null);
+
+                    /** OperationMetadata warnings */
+                    warnings?: (string[]|null);
                 }
 
                 /** Represents an OperationMetadata. */
@@ -2708,6 +4224,9 @@ export namespace google {
 
                     /** OperationMetadata apiVersion. */
                     public apiVersion: string;
+
+                    /** OperationMetadata warnings. */
+                    public warnings: string[];
 
                     /**
                      * Creates a new OperationMetadata instance using the specified properties.
@@ -3338,6 +4857,130 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpgradeClusterRequest. */
+                interface IUpgradeClusterRequest {
+
+                    /** UpgradeClusterRequest name */
+                    name?: (string|null);
+
+                    /** UpgradeClusterRequest targetVersion */
+                    targetVersion?: (string|null);
+
+                    /** UpgradeClusterRequest schedule */
+                    schedule?: (google.cloud.edgecontainer.v1.UpgradeClusterRequest.Schedule|keyof typeof google.cloud.edgecontainer.v1.UpgradeClusterRequest.Schedule|null);
+
+                    /** UpgradeClusterRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpgradeClusterRequest. */
+                class UpgradeClusterRequest implements IUpgradeClusterRequest {
+
+                    /**
+                     * Constructs a new UpgradeClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.edgecontainer.v1.IUpgradeClusterRequest);
+
+                    /** UpgradeClusterRequest name. */
+                    public name: string;
+
+                    /** UpgradeClusterRequest targetVersion. */
+                    public targetVersion: string;
+
+                    /** UpgradeClusterRequest schedule. */
+                    public schedule: (google.cloud.edgecontainer.v1.UpgradeClusterRequest.Schedule|keyof typeof google.cloud.edgecontainer.v1.UpgradeClusterRequest.Schedule);
+
+                    /** UpgradeClusterRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpgradeClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpgradeClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.edgecontainer.v1.IUpgradeClusterRequest): google.cloud.edgecontainer.v1.UpgradeClusterRequest;
+
+                    /**
+                     * Encodes the specified UpgradeClusterRequest message. Does not implicitly {@link google.cloud.edgecontainer.v1.UpgradeClusterRequest.verify|verify} messages.
+                     * @param message UpgradeClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.edgecontainer.v1.IUpgradeClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpgradeClusterRequest message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.UpgradeClusterRequest.verify|verify} messages.
+                     * @param message UpgradeClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.edgecontainer.v1.IUpgradeClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpgradeClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpgradeClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.UpgradeClusterRequest;
+
+                    /**
+                     * Decodes an UpgradeClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpgradeClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.UpgradeClusterRequest;
+
+                    /**
+                     * Verifies an UpgradeClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpgradeClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpgradeClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.UpgradeClusterRequest;
+
+                    /**
+                     * Creates a plain object from an UpgradeClusterRequest message. Also converts values to other types if specified.
+                     * @param message UpgradeClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.edgecontainer.v1.UpgradeClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpgradeClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpgradeClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UpgradeClusterRequest {
+
+                    /** Schedule enum. */
+                    enum Schedule {
+                        SCHEDULE_UNSPECIFIED = 0,
+                        IMMEDIATELY = 1
+                    }
+                }
+
                 /** Properties of a DeleteClusterRequest. */
                 interface IDeleteClusterRequest {
 
@@ -3635,6 +5278,218 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GenerateAccessTokenResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenerateOfflineCredentialRequest. */
+                interface IGenerateOfflineCredentialRequest {
+
+                    /** GenerateOfflineCredentialRequest cluster */
+                    cluster?: (string|null);
+                }
+
+                /** Represents a GenerateOfflineCredentialRequest. */
+                class GenerateOfflineCredentialRequest implements IGenerateOfflineCredentialRequest {
+
+                    /**
+                     * Constructs a new GenerateOfflineCredentialRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest);
+
+                    /** GenerateOfflineCredentialRequest cluster. */
+                    public cluster: string;
+
+                    /**
+                     * Creates a new GenerateOfflineCredentialRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateOfflineCredentialRequest instance
+                     */
+                    public static create(properties?: google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest): google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest;
+
+                    /**
+                     * Encodes the specified GenerateOfflineCredentialRequest message. Does not implicitly {@link google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest.verify|verify} messages.
+                     * @param message GenerateOfflineCredentialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateOfflineCredentialRequest message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest.verify|verify} messages.
+                     * @param message GenerateOfflineCredentialRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateOfflineCredentialRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateOfflineCredentialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest;
+
+                    /**
+                     * Decodes a GenerateOfflineCredentialRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateOfflineCredentialRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest;
+
+                    /**
+                     * Verifies a GenerateOfflineCredentialRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateOfflineCredentialRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateOfflineCredentialRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateOfflineCredentialRequest message. Also converts values to other types if specified.
+                     * @param message GenerateOfflineCredentialRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateOfflineCredentialRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateOfflineCredentialRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenerateOfflineCredentialResponse. */
+                interface IGenerateOfflineCredentialResponse {
+
+                    /** GenerateOfflineCredentialResponse clientCertificate */
+                    clientCertificate?: (string|null);
+
+                    /** GenerateOfflineCredentialResponse clientKey */
+                    clientKey?: (string|null);
+
+                    /** GenerateOfflineCredentialResponse userId */
+                    userId?: (string|null);
+
+                    /** GenerateOfflineCredentialResponse expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a GenerateOfflineCredentialResponse. */
+                class GenerateOfflineCredentialResponse implements IGenerateOfflineCredentialResponse {
+
+                    /**
+                     * Constructs a new GenerateOfflineCredentialResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse);
+
+                    /** GenerateOfflineCredentialResponse clientCertificate. */
+                    public clientCertificate: string;
+
+                    /** GenerateOfflineCredentialResponse clientKey. */
+                    public clientKey: string;
+
+                    /** GenerateOfflineCredentialResponse userId. */
+                    public userId: string;
+
+                    /** GenerateOfflineCredentialResponse expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new GenerateOfflineCredentialResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateOfflineCredentialResponse instance
+                     */
+                    public static create(properties?: google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse): google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse;
+
+                    /**
+                     * Encodes the specified GenerateOfflineCredentialResponse message. Does not implicitly {@link google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse.verify|verify} messages.
+                     * @param message GenerateOfflineCredentialResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateOfflineCredentialResponse message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse.verify|verify} messages.
+                     * @param message GenerateOfflineCredentialResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateOfflineCredentialResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateOfflineCredentialResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse;
+
+                    /**
+                     * Decodes a GenerateOfflineCredentialResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateOfflineCredentialResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse;
+
+                    /**
+                     * Verifies a GenerateOfflineCredentialResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateOfflineCredentialResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateOfflineCredentialResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateOfflineCredentialResponse message. Also converts values to other types if specified.
+                     * @param message GenerateOfflineCredentialResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateOfflineCredentialResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateOfflineCredentialResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -5166,6 +7021,103 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Properties of a GetServerConfigRequest. */
+                interface IGetServerConfigRequest {
+
+                    /** GetServerConfigRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetServerConfigRequest. */
+                class GetServerConfigRequest implements IGetServerConfigRequest {
+
+                    /**
+                     * Constructs a new GetServerConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.edgecontainer.v1.IGetServerConfigRequest);
+
+                    /** GetServerConfigRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetServerConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetServerConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.edgecontainer.v1.IGetServerConfigRequest): google.cloud.edgecontainer.v1.GetServerConfigRequest;
+
+                    /**
+                     * Encodes the specified GetServerConfigRequest message. Does not implicitly {@link google.cloud.edgecontainer.v1.GetServerConfigRequest.verify|verify} messages.
+                     * @param message GetServerConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.edgecontainer.v1.IGetServerConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetServerConfigRequest message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.GetServerConfigRequest.verify|verify} messages.
+                     * @param message GetServerConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.edgecontainer.v1.IGetServerConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetServerConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetServerConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.GetServerConfigRequest;
+
+                    /**
+                     * Decodes a GetServerConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetServerConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.GetServerConfigRequest;
+
+                    /**
+                     * Verifies a GetServerConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetServerConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetServerConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.GetServerConfigRequest;
+
+                    /**
+                     * Creates a plain object from a GetServerConfigRequest message. Also converts values to other types if specified.
+                     * @param message GetServerConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.edgecontainer.v1.GetServerConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetServerConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetServerConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
         }
     }
@@ -5182,7 +7134,8 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -6086,6 +8039,9 @@ export namespace google {
 
             /** Publishing librarySettings */
             librarySettings?: (google.api.IClientLibrarySettings[]|null);
+
+            /** Publishing protoReferenceDocumentationUri */
+            protoReferenceDocumentationUri?: (string|null);
         }
 
         /** Represents a Publishing. */
@@ -6123,6 +8079,9 @@ export namespace google {
 
             /** Publishing librarySettings. */
             public librarySettings: google.api.IClientLibrarySettings[];
+
+            /** Publishing protoReferenceDocumentationUri. */
+            public protoReferenceDocumentationUri: string;
 
             /**
              * Creates a new Publishing instance using the specified properties.
@@ -6704,6 +8663,21 @@ export namespace google {
 
             /** DotnetSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings renamedResources */
+            renamedResources?: ({ [k: string]: string }|null);
+
+            /** DotnetSettings ignoredResources */
+            ignoredResources?: (string[]|null);
+
+            /** DotnetSettings forcedNamespaceAliases */
+            forcedNamespaceAliases?: (string[]|null);
+
+            /** DotnetSettings handwrittenSignatures */
+            handwrittenSignatures?: (string[]|null);
         }
 
         /** Represents a DotnetSettings. */
@@ -6717,6 +8691,21 @@ export namespace google {
 
             /** DotnetSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** DotnetSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
+
+            /** DotnetSettings renamedResources. */
+            public renamedResources: { [k: string]: string };
+
+            /** DotnetSettings ignoredResources. */
+            public ignoredResources: string[];
+
+            /** DotnetSettings forcedNamespaceAliases. */
+            public forcedNamespaceAliases: string[];
+
+            /** DotnetSettings handwrittenSignatures. */
+            public handwrittenSignatures: string[];
 
             /**
              * Creates a new DotnetSettings instance using the specified properties.
@@ -6998,6 +8987,9 @@ export namespace google {
 
             /** MethodSettings longRunning */
             longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields */
+            autoPopulatedFields?: (string[]|null);
         }
 
         /** Represents a MethodSettings. */
@@ -7014,6 +9006,9 @@ export namespace google {
 
             /** MethodSettings longRunning. */
             public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /** MethodSettings autoPopulatedFields. */
+            public autoPopulatedFields: string[];
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -7217,7 +9212,10 @@ export namespace google {
             CLOUD = 1,
             ADS = 2,
             PHOTOS = 3,
-            STREET_VIEW = 4
+            STREET_VIEW = 4,
+            SHOPPING = 5,
+            GEO = 6,
+            GENERATIVE_AI = 7
         }
 
         /** ClientLibraryDestination enum. */
@@ -7340,6 +9338,21 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Edition enum. */
+        enum Edition {
+            EDITION_UNKNOWN = 0,
+            EDITION_PROTO2 = 998,
+            EDITION_PROTO3 = 999,
+            EDITION_2023 = 1000,
+            EDITION_2024 = 1001,
+            EDITION_1_TEST_ONLY = 1,
+            EDITION_2_TEST_ONLY = 2,
+            EDITION_99997_TEST_ONLY = 99997,
+            EDITION_99998_TEST_ONLY = 99998,
+            EDITION_99999_TEST_ONLY = 99999,
+            EDITION_MAX = 2147483647
+        }
+
         /** Properties of a FileDescriptorProto. */
         interface IFileDescriptorProto {
 
@@ -7380,7 +9393,7 @@ export namespace google {
             syntax?: (string|null);
 
             /** FileDescriptorProto edition */
-            edition?: (string|null);
+            edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
         }
 
         /** Represents a FileDescriptorProto. */
@@ -7429,7 +9442,7 @@ export namespace google {
             public syntax: string;
 
             /** FileDescriptorProto edition. */
-            public edition: string;
+            public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
             /**
              * Creates a new FileDescriptorProto instance using the specified properties.
@@ -7880,6 +9893,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** ExtensionRangeOptions declaration */
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+
+            /** ExtensionRangeOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification */
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState|null);
         }
 
         /** Represents an ExtensionRangeOptions. */
@@ -7893,6 +9915,15 @@ export namespace google {
 
             /** ExtensionRangeOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+
+            /** ExtensionRangeOptions declaration. */
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+
+            /** ExtensionRangeOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** ExtensionRangeOptions verification. */
+            public verification: (google.protobuf.ExtensionRangeOptions.VerificationState|keyof typeof google.protobuf.ExtensionRangeOptions.VerificationState);
 
             /**
              * Creates a new ExtensionRangeOptions instance using the specified properties.
@@ -7970,6 +10001,136 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            /** Properties of a Declaration. */
+            interface IDeclaration {
+
+                /** Declaration number */
+                number?: (number|null);
+
+                /** Declaration fullName */
+                fullName?: (string|null);
+
+                /** Declaration type */
+                type?: (string|null);
+
+                /** Declaration reserved */
+                reserved?: (boolean|null);
+
+                /** Declaration repeated */
+                repeated?: (boolean|null);
+            }
+
+            /** Represents a Declaration. */
+            class Declaration implements IDeclaration {
+
+                /**
+                 * Constructs a new Declaration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+
+                /** Declaration number. */
+                public number: number;
+
+                /** Declaration fullName. */
+                public fullName: string;
+
+                /** Declaration type. */
+                public type: string;
+
+                /** Declaration reserved. */
+                public reserved: boolean;
+
+                /** Declaration repeated. */
+                public repeated: boolean;
+
+                /**
+                 * Creates a new Declaration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Declaration instance
+                 */
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Encodes the specified Declaration message. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Declaration message, length delimited. Does not implicitly {@link google.protobuf.ExtensionRangeOptions.Declaration.verify|verify} messages.
+                 * @param message Declaration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Decodes a Declaration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Declaration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Verifies a Declaration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Declaration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Declaration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+
+                /**
+                 * Creates a plain object from a Declaration message. Also converts values to other types if specified.
+                 * @param message Declaration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Declaration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Declaration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** VerificationState enum. */
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
+            }
         }
 
         /** Properties of a FieldDescriptorProto. */
@@ -8156,8 +10317,8 @@ export namespace google {
             /** Label enum. */
             enum Label {
                 LABEL_OPTIONAL = 1,
-                LABEL_REQUIRED = 2,
-                LABEL_REPEATED = 3
+                LABEL_REPEATED = 3,
+                LABEL_REQUIRED = 2
             }
         }
 
@@ -8869,9 +11030,6 @@ export namespace google {
             /** FileOptions pyGenericServices */
             pyGenericServices?: (boolean|null);
 
-            /** FileOptions phpGenericServices */
-            phpGenericServices?: (boolean|null);
-
             /** FileOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -8898,6 +11056,9 @@ export namespace google {
 
             /** FileOptions rubyPackage */
             rubyPackage?: (string|null);
+
+            /** FileOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -8945,9 +11106,6 @@ export namespace google {
             /** FileOptions pyGenericServices. */
             public pyGenericServices: boolean;
 
-            /** FileOptions phpGenericServices. */
-            public phpGenericServices: boolean;
-
             /** FileOptions deprecated. */
             public deprecated: boolean;
 
@@ -8974,6 +11132,9 @@ export namespace google {
 
             /** FileOptions rubyPackage. */
             public rubyPackage: string;
+
+            /** FileOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FileOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9084,6 +11245,9 @@ export namespace google {
             /** MessageOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** MessageOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -9114,6 +11278,9 @@ export namespace google {
 
             /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** MessageOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9226,8 +11393,14 @@ export namespace google {
             /** FieldOptions retention */
             retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
 
-            /** FieldOptions target */
-            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+            /** FieldOptions targets */
+            targets?: (google.protobuf.FieldOptions.OptionTargetType[]|null);
+
+            /** FieldOptions editionDefaults */
+            editionDefaults?: (google.protobuf.FieldOptions.IEditionDefault[]|null);
+
+            /** FieldOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -9275,8 +11448,14 @@ export namespace google {
             /** FieldOptions retention. */
             public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
 
-            /** FieldOptions target. */
-            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
+            /** FieldOptions targets. */
+            public targets: google.protobuf.FieldOptions.OptionTargetType[];
+
+            /** FieldOptions editionDefaults. */
+            public editionDefaults: google.protobuf.FieldOptions.IEditionDefault[];
+
+            /** FieldOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9395,10 +11574,116 @@ export namespace google {
                 TARGET_TYPE_SERVICE = 8,
                 TARGET_TYPE_METHOD = 9
             }
+
+            /** Properties of an EditionDefault. */
+            interface IEditionDefault {
+
+                /** EditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** EditionDefault value */
+                value?: (string|null);
+            }
+
+            /** Represents an EditionDefault. */
+            class EditionDefault implements IEditionDefault {
+
+                /**
+                 * Constructs a new EditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IEditionDefault);
+
+                /** EditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** EditionDefault value. */
+                public value: string;
+
+                /**
+                 * Creates a new EditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns EditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IEditionDefault): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Encodes the specified EditionDefault message. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified EditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.EditionDefault.verify|verify} messages.
+                 * @param message EditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Decodes an EditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns EditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Verifies an EditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an EditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns EditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.EditionDefault;
+
+                /**
+                 * Creates a plain object from an EditionDefault message. Also converts values to other types if specified.
+                 * @param message EditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.EditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this EditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of an OneofOptions. */
         interface IOneofOptions {
+
+            /** OneofOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
@@ -9412,6 +11697,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IOneofOptions);
+
+            /** OneofOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** OneofOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9506,6 +11794,9 @@ export namespace google {
             /** EnumOptions deprecatedLegacyJsonFieldConflicts */
             deprecatedLegacyJsonFieldConflicts?: (boolean|null);
 
+            /** EnumOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -9527,6 +11818,9 @@ export namespace google {
 
             /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
             public deprecatedLegacyJsonFieldConflicts: boolean;
+
+            /** EnumOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9615,6 +11909,12 @@ export namespace google {
             /** EnumValueOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumValueOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact */
+            debugRedact?: (boolean|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -9630,6 +11930,12 @@ export namespace google {
 
             /** EnumValueOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumValueOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
+
+            /** EnumValueOptions debugRedact. */
+            public debugRedact: boolean;
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9715,6 +12021,9 @@ export namespace google {
         /** Properties of a ServiceOptions. */
         interface IServiceOptions {
 
+            /** ServiceOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** ServiceOptions deprecated */
             deprecated?: (boolean|null);
 
@@ -9736,6 +12045,9 @@ export namespace google {
              * @param [properties] Properties to set
              */
             constructor(properties?: google.protobuf.IServiceOptions);
+
+            /** ServiceOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** ServiceOptions deprecated. */
             public deprecated: boolean;
@@ -9830,6 +12142,9 @@ export namespace google {
             /** MethodOptions idempotencyLevel */
             idempotencyLevel?: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel|null);
 
+            /** MethodOptions features */
+            features?: (google.protobuf.IFeatureSet|null);
+
             /** MethodOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -9857,6 +12172,9 @@ export namespace google {
 
             /** MethodOptions idempotencyLevel. */
             public idempotencyLevel: (google.protobuf.MethodOptions.IdempotencyLevel|keyof typeof google.protobuf.MethodOptions.IdempotencyLevel);
+
+            /** MethodOptions features. */
+            public features?: (google.protobuf.IFeatureSet|null);
 
             /** MethodOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10181,6 +12499,394 @@ export namespace google {
 
                 /**
                  * Gets the default type url for NamePart
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** Properties of a FeatureSet. */
+        interface IFeatureSet {
+
+            /** FeatureSet fieldPresence */
+            fieldPresence?: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence|null);
+
+            /** FeatureSet enumType */
+            enumType?: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType|null);
+
+            /** FeatureSet repeatedFieldEncoding */
+            repeatedFieldEncoding?: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding|null);
+
+            /** FeatureSet utf8Validation */
+            utf8Validation?: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation|null);
+
+            /** FeatureSet messageEncoding */
+            messageEncoding?: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding|null);
+
+            /** FeatureSet jsonFormat */
+            jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+        }
+
+        /** Represents a FeatureSet. */
+        class FeatureSet implements IFeatureSet {
+
+            /**
+             * Constructs a new FeatureSet.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSet);
+
+            /** FeatureSet fieldPresence. */
+            public fieldPresence: (google.protobuf.FeatureSet.FieldPresence|keyof typeof google.protobuf.FeatureSet.FieldPresence);
+
+            /** FeatureSet enumType. */
+            public enumType: (google.protobuf.FeatureSet.EnumType|keyof typeof google.protobuf.FeatureSet.EnumType);
+
+            /** FeatureSet repeatedFieldEncoding. */
+            public repeatedFieldEncoding: (google.protobuf.FeatureSet.RepeatedFieldEncoding|keyof typeof google.protobuf.FeatureSet.RepeatedFieldEncoding);
+
+            /** FeatureSet utf8Validation. */
+            public utf8Validation: (google.protobuf.FeatureSet.Utf8Validation|keyof typeof google.protobuf.FeatureSet.Utf8Validation);
+
+            /** FeatureSet messageEncoding. */
+            public messageEncoding: (google.protobuf.FeatureSet.MessageEncoding|keyof typeof google.protobuf.FeatureSet.MessageEncoding);
+
+            /** FeatureSet jsonFormat. */
+            public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /**
+             * Creates a new FeatureSet instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSet instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSet): google.protobuf.FeatureSet;
+
+            /**
+             * Encodes the specified FeatureSet message. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSet message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.verify|verify} messages.
+             * @param message FeatureSet message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet;
+
+            /**
+             * Decodes a FeatureSet message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSet
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet;
+
+            /**
+             * Verifies a FeatureSet message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSet message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSet
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet;
+
+            /**
+             * Creates a plain object from a FeatureSet message. Also converts values to other types if specified.
+             * @param message FeatureSet
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSet to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSet
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSet {
+
+            /** FieldPresence enum. */
+            enum FieldPresence {
+                FIELD_PRESENCE_UNKNOWN = 0,
+                EXPLICIT = 1,
+                IMPLICIT = 2,
+                LEGACY_REQUIRED = 3
+            }
+
+            /** EnumType enum. */
+            enum EnumType {
+                ENUM_TYPE_UNKNOWN = 0,
+                OPEN = 1,
+                CLOSED = 2
+            }
+
+            /** RepeatedFieldEncoding enum. */
+            enum RepeatedFieldEncoding {
+                REPEATED_FIELD_ENCODING_UNKNOWN = 0,
+                PACKED = 1,
+                EXPANDED = 2
+            }
+
+            /** Utf8Validation enum. */
+            enum Utf8Validation {
+                UTF8_VALIDATION_UNKNOWN = 0,
+                VERIFY = 2,
+                NONE = 3
+            }
+
+            /** MessageEncoding enum. */
+            enum MessageEncoding {
+                MESSAGE_ENCODING_UNKNOWN = 0,
+                LENGTH_PREFIXED = 1,
+                DELIMITED = 2
+            }
+
+            /** JsonFormat enum. */
+            enum JsonFormat {
+                JSON_FORMAT_UNKNOWN = 0,
+                ALLOW = 1,
+                LEGACY_BEST_EFFORT = 2
+            }
+        }
+
+        /** Properties of a FeatureSetDefaults. */
+        interface IFeatureSetDefaults {
+
+            /** FeatureSetDefaults defaults */
+            defaults?: (google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[]|null);
+
+            /** FeatureSetDefaults minimumEdition */
+            minimumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+            /** FeatureSetDefaults maximumEdition */
+            maximumEdition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+        }
+
+        /** Represents a FeatureSetDefaults. */
+        class FeatureSetDefaults implements IFeatureSetDefaults {
+
+            /**
+             * Constructs a new FeatureSetDefaults.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFeatureSetDefaults);
+
+            /** FeatureSetDefaults defaults. */
+            public defaults: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault[];
+
+            /** FeatureSetDefaults minimumEdition. */
+            public minimumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /** FeatureSetDefaults maximumEdition. */
+            public maximumEdition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+            /**
+             * Creates a new FeatureSetDefaults instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FeatureSetDefaults instance
+             */
+            public static create(properties?: google.protobuf.IFeatureSetDefaults): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FeatureSetDefaults message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.verify|verify} messages.
+             * @param message FeatureSetDefaults message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFeatureSetDefaults, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Decodes a FeatureSetDefaults message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FeatureSetDefaults
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Verifies a FeatureSetDefaults message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FeatureSetDefaults message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FeatureSetDefaults
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults;
+
+            /**
+             * Creates a plain object from a FeatureSetDefaults message. Also converts values to other types if specified.
+             * @param message FeatureSetDefaults
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FeatureSetDefaults, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FeatureSetDefaults to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FeatureSetDefaults
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FeatureSetDefaults {
+
+            /** Properties of a FeatureSetEditionDefault. */
+            interface IFeatureSetEditionDefault {
+
+                /** FeatureSetEditionDefault edition */
+                edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
+            }
+
+            /** Represents a FeatureSetEditionDefault. */
+            class FeatureSetEditionDefault implements IFeatureSetEditionDefault {
+
+                /**
+                 * Constructs a new FeatureSetEditionDefault.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault);
+
+                /** FeatureSetEditionDefault edition. */
+                public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
+
+                /**
+                 * Creates a new FeatureSetEditionDefault instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSetEditionDefault instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSetEditionDefault message, length delimited. Does not implicitly {@link google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.verify|verify} messages.
+                 * @param message FeatureSetEditionDefault message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSetDefaults.IFeatureSetEditionDefault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Decodes a FeatureSetEditionDefault message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSetEditionDefault
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Verifies a FeatureSetEditionDefault message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSetEditionDefault message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSetEditionDefault
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault;
+
+                /**
+                 * Creates a plain object from a FeatureSetEditionDefault message. Also converts values to other types if specified.
+                 * @param message FeatureSetEditionDefault
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSetEditionDefault to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSetEditionDefault
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -10640,6 +13346,109 @@ export namespace google {
             }
         }
 
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Timestamp. */
         interface ITimestamp {
 
@@ -10840,109 +13649,6 @@ export namespace google {
 
             /**
              * Gets the default type url for Any
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a Duration. */
-        interface IDuration {
-
-            /** Duration seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Duration nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Duration. */
-        class Duration implements IDuration {
-
-            /**
-             * Constructs a new Duration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IDuration);
-
-            /** Duration seconds. */
-            public seconds: (number|Long|string);
-
-            /** Duration nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Duration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Duration instance
-             */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
-
-            /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
-
-            /**
-             * Verifies a Duration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Duration
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
-
-            /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Duration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Duration
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

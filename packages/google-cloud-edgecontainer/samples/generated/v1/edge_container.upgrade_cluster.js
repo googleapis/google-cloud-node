@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START edgecontainer_v1_generated_EdgeContainer_ListVpnConnections_async]
+function main(name, targetVersion) {
+  // [START edgecontainer_v1_generated_EdgeContainer_UpgradeCluster_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,26 +29,23 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent location, which owns this collection of VPN
-   *  connections.
+   *  Required. The resource name of the cluster.
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  The maximum number of resources to list.
+   *  Required. The version the cluster is going to be upgraded to.
    */
-  // const pageSize = 1234
+  // const targetVersion = 'abc123'
   /**
-   *  A page token received from previous list request.
+   *  The schedule for the upgrade.
    */
-  // const pageToken = 'abc123'
+  // const schedule = {}
   /**
-   *  Only resources matching this filter will be listed.
+   *  A unique identifier for this request. Restricted to 36 ASCII characters. A
+   *  random UUID is recommended. This request is only idempotent if
+   *  `request_id` is provided.
    */
-  // const filter = 'abc123'
-  /**
-   *  Specifies the order in which resources will be listed.
-   */
-  // const orderBy = 'abc123'
+  // const requestId = 'abc123'
 
   // Imports the Edgecontainer library
   const {EdgeContainerClient} = require('@google-cloud/edgecontainer').v1;
@@ -56,21 +53,21 @@ function main(parent) {
   // Instantiates a client
   const edgecontainerClient = new EdgeContainerClient();
 
-  async function callListVpnConnections() {
+  async function callUpgradeCluster() {
     // Construct request
     const request = {
-      parent,
+      name,
+      targetVersion,
     };
 
     // Run request
-    const iterable = edgecontainerClient.listVpnConnectionsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await edgecontainerClient.upgradeCluster(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListVpnConnections();
-  // [END edgecontainer_v1_generated_EdgeContainer_ListVpnConnections_async]
+  callUpgradeCluster();
+  // [END edgecontainer_v1_generated_EdgeContainer_UpgradeCluster_async]
 }
 
 process.on('unhandledRejection', err => {

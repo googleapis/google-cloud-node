@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START edgecontainer_v1_generated_EdgeContainer_ListVpnConnections_async]
+function main(cluster) {
+  // [START edgecontainer_v1_generated_EdgeContainer_GenerateOfflineCredential_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,26 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent location, which owns this collection of VPN
-   *  connections.
+   *  Required. The resource name of the cluster.
    */
-  // const parent = 'abc123'
-  /**
-   *  The maximum number of resources to list.
-   */
-  // const pageSize = 1234
-  /**
-   *  A page token received from previous list request.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Only resources matching this filter will be listed.
-   */
-  // const filter = 'abc123'
-  /**
-   *  Specifies the order in which resources will be listed.
-   */
-  // const orderBy = 'abc123'
+  // const cluster = 'abc123'
 
   // Imports the Edgecontainer library
   const {EdgeContainerClient} = require('@google-cloud/edgecontainer').v1;
@@ -56,21 +39,19 @@ function main(parent) {
   // Instantiates a client
   const edgecontainerClient = new EdgeContainerClient();
 
-  async function callListVpnConnections() {
+  async function callGenerateOfflineCredential() {
     // Construct request
     const request = {
-      parent,
+      cluster,
     };
 
     // Run request
-    const iterable = edgecontainerClient.listVpnConnectionsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await edgecontainerClient.generateOfflineCredential(request);
+    console.log(response);
   }
 
-  callListVpnConnections();
-  // [END edgecontainer_v1_generated_EdgeContainer_ListVpnConnections_async]
+  callGenerateOfflineCredential();
+  // [END edgecontainer_v1_generated_EdgeContainer_GenerateOfflineCredential_async]
 }
 
 process.on('unhandledRejection', err => {

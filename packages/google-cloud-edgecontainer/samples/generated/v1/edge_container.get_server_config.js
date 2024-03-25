@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START edgecontainer_v1_generated_EdgeContainer_ListVpnConnections_async]
+function main(name) {
+  // [START edgecontainer_v1_generated_EdgeContainer_GetServerConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,26 +29,10 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent location, which owns this collection of VPN
-   *  connections.
+   *  Required. The name (project and location) of the server config to get,
+   *  specified in the format `projects/* /locations/*`.
    */
-  // const parent = 'abc123'
-  /**
-   *  The maximum number of resources to list.
-   */
-  // const pageSize = 1234
-  /**
-   *  A page token received from previous list request.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Only resources matching this filter will be listed.
-   */
-  // const filter = 'abc123'
-  /**
-   *  Specifies the order in which resources will be listed.
-   */
-  // const orderBy = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Edgecontainer library
   const {EdgeContainerClient} = require('@google-cloud/edgecontainer').v1;
@@ -56,21 +40,19 @@ function main(parent) {
   // Instantiates a client
   const edgecontainerClient = new EdgeContainerClient();
 
-  async function callListVpnConnections() {
+  async function callGetServerConfig() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = edgecontainerClient.listVpnConnectionsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await edgecontainerClient.getServerConfig(request);
+    console.log(response);
   }
 
-  callListVpnConnections();
-  // [END edgecontainer_v1_generated_EdgeContainer_ListVpnConnections_async]
+  callGetServerConfig();
+  // [END edgecontainer_v1_generated_EdgeContainer_GetServerConfig_async]
 }
 
 process.on('unhandledRejection', err => {
