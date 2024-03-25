@@ -524,7 +524,10 @@
                         "dimensions": {
                           "keyType": "string",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         },
                         "quotaConfig": {
                           "type": "QuotaConfig",
@@ -621,7 +624,10 @@
                         "annotations": {
                           "keyType": "string",
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "requestOrigin": {
                           "type": "Origin",
