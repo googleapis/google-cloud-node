@@ -19,7 +19,7 @@ import {protobufMinimal  as $protobuf} from "google-gax/build/src/protobuf.js";
 const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
 // Exported root namespace
-const $root = $protobuf.roots._google_cloud_tasks_protos || ($protobuf.roots._google_cloud_tasks_protos = {});
+const $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
 export const google = $root.google = (() => {
 
