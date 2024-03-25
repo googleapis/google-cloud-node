@@ -2433,7 +2433,10 @@ export namespace google {
                         GOOGLE_SERVICE_TYPE_UNSPECIFIED = 0,
                         IAP = 1,
                         GFE_PROXY_OR_HEALTH_CHECK_PROBER = 2,
-                        CLOUD_DNS = 3
+                        CLOUD_DNS = 3,
+                        GOOGLE_API = 4,
+                        GOOGLE_API_PSC = 5,
+                        GOOGLE_API_VPC_SC = 6
                     }
                 }
 
@@ -3273,6 +3276,9 @@ export namespace google {
 
                     /** DeliverInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** DeliverInfo ipAddress */
+                    ipAddress?: (string|null);
                 }
 
                 /** Represents a DeliverInfo. */
@@ -3289,6 +3295,9 @@ export namespace google {
 
                     /** DeliverInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** DeliverInfo ipAddress. */
+                    public ipAddress: string;
 
                     /**
                      * Creates a new DeliverInfo instance using the specified properties.
@@ -3382,7 +3391,11 @@ export namespace google {
                         PSC_GOOGLE_API = 7,
                         PSC_VPC_SC = 8,
                         SERVERLESS_NEG = 9,
-                        STORAGE_BUCKET = 10
+                        STORAGE_BUCKET = 10,
+                        PRIVATE_NETWORK = 11,
+                        CLOUD_FUNCTION = 12,
+                        APP_ENGINE_VERSION = 13,
+                        CLOUD_RUN_REVISION = 14
                     }
                 }
 
@@ -3394,6 +3407,9 @@ export namespace google {
 
                     /** ForwardInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** ForwardInfo ipAddress */
+                    ipAddress?: (string|null);
                 }
 
                 /** Represents a ForwardInfo. */
@@ -3410,6 +3426,9 @@ export namespace google {
 
                     /** ForwardInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** ForwardInfo ipAddress. */
+                    public ipAddress: string;
 
                     /**
                      * Creates a new ForwardInfo instance using the specified properties.
@@ -3501,7 +3520,8 @@ export namespace google {
                         IMPORTED_CUSTOM_ROUTE_NEXT_HOP = 5,
                         CLOUD_SQL_INSTANCE = 6,
                         ANOTHER_PROJECT = 7,
-                        NCC_HUB = 8
+                        NCC_HUB = 8,
+                        ROUTER_APPLIANCE = 9
                     }
                 }
 
@@ -3513,6 +3533,9 @@ export namespace google {
 
                     /** AbortInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** AbortInfo ipAddress */
+                    ipAddress?: (string|null);
 
                     /** AbortInfo projectsMissingPermission */
                     projectsMissingPermission?: (string[]|null);
@@ -3532,6 +3555,9 @@ export namespace google {
 
                     /** AbortInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** AbortInfo ipAddress. */
+                    public ipAddress: string;
 
                     /** AbortInfo projectsMissingPermission. */
                     public projectsMissingPermission: string[];
@@ -3620,26 +3646,36 @@ export namespace google {
                     enum Cause {
                         CAUSE_UNSPECIFIED = 0,
                         UNKNOWN_NETWORK = 1,
-                        UNKNOWN_IP = 2,
                         UNKNOWN_PROJECT = 3,
-                        PERMISSION_DENIED = 4,
-                        NO_SOURCE_LOCATION = 5,
-                        INVALID_ARGUMENT = 6,
                         NO_EXTERNAL_IP = 7,
                         UNINTENDED_DESTINATION = 8,
-                        TRACE_TOO_LONG = 9,
-                        INTERNAL_ERROR = 10,
                         SOURCE_ENDPOINT_NOT_FOUND = 11,
                         MISMATCHED_SOURCE_NETWORK = 12,
                         DESTINATION_ENDPOINT_NOT_FOUND = 13,
                         MISMATCHED_DESTINATION_NETWORK = 14,
+                        UNKNOWN_IP = 2,
+                        SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK = 23,
+                        PERMISSION_DENIED = 4,
+                        PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS = 28,
+                        PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS = 29,
+                        NO_SOURCE_LOCATION = 5,
+                        INVALID_ARGUMENT = 6,
+                        TRACE_TOO_LONG = 9,
+                        INTERNAL_ERROR = 10,
                         UNSUPPORTED = 15,
                         MISMATCHED_IP_VERSION = 16,
                         GKE_KONNECTIVITY_PROXY_UNSUPPORTED = 17,
                         RESOURCE_CONFIG_NOT_FOUND = 18,
+                        VM_INSTANCE_CONFIG_NOT_FOUND = 24,
+                        NETWORK_CONFIG_NOT_FOUND = 25,
+                        FIREWALL_CONFIG_NOT_FOUND = 26,
+                        ROUTE_CONFIG_NOT_FOUND = 27,
                         GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT = 19,
                         SOURCE_PSC_CLOUD_SQL_UNSUPPORTED = 20,
-                        SOURCE_FORWARDING_RULE_UNSUPPORTED = 21
+                        SOURCE_FORWARDING_RULE_UNSUPPORTED = 21,
+                        NON_ROUTABLE_IP_ADDRESS = 22,
+                        UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT = 30,
+                        UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG = 31
                     }
                 }
 
@@ -3651,6 +3687,15 @@ export namespace google {
 
                     /** DropInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** DropInfo sourceIp */
+                    sourceIp?: (string|null);
+
+                    /** DropInfo destinationIp */
+                    destinationIp?: (string|null);
+
+                    /** DropInfo region */
+                    region?: (string|null);
                 }
 
                 /** Represents a DropInfo. */
@@ -3667,6 +3712,15 @@ export namespace google {
 
                     /** DropInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** DropInfo sourceIp. */
+                    public sourceIp: string;
+
+                    /** DropInfo destinationIp. */
+                    public destinationIp: string;
+
+                    /** DropInfo region. */
+                    public region: string;
 
                     /**
                      * Creates a new DropInfo instance using the specified properties.
@@ -3757,12 +3811,22 @@ export namespace google {
                         NO_ROUTE = 4,
                         ROUTE_BLACKHOLE = 5,
                         ROUTE_WRONG_NETWORK = 6,
+                        ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED = 42,
+                        ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND = 43,
+                        ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK = 49,
+                        ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP = 50,
+                        ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH = 51,
+                        ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED = 52,
+                        ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID = 53,
+                        NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS = 44,
+                        VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH = 45,
+                        VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH = 46,
                         PRIVATE_TRAFFIC_TO_INTERNET = 7,
                         PRIVATE_GOOGLE_ACCESS_DISALLOWED = 8,
+                        PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED = 47,
                         NO_EXTERNAL_ADDRESS = 9,
                         UNKNOWN_INTERNAL_ADDRESS = 10,
                         FORWARDING_RULE_MISMATCH = 11,
-                        FORWARDING_RULE_REGION_MISMATCH = 25,
                         FORWARDING_RULE_NO_INSTANCES = 12,
                         FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK = 13,
                         INSTANCE_NOT_RUNNING = 14,
@@ -3786,10 +3850,20 @@ export namespace google {
                         CLOUD_FUNCTION_NOT_ACTIVE = 22,
                         VPC_CONNECTOR_NOT_SET = 23,
                         VPC_CONNECTOR_NOT_RUNNING = 24,
+                        FORWARDING_RULE_REGION_MISMATCH = 25,
                         PSC_CONNECTION_NOT_ACCEPTED = 26,
+                        PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK = 41,
+                        PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS = 48,
+                        PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS = 54,
+                        CLOUD_SQL_PSC_NEG_UNSUPPORTED = 58,
+                        NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT = 57,
+                        HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED = 55,
+                        HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED = 56,
                         CLOUD_RUN_REVISION_NOT_READY = 29,
                         DROPPED_INSIDE_PSC_SERVICE_PRODUCER = 37,
-                        LOAD_BALANCER_HAS_NO_PROXY_SUBNET = 39
+                        LOAD_BALANCER_HAS_NO_PROXY_SUBNET = 39,
+                        CLOUD_NAT_NO_ADDRESSES = 40,
+                        ROUTING_LOOP = 59
                     }
                 }
 
@@ -8529,7 +8603,10 @@ export namespace google {
                         GOOGLE_SERVICE_TYPE_UNSPECIFIED = 0,
                         IAP = 1,
                         GFE_PROXY_OR_HEALTH_CHECK_PROBER = 2,
-                        CLOUD_DNS = 3
+                        CLOUD_DNS = 3,
+                        GOOGLE_API = 4,
+                        GOOGLE_API_PSC = 5,
+                        GOOGLE_API_VPC_SC = 6
                     }
                 }
 
@@ -9369,6 +9446,9 @@ export namespace google {
 
                     /** DeliverInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** DeliverInfo ipAddress */
+                    ipAddress?: (string|null);
                 }
 
                 /** Represents a DeliverInfo. */
@@ -9385,6 +9465,9 @@ export namespace google {
 
                     /** DeliverInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** DeliverInfo ipAddress. */
+                    public ipAddress: string;
 
                     /**
                      * Creates a new DeliverInfo instance using the specified properties.
@@ -9478,7 +9561,11 @@ export namespace google {
                         PSC_GOOGLE_API = 7,
                         PSC_VPC_SC = 8,
                         SERVERLESS_NEG = 9,
-                        STORAGE_BUCKET = 10
+                        STORAGE_BUCKET = 10,
+                        PRIVATE_NETWORK = 11,
+                        CLOUD_FUNCTION = 12,
+                        APP_ENGINE_VERSION = 13,
+                        CLOUD_RUN_REVISION = 14
                     }
                 }
 
@@ -9490,6 +9577,9 @@ export namespace google {
 
                     /** ForwardInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** ForwardInfo ipAddress */
+                    ipAddress?: (string|null);
                 }
 
                 /** Represents a ForwardInfo. */
@@ -9506,6 +9596,9 @@ export namespace google {
 
                     /** ForwardInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** ForwardInfo ipAddress. */
+                    public ipAddress: string;
 
                     /**
                      * Creates a new ForwardInfo instance using the specified properties.
@@ -9597,7 +9690,8 @@ export namespace google {
                         IMPORTED_CUSTOM_ROUTE_NEXT_HOP = 5,
                         CLOUD_SQL_INSTANCE = 6,
                         ANOTHER_PROJECT = 7,
-                        NCC_HUB = 8
+                        NCC_HUB = 8,
+                        ROUTER_APPLIANCE = 9
                     }
                 }
 
@@ -9609,6 +9703,9 @@ export namespace google {
 
                     /** AbortInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** AbortInfo ipAddress */
+                    ipAddress?: (string|null);
 
                     /** AbortInfo projectsMissingPermission */
                     projectsMissingPermission?: (string[]|null);
@@ -9628,6 +9725,9 @@ export namespace google {
 
                     /** AbortInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** AbortInfo ipAddress. */
+                    public ipAddress: string;
 
                     /** AbortInfo projectsMissingPermission. */
                     public projectsMissingPermission: string[];
@@ -9716,26 +9816,36 @@ export namespace google {
                     enum Cause {
                         CAUSE_UNSPECIFIED = 0,
                         UNKNOWN_NETWORK = 1,
-                        UNKNOWN_IP = 2,
                         UNKNOWN_PROJECT = 3,
-                        PERMISSION_DENIED = 4,
-                        NO_SOURCE_LOCATION = 5,
-                        INVALID_ARGUMENT = 6,
                         NO_EXTERNAL_IP = 7,
                         UNINTENDED_DESTINATION = 8,
-                        TRACE_TOO_LONG = 9,
-                        INTERNAL_ERROR = 10,
                         SOURCE_ENDPOINT_NOT_FOUND = 11,
                         MISMATCHED_SOURCE_NETWORK = 12,
                         DESTINATION_ENDPOINT_NOT_FOUND = 13,
                         MISMATCHED_DESTINATION_NETWORK = 14,
+                        UNKNOWN_IP = 2,
+                        SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK = 23,
+                        PERMISSION_DENIED = 4,
+                        PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS = 28,
+                        PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS = 29,
+                        NO_SOURCE_LOCATION = 5,
+                        INVALID_ARGUMENT = 6,
+                        TRACE_TOO_LONG = 9,
+                        INTERNAL_ERROR = 10,
                         UNSUPPORTED = 15,
                         MISMATCHED_IP_VERSION = 16,
                         GKE_KONNECTIVITY_PROXY_UNSUPPORTED = 17,
                         RESOURCE_CONFIG_NOT_FOUND = 18,
+                        VM_INSTANCE_CONFIG_NOT_FOUND = 24,
+                        NETWORK_CONFIG_NOT_FOUND = 25,
+                        FIREWALL_CONFIG_NOT_FOUND = 26,
+                        ROUTE_CONFIG_NOT_FOUND = 27,
                         GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT = 19,
                         SOURCE_PSC_CLOUD_SQL_UNSUPPORTED = 20,
-                        SOURCE_FORWARDING_RULE_UNSUPPORTED = 21
+                        SOURCE_FORWARDING_RULE_UNSUPPORTED = 21,
+                        NON_ROUTABLE_IP_ADDRESS = 22,
+                        UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT = 30,
+                        UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG = 31
                     }
                 }
 
@@ -9747,6 +9857,15 @@ export namespace google {
 
                     /** DropInfo resourceUri */
                     resourceUri?: (string|null);
+
+                    /** DropInfo sourceIp */
+                    sourceIp?: (string|null);
+
+                    /** DropInfo destinationIp */
+                    destinationIp?: (string|null);
+
+                    /** DropInfo region */
+                    region?: (string|null);
                 }
 
                 /** Represents a DropInfo. */
@@ -9763,6 +9882,15 @@ export namespace google {
 
                     /** DropInfo resourceUri. */
                     public resourceUri: string;
+
+                    /** DropInfo sourceIp. */
+                    public sourceIp: string;
+
+                    /** DropInfo destinationIp. */
+                    public destinationIp: string;
+
+                    /** DropInfo region. */
+                    public region: string;
 
                     /**
                      * Creates a new DropInfo instance using the specified properties.
@@ -9853,12 +9981,22 @@ export namespace google {
                         NO_ROUTE = 4,
                         ROUTE_BLACKHOLE = 5,
                         ROUTE_WRONG_NETWORK = 6,
+                        ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED = 42,
+                        ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND = 43,
+                        ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK = 49,
+                        ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP = 50,
+                        ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH = 51,
+                        ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED = 52,
+                        ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID = 53,
+                        NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS = 44,
+                        VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH = 45,
+                        VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH = 46,
                         PRIVATE_TRAFFIC_TO_INTERNET = 7,
                         PRIVATE_GOOGLE_ACCESS_DISALLOWED = 8,
+                        PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED = 47,
                         NO_EXTERNAL_ADDRESS = 9,
                         UNKNOWN_INTERNAL_ADDRESS = 10,
                         FORWARDING_RULE_MISMATCH = 11,
-                        FORWARDING_RULE_REGION_MISMATCH = 25,
                         FORWARDING_RULE_NO_INSTANCES = 12,
                         FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK = 13,
                         INSTANCE_NOT_RUNNING = 14,
@@ -9882,10 +10020,20 @@ export namespace google {
                         CLOUD_FUNCTION_NOT_ACTIVE = 22,
                         VPC_CONNECTOR_NOT_SET = 23,
                         VPC_CONNECTOR_NOT_RUNNING = 24,
+                        FORWARDING_RULE_REGION_MISMATCH = 25,
                         PSC_CONNECTION_NOT_ACCEPTED = 26,
+                        PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK = 41,
+                        PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS = 48,
+                        PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS = 54,
+                        CLOUD_SQL_PSC_NEG_UNSUPPORTED = 58,
+                        NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT = 57,
+                        HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED = 55,
+                        HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED = 56,
                         CLOUD_RUN_REVISION_NOT_READY = 29,
                         DROPPED_INSIDE_PSC_SERVICE_PRODUCER = 37,
-                        LOAD_BALANCER_HAS_NO_PROXY_SUBNET = 39
+                        LOAD_BALANCER_HAS_NO_PROXY_SUBNET = 39,
+                        CLOUD_NAT_NO_ADDRESSES = 40,
+                        ROUTING_LOOP = 59
                     }
                 }
 
@@ -12483,6 +12631,115 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
         }
 
         /** Properties of a Http. */
@@ -16505,6 +16762,9 @@ export namespace google {
 
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
         }
 
         /** Represents a FieldOptions. */
