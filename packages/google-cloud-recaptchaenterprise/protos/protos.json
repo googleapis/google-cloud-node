@@ -666,7 +666,9 @@
                     "Assessment": {
                       "options": {
                         "(google.api.resource).type": "recaptchaenterprise.googleapis.com/Assessment",
-                        "(google.api.resource).pattern": "projects/{project}/assessments/{assessment}"
+                        "(google.api.resource).pattern": "projects/{project}/assessments/{assessment}",
+                        "(google.api.resource).plural": "assessments",
+                        "(google.api.resource).singular": "assessment"
                       },
                       "fields": {
                         "name": {
@@ -768,6 +770,7 @@
                           "type": "string",
                           "id": 4,
                           "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -1695,7 +1698,9 @@
                     "Metrics": {
                       "options": {
                         "(google.api.resource).type": "recaptchaenterprise.googleapis.com/Metrics",
-                        "(google.api.resource).pattern": "projects/{project}/keys/{key}/metrics"
+                        "(google.api.resource).pattern": "projects/{project}/keys/{key}/metrics",
+                        "(google.api.resource).plural": "metrics",
+                        "(google.api.resource).singular": "metrics"
                       },
                       "fields": {
                         "name": {
@@ -1732,7 +1737,9 @@
                     "Key": {
                       "options": {
                         "(google.api.resource).type": "recaptchaenterprise.googleapis.com/Key",
-                        "(google.api.resource).pattern": "projects/{project}/keys/{key}"
+                        "(google.api.resource).pattern": "projects/{project}/keys/{key}",
+                        "(google.api.resource).plural": "keys",
+                        "(google.api.resource).singular": "key"
                       },
                       "oneofs": {
                         "platformSettings": {
@@ -2109,7 +2116,9 @@
                     "FirewallPolicy": {
                       "options": {
                         "(google.api.resource).type": "recaptchaenterprise.googleapis.com/FirewallPolicy",
-                        "(google.api.resource).pattern": "projects/{project}/firewallpolicies/{firewallpolicy}"
+                        "(google.api.resource).pattern": "projects/{project}/firewallpolicies/{firewallpolicy}",
+                        "(google.api.resource).plural": "firewallPolicies",
+                        "(google.api.resource).singular": "firewallPolicy"
                       },
                       "fields": {
                         "name": {
@@ -2235,7 +2244,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "accountId": {
@@ -2285,15 +2294,16 @@
                     "RelatedAccountGroupMembership": {
                       "options": {
                         "(google.api.resource).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership",
-                        "(google.api.resource).pattern": "projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}"
+                        "(google.api.resource).pattern": "projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}",
+                        "(google.api.resource).plural": "relatedAccountGroupMemberships",
+                        "(google.api.resource).singular": "relatedAccountGroupMembership"
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "accountId": {
@@ -2312,15 +2322,16 @@
                     "RelatedAccountGroup": {
                       "options": {
                         "(google.api.resource).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroup",
-                        "(google.api.resource).pattern": "projects/{project}/relatedaccountgroups/{relatedaccountgroup}"
+                        "(google.api.resource).pattern": "projects/{project}/relatedaccountgroups/{relatedaccountgroup}",
+                        "(google.api.resource).plural": "relatedAccountGroups",
+                        "(google.api.resource).singular": "relatedAccountGroup"
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroup"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -2356,7 +2367,8 @@
                           "values": {
                             "WAF_SERVICE_UNSPECIFIED": 0,
                             "CA": 1,
-                            "FASTLY": 3
+                            "FASTLY": 3,
+                            "CLOUDFLARE": 4
                           }
                         }
                       }
@@ -3417,6 +3429,30 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
               }
             },
             "resourceReference": {

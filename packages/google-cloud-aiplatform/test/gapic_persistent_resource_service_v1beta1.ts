@@ -5325,6 +5325,74 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
       });
     });
 
+    describe('reasoningEngine', () => {
+      const fakePath = '/rendered/path/reasoningEngine';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        reasoning_engine: 'reasoningEngineValue',
+      };
+      const client =
+        new persistentresourceserviceModule.v1beta1.PersistentResourceServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.reasoningEnginePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.reasoningEnginePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('reasoningEnginePath', () => {
+        const result = client.reasoningEnginePath(
+          'projectValue',
+          'locationValue',
+          'reasoningEngineValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromReasoningEngineName', () => {
+        const result = client.matchProjectFromReasoningEngineName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromReasoningEngineName', () => {
+        const result = client.matchLocationFromReasoningEngineName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchReasoningEngineFromReasoningEngineName', () => {
+        const result =
+          client.matchReasoningEngineFromReasoningEngineName(fakePath);
+        assert.strictEqual(result, 'reasoningEngineValue');
+        assert(
+          (client.pathTemplates.reasoningEnginePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('savedQuery', () => {
       const fakePath = '/rendered/path/savedQuery';
       const expectedParameters = {

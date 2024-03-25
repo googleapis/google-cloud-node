@@ -35,6 +35,11 @@
                 "getCertificateIssuanceConfig"
               ]
             },
+            "GetTrustConfig": {
+              "methods": [
+                "getTrustConfig"
+              ]
+            },
             "CreateCertificate": {
               "methods": [
                 "createCertificate"
@@ -105,6 +110,21 @@
                 "deleteCertificateIssuanceConfig"
               ]
             },
+            "CreateTrustConfig": {
+              "methods": [
+                "createTrustConfig"
+              ]
+            },
+            "UpdateTrustConfig": {
+              "methods": [
+                "updateTrustConfig"
+              ]
+            },
+            "DeleteTrustConfig": {
+              "methods": [
+                "deleteTrustConfig"
+              ]
+            },
             "ListCertificates": {
               "methods": [
                 "listCertificates",
@@ -138,6 +158,13 @@
                 "listCertificateIssuanceConfigs",
                 "listCertificateIssuanceConfigsStream",
                 "listCertificateIssuanceConfigsAsync"
+              ]
+            },
+            "ListTrustConfigs": {
+              "methods": [
+                "listTrustConfigs",
+                "listTrustConfigsStream",
+                "listTrustConfigsAsync"
               ]
             }
           }
@@ -170,6 +197,11 @@
                 "getCertificateIssuanceConfig"
               ]
             },
+            "GetTrustConfig": {
+              "methods": [
+                "getTrustConfig"
+              ]
+            },
             "CreateCertificate": {
               "methods": [
                 "createCertificate"
@@ -240,6 +272,21 @@
                 "deleteCertificateIssuanceConfig"
               ]
             },
+            "CreateTrustConfig": {
+              "methods": [
+                "createTrustConfig"
+              ]
+            },
+            "UpdateTrustConfig": {
+              "methods": [
+                "updateTrustConfig"
+              ]
+            },
+            "DeleteTrustConfig": {
+              "methods": [
+                "deleteTrustConfig"
+              ]
+            },
             "ListCertificates": {
               "methods": [
                 "listCertificates",
@@ -273,6 +320,13 @@
                 "listCertificateIssuanceConfigs",
                 "listCertificateIssuanceConfigsStream",
                 "listCertificateIssuanceConfigsAsync"
+              ]
+            },
+            "ListTrustConfigs": {
+              "methods": [
+                "listTrustConfigs",
+                "listTrustConfigsStream",
+                "listTrustConfigsAsync"
               ]
             }
           }

@@ -1,5 +1,6 @@
 [
   "../../protos/google/cloud/dataplex/v1/analyze.proto",
+  "../../protos/google/cloud/dataplex/v1/catalog.proto",
   "../../protos/google/cloud/dataplex/v1/content.proto",
   "../../protos/google/cloud/dataplex/v1/data_profile.proto",
   "../../protos/google/cloud/dataplex/v1/data_quality.proto",

@@ -36,6 +36,8 @@ export {ModelServiceClient} from './model_service_client';
 export {PersistentResourceServiceClient} from './persistent_resource_service_client';
 export {PipelineServiceClient} from './pipeline_service_client';
 export {PredictionServiceClient} from './prediction_service_client';
+export {ReasoningEngineExecutionServiceClient} from './reasoning_engine_execution_service_client';
+export {ReasoningEngineServiceClient} from './reasoning_engine_service_client';
 export {ScheduleServiceClient} from './schedule_service_client';
 export {SpecialistPoolServiceClient} from './specialist_pool_service_client';
 export {TensorboardServiceClient} from './tensorboard_service_client';
