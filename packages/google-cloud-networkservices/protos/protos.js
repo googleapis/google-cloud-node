@@ -1379,6 +1379,5376 @@
                         return EndpointMatcher;
                     })();
     
+                    v1.DepService = (function() {
+    
+                        /**
+                         * Constructs a new DepService service.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a DepService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function DepService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (DepService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = DepService;
+    
+                        /**
+                         * Creates new DepService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {DepService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        DepService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|listLbTrafficExtensions}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef ListLbTrafficExtensionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse} [response] ListLbTrafficExtensionsResponse
+                         */
+    
+                        /**
+                         * Calls ListLbTrafficExtensions.
+                         * @function listLbTrafficExtensions
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest} request ListLbTrafficExtensionsRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.ListLbTrafficExtensionsCallback} callback Node-style callback called with the error, if any, and ListLbTrafficExtensionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.listLbTrafficExtensions = function listLbTrafficExtensions(request, callback) {
+                            return this.rpcCall(listLbTrafficExtensions, $root.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest, $root.google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse, request, callback);
+                        }, "name", { value: "ListLbTrafficExtensions" });
+    
+                        /**
+                         * Calls ListLbTrafficExtensions.
+                         * @function listLbTrafficExtensions
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest} request ListLbTrafficExtensionsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|getLbTrafficExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef GetLbTrafficExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.LbTrafficExtension} [response] LbTrafficExtension
+                         */
+    
+                        /**
+                         * Calls GetLbTrafficExtension.
+                         * @function getLbTrafficExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest} request GetLbTrafficExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.GetLbTrafficExtensionCallback} callback Node-style callback called with the error, if any, and LbTrafficExtension
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.getLbTrafficExtension = function getLbTrafficExtension(request, callback) {
+                            return this.rpcCall(getLbTrafficExtension, $root.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest, $root.google.cloud.networkservices.v1.LbTrafficExtension, request, callback);
+                        }, "name", { value: "GetLbTrafficExtension" });
+    
+                        /**
+                         * Calls GetLbTrafficExtension.
+                         * @function getLbTrafficExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest} request GetLbTrafficExtensionRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.LbTrafficExtension>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|createLbTrafficExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef CreateLbTrafficExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateLbTrafficExtension.
+                         * @function createLbTrafficExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest} request CreateLbTrafficExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.CreateLbTrafficExtensionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.createLbTrafficExtension = function createLbTrafficExtension(request, callback) {
+                            return this.rpcCall(createLbTrafficExtension, $root.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateLbTrafficExtension" });
+    
+                        /**
+                         * Calls CreateLbTrafficExtension.
+                         * @function createLbTrafficExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest} request CreateLbTrafficExtensionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|updateLbTrafficExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef UpdateLbTrafficExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateLbTrafficExtension.
+                         * @function updateLbTrafficExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest} request UpdateLbTrafficExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.UpdateLbTrafficExtensionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.updateLbTrafficExtension = function updateLbTrafficExtension(request, callback) {
+                            return this.rpcCall(updateLbTrafficExtension, $root.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateLbTrafficExtension" });
+    
+                        /**
+                         * Calls UpdateLbTrafficExtension.
+                         * @function updateLbTrafficExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest} request UpdateLbTrafficExtensionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|deleteLbTrafficExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef DeleteLbTrafficExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteLbTrafficExtension.
+                         * @function deleteLbTrafficExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest} request DeleteLbTrafficExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.DeleteLbTrafficExtensionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.deleteLbTrafficExtension = function deleteLbTrafficExtension(request, callback) {
+                            return this.rpcCall(deleteLbTrafficExtension, $root.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteLbTrafficExtension" });
+    
+                        /**
+                         * Calls DeleteLbTrafficExtension.
+                         * @function deleteLbTrafficExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest} request DeleteLbTrafficExtensionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|listLbRouteExtensions}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef ListLbRouteExtensionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.ListLbRouteExtensionsResponse} [response] ListLbRouteExtensionsResponse
+                         */
+    
+                        /**
+                         * Calls ListLbRouteExtensions.
+                         * @function listLbRouteExtensions
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListLbRouteExtensionsRequest} request ListLbRouteExtensionsRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.ListLbRouteExtensionsCallback} callback Node-style callback called with the error, if any, and ListLbRouteExtensionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.listLbRouteExtensions = function listLbRouteExtensions(request, callback) {
+                            return this.rpcCall(listLbRouteExtensions, $root.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest, $root.google.cloud.networkservices.v1.ListLbRouteExtensionsResponse, request, callback);
+                        }, "name", { value: "ListLbRouteExtensions" });
+    
+                        /**
+                         * Calls ListLbRouteExtensions.
+                         * @function listLbRouteExtensions
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IListLbRouteExtensionsRequest} request ListLbRouteExtensionsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.ListLbRouteExtensionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|getLbRouteExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef GetLbRouteExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkservices.v1.LbRouteExtension} [response] LbRouteExtension
+                         */
+    
+                        /**
+                         * Calls GetLbRouteExtension.
+                         * @function getLbRouteExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetLbRouteExtensionRequest} request GetLbRouteExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.GetLbRouteExtensionCallback} callback Node-style callback called with the error, if any, and LbRouteExtension
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.getLbRouteExtension = function getLbRouteExtension(request, callback) {
+                            return this.rpcCall(getLbRouteExtension, $root.google.cloud.networkservices.v1.GetLbRouteExtensionRequest, $root.google.cloud.networkservices.v1.LbRouteExtension, request, callback);
+                        }, "name", { value: "GetLbRouteExtension" });
+    
+                        /**
+                         * Calls GetLbRouteExtension.
+                         * @function getLbRouteExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IGetLbRouteExtensionRequest} request GetLbRouteExtensionRequest message or plain object
+                         * @returns {Promise<google.cloud.networkservices.v1.LbRouteExtension>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|createLbRouteExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef CreateLbRouteExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateLbRouteExtension.
+                         * @function createLbRouteExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest} request CreateLbRouteExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.CreateLbRouteExtensionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.createLbRouteExtension = function createLbRouteExtension(request, callback) {
+                            return this.rpcCall(createLbRouteExtension, $root.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateLbRouteExtension" });
+    
+                        /**
+                         * Calls CreateLbRouteExtension.
+                         * @function createLbRouteExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest} request CreateLbRouteExtensionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|updateLbRouteExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef UpdateLbRouteExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateLbRouteExtension.
+                         * @function updateLbRouteExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest} request UpdateLbRouteExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.UpdateLbRouteExtensionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.updateLbRouteExtension = function updateLbRouteExtension(request, callback) {
+                            return this.rpcCall(updateLbRouteExtension, $root.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateLbRouteExtension" });
+    
+                        /**
+                         * Calls UpdateLbRouteExtension.
+                         * @function updateLbRouteExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest} request UpdateLbRouteExtensionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkservices.v1.DepService|deleteLbRouteExtension}.
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @typedef DeleteLbRouteExtensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteLbRouteExtension.
+                         * @function deleteLbRouteExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest} request DeleteLbRouteExtensionRequest message or plain object
+                         * @param {google.cloud.networkservices.v1.DepService.DeleteLbRouteExtensionCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DepService.prototype.deleteLbRouteExtension = function deleteLbRouteExtension(request, callback) {
+                            return this.rpcCall(deleteLbRouteExtension, $root.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteLbRouteExtension" });
+    
+                        /**
+                         * Calls DeleteLbRouteExtension.
+                         * @function deleteLbRouteExtension
+                         * @memberof google.cloud.networkservices.v1.DepService
+                         * @instance
+                         * @param {google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest} request DeleteLbRouteExtensionRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return DepService;
+                    })();
+    
+                    /**
+                     * EventType enum.
+                     * @name google.cloud.networkservices.v1.EventType
+                     * @enum {number}
+                     * @property {number} EVENT_TYPE_UNSPECIFIED=0 EVENT_TYPE_UNSPECIFIED value
+                     * @property {number} REQUEST_HEADERS=1 REQUEST_HEADERS value
+                     * @property {number} REQUEST_BODY=2 REQUEST_BODY value
+                     * @property {number} RESPONSE_HEADERS=3 RESPONSE_HEADERS value
+                     * @property {number} RESPONSE_BODY=4 RESPONSE_BODY value
+                     * @property {number} REQUEST_TRAILERS=5 REQUEST_TRAILERS value
+                     * @property {number} RESPONSE_TRAILERS=6 RESPONSE_TRAILERS value
+                     */
+                    v1.EventType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "EVENT_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "REQUEST_HEADERS"] = 1;
+                        values[valuesById[2] = "REQUEST_BODY"] = 2;
+                        values[valuesById[3] = "RESPONSE_HEADERS"] = 3;
+                        values[valuesById[4] = "RESPONSE_BODY"] = 4;
+                        values[valuesById[5] = "REQUEST_TRAILERS"] = 5;
+                        values[valuesById[6] = "RESPONSE_TRAILERS"] = 6;
+                        return values;
+                    })();
+    
+                    /**
+                     * LoadBalancingScheme enum.
+                     * @name google.cloud.networkservices.v1.LoadBalancingScheme
+                     * @enum {number}
+                     * @property {number} LOAD_BALANCING_SCHEME_UNSPECIFIED=0 LOAD_BALANCING_SCHEME_UNSPECIFIED value
+                     * @property {number} INTERNAL_MANAGED=1 INTERNAL_MANAGED value
+                     * @property {number} EXTERNAL_MANAGED=2 EXTERNAL_MANAGED value
+                     */
+                    v1.LoadBalancingScheme = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOAD_BALANCING_SCHEME_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "INTERNAL_MANAGED"] = 1;
+                        values[valuesById[2] = "EXTERNAL_MANAGED"] = 2;
+                        return values;
+                    })();
+    
+                    v1.ExtensionChain = (function() {
+    
+                        /**
+                         * Properties of an ExtensionChain.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IExtensionChain
+                         * @property {string|null} [name] ExtensionChain name
+                         * @property {google.cloud.networkservices.v1.ExtensionChain.IMatchCondition|null} [matchCondition] ExtensionChain matchCondition
+                         * @property {Array.<google.cloud.networkservices.v1.ExtensionChain.IExtension>|null} [extensions] ExtensionChain extensions
+                         */
+    
+                        /**
+                         * Constructs a new ExtensionChain.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents an ExtensionChain.
+                         * @implements IExtensionChain
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IExtensionChain=} [properties] Properties to set
+                         */
+                        function ExtensionChain(properties) {
+                            this.extensions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExtensionChain name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @instance
+                         */
+                        ExtensionChain.prototype.name = "";
+    
+                        /**
+                         * ExtensionChain matchCondition.
+                         * @member {google.cloud.networkservices.v1.ExtensionChain.IMatchCondition|null|undefined} matchCondition
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @instance
+                         */
+                        ExtensionChain.prototype.matchCondition = null;
+    
+                        /**
+                         * ExtensionChain extensions.
+                         * @member {Array.<google.cloud.networkservices.v1.ExtensionChain.IExtension>} extensions
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @instance
+                         */
+                        ExtensionChain.prototype.extensions = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ExtensionChain instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IExtensionChain=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ExtensionChain} ExtensionChain instance
+                         */
+                        ExtensionChain.create = function create(properties) {
+                            return new ExtensionChain(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExtensionChain message. Does not implicitly {@link google.cloud.networkservices.v1.ExtensionChain.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IExtensionChain} message ExtensionChain message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExtensionChain.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.matchCondition != null && Object.hasOwnProperty.call(message, "matchCondition"))
+                                $root.google.cloud.networkservices.v1.ExtensionChain.MatchCondition.encode(message.matchCondition, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.extensions != null && message.extensions.length)
+                                for (var i = 0; i < message.extensions.length; ++i)
+                                    $root.google.cloud.networkservices.v1.ExtensionChain.Extension.encode(message.extensions[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExtensionChain message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ExtensionChain.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IExtensionChain} message ExtensionChain message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExtensionChain.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExtensionChain message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ExtensionChain} ExtensionChain
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExtensionChain.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ExtensionChain();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.matchCondition = $root.google.cloud.networkservices.v1.ExtensionChain.MatchCondition.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.extensions && message.extensions.length))
+                                            message.extensions = [];
+                                        message.extensions.push($root.google.cloud.networkservices.v1.ExtensionChain.Extension.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExtensionChain message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ExtensionChain} ExtensionChain
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExtensionChain.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExtensionChain message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExtensionChain.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.matchCondition != null && message.hasOwnProperty("matchCondition")) {
+                                var error = $root.google.cloud.networkservices.v1.ExtensionChain.MatchCondition.verify(message.matchCondition);
+                                if (error)
+                                    return "matchCondition." + error;
+                            }
+                            if (message.extensions != null && message.hasOwnProperty("extensions")) {
+                                if (!Array.isArray(message.extensions))
+                                    return "extensions: array expected";
+                                for (var i = 0; i < message.extensions.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.ExtensionChain.Extension.verify(message.extensions[i]);
+                                    if (error)
+                                        return "extensions." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExtensionChain message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ExtensionChain} ExtensionChain
+                         */
+                        ExtensionChain.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ExtensionChain)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ExtensionChain();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.matchCondition != null) {
+                                if (typeof object.matchCondition !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.ExtensionChain.matchCondition: object expected");
+                                message.matchCondition = $root.google.cloud.networkservices.v1.ExtensionChain.MatchCondition.fromObject(object.matchCondition);
+                            }
+                            if (object.extensions) {
+                                if (!Array.isArray(object.extensions))
+                                    throw TypeError(".google.cloud.networkservices.v1.ExtensionChain.extensions: array expected");
+                                message.extensions = [];
+                                for (var i = 0; i < object.extensions.length; ++i) {
+                                    if (typeof object.extensions[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ExtensionChain.extensions: object expected");
+                                    message.extensions[i] = $root.google.cloud.networkservices.v1.ExtensionChain.Extension.fromObject(object.extensions[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExtensionChain message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ExtensionChain} message ExtensionChain
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExtensionChain.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.extensions = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.matchCondition = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.matchCondition != null && message.hasOwnProperty("matchCondition"))
+                                object.matchCondition = $root.google.cloud.networkservices.v1.ExtensionChain.MatchCondition.toObject(message.matchCondition, options);
+                            if (message.extensions && message.extensions.length) {
+                                object.extensions = [];
+                                for (var j = 0; j < message.extensions.length; ++j)
+                                    object.extensions[j] = $root.google.cloud.networkservices.v1.ExtensionChain.Extension.toObject(message.extensions[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExtensionChain to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExtensionChain.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExtensionChain
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ExtensionChain
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExtensionChain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ExtensionChain";
+                        };
+    
+                        ExtensionChain.MatchCondition = (function() {
+    
+                            /**
+                             * Properties of a MatchCondition.
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain
+                             * @interface IMatchCondition
+                             * @property {string|null} [celExpression] MatchCondition celExpression
+                             */
+    
+                            /**
+                             * Constructs a new MatchCondition.
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain
+                             * @classdesc Represents a MatchCondition.
+                             * @implements IMatchCondition
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.ExtensionChain.IMatchCondition=} [properties] Properties to set
+                             */
+                            function MatchCondition(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MatchCondition celExpression.
+                             * @member {string} celExpression
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.MatchCondition
+                             * @instance
+                             */
+                            MatchCondition.prototype.celExpression = "";
+    
+                            /**
+                             * Creates a new MatchCondition instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.MatchCondition
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ExtensionChain.IMatchCondition=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.ExtensionChain.MatchCondition} MatchCondition instance
+                             */
+                            MatchCondition.create = function create(properties) {
+                                return new MatchCondition(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MatchCondition message. Does not implicitly {@link google.cloud.networkservices.v1.ExtensionChain.MatchCondition.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.MatchCondition
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ExtensionChain.IMatchCondition} message MatchCondition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MatchCondition.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.celExpression != null && Object.hasOwnProperty.call(message, "celExpression"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.celExpression);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MatchCondition message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ExtensionChain.MatchCondition.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.MatchCondition
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ExtensionChain.IMatchCondition} message MatchCondition message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MatchCondition.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MatchCondition message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.MatchCondition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.ExtensionChain.MatchCondition} MatchCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MatchCondition.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ExtensionChain.MatchCondition();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.celExpression = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MatchCondition message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.MatchCondition
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.ExtensionChain.MatchCondition} MatchCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MatchCondition.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MatchCondition message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.MatchCondition
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MatchCondition.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.celExpression != null && message.hasOwnProperty("celExpression"))
+                                    if (!$util.isString(message.celExpression))
+                                        return "celExpression: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MatchCondition message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.MatchCondition
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.ExtensionChain.MatchCondition} MatchCondition
+                             */
+                            MatchCondition.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.ExtensionChain.MatchCondition)
+                                    return object;
+                                var message = new $root.google.cloud.networkservices.v1.ExtensionChain.MatchCondition();
+                                if (object.celExpression != null)
+                                    message.celExpression = String(object.celExpression);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MatchCondition message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.MatchCondition
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ExtensionChain.MatchCondition} message MatchCondition
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MatchCondition.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.celExpression = "";
+                                if (message.celExpression != null && message.hasOwnProperty("celExpression"))
+                                    object.celExpression = message.celExpression;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MatchCondition to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.MatchCondition
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MatchCondition.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MatchCondition
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.MatchCondition
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MatchCondition.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.ExtensionChain.MatchCondition";
+                            };
+    
+                            return MatchCondition;
+                        })();
+    
+                        ExtensionChain.Extension = (function() {
+    
+                            /**
+                             * Properties of an Extension.
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain
+                             * @interface IExtension
+                             * @property {string|null} [name] Extension name
+                             * @property {string|null} [authority] Extension authority
+                             * @property {string|null} [service] Extension service
+                             * @property {Array.<google.cloud.networkservices.v1.EventType>|null} [supportedEvents] Extension supportedEvents
+                             * @property {google.protobuf.IDuration|null} [timeout] Extension timeout
+                             * @property {boolean|null} [failOpen] Extension failOpen
+                             * @property {Array.<string>|null} [forwardHeaders] Extension forwardHeaders
+                             */
+    
+                            /**
+                             * Constructs a new Extension.
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain
+                             * @classdesc Represents an Extension.
+                             * @implements IExtension
+                             * @constructor
+                             * @param {google.cloud.networkservices.v1.ExtensionChain.IExtension=} [properties] Properties to set
+                             */
+                            function Extension(properties) {
+                                this.supportedEvents = [];
+                                this.forwardHeaders = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Extension name.
+                             * @member {string} name
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.name = "";
+    
+                            /**
+                             * Extension authority.
+                             * @member {string} authority
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.authority = "";
+    
+                            /**
+                             * Extension service.
+                             * @member {string} service
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.service = "";
+    
+                            /**
+                             * Extension supportedEvents.
+                             * @member {Array.<google.cloud.networkservices.v1.EventType>} supportedEvents
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.supportedEvents = $util.emptyArray;
+    
+                            /**
+                             * Extension timeout.
+                             * @member {google.protobuf.IDuration|null|undefined} timeout
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.timeout = null;
+    
+                            /**
+                             * Extension failOpen.
+                             * @member {boolean} failOpen
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.failOpen = false;
+    
+                            /**
+                             * Extension forwardHeaders.
+                             * @member {Array.<string>} forwardHeaders
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             */
+                            Extension.prototype.forwardHeaders = $util.emptyArray;
+    
+                            /**
+                             * Creates a new Extension instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ExtensionChain.IExtension=} [properties] Properties to set
+                             * @returns {google.cloud.networkservices.v1.ExtensionChain.Extension} Extension instance
+                             */
+                            Extension.create = function create(properties) {
+                                return new Extension(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Extension message. Does not implicitly {@link google.cloud.networkservices.v1.ExtensionChain.Extension.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ExtensionChain.IExtension} message Extension message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Extension.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.authority != null && Object.hasOwnProperty.call(message, "authority"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.authority);
+                                if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.service);
+                                if (message.supportedEvents != null && message.supportedEvents.length) {
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                                    for (var i = 0; i < message.supportedEvents.length; ++i)
+                                        writer.int32(message.supportedEvents[i]);
+                                    writer.ldelim();
+                                }
+                                if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
+                                    $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.failOpen != null && Object.hasOwnProperty.call(message, "failOpen"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.failOpen);
+                                if (message.forwardHeaders != null && message.forwardHeaders.length)
+                                    for (var i = 0; i < message.forwardHeaders.length; ++i)
+                                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.forwardHeaders[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Extension message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ExtensionChain.Extension.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ExtensionChain.IExtension} message Extension message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Extension.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Extension message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkservices.v1.ExtensionChain.Extension} Extension
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Extension.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ExtensionChain.Extension();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.authority = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.service = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.supportedEvents && message.supportedEvents.length))
+                                                message.supportedEvents = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.supportedEvents.push(reader.int32());
+                                            } else
+                                                message.supportedEvents.push(reader.int32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.failOpen = reader.bool();
+                                            break;
+                                        }
+                                    case 7: {
+                                            if (!(message.forwardHeaders && message.forwardHeaders.length))
+                                                message.forwardHeaders = [];
+                                            message.forwardHeaders.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Extension message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkservices.v1.ExtensionChain.Extension} Extension
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Extension.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Extension message.
+                             * @function verify
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Extension.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.authority != null && message.hasOwnProperty("authority"))
+                                    if (!$util.isString(message.authority))
+                                        return "authority: string expected";
+                                if (message.service != null && message.hasOwnProperty("service"))
+                                    if (!$util.isString(message.service))
+                                        return "service: string expected";
+                                if (message.supportedEvents != null && message.hasOwnProperty("supportedEvents")) {
+                                    if (!Array.isArray(message.supportedEvents))
+                                        return "supportedEvents: array expected";
+                                    for (var i = 0; i < message.supportedEvents.length; ++i)
+                                        switch (message.supportedEvents[i]) {
+                                        default:
+                                            return "supportedEvents: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                            break;
+                                        }
+                                }
+                                if (message.timeout != null && message.hasOwnProperty("timeout")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.timeout);
+                                    if (error)
+                                        return "timeout." + error;
+                                }
+                                if (message.failOpen != null && message.hasOwnProperty("failOpen"))
+                                    if (typeof message.failOpen !== "boolean")
+                                        return "failOpen: boolean expected";
+                                if (message.forwardHeaders != null && message.hasOwnProperty("forwardHeaders")) {
+                                    if (!Array.isArray(message.forwardHeaders))
+                                        return "forwardHeaders: array expected";
+                                    for (var i = 0; i < message.forwardHeaders.length; ++i)
+                                        if (!$util.isString(message.forwardHeaders[i]))
+                                            return "forwardHeaders: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Extension message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkservices.v1.ExtensionChain.Extension} Extension
+                             */
+                            Extension.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkservices.v1.ExtensionChain.Extension)
+                                    return object;
+                                var message = new $root.google.cloud.networkservices.v1.ExtensionChain.Extension();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.authority != null)
+                                    message.authority = String(object.authority);
+                                if (object.service != null)
+                                    message.service = String(object.service);
+                                if (object.supportedEvents) {
+                                    if (!Array.isArray(object.supportedEvents))
+                                        throw TypeError(".google.cloud.networkservices.v1.ExtensionChain.Extension.supportedEvents: array expected");
+                                    message.supportedEvents = [];
+                                    for (var i = 0; i < object.supportedEvents.length; ++i)
+                                        switch (object.supportedEvents[i]) {
+                                        default:
+                                            if (typeof object.supportedEvents[i] === "number") {
+                                                message.supportedEvents[i] = object.supportedEvents[i];
+                                                break;
+                                            }
+                                        case "EVENT_TYPE_UNSPECIFIED":
+                                        case 0:
+                                            message.supportedEvents[i] = 0;
+                                            break;
+                                        case "REQUEST_HEADERS":
+                                        case 1:
+                                            message.supportedEvents[i] = 1;
+                                            break;
+                                        case "REQUEST_BODY":
+                                        case 2:
+                                            message.supportedEvents[i] = 2;
+                                            break;
+                                        case "RESPONSE_HEADERS":
+                                        case 3:
+                                            message.supportedEvents[i] = 3;
+                                            break;
+                                        case "RESPONSE_BODY":
+                                        case 4:
+                                            message.supportedEvents[i] = 4;
+                                            break;
+                                        case "REQUEST_TRAILERS":
+                                        case 5:
+                                            message.supportedEvents[i] = 5;
+                                            break;
+                                        case "RESPONSE_TRAILERS":
+                                        case 6:
+                                            message.supportedEvents[i] = 6;
+                                            break;
+                                        }
+                                }
+                                if (object.timeout != null) {
+                                    if (typeof object.timeout !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ExtensionChain.Extension.timeout: object expected");
+                                    message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout);
+                                }
+                                if (object.failOpen != null)
+                                    message.failOpen = Boolean(object.failOpen);
+                                if (object.forwardHeaders) {
+                                    if (!Array.isArray(object.forwardHeaders))
+                                        throw TypeError(".google.cloud.networkservices.v1.ExtensionChain.Extension.forwardHeaders: array expected");
+                                    message.forwardHeaders = [];
+                                    for (var i = 0; i < object.forwardHeaders.length; ++i)
+                                        message.forwardHeaders[i] = String(object.forwardHeaders[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Extension message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @static
+                             * @param {google.cloud.networkservices.v1.ExtensionChain.Extension} message Extension
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Extension.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.supportedEvents = [];
+                                    object.forwardHeaders = [];
+                                }
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.authority = "";
+                                    object.service = "";
+                                    object.timeout = null;
+                                    object.failOpen = false;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.authority != null && message.hasOwnProperty("authority"))
+                                    object.authority = message.authority;
+                                if (message.service != null && message.hasOwnProperty("service"))
+                                    object.service = message.service;
+                                if (message.supportedEvents && message.supportedEvents.length) {
+                                    object.supportedEvents = [];
+                                    for (var j = 0; j < message.supportedEvents.length; ++j)
+                                        object.supportedEvents[j] = options.enums === String ? $root.google.cloud.networkservices.v1.EventType[message.supportedEvents[j]] === undefined ? message.supportedEvents[j] : $root.google.cloud.networkservices.v1.EventType[message.supportedEvents[j]] : message.supportedEvents[j];
+                                }
+                                if (message.timeout != null && message.hasOwnProperty("timeout"))
+                                    object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options);
+                                if (message.failOpen != null && message.hasOwnProperty("failOpen"))
+                                    object.failOpen = message.failOpen;
+                                if (message.forwardHeaders && message.forwardHeaders.length) {
+                                    object.forwardHeaders = [];
+                                    for (var j = 0; j < message.forwardHeaders.length; ++j)
+                                        object.forwardHeaders[j] = message.forwardHeaders[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Extension to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Extension.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Extension
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkservices.v1.ExtensionChain.Extension
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Extension.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkservices.v1.ExtensionChain.Extension";
+                            };
+    
+                            return Extension;
+                        })();
+    
+                        return ExtensionChain;
+                    })();
+    
+                    v1.LbTrafficExtension = (function() {
+    
+                        /**
+                         * Properties of a LbTrafficExtension.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface ILbTrafficExtension
+                         * @property {string|null} [name] LbTrafficExtension name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] LbTrafficExtension createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] LbTrafficExtension updateTime
+                         * @property {string|null} [description] LbTrafficExtension description
+                         * @property {Object.<string,string>|null} [labels] LbTrafficExtension labels
+                         * @property {Array.<string>|null} [forwardingRules] LbTrafficExtension forwardingRules
+                         * @property {Array.<google.cloud.networkservices.v1.IExtensionChain>|null} [extensionChains] LbTrafficExtension extensionChains
+                         * @property {google.cloud.networkservices.v1.LoadBalancingScheme|null} [loadBalancingScheme] LbTrafficExtension loadBalancingScheme
+                         */
+    
+                        /**
+                         * Constructs a new LbTrafficExtension.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a LbTrafficExtension.
+                         * @implements ILbTrafficExtension
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.ILbTrafficExtension=} [properties] Properties to set
+                         */
+                        function LbTrafficExtension(properties) {
+                            this.labels = {};
+                            this.forwardingRules = [];
+                            this.extensionChains = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LbTrafficExtension name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @instance
+                         */
+                        LbTrafficExtension.prototype.name = "";
+    
+                        /**
+                         * LbTrafficExtension createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @instance
+                         */
+                        LbTrafficExtension.prototype.createTime = null;
+    
+                        /**
+                         * LbTrafficExtension updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @instance
+                         */
+                        LbTrafficExtension.prototype.updateTime = null;
+    
+                        /**
+                         * LbTrafficExtension description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @instance
+                         */
+                        LbTrafficExtension.prototype.description = "";
+    
+                        /**
+                         * LbTrafficExtension labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @instance
+                         */
+                        LbTrafficExtension.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * LbTrafficExtension forwardingRules.
+                         * @member {Array.<string>} forwardingRules
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @instance
+                         */
+                        LbTrafficExtension.prototype.forwardingRules = $util.emptyArray;
+    
+                        /**
+                         * LbTrafficExtension extensionChains.
+                         * @member {Array.<google.cloud.networkservices.v1.IExtensionChain>} extensionChains
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @instance
+                         */
+                        LbTrafficExtension.prototype.extensionChains = $util.emptyArray;
+    
+                        /**
+                         * LbTrafficExtension loadBalancingScheme.
+                         * @member {google.cloud.networkservices.v1.LoadBalancingScheme} loadBalancingScheme
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @instance
+                         */
+                        LbTrafficExtension.prototype.loadBalancingScheme = 0;
+    
+                        /**
+                         * Creates a new LbTrafficExtension instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ILbTrafficExtension=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.LbTrafficExtension} LbTrafficExtension instance
+                         */
+                        LbTrafficExtension.create = function create(properties) {
+                            return new LbTrafficExtension(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LbTrafficExtension message. Does not implicitly {@link google.cloud.networkservices.v1.LbTrafficExtension.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ILbTrafficExtension} message LbTrafficExtension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LbTrafficExtension.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.forwardingRules != null && message.forwardingRules.length)
+                                for (var i = 0; i < message.forwardingRules.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.forwardingRules[i]);
+                            if (message.extensionChains != null && message.extensionChains.length)
+                                for (var i = 0; i < message.extensionChains.length; ++i)
+                                    $root.google.cloud.networkservices.v1.ExtensionChain.encode(message.extensionChains[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.loadBalancingScheme != null && Object.hasOwnProperty.call(message, "loadBalancingScheme"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.loadBalancingScheme);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.description);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LbTrafficExtension message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.LbTrafficExtension.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ILbTrafficExtension} message LbTrafficExtension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LbTrafficExtension.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LbTrafficExtension message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.LbTrafficExtension} LbTrafficExtension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LbTrafficExtension.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.LbTrafficExtension(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.forwardingRules && message.forwardingRules.length))
+                                            message.forwardingRules = [];
+                                        message.forwardingRules.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.extensionChains && message.extensionChains.length))
+                                            message.extensionChains = [];
+                                        message.extensionChains.push($root.google.cloud.networkservices.v1.ExtensionChain.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 8: {
+                                        message.loadBalancingScheme = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LbTrafficExtension message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.LbTrafficExtension} LbTrafficExtension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LbTrafficExtension.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LbTrafficExtension message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LbTrafficExtension.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.forwardingRules != null && message.hasOwnProperty("forwardingRules")) {
+                                if (!Array.isArray(message.forwardingRules))
+                                    return "forwardingRules: array expected";
+                                for (var i = 0; i < message.forwardingRules.length; ++i)
+                                    if (!$util.isString(message.forwardingRules[i]))
+                                        return "forwardingRules: string[] expected";
+                            }
+                            if (message.extensionChains != null && message.hasOwnProperty("extensionChains")) {
+                                if (!Array.isArray(message.extensionChains))
+                                    return "extensionChains: array expected";
+                                for (var i = 0; i < message.extensionChains.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.ExtensionChain.verify(message.extensionChains[i]);
+                                    if (error)
+                                        return "extensionChains." + error;
+                                }
+                            }
+                            if (message.loadBalancingScheme != null && message.hasOwnProperty("loadBalancingScheme"))
+                                switch (message.loadBalancingScheme) {
+                                default:
+                                    return "loadBalancingScheme: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LbTrafficExtension message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.LbTrafficExtension} LbTrafficExtension
+                         */
+                        LbTrafficExtension.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.LbTrafficExtension)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.LbTrafficExtension();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.LbTrafficExtension.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.LbTrafficExtension.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.LbTrafficExtension.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.forwardingRules) {
+                                if (!Array.isArray(object.forwardingRules))
+                                    throw TypeError(".google.cloud.networkservices.v1.LbTrafficExtension.forwardingRules: array expected");
+                                message.forwardingRules = [];
+                                for (var i = 0; i < object.forwardingRules.length; ++i)
+                                    message.forwardingRules[i] = String(object.forwardingRules[i]);
+                            }
+                            if (object.extensionChains) {
+                                if (!Array.isArray(object.extensionChains))
+                                    throw TypeError(".google.cloud.networkservices.v1.LbTrafficExtension.extensionChains: array expected");
+                                message.extensionChains = [];
+                                for (var i = 0; i < object.extensionChains.length; ++i) {
+                                    if (typeof object.extensionChains[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.LbTrafficExtension.extensionChains: object expected");
+                                    message.extensionChains[i] = $root.google.cloud.networkservices.v1.ExtensionChain.fromObject(object.extensionChains[i]);
+                                }
+                            }
+                            switch (object.loadBalancingScheme) {
+                            default:
+                                if (typeof object.loadBalancingScheme === "number") {
+                                    message.loadBalancingScheme = object.loadBalancingScheme;
+                                    break;
+                                }
+                                break;
+                            case "LOAD_BALANCING_SCHEME_UNSPECIFIED":
+                            case 0:
+                                message.loadBalancingScheme = 0;
+                                break;
+                            case "INTERNAL_MANAGED":
+                            case 1:
+                                message.loadBalancingScheme = 1;
+                                break;
+                            case "EXTERNAL_MANAGED":
+                            case 2:
+                                message.loadBalancingScheme = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LbTrafficExtension message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.LbTrafficExtension} message LbTrafficExtension
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LbTrafficExtension.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.forwardingRules = [];
+                                object.extensionChains = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.loadBalancingScheme = options.enums === String ? "LOAD_BALANCING_SCHEME_UNSPECIFIED" : 0;
+                                object.description = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.forwardingRules && message.forwardingRules.length) {
+                                object.forwardingRules = [];
+                                for (var j = 0; j < message.forwardingRules.length; ++j)
+                                    object.forwardingRules[j] = message.forwardingRules[j];
+                            }
+                            if (message.extensionChains && message.extensionChains.length) {
+                                object.extensionChains = [];
+                                for (var j = 0; j < message.extensionChains.length; ++j)
+                                    object.extensionChains[j] = $root.google.cloud.networkservices.v1.ExtensionChain.toObject(message.extensionChains[j], options);
+                            }
+                            if (message.loadBalancingScheme != null && message.hasOwnProperty("loadBalancingScheme"))
+                                object.loadBalancingScheme = options.enums === String ? $root.google.cloud.networkservices.v1.LoadBalancingScheme[message.loadBalancingScheme] === undefined ? message.loadBalancingScheme : $root.google.cloud.networkservices.v1.LoadBalancingScheme[message.loadBalancingScheme] : message.loadBalancingScheme;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LbTrafficExtension to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LbTrafficExtension.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LbTrafficExtension
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.LbTrafficExtension
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LbTrafficExtension.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.LbTrafficExtension";
+                        };
+    
+                        return LbTrafficExtension;
+                    })();
+    
+                    v1.ListLbTrafficExtensionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListLbTrafficExtensionsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListLbTrafficExtensionsRequest
+                         * @property {string|null} [parent] ListLbTrafficExtensionsRequest parent
+                         * @property {number|null} [pageSize] ListLbTrafficExtensionsRequest pageSize
+                         * @property {string|null} [pageToken] ListLbTrafficExtensionsRequest pageToken
+                         * @property {string|null} [filter] ListLbTrafficExtensionsRequest filter
+                         * @property {string|null} [orderBy] ListLbTrafficExtensionsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListLbTrafficExtensionsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListLbTrafficExtensionsRequest.
+                         * @implements IListLbTrafficExtensionsRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest=} [properties] Properties to set
+                         */
+                        function ListLbTrafficExtensionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListLbTrafficExtensionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @instance
+                         */
+                        ListLbTrafficExtensionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListLbTrafficExtensionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @instance
+                         */
+                        ListLbTrafficExtensionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListLbTrafficExtensionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @instance
+                         */
+                        ListLbTrafficExtensionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListLbTrafficExtensionsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @instance
+                         */
+                        ListLbTrafficExtensionsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListLbTrafficExtensionsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @instance
+                         */
+                        ListLbTrafficExtensionsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListLbTrafficExtensionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest} ListLbTrafficExtensionsRequest instance
+                         */
+                        ListLbTrafficExtensionsRequest.create = function create(properties) {
+                            return new ListLbTrafficExtensionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListLbTrafficExtensionsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest} message ListLbTrafficExtensionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLbTrafficExtensionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListLbTrafficExtensionsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbTrafficExtensionsRequest} message ListLbTrafficExtensionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLbTrafficExtensionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListLbTrafficExtensionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest} ListLbTrafficExtensionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLbTrafficExtensionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListLbTrafficExtensionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest} ListLbTrafficExtensionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLbTrafficExtensionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListLbTrafficExtensionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListLbTrafficExtensionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListLbTrafficExtensionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest} ListLbTrafficExtensionsRequest
+                         */
+                        ListLbTrafficExtensionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListLbTrafficExtensionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest} message ListLbTrafficExtensionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListLbTrafficExtensionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListLbTrafficExtensionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListLbTrafficExtensionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListLbTrafficExtensionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListLbTrafficExtensionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListLbTrafficExtensionsRequest";
+                        };
+    
+                        return ListLbTrafficExtensionsRequest;
+                    })();
+    
+                    v1.ListLbTrafficExtensionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListLbTrafficExtensionsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListLbTrafficExtensionsResponse
+                         * @property {Array.<google.cloud.networkservices.v1.ILbTrafficExtension>|null} [lbTrafficExtensions] ListLbTrafficExtensionsResponse lbTrafficExtensions
+                         * @property {string|null} [nextPageToken] ListLbTrafficExtensionsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListLbTrafficExtensionsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListLbTrafficExtensionsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListLbTrafficExtensionsResponse.
+                         * @implements IListLbTrafficExtensionsResponse
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse=} [properties] Properties to set
+                         */
+                        function ListLbTrafficExtensionsResponse(properties) {
+                            this.lbTrafficExtensions = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListLbTrafficExtensionsResponse lbTrafficExtensions.
+                         * @member {Array.<google.cloud.networkservices.v1.ILbTrafficExtension>} lbTrafficExtensions
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @instance
+                         */
+                        ListLbTrafficExtensionsResponse.prototype.lbTrafficExtensions = $util.emptyArray;
+    
+                        /**
+                         * ListLbTrafficExtensionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @instance
+                         */
+                        ListLbTrafficExtensionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListLbTrafficExtensionsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @instance
+                         */
+                        ListLbTrafficExtensionsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListLbTrafficExtensionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse} ListLbTrafficExtensionsResponse instance
+                         */
+                        ListLbTrafficExtensionsResponse.create = function create(properties) {
+                            return new ListLbTrafficExtensionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListLbTrafficExtensionsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse} message ListLbTrafficExtensionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLbTrafficExtensionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.lbTrafficExtensions != null && message.lbTrafficExtensions.length)
+                                for (var i = 0; i < message.lbTrafficExtensions.length; ++i)
+                                    $root.google.cloud.networkservices.v1.LbTrafficExtension.encode(message.lbTrafficExtensions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListLbTrafficExtensionsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbTrafficExtensionsResponse} message ListLbTrafficExtensionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLbTrafficExtensionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListLbTrafficExtensionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse} ListLbTrafficExtensionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLbTrafficExtensionsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.lbTrafficExtensions && message.lbTrafficExtensions.length))
+                                            message.lbTrafficExtensions = [];
+                                        message.lbTrafficExtensions.push($root.google.cloud.networkservices.v1.LbTrafficExtension.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListLbTrafficExtensionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse} ListLbTrafficExtensionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLbTrafficExtensionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListLbTrafficExtensionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListLbTrafficExtensionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.lbTrafficExtensions != null && message.hasOwnProperty("lbTrafficExtensions")) {
+                                if (!Array.isArray(message.lbTrafficExtensions))
+                                    return "lbTrafficExtensions: array expected";
+                                for (var i = 0; i < message.lbTrafficExtensions.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.LbTrafficExtension.verify(message.lbTrafficExtensions[i]);
+                                    if (error)
+                                        return "lbTrafficExtensions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListLbTrafficExtensionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse} ListLbTrafficExtensionsResponse
+                         */
+                        ListLbTrafficExtensionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse();
+                            if (object.lbTrafficExtensions) {
+                                if (!Array.isArray(object.lbTrafficExtensions))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse.lbTrafficExtensions: array expected");
+                                message.lbTrafficExtensions = [];
+                                for (var i = 0; i < object.lbTrafficExtensions.length; ++i) {
+                                    if (typeof object.lbTrafficExtensions[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse.lbTrafficExtensions: object expected");
+                                    message.lbTrafficExtensions[i] = $root.google.cloud.networkservices.v1.LbTrafficExtension.fromObject(object.lbTrafficExtensions[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListLbTrafficExtensionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse} message ListLbTrafficExtensionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListLbTrafficExtensionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.lbTrafficExtensions = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.lbTrafficExtensions && message.lbTrafficExtensions.length) {
+                                object.lbTrafficExtensions = [];
+                                for (var j = 0; j < message.lbTrafficExtensions.length; ++j)
+                                    object.lbTrafficExtensions[j] = $root.google.cloud.networkservices.v1.LbTrafficExtension.toObject(message.lbTrafficExtensions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListLbTrafficExtensionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListLbTrafficExtensionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListLbTrafficExtensionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListLbTrafficExtensionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListLbTrafficExtensionsResponse";
+                        };
+    
+                        return ListLbTrafficExtensionsResponse;
+                    })();
+    
+                    v1.GetLbTrafficExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetLbTrafficExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IGetLbTrafficExtensionRequest
+                         * @property {string|null} [name] GetLbTrafficExtensionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetLbTrafficExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a GetLbTrafficExtensionRequest.
+                         * @implements IGetLbTrafficExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest=} [properties] Properties to set
+                         */
+                        function GetLbTrafficExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetLbTrafficExtensionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.GetLbTrafficExtensionRequest
+                         * @instance
+                         */
+                        GetLbTrafficExtensionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetLbTrafficExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.GetLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.GetLbTrafficExtensionRequest} GetLbTrafficExtensionRequest instance
+                         */
+                        GetLbTrafficExtensionRequest.create = function create(properties) {
+                            return new GetLbTrafficExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetLbTrafficExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetLbTrafficExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.GetLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest} message GetLbTrafficExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetLbTrafficExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetLbTrafficExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetLbTrafficExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetLbTrafficExtensionRequest} message GetLbTrafficExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetLbTrafficExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetLbTrafficExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.GetLbTrafficExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.GetLbTrafficExtensionRequest} GetLbTrafficExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetLbTrafficExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetLbTrafficExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.GetLbTrafficExtensionRequest} GetLbTrafficExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetLbTrafficExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetLbTrafficExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.GetLbTrafficExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetLbTrafficExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetLbTrafficExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.GetLbTrafficExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.GetLbTrafficExtensionRequest} GetLbTrafficExtensionRequest
+                         */
+                        GetLbTrafficExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.GetLbTrafficExtensionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetLbTrafficExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.GetLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.GetLbTrafficExtensionRequest} message GetLbTrafficExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetLbTrafficExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetLbTrafficExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.GetLbTrafficExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetLbTrafficExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetLbTrafficExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.GetLbTrafficExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetLbTrafficExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.GetLbTrafficExtensionRequest";
+                        };
+    
+                        return GetLbTrafficExtensionRequest;
+                    })();
+    
+                    v1.CreateLbTrafficExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateLbTrafficExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface ICreateLbTrafficExtensionRequest
+                         * @property {string|null} [parent] CreateLbTrafficExtensionRequest parent
+                         * @property {string|null} [lbTrafficExtensionId] CreateLbTrafficExtensionRequest lbTrafficExtensionId
+                         * @property {google.cloud.networkservices.v1.ILbTrafficExtension|null} [lbTrafficExtension] CreateLbTrafficExtensionRequest lbTrafficExtension
+                         * @property {string|null} [requestId] CreateLbTrafficExtensionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateLbTrafficExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a CreateLbTrafficExtensionRequest.
+                         * @implements ICreateLbTrafficExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest=} [properties] Properties to set
+                         */
+                        function CreateLbTrafficExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateLbTrafficExtensionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @instance
+                         */
+                        CreateLbTrafficExtensionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateLbTrafficExtensionRequest lbTrafficExtensionId.
+                         * @member {string} lbTrafficExtensionId
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @instance
+                         */
+                        CreateLbTrafficExtensionRequest.prototype.lbTrafficExtensionId = "";
+    
+                        /**
+                         * CreateLbTrafficExtensionRequest lbTrafficExtension.
+                         * @member {google.cloud.networkservices.v1.ILbTrafficExtension|null|undefined} lbTrafficExtension
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @instance
+                         */
+                        CreateLbTrafficExtensionRequest.prototype.lbTrafficExtension = null;
+    
+                        /**
+                         * CreateLbTrafficExtensionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @instance
+                         */
+                        CreateLbTrafficExtensionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateLbTrafficExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest} CreateLbTrafficExtensionRequest instance
+                         */
+                        CreateLbTrafficExtensionRequest.create = function create(properties) {
+                            return new CreateLbTrafficExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateLbTrafficExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest} message CreateLbTrafficExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateLbTrafficExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.lbTrafficExtensionId != null && Object.hasOwnProperty.call(message, "lbTrafficExtensionId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.lbTrafficExtensionId);
+                            if (message.lbTrafficExtension != null && Object.hasOwnProperty.call(message, "lbTrafficExtension"))
+                                $root.google.cloud.networkservices.v1.LbTrafficExtension.encode(message.lbTrafficExtension, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateLbTrafficExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateLbTrafficExtensionRequest} message CreateLbTrafficExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateLbTrafficExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateLbTrafficExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest} CreateLbTrafficExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.lbTrafficExtensionId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.lbTrafficExtension = $root.google.cloud.networkservices.v1.LbTrafficExtension.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateLbTrafficExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest} CreateLbTrafficExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateLbTrafficExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateLbTrafficExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateLbTrafficExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.lbTrafficExtensionId != null && message.hasOwnProperty("lbTrafficExtensionId"))
+                                if (!$util.isString(message.lbTrafficExtensionId))
+                                    return "lbTrafficExtensionId: string expected";
+                            if (message.lbTrafficExtension != null && message.hasOwnProperty("lbTrafficExtension")) {
+                                var error = $root.google.cloud.networkservices.v1.LbTrafficExtension.verify(message.lbTrafficExtension);
+                                if (error)
+                                    return "lbTrafficExtension." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateLbTrafficExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest} CreateLbTrafficExtensionRequest
+                         */
+                        CreateLbTrafficExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.lbTrafficExtensionId != null)
+                                message.lbTrafficExtensionId = String(object.lbTrafficExtensionId);
+                            if (object.lbTrafficExtension != null) {
+                                if (typeof object.lbTrafficExtension !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest.lbTrafficExtension: object expected");
+                                message.lbTrafficExtension = $root.google.cloud.networkservices.v1.LbTrafficExtension.fromObject(object.lbTrafficExtension);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateLbTrafficExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest} message CreateLbTrafficExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateLbTrafficExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.lbTrafficExtensionId = "";
+                                object.lbTrafficExtension = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.lbTrafficExtensionId != null && message.hasOwnProperty("lbTrafficExtensionId"))
+                                object.lbTrafficExtensionId = message.lbTrafficExtensionId;
+                            if (message.lbTrafficExtension != null && message.hasOwnProperty("lbTrafficExtension"))
+                                object.lbTrafficExtension = $root.google.cloud.networkservices.v1.LbTrafficExtension.toObject(message.lbTrafficExtension, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateLbTrafficExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateLbTrafficExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateLbTrafficExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateLbTrafficExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.CreateLbTrafficExtensionRequest";
+                        };
+    
+                        return CreateLbTrafficExtensionRequest;
+                    })();
+    
+                    v1.UpdateLbTrafficExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateLbTrafficExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IUpdateLbTrafficExtensionRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateLbTrafficExtensionRequest updateMask
+                         * @property {google.cloud.networkservices.v1.ILbTrafficExtension|null} [lbTrafficExtension] UpdateLbTrafficExtensionRequest lbTrafficExtension
+                         * @property {string|null} [requestId] UpdateLbTrafficExtensionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateLbTrafficExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents an UpdateLbTrafficExtensionRequest.
+                         * @implements IUpdateLbTrafficExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest=} [properties] Properties to set
+                         */
+                        function UpdateLbTrafficExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateLbTrafficExtensionRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @instance
+                         */
+                        UpdateLbTrafficExtensionRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateLbTrafficExtensionRequest lbTrafficExtension.
+                         * @member {google.cloud.networkservices.v1.ILbTrafficExtension|null|undefined} lbTrafficExtension
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @instance
+                         */
+                        UpdateLbTrafficExtensionRequest.prototype.lbTrafficExtension = null;
+    
+                        /**
+                         * UpdateLbTrafficExtensionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @instance
+                         */
+                        UpdateLbTrafficExtensionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateLbTrafficExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest} UpdateLbTrafficExtensionRequest instance
+                         */
+                        UpdateLbTrafficExtensionRequest.create = function create(properties) {
+                            return new UpdateLbTrafficExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateLbTrafficExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest} message UpdateLbTrafficExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateLbTrafficExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.lbTrafficExtension != null && Object.hasOwnProperty.call(message, "lbTrafficExtension"))
+                                $root.google.cloud.networkservices.v1.LbTrafficExtension.encode(message.lbTrafficExtension, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateLbTrafficExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateLbTrafficExtensionRequest} message UpdateLbTrafficExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateLbTrafficExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateLbTrafficExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest} UpdateLbTrafficExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.lbTrafficExtension = $root.google.cloud.networkservices.v1.LbTrafficExtension.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateLbTrafficExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest} UpdateLbTrafficExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateLbTrafficExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateLbTrafficExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateLbTrafficExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.lbTrafficExtension != null && message.hasOwnProperty("lbTrafficExtension")) {
+                                var error = $root.google.cloud.networkservices.v1.LbTrafficExtension.verify(message.lbTrafficExtension);
+                                if (error)
+                                    return "lbTrafficExtension." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateLbTrafficExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest} UpdateLbTrafficExtensionRequest
+                         */
+                        UpdateLbTrafficExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.lbTrafficExtension != null) {
+                                if (typeof object.lbTrafficExtension !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest.lbTrafficExtension: object expected");
+                                message.lbTrafficExtension = $root.google.cloud.networkservices.v1.LbTrafficExtension.fromObject(object.lbTrafficExtension);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateLbTrafficExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest} message UpdateLbTrafficExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateLbTrafficExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.lbTrafficExtension = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.lbTrafficExtension != null && message.hasOwnProperty("lbTrafficExtension"))
+                                object.lbTrafficExtension = $root.google.cloud.networkservices.v1.LbTrafficExtension.toObject(message.lbTrafficExtension, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateLbTrafficExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateLbTrafficExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateLbTrafficExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateLbTrafficExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.UpdateLbTrafficExtensionRequest";
+                        };
+    
+                        return UpdateLbTrafficExtensionRequest;
+                    })();
+    
+                    v1.DeleteLbTrafficExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteLbTrafficExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IDeleteLbTrafficExtensionRequest
+                         * @property {string|null} [name] DeleteLbTrafficExtensionRequest name
+                         * @property {string|null} [requestId] DeleteLbTrafficExtensionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteLbTrafficExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a DeleteLbTrafficExtensionRequest.
+                         * @implements IDeleteLbTrafficExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest=} [properties] Properties to set
+                         */
+                        function DeleteLbTrafficExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteLbTrafficExtensionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @instance
+                         */
+                        DeleteLbTrafficExtensionRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteLbTrafficExtensionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @instance
+                         */
+                        DeleteLbTrafficExtensionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteLbTrafficExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest} DeleteLbTrafficExtensionRequest instance
+                         */
+                        DeleteLbTrafficExtensionRequest.create = function create(properties) {
+                            return new DeleteLbTrafficExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteLbTrafficExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest} message DeleteLbTrafficExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteLbTrafficExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteLbTrafficExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteLbTrafficExtensionRequest} message DeleteLbTrafficExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteLbTrafficExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteLbTrafficExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest} DeleteLbTrafficExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteLbTrafficExtensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteLbTrafficExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest} DeleteLbTrafficExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteLbTrafficExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteLbTrafficExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteLbTrafficExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteLbTrafficExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest} DeleteLbTrafficExtensionRequest
+                         */
+                        DeleteLbTrafficExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteLbTrafficExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest} message DeleteLbTrafficExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteLbTrafficExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteLbTrafficExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteLbTrafficExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteLbTrafficExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteLbTrafficExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.DeleteLbTrafficExtensionRequest";
+                        };
+    
+                        return DeleteLbTrafficExtensionRequest;
+                    })();
+    
+                    v1.LbRouteExtension = (function() {
+    
+                        /**
+                         * Properties of a LbRouteExtension.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface ILbRouteExtension
+                         * @property {string|null} [name] LbRouteExtension name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] LbRouteExtension createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] LbRouteExtension updateTime
+                         * @property {string|null} [description] LbRouteExtension description
+                         * @property {Object.<string,string>|null} [labels] LbRouteExtension labels
+                         * @property {Array.<string>|null} [forwardingRules] LbRouteExtension forwardingRules
+                         * @property {Array.<google.cloud.networkservices.v1.IExtensionChain>|null} [extensionChains] LbRouteExtension extensionChains
+                         * @property {google.cloud.networkservices.v1.LoadBalancingScheme|null} [loadBalancingScheme] LbRouteExtension loadBalancingScheme
+                         */
+    
+                        /**
+                         * Constructs a new LbRouteExtension.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a LbRouteExtension.
+                         * @implements ILbRouteExtension
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.ILbRouteExtension=} [properties] Properties to set
+                         */
+                        function LbRouteExtension(properties) {
+                            this.labels = {};
+                            this.forwardingRules = [];
+                            this.extensionChains = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LbRouteExtension name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @instance
+                         */
+                        LbRouteExtension.prototype.name = "";
+    
+                        /**
+                         * LbRouteExtension createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @instance
+                         */
+                        LbRouteExtension.prototype.createTime = null;
+    
+                        /**
+                         * LbRouteExtension updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @instance
+                         */
+                        LbRouteExtension.prototype.updateTime = null;
+    
+                        /**
+                         * LbRouteExtension description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @instance
+                         */
+                        LbRouteExtension.prototype.description = "";
+    
+                        /**
+                         * LbRouteExtension labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @instance
+                         */
+                        LbRouteExtension.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * LbRouteExtension forwardingRules.
+                         * @member {Array.<string>} forwardingRules
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @instance
+                         */
+                        LbRouteExtension.prototype.forwardingRules = $util.emptyArray;
+    
+                        /**
+                         * LbRouteExtension extensionChains.
+                         * @member {Array.<google.cloud.networkservices.v1.IExtensionChain>} extensionChains
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @instance
+                         */
+                        LbRouteExtension.prototype.extensionChains = $util.emptyArray;
+    
+                        /**
+                         * LbRouteExtension loadBalancingScheme.
+                         * @member {google.cloud.networkservices.v1.LoadBalancingScheme} loadBalancingScheme
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @instance
+                         */
+                        LbRouteExtension.prototype.loadBalancingScheme = 0;
+    
+                        /**
+                         * Creates a new LbRouteExtension instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ILbRouteExtension=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.LbRouteExtension} LbRouteExtension instance
+                         */
+                        LbRouteExtension.create = function create(properties) {
+                            return new LbRouteExtension(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LbRouteExtension message. Does not implicitly {@link google.cloud.networkservices.v1.LbRouteExtension.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ILbRouteExtension} message LbRouteExtension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LbRouteExtension.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.forwardingRules != null && message.forwardingRules.length)
+                                for (var i = 0; i < message.forwardingRules.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.forwardingRules[i]);
+                            if (message.extensionChains != null && message.extensionChains.length)
+                                for (var i = 0; i < message.extensionChains.length; ++i)
+                                    $root.google.cloud.networkservices.v1.ExtensionChain.encode(message.extensionChains[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.loadBalancingScheme != null && Object.hasOwnProperty.call(message, "loadBalancingScheme"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.loadBalancingScheme);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.description);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LbRouteExtension message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.LbRouteExtension.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ILbRouteExtension} message LbRouteExtension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LbRouteExtension.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LbRouteExtension message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.LbRouteExtension} LbRouteExtension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LbRouteExtension.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.LbRouteExtension(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.forwardingRules && message.forwardingRules.length))
+                                            message.forwardingRules = [];
+                                        message.forwardingRules.push(reader.string());
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.extensionChains && message.extensionChains.length))
+                                            message.extensionChains = [];
+                                        message.extensionChains.push($root.google.cloud.networkservices.v1.ExtensionChain.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 8: {
+                                        message.loadBalancingScheme = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LbRouteExtension message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.LbRouteExtension} LbRouteExtension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LbRouteExtension.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LbRouteExtension message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LbRouteExtension.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.forwardingRules != null && message.hasOwnProperty("forwardingRules")) {
+                                if (!Array.isArray(message.forwardingRules))
+                                    return "forwardingRules: array expected";
+                                for (var i = 0; i < message.forwardingRules.length; ++i)
+                                    if (!$util.isString(message.forwardingRules[i]))
+                                        return "forwardingRules: string[] expected";
+                            }
+                            if (message.extensionChains != null && message.hasOwnProperty("extensionChains")) {
+                                if (!Array.isArray(message.extensionChains))
+                                    return "extensionChains: array expected";
+                                for (var i = 0; i < message.extensionChains.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.ExtensionChain.verify(message.extensionChains[i]);
+                                    if (error)
+                                        return "extensionChains." + error;
+                                }
+                            }
+                            if (message.loadBalancingScheme != null && message.hasOwnProperty("loadBalancingScheme"))
+                                switch (message.loadBalancingScheme) {
+                                default:
+                                    return "loadBalancingScheme: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LbRouteExtension message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.LbRouteExtension} LbRouteExtension
+                         */
+                        LbRouteExtension.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.LbRouteExtension)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.LbRouteExtension();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.LbRouteExtension.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.LbRouteExtension.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.LbRouteExtension.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.forwardingRules) {
+                                if (!Array.isArray(object.forwardingRules))
+                                    throw TypeError(".google.cloud.networkservices.v1.LbRouteExtension.forwardingRules: array expected");
+                                message.forwardingRules = [];
+                                for (var i = 0; i < object.forwardingRules.length; ++i)
+                                    message.forwardingRules[i] = String(object.forwardingRules[i]);
+                            }
+                            if (object.extensionChains) {
+                                if (!Array.isArray(object.extensionChains))
+                                    throw TypeError(".google.cloud.networkservices.v1.LbRouteExtension.extensionChains: array expected");
+                                message.extensionChains = [];
+                                for (var i = 0; i < object.extensionChains.length; ++i) {
+                                    if (typeof object.extensionChains[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.LbRouteExtension.extensionChains: object expected");
+                                    message.extensionChains[i] = $root.google.cloud.networkservices.v1.ExtensionChain.fromObject(object.extensionChains[i]);
+                                }
+                            }
+                            switch (object.loadBalancingScheme) {
+                            default:
+                                if (typeof object.loadBalancingScheme === "number") {
+                                    message.loadBalancingScheme = object.loadBalancingScheme;
+                                    break;
+                                }
+                                break;
+                            case "LOAD_BALANCING_SCHEME_UNSPECIFIED":
+                            case 0:
+                                message.loadBalancingScheme = 0;
+                                break;
+                            case "INTERNAL_MANAGED":
+                            case 1:
+                                message.loadBalancingScheme = 1;
+                                break;
+                            case "EXTERNAL_MANAGED":
+                            case 2:
+                                message.loadBalancingScheme = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LbRouteExtension message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @static
+                         * @param {google.cloud.networkservices.v1.LbRouteExtension} message LbRouteExtension
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LbRouteExtension.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.forwardingRules = [];
+                                object.extensionChains = [];
+                            }
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.loadBalancingScheme = options.enums === String ? "LOAD_BALANCING_SCHEME_UNSPECIFIED" : 0;
+                                object.description = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.forwardingRules && message.forwardingRules.length) {
+                                object.forwardingRules = [];
+                                for (var j = 0; j < message.forwardingRules.length; ++j)
+                                    object.forwardingRules[j] = message.forwardingRules[j];
+                            }
+                            if (message.extensionChains && message.extensionChains.length) {
+                                object.extensionChains = [];
+                                for (var j = 0; j < message.extensionChains.length; ++j)
+                                    object.extensionChains[j] = $root.google.cloud.networkservices.v1.ExtensionChain.toObject(message.extensionChains[j], options);
+                            }
+                            if (message.loadBalancingScheme != null && message.hasOwnProperty("loadBalancingScheme"))
+                                object.loadBalancingScheme = options.enums === String ? $root.google.cloud.networkservices.v1.LoadBalancingScheme[message.loadBalancingScheme] === undefined ? message.loadBalancingScheme : $root.google.cloud.networkservices.v1.LoadBalancingScheme[message.loadBalancingScheme] : message.loadBalancingScheme;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LbRouteExtension to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LbRouteExtension.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LbRouteExtension
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.LbRouteExtension
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LbRouteExtension.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.LbRouteExtension";
+                        };
+    
+                        return LbRouteExtension;
+                    })();
+    
+                    v1.ListLbRouteExtensionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListLbRouteExtensionsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListLbRouteExtensionsRequest
+                         * @property {string|null} [parent] ListLbRouteExtensionsRequest parent
+                         * @property {number|null} [pageSize] ListLbRouteExtensionsRequest pageSize
+                         * @property {string|null} [pageToken] ListLbRouteExtensionsRequest pageToken
+                         * @property {string|null} [filter] ListLbRouteExtensionsRequest filter
+                         * @property {string|null} [orderBy] ListLbRouteExtensionsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListLbRouteExtensionsRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListLbRouteExtensionsRequest.
+                         * @implements IListLbRouteExtensionsRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListLbRouteExtensionsRequest=} [properties] Properties to set
+                         */
+                        function ListLbRouteExtensionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListLbRouteExtensionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @instance
+                         */
+                        ListLbRouteExtensionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListLbRouteExtensionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @instance
+                         */
+                        ListLbRouteExtensionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListLbRouteExtensionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @instance
+                         */
+                        ListLbRouteExtensionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListLbRouteExtensionsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @instance
+                         */
+                        ListLbRouteExtensionsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListLbRouteExtensionsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @instance
+                         */
+                        ListLbRouteExtensionsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListLbRouteExtensionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbRouteExtensionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListLbRouteExtensionsRequest} ListLbRouteExtensionsRequest instance
+                         */
+                        ListLbRouteExtensionsRequest.create = function create(properties) {
+                            return new ListLbRouteExtensionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListLbRouteExtensionsRequest message. Does not implicitly {@link google.cloud.networkservices.v1.ListLbRouteExtensionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbRouteExtensionsRequest} message ListLbRouteExtensionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLbRouteExtensionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListLbRouteExtensionsRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListLbRouteExtensionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbRouteExtensionsRequest} message ListLbRouteExtensionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLbRouteExtensionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListLbRouteExtensionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListLbRouteExtensionsRequest} ListLbRouteExtensionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLbRouteExtensionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListLbRouteExtensionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListLbRouteExtensionsRequest} ListLbRouteExtensionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLbRouteExtensionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListLbRouteExtensionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListLbRouteExtensionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListLbRouteExtensionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListLbRouteExtensionsRequest} ListLbRouteExtensionsRequest
+                         */
+                        ListLbRouteExtensionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListLbRouteExtensionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListLbRouteExtensionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListLbRouteExtensionsRequest} message ListLbRouteExtensionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListLbRouteExtensionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListLbRouteExtensionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListLbRouteExtensionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListLbRouteExtensionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListLbRouteExtensionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListLbRouteExtensionsRequest";
+                        };
+    
+                        return ListLbRouteExtensionsRequest;
+                    })();
+    
+                    v1.ListLbRouteExtensionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListLbRouteExtensionsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IListLbRouteExtensionsResponse
+                         * @property {Array.<google.cloud.networkservices.v1.ILbRouteExtension>|null} [lbRouteExtensions] ListLbRouteExtensionsResponse lbRouteExtensions
+                         * @property {string|null} [nextPageToken] ListLbRouteExtensionsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListLbRouteExtensionsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListLbRouteExtensionsResponse.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a ListLbRouteExtensionsResponse.
+                         * @implements IListLbRouteExtensionsResponse
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IListLbRouteExtensionsResponse=} [properties] Properties to set
+                         */
+                        function ListLbRouteExtensionsResponse(properties) {
+                            this.lbRouteExtensions = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListLbRouteExtensionsResponse lbRouteExtensions.
+                         * @member {Array.<google.cloud.networkservices.v1.ILbRouteExtension>} lbRouteExtensions
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @instance
+                         */
+                        ListLbRouteExtensionsResponse.prototype.lbRouteExtensions = $util.emptyArray;
+    
+                        /**
+                         * ListLbRouteExtensionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @instance
+                         */
+                        ListLbRouteExtensionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListLbRouteExtensionsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @instance
+                         */
+                        ListLbRouteExtensionsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListLbRouteExtensionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbRouteExtensionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.ListLbRouteExtensionsResponse} ListLbRouteExtensionsResponse instance
+                         */
+                        ListLbRouteExtensionsResponse.create = function create(properties) {
+                            return new ListLbRouteExtensionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListLbRouteExtensionsResponse message. Does not implicitly {@link google.cloud.networkservices.v1.ListLbRouteExtensionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbRouteExtensionsResponse} message ListLbRouteExtensionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLbRouteExtensionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.lbRouteExtensions != null && message.lbRouteExtensions.length)
+                                for (var i = 0; i < message.lbRouteExtensions.length; ++i)
+                                    $root.google.cloud.networkservices.v1.LbRouteExtension.encode(message.lbRouteExtensions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListLbRouteExtensionsResponse message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.ListLbRouteExtensionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IListLbRouteExtensionsResponse} message ListLbRouteExtensionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListLbRouteExtensionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListLbRouteExtensionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.ListLbRouteExtensionsResponse} ListLbRouteExtensionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLbRouteExtensionsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.ListLbRouteExtensionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.lbRouteExtensions && message.lbRouteExtensions.length))
+                                            message.lbRouteExtensions = [];
+                                        message.lbRouteExtensions.push($root.google.cloud.networkservices.v1.LbRouteExtension.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListLbRouteExtensionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.ListLbRouteExtensionsResponse} ListLbRouteExtensionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListLbRouteExtensionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListLbRouteExtensionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListLbRouteExtensionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.lbRouteExtensions != null && message.hasOwnProperty("lbRouteExtensions")) {
+                                if (!Array.isArray(message.lbRouteExtensions))
+                                    return "lbRouteExtensions: array expected";
+                                for (var i = 0; i < message.lbRouteExtensions.length; ++i) {
+                                    var error = $root.google.cloud.networkservices.v1.LbRouteExtension.verify(message.lbRouteExtensions[i]);
+                                    if (error)
+                                        return "lbRouteExtensions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListLbRouteExtensionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.ListLbRouteExtensionsResponse} ListLbRouteExtensionsResponse
+                         */
+                        ListLbRouteExtensionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.ListLbRouteExtensionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.ListLbRouteExtensionsResponse();
+                            if (object.lbRouteExtensions) {
+                                if (!Array.isArray(object.lbRouteExtensions))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListLbRouteExtensionsResponse.lbRouteExtensions: array expected");
+                                message.lbRouteExtensions = [];
+                                for (var i = 0; i < object.lbRouteExtensions.length; ++i) {
+                                    if (typeof object.lbRouteExtensions[i] !== "object")
+                                        throw TypeError(".google.cloud.networkservices.v1.ListLbRouteExtensionsResponse.lbRouteExtensions: object expected");
+                                    message.lbRouteExtensions[i] = $root.google.cloud.networkservices.v1.LbRouteExtension.fromObject(object.lbRouteExtensions[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkservices.v1.ListLbRouteExtensionsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListLbRouteExtensionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ListLbRouteExtensionsResponse} message ListLbRouteExtensionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListLbRouteExtensionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.lbRouteExtensions = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.lbRouteExtensions && message.lbRouteExtensions.length) {
+                                object.lbRouteExtensions = [];
+                                for (var j = 0; j < message.lbRouteExtensions.length; ++j)
+                                    object.lbRouteExtensions[j] = $root.google.cloud.networkservices.v1.LbRouteExtension.toObject(message.lbRouteExtensions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListLbRouteExtensionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListLbRouteExtensionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListLbRouteExtensionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.ListLbRouteExtensionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListLbRouteExtensionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.ListLbRouteExtensionsResponse";
+                        };
+    
+                        return ListLbRouteExtensionsResponse;
+                    })();
+    
+                    v1.GetLbRouteExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetLbRouteExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IGetLbRouteExtensionRequest
+                         * @property {string|null} [name] GetLbRouteExtensionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetLbRouteExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a GetLbRouteExtensionRequest.
+                         * @implements IGetLbRouteExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IGetLbRouteExtensionRequest=} [properties] Properties to set
+                         */
+                        function GetLbRouteExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetLbRouteExtensionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.GetLbRouteExtensionRequest
+                         * @instance
+                         */
+                        GetLbRouteExtensionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetLbRouteExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.GetLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetLbRouteExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.GetLbRouteExtensionRequest} GetLbRouteExtensionRequest instance
+                         */
+                        GetLbRouteExtensionRequest.create = function create(properties) {
+                            return new GetLbRouteExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetLbRouteExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.GetLbRouteExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.GetLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetLbRouteExtensionRequest} message GetLbRouteExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetLbRouteExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetLbRouteExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.GetLbRouteExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IGetLbRouteExtensionRequest} message GetLbRouteExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetLbRouteExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetLbRouteExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.GetLbRouteExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.GetLbRouteExtensionRequest} GetLbRouteExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetLbRouteExtensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.GetLbRouteExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetLbRouteExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.GetLbRouteExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.GetLbRouteExtensionRequest} GetLbRouteExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetLbRouteExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetLbRouteExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.GetLbRouteExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetLbRouteExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetLbRouteExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.GetLbRouteExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.GetLbRouteExtensionRequest} GetLbRouteExtensionRequest
+                         */
+                        GetLbRouteExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.GetLbRouteExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.GetLbRouteExtensionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetLbRouteExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.GetLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.GetLbRouteExtensionRequest} message GetLbRouteExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetLbRouteExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetLbRouteExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.GetLbRouteExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetLbRouteExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetLbRouteExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.GetLbRouteExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetLbRouteExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.GetLbRouteExtensionRequest";
+                        };
+    
+                        return GetLbRouteExtensionRequest;
+                    })();
+    
+                    v1.CreateLbRouteExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateLbRouteExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface ICreateLbRouteExtensionRequest
+                         * @property {string|null} [parent] CreateLbRouteExtensionRequest parent
+                         * @property {string|null} [lbRouteExtensionId] CreateLbRouteExtensionRequest lbRouteExtensionId
+                         * @property {google.cloud.networkservices.v1.ILbRouteExtension|null} [lbRouteExtension] CreateLbRouteExtensionRequest lbRouteExtension
+                         * @property {string|null} [requestId] CreateLbRouteExtensionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateLbRouteExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a CreateLbRouteExtensionRequest.
+                         * @implements ICreateLbRouteExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest=} [properties] Properties to set
+                         */
+                        function CreateLbRouteExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateLbRouteExtensionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @instance
+                         */
+                        CreateLbRouteExtensionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateLbRouteExtensionRequest lbRouteExtensionId.
+                         * @member {string} lbRouteExtensionId
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @instance
+                         */
+                        CreateLbRouteExtensionRequest.prototype.lbRouteExtensionId = "";
+    
+                        /**
+                         * CreateLbRouteExtensionRequest lbRouteExtension.
+                         * @member {google.cloud.networkservices.v1.ILbRouteExtension|null|undefined} lbRouteExtension
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @instance
+                         */
+                        CreateLbRouteExtensionRequest.prototype.lbRouteExtension = null;
+    
+                        /**
+                         * CreateLbRouteExtensionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @instance
+                         */
+                        CreateLbRouteExtensionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateLbRouteExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.CreateLbRouteExtensionRequest} CreateLbRouteExtensionRequest instance
+                         */
+                        CreateLbRouteExtensionRequest.create = function create(properties) {
+                            return new CreateLbRouteExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateLbRouteExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.CreateLbRouteExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest} message CreateLbRouteExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateLbRouteExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.lbRouteExtensionId != null && Object.hasOwnProperty.call(message, "lbRouteExtensionId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.lbRouteExtensionId);
+                            if (message.lbRouteExtension != null && Object.hasOwnProperty.call(message, "lbRouteExtension"))
+                                $root.google.cloud.networkservices.v1.LbRouteExtension.encode(message.lbRouteExtension, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateLbRouteExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.CreateLbRouteExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.ICreateLbRouteExtensionRequest} message CreateLbRouteExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateLbRouteExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateLbRouteExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.CreateLbRouteExtensionRequest} CreateLbRouteExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateLbRouteExtensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.lbRouteExtensionId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.lbRouteExtension = $root.google.cloud.networkservices.v1.LbRouteExtension.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateLbRouteExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.CreateLbRouteExtensionRequest} CreateLbRouteExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateLbRouteExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateLbRouteExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateLbRouteExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.lbRouteExtensionId != null && message.hasOwnProperty("lbRouteExtensionId"))
+                                if (!$util.isString(message.lbRouteExtensionId))
+                                    return "lbRouteExtensionId: string expected";
+                            if (message.lbRouteExtension != null && message.hasOwnProperty("lbRouteExtension")) {
+                                var error = $root.google.cloud.networkservices.v1.LbRouteExtension.verify(message.lbRouteExtension);
+                                if (error)
+                                    return "lbRouteExtension." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateLbRouteExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.CreateLbRouteExtensionRequest} CreateLbRouteExtensionRequest
+                         */
+                        CreateLbRouteExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.CreateLbRouteExtensionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.lbRouteExtensionId != null)
+                                message.lbRouteExtensionId = String(object.lbRouteExtensionId);
+                            if (object.lbRouteExtension != null) {
+                                if (typeof object.lbRouteExtension !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.CreateLbRouteExtensionRequest.lbRouteExtension: object expected");
+                                message.lbRouteExtension = $root.google.cloud.networkservices.v1.LbRouteExtension.fromObject(object.lbRouteExtension);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateLbRouteExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.CreateLbRouteExtensionRequest} message CreateLbRouteExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateLbRouteExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.lbRouteExtensionId = "";
+                                object.lbRouteExtension = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.lbRouteExtensionId != null && message.hasOwnProperty("lbRouteExtensionId"))
+                                object.lbRouteExtensionId = message.lbRouteExtensionId;
+                            if (message.lbRouteExtension != null && message.hasOwnProperty("lbRouteExtension"))
+                                object.lbRouteExtension = $root.google.cloud.networkservices.v1.LbRouteExtension.toObject(message.lbRouteExtension, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateLbRouteExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateLbRouteExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateLbRouteExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.CreateLbRouteExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateLbRouteExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.CreateLbRouteExtensionRequest";
+                        };
+    
+                        return CreateLbRouteExtensionRequest;
+                    })();
+    
+                    v1.UpdateLbRouteExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateLbRouteExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IUpdateLbRouteExtensionRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateLbRouteExtensionRequest updateMask
+                         * @property {google.cloud.networkservices.v1.ILbRouteExtension|null} [lbRouteExtension] UpdateLbRouteExtensionRequest lbRouteExtension
+                         * @property {string|null} [requestId] UpdateLbRouteExtensionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateLbRouteExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents an UpdateLbRouteExtensionRequest.
+                         * @implements IUpdateLbRouteExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest=} [properties] Properties to set
+                         */
+                        function UpdateLbRouteExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateLbRouteExtensionRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @instance
+                         */
+                        UpdateLbRouteExtensionRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateLbRouteExtensionRequest lbRouteExtension.
+                         * @member {google.cloud.networkservices.v1.ILbRouteExtension|null|undefined} lbRouteExtension
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @instance
+                         */
+                        UpdateLbRouteExtensionRequest.prototype.lbRouteExtension = null;
+    
+                        /**
+                         * UpdateLbRouteExtensionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @instance
+                         */
+                        UpdateLbRouteExtensionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateLbRouteExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest} UpdateLbRouteExtensionRequest instance
+                         */
+                        UpdateLbRouteExtensionRequest.create = function create(properties) {
+                            return new UpdateLbRouteExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateLbRouteExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest} message UpdateLbRouteExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateLbRouteExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.lbRouteExtension != null && Object.hasOwnProperty.call(message, "lbRouteExtension"))
+                                $root.google.cloud.networkservices.v1.LbRouteExtension.encode(message.lbRouteExtension, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateLbRouteExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IUpdateLbRouteExtensionRequest} message UpdateLbRouteExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateLbRouteExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateLbRouteExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest} UpdateLbRouteExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateLbRouteExtensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.lbRouteExtension = $root.google.cloud.networkservices.v1.LbRouteExtension.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateLbRouteExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest} UpdateLbRouteExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateLbRouteExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateLbRouteExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateLbRouteExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.lbRouteExtension != null && message.hasOwnProperty("lbRouteExtension")) {
+                                var error = $root.google.cloud.networkservices.v1.LbRouteExtension.verify(message.lbRouteExtension);
+                                if (error)
+                                    return "lbRouteExtension." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateLbRouteExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest} UpdateLbRouteExtensionRequest
+                         */
+                        UpdateLbRouteExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.lbRouteExtension != null) {
+                                if (typeof object.lbRouteExtension !== "object")
+                                    throw TypeError(".google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest.lbRouteExtension: object expected");
+                                message.lbRouteExtension = $root.google.cloud.networkservices.v1.LbRouteExtension.fromObject(object.lbRouteExtension);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateLbRouteExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest} message UpdateLbRouteExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateLbRouteExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.lbRouteExtension = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.lbRouteExtension != null && message.hasOwnProperty("lbRouteExtension"))
+                                object.lbRouteExtension = $root.google.cloud.networkservices.v1.LbRouteExtension.toObject(message.lbRouteExtension, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateLbRouteExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateLbRouteExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateLbRouteExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateLbRouteExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.UpdateLbRouteExtensionRequest";
+                        };
+    
+                        return UpdateLbRouteExtensionRequest;
+                    })();
+    
+                    v1.DeleteLbRouteExtensionRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteLbRouteExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @interface IDeleteLbRouteExtensionRequest
+                         * @property {string|null} [name] DeleteLbRouteExtensionRequest name
+                         * @property {string|null} [requestId] DeleteLbRouteExtensionRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteLbRouteExtensionRequest.
+                         * @memberof google.cloud.networkservices.v1
+                         * @classdesc Represents a DeleteLbRouteExtensionRequest.
+                         * @implements IDeleteLbRouteExtensionRequest
+                         * @constructor
+                         * @param {google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest=} [properties] Properties to set
+                         */
+                        function DeleteLbRouteExtensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteLbRouteExtensionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @instance
+                         */
+                        DeleteLbRouteExtensionRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteLbRouteExtensionRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @instance
+                         */
+                        DeleteLbRouteExtensionRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteLbRouteExtensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest} DeleteLbRouteExtensionRequest instance
+                         */
+                        DeleteLbRouteExtensionRequest.create = function create(properties) {
+                            return new DeleteLbRouteExtensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteLbRouteExtensionRequest message. Does not implicitly {@link google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest} message DeleteLbRouteExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteLbRouteExtensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteLbRouteExtensionRequest message, length delimited. Does not implicitly {@link google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.IDeleteLbRouteExtensionRequest} message DeleteLbRouteExtensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteLbRouteExtensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteLbRouteExtensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest} DeleteLbRouteExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteLbRouteExtensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteLbRouteExtensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest} DeleteLbRouteExtensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteLbRouteExtensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteLbRouteExtensionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteLbRouteExtensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteLbRouteExtensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest} DeleteLbRouteExtensionRequest
+                         */
+                        DeleteLbRouteExtensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteLbRouteExtensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @static
+                         * @param {google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest} message DeleteLbRouteExtensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteLbRouteExtensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteLbRouteExtensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteLbRouteExtensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteLbRouteExtensionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteLbRouteExtensionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkservices.v1.DeleteLbRouteExtensionRequest";
+                        };
+    
+                        return DeleteLbRouteExtensionRequest;
+                    })();
+    
                     v1.EndpointPolicy = (function() {
     
                         /**
@@ -35841,690 +41211,6 @@
                 return values;
             })();
     
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    this.style = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                if (!(message.pattern && message.pattern.length))
-                                    message.pattern = [];
-                                message.pattern.push(reader.string());
-                                break;
-                            }
-                        case 3: {
-                                message.nameField = reader.string();
-                                break;
-                            }
-                        case 4: {
-                                message.history = reader.int32();
-                                break;
-                            }
-                        case 5: {
-                                message.plural = reader.string();
-                                break;
-                            }
-                        case 6: {
-                                message.singular = reader.string();
-                                break;
-                            }
-                        case 10: {
-                                if (!(message.style && message.style.length))
-                                    message.style = [];
-                                if ((tag & 7) === 2) {
-                                    var end2 = reader.uint32() + reader.pos;
-                                    while (reader.pos < end2)
-                                        message.style.push(reader.int32());
-                                } else
-                                    message.style.push(reader.int32());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    default:
-                        if (typeof object.history === "number") {
-                            message.history = object.history;
-                            break;
-                        }
-                        break;
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                                if (typeof object.style[i] === "number") {
-                                    message.style[i] = object.style[i];
-                                    break;
-                                }
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.pattern = [];
-                        object.style = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceDescriptor
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.childType = reader.string();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for ResourceReference
-                 * @function getTypeUrl
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.ResourceReference";
-                };
-    
-                return ResourceReference;
-            })();
-    
             api.Http = (function() {
     
                 /**
@@ -41672,6 +46358,690 @@
                 })();
     
                 return FieldInfo;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.pattern && message.pattern.length))
+                                    message.pattern = [];
+                                message.pattern.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.nameField = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.history = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.plural = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.singular = reader.string();
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.style && message.style.length))
+                                    message.style = [];
+                                if ((tag & 7) === 2) {
+                                    var end2 = reader.uint32() + reader.pos;
+                                    while (reader.pos < end2)
+                                        message.style.push(reader.int32());
+                                } else
+                                    message.style.push(reader.int32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceDescriptor
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceDescriptor.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceDescriptor";
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.childType = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for ResourceReference
+                 * @function getTypeUrl
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                ResourceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.ResourceReference";
+                };
+    
+                return ResourceReference;
             })();
     
             return api;
@@ -47847,8 +53217,8 @@
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
-                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -47983,20 +53353,20 @@
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
     
                 /**
-                 * FieldOptions .google.api.resourceReference.
-                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype[".google.api.resourceReference"] = null;
-    
-                /**
                  * FieldOptions .google.api.fieldInfo.
                  * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
                  * @memberof google.protobuf.FieldOptions
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.fieldInfo"] = null;
+    
+                /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
                  * Creates a new FieldOptions instance using the specified properties.
@@ -48169,12 +53539,12 @@
                                     message[".google.api.fieldBehavior"].push(reader.int32());
                                 break;
                             }
-                        case 1055: {
-                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
-                                break;
-                            }
                         case 291403980: {
                                 message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 1055: {
+                                message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -48319,15 +53689,15 @@
                                 break;
                             }
                     }
-                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
-                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
-                        if (error)
-                            return ".google.api.resourceReference." + error;
-                    }
                     if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
                         var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
                         if (error)
                             return ".google.api.fieldInfo." + error;
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
                     }
                     return null;
                 };
@@ -48543,15 +53913,15 @@
                                 break;
                             }
                     }
-                    if (object[".google.api.resourceReference"] != null) {
-                        if (typeof object[".google.api.resourceReference"] !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
-                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
-                    }
                     if (object[".google.api.fieldInfo"] != null) {
                         if (typeof object[".google.api.fieldInfo"] !== "object")
                             throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
                         message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
+                    }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
                     return message;
                 };
@@ -53971,225 +59341,6 @@
                 return Timestamp;
             })();
     
-            protobuf.FieldMask = (function() {
-    
-                /**
-                 * Properties of a FieldMask.
-                 * @memberof google.protobuf
-                 * @interface IFieldMask
-                 * @property {Array.<string>|null} [paths] FieldMask paths
-                 */
-    
-                /**
-                 * Constructs a new FieldMask.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a FieldMask.
-                 * @implements IFieldMask
-                 * @constructor
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 */
-                function FieldMask(properties) {
-                    this.paths = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * FieldMask paths.
-                 * @member {Array.<string>} paths
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 */
-                FieldMask.prototype.paths = $util.emptyArray;
-    
-                /**
-                 * Creates a new FieldMask instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
-                 * @returns {google.protobuf.FieldMask} FieldMask instance
-                 */
-                FieldMask.create = function create(properties) {
-                    return new FieldMask(properties);
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.paths != null && message.paths.length)
-                        for (var i = 0; i < message.paths.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.paths && message.paths.length))
-                                    message.paths = [];
-                                message.paths.push(reader.string());
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                FieldMask.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a FieldMask message.
-                 * @function verify
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                FieldMask.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.paths != null && message.hasOwnProperty("paths")) {
-                        if (!Array.isArray(message.paths))
-                            return "paths: array expected";
-                        for (var i = 0; i < message.paths.length; ++i)
-                            if (!$util.isString(message.paths[i]))
-                                return "paths: string[] expected";
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.FieldMask} FieldMask
-                 */
-                FieldMask.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.FieldMask)
-                        return object;
-                    var message = new $root.google.protobuf.FieldMask();
-                    if (object.paths) {
-                        if (!Array.isArray(object.paths))
-                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
-                        message.paths = [];
-                        for (var i = 0; i < object.paths.length; ++i)
-                            message.paths[i] = String(object.paths[i]);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {google.protobuf.FieldMask} message FieldMask
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                FieldMask.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.paths = [];
-                    if (message.paths && message.paths.length) {
-                        object.paths = [];
-                        for (var j = 0; j < message.paths.length; ++j)
-                            object.paths[j] = message.paths[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this FieldMask to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.FieldMask
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                FieldMask.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for FieldMask
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.FieldMask
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.FieldMask";
-                };
-    
-                return FieldMask;
-            })();
-    
             protobuf.Duration = (function() {
     
                 /**
@@ -54840,6 +59991,225 @@
                 };
     
                 return Empty;
+            })();
+    
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
             })();
     
             return protobuf;
