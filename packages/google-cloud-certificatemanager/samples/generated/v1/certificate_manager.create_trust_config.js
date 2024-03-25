@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START certificatemanager_v1_generated_CertificateManager_ListCertificateMapEntries_async]
+function main(parent, trustConfigId, trustConfig) {
+  // [START certificatemanager_v1_generated_CertificateManager_CreateTrustConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,19 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project, location and certificate map from which the
-   *  certificate map entries should be listed, specified in the format
-   *  `projects/* /locations/* /certificateMaps/*`.
+   *  Required. The parent resource of the TrustConfig. Must be in the format
+   *  `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of certificate map entries to return. The service may return
-   *  fewer than this value.
-   *  If unspecified, at most 50 certificate map entries will be returned.
-   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  Required. A user-provided name of the TrustConfig. Must match the regexp
+   *  `[a-z0-9-]{1,63}`.
    */
-  // const pageSize = 1234
+  // const trustConfigId = 'abc123'
   /**
-   *  The value returned by the last `ListCertificateMapEntriesResponse`.
-   *  Indicates that this is a continuation of a prior
-   *  `ListCertificateMapEntries` call, and that the system should return the
-   *  next page of data.
+   *  Required. A definition of the TrustConfig to create.
    */
-  // const pageToken = 'abc123'
-  /**
-   *  Filter expression to restrict the returned Certificate Map Entries.
-   */
-  // const filter = 'abc123'
-  /**
-   *  A list of Certificate Map Entry field names used to specify
-   *  the order of the returned results. The default sorting order is ascending.
-   *  To specify descending order for a field, add a suffix `" desc"`.
-   */
-  // const orderBy = 'abc123'
+  // const trustConfig = {}
 
   // Imports the Certificatemanager library
   const {CertificateManagerClient} = require('@google-cloud/certificate-manager').v1;
@@ -65,21 +49,22 @@ function main(parent) {
   // Instantiates a client
   const certificatemanagerClient = new CertificateManagerClient();
 
-  async function callListCertificateMapEntries() {
+  async function callCreateTrustConfig() {
     // Construct request
     const request = {
       parent,
+      trustConfigId,
+      trustConfig,
     };
 
     // Run request
-    const iterable = certificatemanagerClient.listCertificateMapEntriesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await certificatemanagerClient.createTrustConfig(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListCertificateMapEntries();
-  // [END certificatemanager_v1_generated_CertificateManager_ListCertificateMapEntries_async]
+  callCreateTrustConfig();
+  // [END certificatemanager_v1_generated_CertificateManager_CreateTrustConfig_async]
 }
 
 process.on('unhandledRejection', err => {

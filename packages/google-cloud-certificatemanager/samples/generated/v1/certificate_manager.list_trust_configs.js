@@ -21,7 +21,7 @@
 'use strict';
 
 function main(parent) {
-  // [START certificatemanager_v1_generated_CertificateManager_ListCertificateMapEntries_async]
+  // [START certificatemanager_v1_generated_CertificateManager_ListTrustConfigs_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,33 +29,28 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project, location and certificate map from which the
-   *  certificate map entries should be listed, specified in the format
-   *  `projects/* /locations/* /certificateMaps/*`.
+   *  Required. The project and location from which the TrustConfigs should be
+   *  listed, specified in the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of certificate map entries to return. The service may return
-   *  fewer than this value.
-   *  If unspecified, at most 50 certificate map entries will be returned.
-   *  The maximum value is 1000; values above 1000 will be coerced to 1000.
+   *  Maximum number of TrustConfigs to return per call.
    */
   // const pageSize = 1234
   /**
-   *  The value returned by the last `ListCertificateMapEntriesResponse`.
-   *  Indicates that this is a continuation of a prior
-   *  `ListCertificateMapEntries` call, and that the system should return the
-   *  next page of data.
+   *  The value returned by the last `ListTrustConfigsResponse`. Indicates
+   *  that this is a continuation of a prior `ListTrustConfigs` call, and that
+   *  the system should return the next page of data.
    */
   // const pageToken = 'abc123'
   /**
-   *  Filter expression to restrict the returned Certificate Map Entries.
+   *  Filter expression to restrict the TrustConfigs returned.
    */
   // const filter = 'abc123'
   /**
-   *  A list of Certificate Map Entry field names used to specify
-   *  the order of the returned results. The default sorting order is ascending.
-   *  To specify descending order for a field, add a suffix `" desc"`.
+   *  A list of TrustConfig field names used to specify the order of the
+   *  returned results. The default sorting order is ascending. To specify
+   *  descending order for a field, add a suffix `" desc"`.
    */
   // const orderBy = 'abc123'
 
@@ -65,21 +60,21 @@ function main(parent) {
   // Instantiates a client
   const certificatemanagerClient = new CertificateManagerClient();
 
-  async function callListCertificateMapEntries() {
+  async function callListTrustConfigs() {
     // Construct request
     const request = {
       parent,
     };
 
     // Run request
-    const iterable = certificatemanagerClient.listCertificateMapEntriesAsync(request);
+    const iterable = certificatemanagerClient.listTrustConfigsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListCertificateMapEntries();
-  // [END certificatemanager_v1_generated_CertificateManager_ListCertificateMapEntries_async]
+  callListTrustConfigs();
+  // [END certificatemanager_v1_generated_CertificateManager_ListTrustConfigs_async]
 }
 
 process.on('unhandledRejection', err => {

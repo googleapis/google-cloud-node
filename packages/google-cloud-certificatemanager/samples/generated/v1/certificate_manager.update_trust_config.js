@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START certificatemanager_v1_generated_CertificateManager_ListCertificateMaps_async]
+function main(trustConfig, updateMask) {
+  // [START certificatemanager_v1_generated_CertificateManager_UpdateTrustConfig_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,15 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location from which the certificate maps should
-   *  be listed, specified in the format `projects/* /locations/*`.
+   *  Required. A definition of the TrustConfig to update.
    */
-  // const parent = 'abc123'
+  // const trustConfig = {}
   /**
-   *  Maximum number of certificate maps to return per call.
+   *  Required. The update mask applies to the resource. For the `FieldMask`
+   *  definition, see
+   *  https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
    */
-  // const pageSize = 1234
-  /**
-   *  The value returned by the last `ListCertificateMapsResponse`. Indicates
-   *  that this is a continuation of a prior `ListCertificateMaps` call, and that
-   *  the system should return the next page of data.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Filter expression to restrict the Certificates Maps returned.
-   */
-  // const filter = 'abc123'
-  /**
-   *  A list of Certificate Map field names used to specify the order of the
-   *  returned results. The default sorting order is ascending. To specify
-   *  descending order for a field, add a suffix `" desc"`.
-   */
-  // const orderBy = 'abc123'
+  // const updateMask = {}
 
   // Imports the Certificatemanager library
   const {CertificateManagerClient} = require('@google-cloud/certificate-manager').v1;
@@ -60,21 +45,21 @@ function main(parent) {
   // Instantiates a client
   const certificatemanagerClient = new CertificateManagerClient();
 
-  async function callListCertificateMaps() {
+  async function callUpdateTrustConfig() {
     // Construct request
     const request = {
-      parent,
+      trustConfig,
+      updateMask,
     };
 
     // Run request
-    const iterable = certificatemanagerClient.listCertificateMapsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await certificatemanagerClient.updateTrustConfig(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListCertificateMaps();
-  // [END certificatemanager_v1_generated_CertificateManager_ListCertificateMaps_async]
+  callUpdateTrustConfig();
+  // [END certificatemanager_v1_generated_CertificateManager_UpdateTrustConfig_async]
 }
 
 process.on('unhandledRejection', err => {
