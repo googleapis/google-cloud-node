@@ -1,0 +1,43 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.vision.v1p2beta1",
+  "libraryPackage": "@google-cloud/vision",
+  "services": {
+    "ImageAnnotator": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ImageAnnotatorClient",
+          "rpcs": {
+            "BatchAnnotateImages": {
+              "methods": [
+                "batchAnnotateImages"
+              ]
+            },
+            "AsyncBatchAnnotateFiles": {
+              "methods": [
+                "asyncBatchAnnotateFiles"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ImageAnnotatorClient",
+          "rpcs": {
+            "BatchAnnotateImages": {
+              "methods": [
+                "batchAnnotateImages"
+              ]
+            },
+            "AsyncBatchAnnotateFiles": {
+              "methods": [
+                "asyncBatchAnnotateFiles"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
