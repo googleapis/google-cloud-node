@@ -313,6 +313,13 @@
   * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
   * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
   * [Evaluation_service.evaluate_instances](#evaluation_service.evaluate_instances)
+  * [Extension_execution_service.execute_extension](#extension_execution_service.execute_extension)
+  * [Extension_execution_service.query_extension](#extension_execution_service.query_extension)
+  * [Extension_registry_service.delete_extension](#extension_registry_service.delete_extension)
+  * [Extension_registry_service.get_extension](#extension_registry_service.get_extension)
+  * [Extension_registry_service.import_extension](#extension_registry_service.import_extension)
+  * [Extension_registry_service.list_extensions](#extension_registry_service.list_extensions)
+  * [Extension_registry_service.update_extension](#extension_registry_service.update_extension)
   * [Feature_online_store_admin_service.create_feature_online_store](#feature_online_store_admin_service.create_feature_online_store)
   * [Feature_online_store_admin_service.create_feature_view](#feature_online_store_admin_service.create_feature_view)
   * [Feature_online_store_admin_service.delete_feature_online_store](#feature_online_store_admin_service.delete_feature_online_store)
@@ -5690,6 +5697,125 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_instances.js`
+
+
+-----
+
+
+
+
+### Extension_execution_service.execute_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.execute_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.execute_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.execute_extension.js`
+
+
+-----
+
+
+
+
+### Extension_execution_service.query_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.query_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.query_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_execution_service.query_extension.js`
+
+
+-----
+
+
+
+
+### Extension_registry_service.delete_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.delete_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.delete_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.delete_extension.js`
+
+
+-----
+
+
+
+
+### Extension_registry_service.get_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.get_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.get_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.get_extension.js`
+
+
+-----
+
+
+
+
+### Extension_registry_service.import_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.import_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.import_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.import_extension.js`
+
+
+-----
+
+
+
+
+### Extension_registry_service.list_extensions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.list_extensions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.list_extensions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.list_extensions.js`
+
+
+-----
+
+
+
+
+### Extension_registry_service.update_extension
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.update_extension.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.update_extension.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/extension_registry_service.update_extension.js`
 
 
 -----

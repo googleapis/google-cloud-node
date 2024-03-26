@@ -247,6 +247,9 @@ export class VizierServiceClient {
       executionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
       ),
+      extensionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/extensions/{extension}'
+      ),
       featureGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featureGroups/{feature_group}'
       ),
@@ -5219,6 +5222,58 @@ export class VizierServiceClient {
   matchExecutionFromExecutionName(executionName: string) {
     return this.pathTemplates.executionPathTemplate.match(executionName)
       .execution;
+  }
+
+  /**
+   * Return a fully-qualified extension resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} extension
+   * @returns {string} Resource name string.
+   */
+  extensionPath(project: string, location: string, extension: string) {
+    return this.pathTemplates.extensionPathTemplate.render({
+      project: project,
+      location: location,
+      extension: extension,
+    });
+  }
+
+  /**
+   * Parse the project from Extension resource.
+   *
+   * @param {string} extensionName
+   *   A fully-qualified path representing Extension resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExtensionName(extensionName: string) {
+    return this.pathTemplates.extensionPathTemplate.match(extensionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Extension resource.
+   *
+   * @param {string} extensionName
+   *   A fully-qualified path representing Extension resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExtensionName(extensionName: string) {
+    return this.pathTemplates.extensionPathTemplate.match(extensionName)
+      .location;
+  }
+
+  /**
+   * Parse the extension from Extension resource.
+   *
+   * @param {string} extensionName
+   *   A fully-qualified path representing Extension resource.
+   * @returns {string} A string representing the extension.
+   */
+  matchExtensionFromExtensionName(extensionName: string) {
+    return this.pathTemplates.extensionPathTemplate.match(extensionName)
+      .extension;
   }
 
   /**
