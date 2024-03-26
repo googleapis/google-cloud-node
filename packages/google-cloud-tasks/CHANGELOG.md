@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [5.2.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.2.0...tasks-v5.2.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* [tasks] issue with ambiguous naming in protos ([#5173](https://github.com/googleapis/google-cloud-node/issues/5173)) ([28e1ffd](https://github.com/googleapis/google-cloud-node/commit/28e1ffd2cf64aafe72d4f993fa0b313722682c04))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.1.1...tasks-v5.2.0) (2024-03-23)
 
 

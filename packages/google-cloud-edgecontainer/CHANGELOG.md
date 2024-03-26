@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/edgecontainer-v0.1.0...edgecontainer-v0.2.0) (2024-03-26)
+
+
+### Features
+
+* [edgecontainer] add GetServerConfig rpc and message ([#5163](https://github.com/googleapis/google-cloud-node/issues/5163)) ([a57ebeb](https://github.com/googleapis/google-cloud-node/commit/a57ebebec43b92de5ea6826a4ee5e9c95fa3c549))
+
 ## 0.1.0 (2023-09-14)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.5.1...dataplex-v3.6.0) (2024-03-26)
+
+
+### Features
+
+* [dataplex] added client side library for the followings: ([#5149](https://github.com/googleapis/google-cloud-node/issues/5149)) ([8c2c43c](https://github.com/googleapis/google-cloud-node/commit/8c2c43c19b148b0e95874a1d24261c9b962020f0))
+
 ## [3.5.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.5.0...dataplex-v3.5.1) (2024-01-23)
 
 
