@@ -586,7 +586,7 @@
                           "type": "string",
                           "id": 12,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "INPUT_ONLY"
                           }
                         }
                       }
