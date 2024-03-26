@@ -1142,6 +1142,46 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "gkebackup_v1_generated_BackupForGKE_GetBackupIndexDownloadUrl_async",
+            "title": "BackupForGKE getBackupIndexDownloadUrl Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieve the link to the backupIndex.",
+            "canonical": true,
+            "file": "backup_for_g_k_e.get_backup_index_download_url.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetBackupIndexDownloadUrl",
+                "fullName": "google.cloud.gkebackup.v1.BackupForGKE.GetBackupIndexDownloadUrl",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "backup",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.gkebackup.v1.GetBackupIndexDownloadUrlResponse",
+                "client": {
+                    "shortName": "BackupForGKEClient",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKEClient"
+                },
+                "method": {
+                    "shortName": "GetBackupIndexDownloadUrl",
+                    "fullName": "google.cloud.gkebackup.v1.BackupForGKE.GetBackupIndexDownloadUrl",
+                    "service": {
+                        "shortName": "BackupForGKE",
+                        "fullName": "google.cloud.gkebackup.v1.BackupForGKE"
+                    }
+                }
+            }
         }
     ]
 }

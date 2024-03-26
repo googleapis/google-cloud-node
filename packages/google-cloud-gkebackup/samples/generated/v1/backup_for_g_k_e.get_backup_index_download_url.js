@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START gkebackup_v1_generated_BackupForGKE_DeleteBackupPlan_async]
+function main(backup) {
+  // [START gkebackup_v1_generated_BackupForGKE_GetBackupIndexDownloadUrl_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,16 +29,11 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Fully qualified BackupPlan name.
-   *  Format: `projects/* /locations/* /backupPlans/*`
+   *  Required. Full name of Backup resource.
+   *  Format:
+   *  projects/{project}/locations/{location}/backupPlans/{backup_plan}/backups/{backup}
    */
-  // const name = 'abc123'
-  /**
-   *  Optional. If provided, this value must match the current value of the
-   *  target BackupPlan's etag google.cloud.gkebackup.v1.BackupPlan.etag  field
-   *  or the request is rejected.
-   */
-  // const etag = 'abc123'
+  // const backup = 'abc123'
 
   // Imports the Gkebackup library
   const {BackupForGKEClient} = require('@google-cloud/gke-backup').v1;
@@ -46,20 +41,19 @@ function main(name) {
   // Instantiates a client
   const gkebackupClient = new BackupForGKEClient();
 
-  async function callDeleteBackupPlan() {
+  async function callGetBackupIndexDownloadUrl() {
     // Construct request
     const request = {
-      name,
+      backup,
     };
 
     // Run request
-    const [operation] = await gkebackupClient.deleteBackupPlan(request);
-    const [response] = await operation.promise();
+    const response = await gkebackupClient.getBackupIndexDownloadUrl(request);
     console.log(response);
   }
 
-  callDeleteBackupPlan();
-  // [END gkebackup_v1_generated_BackupForGKE_DeleteBackupPlan_async]
+  callGetBackupIndexDownloadUrl();
+  // [END gkebackup_v1_generated_BackupForGKE_GetBackupIndexDownloadUrl_async]
 }
 
 process.on('unhandledRejection', err => {

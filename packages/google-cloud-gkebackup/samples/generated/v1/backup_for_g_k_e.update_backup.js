@@ -34,7 +34,7 @@ function main(backup) {
    */
   // const backup = {}
   /**
-   *  This is used to specify the fields to be overwritten in the
+   *  Optional. This is used to specify the fields to be overwritten in the
    *  Backup targeted for update. The values for each of these
    *  updated fields will be taken from the `backup_plan` provided
    *  with this request. Field names are relative to the root of the resource.
