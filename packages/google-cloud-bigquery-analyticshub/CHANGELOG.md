@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v1.2.0...bigquery-analyticshub-v1.3.0) (2024-03-26)
+
+
+### Features
+
+* [bigquery-analyticshub] support selective sharing on data clean room Listings ([#5144](https://github.com/googleapis/google-cloud-node/issues/5144)) ([d7d9e74](https://github.com/googleapis/google-cloud-node/commit/d7d9e74ef00ed20aa80ee7c9a2726db115ea19df))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v1.1.0...bigquery-analyticshub-v1.2.0) (2024-02-09)
 
 

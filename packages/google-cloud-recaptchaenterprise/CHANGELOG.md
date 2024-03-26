@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.5.0...recaptcha-enterprise-v5.6.0) (2024-03-26)
+
+
+### Features
+
+* [recaptchaenterprise] Existing resource_reference option of the field name is removed from message `google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMemberShip` ([#5164](https://github.com/googleapis/google-cloud-node/issues/5164)) ([068ecea](https://github.com/googleapis/google-cloud-node/commit/068ecea9f9966547ad02cf5c1e9d007c7f233343))
+
 ## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.4.0...recaptcha-enterprise-v5.5.0) (2024-03-07)
 
 
