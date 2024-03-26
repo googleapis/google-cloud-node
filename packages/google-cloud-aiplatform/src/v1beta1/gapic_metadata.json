@@ -417,6 +417,108 @@
         }
       }
     },
+    "ExtensionExecutionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ExtensionExecutionServiceClient",
+          "rpcs": {
+            "ExecuteExtension": {
+              "methods": [
+                "executeExtension"
+              ]
+            },
+            "QueryExtension": {
+              "methods": [
+                "queryExtension"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ExtensionExecutionServiceClient",
+          "rpcs": {
+            "ExecuteExtension": {
+              "methods": [
+                "executeExtension"
+              ]
+            },
+            "QueryExtension": {
+              "methods": [
+                "queryExtension"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ExtensionRegistryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ExtensionRegistryServiceClient",
+          "rpcs": {
+            "GetExtension": {
+              "methods": [
+                "getExtension"
+              ]
+            },
+            "UpdateExtension": {
+              "methods": [
+                "updateExtension"
+              ]
+            },
+            "ImportExtension": {
+              "methods": [
+                "importExtension"
+              ]
+            },
+            "DeleteExtension": {
+              "methods": [
+                "deleteExtension"
+              ]
+            },
+            "ListExtensions": {
+              "methods": [
+                "listExtensions",
+                "listExtensionsStream",
+                "listExtensionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ExtensionRegistryServiceClient",
+          "rpcs": {
+            "GetExtension": {
+              "methods": [
+                "getExtension"
+              ]
+            },
+            "UpdateExtension": {
+              "methods": [
+                "updateExtension"
+              ]
+            },
+            "ImportExtension": {
+              "methods": [
+                "importExtension"
+              ]
+            },
+            "DeleteExtension": {
+              "methods": [
+                "deleteExtension"
+              ]
+            },
+            "ListExtensions": {
+              "methods": [
+                "listExtensions",
+                "listExtensionsStream",
+                "listExtensionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "FeatureOnlineStoreAdminService": {
       "clients": {
         "grpc": {

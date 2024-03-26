@@ -4312,6 +4312,71 @@ describe('v1beta1.FeatureRegistryServiceClient', () => {
       });
     });
 
+    describe('extension', () => {
+      const fakePath = '/rendered/path/extension';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        extension: 'extensionValue',
+      };
+      const client =
+        new featureregistryserviceModule.v1beta1.FeatureRegistryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.extensionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.extensionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('extensionPath', () => {
+        const result = client.extensionPath(
+          'projectValue',
+          'locationValue',
+          'extensionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.extensionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExtensionName', () => {
+        const result = client.matchProjectFromExtensionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.extensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExtensionName', () => {
+        const result = client.matchLocationFromExtensionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.extensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExtensionFromExtensionName', () => {
+        const result = client.matchExtensionFromExtensionName(fakePath);
+        assert.strictEqual(result, 'extensionValue');
+        assert(
+          (client.pathTemplates.extensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('featureGroup', () => {
       const fakePath = '/rendered/path/featureGroup';
       const expectedParameters = {
