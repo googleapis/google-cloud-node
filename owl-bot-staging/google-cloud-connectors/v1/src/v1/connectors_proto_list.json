@@ -1,0 +1,13 @@
+[
+  "../../protos/google/cloud/connectors/v1/authconfig.proto",
+  "../../protos/google/cloud/connectors/v1/common.proto",
+  "../../protos/google/cloud/connectors/v1/connection.proto",
+  "../../protos/google/cloud/connectors/v1/connector.proto",
+  "../../protos/google/cloud/connectors/v1/connector_version.proto",
+  "../../protos/google/cloud/connectors/v1/connectors_service.proto",
+  "../../protos/google/cloud/connectors/v1/destination_config.proto",
+  "../../protos/google/cloud/connectors/v1/provider.proto",
+  "../../protos/google/cloud/connectors/v1/runtime.proto",
+  "../../protos/google/cloud/connectors/v1/settings.proto",
+  "../../protos/google/cloud/connectors/v1/ssl_config.proto"
+]
