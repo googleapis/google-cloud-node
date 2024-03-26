@@ -28462,6 +28462,72 @@
                         }
                       }
                     },
+                    "ToolUseExample": {
+                      "oneofs": {
+                        "Target": {
+                          "oneof": [
+                            "extensionOperation",
+                            "functionName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "extensionOperation": {
+                          "type": "ExtensionOperation",
+                          "id": 10
+                        },
+                        "functionName": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestParams": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3
+                        },
+                        "responseParams": {
+                          "type": "google.protobuf.Struct",
+                          "id": 4
+                        },
+                        "responseSummary": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "ExtensionOperation": {
+                          "fields": {
+                            "extension": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Extension"
+                              }
+                            },
+                            "operationId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "FunctionDeclaration": {
                       "fields": {
                         "name": {
@@ -28481,6 +28547,13 @@
                         "parameters": {
                           "type": "Schema",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "response": {
+                          "type": "Schema",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -34825,6 +34898,750 @@
                             "FAILED": 4,
                             "CACHED": 5,
                             "CANCELLED": 6
+                          }
+                        }
+                      }
+                    },
+                    "HttpElementLocation": {
+                      "values": {
+                        "HTTP_IN_UNSPECIFIED": 0,
+                        "HTTP_IN_QUERY": 1,
+                        "HTTP_IN_HEADER": 2,
+                        "HTTP_IN_PATH": 3,
+                        "HTTP_IN_BODY": 4,
+                        "HTTP_IN_COOKIE": 5
+                      }
+                    },
+                    "AuthType": {
+                      "values": {
+                        "AUTH_TYPE_UNSPECIFIED": 0,
+                        "NO_AUTH": 1,
+                        "API_KEY_AUTH": 2,
+                        "HTTP_BASIC_AUTH": 3,
+                        "GOOGLE_SERVICE_ACCOUNT_AUTH": 4,
+                        "OAUTH": 6,
+                        "OIDC_AUTH": 8
+                      }
+                    },
+                    "Extension": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/Extension",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/extensions/{extension}",
+                        "(google.api.resource).plural": "extensions",
+                        "(google.api.resource).singular": "extension"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "manifest": {
+                          "type": "ExtensionManifest",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "extensionOperations": {
+                          "rule": "repeated",
+                          "type": "ExtensionOperation",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "runtimeConfig": {
+                          "type": "RuntimeConfig",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "toolUseExamples": {
+                          "rule": "repeated",
+                          "type": "ToolUseExample",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "privateServiceConnectConfig": {
+                          "type": "ExtensionPrivateServiceConnectConfig",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExtensionManifest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "apiSpec": {
+                          "type": "ApiSpec",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "authConfig": {
+                          "type": "AuthConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ApiSpec": {
+                          "oneofs": {
+                            "apiSpec": {
+                              "oneof": [
+                                "openApiYaml",
+                                "openApiGcsUri"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "openApiYaml": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "openApiGcsUri": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExtensionOperation": {
+                      "fields": {
+                        "operationId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "functionDeclaration": {
+                          "type": "FunctionDeclaration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AuthConfig": {
+                      "oneofs": {
+                        "authConfig": {
+                          "oneof": [
+                            "apiKeyConfig",
+                            "httpBasicAuthConfig",
+                            "googleServiceAccountConfig",
+                            "oauthConfig",
+                            "oidcConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "apiKeyConfig": {
+                          "type": "ApiKeyConfig",
+                          "id": 2
+                        },
+                        "httpBasicAuthConfig": {
+                          "type": "HttpBasicAuthConfig",
+                          "id": 3
+                        },
+                        "googleServiceAccountConfig": {
+                          "type": "GoogleServiceAccountConfig",
+                          "id": 4
+                        },
+                        "oauthConfig": {
+                          "type": "OauthConfig",
+                          "id": 5
+                        },
+                        "oidcConfig": {
+                          "type": "OidcConfig",
+                          "id": 7
+                        },
+                        "authType": {
+                          "type": "AuthType",
+                          "id": 101
+                        }
+                      },
+                      "nested": {
+                        "NoAuth": {
+                          "fields": {}
+                        },
+                        "ApiKeyConfig": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "apiKeySecret": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                              }
+                            },
+                            "httpElementLocation": {
+                              "type": "HttpElementLocation",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "HttpBasicAuthConfig": {
+                          "fields": {
+                            "credentialSecret": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                              }
+                            }
+                          }
+                        },
+                        "GoogleServiceAccountConfig": {
+                          "fields": {
+                            "serviceAccount": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "OauthConfig": {
+                          "oneofs": {
+                            "oauthConfig": {
+                              "oneof": [
+                                "accessToken",
+                                "serviceAccount"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "accessToken": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "serviceAccount": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "OidcConfig": {
+                          "oneofs": {
+                            "oidcConfig": {
+                              "oneof": [
+                                "idToken",
+                                "serviceAccount"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "idToken": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "serviceAccount": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RuntimeConfig": {
+                      "oneofs": {
+                        "GoogleFirstPartyExtensionConfig": {
+                          "oneof": [
+                            "codeInterpreterRuntimeConfig",
+                            "vertexAiSearchRuntimeConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "codeInterpreterRuntimeConfig": {
+                          "type": "CodeInterpreterRuntimeConfig",
+                          "id": 2
+                        },
+                        "vertexAiSearchRuntimeConfig": {
+                          "type": "VertexAISearchRuntimeConfig",
+                          "id": 6
+                        },
+                        "defaultParams": {
+                          "type": "google.protobuf.Struct",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CodeInterpreterRuntimeConfig": {
+                          "fields": {
+                            "fileInputGcsBucket": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "fileOutputGcsBucket": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "VertexAISearchRuntimeConfig": {
+                          "fields": {
+                            "servingConfigName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExtensionPrivateServiceConnectConfig": {
+                      "fields": {
+                        "serviceDirectory": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "servicedirectory.googleapis.com/Service"
+                          }
+                        }
+                      }
+                    },
+                    "ExtensionExecutionService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ExecuteExtension": {
+                          "requestType": "ExecuteExtensionRequest",
+                          "responseType": "ExecuteExtensionResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/extensions/*}:execute",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,operation_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/extensions/*}:execute",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,operation_id"
+                            }
+                          ]
+                        },
+                        "QueryExtension": {
+                          "requestType": "QueryExtensionRequest",
+                          "responseType": "QueryExtensionResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/extensions/*}:query",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,contents"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/*/extensions/*}:query",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,contents"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ExecuteExtensionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Extension"
+                          }
+                        },
+                        "operationId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "operationParams": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "runtimeAuthConfig": {
+                          "type": "AuthConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExecuteExtensionResponse": {
+                      "fields": {
+                        "content": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "QueryExtensionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Extension"
+                          }
+                        },
+                        "contents": {
+                          "rule": "repeated",
+                          "type": "Content",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "QueryExtensionResponse": {
+                      "fields": {
+                        "steps": {
+                          "rule": "repeated",
+                          "type": "Content",
+                          "id": 1
+                        },
+                        "failureMessage": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ExtensionRegistryService": {
+                      "options": {
+                        "(google.api.default_host)": "aiplatform.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ImportExtension": {
+                          "requestType": "ImportExtensionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/extensions:import",
+                            "(google.api.http).body": "extension",
+                            "(google.api.method_signature)": "parent,extension",
+                            "(google.longrunning.operation_info).response_type": "Extension",
+                            "(google.longrunning.operation_info).metadata_type": "ImportExtensionOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/extensions:import",
+                                "body": "extension"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,extension"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Extension",
+                                "metadata_type": "ImportExtensionOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetExtension": {
+                          "requestType": "GetExtensionRequest",
+                          "responseType": "Extension",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/extensions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/extensions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListExtensions": {
+                          "requestType": "ListExtensionsRequest",
+                          "responseType": "ListExtensionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/extensions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/extensions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateExtension": {
+                          "requestType": "UpdateExtensionRequest",
+                          "responseType": "Extension",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{extension.name=projects/*/locations/*/extensions/*}",
+                            "(google.api.http).body": "extension",
+                            "(google.api.method_signature)": "extension,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{extension.name=projects/*/locations/*/extensions/*}",
+                                "body": "extension"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "extension,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteExtension": {
+                          "requestType": "DeleteExtensionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/extensions/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/*/extensions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ImportExtensionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "extension": {
+                          "type": "Extension",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ImportExtensionOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetExtensionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Extension"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateExtensionRequest": {
+                      "fields": {
+                        "extension": {
+                          "type": "Extension",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListExtensionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListExtensionsResponse": {
+                      "fields": {
+                        "extensions": {
+                          "rule": "repeated",
+                          "type": "Extension",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteExtensionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Extension"
                           }
                         }
                       }

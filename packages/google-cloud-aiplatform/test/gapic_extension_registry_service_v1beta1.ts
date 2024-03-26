@@ -21,11 +21,17 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as featureonlinestoreserviceModule from '../src';
+import * as extensionregistryserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, IamProtos, LocationProtos} from 'google-gax';
+import {
+  protobuf,
+  LROperation,
+  operationsProtos,
+  IamProtos,
+  LocationProtos,
+} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -66,17 +72,73 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubBidiStreamingCall<ResponseType>(
+function stubLongRunningCall<ResponseType>(
   response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
   error?: Error
 ) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
   const transformStub = error
     ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
+    : pagingStub;
   const mockStream = new PassThrough({
     objectMode: true,
     transform: transformStub,
   });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
   return sinon.stub().returns(mockStream);
 }
 
@@ -103,18 +165,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
+describe('v1beta1.ExtensionRegistryServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient();
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient();
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -126,8 +188,8 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          featureonlinestoreserviceModule.v1beta1
-            .FeatureOnlineStoreServiceClient.servicePath;
+          extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient
+            .servicePath;
         assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -136,8 +198,8 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          featureonlinestoreserviceModule.v1beta1
-            .FeatureOnlineStoreServiceClient.apiEndpoint;
+          extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient
+            .apiEndpoint;
         assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -145,7 +207,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {universeDomain: 'example.com'}
         );
       const servicePath = client.apiEndpoint;
@@ -154,7 +216,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {universe_domain: 'example.com'}
         );
       const servicePath = client.apiEndpoint;
@@ -162,7 +224,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {universe_domain: 'example.com', universeDomain: 'example.net'}
         );
       });
@@ -170,7 +232,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
 
     it('has port', () => {
       const port =
-        featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient
+        extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient
           .port;
       assert(port);
       assert(typeof port === 'number');
@@ -178,13 +240,13 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
 
     it('should create a client with no option', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient();
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             fallback: true,
           }
@@ -194,27 +256,27 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
-      assert.strictEqual(client.featureOnlineStoreServiceStub, undefined);
+      assert.strictEqual(client.extensionRegistryServiceStub, undefined);
       await client.initialize();
-      assert(client.featureOnlineStoreServiceStub);
+      assert(client.extensionRegistryServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
       client.initialize();
-      assert(client.featureOnlineStoreServiceStub);
+      assert(client.extensionRegistryServiceStub);
       client.close().then(() => {
         done();
       });
@@ -222,13 +284,13 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
-      assert.strictEqual(client.featureOnlineStoreServiceStub, undefined);
+      assert.strictEqual(client.extensionRegistryServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -237,7 +299,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -252,7 +314,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -275,10 +337,10 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
   });
 
-  describe('fetchFeatureValues', () => {
-    it('invokes fetchFeatureValues without error', async () => {
+  describe('getExtension', () => {
+    it('invokes getExtension without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -286,34 +348,33 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.GetExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesResponse()
+        new protos.google.cloud.aiplatform.v1beta1.Extension()
       );
-      client.innerApiCalls.fetchFeatureValues =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchFeatureValues(request);
+      client.innerApiCalls.getExtension = stubSimpleCall(expectedResponse);
+      const [response] = await client.getExtension(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.getExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.getExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes fetchFeatureValues without error using callback', async () => {
+    it('invokes getExtension without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -321,25 +382,25 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.GetExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesResponse()
+        new protos.google.cloud.aiplatform.v1beta1.Extension()
       );
-      client.innerApiCalls.fetchFeatureValues =
+      client.innerApiCalls.getExtension =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.fetchFeatureValues(
+        client.getExtension(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IFetchFeatureValuesResponse | null
+            result?: protos.google.cloud.aiplatform.v1beta1.IExtension | null
           ) => {
             if (err) {
               reject(err);
@@ -352,18 +413,18 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.getExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.getExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes fetchFeatureValues with error', async () => {
+    it('invokes getExtension with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -371,33 +432,33 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.GetExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.fetchFeatureValues = stubSimpleCall(
+      client.innerApiCalls.getExtension = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.fetchFeatureValues(request), expectedError);
+      await assert.rejects(client.getExtension(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.getExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.getExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes fetchFeatureValues with closed client', async () => {
+    it('invokes getExtension with closed client', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -405,23 +466,23 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.GetExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.GetExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.fetchFeatureValues(request), expectedError);
+      await assert.rejects(client.getExtension(request), expectedError);
     });
   });
 
-  describe('searchNearestEntities', () => {
-    it('invokes searchNearestEntities without error', async () => {
+  describe('updateExtension', () => {
+    it('invokes updateExtension without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -429,34 +490,34 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest()
       );
+      request.extension ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest',
+        ['extension', 'name']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.extension.name = defaultValue1;
+      const expectedHeaderRequestParams = `extension.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesResponse()
+        new protos.google.cloud.aiplatform.v1beta1.Extension()
       );
-      client.innerApiCalls.searchNearestEntities =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.searchNearestEntities(request);
+      client.innerApiCalls.updateExtension = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateExtension(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.updateExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.updateExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes searchNearestEntities without error using callback', async () => {
+    it('invokes updateExtension without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -464,25 +525,26 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest()
       );
+      request.extension ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest',
+        ['extension', 'name']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.extension.name = defaultValue1;
+      const expectedHeaderRequestParams = `extension.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesResponse()
+        new protos.google.cloud.aiplatform.v1beta1.Extension()
       );
-      client.innerApiCalls.searchNearestEntities =
+      client.innerApiCalls.updateExtension =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.searchNearestEntities(
+        client.updateExtension(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.ISearchNearestEntitiesResponse | null
+            result?: protos.google.cloud.aiplatform.v1beta1.IExtension | null
           ) => {
             if (err) {
               reject(err);
@@ -495,18 +557,18 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.updateExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.updateExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes searchNearestEntities with error', async () => {
+    it('invokes updateExtension with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -514,36 +576,307 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest()
+      );
+      request.extension ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest',
+        ['extension', 'name']
+      );
+      request.extension.name = defaultValue1;
+      const expectedHeaderRequestParams = `extension.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateExtension = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateExtension(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateExtension with closed client', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest()
+      );
+      request.extension ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateExtensionRequest',
+        ['extension', 'name']
+      );
+      request.extension.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateExtension(request), expectedError);
+    });
+  });
+
+  describe('importExtension', () => {
+    it('invokes importExtension without error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ImportExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.ImportExtensionRequest',
+        ['parent']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importExtension =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.importExtension(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importExtension without error using callback', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ImportExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ImportExtensionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importExtension =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.importExtension(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IExtension,
+              protos.google.cloud.aiplatform.v1beta1.IImportExtensionOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IExtension,
+        protos.google.cloud.aiplatform.v1beta1.IImportExtensionOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importExtension with call error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ImportExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ImportExtensionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.searchNearestEntities = stubSimpleCall(
+      client.innerApiCalls.importExtension = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.importExtension(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importExtension with LRO error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ImportExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ImportExtensionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importExtension = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.importExtension(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkImportExtensionProgress without error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportExtensionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportExtensionProgress with error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(
-        client.searchNearestEntities(request),
+        client.checkImportExtensionProgress(''),
         expectedError
       );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteExtension', () => {
+    it('invokes deleteExtension without error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteExtension =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteExtension(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.deleteExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.deleteExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes searchNearestEntities with closed client', async () => {
+    it('invokes deleteExtension without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -551,26 +884,175 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.searchNearestEntities(request),
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteExtension =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteExtension(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteExtension with call error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteExtension = stubLongRunningCall(
+        undefined,
         expectedError
       );
+      await assert.rejects(client.deleteExtension(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteExtension with LRO error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteExtensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteExtension = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteExtension(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteExtension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteExtension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteExtensionProgress without error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteExtensionProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteExtensionProgress with error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteExtensionProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('streamingFetchFeatureValues', () => {
-    it('invokes streamingFetchFeatureValues without error', async () => {
+  describe('listExtensions', () => {
+    it('invokes listExtensions without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -578,47 +1060,197 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+      ];
+      client.innerApiCalls.listExtensions = stubSimpleCall(expectedResponse);
+      const [response] = await client.listExtensions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listExtensions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExtensions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesResponse()
+    it('invokes listExtensions without error using callback', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
       );
-      client.innerApiCalls.streamingFetchFeatureValues =
-        stubBidiStreamingCall(expectedResponse);
-      const stream = client.streamingFetchFeatureValues();
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+      ];
+      client.innerApiCalls.listExtensions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
+        client.listExtensions(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IExtension[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listExtensions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExtensions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listExtensions with error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listExtensions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listExtensions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listExtensions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listExtensions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listExtensionsStream without error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+      ];
+      client.descriptors.page.listExtensions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listExtensionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.Extension[] =
+          [];
         stream.on(
           'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesResponse
-          ) => {
-            resolve(response);
+          (response: protos.google.cloud.aiplatform.v1beta1.Extension) => {
+            responses.push(response);
           }
         );
+        stream.on('end', () => {
+          resolve(responses);
+        });
         stream.on('error', (err: Error) => {
           reject(err);
         });
-        stream.write(request);
-        stream.end();
       });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.innerApiCalls.streamingFetchFeatureValues as SinonStub)
+        (client.descriptors.page.listExtensions.createStream as SinonStub)
           .getCall(0)
-          .calledWith(null)
+          .calledWith(client.innerApiCalls.listExtensions, request)
       );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
+      assert(
+        (client.descriptors.page.listExtensions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
 
-    it('invokes streamingFetchFeatureValues with error', async () => {
+    it('invokes listExtensionsStream with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -626,46 +1258,149 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.streamingFetchFeatureValues = stubBidiStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.streamingFetchFeatureValues();
+      client.descriptors.page.listExtensions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listExtensionsStream(request);
       const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.Extension[] =
+          [];
         stream.on(
           'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesResponse
-          ) => {
-            resolve(response);
+          (response: protos.google.cloud.aiplatform.v1beta1.Extension) => {
+            responses.push(response);
           }
         );
+        stream.on('end', () => {
+          resolve(responses);
+        });
         stream.on('error', (err: Error) => {
           reject(err);
         });
-        stream.write(request);
-        stream.end();
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.innerApiCalls.streamingFetchFeatureValues as SinonStub)
+        (client.descriptors.page.listExtensions.createStream as SinonStub)
           .getCall(0)
-          .calledWith(null)
+          .calledWith(client.innerApiCalls.listExtensions, request)
       );
+      assert(
+        (client.descriptors.page.listExtensions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listExtensions without error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.Extension()
+        ),
+      ];
+      client.descriptors.page.listExtensions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.IExtension[] = [];
+      const iterable = client.listExtensionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
+        (
+          client.descriptors.page.listExtensions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
+      );
+      assert(
+        (client.descriptors.page.listExtensions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listExtensions with error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListExtensionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListExtensionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listExtensions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listExtensionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.IExtension[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listExtensions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listExtensions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -698,7 +1433,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -745,7 +1480,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -780,7 +1515,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -813,7 +1548,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -860,7 +1595,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -895,7 +1630,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -931,7 +1666,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -978,7 +1713,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1016,7 +1751,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1049,7 +1784,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1096,7 +1831,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1134,7 +1869,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1185,7 +1920,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1226,6 +1961,344 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
       );
     });
   });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.getOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: operationsProtos.google.longrunning.Operation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.cancelOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.deleteOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+        [];
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
 
   describe('Path templates', () => {
     describe('annotation', () => {
@@ -1238,7 +2311,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1328,7 +2401,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1408,7 +2481,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1486,7 +2559,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1567,7 +2640,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         context: 'contextValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1645,7 +2718,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1713,7 +2786,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1791,7 +2864,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1859,7 +2932,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1927,7 +3000,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2006,7 +3079,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2091,7 +3164,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2170,7 +3243,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         execution: 'executionValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2248,7 +3321,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         extension: 'extensionValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2315,7 +3388,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2382,7 +3455,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2463,7 +3536,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2543,7 +3616,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2622,7 +3695,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2689,7 +3762,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2773,7 +3846,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         index: 'indexValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2840,7 +3913,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2899,6 +3972,58 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
       });
     });
 
+    describe('location', () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('metadataSchema', () => {
       const fakePath = '/rendered/path/metadataSchema';
       const expectedParameters = {
@@ -2908,7 +4033,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2988,7 +4113,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3055,7 +4180,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3122,7 +4247,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3205,7 +4330,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3285,7 +4410,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         slice: 'sliceValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3395,7 +4520,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3463,7 +4588,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3542,7 +4667,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3622,7 +4747,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3689,7 +4814,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3772,7 +4897,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature: 'featureValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3878,7 +5003,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature: 'featureValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4005,7 +5130,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4099,7 +5224,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4155,7 +5280,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4224,7 +5349,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4302,7 +5427,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4369,7 +5494,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4437,7 +5562,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         study: 'studyValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4504,7 +5629,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4572,7 +5697,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4671,7 +5796,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         run: 'runValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4763,7 +5888,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4889,7 +6014,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4961,7 +6086,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         trial: 'trialValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionregistryserviceModule.v1beta1.ExtensionRegistryServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',

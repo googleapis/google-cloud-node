@@ -21,9 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as featureonlinestoreserviceModule from '../src';
-
-import {PassThrough} from 'stream';
+import * as extensionexecutionserviceModule from '../src';
 
 import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
@@ -66,20 +64,6 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubBidiStreamingCall<ResponseType>(
-  response?: ResponseType,
-  error?: Error
-) {
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : sinon.stub().callsArgWith(2, null, response);
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  return sinon.stub().returns(mockStream);
-}
-
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -103,18 +87,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
+describe('v1beta1.ExtensionExecutionServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient();
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient();
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -126,8 +110,8 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          featureonlinestoreserviceModule.v1beta1
-            .FeatureOnlineStoreServiceClient.servicePath;
+          extensionexecutionserviceModule.v1beta1
+            .ExtensionExecutionServiceClient.servicePath;
         assert.strictEqual(servicePath, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -136,8 +120,8 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          featureonlinestoreserviceModule.v1beta1
-            .FeatureOnlineStoreServiceClient.apiEndpoint;
+          extensionexecutionserviceModule.v1beta1
+            .ExtensionExecutionServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'aiplatform.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -145,7 +129,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {universeDomain: 'example.com'}
         );
       const servicePath = client.apiEndpoint;
@@ -154,7 +138,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {universe_domain: 'example.com'}
         );
       const servicePath = client.apiEndpoint;
@@ -162,7 +146,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {universe_domain: 'example.com', universeDomain: 'example.net'}
         );
       });
@@ -170,7 +154,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
 
     it('has port', () => {
       const port =
-        featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient
+        extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient
           .port;
       assert(port);
       assert(typeof port === 'number');
@@ -178,13 +162,13 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
 
     it('should create a client with no option', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient();
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             fallback: true,
           }
@@ -194,27 +178,27 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
-      assert.strictEqual(client.featureOnlineStoreServiceStub, undefined);
+      assert.strictEqual(client.extensionExecutionServiceStub, undefined);
       await client.initialize();
-      assert(client.featureOnlineStoreServiceStub);
+      assert(client.extensionExecutionServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
       client.initialize();
-      assert(client.featureOnlineStoreServiceStub);
+      assert(client.extensionExecutionServiceStub);
       client.close().then(() => {
         done();
       });
@@ -222,13 +206,13 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
-      assert.strictEqual(client.featureOnlineStoreServiceStub, undefined);
+      assert.strictEqual(client.extensionExecutionServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -237,7 +221,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -252,7 +236,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -275,10 +259,10 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
   });
 
-  describe('fetchFeatureValues', () => {
-    it('invokes fetchFeatureValues without error', async () => {
+  describe('executeExtension', () => {
+    it('invokes executeExtension without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -286,34 +270,33 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesResponse()
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionResponse()
       );
-      client.innerApiCalls.fetchFeatureValues =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchFeatureValues(request);
+      client.innerApiCalls.executeExtension = stubSimpleCall(expectedResponse);
+      const [response] = await client.executeExtension(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.executeExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.executeExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes fetchFeatureValues without error using callback', async () => {
+    it('invokes executeExtension without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -321,25 +304,25 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesResponse()
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionResponse()
       );
-      client.innerApiCalls.fetchFeatureValues =
+      client.innerApiCalls.executeExtension =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.fetchFeatureValues(
+        client.executeExtension(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.IFetchFeatureValuesResponse | null
+            result?: protos.google.cloud.aiplatform.v1beta1.IExecuteExtensionResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -352,18 +335,18 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.executeExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.executeExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes fetchFeatureValues with error', async () => {
+    it('invokes executeExtension with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -371,33 +354,33 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.fetchFeatureValues = stubSimpleCall(
+      client.innerApiCalls.executeExtension = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.fetchFeatureValues(request), expectedError);
+      await assert.rejects(client.executeExtension(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.executeExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.fetchFeatureValues as SinonStub
+        client.innerApiCalls.executeExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes fetchFeatureValues with closed client', async () => {
+    it('invokes executeExtension with closed client', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -405,23 +388,23 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.ExecuteExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.fetchFeatureValues(request), expectedError);
+      await assert.rejects(client.executeExtension(request), expectedError);
     });
   });
 
-  describe('searchNearestEntities', () => {
-    it('invokes searchNearestEntities without error', async () => {
+  describe('queryExtension', () => {
+    it('invokes queryExtension without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -429,34 +412,33 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.QueryExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesResponse()
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionResponse()
       );
-      client.innerApiCalls.searchNearestEntities =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.searchNearestEntities(request);
+      client.innerApiCalls.queryExtension = stubSimpleCall(expectedResponse);
+      const [response] = await client.queryExtension(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.queryExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.queryExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes searchNearestEntities without error using callback', async () => {
+    it('invokes queryExtension without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -464,25 +446,25 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.QueryExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesResponse()
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionResponse()
       );
-      client.innerApiCalls.searchNearestEntities =
+      client.innerApiCalls.queryExtension =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.searchNearestEntities(
+        client.queryExtension(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1beta1.ISearchNearestEntitiesResponse | null
+            result?: protos.google.cloud.aiplatform.v1beta1.IQueryExtensionResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -495,18 +477,18 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.queryExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.queryExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes searchNearestEntities with error', async () => {
+    it('invokes queryExtension with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -514,36 +496,33 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.QueryExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
-      const expectedHeaderRequestParams = `feature_view=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.searchNearestEntities = stubSimpleCall(
+      client.innerApiCalls.queryExtension = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.searchNearestEntities(request),
-        expectedError
-      );
+      await assert.rejects(client.queryExtension(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.queryExtension as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.searchNearestEntities as SinonStub
+        client.innerApiCalls.queryExtension as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes searchNearestEntities with closed client', async () => {
+    it('invokes queryExtension with closed client', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -551,121 +530,22 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest()
+        new protos.google.cloud.aiplatform.v1beta1.QueryExtensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.aiplatform.v1beta1.SearchNearestEntitiesRequest',
-        ['featureView']
+        '.google.cloud.aiplatform.v1beta1.QueryExtensionRequest',
+        ['name']
       );
-      request.featureView = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(
-        client.searchNearestEntities(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('streamingFetchFeatureValues', () => {
-    it('invokes streamingFetchFeatureValues without error', async () => {
-      const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesRequest()
-      );
-
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesResponse()
-      );
-      client.innerApiCalls.streamingFetchFeatureValues =
-        stubBidiStreamingCall(expectedResponse);
-      const stream = client.streamingFetchFeatureValues();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-        stream.write(request);
-        stream.end();
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.streamingFetchFeatureValues as SinonStub)
-          .getCall(0)
-          .calledWith(null)
-      );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
-      );
-    });
-
-    it('invokes streamingFetchFeatureValues with error', async () => {
-      const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesRequest()
-      );
-      const expectedError = new Error('expected');
-      client.innerApiCalls.streamingFetchFeatureValues = stubBidiStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.streamingFetchFeatureValues();
-      const promise = new Promise((resolve, reject) => {
-        stream.on(
-          'data',
-          (
-            response: protos.google.cloud.aiplatform.v1beta1.StreamingFetchFeatureValuesResponse
-          ) => {
-            resolve(response);
-          }
-        );
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-        stream.write(request);
-        stream.end();
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.innerApiCalls.streamingFetchFeatureValues as SinonStub)
-          .getCall(0)
-          .calledWith(null)
-      );
-      assert.deepStrictEqual(
-        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
-          .args[0],
-        request
-      );
+      await assert.rejects(client.queryExtension(request), expectedError);
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -698,7 +578,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -745,7 +625,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -780,7 +660,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -813,7 +693,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -860,7 +740,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -895,7 +775,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -931,7 +811,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -978,7 +858,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1016,7 +896,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1049,7 +929,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1096,7 +976,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1134,7 +1014,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1185,7 +1065,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1238,7 +1118,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1328,7 +1208,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1408,7 +1288,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1486,7 +1366,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1567,7 +1447,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         context: 'contextValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1645,7 +1525,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1713,7 +1593,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1791,7 +1671,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1859,7 +1739,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -1927,7 +1807,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2006,7 +1886,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2091,7 +1971,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2170,7 +2050,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         execution: 'executionValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2248,7 +2128,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         extension: 'extensionValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2315,7 +2195,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2382,7 +2262,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2463,7 +2343,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2543,7 +2423,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2622,7 +2502,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2689,7 +2569,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2773,7 +2653,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         index: 'indexValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2840,7 +2720,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2908,7 +2788,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -2988,7 +2868,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3055,7 +2935,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3122,7 +3002,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3205,7 +3085,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3285,7 +3165,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         slice: 'sliceValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3395,7 +3275,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3463,7 +3343,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3542,7 +3422,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3622,7 +3502,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3689,7 +3569,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3772,7 +3652,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature: 'featureValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -3878,7 +3758,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         feature: 'featureValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4005,7 +3885,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4099,7 +3979,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4155,7 +4035,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4224,7 +4104,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4302,7 +4182,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4369,7 +4249,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4437,7 +4317,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         study: 'studyValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4504,7 +4384,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4572,7 +4452,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4671,7 +4551,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         run: 'runValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4763,7 +4643,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4889,7 +4769,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
@@ -4961,7 +4841,7 @@ describe('v1beta1.FeatureOnlineStoreServiceClient', () => {
         trial: 'trialValue',
       };
       const client =
-        new featureonlinestoreserviceModule.v1beta1.FeatureOnlineStoreServiceClient(
+        new extensionexecutionserviceModule.v1beta1.ExtensionExecutionServiceClient(
           {
             credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
