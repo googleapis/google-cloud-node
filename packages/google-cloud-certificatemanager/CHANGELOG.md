@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/certificate-manager-v1.1.0...certificate-manager-v1.2.0) (2024-03-26)
+
+
+### Features
+
+* [certificatemanager] Added Trust Configs and DnsAuthorization.Type to Certificate Manager ([#5145](https://github.com/googleapis/google-cloud-node/issues/5145)) ([cd79bb0](https://github.com/googleapis/google-cloud-node/commit/cd79bb04fba6e8eafac28c8a360bc077151cbf10))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/certificate-manager-v1.0.1...certificate-manager-v1.1.0) (2024-02-09)
 
 

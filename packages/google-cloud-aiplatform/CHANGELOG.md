@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.17.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.16.0...aiplatform-v3.17.0) (2024-03-26)
+
+
+### Features
+
+* Add Optimized feature store proto ([#5153](https://github.com/googleapis/google-cloud-node/issues/5153)) ([1f5d99c](https://github.com/googleapis/google-cloud-node/commit/1f5d99c3fec4d7c0c84da22fc780e4e76af57548))
+* Evaluation Service aiplatform v1beta1 initial release ([#5172](https://github.com/googleapis/google-cloud-node/issues/5172)) ([6827acc](https://github.com/googleapis/google-cloud-node/commit/6827accaabc06bffa6a154189c18cd8e3bc7ed82))
+
 ## [3.16.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.15.0...aiplatform-v3.16.0) (2024-03-23)
 
 

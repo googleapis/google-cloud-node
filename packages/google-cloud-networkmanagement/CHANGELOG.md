@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.3.0...network-management-v3.4.0) (2024-03-26)
+
+
+### Features
+
+* [networkmanagement] add new fields and enum values related to round-trip ([#5171](https://github.com/googleapis/google-cloud-node/issues/5171)) ([009e21a](https://github.com/googleapis/google-cloud-node/commit/009e21ab1ca8cddc53dc68a197c0b23989ec55c0))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.2.0...network-management-v3.3.0) (2024-03-12)
 
 

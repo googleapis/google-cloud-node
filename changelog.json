@@ -4,6 +4,252 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "115b6952af6016b1c88f1d706056b92cd8f41979",
+          "message": "[edgenetwork] deprecate unimplemented Zone fields and methods",
+          "issues": [
+            "5148"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "26a0165b-a7d4-4e17-b09a-f51089347497",
+      "createTime": "2024-03-26T00:45:06.296Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5e7644431ce558ea6ce3be42a4038bd25cd224c3",
+          "message": "[container] add optional secondary_boot_disk_update_strategy field to NodePool API",
+          "issues": [
+            "5162"
+          ]
+        }
+      ],
+      "version": "5.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "36940a93-399b-4afa-9ce5-145b0beeb55b",
+      "createTime": "2024-03-26T00:45:06.280Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "28e1ffd2cf64aafe72d4f993fa0b313722682c04",
+          "message": "[tasks] issue with ambiguous naming in protos",
+          "issues": [
+            "5173"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "9c78a2e7-2af0-4b0f-8969-1e4540a0fe6b",
+      "createTime": "2024-03-26T00:45:06.236Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "73bed7b530eadf710153938cdb76af007cb4fcbf",
+          "message": "[sql] support INSUFFICIENT_DISK_SIZE and INSUFFICIENT_MACHINE_TIER error types for external primary instance migration settings",
+          "issues": [
+            "5161"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "9da3111a-e00e-44a4-9031-c13e408d94ea",
+      "createTime": "2024-03-26T00:45:06.224Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "068ecea9f9966547ad02cf5c1e9d007c7f233343",
+          "message": "[recaptchaenterprise] Existing resource_reference option of the field name is removed from message `google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMemberShip`",
+          "issues": [
+            "5164"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "4eba7dcd-bd5e-46ed-86f0-7ecc41f955dc",
+      "createTime": "2024-03-26T00:45:06.209Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4c0690fc833c115159b83192d0ae72356a629dd8",
+          "message": "[networkservices] publish DEP proto",
+          "issues": [
+            "5170"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "3c756118-6c97-4c4c-b05b-eb1f979187d1",
+      "createTime": "2024-03-26T00:45:06.198Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "009e21ab1ca8cddc53dc68a197c0b23989ec55c0",
+          "message": "[networkmanagement] add new fields and enum values related to round-trip",
+          "issues": [
+            "5171"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "a7bd77fa-bd6a-4bd9-a3ac-5ce8b19328c8",
+      "createTime": "2024-03-26T00:45:06.092Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a57ebebec43b92de5ea6826a4ee5e9c95fa3c549",
+          "message": "[edgecontainer] add GetServerConfig rpc and message",
+          "issues": [
+            "5163"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "2cbf1af3-ee14-4a44-9297-b5ed9a5b3337",
+      "createTime": "2024-03-26T00:45:06.028Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8c2c43c19b148b0e95874a1d24261c9b962020f0",
+          "message": "[dataplex] added client side library for the followings:",
+          "issues": [
+            "5149"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "04317322-4ee8-4584-b6e2-9d9582277ddc",
+      "createTime": "2024-03-26T00:45:06.009Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "49a57d3cacc1cc96755f3fb7943e309639024c7d",
+          "message": "[infra-manager] Infrastructure Manager supports the deployment of infrastructure from Terraform configurations in a private Git repository",
+          "issues": [
+            "5147"
+          ]
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "1fb14ba3-10b7-442d-85ae-17ddb3082c7e",
+      "createTime": "2024-03-26T00:45:05.997Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cd79bb04fba6e8eafac28c8a360bc077151cbf10",
+          "message": "[certificatemanager] Added Trust Configs and DnsAuthorization.Type to Certificate Manager",
+          "issues": [
+            "5145"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "86bc0375-541f-451b-9126-8b201238140c",
+      "createTime": "2024-03-26T00:45:05.986Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d7d9e74ef00ed20aa80ee7c9a2726db115ea19df",
+          "message": "[bigquery-analyticshub] support selective sharing on data clean room Listings",
+          "issues": [
+            "5144"
+          ]
+        }
+      ],
+      "version": "1.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "917291a9-b81f-4412-9452-a4ba0df2b276",
+      "createTime": "2024-03-26T00:45:05.975Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6827accaabc06bffa6a154189c18cd8e3bc7ed82",
+          "message": "Evaluation Service aiplatform v1beta1 initial release",
+          "issues": [
+            "5172"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "1f5d99c3fec4d7c0c84da22fc780e4e76af57548",
+          "message": "Add Optimized feature store proto",
+          "issues": [
+            "5153"
+          ]
+        }
+      ],
+      "version": "3.17.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "27cb5658-65f6-4a19-ae49-b88431598e72",
+      "createTime": "2024-03-26T00:45:05.964Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b2a5f9d476c5cc5bbf9eb47f0dc605284943d8c5",
+          "message": "[generativelanguage] make learning rate a one-of",
+          "issues": [
+            "5142"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "1b7620d1-4473-4dbe-a0ab-b4b2db701e70",
+      "createTime": "2024-03-26T00:45:05.952Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "0aab0441677cb4cc037c2adc08b10f3556e9f459",
           "message": "Add initial files for google.chat.v1",
@@ -25148,5 +25394,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-03-23T10:48:03.284Z"
+  "updateTime": "2024-03-26T00:45:06.296Z"
 }
