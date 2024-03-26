@@ -34,11 +34,11 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The Backup resource to create.
+   *  Optional. The Backup resource to create.
    */
   // const backup = {}
   /**
-   *  The client-provided short name for the Backup resource.
+   *  Optional. The client-provided short name for the Backup resource.
    *  This name must:
    *  - be between 1 and 63 characters long (inclusive)
    *  - consist of only lower-case ASCII letters, numbers, and dashes
