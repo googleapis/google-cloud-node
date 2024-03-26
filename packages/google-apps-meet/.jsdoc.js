@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2024 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-apps/meet',
+    systemName: '@google-cloud/meet',
     theme: 'lumen',
     default: {
       outputSourceFiles: false
