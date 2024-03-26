@@ -1283,7 +1283,7 @@
                     "csharp_namespace": "Google.Cloud.Batch.V1Alpha",
                     "go_package": "cloud.google.com/go/batch/apiv1alpha/batchpb;batchpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "VolumeProto",
+                    "java_outer_classname": "ResourceAllowanceProto",
                     "java_package": "com.google.cloud.batch.v1alpha",
                     "objc_class_prefix": "GCB",
                     "php_namespace": "Google\\Cloud\\Batch\\V1alpha",
@@ -4785,6 +4785,30 @@
                   "rule": "repeated",
                   "type": "google.protobuf.Any",
                   "id": 3
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/interval;interval",
+            "java_multiple_files": true,
+            "java_outer_classname": "IntervalProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Interval": {
+              "fields": {
+                "startTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 1
+                },
+                "endTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 2
                 }
               }
             }
