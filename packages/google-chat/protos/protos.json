@@ -3489,6 +3489,11 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "accessoryWidgets": {
+                      "rule": "repeated",
+                      "type": "AccessoryWidget",
+                      "id": 44
                     }
                   }
                 },
@@ -3615,6 +3620,21 @@
                           "id": 2
                         }
                       }
+                    }
+                  }
+                },
+                "AccessoryWidget": {
+                  "oneofs": {
+                    "action": {
+                      "oneof": [
+                        "buttonList"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "buttonList": {
+                      "type": "google.apps.card.v1.ButtonList",
+                      "id": 1
                     }
                   }
                 },

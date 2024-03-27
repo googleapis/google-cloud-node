@@ -32271,6 +32271,7 @@
                      * @property {google.chat.v1.IDeletionMetadata|null} [deletionMetadata] Message deletionMetadata
                      * @property {google.chat.v1.IQuotedMessageMetadata|null} [quotedMessageMetadata] Message quotedMessageMetadata
                      * @property {Array.<google.chat.v1.IAttachedGif>|null} [attachedGifs] Message attachedGifs
+                     * @property {Array.<google.chat.v1.IAccessoryWidget>|null} [accessoryWidgets] Message accessoryWidgets
                      */
     
                     /**
@@ -32288,6 +32289,7 @@
                         this.attachment = [];
                         this.emojiReactionSummaries = [];
                         this.attachedGifs = [];
+                        this.accessoryWidgets = [];
                         if (properties)
                             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                 if (properties[keys[i]] != null)
@@ -32495,6 +32497,14 @@
                     Message.prototype.attachedGifs = $util.emptyArray;
     
                     /**
+                     * Message accessoryWidgets.
+                     * @member {Array.<google.chat.v1.IAccessoryWidget>} accessoryWidgets
+                     * @memberof google.chat.v1.Message
+                     * @instance
+                     */
+                    Message.prototype.accessoryWidgets = $util.emptyArray;
+    
+                    /**
                      * Creates a new Message instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.Message
@@ -32574,6 +32584,9 @@
                                 $root.google.chat.v1.AttachedGif.encode(message.attachedGifs[i], writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
                         if (message.formattedText != null && Object.hasOwnProperty.call(message, "formattedText"))
                             writer.uint32(/* id 43, wireType 2 =*/346).string(message.formattedText);
+                        if (message.accessoryWidgets != null && message.accessoryWidgets.length)
+                            for (var i = 0; i < message.accessoryWidgets.length; ++i)
+                                $root.google.chat.v1.AccessoryWidget.encode(message.accessoryWidgets[i], writer.uint32(/* id 44, wireType 2 =*/354).fork()).ldelim();
                         return writer;
                     };
     
@@ -32718,6 +32731,12 @@
                                     if (!(message.attachedGifs && message.attachedGifs.length))
                                         message.attachedGifs = [];
                                     message.attachedGifs.push($root.google.chat.v1.AttachedGif.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 44: {
+                                    if (!(message.accessoryWidgets && message.accessoryWidgets.length))
+                                        message.accessoryWidgets = [];
+                                    message.accessoryWidgets.push($root.google.chat.v1.AccessoryWidget.decode(reader, reader.uint32()));
                                     break;
                                 }
                             default:
@@ -32890,6 +32909,15 @@
                                     return "attachedGifs." + error;
                             }
                         }
+                        if (message.accessoryWidgets != null && message.hasOwnProperty("accessoryWidgets")) {
+                            if (!Array.isArray(message.accessoryWidgets))
+                                return "accessoryWidgets: array expected";
+                            for (var i = 0; i < message.accessoryWidgets.length; ++i) {
+                                var error = $root.google.chat.v1.AccessoryWidget.verify(message.accessoryWidgets[i]);
+                                if (error)
+                                    return "accessoryWidgets." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -33039,6 +33067,16 @@
                                 message.attachedGifs[i] = $root.google.chat.v1.AttachedGif.fromObject(object.attachedGifs[i]);
                             }
                         }
+                        if (object.accessoryWidgets) {
+                            if (!Array.isArray(object.accessoryWidgets))
+                                throw TypeError(".google.chat.v1.Message.accessoryWidgets: array expected");
+                            message.accessoryWidgets = [];
+                            for (var i = 0; i < object.accessoryWidgets.length; ++i) {
+                                if (typeof object.accessoryWidgets[i] !== "object")
+                                    throw TypeError(".google.chat.v1.Message.accessoryWidgets: object expected");
+                                message.accessoryWidgets[i] = $root.google.chat.v1.AccessoryWidget.fromObject(object.accessoryWidgets[i]);
+                            }
+                        }
                         return message;
                     };
     
@@ -33062,6 +33100,7 @@
                             object.cardsV2 = [];
                             object.emojiReactionSummaries = [];
                             object.attachedGifs = [];
+                            object.accessoryWidgets = [];
                         }
                         if (options.defaults) {
                             object.name = "";
@@ -33152,6 +33191,11 @@
                         }
                         if (message.formattedText != null && message.hasOwnProperty("formattedText"))
                             object.formattedText = message.formattedText;
+                        if (message.accessoryWidgets && message.accessoryWidgets.length) {
+                            object.accessoryWidgets = [];
+                            for (var j = 0; j < message.accessoryWidgets.length; ++j)
+                                object.accessoryWidgets[j] = $root.google.chat.v1.AccessoryWidget.toObject(message.accessoryWidgets[j], options);
+                        }
                         return object;
                     };
     
@@ -34670,6 +34714,233 @@
                     })();
     
                     return ActionResponse;
+                })();
+    
+                v1.AccessoryWidget = (function() {
+    
+                    /**
+                     * Properties of an AccessoryWidget.
+                     * @memberof google.chat.v1
+                     * @interface IAccessoryWidget
+                     * @property {google.apps.card.v1.IButtonList|null} [buttonList] AccessoryWidget buttonList
+                     */
+    
+                    /**
+                     * Constructs a new AccessoryWidget.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents an AccessoryWidget.
+                     * @implements IAccessoryWidget
+                     * @constructor
+                     * @param {google.chat.v1.IAccessoryWidget=} [properties] Properties to set
+                     */
+                    function AccessoryWidget(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AccessoryWidget buttonList.
+                     * @member {google.apps.card.v1.IButtonList|null|undefined} buttonList
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @instance
+                     */
+                    AccessoryWidget.prototype.buttonList = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * AccessoryWidget action.
+                     * @member {"buttonList"|undefined} action
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @instance
+                     */
+                    Object.defineProperty(AccessoryWidget.prototype, "action", {
+                        get: $util.oneOfGetter($oneOfFields = ["buttonList"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new AccessoryWidget instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {google.chat.v1.IAccessoryWidget=} [properties] Properties to set
+                     * @returns {google.chat.v1.AccessoryWidget} AccessoryWidget instance
+                     */
+                    AccessoryWidget.create = function create(properties) {
+                        return new AccessoryWidget(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AccessoryWidget message. Does not implicitly {@link google.chat.v1.AccessoryWidget.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {google.chat.v1.IAccessoryWidget} message AccessoryWidget message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AccessoryWidget.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.buttonList != null && Object.hasOwnProperty.call(message, "buttonList"))
+                            $root.google.apps.card.v1.ButtonList.encode(message.buttonList, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AccessoryWidget message, length delimited. Does not implicitly {@link google.chat.v1.AccessoryWidget.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {google.chat.v1.IAccessoryWidget} message AccessoryWidget message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AccessoryWidget.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AccessoryWidget message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.AccessoryWidget} AccessoryWidget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AccessoryWidget.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.AccessoryWidget();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.buttonList = $root.google.apps.card.v1.ButtonList.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AccessoryWidget message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.AccessoryWidget} AccessoryWidget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AccessoryWidget.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AccessoryWidget message.
+                     * @function verify
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AccessoryWidget.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.buttonList != null && message.hasOwnProperty("buttonList")) {
+                            properties.action = 1;
+                            {
+                                var error = $root.google.apps.card.v1.ButtonList.verify(message.buttonList);
+                                if (error)
+                                    return "buttonList." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AccessoryWidget message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.AccessoryWidget} AccessoryWidget
+                     */
+                    AccessoryWidget.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.AccessoryWidget)
+                            return object;
+                        var message = new $root.google.chat.v1.AccessoryWidget();
+                        if (object.buttonList != null) {
+                            if (typeof object.buttonList !== "object")
+                                throw TypeError(".google.chat.v1.AccessoryWidget.buttonList: object expected");
+                            message.buttonList = $root.google.apps.card.v1.ButtonList.fromObject(object.buttonList);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AccessoryWidget message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {google.chat.v1.AccessoryWidget} message AccessoryWidget
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AccessoryWidget.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.buttonList != null && message.hasOwnProperty("buttonList")) {
+                            object.buttonList = $root.google.apps.card.v1.ButtonList.toObject(message.buttonList, options);
+                            if (options.oneofs)
+                                object.action = "buttonList";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AccessoryWidget to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AccessoryWidget.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AccessoryWidget
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.AccessoryWidget
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AccessoryWidget.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.AccessoryWidget";
+                    };
+    
+                    return AccessoryWidget;
                 })();
     
                 v1.GetMessageRequest = (function() {
