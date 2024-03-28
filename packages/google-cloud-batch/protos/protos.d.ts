@@ -5580,6 +5580,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public listTasks(request: google.cloud.batch.v1alpha.IListTasksRequest): Promise<google.cloud.batch.v1alpha.ListTasksResponse>;
+
+                    /**
+                     * Calls CreateResourceAllowance.
+                     * @param request CreateResourceAllowanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ResourceAllowance
+                     */
+                    public createResourceAllowance(request: google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest, callback: google.cloud.batch.v1alpha.BatchService.CreateResourceAllowanceCallback): void;
+
+                    /**
+                     * Calls CreateResourceAllowance.
+                     * @param request CreateResourceAllowanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createResourceAllowance(request: google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest): Promise<google.cloud.batch.v1alpha.ResourceAllowance>;
+
+                    /**
+                     * Calls GetResourceAllowance.
+                     * @param request GetResourceAllowanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ResourceAllowance
+                     */
+                    public getResourceAllowance(request: google.cloud.batch.v1alpha.IGetResourceAllowanceRequest, callback: google.cloud.batch.v1alpha.BatchService.GetResourceAllowanceCallback): void;
+
+                    /**
+                     * Calls GetResourceAllowance.
+                     * @param request GetResourceAllowanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getResourceAllowance(request: google.cloud.batch.v1alpha.IGetResourceAllowanceRequest): Promise<google.cloud.batch.v1alpha.ResourceAllowance>;
+
+                    /**
+                     * Calls DeleteResourceAllowance.
+                     * @param request DeleteResourceAllowanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteResourceAllowance(request: google.cloud.batch.v1alpha.IDeleteResourceAllowanceRequest, callback: google.cloud.batch.v1alpha.BatchService.DeleteResourceAllowanceCallback): void;
+
+                    /**
+                     * Calls DeleteResourceAllowance.
+                     * @param request DeleteResourceAllowanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteResourceAllowance(request: google.cloud.batch.v1alpha.IDeleteResourceAllowanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListResourceAllowances.
+                     * @param request ListResourceAllowancesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListResourceAllowancesResponse
+                     */
+                    public listResourceAllowances(request: google.cloud.batch.v1alpha.IListResourceAllowancesRequest, callback: google.cloud.batch.v1alpha.BatchService.ListResourceAllowancesCallback): void;
+
+                    /**
+                     * Calls ListResourceAllowances.
+                     * @param request ListResourceAllowancesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listResourceAllowances(request: google.cloud.batch.v1alpha.IListResourceAllowancesRequest): Promise<google.cloud.batch.v1alpha.ListResourceAllowancesResponse>;
+
+                    /**
+                     * Calls UpdateResourceAllowance.
+                     * @param request UpdateResourceAllowanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ResourceAllowance
+                     */
+                    public updateResourceAllowance(request: google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest, callback: google.cloud.batch.v1alpha.BatchService.UpdateResourceAllowanceCallback): void;
+
+                    /**
+                     * Calls UpdateResourceAllowance.
+                     * @param request UpdateResourceAllowanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateResourceAllowance(request: google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest): Promise<google.cloud.batch.v1alpha.ResourceAllowance>;
                 }
 
                 namespace BatchService {
@@ -5625,6 +5695,41 @@ export namespace google {
                      * @param [response] ListTasksResponse
                      */
                     type ListTasksCallback = (error: (Error|null), response?: google.cloud.batch.v1alpha.ListTasksResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.batch.v1alpha.BatchService|createResourceAllowance}.
+                     * @param error Error, if any
+                     * @param [response] ResourceAllowance
+                     */
+                    type CreateResourceAllowanceCallback = (error: (Error|null), response?: google.cloud.batch.v1alpha.ResourceAllowance) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.batch.v1alpha.BatchService|getResourceAllowance}.
+                     * @param error Error, if any
+                     * @param [response] ResourceAllowance
+                     */
+                    type GetResourceAllowanceCallback = (error: (Error|null), response?: google.cloud.batch.v1alpha.ResourceAllowance) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.batch.v1alpha.BatchService|deleteResourceAllowance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteResourceAllowanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.batch.v1alpha.BatchService|listResourceAllowances}.
+                     * @param error Error, if any
+                     * @param [response] ListResourceAllowancesResponse
+                     */
+                    type ListResourceAllowancesCallback = (error: (Error|null), response?: google.cloud.batch.v1alpha.ListResourceAllowancesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.batch.v1alpha.BatchService|updateResourceAllowance}.
+                     * @param error Error, if any
+                     * @param [response] ResourceAllowance
+                     */
+                    type UpdateResourceAllowanceCallback = (error: (Error|null), response?: google.cloud.batch.v1alpha.ResourceAllowance) => void;
                 }
 
                 /** Properties of a CreateJobRequest. */
@@ -6499,6 +6604,654 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetTaskRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateResourceAllowanceRequest. */
+                interface ICreateResourceAllowanceRequest {
+
+                    /** CreateResourceAllowanceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateResourceAllowanceRequest resourceAllowanceId */
+                    resourceAllowanceId?: (string|null);
+
+                    /** CreateResourceAllowanceRequest resourceAllowance */
+                    resourceAllowance?: (google.cloud.batch.v1alpha.IResourceAllowance|null);
+
+                    /** CreateResourceAllowanceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateResourceAllowanceRequest. */
+                class CreateResourceAllowanceRequest implements ICreateResourceAllowanceRequest {
+
+                    /**
+                     * Constructs a new CreateResourceAllowanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest);
+
+                    /** CreateResourceAllowanceRequest parent. */
+                    public parent: string;
+
+                    /** CreateResourceAllowanceRequest resourceAllowanceId. */
+                    public resourceAllowanceId: string;
+
+                    /** CreateResourceAllowanceRequest resourceAllowance. */
+                    public resourceAllowance?: (google.cloud.batch.v1alpha.IResourceAllowance|null);
+
+                    /** CreateResourceAllowanceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateResourceAllowanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateResourceAllowanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest): google.cloud.batch.v1alpha.CreateResourceAllowanceRequest;
+
+                    /**
+                     * Encodes the specified CreateResourceAllowanceRequest message. Does not implicitly {@link google.cloud.batch.v1alpha.CreateResourceAllowanceRequest.verify|verify} messages.
+                     * @param message CreateResourceAllowanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateResourceAllowanceRequest message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.CreateResourceAllowanceRequest.verify|verify} messages.
+                     * @param message CreateResourceAllowanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateResourceAllowanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateResourceAllowanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.CreateResourceAllowanceRequest;
+
+                    /**
+                     * Decodes a CreateResourceAllowanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateResourceAllowanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.CreateResourceAllowanceRequest;
+
+                    /**
+                     * Verifies a CreateResourceAllowanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateResourceAllowanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateResourceAllowanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.CreateResourceAllowanceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateResourceAllowanceRequest message. Also converts values to other types if specified.
+                     * @param message CreateResourceAllowanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.CreateResourceAllowanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateResourceAllowanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateResourceAllowanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetResourceAllowanceRequest. */
+                interface IGetResourceAllowanceRequest {
+
+                    /** GetResourceAllowanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetResourceAllowanceRequest. */
+                class GetResourceAllowanceRequest implements IGetResourceAllowanceRequest {
+
+                    /**
+                     * Constructs a new GetResourceAllowanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.IGetResourceAllowanceRequest);
+
+                    /** GetResourceAllowanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetResourceAllowanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetResourceAllowanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.IGetResourceAllowanceRequest): google.cloud.batch.v1alpha.GetResourceAllowanceRequest;
+
+                    /**
+                     * Encodes the specified GetResourceAllowanceRequest message. Does not implicitly {@link google.cloud.batch.v1alpha.GetResourceAllowanceRequest.verify|verify} messages.
+                     * @param message GetResourceAllowanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.IGetResourceAllowanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetResourceAllowanceRequest message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.GetResourceAllowanceRequest.verify|verify} messages.
+                     * @param message GetResourceAllowanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.IGetResourceAllowanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetResourceAllowanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetResourceAllowanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.GetResourceAllowanceRequest;
+
+                    /**
+                     * Decodes a GetResourceAllowanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetResourceAllowanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.GetResourceAllowanceRequest;
+
+                    /**
+                     * Verifies a GetResourceAllowanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetResourceAllowanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetResourceAllowanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.GetResourceAllowanceRequest;
+
+                    /**
+                     * Creates a plain object from a GetResourceAllowanceRequest message. Also converts values to other types if specified.
+                     * @param message GetResourceAllowanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.GetResourceAllowanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetResourceAllowanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetResourceAllowanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteResourceAllowanceRequest. */
+                interface IDeleteResourceAllowanceRequest {
+
+                    /** DeleteResourceAllowanceRequest name */
+                    name?: (string|null);
+
+                    /** DeleteResourceAllowanceRequest reason */
+                    reason?: (string|null);
+
+                    /** DeleteResourceAllowanceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteResourceAllowanceRequest. */
+                class DeleteResourceAllowanceRequest implements IDeleteResourceAllowanceRequest {
+
+                    /**
+                     * Constructs a new DeleteResourceAllowanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.IDeleteResourceAllowanceRequest);
+
+                    /** DeleteResourceAllowanceRequest name. */
+                    public name: string;
+
+                    /** DeleteResourceAllowanceRequest reason. */
+                    public reason: string;
+
+                    /** DeleteResourceAllowanceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteResourceAllowanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteResourceAllowanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.IDeleteResourceAllowanceRequest): google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest;
+
+                    /**
+                     * Encodes the specified DeleteResourceAllowanceRequest message. Does not implicitly {@link google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest.verify|verify} messages.
+                     * @param message DeleteResourceAllowanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.IDeleteResourceAllowanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteResourceAllowanceRequest message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest.verify|verify} messages.
+                     * @param message DeleteResourceAllowanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.IDeleteResourceAllowanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteResourceAllowanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteResourceAllowanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest;
+
+                    /**
+                     * Decodes a DeleteResourceAllowanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteResourceAllowanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest;
+
+                    /**
+                     * Verifies a DeleteResourceAllowanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteResourceAllowanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteResourceAllowanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteResourceAllowanceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteResourceAllowanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteResourceAllowanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteResourceAllowanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListResourceAllowancesRequest. */
+                interface IListResourceAllowancesRequest {
+
+                    /** ListResourceAllowancesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListResourceAllowancesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListResourceAllowancesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListResourceAllowancesRequest. */
+                class ListResourceAllowancesRequest implements IListResourceAllowancesRequest {
+
+                    /**
+                     * Constructs a new ListResourceAllowancesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.IListResourceAllowancesRequest);
+
+                    /** ListResourceAllowancesRequest parent. */
+                    public parent: string;
+
+                    /** ListResourceAllowancesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListResourceAllowancesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListResourceAllowancesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListResourceAllowancesRequest instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.IListResourceAllowancesRequest): google.cloud.batch.v1alpha.ListResourceAllowancesRequest;
+
+                    /**
+                     * Encodes the specified ListResourceAllowancesRequest message. Does not implicitly {@link google.cloud.batch.v1alpha.ListResourceAllowancesRequest.verify|verify} messages.
+                     * @param message ListResourceAllowancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.IListResourceAllowancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListResourceAllowancesRequest message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.ListResourceAllowancesRequest.verify|verify} messages.
+                     * @param message ListResourceAllowancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.IListResourceAllowancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListResourceAllowancesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListResourceAllowancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.ListResourceAllowancesRequest;
+
+                    /**
+                     * Decodes a ListResourceAllowancesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListResourceAllowancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.ListResourceAllowancesRequest;
+
+                    /**
+                     * Verifies a ListResourceAllowancesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListResourceAllowancesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListResourceAllowancesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.ListResourceAllowancesRequest;
+
+                    /**
+                     * Creates a plain object from a ListResourceAllowancesRequest message. Also converts values to other types if specified.
+                     * @param message ListResourceAllowancesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.ListResourceAllowancesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListResourceAllowancesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListResourceAllowancesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListResourceAllowancesResponse. */
+                interface IListResourceAllowancesResponse {
+
+                    /** ListResourceAllowancesResponse resourceAllowances */
+                    resourceAllowances?: (google.cloud.batch.v1alpha.IResourceAllowance[]|null);
+
+                    /** ListResourceAllowancesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListResourceAllowancesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListResourceAllowancesResponse. */
+                class ListResourceAllowancesResponse implements IListResourceAllowancesResponse {
+
+                    /**
+                     * Constructs a new ListResourceAllowancesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.IListResourceAllowancesResponse);
+
+                    /** ListResourceAllowancesResponse resourceAllowances. */
+                    public resourceAllowances: google.cloud.batch.v1alpha.IResourceAllowance[];
+
+                    /** ListResourceAllowancesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListResourceAllowancesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListResourceAllowancesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListResourceAllowancesResponse instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.IListResourceAllowancesResponse): google.cloud.batch.v1alpha.ListResourceAllowancesResponse;
+
+                    /**
+                     * Encodes the specified ListResourceAllowancesResponse message. Does not implicitly {@link google.cloud.batch.v1alpha.ListResourceAllowancesResponse.verify|verify} messages.
+                     * @param message ListResourceAllowancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.IListResourceAllowancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListResourceAllowancesResponse message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.ListResourceAllowancesResponse.verify|verify} messages.
+                     * @param message ListResourceAllowancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.IListResourceAllowancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListResourceAllowancesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListResourceAllowancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.ListResourceAllowancesResponse;
+
+                    /**
+                     * Decodes a ListResourceAllowancesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListResourceAllowancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.ListResourceAllowancesResponse;
+
+                    /**
+                     * Verifies a ListResourceAllowancesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListResourceAllowancesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListResourceAllowancesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.ListResourceAllowancesResponse;
+
+                    /**
+                     * Creates a plain object from a ListResourceAllowancesResponse message. Also converts values to other types if specified.
+                     * @param message ListResourceAllowancesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.ListResourceAllowancesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListResourceAllowancesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListResourceAllowancesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateResourceAllowanceRequest. */
+                interface IUpdateResourceAllowanceRequest {
+
+                    /** UpdateResourceAllowanceRequest resourceAllowance */
+                    resourceAllowance?: (google.cloud.batch.v1alpha.IResourceAllowance|null);
+
+                    /** UpdateResourceAllowanceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateResourceAllowanceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateResourceAllowanceRequest. */
+                class UpdateResourceAllowanceRequest implements IUpdateResourceAllowanceRequest {
+
+                    /**
+                     * Constructs a new UpdateResourceAllowanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest);
+
+                    /** UpdateResourceAllowanceRequest resourceAllowance. */
+                    public resourceAllowance?: (google.cloud.batch.v1alpha.IResourceAllowance|null);
+
+                    /** UpdateResourceAllowanceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateResourceAllowanceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateResourceAllowanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateResourceAllowanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest): google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest;
+
+                    /**
+                     * Encodes the specified UpdateResourceAllowanceRequest message. Does not implicitly {@link google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest.verify|verify} messages.
+                     * @param message UpdateResourceAllowanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateResourceAllowanceRequest message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest.verify|verify} messages.
+                     * @param message UpdateResourceAllowanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateResourceAllowanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateResourceAllowanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest;
+
+                    /**
+                     * Decodes an UpdateResourceAllowanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateResourceAllowanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest;
+
+                    /**
+                     * Verifies an UpdateResourceAllowanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateResourceAllowanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateResourceAllowanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateResourceAllowanceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateResourceAllowanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateResourceAllowanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateResourceAllowanceRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11440,6 +12193,989 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GCS
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** CalendarPeriod enum. */
+                enum CalendarPeriod {
+                    CALENDAR_PERIOD_UNSPECIFIED = 0,
+                    MONTH = 1,
+                    QUARTER = 2,
+                    YEAR = 3,
+                    WEEK = 4,
+                    DAY = 5
+                }
+
+                /** ResourceAllowanceState enum. */
+                enum ResourceAllowanceState {
+                    RESOURCE_ALLOWANCE_STATE_UNSPECIFIED = 0,
+                    RESOURCE_ALLOWANCE_ACTIVE = 1,
+                    RESOURCE_ALLOWANCE_DEPLETED = 2
+                }
+
+                /** Properties of a ResourceAllowance. */
+                interface IResourceAllowance {
+
+                    /** ResourceAllowance usageResourceAllowance */
+                    usageResourceAllowance?: (google.cloud.batch.v1alpha.IUsageResourceAllowance|null);
+
+                    /** ResourceAllowance name */
+                    name?: (string|null);
+
+                    /** ResourceAllowance uid */
+                    uid?: (string|null);
+
+                    /** ResourceAllowance createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ResourceAllowance labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** ResourceAllowance notifications */
+                    notifications?: (google.cloud.batch.v1alpha.INotification[]|null);
+                }
+
+                /** Represents a ResourceAllowance. */
+                class ResourceAllowance implements IResourceAllowance {
+
+                    /**
+                     * Constructs a new ResourceAllowance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.IResourceAllowance);
+
+                    /** ResourceAllowance usageResourceAllowance. */
+                    public usageResourceAllowance?: (google.cloud.batch.v1alpha.IUsageResourceAllowance|null);
+
+                    /** ResourceAllowance name. */
+                    public name: string;
+
+                    /** ResourceAllowance uid. */
+                    public uid: string;
+
+                    /** ResourceAllowance createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ResourceAllowance labels. */
+                    public labels: { [k: string]: string };
+
+                    /** ResourceAllowance notifications. */
+                    public notifications: google.cloud.batch.v1alpha.INotification[];
+
+                    /** ResourceAllowance resourceAllowance. */
+                    public resourceAllowance?: "usageResourceAllowance";
+
+                    /**
+                     * Creates a new ResourceAllowance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResourceAllowance instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.IResourceAllowance): google.cloud.batch.v1alpha.ResourceAllowance;
+
+                    /**
+                     * Encodes the specified ResourceAllowance message. Does not implicitly {@link google.cloud.batch.v1alpha.ResourceAllowance.verify|verify} messages.
+                     * @param message ResourceAllowance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.IResourceAllowance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResourceAllowance message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.ResourceAllowance.verify|verify} messages.
+                     * @param message ResourceAllowance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.IResourceAllowance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResourceAllowance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResourceAllowance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.ResourceAllowance;
+
+                    /**
+                     * Decodes a ResourceAllowance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResourceAllowance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.ResourceAllowance;
+
+                    /**
+                     * Verifies a ResourceAllowance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResourceAllowance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResourceAllowance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.ResourceAllowance;
+
+                    /**
+                     * Creates a plain object from a ResourceAllowance message. Also converts values to other types if specified.
+                     * @param message ResourceAllowance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.ResourceAllowance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResourceAllowance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResourceAllowance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a UsageResourceAllowance. */
+                interface IUsageResourceAllowance {
+
+                    /** UsageResourceAllowance spec */
+                    spec?: (google.cloud.batch.v1alpha.IUsageResourceAllowanceSpec|null);
+
+                    /** UsageResourceAllowance status */
+                    status?: (google.cloud.batch.v1alpha.IUsageResourceAllowanceStatus|null);
+                }
+
+                /** Represents a UsageResourceAllowance. */
+                class UsageResourceAllowance implements IUsageResourceAllowance {
+
+                    /**
+                     * Constructs a new UsageResourceAllowance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.IUsageResourceAllowance);
+
+                    /** UsageResourceAllowance spec. */
+                    public spec?: (google.cloud.batch.v1alpha.IUsageResourceAllowanceSpec|null);
+
+                    /** UsageResourceAllowance status. */
+                    public status?: (google.cloud.batch.v1alpha.IUsageResourceAllowanceStatus|null);
+
+                    /**
+                     * Creates a new UsageResourceAllowance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UsageResourceAllowance instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.IUsageResourceAllowance): google.cloud.batch.v1alpha.UsageResourceAllowance;
+
+                    /**
+                     * Encodes the specified UsageResourceAllowance message. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowance.verify|verify} messages.
+                     * @param message UsageResourceAllowance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.IUsageResourceAllowance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UsageResourceAllowance message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowance.verify|verify} messages.
+                     * @param message UsageResourceAllowance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.IUsageResourceAllowance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UsageResourceAllowance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UsageResourceAllowance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.UsageResourceAllowance;
+
+                    /**
+                     * Decodes a UsageResourceAllowance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UsageResourceAllowance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.UsageResourceAllowance;
+
+                    /**
+                     * Verifies a UsageResourceAllowance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UsageResourceAllowance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UsageResourceAllowance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.UsageResourceAllowance;
+
+                    /**
+                     * Creates a plain object from a UsageResourceAllowance message. Also converts values to other types if specified.
+                     * @param message UsageResourceAllowance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.UsageResourceAllowance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UsageResourceAllowance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UsageResourceAllowance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a UsageResourceAllowanceSpec. */
+                interface IUsageResourceAllowanceSpec {
+
+                    /** UsageResourceAllowanceSpec type */
+                    type?: (string|null);
+
+                    /** UsageResourceAllowanceSpec limit */
+                    limit?: (google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.ILimit|null);
+                }
+
+                /** Represents a UsageResourceAllowanceSpec. */
+                class UsageResourceAllowanceSpec implements IUsageResourceAllowanceSpec {
+
+                    /**
+                     * Constructs a new UsageResourceAllowanceSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.IUsageResourceAllowanceSpec);
+
+                    /** UsageResourceAllowanceSpec type. */
+                    public type: string;
+
+                    /** UsageResourceAllowanceSpec limit. */
+                    public limit?: (google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.ILimit|null);
+
+                    /**
+                     * Creates a new UsageResourceAllowanceSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UsageResourceAllowanceSpec instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.IUsageResourceAllowanceSpec): google.cloud.batch.v1alpha.UsageResourceAllowanceSpec;
+
+                    /**
+                     * Encodes the specified UsageResourceAllowanceSpec message. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.verify|verify} messages.
+                     * @param message UsageResourceAllowanceSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.IUsageResourceAllowanceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UsageResourceAllowanceSpec message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.verify|verify} messages.
+                     * @param message UsageResourceAllowanceSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.IUsageResourceAllowanceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UsageResourceAllowanceSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UsageResourceAllowanceSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.UsageResourceAllowanceSpec;
+
+                    /**
+                     * Decodes a UsageResourceAllowanceSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UsageResourceAllowanceSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.UsageResourceAllowanceSpec;
+
+                    /**
+                     * Verifies a UsageResourceAllowanceSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UsageResourceAllowanceSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UsageResourceAllowanceSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.UsageResourceAllowanceSpec;
+
+                    /**
+                     * Creates a plain object from a UsageResourceAllowanceSpec message. Also converts values to other types if specified.
+                     * @param message UsageResourceAllowanceSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.UsageResourceAllowanceSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UsageResourceAllowanceSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UsageResourceAllowanceSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UsageResourceAllowanceSpec {
+
+                    /** Properties of a Limit. */
+                    interface ILimit {
+
+                        /** Limit calendarPeriod */
+                        calendarPeriod?: (google.cloud.batch.v1alpha.CalendarPeriod|keyof typeof google.cloud.batch.v1alpha.CalendarPeriod|null);
+
+                        /** Limit limit */
+                        limit?: (number|null);
+                    }
+
+                    /** Represents a Limit. */
+                    class Limit implements ILimit {
+
+                        /**
+                         * Constructs a new Limit.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.ILimit);
+
+                        /** Limit calendarPeriod. */
+                        public calendarPeriod?: (google.cloud.batch.v1alpha.CalendarPeriod|keyof typeof google.cloud.batch.v1alpha.CalendarPeriod|null);
+
+                        /** Limit limit. */
+                        public limit?: (number|null);
+
+                        /** Limit duration. */
+                        public duration?: "calendarPeriod";
+
+                        /** Limit _limit. */
+                        public _limit?: "limit";
+
+                        /**
+                         * Creates a new Limit instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Limit instance
+                         */
+                        public static create(properties?: google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.ILimit): google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.Limit;
+
+                        /**
+                         * Encodes the specified Limit message. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.Limit.verify|verify} messages.
+                         * @param message Limit message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.ILimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Limit message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.Limit.verify|verify} messages.
+                         * @param message Limit message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.ILimit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Limit message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Limit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.Limit;
+
+                        /**
+                         * Decodes a Limit message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Limit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.Limit;
+
+                        /**
+                         * Verifies a Limit message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Limit message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Limit
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.Limit;
+
+                        /**
+                         * Creates a plain object from a Limit message. Also converts values to other types if specified.
+                         * @param message Limit
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.batch.v1alpha.UsageResourceAllowanceSpec.Limit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Limit to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Limit
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a UsageResourceAllowanceStatus. */
+                interface IUsageResourceAllowanceStatus {
+
+                    /** UsageResourceAllowanceStatus state */
+                    state?: (google.cloud.batch.v1alpha.ResourceAllowanceState|keyof typeof google.cloud.batch.v1alpha.ResourceAllowanceState|null);
+
+                    /** UsageResourceAllowanceStatus limitStatus */
+                    limitStatus?: (google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ILimitStatus|null);
+
+                    /** UsageResourceAllowanceStatus report */
+                    report?: (google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IConsumptionReport|null);
+                }
+
+                /** Represents a UsageResourceAllowanceStatus. */
+                class UsageResourceAllowanceStatus implements IUsageResourceAllowanceStatus {
+
+                    /**
+                     * Constructs a new UsageResourceAllowanceStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.IUsageResourceAllowanceStatus);
+
+                    /** UsageResourceAllowanceStatus state. */
+                    public state: (google.cloud.batch.v1alpha.ResourceAllowanceState|keyof typeof google.cloud.batch.v1alpha.ResourceAllowanceState);
+
+                    /** UsageResourceAllowanceStatus limitStatus. */
+                    public limitStatus?: (google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ILimitStatus|null);
+
+                    /** UsageResourceAllowanceStatus report. */
+                    public report?: (google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IConsumptionReport|null);
+
+                    /**
+                     * Creates a new UsageResourceAllowanceStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UsageResourceAllowanceStatus instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.IUsageResourceAllowanceStatus): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus;
+
+                    /**
+                     * Encodes the specified UsageResourceAllowanceStatus message. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.verify|verify} messages.
+                     * @param message UsageResourceAllowanceStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.IUsageResourceAllowanceStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UsageResourceAllowanceStatus message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.verify|verify} messages.
+                     * @param message UsageResourceAllowanceStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.IUsageResourceAllowanceStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UsageResourceAllowanceStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UsageResourceAllowanceStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus;
+
+                    /**
+                     * Decodes a UsageResourceAllowanceStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UsageResourceAllowanceStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus;
+
+                    /**
+                     * Verifies a UsageResourceAllowanceStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UsageResourceAllowanceStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UsageResourceAllowanceStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus;
+
+                    /**
+                     * Creates a plain object from a UsageResourceAllowanceStatus message. Also converts values to other types if specified.
+                     * @param message UsageResourceAllowanceStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UsageResourceAllowanceStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UsageResourceAllowanceStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UsageResourceAllowanceStatus {
+
+                    /** Properties of a LimitStatus. */
+                    interface ILimitStatus {
+
+                        /** LimitStatus consumptionInterval */
+                        consumptionInterval?: (google.type.IInterval|null);
+
+                        /** LimitStatus limit */
+                        limit?: (number|null);
+
+                        /** LimitStatus consumed */
+                        consumed?: (number|null);
+                    }
+
+                    /** Represents a LimitStatus. */
+                    class LimitStatus implements ILimitStatus {
+
+                        /**
+                         * Constructs a new LimitStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ILimitStatus);
+
+                        /** LimitStatus consumptionInterval. */
+                        public consumptionInterval?: (google.type.IInterval|null);
+
+                        /** LimitStatus limit. */
+                        public limit: number;
+
+                        /** LimitStatus consumed. */
+                        public consumed: number;
+
+                        /**
+                         * Creates a new LimitStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LimitStatus instance
+                         */
+                        public static create(properties?: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ILimitStatus): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.LimitStatus;
+
+                        /**
+                         * Encodes the specified LimitStatus message. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.LimitStatus.verify|verify} messages.
+                         * @param message LimitStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ILimitStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LimitStatus message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.LimitStatus.verify|verify} messages.
+                         * @param message LimitStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ILimitStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LimitStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LimitStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.LimitStatus;
+
+                        /**
+                         * Decodes a LimitStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LimitStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.LimitStatus;
+
+                        /**
+                         * Verifies a LimitStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LimitStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LimitStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.LimitStatus;
+
+                        /**
+                         * Creates a plain object from a LimitStatus message. Also converts values to other types if specified.
+                         * @param message LimitStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.LimitStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LimitStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LimitStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PeriodConsumption. */
+                    interface IPeriodConsumption {
+
+                        /** PeriodConsumption consumptionInterval */
+                        consumptionInterval?: (google.type.IInterval|null);
+
+                        /** PeriodConsumption consumed */
+                        consumed?: (number|null);
+                    }
+
+                    /** Represents a PeriodConsumption. */
+                    class PeriodConsumption implements IPeriodConsumption {
+
+                        /**
+                         * Constructs a new PeriodConsumption.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IPeriodConsumption);
+
+                        /** PeriodConsumption consumptionInterval. */
+                        public consumptionInterval?: (google.type.IInterval|null);
+
+                        /** PeriodConsumption consumed. */
+                        public consumed: number;
+
+                        /**
+                         * Creates a new PeriodConsumption instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PeriodConsumption instance
+                         */
+                        public static create(properties?: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IPeriodConsumption): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.PeriodConsumption;
+
+                        /**
+                         * Encodes the specified PeriodConsumption message. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.PeriodConsumption.verify|verify} messages.
+                         * @param message PeriodConsumption message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IPeriodConsumption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PeriodConsumption message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.PeriodConsumption.verify|verify} messages.
+                         * @param message PeriodConsumption message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IPeriodConsumption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PeriodConsumption message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PeriodConsumption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.PeriodConsumption;
+
+                        /**
+                         * Decodes a PeriodConsumption message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PeriodConsumption
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.PeriodConsumption;
+
+                        /**
+                         * Verifies a PeriodConsumption message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PeriodConsumption message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PeriodConsumption
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.PeriodConsumption;
+
+                        /**
+                         * Creates a plain object from a PeriodConsumption message. Also converts values to other types if specified.
+                         * @param message PeriodConsumption
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.PeriodConsumption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PeriodConsumption to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PeriodConsumption
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConsumptionReport. */
+                    interface IConsumptionReport {
+
+                        /** ConsumptionReport latestPeriodConsumptions */
+                        latestPeriodConsumptions?: ({ [k: string]: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IPeriodConsumption }|null);
+                    }
+
+                    /** Represents a ConsumptionReport. */
+                    class ConsumptionReport implements IConsumptionReport {
+
+                        /**
+                         * Constructs a new ConsumptionReport.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IConsumptionReport);
+
+                        /** ConsumptionReport latestPeriodConsumptions. */
+                        public latestPeriodConsumptions: { [k: string]: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IPeriodConsumption };
+
+                        /**
+                         * Creates a new ConsumptionReport instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConsumptionReport instance
+                         */
+                        public static create(properties?: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IConsumptionReport): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ConsumptionReport;
+
+                        /**
+                         * Encodes the specified ConsumptionReport message. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ConsumptionReport.verify|verify} messages.
+                         * @param message ConsumptionReport message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IConsumptionReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConsumptionReport message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ConsumptionReport.verify|verify} messages.
+                         * @param message ConsumptionReport message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.IConsumptionReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConsumptionReport message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConsumptionReport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ConsumptionReport;
+
+                        /**
+                         * Decodes a ConsumptionReport message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConsumptionReport
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ConsumptionReport;
+
+                        /**
+                         * Verifies a ConsumptionReport message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConsumptionReport message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConsumptionReport
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ConsumptionReport;
+
+                        /**
+                         * Creates a plain object from a ConsumptionReport message. Also converts values to other types if specified.
+                         * @param message ConsumptionReport
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.batch.v1alpha.UsageResourceAllowanceStatus.ConsumptionReport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConsumptionReport to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConsumptionReport
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Notification. */
+                interface INotification {
+
+                    /** Notification pubsubTopic */
+                    pubsubTopic?: (string|null);
+                }
+
+                /** Represents a Notification. */
+                class Notification implements INotification {
+
+                    /**
+                     * Constructs a new Notification.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.batch.v1alpha.INotification);
+
+                    /** Notification pubsubTopic. */
+                    public pubsubTopic: string;
+
+                    /**
+                     * Creates a new Notification instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Notification instance
+                     */
+                    public static create(properties?: google.cloud.batch.v1alpha.INotification): google.cloud.batch.v1alpha.Notification;
+
+                    /**
+                     * Encodes the specified Notification message. Does not implicitly {@link google.cloud.batch.v1alpha.Notification.verify|verify} messages.
+                     * @param message Notification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.batch.v1alpha.INotification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Notification message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.Notification.verify|verify} messages.
+                     * @param message Notification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.batch.v1alpha.INotification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Notification message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Notification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.Notification;
+
+                    /**
+                     * Decodes a Notification message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Notification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.Notification;
+
+                    /**
+                     * Verifies a Notification message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Notification message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Notification
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.Notification;
+
+                    /**
+                     * Creates a plain object from a Notification message. Also converts values to other types if specified.
+                     * @param message Notification
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.batch.v1alpha.Notification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Notification to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Notification
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -18179,6 +19915,103 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
