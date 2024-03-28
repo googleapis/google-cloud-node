@@ -10687,6 +10687,9 @@ export namespace google {
                     /** Tag tagKey */
                     tagKey?: (string|null);
 
+                    /** Tag tagKeyId */
+                    tagKeyId?: (string|null);
+
                     /** Tag tagValue */
                     tagValue?: (string|null);
 
@@ -10706,6 +10709,9 @@ export namespace google {
                     /** Tag tagKey. */
                     public tagKey?: (string|null);
 
+                    /** Tag tagKeyId. */
+                    public tagKeyId?: (string|null);
+
                     /** Tag tagValue. */
                     public tagValue?: (string|null);
 
@@ -10714,6 +10720,9 @@ export namespace google {
 
                     /** Tag _tagKey. */
                     public _tagKey?: "tagKey";
+
+                    /** Tag _tagKeyId. */
+                    public _tagKeyId?: "tagKeyId";
 
                     /** Tag _tagValue. */
                     public _tagValue?: "tagValue";
