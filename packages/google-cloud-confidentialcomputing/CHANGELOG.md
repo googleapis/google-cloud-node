@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.3.0...confidentialcomputing-v1.4.0) (2024-03-29)
+
+
+### Features
+
+* [Many APIs] add several fields to manage state of database encryption update ([#5187](https://github.com/googleapis/google-cloud-node/issues/5187)) ([1952fbe](https://github.com/googleapis/google-cloud-node/commit/1952fbe432b96115278d42e5c1dbdbc7de39036b))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.2.0...confidentialcomputing-v1.3.0) (2024-02-09)
 
 

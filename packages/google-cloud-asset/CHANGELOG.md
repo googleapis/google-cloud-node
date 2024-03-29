@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.5.0...asset-v5.6.0) (2024-03-29)
+
+
+### Features
+
+* [asset] add tag key id support ([#5206](https://github.com/googleapis/google-cloud-node/issues/5206)) ([1743452](https://github.com/googleapis/google-cloud-node/commit/17434529c8bae0685ad0b3289d813500a05939ac))
+
 ## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.4.0...asset-v5.5.0) (2024-03-07)
 
 
